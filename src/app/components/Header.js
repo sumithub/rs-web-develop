@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 export default function Header() {
-    return <div className="border-b border-[#ADADAD33] py-[18px] px-6 ml-24">
+    return <div className="border-b border-[#ADADAD33] py-[18px] px-4 ml-24 bg-white">
         <div className="flex items-center justify-between w-full">
             <div>
                 <div className="text-secondary text-base font-semibold">Manage Reviews</div>
