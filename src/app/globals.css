@@ -6,6 +6,8 @@
   --primary2: #6FC3FF;
   --secondary: #1F2933;
   --text: #FEFEFE;
+  --text2: #ADADAD;
+  --border-color: #ADADAD4D;
 }
 
 @theme inline {
@@ -13,6 +15,8 @@
   --color-primary2: var(--primary2);
   --color-secondary: var(--secondary);
   --color-text: var(--text);
+  --color-text2: var(--text2);
+  --color-border-color: var(--border-color);
 }
 
 body {
