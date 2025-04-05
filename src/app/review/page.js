@@ -59,7 +59,7 @@ export default function Review() {
                 <div className="flex justify-between items-center">
                     <div className="relative w-[32%]">
                         <div className="w-full">
-                            <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text2 bg-[#F6F8FB] border border-[#E6E6E6] rounded-lg focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
+                            <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-[#F6F8FB] border border-[#E6E6E6] rounded-lg focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
                                 placeholder="Search by customer name, review content, or source." />
 
                             <span className="absolute text-center top-1 right-0 py-2 px-2">
@@ -90,7 +90,7 @@ export default function Review() {
                 <div className="border border-border-color px-2 py-1 rounded-lg w-32 mt-5">
                     <div className="flex items-start justify-center gap-2 mt-1">
                         <Checkbox />
-                        <div className="text-text2 text-sm capitalize">Select all</div>
+                        <div className="text-text3 text-sm capitalize">Select all</div>
                     </div>
                 </div>
 
