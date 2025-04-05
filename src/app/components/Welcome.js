@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 export default function Welcome() {
-    return (<><div>
-        <div className="bg-primary2 w-full rounded-[20px] mt-[25px]">
+    return (<>
+        <div className="">
             <div className=" relative">
                 <Image src="/images/image-1.svg" alt="image-1" width={209} height={209} className="absolute right-3 z-0 -top-16" />
                 <div>
@@ -15,6 +15,5 @@ export default function Welcome() {
                 <p className="text-sm font-medium text-text text-center">Few things make me feel more powerful than setting up <br /> automations to make my life easier and more efficient.</p>
             </div>
         </div>
-    </div>
     </>)
 }
