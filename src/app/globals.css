@@ -3,12 +3,16 @@
 
 :root {
   --primary: #0396FF;
+  --primary2: #6FC3FF;
   --secondary: #1F2933;
+  --text: #FEFEFE;
 }
 
 @theme inline {
   --color-primary: var(--primary);
-  --color-secondary: var(--secondary)
+  --color-primary2: var(--primary2);
+  --color-secondary: var(--secondary);
+  --color-text: var(--text);
 }
 
 body {
