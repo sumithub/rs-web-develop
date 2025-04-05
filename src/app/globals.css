@@ -6,6 +6,7 @@
   --primary2: #6FC3FF;
   --secondary: #1F2933;
   --text: #FEFEFE;
+  --text2: #DC3545;
 }
 
 @theme inline {
@@ -13,6 +14,7 @@
   --color-primary2: var(--primary2);
   --color-secondary: var(--secondary);
   --color-text: var(--text);
+  --color-text2: var(--text2)
 }
 
 body {
