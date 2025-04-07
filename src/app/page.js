@@ -1,7 +1,5 @@
 import Signup from "./components/Signup";
 import Welcome from "./components/Welcome";
-
-
 export default function Home() {
   return (<><div className="bg-[#FEFEFE]">
     <div className="max-w-7xl mx-auto">
@@ -9,11 +7,10 @@ export default function Home() {
         <div>
           <Signup />
         </div>
-        <div className="bg-primary2 w-full rounded-[20px] mt-[25px]">
+        <div className="bg-primary2 w-full rounded-[20px] my-[25px]">
           <Welcome />
         </div>
       </div>
-      Register
     </div>
   </div>
   </>)
