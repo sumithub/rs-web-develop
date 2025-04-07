@@ -24,7 +24,7 @@ const Dropdown = () => {
     };
 
     return (
-        <div className="relative" ref={dropdownRef}>
+        <div className="relative inline-block" ref={dropdownRef}>
             {/* Dropdown button */}
             <button
                 onClick={toggleDropdown}
@@ -34,7 +34,7 @@ const Dropdown = () => {
 
             {/* Dropdown menu */}
             {isOpen && (
-                <div className="absolute z-10 mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200">
+                <div className="absolute z-10 mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200 right-0">
                     <ul className="py-1">
                         {/* Reply Now - with blue background */}
                         <li>

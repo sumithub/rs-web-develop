@@ -71,7 +71,7 @@ export default function Review() {
                 </div>
             </div>
 
-            <div className="bg-white min-h-[calc(100dvh_-_85px)]  rounded-[10px] mt-5 p-5">
+            <div className="bg-white min-h-[calc(100vh_-_85px)]  rounded-[10px] mt-5 p-5">
                 <Dropdown />
 
                 <div className="flex justify-between items-center">
@@ -206,7 +206,39 @@ export default function Review() {
                                 <td className="py-3.5 px-4"><Dropdown /></td>
                             </tr>
 
+                            <tr className={`border-b border-border-color text-secondary text-sm text-left } cursor-pointer text-sm`}>
+                                <td className="py-3.5 px-4">
+                                    <div className="flex items-start gap-2">
+                                        <Checkbox />
+                                        <div>Hiking template</div>
+                                    </div>
+                                </td>
+                                <td className="py-3.5 px-4">
+                                    <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                </td>
+                                <td className="py-3.5 px-4">Great!</td>
+                                <td className="py-3.5 px-4">Google</td>
+                                <td className="py-3.5 px-4">Jun 18,2024 | 10:00AM</td>
+                                <td className="py-3.5 px-4"><Status status="Responded" /></td>
+                                <td className="py-3.5 px-4"><Dropdown /></td>
+                            </tr>
 
+                            <tr className={`border-b border-border-color text-secondary text-sm text-left } cursor-pointer text-sm`}>
+                                <td className="py-3.5 px-4">
+                                    <div className="flex items-start gap-2">
+                                        <Checkbox />
+                                        <div>Hiking template</div>
+                                    </div>
+                                </td>
+                                <td className="py-3.5 px-4">
+                                    <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                </td>
+                                <td className="py-3.5 px-4">Great!</td>
+                                <td className="py-3.5 px-4">Google</td>
+                                <td className="py-3.5 px-4">Jun 18,2024 | 10:00AM</td>
+                                <td className="py-3.5 px-4"><Status status="Responded" /></td>
+                                <td className="py-3.5 px-4"><Dropdown /></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
