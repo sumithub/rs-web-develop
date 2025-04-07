@@ -23,7 +23,7 @@ export default function Search({ mainClass = "", selected, onRemove, hideSearchT
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    return <div className="w-[30%]" ref={ref}>
+    return <div className="w-[30%] xl:w-[32%]" ref={ref}>
         <div className="relative w-full!">
             {selected ? <div className="bg-light-bg h-8 line-clamp-1 rounded py-1 px-2 w-full text-base focus-visible:outline-none">
                 {selected?.name}
