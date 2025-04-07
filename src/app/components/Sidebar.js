@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Sidebar() {
     return <div className="relative">
-        <div className="bg-white h-[100vh] w-24 fixed top-0 left-0 z-20">
+        <div className="bg-white h-[100vh] w-24 fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px]">
             <div className="relative h-full pb-10 shadow-[0px_16px_44px_0px_#00000012]">
 
                 <div className="test-secondary text-base font-semibold uppercase pt-5 text-center">logo</div>
@@ -22,6 +22,5 @@ export default function Sidebar() {
                 </div>
             </div>
         </div>
-
     </div>
 }
