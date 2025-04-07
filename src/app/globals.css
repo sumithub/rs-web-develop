@@ -27,13 +27,63 @@ body {
 }
 
 
+.slick-next:before,
+.slick-prev:before {
+  opacity: 1;
+  font-size: 0px !important;
+}
 
+.slick-dots {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  bottom: 45px !important;
+  z-index: 20;
+  gap: 8px !important;
+}
 
+/* flex-direction: row; */
+.slick-dots li {
+  position: unset;
+  margin: 0px !important;
+  width: 10px !important;
+  height: 10px !important;
+}
 
+.slick-dots li button {
+  background: #B8CAF2 !important;
+  /* color: #242424 !important; */
+  /* border: 1px solid #24242480 !important; */
+  height: 10px !important;
+  width: 10px !important;
+  border-radius: 100px !important;
+  cursor: pointer;
+}
 
+.slick-dots .slick-active button {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 100px !important;
+  /* border: 1px solid #242424 !important; */
+  background-color: #FEFEFE !important;
+}
 
+.slick-dots li button:before {
+  display: none;
+}
 
-
+.slick-next {
+  font-size: 0px;
+  line-height: 0;
+  top: 50%;
+  width: auto;
+  height: auto;
+  transform: 0, -50%;
+  cursor: pointer;
+  border: none;
+  outline: 0;
+  color: #FEFEFE;
+}
 
 
 .react-datepicker {
@@ -90,7 +140,6 @@ body {
 .react-datepicker__children-container {
   width: 10.5rem !important;
 }
-
 
 
 .ldio-x2uulkbinbj>div {
