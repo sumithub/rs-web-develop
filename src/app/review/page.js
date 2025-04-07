@@ -11,7 +11,7 @@ import Search from "../components/form/Search"
 import Dropdown from "../components/DropDown";
 import DatePicker from "../components/form/DatePicker";
 import Loading from "../components/Loading"
-
+import Pagination from "../components/Pagination"
 export default function Review() {
     const [rating, setRating] = useState("")
     const [reviewSource, setReviewSource] = useState("")
@@ -25,7 +25,7 @@ export default function Review() {
     return <div >
         <Header />
         <Sidebar />
-        <div className="bg-[#F9FBFC] min-h-[calc(100dvh_-_85px)] pl-[118px] py-6 px-6">
+        <div className="bg-[#F9FBFC] min-h-[calc(100dvh_-_85px)] pl-[113px] py-6 px-4 mt-[85px]">
             <div className="grid grid-cols-3 gap-4">
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
@@ -71,13 +71,11 @@ export default function Review() {
                 </div>
             </div>
 
-            <div className="bg-white min-h-[calc(100vh_-_85px)]  rounded-[10px] mt-5 p-5">
-                <Dropdown />
-
-                <div className="flex justify-between items-center">
+            <div className="bg-white min-h-[calc(100vh_-_85px)] rounded-[10px] mt-5 p-5">
+                <div className="flex justify-between items-center w-full">
                     {/* <div className="relative w-[32%]">
                         <div className="w-full">
-                            <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-[#F6F8FB] border border-[#E6E6E6] rounded-lg focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
+                            <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-dark border border-border2 rounded-lg focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
 
                                 value={search}
                                 onChange={(e) => {
@@ -143,7 +141,7 @@ export default function Review() {
                         <button className="bg-primary rounded-lg py-2.5 px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 ">Create Manual Review</button>
                     </div>
                 </div>
-                <div className="border border-border-color px-2 py-1 rounded-lg w-32 mt-5">
+                <div className="border border-border-color px-2 py-1 rounded-lg w-28 mt-5">
                     <div className="flex items-start justify-center gap-2 mt-1">
                         <Checkbox />
                         <div className="text-text3 text-sm capitalize">Select all</div>
@@ -154,7 +152,7 @@ export default function Review() {
 
                     <table className="w-full">
                         <thead>
-                            <tr className="text-secondary text-sm font-semibold bg-[#F6F8FB] border-b border-border-color text-left">
+                            <tr className="text-secondary text-sm font-semibold bg-dark border-b border-border-color text-left">
                                 <th className="py-4 px-4"><TableOrder title="Reviewer" /></th>
                                 <th className="py-4 px-4"><TableOrder title="Rating" /></th>
                                 <th className="py-4 px-4"><TableOrder title="Review Text" /></th>
@@ -189,7 +187,30 @@ export default function Review() {
                         </tbody> */}
 
                         <tbody>
-                            <tr className={`border-b border-border-color text-secondary text-sm text-left } cursor-pointer text-sm`}>
+                            <tr className={`border-b border-border-color text-secondary text-sm text-left } text-sm hover:bg-dark`}>
+                                <td className="py-3.5 px-4">
+                                    <div className="flex items-start gap-2">
+                                        <Checkbox />
+                                        <div>Hiking template</div>
+                                    </div>
+                                </td>
+                                <td className="py-3.5 px-4">
+                                    <div className="flex items-center gap-1">
+                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                    </div>
+                                </td>
+                                <td className="py-3.5 px-4">Great!</td>
+                                <td className="py-3.5 px-4">Google</td>
+                                <td className="py-3.5 px-4">Jun 18,2024 | 10:00AM</td>
+                                <td className="py-3.5 px-4"><Status status="Responded" /></td>
+                                <td className="py-3.5 px-4"><Dropdown /></td>
+                            </tr>
+
+                            <tr className={`border-b border-border-color text-secondary text-sm text-left } text-sm hover:bg-dark`}>
                                 <td className="py-3.5 px-4">
                                     <div className="flex items-start gap-2">
                                         <Checkbox />
@@ -206,24 +227,7 @@ export default function Review() {
                                 <td className="py-3.5 px-4"><Dropdown /></td>
                             </tr>
 
-                            <tr className={`border-b border-border-color text-secondary text-sm text-left } cursor-pointer text-sm`}>
-                                <td className="py-3.5 px-4">
-                                    <div className="flex items-start gap-2">
-                                        <Checkbox />
-                                        <div>Hiking template</div>
-                                    </div>
-                                </td>
-                                <td className="py-3.5 px-4">
-                                    <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                </td>
-                                <td className="py-3.5 px-4">Great!</td>
-                                <td className="py-3.5 px-4">Google</td>
-                                <td className="py-3.5 px-4">Jun 18,2024 | 10:00AM</td>
-                                <td className="py-3.5 px-4"><Status status="Responded" /></td>
-                                <td className="py-3.5 px-4"><Dropdown /></td>
-                            </tr>
-
-                            <tr className={`border-b border-border-color text-secondary text-sm text-left } cursor-pointer text-sm`}>
+                            <tr className={`border-b border-border-color text-secondary text-sm text-left } text-sm hover:bg-dark`}>
                                 <td className="py-3.5 px-4">
                                     <div className="flex items-start gap-2">
                                         <Checkbox />
@@ -242,6 +246,8 @@ export default function Review() {
                         </tbody>
                     </table>
                 </div>
+
+                <Pagination />
             </div>
         </div>
 

@@ -8,7 +8,11 @@
   --text: #FEFEFE;
   --text3: #ADADAD;
   --border-color: #ADADAD4D;
+  --border2: #E6E6E6;
   --text2: #DC3545;
+  --success: #28A745;
+  --dark: #F6F8FB;
+
 }
 
 @theme inline {
@@ -18,7 +22,10 @@
   --color-text: var(--text);
   --color-text2: var(--text2);
   --color-border-color: var(--border-color);
+  --color-border2: var(--border2);
   --color-text3: var(--text3);
+  --color-success: var(--success);
+  --color-dark: var(--dark);
 }
 
 body {
