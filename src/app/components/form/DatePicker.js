@@ -1,18 +1,21 @@
 "use client"
+import Image from 'next/image';
 import React, { forwardRef } from 'react';
 import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 // eslint-disable-next-line react/display-name
-const CustomInput = forwardRef(({ value, onClick, class_ = "", icon }) => (<>
+const CustomInput = forwardRef(({ value, onClick, class_ = "", icon }, ref) => (<>
     <div className="w-full cursor-pointer relative" onClick={onClick} ref={ref}>
-        {icon && icon}
-        <div className={`${class_} text-primary-light font-bold montserrat text-[45px] leading-none w-full focus-visible:outline-none shrink-0`}>{value ? value : "Select"}</div>
+
+        <div className={`${class_} border border-border-color rounded-lg py-[6.4px]! px-2 capitalize  text-base text-text3 w-full focus-visible:outline-none shrink-0`}>{value ? value : "Select Date"}</div>
+        {icon && <Image src="/images/calendar1.svg" alt='calendar' height={16} width={16} unoptimized={true} className='absolute top-3 right-2' />}
     </div>
 </>
 ))
 
-function DatePicker({ label = '', showTimeInput = false, icon = "", class_, value, labelClass = "", isRequired, minDate, maxDate, onChange }) {
-    return (<div className="mt-4 relative w-full text-lg z-[11]">
+function DatePicker({ label = '', showTimeInput = false, icon = "", class_, value, labelClass = "", isRequired, minDate, maxDate, onChange, mainClass }) {
+    return (<div className={`mt-4 relative w-full text-lg z-[11] ${mainClass}`}>
         {label && <label className={`text-base text-text mb-1 block capitalize  ${labelClass}`}>{label}{isRequired ? <span className="">*</span> : ""}</label>}
         <ReactDatePicker
             showYearDropdown={true}

@@ -27,8 +27,6 @@ body {
 }
 
 
-
-
 .slick-next:before,
 .slick-prev:before {
   opacity: 1;
@@ -85,4 +83,120 @@ body {
   border: none;
   outline: 0;
   color: #FEFEFE;
+}
+
+
+.react-datepicker {
+  font-size: 12px !important;
+}
+
+.react-datepicker__year-dropdown-container--select,
+.react-datepicker__month-dropdown-container--select,
+.react-datepicker__month-year-dropdown-container--select,
+.react-datepicker__year-dropdown-container--scroll,
+.react-datepicker__month-dropdown-container--scroll,
+.react-datepicker__month-year-dropdown-container--scroll {
+  margin: 0 8px !important;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  line-height: 1.2rem !important;
+}
+
+.react-datepicker__month-container select {
+  height: auto;
+  padding: 4px;
+}
+
+.react-datepicker__triangle {
+  display: none
+}
+
+.react-datepicker__close-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: auto !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+.react-datepicker__close-icon::after {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: transparent !important;
+  content: url('https://api.iconify.design/carbon/close-filled.svg') !important;
+}
+
+.react-datepicker-popper {
+  z-index: 20;
+}
+
+.react-datepicker__children-container {
+  width: 10.5rem !important;
+}
+
+
+.ldio-x2uulkbinbj>div {
+  animation: ldio-x2uulkbinbj 1s infinite linear;
+  transform-origin: 70.5px 70.5px;
+}
+
+.ldio-x2uulkbinbj>div div {
+  position: absolute;
+}
+
+.ldio-x2uulkbinbj>div div:nth-child(1),
+.ldio-x2uulkbinbj>div div:nth-child(2) {
+  width: 115.61999999999999px;
+  height: 115.61999999999999px;
+  border: 16.919999999999998px solid;
+  border-radius: 50%;
+  border-color: transparent #090B27 #090B27 #090B27;
+  box-sizing: border-box;
+  position: absolute;
+  transform: rotate(45deg);
+  transform-origin: 70.5px 70.5px;
+}
+
+.ldio-x2uulkbinbj>div div:nth-child(1) {
+  transform: rotate(45deg) translate(12.69px, 12.69px);
+}
+
+.ldio-x2uulkbinbj>div div:nth-child(2) {
+  transform: rotate(0deg) translate(12.69px, 12.69px);
+  ;
+}
+
+.ldio-x2uulkbinbj>div div:nth-child(3) {
+  width: 0;
+  height: 0;
+  border: 16.919999999999998px solid;
+  border-color: transparent transparent transparent #090B27;
+  transform: translate(70.5px, 4.2299999999999995px);
+}
+
+.loadingio-spinner-reload-nq4q5u6dq7r {
+  width: 141px;
+  height: 141px;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.ldio-x2uulkbinbj {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+
+.ldio-x2uulkbinbj div {
+  box-sizing: content-box;
 }
