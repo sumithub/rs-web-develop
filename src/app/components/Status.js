@@ -1,8 +1,8 @@
 export default function Status({ status }) {
-    if ((!status)) {
+    console.log(status)
+    if (!status) {
         return <></>
     }
-    let name = status.replaceAll("_", " ")
     let s = status.toLowerCase()
     let bgClass = ""
 
@@ -14,7 +14,7 @@ export default function Status({ status }) {
         bgClass = "bg-[#FFC1071A] text-[#FFC107]"
     }
 
-    <div>
-        <button className={`${bgClass} rounded-4xl py-2 px-3 text-primary! text-sm text-center cursor-pointer disabled:pointer-events-none w-28`}>{status}</button>
+    return <div>
+        <button className={`${bgClass} rounded-4xl py-2 px-3 text-sm text-center cursor-pointer disabled:pointer-events-none w-28`}>{status}</button>
     </div>
 }

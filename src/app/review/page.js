@@ -206,7 +206,7 @@ export default function Review() {
                                 <td className="py-3.5 px-4">Great!</td>
                                 <td className="py-3.5 px-4">Google</td>
                                 <td className="py-3.5 px-4">Jun 18,2024 | 10:00AM</td>
-                                <td className="py-3.5 px-4"><Status status="Responded" /></td>
+                                <td className="py-3.5 px-4"><Status status="New" /></td>
                                 <td className="py-3.5 px-4"><Dropdown /></td>
                             </tr>
 
@@ -240,7 +240,7 @@ export default function Review() {
                                 <td className="py-3.5 px-4">Great!</td>
                                 <td className="py-3.5 px-4">Google</td>
                                 <td className="py-3.5 px-4">Jun 18,2024 | 10:00AM</td>
-                                <td className="py-3.5 px-4"><Status status="Responded" /></td>
+                                <td className="py-3.5 px-4"><Status status="Flagged" /></td>
                                 <td className="py-3.5 px-4"><Dropdown /></td>
                             </tr>
                         </tbody>
