@@ -25,7 +25,7 @@ export default function Review() {
     return <div >
         <Header />
         <Sidebar />
-        <div className="bg-[#F9FBFC] min-h-[calc(100dvh_-_85px)] pl-[113px] py-6 px-4 mt-[85px]">
+        <div className="bg-[#F9FBFC] min-h-[calc(100dvh_-_85px)] pl-[113px] py-6 px-3 mt-[85px]">
             <div className="grid grid-cols-3 gap-4">
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
@@ -94,7 +94,7 @@ export default function Review() {
                             setSearch(s)
                         }}
                     />
-                    <div className="grid grid-cols-[1fr_1fr_1fr_1fr_0.3fr_1fr] items-start gap-4">
+                    <div className="grid grid-cols-[1fr_1fr_1fr_1fr_0.3fr_1fr] items-start 2xl:gap-4 gap-1">
                         <Select
                             class_="mt-0!"
                             defaultOption="start rating"
@@ -132,13 +132,14 @@ export default function Review() {
                             }}>
                             <option value="new">New</option>
                             <option value="responded">Responded</option>
+                            <option value="flagged">Flagged</option>
                         </Select>
 
-                        <button className="cursor-pointer disabled:pointer-events-none ">
+                        <button className="cursor-pointer disabled:pointer-events-none">
                             <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
                         </button>
 
-                        <button className="bg-primary rounded-lg py-2.5 px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 ">Create Manual Review</button>
+                        <button className="bg-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50">Create Manual Review</button>
                     </div>
                 </div>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 mt-5">
