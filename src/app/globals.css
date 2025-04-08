@@ -207,3 +207,8 @@ body {
 .ldio-x2uulkbinbj div {
   box-sizing: content-box;
 }
+
+
+:disabled {
+  @apply pointer-events-none
+}
