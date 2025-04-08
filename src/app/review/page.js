@@ -177,7 +177,7 @@ export default function Review() {
                         <tbody>
                             {loading ? <tr><td colSpan={6} className='text-center'><Loading /></td></tr> : (
                                 (list && list.length > 0) ? list.map((e, index) => {
-                                    return <tr className={`${index === 0 ? "" : "border-t"} border-border-color text-secondary text-sm text-left hover:bg-dark text-sm`}>
+                                    return <tr key={index} className={`${index === 0 ? "" : "border-t"} border-border-color text-secondary text-sm text-left hover:bg-dark text-sm`}>
                                         <td className="py-3 px-4">
                                             <div className="flex items-start gap-2">
                                                 <Checkbox />
