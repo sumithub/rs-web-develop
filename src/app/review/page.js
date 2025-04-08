@@ -12,6 +12,7 @@ import Dropdown from "../components/DropDown";
 import DatePicker from "../components/form/DatePicker";
 import Loading from "../components/Loading"
 import Pagination from "../components/Pagination"
+import ProgressBar from "@ramonak/react-progress-bar";
 import Chart from "../components/Chart";
 
 export default function Review() {
@@ -41,7 +42,6 @@ export default function Review() {
                     <div>
                         <div className="text-secondary text-base font-semibold mb-3">Most mentioned keywords</div>
                         <Chart />
-                        {/* <Image src="/images/graph.png" alt="graph" height={127} width={394} className="w-full" /> */}
                     </div>
                 </div>
 
@@ -61,17 +61,51 @@ export default function Review() {
 
                                 <div className="flex items-center justify-between mt-2">
                                     <div>
-                                        <div className="2xl:text-xs lg:text-[10px] mb-1.5">Ratings</div>
+                                        <div className="2xl:text-sm lg:text-[10px] mb-1.5">Ratings</div>
                                         <div className="2xl:text-base text-sm font-semibold">233</div>
                                     </div>
                                     <div>
-                                        <div className="2xl:text-xs lg:text-[10px] capitalize mb-1.5">Rating With Reviews</div>
+                                        <div className="2xl:text-sm lg:text-[10px] capitalize mb-1.5">Rating With Reviews</div>
                                         <div className="2xl:text-base text-sm font-semibold">217</div>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* <Image src="/images/graph1.png" alt="graph" height={117} width={180} /> */}
+                            <div>
+                                <div className="grid grid-cols-[0.1fr_auto] items-center">
+                                    <div className="text-text3 text-sm">5</div>
+                                    <ProgressBar completed={100} bgColor="#FFC107" height="12px"
+                                        isLabelVisible={false} borderRadius="2px"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-[0.1fr_auto] items-center my-1.5">
+                                    <div className="text-text3 text-sm">4</div>
+                                    <ProgressBar completed={80} bgColor="#FFC107" height="12px"
+                                        isLabelVisible={false} borderRadius="2px"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-[0.1fr_auto] items-center">
+                                    <div className="text-text3 text-sm">3</div>
+                                    <ProgressBar completed={50} bgColor="#FFC107" height="12px"
+                                        isLabelVisible={false} borderRadius="2px"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-[0.1fr_auto] items-center my-1.5">
+                                    <div className="text-text3 text-sm">2</div>
+                                    <ProgressBar completed={50} bgColor="#FFC107" height="12px"
+                                        isLabelVisible={false} borderRadius="2px"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-[0.1fr_auto] items-center">
+                                    <div className="text-text3 text-sm">1</div>
+                                    <ProgressBar completed={50} bgColor="#FFC107" height="12px"
+                                        isLabelVisible={false} borderRadius="2px"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,6 +113,59 @@ export default function Review() {
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
                         <div className="text-secondary text-base font-semibold mb-3">Sentiment analysis</div>
+                        <div>
+                            <div>
+                                <ProgressBar completed={50} bgColor="#28A745" height="5px"
+                                    isLabelVisible={false}
+                                />
+                                <div className="flex items-center justify-between mt-1">
+                                    <div className="text-text3 text-sm font-normal">Positive</div>
+                                    <div className="text-sm font-medium flex gap-1">
+                                        <div className="text-secondary">3,035</div>
+                                        <div className="text-text3">(50%)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="my-4">
+                                <ProgressBar completed={15} bgColor="#FFC107" height="5px"
+                                    isLabelVisible={false}
+                                />
+                                <div className="flex items-center justify-between mt-1">
+                                    <div className="text-text3 text-sm font-normal">Neutral</div>
+                                    <div className="text-sm font-medium flex gap-1">
+                                        <div className="text-secondary">386</div>
+                                        <div className="text-text3">(15%)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="">
+                                <ProgressBar completed={5} bgColor="#1F2933" height="5px"
+                                    isLabelVisible={false}
+                                />
+                                <div className="flex items-center justify-between mt-1">
+                                    <div className="text-text3 text-sm font-normal">Mixed</div>
+                                    <div className="text-sm font-medium flex gap-1">
+                                        <div className="text-secondary">374</div>
+                                        <div className="text-text3">(5%)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-4">
+                                <ProgressBar completed={38} bgColor="#DC3545" height="5px"
+                                    isLabelVisible={false}
+                                />
+                                <div className="flex items-center justify-between mt-1">
+                                    <div className="text-text3 text-sm font-normal">Negative</div>
+                                    <div className="text-sm font-medium flex gap-1">
+                                        <div className="text-secondary">2,307</div>
+                                        <div className="text-text3">(38%)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

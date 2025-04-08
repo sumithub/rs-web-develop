@@ -14,6 +14,7 @@ const data = { labels, datasets: [{ label: '28.7 Reviews', data: values, backgro
 // Chart options 
 const options = {
     responsive: true,
+    aspectRatio: 2.4,
     plugins: {
         legend: { position: 'top', },
         title: { display: false, text: 'Numbers by Month', },
@@ -27,4 +28,4 @@ const options = {
     },
 };
 
-export default function ChartPage() { return (<div style={{ width: '100%', maxWidth: 700, margin: 'auto', paddingTop: 50 }}> <Bar data={data} options={options} /> </div>); }
+export default function ChartPage() { return (<div style={{ width: '100%', maxWidth: 700, margin: 'auto', }}> <Bar data={data} options={options} /> </div>); }
