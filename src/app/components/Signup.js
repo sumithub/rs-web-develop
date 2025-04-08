@@ -14,22 +14,22 @@ export default function Signup() {
                         label="Full Name*"
                         type="type"
                         class_="mt-10!"
-                        placeholder="Johan 68056"
-                        error="Please enter a valid first name (alphabetic characters only)."
+                        placeholder="Enter Name"
+                        error="Please Enter A Valid First Name (Alphabetic Characters Only)."
                         icon="/images/close.svg"
                     />
                     <Input
                         label="Email ID*"
                         type="Email"
-                        placeholder="gmiller@gmail.com"
-                        error="This email address is already in use. Please try another."
+                        placeholder="Enter Email"
+                        error="This Email Address Is Already In Use. Please Try Another."
                         icon="/images/close.svg"
                     />
                     <Input
                         label="Password*"
                         type="password"
-                        placeholder="........"
-                        error="Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character."
+                        placeholder="Enter Password"
+                        error="Password Must Be At Least 8 Characters Long And Include Uppercase, lowercase, a number, and a special character."
                         icon="/images/eyes.svg"
                         iconClass="w-6 h-6"
                     />
