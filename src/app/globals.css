@@ -17,6 +17,7 @@
 
 @theme inline {
   --color-primary: var(--primary);
+  --border-primary: var(--primary);
   --color-primary2: var(--primary2);
   --color-secondary: var(--secondary);
   --color-text: var(--text);
