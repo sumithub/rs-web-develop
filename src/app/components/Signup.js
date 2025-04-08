@@ -61,7 +61,7 @@ export default function Signup() {
                                     required: "Email is required",
                                     pattern: {
                                         value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                        message: "Invalid Email"
+                                        message: "Email is invalid."
                                     },
                                     validate: (value) =>
                                         !["test@gmail.com", "admin@gmail.com"].includes(value) ||
@@ -81,7 +81,7 @@ export default function Signup() {
                                 ...register("password", {
                                     required: true,
                                     pattern: {
-                                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]{8,}$/,
                                         message: "Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character."
                                     }
                                 })
