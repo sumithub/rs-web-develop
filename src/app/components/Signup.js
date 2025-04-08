@@ -38,7 +38,7 @@ export default function Signup() {
                         />
                         <div className="text-sm text-secondary">I Agree To Our <Link href="/" className="text-primary">Terms & Conditions</Link> And <Link href="/" className="text-primary">Privacy Policy</Link></div>
                     </div>
-                    <Link href="/" className="">
+                    <Link href="/review" className="">
                         <button className="text-text text-lg mt-5 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary">
                             Create Account
                         </button>
