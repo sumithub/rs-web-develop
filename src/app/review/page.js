@@ -81,15 +81,56 @@ export default function Review() {
                     <div>
                         <div className="text-secondary text-base font-semibold mb-3">Sentiment analysis</div>
                         <div>
-                            {/* <progress value={75} max={100} /> */}
-                            <ProgressBar completed={50} bgColor="#28A745" height="5px"
-                                isLabelVisible={false}
-                            />
-                            <div className="flex items-center justify-between mt-2">
-                                <div className="text-text3 text-sm font-normal">Positive</div>
-                                <div className="text-sm font-medium flex gap-1">
-                                    <div className="text-secondary">3,035</div>
-                                    <div className="text-text3">(50%)</div>
+                            <div>
+                                {/* <progress value={75} max={100} /> */}
+                                <ProgressBar completed={50} bgColor="#28A745" height="5px"
+                                    isLabelVisible={false}
+                                />
+                                <div className="flex items-center justify-between mt-1">
+                                    <div className="text-text3 text-sm font-normal">Positive</div>
+                                    <div className="text-sm font-medium flex gap-1">
+                                        <div className="text-secondary">3,035</div>
+                                        <div className="text-text3">(50%)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="my-4">
+                                <ProgressBar completed={15} bgColor="#FFC107" height="5px"
+                                    isLabelVisible={false}
+                                />
+                                <div className="flex items-center justify-between mt-1">
+                                    <div className="text-text3 text-sm font-normal">Neutral</div>
+                                    <div className="text-sm font-medium flex gap-1">
+                                        <div className="text-secondary">386</div>
+                                        <div className="text-text3">(15%)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="">
+                                <ProgressBar completed={5} bgColor="#1F2933" height="5px"
+                                    isLabelVisible={false}
+                                />
+                                <div className="flex items-center justify-between mt-1">
+                                    <div className="text-text3 text-sm font-normal">Mixed</div>
+                                    <div className="text-sm font-medium flex gap-1">
+                                        <div className="text-secondary">374</div>
+                                        <div className="text-text3">(5%)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-4">
+                                <ProgressBar completed={38} bgColor="#DC3545" height="5px"
+                                    isLabelVisible={false}
+                                />
+                                <div className="flex items-center justify-between mt-1">
+                                    <div className="text-text3 text-sm font-normal">Negative</div>
+                                    <div className="text-sm font-medium flex gap-1">
+                                        <div className="text-secondary">2,307</div>
+                                        <div className="text-text3">(38%)</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

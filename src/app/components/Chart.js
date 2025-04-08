@@ -27,4 +27,4 @@ const options = {
     },
 };
 
-export default function ChartPage() { return (<div style={{ width: '100%', maxWidth: 700, margin: 'auto', paddingTop: 50 }}> <Bar data={data} options={options} /> </div>); }
+export default function ChartPage() { return (<div style={{ width: '100%', maxWidth: 700, margin: 'auto', }}> <Bar data={data} options={options} /> </div>); }
