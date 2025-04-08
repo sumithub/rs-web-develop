@@ -28,7 +28,7 @@ export default function Search({ mainClass = "", selected, onRemove, hideSearchT
             {selected ? <div className="bg-light-bg h-8 line-clamp-1 rounded py-1 px-2 w-full text-base focus-visible:outline-none">
                 {selected?.name}
             </div> :
-                <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-dark border border-border2 rounded-lg focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
+                <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-dark border border-border2 rounded-lg placeholder:capitalize focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
                     value={search}
                     onChange={(e) => {
                         setSearch(e.target.value)
