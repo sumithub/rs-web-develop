@@ -43,7 +43,7 @@ export default function Signup() {
                             Create Account
                         </button>
                     </Link>
-                    <h2 className="text-sm text-center mt-5 text-secondary">Already have an account?<Link href="/" className="text-primary underline underline-offset-[3px]"> Login</Link></h2>
+                    <h2 className="text-sm text-center mt-5 capitalize text-secondary">Already have an account?<Link href="/" className="text-primary underline underline-offset-[3px]"> Login</Link></h2>
                 </div>
             </div>
         </div>
