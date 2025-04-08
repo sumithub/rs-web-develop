@@ -42,7 +42,6 @@ export default function Review() {
                     <div>
                         <div className="text-secondary text-base font-semibold mb-3">Most mentioned keywords</div>
                         <Chart />
-                        {/* <Image src="/images/graph.png" alt="graph" height={127} width={394} className="w-full" /> */}
                     </div>
                 </div>
 
@@ -72,7 +71,41 @@ export default function Review() {
                                 </div>
                             </div>
 
-                            {/* <Image src="/images/graph1.png" alt="graph" height={117} width={180} /> */}
+                            <div>
+                                <div className="grid grid-cols-[0.1fr_auto] items-center">
+                                    <div className="text-text3 text-sm">5</div>
+                                    <ProgressBar completed={100} bgColor="#FFC107" height="10px"
+                                        isLabelVisible={false} borderRadius="2px"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-[0.1fr_auto] items-center my-1.5">
+                                    <div className="text-text3 text-sm">4</div>
+                                    <ProgressBar completed={80} bgColor="#FFC107" height="10px"
+                                        isLabelVisible={false} borderRadius="2px"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-[0.1fr_auto] items-center">
+                                    <div className="text-text3 text-sm">3</div>
+                                    <ProgressBar completed={50} bgColor="#FFC107" height="10px"
+                                        isLabelVisible={false} borderRadius="2px"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-[0.1fr_auto] items-center my-1.5">
+                                    <div className="text-text3 text-sm">2</div>
+                                    <ProgressBar completed={50} bgColor="#FFC107" height="10px"
+                                        isLabelVisible={false} borderRadius="2px"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-[0.1fr_auto] items-center">
+                                    <div className="text-text3 text-sm">1</div>
+                                    <ProgressBar completed={50} bgColor="#FFC107" height="10px"
+                                        isLabelVisible={false} borderRadius="2px"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +115,6 @@ export default function Review() {
                         <div className="text-secondary text-base font-semibold mb-3">Sentiment analysis</div>
                         <div>
                             <div>
-                                {/* <progress value={75} max={100} /> */}
                                 <ProgressBar completed={50} bgColor="#28A745" height="5px"
                                     isLabelVisible={false}
                                 />
