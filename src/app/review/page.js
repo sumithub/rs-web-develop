@@ -104,7 +104,7 @@ export default function Review() {
                             setSearch(s)
                         }}
                     />
-                    <div className="grid grid-cols-[1fr_1fr_1fr_1fr_0.3fr_1fr] items-start 2xl:gap-3 xl:gap-2 lg:gap-2 2xl:mt-0 mt-3">
+                    <div className="grid grid-cols-[0.8fr_0.8fr_0.8fr_0.8fr_0.3fr_1fr] items-start 2xl:gap-3 xl:gap-2 lg:gap-2 2xl:mt-0 mt-3">
                         <Select
                             class_="mt-0!"
                             defaultOption="start rating"
