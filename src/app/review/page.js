@@ -12,6 +12,7 @@ import Dropdown from "../components/DropDown";
 import DatePicker from "../components/form/DatePicker";
 import Loading from "../components/Loading"
 import Pagination from "../components/Pagination"
+import ProgressBar from "@ramonak/react-progress-bar";
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -77,6 +78,19 @@ export default function Review() {
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
                         <div className="text-secondary text-base font-semibold mb-3">Sentiment analysis</div>
+                        <div>
+                            {/* <progress value={75} max={100} /> */}
+                            <ProgressBar completed={50} bgColor="#28A745" height="5px"
+                                isLabelVisible={false}
+                            />
+                            <div className="flex items-center justify-between mt-2">
+                                <div className="text-text3 text-sm font-normal">Positive</div>
+                                <div className="text-sm font-medium flex gap-1">
+                                    <div className="text-secondary">3,035</div>
+                                    <div className="text-text3">(50%)</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
