@@ -34,7 +34,7 @@ const Dropdown = () => {
 
             {/* Dropdown menu */}
             {isOpen && (
-                <div className="fixed z-50 right-20 top-1/2 -translate-y-1/2 mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200 ">
+                <div className="fixed z-50 right-20 top-1/2 translate-y-1/2 mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200 ">
                     <ul className="py-1">
                         {/* Reply Now - with blue background */}
                         <li>
