@@ -34,7 +34,7 @@ const Item = () => {
         </div>
         <div className="bg-white/[13%] mt-[141px] pt-12 pb-[78px] px-10">
             <h2 className="text-[32px] text-text tracking-tight font-medium text-center">Welcome To Our Platform!</h2>
-            <p className="text-sm font-medium text-text text-center">Few things make me feel more powerful than setting up <br /> automations to make my life easier and more efficient.</p>
+            <p className="text-sm font-medium capitalize text-text text-center">Few things make me feel more powerful than setting up <br /> automations to make my life easier and more efficient.</p>
             {/* <h2 className="mt-[30px] text-center">---</h2> */}
         </div>
     </div>
