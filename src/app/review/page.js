@@ -32,7 +32,6 @@ export default function Review() {
         { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Flagged" },
     ]
 
-    console.log(list)
     return <div >
         <Header />
         <Sidebar />
@@ -127,7 +126,7 @@ export default function Review() {
                                 </div>
                             </div>
 
-                            <div className="my-4">
+                            <div className="my-3">
                                 <ProgressBar completed={15} bgColor="#FFC107" height="5px"
                                     isLabelVisible={false}
                                 />
@@ -140,7 +139,7 @@ export default function Review() {
                                 </div>
                             </div>
 
-                            <div className="">
+                            <div>
                                 <ProgressBar completed={5} bgColor="#1F2933" height="5px"
                                     isLabelVisible={false}
                                 />
@@ -153,7 +152,7 @@ export default function Review() {
                                 </div>
                             </div>
 
-                            <div className="mt-4">
+                            <div className="mt-3">
                                 <ProgressBar completed={38} bgColor="#DC3545" height="5px"
                                     isLabelVisible={false}
                                 />
@@ -193,7 +192,7 @@ export default function Review() {
                             setSearch(s)
                         }}
                     />
-                    <div className="grid grid-cols-[0.8fr_0.8fr_0.8fr_0.8fr_0.3fr_1fr] items-start 2xl:gap-3 xl:gap-2 lg:gap-2 2xl:mt-0 mt-3">
+                    <div className="grid grid-cols-[0.8fr_0.8fr_0.8fr_0.8fr_auto_1fr] items-start 2xl:gap-3 xl:gap-2 lg:gap-2 2xl:mt-0 mt-3">
                         <Select
                             class_="mt-0!"
                             defaultOption="start rating"

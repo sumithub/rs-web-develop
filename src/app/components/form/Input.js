@@ -26,7 +26,7 @@ export default function Input({ watch, setValue, clearValue = true, isRequired, 
     };
 
     return (
-        <div className={`mt-[15px] ${inputClass}`}>
+        <div className={`mt-[15px]`}>
             <label className={`text-sm font-medium text-secondary ${labelClass}`}> {label}{isRequired && <span className="text-danger">*</span>}</label>
             <div className="relative">
                 {(inputType !== "password" && icon && watch(formProps?.name)) && (
@@ -53,7 +53,7 @@ export default function Input({ watch, setValue, clearValue = true, isRequired, 
                     placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
                     {...formProps}
                     disabled={disabled}
-                    className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} w-full rounded-lg py-3.5 px-2.5 text-sm text-secondary focus:outline-none ${inputClass}`}
+                    className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3.5 px-2.5 text-sm text-secondary  ${inputClass}`}
                 />
             </div>
             {error && <p className="text-xs pt-[5px] capitalize text-danger">{error}</p>}
