@@ -1,5 +1,4 @@
 export default function Status({ status }) {
-    console.log(status)
     if (!status) {
         return <></>
     }

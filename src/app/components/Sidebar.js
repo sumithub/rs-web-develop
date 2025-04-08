@@ -16,8 +16,10 @@ export default function Sidebar() {
                             <Image src="/images/dashboard.svg" alt="dashboard" height={22} width={22} unoptimized={true} />
                         </button>
                     </div>
+
                     <div>
-                        <Image src="/images/avatar1.png" alt="avatar" height={56} width={56} className="h-14 w-14 rounded-full" />
+                        <div className="border-b-2 border-border2 mb-8" />
+                        <Image src="/images/avatar1.png" alt="avatar" height={56} width={56} className="h-14 w-14 rounded-full border border-border2" />
                     </div>
                 </div>
             </div>
