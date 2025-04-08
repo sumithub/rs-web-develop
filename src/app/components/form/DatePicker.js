@@ -8,8 +8,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 const CustomInput = forwardRef(({ value, onClick, class_ = "", icon }, ref) => (<>
     <div className="w-full cursor-pointer relative" onClick={onClick} ref={ref}>
 
-        <div className={`${class_} border border-border-color rounded-lg py-[7.7px]! px-2 capitalize text-sm text-text3 w-full focus-visible:outline-none shrink-0`}>{value ? value : "Select Date"}</div>
-        {icon && <Image src="/images/calendar1.svg" alt='calendar' height={16} width={16} unoptimized={true} className='absolute top-3 right-2' />}
+        <div className={`${class_} border border-border-color rounded-lg py-[7.7px]! px-2 capitalize text-[13px] text-text3 w-full focus-visible:outline-none shrink-0`}>{value ? value : "Select Date"}</div>
+        {icon && <Image src="/images/calendar1.svg" alt='calendar' height={16} width={16} unoptimized={true} className='absolute top-2.5 right-2' />}
     </div>
 </>
 ))

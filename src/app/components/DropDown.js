@@ -34,14 +34,13 @@ const Dropdown = () => {
 
             {/* Dropdown menu */}
             {isOpen && (
-                <div className="absolute z-10 mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200 right-0">
+                <div className="fixed z-50 right-20 top-1/2  mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200 ">
                     <ul className="py-1">
                         {/* Reply Now - with blue background */}
                         <li>
                             <button
                                 className="w-full text-left px-4 py-3 flex items-center text-white bg-primary cursor-pointer disabled:pointer-events-none"
-                                onClick={() => console.log('Reply Now clicked')}
-                            >
+                                onClick={() => console.log('Reply Now clicked')}>
                                 <Image src="/images/sms.svg" alt='arrow' height={16} width={16} unoptimized={true} className='mr-3' />
                                 Reply Now
                             </button>
@@ -51,8 +50,7 @@ const Dropdown = () => {
                         <li>
                             <button
                                 className="w-full text-left px-4 py-3 flex items-center text-text3 text-sm hover:bg-gray-100 cursor-pointer disabled:pointer-events-none"
-                                onClick={() => console.log('Request Update clicked')}
-                            >
+                                onClick={() => console.log('Request Update clicked')}>
                                 <Image src="/images/arrow2.svg" alt='arrow' height={16} width={16} unoptimized={true} className='mr-3' />
                                 Request Update
                             </button>
@@ -62,8 +60,7 @@ const Dropdown = () => {
                         <li>
                             <button
                                 className="w-full text-left px-4 py-3 flex items-center text-text3 text-sm hover:bg-gray-100 cursor-pointer disabled:pointer-events-none"
-                                onClick={() => console.log('Assign To User clicked')}
-                            >
+                                onClick={() => console.log('Assign To User clicked')}>
                                 <Image src="/images/user.svg" alt='arrow' height={16} width={16} unoptimized={true} className='mr-3' />
                                 Assign To User
                             </button>
@@ -73,8 +70,7 @@ const Dropdown = () => {
                         <li>
                             <button
                                 className="w-full text-left px-4 py-3 flex items-center text-text3 text-sm hover:bg-gray-100 cursor-pointer disabled:pointer-events-none"
-                                onClick={() => console.log('Share clicked')}
-                            >
+                                onClick={() => console.log('Share clicked')}>
                                 <Image src="/images/share.svg" alt='arrow' height={16} width={16} unoptimized={true} className='mr-3' />
                                 Share (Social Media, Email)
                             </button>
@@ -86,9 +82,8 @@ const Dropdown = () => {
                         {/* Delete - with red text */}
                         <li>
                             <button
-                                className="w-full text-left px-4 py-3 flex items-center text-text2 text-sm hover:bg-gray-100 cursor-pointer disabled:pointer-events-none"
-                                onClick={() => console.log('Delete clicked')}
-                            >
+                                className="w-full text-left px-4 py-3 flex items-center text-danger text-sm hover:bg-gray-100 cursor-pointer disabled:pointer-events-none"
+                                onClick={() => console.log('Delete clicked')}>
                                 <Image src="/images/delete.svg" alt='arrow' height={16} width={16} unoptimized={true} className='mr-3' />
                                 Delete
                             </button>

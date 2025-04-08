@@ -15,6 +15,6 @@ export default function Status({ status }) {
     }
 
     return <div>
-        <button className={`${bgClass} rounded-4xl py-2 px-3 text-sm text-center cursor-pointer disabled:pointer-events-none w-28`}>{status}</button>
+        <button className={`${bgClass} rounded-4xl py-1.5 px-3 text-sm text-center disabled:pointer-events-none w-24`}>{status}</button>
     </div>
 }
