@@ -9,7 +9,7 @@
   --text3: #ADADAD;
   --border-color: #ADADAD4D;
   --border2: #E6E6E6;
-  --text2: #DC3545;
+  --danger: #DC3545;
   --success: #28A745;
   --dark: #F6F8FB;
 
@@ -20,7 +20,7 @@
   --color-primary2: var(--primary2);
   --color-secondary: var(--secondary);
   --color-text: var(--text);
-  --color-text2: var(--text2);
+  --color-danger: var(--danger);
   --color-border-color: var(--border-color);
   --color-border2: var(--border2);
   --color-text3: var(--text3);

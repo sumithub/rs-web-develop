@@ -82,7 +82,7 @@ const Dropdown = () => {
                         {/* Delete - with red text */}
                         <li>
                             <button
-                                className="w-full text-left px-4 py-3 flex items-center text-text2 text-sm hover:bg-gray-100 cursor-pointer disabled:pointer-events-none"
+                                className="w-full text-left px-4 py-3 flex items-center text-danger text-sm hover:bg-gray-100 cursor-pointer disabled:pointer-events-none"
                                 onClick={() => console.log('Delete clicked')}>
                                 <Image src="/images/delete.svg" alt='arrow' height={16} width={16} unoptimized={true} className='mr-3' />
                                 Delete
