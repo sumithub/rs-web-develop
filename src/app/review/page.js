@@ -61,11 +61,11 @@ export default function Review() {
 
                                 <div className="flex items-center justify-between mt-2">
                                     <div>
-                                        <div className="2xl:text-xs lg:text-[10px] mb-1.5">Ratings</div>
+                                        <div className="2xl:text-sm lg:text-[10px] mb-1.5">Ratings</div>
                                         <div className="2xl:text-base text-sm font-semibold">233</div>
                                     </div>
                                     <div>
-                                        <div className="2xl:text-xs lg:text-[10px] capitalize mb-1.5">Rating With Reviews</div>
+                                        <div className="2xl:text-sm lg:text-[10px] capitalize mb-1.5">Rating With Reviews</div>
                                         <div className="2xl:text-base text-sm font-semibold">217</div>
                                     </div>
                                 </div>
@@ -74,34 +74,34 @@ export default function Review() {
                             <div>
                                 <div className="grid grid-cols-[0.1fr_auto] items-center">
                                     <div className="text-text3 text-sm">5</div>
-                                    <ProgressBar completed={100} bgColor="#FFC107" height="10px"
+                                    <ProgressBar completed={100} bgColor="#FFC107" height="12px"
                                         isLabelVisible={false} borderRadius="2px"
                                     />
                                 </div>
 
                                 <div className="grid grid-cols-[0.1fr_auto] items-center my-1.5">
                                     <div className="text-text3 text-sm">4</div>
-                                    <ProgressBar completed={80} bgColor="#FFC107" height="10px"
+                                    <ProgressBar completed={80} bgColor="#FFC107" height="12px"
                                         isLabelVisible={false} borderRadius="2px"
                                     />
                                 </div>
                                 <div className="grid grid-cols-[0.1fr_auto] items-center">
                                     <div className="text-text3 text-sm">3</div>
-                                    <ProgressBar completed={50} bgColor="#FFC107" height="10px"
+                                    <ProgressBar completed={50} bgColor="#FFC107" height="12px"
                                         isLabelVisible={false} borderRadius="2px"
                                     />
                                 </div>
 
                                 <div className="grid grid-cols-[0.1fr_auto] items-center my-1.5">
                                     <div className="text-text3 text-sm">2</div>
-                                    <ProgressBar completed={50} bgColor="#FFC107" height="10px"
+                                    <ProgressBar completed={50} bgColor="#FFC107" height="12px"
                                         isLabelVisible={false} borderRadius="2px"
                                     />
                                 </div>
 
                                 <div className="grid grid-cols-[0.1fr_auto] items-center">
                                     <div className="text-text3 text-sm">1</div>
-                                    <ProgressBar completed={50} bgColor="#FFC107" height="10px"
+                                    <ProgressBar completed={50} bgColor="#FFC107" height="12px"
                                         isLabelVisible={false} borderRadius="2px"
                                     />
                                 </div>
