@@ -18,10 +18,19 @@ export default function Review() {
     const [reviewSource, setReviewSource] = useState("")
     const [status, setStatus] = useState("")
     const [date, setDate] = useState("")
-    const [list, setList] = useState([])
-    const [loading, setLoading] = useState(true)
+    // const [list, setList] = useState([])
+    const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
 
+    const list = [
+        { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "New" },
+
+        { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Responded" },
+
+        { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Flagged" },
+    ]
+
+    console.log(list)
     return <div >
         <Header />
         <Sidebar />
@@ -30,7 +39,7 @@ export default function Review() {
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
                         <div className="text-secondary text-base font-semibold mb-3">Most mentioned keywords</div>
-                        <Image src="/images/graph.png" alt="graph" height={127} width={394} className="w-full" />
+                        {/* <Image src="/images/graph.png" alt="graph" height={127} width={394} className="w-full" /> */}
                     </div>
                 </div>
 
@@ -60,7 +69,7 @@ export default function Review() {
                                 </div>
                             </div>
 
-                            <Image src="/images/graph1.png" alt="graph" height={117} width={180} />
+                            {/* <Image src="/images/graph1.png" alt="graph" height={117} width={180} /> */}
                         </div>
                     </div>
                 </div>
@@ -165,100 +174,38 @@ export default function Review() {
                             </tr>
                         </thead>
 
-                        {/* <tbody>
+                        <tbody>
                             {loading ? <tr><td colSpan={6} className='text-center'><Loading /></td></tr> : (
                                 (list && list.length > 0) ? list.map((e, index) => {
-                                    <tr className={`border-b border-border-color text-secondary text-sm text-left ${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} cursor-pointer text-sm`}>
+                                    return <tr className={`${index === 0 ? "" : "border-t"} border-border-color text-secondary text-sm text-left hover:bg-dark text-sm`}>
                                         <td className="py-3 px-4">
                                             <div className="flex items-start gap-2">
                                                 <Checkbox />
-                                                <div>Hiking template</div>
+                                                <div>{e.name}</div>
                                             </div>
                                         </td>
                                         <td className="py-3 px-4">
-                                    <div className="flex items-center gap-1">
-
-                                            <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                               <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                                  <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                                     <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                                        </div>
+                                            <div className="flex items-center gap-1">
+                                                <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                                <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                                <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                                <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                                <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                            </div>
                                         </td>
                                         <td className="py-3 px-4">{e.review}</td>
                                         <td className="py-3 px-4">{e.source}</td>
-                                        <td className="py-3 px-4">Jun 18,2024 | 10:00AM</td>
-                                        <td className="py-3 px-4"><Status  status={e.status}/></td>
+                                        <td className="py-3 px-4">{e.lastUpdate}</td>
+                                        <td className="py-3 px-4"><Status status={e.status} /></td>
                                         <td className="py-3 px-4"><Dropdown /></td>
                                     </tr>
-                                }) : <tr><td colSpan={10} className='text-center! h-20  text-3xl text-secondary'>No data</td></tr>
+                                }) : <tr><td colSpan={10} className='text-center! h-20 text-3xl text-secondary'>No data</td></tr>
                             )}
-                        </tbody> */}
-
-                        <tbody>
-                            <tr className={`border-b border-border-color text-secondary text-sm text-left } text-sm hover:bg-dark`}>
-                                <td className="py-3.5 px-4">
-                                    <div className="flex items-start gap-2">
-                                        <Checkbox />
-                                        <div>Hiking template</div>
-                                    </div>
-                                </td>
-                                <td className="py-3.5 px-4">
-                                    <div className="flex items-center gap-1">
-                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                    </div>
-                                </td>
-                                <td className="py-3.5 px-4">Great!</td>
-                                <td className="py-3.5 px-4">Google</td>
-                                <td className="py-3.5 px-4">Jun 18,2024 | 10:00AM</td>
-                                <td className="py-3.5 px-4"><Status status="New" /></td>
-                                <td className="py-3.5 px-4"><Dropdown /></td>
-                            </tr>
-
-                            <tr className={`border-b border-border-color text-secondary text-sm text-left } text-sm hover:bg-dark`}>
-                                <td className="py-3.5 px-4">
-                                    <div className="flex items-start gap-2">
-                                        <Checkbox />
-                                        <div>Hiking template</div>
-                                    </div>
-                                </td>
-                                <td className="py-3.5 px-4">
-                                    <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                </td>
-                                <td className="py-3.5 px-4">Great!</td>
-                                <td className="py-3.5 px-4">Google</td>
-                                <td className="py-3.5 px-4">Jun 18,2024 | 10:00AM</td>
-                                <td className="py-3.5 px-4"><Status status="Responded" /></td>
-                                <td className="py-3.5 px-4"><Dropdown /></td>
-                            </tr>
-
-                            <tr className={`border-b border-border-color text-secondary text-sm text-left } text-sm hover:bg-dark`}>
-                                <td className="py-3.5 px-4">
-                                    <div className="flex items-start gap-2">
-                                        <Checkbox />
-                                        <div>Hiking template</div>
-                                    </div>
-                                </td>
-                                <td className="py-3.5 px-4">
-                                    <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
-                                </td>
-                                <td className="py-3.5 px-4">Great!</td>
-                                <td className="py-3.5 px-4">Google</td>
-                                <td className="py-3.5 px-4">Jun 18,2024 | 10:00AM</td>
-                                <td className="py-3.5 px-4"><Status status="Flagged" /></td>
-                                <td className="py-3.5 px-4"><Dropdown /></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
-
                 <Pagination />
             </div>
         </div>
-
     </div>
 }
