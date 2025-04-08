@@ -13,6 +13,7 @@ import DatePicker from "../components/form/DatePicker";
 import Loading from "../components/Loading"
 import Pagination from "../components/Pagination"
 import ProgressBar from "@ramonak/react-progress-bar";
+import Chart from "../components/Chart";
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -40,6 +41,7 @@ export default function Review() {
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
                         <div className="text-secondary text-base font-semibold mb-3">Most mentioned keywords</div>
+                        <Chart />
                         {/* <Image src="/images/graph.png" alt="graph" height={127} width={394} className="w-full" /> */}
                     </div>
                 </div>
