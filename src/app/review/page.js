@@ -12,6 +12,7 @@ import Dropdown from "../components/DropDown";
 import DatePicker from "../components/form/DatePicker";
 import Loading from "../components/Loading"
 import Pagination from "../components/Pagination"
+
 export default function Review() {
     const [rating, setRating] = useState("")
     const [reviewSource, setReviewSource] = useState("")
@@ -19,7 +20,6 @@ export default function Review() {
     const [date, setDate] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
-
     const [search, setSearch] = useState("")
 
     return <div >
@@ -30,7 +30,7 @@ export default function Review() {
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
                         <div className="text-secondary text-base font-semibold mb-3">Most mentioned keywords</div>
-                        {/* <Image src="/images/graph.png" alt="graph" height={127} width={394} className="w-full" /> */}
+                        <Image src="/images/graph.png" alt="graph" height={127} width={394} className="w-full" />
                     </div>
                 </div>
 
@@ -43,24 +43,25 @@ export default function Review() {
                                 <div className="text-[22px] font-semibold my-1">4.3</div>
                                 <div className="flex items-center gap-1">
                                     <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
-                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />  <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />  <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />  <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />  <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
                                 </div>
 
                                 <div className="flex items-center justify-between mt-2">
                                     <div>
-                                        <div className="text-xs mb-1.5">Ratings</div>
-                                        <div className="text-base font-semibold">233</div>
+                                        <div className="2xl:text-xs lg:text-[10px] mb-1.5">Ratings</div>
+                                        <div className="2xl:text-base text-sm font-semibold">233</div>
                                     </div>
                                     <div>
-                                        <div className="text-xs capitalize mb-1.5">Rating With Reviews</div>
-                                        <div className="text-base font-semibold">217</div>
+                                        <div className="2xl:text-xs lg:text-[10px] capitalize mb-1.5">Rating With Reviews</div>
+                                        <div className="2xl:text-base text-sm font-semibold">217</div>
                                     </div>
                                 </div>
-
                             </div>
-                            {/* <Image src="/images/graph1.png" alt="graph" height={117} width={180} /> */}
-                        </div>
 
+                            <Image src="/images/graph1.png" alt="graph" height={117} width={180} />
+                        </div>
                     </div>
                 </div>
 
@@ -72,7 +73,7 @@ export default function Review() {
             </div>
 
             <div className="bg-white min-h-[calc(100vh_-_85px)] rounded-[10px] mt-5 p-5">
-                <div className="flex justify-between items-center w-full">
+                <div className="2xl:flex lg:flex-wrap justify-between items-center w-full">
                     {/* <div className="relative w-[32%]">
                         <div className="w-full">
                             <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-dark border border-border2 rounded-lg focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
@@ -94,7 +95,7 @@ export default function Review() {
                             setSearch(s)
                         }}
                     />
-                    <div className="grid grid-cols-[1fr_1fr_1fr_1fr_0.3fr_1fr] items-start 2xl:gap-4 gap-1">
+                    <div className="grid grid-cols-[1fr_1fr_1fr_1fr_0.3fr_1fr] items-start 2xl:gap-3 xl:gap-2 lg:gap-2 2xl:mt-0 mt-3">
                         <Select
                             class_="mt-0!"
                             defaultOption="start rating"
@@ -175,7 +176,14 @@ export default function Review() {
                                             </div>
                                         </td>
                                         <td className="py-3 px-4">
+                                    <div className="flex items-center gap-1">
+
                                             <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                               <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                                  <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                                     <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                                        <Image src="/images/star.svg" alt="rating" height={16} width={16} unoptimized={true} />
+                                                        </div>
                                         </td>
                                         <td className="py-3 px-4">{e.review}</td>
                                         <td className="py-3 px-4">{e.source}</td>
