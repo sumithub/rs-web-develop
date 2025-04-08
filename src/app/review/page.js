@@ -126,7 +126,7 @@ export default function Review() {
                                 </div>
                             </div>
 
-                            <div className="my-4">
+                            <div className="my-3">
                                 <ProgressBar completed={15} bgColor="#FFC107" height="5px"
                                     isLabelVisible={false}
                                 />
@@ -139,7 +139,7 @@ export default function Review() {
                                 </div>
                             </div>
 
-                            <div className="">
+                            <div>
                                 <ProgressBar completed={5} bgColor="#1F2933" height="5px"
                                     isLabelVisible={false}
                                 />
@@ -152,7 +152,7 @@ export default function Review() {
                                 </div>
                             </div>
 
-                            <div className="mt-4">
+                            <div className="mt-3">
                                 <ProgressBar completed={38} bgColor="#DC3545" height="5px"
                                     isLabelVisible={false}
                                 />
