@@ -44,7 +44,7 @@ export default function Signup() {
                             inputType="text"
                             placeholder="Enter Your Full Name"
                             icon="/images/close.svg"
-                            formProps={{ ...register("name", { required: true, pattern: { value: /^[A-Za-z]+$/, message: "Please enter a valid first name (alphabetic characters only)." } }) }}
+                            formProps={{ ...register("name", { required: true, pattern: { value: /^[A-Za-z\s]+$/, message: "Please enter a valid first name (alphabetic characters only)." } }) }}
                             isRequired={true} errors={errors}
                             setValue={setValue}
                             watch={watch}
