@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import AuthLayout from '../../components/common/AuthLayout';
 
 function RegisterPage() {
-  return (
-    <div>Register Page</div>
-  )
+    return (
+        <AuthLayout>
+            <div>Register Page</div>
+        </AuthLayout>
+    )
 }
 
 export default RegisterPage

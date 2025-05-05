@@ -1,13 +1,11 @@
-import React from 'react'
-import AuthLayout from "../../components/common/AuthLayout" 
+import React from 'react';
+import AuthLayout from "../../components/common/AuthLayout";
 
 function ForgotPassword() {
-  return (
-    <div>
-       <div>Forgot ResetPassword</div> 
-        <AuthLayout />
-    </div>
-  )
+    return (<AuthLayout>
+                <div>Forgot Password</div>
+            </AuthLayout>
+    )
 }
 
 export default ForgotPassword

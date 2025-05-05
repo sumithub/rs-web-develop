@@ -1,13 +1,11 @@
 import React from 'react';
-import Card from "../../components/common/Card"
+import AuthLayout from '../../components/common/AuthLayout';
+
 function LoginPage() {
   return (
-    <div>
-        <Card>
-        Login Page
-            
-        </Card>
-    </div>
+    <AuthLayout>
+      <div>Login Page</div>
+    </AuthLayout>
   )
 }
 
