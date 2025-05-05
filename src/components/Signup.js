@@ -1,10 +1,10 @@
 "use client"
 import { useForm } from "react-hook-form";
-import Input from "./form/Input";
 import Checkbox2 from "./form/Checkbox2";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import InputForm from "./form/InputForm";
 
 export default function Signup() {
     const {
@@ -36,7 +36,7 @@ export default function Signup() {
                 <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Sign Up</h2>
                 <p className="text-xs pt-2.5 pb-[25px] capitalize text-center text-[#616E7C]">Let&#39;s get you all st up so you can access your personal account.</p>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Input
+                    <InputForm
                         label="Full Name"
                         name="name"
                         inputType="text"
@@ -47,7 +47,7 @@ export default function Signup() {
                         setValue={setValue}
                         watch={watch}
                     />
-                    <Input
+                    <InputForm
                         label="Email ID"
                         name="email"
                         placeholder="Enter Email"
@@ -70,7 +70,7 @@ export default function Signup() {
                         watch={watch}
                     />
 
-                    <Input
+                    <InputForm
                         label="Password"
                         name="password"
                         inputType="password"

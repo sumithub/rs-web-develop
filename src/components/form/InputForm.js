@@ -3,13 +3,25 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Input({ isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", error, icon, disabled, iconClass = "" }) {
+export default function InputForm({ watch, setValue, clearValue = true, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "" }) {
     const [type, setType] = useState("password")
+    let error = "";
+
+    if (formProps?.name && errors?.[formProps.name]) {
+        const fieldError = errors[formProps.name];
+        if (fieldError.type === "pattern" || fieldError.type === "validate") {
+            error = fieldError.message;
+        } else {
+            error = "This field is required";
+        }
+    }
 
 
     const handleClick = () => {
         if (inputType === "password") {
             setType(type === "password" ? "text" : "password");
+        } else if (clearValue) {
+            setValue(formProps?.name, "")
         }
     };
 
@@ -17,7 +29,7 @@ export default function Input({ isRequired, label, placeholder, labelClass, inpu
         <div className={`mt-[15px]`}>
             <label className={`text-sm font-medium text-secondary ${labelClass}`}> {label}{isRequired && <span className="text-danger">*</span>}</label>
             <div className="relative">
-                {(inputType !== "password" && icon) && (
+                {(inputType !== "password" && icon && watch(formProps?.name)) && (
                     <Image
                         unoptimized
                         src={icon}
@@ -39,6 +51,7 @@ export default function Input({ isRequired, label, placeholder, labelClass, inpu
                 )}
                 <input
                     placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
+                    {...formProps}
                     disabled={disabled}
                     className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3.5 px-2.5 text-sm text-secondary  ${inputClass}`}
                 />
