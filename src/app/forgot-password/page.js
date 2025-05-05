@@ -1,8 +1,12 @@
 import React from 'react'
+import AuthLayout from "../../components/common/AuthLayout" 
 
 function ForgotPassword() {
   return (
-    <div>Forgot Password</div>
+    <div>
+       <div>Forgot ResetPassword</div> 
+        <AuthLayout />
+    </div>
   )
 }
 

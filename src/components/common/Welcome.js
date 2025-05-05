@@ -13,14 +13,14 @@ export default function Welcome() {
         autoplay: true,
     };
 
-    return (<>
+    return (        <div className="bg-primary2 w-full rounded-[20px] my-[25px]">
         <Slider {...settings}>
             <Item />
             <Item />
             <Item />
             <Item />
         </Slider>
-    </>)
+    </div>)
 }
 
 const Item = () => {
