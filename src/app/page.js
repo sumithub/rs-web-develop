@@ -1,5 +1,5 @@
 import Signup from "../components/Signup";
-import Welcome from "../components/Welcome";
+import Welcome from "../components/common/Welcome";
 export default function Home() {
   return (<><div className="bg-[#FEFEFE]">
     <div className="max-w-7xl mx-auto xl:px-0 px-12">
@@ -7,9 +7,7 @@ export default function Home() {
         <div>
           <Signup />
         </div>
-        <div className="bg-primary2 w-full rounded-[20px] my-[25px]">
           <Welcome />
-        </div>
       </div>
     </div>
   </div>
