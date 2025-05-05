@@ -1,19 +1,19 @@
 "use client"
 import Image from "next/image";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import Select from "../components/form/Select";
-import Checkbox from "../components/form/Checkbox";
-import Status from "../components/Status";
-import TableOrder from "../components/TableOrder"
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
+import Select from "@/components/form/Select";
+import Checkbox from "@/components/form/Checkbox";
+import Status from "@/components/Status";
+import TableOrder from "@/components/TableOrder"
 import { useState } from "react";
-import Search from "../components/form/Search"
-import Dropdown from "../components/DropDown";
-import DatePicker from "../components/form/DatePicker";
-import Loading from "../components/Loading"
-import Pagination from "../components/Pagination"
+import Search from "@/components/form/Search"
+import Dropdown from "@/components/DropDown";
+import DatePicker from "@/components/form/DatePicker";
+import Loading from "@/components/Loading"
+import Pagination from "@/components/Pagination"
 import ProgressBar from "@ramonak/react-progress-bar";
-import Chart from "../components/Chart";
+import Chart from "@/components/Chart";
 
 export default function Review() {
     const [rating, setRating] = useState("")
