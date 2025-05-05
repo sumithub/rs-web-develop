@@ -1,8 +1,13 @@
-import React from 'react'
-
+import React from 'react';
+import Card from "../../components/Card"
 function LoginPage() {
   return (
-    <div>Login Page</div>
+    <div>
+        <Card>
+        Login Page
+            
+        </Card>
+    </div>
   )
 }
 

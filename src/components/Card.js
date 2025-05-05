@@ -1,9 +1,10 @@
 import React from 'react'
 
-function CardPage() {
-  return (
-    <div>Card Page</div>
+function Card({children}) {
+  return (    <div>
+        {children}
+    </div>
   )
 }
 
-export default CardPage
+export default Card
