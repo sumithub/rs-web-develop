@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import Welcome from './Welcome';
 import Card from './Card';
 import Link from 'next/link';
