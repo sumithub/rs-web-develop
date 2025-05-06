@@ -1,6 +1,7 @@
 "use client"
 import Slider from "react-slick";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Welcome() {
     var settings = {
@@ -13,22 +14,34 @@ export default function Welcome() {
         autoplay: true,
     };
 
-    return (<>
+    return (<div className="bg-primary2 w-full rounded-[20px] my-[25px]">
         <Slider {...settings}>
             <Item />
             <Item />
             <Item />
             <Item />
         </Slider>
-    </>)
+    </div>)
 }
 
 const Item = () => {
+    let imgName = "";
+    const pathname = usePathname();
+
+    if (pathname === "/login") {
+        imgName = "login"
+    } else if (pathname === "/reset-password") {
+        imgName = "reset-password"
+    } else {
+        imgName = "signup"
+    }
+
+
     return <div className="">
         <div className=" relative">
-            <Image src="/images/image-1.svg" alt="image-1" width={209} height={209} className="absolute right-3 z-0 -top-16" />
+            <Image src={`/images/image-1.svg`} alt="image-1" width={209} height={209} className="absolute right-3 z-0 -top-16" />
             <div>
-                <Image src="/images/signup.png" alt="signup" width={502} height={500} className="mx-auto mt-[99px] z-10 w-full px-14 relative rounded-[23px]" />
+                <Image src={`/images/auth/${imgName}.png`} alt="signup" width={502} height={500} className="mx-auto mt-[99px] z-10 w-full px-14 relative rounded-[23px]" />
             </div>
             <Image src="/images/image-2.svg" alt="image-2" width={209} height={209} className="absolute left-5 z-0 -bottom-11" />
         </div>

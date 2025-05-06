@@ -11,7 +11,11 @@
   --border2: #E6E6E6;
   --danger: #DC3545;
   --success: #28A745;
+  --success-light: #07BEAA;
   --dark: #F6F8FB;
+  --light: #F9FBFC;
+  --custom-purple: #5470DE;
+  --custom-yellow: #FFC246;
 
 }
 
@@ -26,7 +30,11 @@
   --color-border2: var(--border2);
   --color-text3: var(--text3);
   --color-success: var(--success);
+  --color-success-light: var(--success-light);
   --color-dark: var(--dark);
+  --color-light: var(--light);
+  --color-custom-purple: var(--custom-purple);
+  --color-custom-yellow: var(--custom-yellow);
 }
 
 body {
@@ -212,4 +220,30 @@ body {
 
 :disabled {
   @apply pointer-events-none
+}
+
+.table-class {
+  width: 100%;
+  border: 1px solid #E6E6E6;
+  border-radius: 20px !important;
+  overflow: hidden;
+}
+
+th {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1F2933;
+  text-align: start;
+  padding: 20px;
+  background-color: #F6F8FB;
+}
+
+td {
+  font-size: 14px;
+  font-weight: 400;
+  color: #1F2933;
+  text-align: start;
+  padding: 20px;
+  border-top: 1px solid #E6E6E6;
+  background-color: white;
 }

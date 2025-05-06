@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Sidebar() {
     return <div className="relative">
@@ -12,9 +13,9 @@ export default function Sidebar() {
                             <Image src="/images/location.svg" alt="location" height={48} width={48} unoptimized={true} />
                         </button>
 
-                        <button className="cursor-pointer">
+                        <Link href="/dashboard" className="cursor-pointer">
                             <Image src="/images/dashboard.svg" alt="dashboard" height={22} width={22} unoptimized={true} />
-                        </button>
+                        </Link>
                     </div>
 
                     <div>

@@ -1,17 +1,16 @@
-import Signup from "./components/Signup";
-import Welcome from "./components/Welcome";
+import Signup from "../components/Signup";
+import AuthLayout from "../components/common/AuthLayout";
+import VerificationEmail from "../components/VerificationEmail";
+import VerificationError from "../components/VerificationError";
+import Error from "../components/common/Error";
+import Success from "../components/common/Success"
 export default function Home() {
-  return (<><div className="bg-[#FEFEFE]">
-    <div className="max-w-7xl mx-auto xl:px-0 px-12">
-      <div className="grid grid-cols-2 gap-16">
-        <div>
-          <Signup />
-        </div>
-        <div className="bg-primary2 w-full rounded-[20px] my-[25px]">
-          <Welcome />
-        </div>
-      </div>
-    </div>
-  </div>
+  return (<>
+    <AuthLayout>
+      {/* <VerificationEmail /> */}
+      {/* <VerificationError /> */}
+      {/* <Error /> */}
+      <Success />
+    </AuthLayout>
   </>)
 }
