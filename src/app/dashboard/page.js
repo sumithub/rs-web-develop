@@ -1,6 +1,7 @@
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
-import DashboardCard from "../../components/DashboardCard"
+import DashboardCard from "../../components/DashboardCard";
+import Table from "../../components/Table";
 
 export default function Dashboard() {
     return <div>
@@ -15,6 +16,9 @@ export default function Dashboard() {
                 <DashboardCard title="New Reviews" count="12%" img="/images/star1.svg" bgClass="bg-custom-purple" textColor="text-custom-purple" />
 
                 <DashboardCard title="Active Campaigns" count="20%" img="/images/sms-star.svg" bgClass="bg-custom-yellow" textColor="text-custom-yellow!" />
+            </div>
+            <div>
+                <Table />
             </div>
         </div>
     </div>
