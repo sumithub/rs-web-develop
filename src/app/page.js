@@ -1,16 +1,9 @@
-import Signup from "../components/Signup";
-import AuthLayout from "../components/common/AuthLayout";
-import VerificationEmail from "../components/VerificationEmail";
-import VerificationError from "../components/VerificationError";
-import Error from "../components/common/Error";
-import Success from "../components/common/Success"
+import Link from "next/link";
+
 export default function Home() {
   return (<>
-    <AuthLayout>
-      {/* <VerificationEmail /> */}
-      {/* <VerificationError /> */}
-      {/* <Error /> */}
-      <Success />
-    </AuthLayout>
+    <div className="text-secondary text-5xl font-semibold text-center my-80">
+      <Link href="/dashboard" >Dashboard</Link>
+    </div>
   </>)
 }
