@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function DashboardCard({ title, count, img, bgClass, textColor, icon, percentage }) {
     return <div >
-        <div className="bg-light rounded-md p-5 border border-border-color">
+        <div className="bg-white rounded-md p-5 border border-border-color">
             {/* <div className="bg-[url(/images/vector.png)] "> */}
             {/* <div className="bg-[url(/images/total.png)] left-0 relative bg-no-repeat w-full"> */}
             <div>
