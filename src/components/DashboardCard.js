@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function DashboardCard({ title, count, img, bgClass }) {
+export default function DashboardCard({ title, count, img, bgClass, textColor, icon }) {
     return <div>
         <div className="bg-white rounded-md p-5">
             <div>
@@ -10,7 +10,14 @@ export default function DashboardCard({ title, count, img, bgClass }) {
                     </div>
                     <div className="capitalize text-lg font-bold text-secondary">{title}</div>
                 </div>
-                <div className="text-[22px] font-bold text-primary ml-11">{count}</div>
+
+                <div className="ml-11">
+                    <div className={`text-[22px] font-bold ${textColor}`}>{count}</div>
+                    {icon && <div className="flex gap-2">
+                        <Image src={icon} alt="arrow" height={24} width={24} unoptimized={true} />
+                        <div className="text-secondary text-sm"><span className="font-semibold">2.5%</span>last 7 days</div>
+                    </div>}
+                </div>
             </div>
         </div>
     </div>

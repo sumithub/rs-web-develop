@@ -34,7 +34,7 @@
   --color-dark: var(--dark);
   --color-light: var(--light);
   --color-custom-purple: var(--custom-purple);
-  --color-custom-yellow: var(--yellow);
+  --color-custom-yellow: var(--custom-yellow);
 }
 
 body {

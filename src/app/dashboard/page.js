@@ -8,10 +8,13 @@ export default function Dashboard() {
         <Sidebar />
         <div className="bg-light min-h-[calc(100dvh_-_85px)] pl-[113px] py-6 px-3 mt-[85px]">
             <div className="grid grid-cols-4 gap-5">
-                <DashboardCard title="total reviews" count="1.234" img="/images/sent.svg" bgClass="bg-primary" />
-                <DashboardCard title="Average Rating" count="68%" bgClass="bg-success-light" />
-                <DashboardCard title="New Reviews" count="12%" bgClass="bg-custom-purple" />
-                <DashboardCard title="Active Campaigns" count="20%" bgClass="bg-custom-yellow" />
+                <DashboardCard title="total reviews" count="1.234" img="/images/sent.svg" bgClass="bg-primary" textColor="text-primary" icon="/images/course-up.svg" />
+
+                <DashboardCard title="Average Rating" count="68%" img="/images/star1.svg" bgClass="bg-success-light" textColor="text-success-light" />
+
+                <DashboardCard title="New Reviews" count="12%" img="/images/star1.svg" bgClass="bg-custom-purple" textColor="text-custom-purple" />
+
+                <DashboardCard title="Active Campaigns" count="20%" img="/images/sms-star.svg" bgClass="bg-custom-yellow" textColor="text-custom-yellow!" />
             </div>
         </div>
     </div>
