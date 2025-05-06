@@ -1,15 +1,12 @@
-import Header from "../../components/Header";
-import Sidebar from "../../components/Sidebar";
 import DashboardCard from "../../components/DashboardCard";
 import Table from "../../components/Table";
 import DashboardChart from "../../components/DashboardChart"
 import Image from "next/image";
+import AdminLayout from "../../components/AdminLayout";
 
 export default function Dashboard() {
-    return <div>
-        <Header />
-        <Sidebar />
-        <div className="bg-light min-h-[calc(100dvh_-_85px)] pl-[113px] py-6 px-3 mt-[85px]">
+    return <AdminLayout>
+        <div className="bg-light min-h-[calc(100dvh_-_85px)] mt-[85px]">
             <div className="grid grid-cols-4 gap-5">
                 <DashboardCard title="total reviews" count="1.234" img="/images/sent.svg" bgClass="bg-primary" textColor="text-primary" icon="/images/course-up.svg" percentage="2.5%" />
 
@@ -19,17 +16,17 @@ export default function Dashboard() {
 
                 <DashboardCard title="Active Campaigns" count="20%" img="/images/sms-star.svg" bgClass="bg-custom-yellow" textColor="text-custom-yellow!" icon="/images/course-up1.svg" percentage="8.2%" />
             </div>
-            <div className="grid grid-cols-2 gap-5 mt-5">
+            <div className="grid grid-cols-2 gap-5 mt-5 items-start">
                 <DashboardChart title="Review Count & Average Over Time">
-                    <div><Image src="/images/graph.png" alt="graph" height={235} width={509} className="w-full h-auto
-                    object-contain"/></div>
+                    <div><Image src="/images/graph.png" alt="graph" height={235} width={509} className="w-full object-contain mt-5" /></div>
                 </DashboardChart>
 
                 <DashboardChart title="Review Rating Distribution">
-                    <div className="flex items-start justify-center">
-                        <Image src="/images/main-chart.png" alt="chart" height={235} width={283} className="object-contain" />
-
-                        <div className="mt-7">
+                    <div className="flex items-start">
+                        <div className="w-[60%]">
+                            <Image src="/images/main-chart.png" alt="chart" height={235} width={283} className="object-contain w-full" />
+                        </div>
+                        <div className="mt-10 w-[40%]">
                             <div className="flex items-center gap-3 mb-2">
                                 <div className="bg-primary h-3 w-3 rounded-full"></div>
                                 <div className="text-base text-secondary">5</div>
@@ -68,11 +65,17 @@ export default function Dashboard() {
                     </div>
                 </DashboardChart>
 
-                {/* <DashboardChart title="Review Rating Distribution" chartImage="/images/graph1.png" height={366} width={656} imgClass="my-0" /> */}
+                <DashboardChart title="Sentiment Trend">
+                    <Image src="/images/graph1.png" alt="graph" height={366} width={656} className="w-full" />
+                </DashboardChart>
+
+                <DashboardChart title="Top Review Sources">
+                    <Image src="/images/graph2.png" alt="graph" height={239} width={509} className="w-full h-auto object-contain" />
+                </DashboardChart>
             </div>
             <div>
                 <Table />
             </div>
         </div>
-    </div>
+    </AdminLayout>
 }

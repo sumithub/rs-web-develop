@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Table() {
     return <div>
-        <div className="mt-5 table-class">
+        <div className="mt-8 table-class">
             <table className="w-full">
                 <thead>
                     <tr>
