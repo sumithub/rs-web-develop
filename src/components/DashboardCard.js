@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-export default function DashboardCard({ title, count, img, bgClass, textColor, icon }) {
+export default function DashboardCard({ title, count, img, bgClass, textColor, icon, percentage }) {
     return <div>
-        <div className="bg-white rounded-md p-5">
+        <div className="bg-white rounded-md p-5 border border-border-color">
             <div>
                 <div className="flex items-start gap-2">
                     <div className="flex">
@@ -15,7 +15,7 @@ export default function DashboardCard({ title, count, img, bgClass, textColor, i
                     <div className={`text-[22px] font-bold ${textColor}`}>{count}</div>
                     {icon && <div className="flex gap-2">
                         <Image src={icon} alt="arrow" height={24} width={24} unoptimized={true} />
-                        <div className="text-secondary text-sm"><span className="font-semibold">2.5%</span>last 7 days</div>
+                        <div className="text-secondary text-sm"><span className="font-semibold">{percentage}</span> last 7 days</div>
                     </div>}
                 </div>
             </div>
