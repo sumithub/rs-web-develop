@@ -5,8 +5,8 @@ export default function Home() {
     <div className="text-secondary text-5xl font-semibold text-center my-80">
       <div className="flex flex-col gap-y-5">
         <Link href="/dashboard" >Dashboard</Link>
-        <Link href="/reset-password">Reset password</Link>
         <Link href="/login" >Login</Link>
+        <Link href="/reset-password">Reset password</Link>
       </div>
     </div>
   </>)
