@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import Checkbox2 from "./form/Checkbox2";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import InputForm from "./form/InputForm";
+import Success from "./common/Success";
 
 export default function Signup() {
     const {
@@ -14,22 +14,21 @@ export default function Signup() {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const route = useRouter()
     const [loading, setLoading] = useState(false);
 
     const onSubmit = async () => {
         try {
-
+            console.log("rrr")
             setLoading(true);
-            route.push("/review")
         } catch (error) {
             console.error("Signup error:", error);
-        } finally {
-            setLoading(false);
         }
     };
     console.log(errors)
 
+    if (loading) {
+        return <Success />
+    }
     return (
         <>
             <div>
