@@ -221,3 +221,29 @@ body {
 :disabled {
   @apply pointer-events-none
 }
+
+.table-class {
+  width: 100%;
+  border: 1px solid #E6E6E6;
+  border-radius: 20px !important;
+  overflow: hidden;
+}
+
+th {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1F2933;
+  text-align: start;
+  padding: 20px;
+  background-color: #F6F8FB;
+}
+
+td {
+  font-size: 14px;
+  font-weight: 400;
+  color: #1F2933;
+  text-align: start;
+  padding: 20px;
+  border-top: 1px solid #E6E6E6;
+  background-color: white;
+}
