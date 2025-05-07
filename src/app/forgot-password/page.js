@@ -20,7 +20,7 @@ function ForgotPassword() {
                     error="Incorrect Email"
                 />
             </div>
-            <button className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-5 py-3 rounded-[10px] border border-primary ">Send Reset Link</button>
+            <button className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-5 py-3 rounded-[10px] border border-primary cursor-pointer">Send Reset Link</button>
             <div className='flex justify-center mt-5'>
                 <Link href="/login" className="flex gap-[15px]">
                     <Image src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
