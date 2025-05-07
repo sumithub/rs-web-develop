@@ -18,7 +18,6 @@ export default function Signup() {
 
     const onSubmit = async () => {
         try {
-            console.log("rrr")
             setLoading(true);
         } catch (error) {
             console.error("Signup error:", error);

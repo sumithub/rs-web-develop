@@ -36,9 +36,8 @@ const Item = () => {
         imgName = "signup"
     }
 
-
-    return <div className="">
-        <div className=" relative">
+    return <div>
+        <div className="relative">
             <Image src={`/images/image-1.svg`} alt="image-1" width={209} height={209} className="absolute right-3 z-0 -top-16" />
             <div>
                 <Image src={`/images/auth/${imgName}.png`} alt="signup" width={502} height={500} className="mx-auto mt-[99px] z-10 w-full px-14 relative rounded-[23px]" />

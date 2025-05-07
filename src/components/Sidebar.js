@@ -6,7 +6,9 @@ export default function Sidebar() {
         <div className="bg-white h-[100vh] w-24 fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px] shadow-[0px_16px_44px_0px_#00000012]">
             <div className="relative h-full pb-10">
 
-                <div className="test-secondary text-base font-semibold uppercase pt-5 text-center">logo</div>
+                <div className="pt-5 text-center">
+                    <Link href="/" className="test-secondary text-base font-semibold uppercase text-center">logo</Link>
+                </div>
                 <div className="relative h-full flex flex-col items-center justify-between overflow-y-auto custom-scrollbar pb-10 pt-10">
                     <div className="flex flex-col items-center justify-center gap-y-8">
                         <button className="cursor-pointer">
