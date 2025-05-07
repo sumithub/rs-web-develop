@@ -17,7 +17,7 @@ export default function Table() {
                     <tr>
                         <td>
                             <div className="flex gap-2.5">
-                                <Image src="/images/google.svg" alt="google.svg" width={17} height={17} />
+                                <Image src="/images/google.svg" alt="google.svg" width={17} height={17} unoptimized={true} />
                                 Google
                             </div>
                         </td>
@@ -29,7 +29,7 @@ export default function Table() {
                     <tr>
                         <td>
                             <div className="flex gap-2.5">
-                                <Image src="/images/yelp.svg" alt="yelp.svg" width={38} height={15} />
+                                <Image src="/images/yelp.svg" alt="yelp.svg" width={38} height={15} unoptimized={true} />
                                 Yelp
                             </div>
                         </td>
@@ -41,7 +41,7 @@ export default function Table() {
                     <tr>
                         <td>
                             <div className="flex gap-2.5">
-                                <Image src="/images/tripadvisor.svg" alt="tripadvisor.svg" width={17} height={17} />
+                                <Image src="/images/tripadvisor.svg" alt="tripadvisor.svg" width={17} height={17} unoptimized={true} />
                                 Tripadvisor
                             </div>
                         </td>
