@@ -7,6 +7,7 @@ export default function Home() {
         <Link href="/dashboard" >Dashboard</Link>
         <Link href="/login" >Login</Link>
         <Link href="/reset-password">Reset password</Link>
+        <Link href="/change-email">Change Email</Link>
       </div>
     </div>
   </>)
