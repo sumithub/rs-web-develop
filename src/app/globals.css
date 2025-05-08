@@ -11,6 +11,7 @@
   --border2: #E6E6E6;
   --danger: #DC3545;
   --danger-light: #F15D5F;
+  --danger-light2: #F15D5F1a;
   --success: #28A745;
   --success-light: #07BEAA;
   --success-dark: #328394;
@@ -30,6 +31,7 @@
   --color-text: var(--text);
   --color-danger: var(--danger);
   --color-danger-light: var(--danger-light);
+  --color-danger-light2: var(--danger-light2);
   --color-border-color: var(--border-color);
   --color-border2: var(--border2);
   --color-text3: var(--text3);
@@ -239,7 +241,8 @@ th {
   font-weight: 600;
   color: #1F2933;
   text-align: start;
-  padding: 20px;
+  padding: 16px;
+  border-bottom: 1px solid #E6E6E6;
   background-color: #F6F8FB;
 }
 
@@ -248,7 +251,7 @@ td {
   font-weight: 400;
   color: #1F2933;
   text-align: start;
-  padding: 20px;
-  border-top: 1px solid #E6E6E6;
+  padding: 16px;
+  border-bottom: 1px solid #E6E6E6;
   background-color: white;
 }
