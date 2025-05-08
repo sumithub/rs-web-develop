@@ -3,6 +3,7 @@ import React from 'react';
 import Status from "../../components/Status"
 import Dropdown from '../../components/DropDown';
 import TableOrder from '../../components/TableOrder';
+import PaginationDemo from '../../components/Pagination';
 
 function Users() {
     return (
@@ -83,6 +84,9 @@ function Users() {
                     </tr>
                 </tbody>
             </table>
+            <div>
+                <PaginationDemo />
+            </div>
         </div>
     )
 }

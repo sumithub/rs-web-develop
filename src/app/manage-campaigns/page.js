@@ -1,4 +1,5 @@
-import Checkbox from '../../components/form/Checkbox'
+"use client"
+import PaginationDemo from '../../components/Pagination'
 import Status from '../../components/Status'
 import TableOrder from '../../components/TableOrder'
 import React from 'react'
@@ -83,6 +84,7 @@ function ManageCampaigns() {
                     </tr>
                 </tbody>
             </table>
+            <PaginationDemo />
         </div>
     )
 }

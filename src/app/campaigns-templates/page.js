@@ -74,6 +74,9 @@ function CampaignsTemplates() {
                     </tr>
                 </tbody>
             </table>
+            <div>
+                <PaginationDemo />
+            </div>
         </div>
     )
 }
