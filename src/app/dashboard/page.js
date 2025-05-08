@@ -6,7 +6,7 @@ import AdminLayout from "../../components/AdminLayout";
 
 export default function Dashboard() {
     return <AdminLayout>
-        <div className="bg-light min-h-[calc(100dvh_-_85px)] mt-[85px]">
+        <div className="bg-light min-h-[calc(100dvh_-_85px)]">
             <div className="grid grid-cols-4 gap-5">
                 <DashboardCard title="total reviews" count="1.234" img="/images/sms-star.svg" bgClass="bg-primary" textColor="text-primary" icon="/images/course-up.svg" percentage="2.5%" bgImage="bg-[url('/images/total.png')]" />
 
