@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Table() {
     return <div>
-        <div className="mt-8 table-class">
+        <div className="mt-8 w-full border border-border-color rounded-[20px] overflow-hidden">
             <table className="w-full">
                 <thead>
                     <tr>
