@@ -17,8 +17,7 @@ export default function Dashboard() {
                 <DashboardCard title="Active Campaigns" count="20%" img="/images/sms-star.svg" bgClass="bg-custom-yellow" textColor="text-custom-yellow!" icon="/images/course-up1.svg" percentage="8.2%" bgImage="bg-[url('/images/active.png')]" />
             </div>
             <div className="grid grid-cols-2 gap-5 mt-5 items-start">
-                <DashboardChart title="Review Count & Average Over Time">
-                    <div><Image src="/images/graph.png" alt="graph" height={235} width={509} className="w-full object-contain mt-5" /></div>
+                <DashboardChart title="Review Count & Average Over Time" imgName="/images/graph.png" alt="Review" height={235} width={509} class_="w-full object-contain mt-5">
                 </DashboardChart>
 
                 <DashboardChart title="Review Rating Distribution">
@@ -65,12 +64,10 @@ export default function Dashboard() {
                     </div>
                 </DashboardChart>
 
-                <DashboardChart title="Sentiment Trend">
-                    <Image src="/images/graph1.png" alt="graph" height={366} width={656} className="w-full" />
+                <DashboardChart title="Sentiment Trend" imgName="/images/graph1.png" alt="Sentiment" height={366} width={656} class_="w-full">
                 </DashboardChart>
 
-                <DashboardChart title="Top Review Sources">
-                    <Image src="/images/graph2.png" alt="graph" height={239} width={509} className="w-full h-auto object-contain" />
+                <DashboardChart title="Top Review Sources" imgName="/images/graph2.png" alt="Top Review" height={239} width={509} class_="w-full h-auto object-contain">
                 </DashboardChart>
             </div>
             <div>

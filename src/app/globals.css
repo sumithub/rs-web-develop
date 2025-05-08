@@ -10,12 +10,15 @@
   --border-color: #ADADAD4D;
   --border2: #E6E6E6;
   --danger: #DC3545;
+  --danger-light: #F15D5F;
   --success: #28A745;
   --success-light: #07BEAA;
+  --success-dark: #328394;
   --dark: #F6F8FB;
   --light: #F9FBFC;
   --custom-purple: #5470DE;
   --custom-yellow: #FFC246;
+  --custom-yellow-dark: #FF9C23;
 
 }
 
@@ -26,22 +29,25 @@
   --color-secondary: var(--secondary);
   --color-text: var(--text);
   --color-danger: var(--danger);
+  --color-danger-light: var(--danger-light);
   --color-border-color: var(--border-color);
   --color-border2: var(--border2);
   --color-text3: var(--text3);
   --color-success: var(--success);
   --color-success-light: var(--success-light);
+  --color-success-dark: var(--success-dark);
   --color-dark: var(--dark);
   --color-light: var(--light);
   --color-custom-purple: var(--custom-purple);
   --color-custom-yellow: var(--custom-yellow);
+  --color-custom-yellow-dark: var(--custom-yellow-dark);
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--secondary);
-}
 
+}
 
 .slick-next:before,
 .slick-prev:before {
@@ -53,7 +59,7 @@ body {
   display: flex !important;
   align-items: center;
   justify-content: center;
-  bottom: 45px !important;
+  bottom: 20px !important;
   z-index: 20;
   gap: 8px !important;
 }
@@ -216,7 +222,6 @@ body {
 .ldio-x2uulkbinbj div {
   box-sizing: content-box;
 }
-
 
 :disabled {
   @apply pointer-events-none

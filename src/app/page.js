@@ -1,10 +1,13 @@
+"use client"
 import Link from "next/link";
 
 export default function Home() {
+
   return (<>
     <div className="text-secondary text-5xl font-semibold text-center capitalize my-80">
       <div className="flex flex-col gap-y-5">
         <Link href="/dashboard">Dashboard</Link>
+        <Link href="/campaign-dashboard">Campaign Dashboard</Link>
         <Link href="/review">review</Link>
         <Link href="/login">Login</Link>
         <Link href="/reset-password">Reset password</Link>
