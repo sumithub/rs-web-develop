@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
 
-const Dropdown = () => {
+const Dropdown = ({ options = [] }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -37,14 +37,19 @@ const Dropdown = () => {
                 <div className="fixed z-50 right-20 top-1/2  mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200 ">
                     <ul className="py-1">
                         {/* Reply Now - with blue background */}
-                        <li>
-                            <button
-                                className="w-full text-left px-4 py-3 flex items-center text-white bg-primary cursor-pointer disabled:pointer-events-none"
-                                onClick={() => console.log('Reply Now clicked')}>
-                                <Image src="/images/sms.svg" alt='arrow' height={16} width={16} unoptimized={true} className='mr-3' />
-                                Reply Now
-                            </button>
-                        </li>
+
+                        {options.map((e, i) => {
+                            if (typeof e === 'object')
+                                return <li key={i}>
+                                    <button
+                                        className="w-full text-left px-4 py-3 flex items-center text-white bg-primary cursor-pointer disabled:pointer-events-none"
+                                        onClick={() => console.log('Reply Now clicked')}>
+                                        <Image src="/images/sms.svg" alt='arrow' height={16} width={16} unoptimized={true} className='mr-3' />
+                                        {e.label}
+                                    </button>
+                                </li>
+
+                        })}
 
                         {/* Request Update */}
                         <li>
