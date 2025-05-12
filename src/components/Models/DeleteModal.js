@@ -1,12 +1,12 @@
 
-import CancelButton from "../../common/CancelButton"
-import Model from "../Model";
-import SecondaryButton from "../../common/SecondaryButton"
+import CancelButton from "../common/CancelButton";
+import SecondaryButton from "../common/SecondaryButton";
 import Image from "next/image";
+import Model from "./Model";
 
-export default function RemoveUser({ onClose }) {
+export default function DeleteModal({ onClose, title = "user" }) {
     return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
-        <DeleteUser title="Remove User" question="Are You Sure you want to Remove this user permanently?" />
+        <DeleteUser title={`Remove ${title}`} question={`Are You Sure you want to Remove this ${title} permanently?`} />
 
         {/* <DeleteUser title="remove user confirmation" question="Are You Sure you want to Remove this user permanently?" /> */}
 
