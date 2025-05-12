@@ -13,83 +13,94 @@ import Image from 'next/image';
 import AddUser from '../../components/Models/users/AddUser'
 import DeleteUsers from '../../components/Models/users/DeleteUsers'
 import ResendInvitations from '../../components/Models/users/ResendInvitations'
-import SuspendUsers from '../../components/Models/users/SuspendUsers'
 import ChangeUserRoles from '../../components/Models/users/ChangeUserRoles'
+import { USER_ACTIONS } from '../../constent/constArray';
+import ResendInvitation from '../../components/Models/users/ResendInvitation';
+import SuspendUser from '../../components/Models/users/SuspendUser';
+import SuspendUsers from '../../components/Models/users/SuspendUsers';
+import ChangeUserRole from '../../components/Models/users/ChangeUserRole';
+import RemoveUser from '../../components/Models/users/RemoveUser';
+import SendInvite from '../../components/Models/users/SendInvite';
 
 function Users() {
     const [role, setRole] = useState("")
     const [status, setStatus] = useState("")
     const [date, setDate] = useState("")
     // const [list, setList] = useState([])
-    const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
-    const [openUser, setUserOpen] = useState(false)
-    const [openDelete, setOpenDelete] = useState(false)
-    const [openInvite, setOpenInvite] = useState(false)
-    const [openSuspend, setOpeSuspend] = useState(false)
-    const [openRoles, setOpeRoles] = useState(false)
+    const [openModal, setOpenModal] = useState(null)
 
     return (
         <AdminLayout headerChild={<h1>filters</h1>}>
-            {openUser &&
+            {(openModal === "edit" || openModal === "new") &&
                 <AddUser
                     onClose={() => {
-                        setUserOpen(false)
-                    }}
-
-                    onSave={() => {
-                        setUserOpen(true)
+                        setOpenModal(false)
                     }}
                 />
             }
 
-            {openDelete &&
+            {openModal === "delete" &&
                 <DeleteUsers
                     onClose={() => {
-                        setOpenDelete(false)
-                    }}
-
-                    onSave={() => {
-                        setOpenDelete(true)
-                    }}
-                />
+                        setOpenModal(false)
+                    }} />
             }
 
-            {openInvite &&
+            {openModal === "invites" &&
                 <ResendInvitations
                     onClose={() => {
-                        setOpenInvite(false)
-                    }}
+                        setOpenModal(false)
+                    }} />
+            }
+            {openModal === "resend-invite" &&
+                <ResendInvitation
+                    onClose={() => {
+                        setOpenModal(false)
+                    }} />
+            }
+            {openModal === "send-invite" &&
+                <SendInvite
+                    onClose={() => {
+                        setOpenModal(false)
+                    }} />
+            }
 
-                    onSave={() => {
-                        setOpenInvite(true)
+            {openModal === "suspend/reactivate" &&
+                <SuspendUser
+                    onClose={() => {
+                        setOpenModal(false)
                     }}
                 />
             }
-
-            {openSuspend &&
+            {openModal === "suspended-users" &&
                 <SuspendUsers
                     onClose={() => {
-                        setOpeSuspend(false)
-                    }}
-
-                    onSave={() => {
-                        setOpeSuspend(true)
+                        setOpenModal(false)
                     }}
                 />
             }
 
-            {openRoles &&
+            {openModal === "roles" &&
                 <ChangeUserRoles
                     onClose={() => {
-                        setOpeRoles(false)
-                    }}
-
-                    onSave={() => {
-                        setOpeRoles(true)
-                    }}
-                />
+                        setOpenModal(false)
+                    }} />
             }
+            {openModal === "role" &&
+                <ChangeUserRole
+                    onClose={() => {
+                        setOpenModal(false)
+                    }} />
+            }
+
+            {openModal === "remove-user" &&
+                <RemoveUser
+                    onClose={() => {
+                        setOpenModal(false)
+                    }} />
+            }
+
 
             <div className="flex justify-between items-center w-full">
                 <div className='grid grid-cols-[3.3fr_1fr_1fr_1fr] gap-4'>
@@ -135,7 +146,7 @@ function Users() {
 
                 <div className="2xl:mt-0 mt-3">
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-full"
-                        onClick={() => { setUserOpen(true) }}>Invite New User</button>
+                        onClick={() => { setOpenModal("new") }}>Invite New User</button>
                 </div>
             </div>
             <div className='my-5 flex items-center justify-between'>
@@ -147,17 +158,17 @@ function Users() {
                 </div>
                 <div className='grid grid-cols-4 gap-4'>
                     <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
-                        onClick={() => { setOpenInvite(true) }}
+                        onClick={() => { setOpenModal("invites") }}
                     ><Image src="images/add.svg" alt='add' height={16} width={16} unoptimized={true} />Resend Invite</button>
 
                     <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
-                        onClick={() => { setOpeSuspend(true) }}><Image src="images/pause.svg" alt='pause' height={16} width={16} unoptimized={true} />Suspend Users</button>
+                        onClick={() => { setOpenModal("suspended-users") }}><Image src="images/pause.svg" alt='pause' height={16} width={16} unoptimized={true} />Suspend Users</button>
 
                     <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
-                        onClick={() => { setOpeRoles(true) }}><Image src="images/refresh.svg" alt='refresh' height={16} width={16} unoptimized={true} />Change Role</button>
+                        onClick={() => { setOpenModal("roles") }}><Image src="images/refresh.svg" alt='refresh' height={16} width={16} unoptimized={true} />Change Role</button>
 
                     <button className='border border-danger-light2 bg-danger-light2 rounded-lg p-2 text-danger text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
-                        onClick={() => { setOpenDelete(true) }}><Image src="images/trash.svg" alt='refresh' height={16} width={16} unoptimized={true} />Remove Users</button>
+                        onClick={() => { setOpenModal("delete") }}><Image src="images/trash.svg" alt='refresh' height={16} width={16} unoptimized={true} />Remove Users</button>
                 </div>
             </div>
 
@@ -183,7 +194,12 @@ function Users() {
                             <td>Manager</td>
                             <td><Status status="Active" /></td>
                             <td>Aug 05,2025</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={USER_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -196,7 +212,12 @@ function Users() {
                             <td>Manager</td>
                             <td><Status status="Pending Invite" /></td>
                             <td>Aug 05,2025</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={USER_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -209,7 +230,12 @@ function Users() {
                             <td>Manager</td>
                             <td><Status status="Active" /></td>
                             <td>Aug 05,2025</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={USER_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -222,7 +248,12 @@ function Users() {
                             <td>Manager</td>
                             <td><Status status="Suspended" /></td>
                             <td>Aug 05,2025</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={USER_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -235,7 +266,12 @@ function Users() {
                             <td>Manager</td>
                             <td><Status status="Active" /></td>
                             <td>Aug 05,2025</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={USER_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -248,7 +284,12 @@ function Users() {
                             <td>Manager</td>
                             <td><Status status="Pending Invite" /></td>
                             <td>Aug 05,2025</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={USER_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -261,7 +302,12 @@ function Users() {
                             <td>Manager</td>
                             <td><Status status="Active" /></td>
                             <td>Aug 05,2025</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={USER_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -274,7 +320,12 @@ function Users() {
                             <td>Manager</td>
                             <td><Status status="Active" /></td>
                             <td>Aug 05,2025</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={USER_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
                     </tbody>
                 </table>

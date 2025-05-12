@@ -4,7 +4,7 @@ import Input from "../../form/Input"
 import Select from "../../form/Select"
 import Model from "../Model"
 
-function AddUser({ onClose, onSave }) {
+function AddUser({ onClose }) {
     return <Model onClose={onClose} title="Invite New User" modalClass="w-1/2!">
         <div>
             <Input label="Full Name" placeholder="Enter your name" isRequired={true} class_="mt-0!" />
