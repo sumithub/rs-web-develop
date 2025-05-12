@@ -11,6 +11,7 @@ import DatePicker from '../../components/form/DatePicker';
 import Search from '../../components/form/Search';
 import Image from 'next/image';
 import AddUser from '../../components/Models/AddUser'
+import RemoveUser from '../../components/Models/RemoveUser'
 
 function Users() {
     const [role, setRole] = useState("")
@@ -19,13 +20,26 @@ function Users() {
     // const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
+    const [openUser, setUserOpen] = useState(false)
     const [open, setOpen] = useState(false)
 
     return (
         <AdminLayout headerChild={<h1>filters</h1>}>
-            {open &&
+            {openUser &&
                 <AddUser
-                     onClose={() => {
+                    onClose={() => {
+                        setUserOpen(false)
+                    }}
+
+                    onSave={() => {
+                        setUserOpen(true)
+                    }}
+                />
+            }
+
+            {open &&
+                <RemoveUser
+                    onClose={() => {
                         setOpen(false)
                     }}
 
@@ -52,8 +66,8 @@ function Users() {
                             setStatus(e.target.value)
                         }}>
                         <option value="active">Active</option>
-                        <option value="pendingInvite">Pending Invite</option>
                         <option value="suspended">Suspended</option>
+                        <option value="pendingInvite">Pending Invite</option>
                     </Select>
 
                     <Select
@@ -63,8 +77,9 @@ function Users() {
                         onChange={(e) => {
                             setRole(e.target.value)
                         }}>
+                        <option value="owner">Owner</option>
                         <option value="manager">manager</option>
-                        <option value="user">user</option>
+                        <option value="viewer">Viewer</option>
                     </Select>
 
                     <DatePicker
@@ -78,7 +93,7 @@ function Users() {
 
                 <div className="2xl:mt-0 mt-3">
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-full"
-                     onClick={() => { setOpen(true) }}>Invite New User</button>
+                        onClick={() => { setUserOpen(true) }}>Invite New User</button>
                 </div>
             </div>
             <div className='my-5 flex items-center justify-between'>
@@ -95,7 +110,8 @@ function Users() {
 
                     <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'><Image src="images/refresh.svg" alt='refresh' height={16} width={16} unoptimized={true} />Change Role</button>
 
-                    <button className='border border-danger-light2 bg-danger-light2 rounded-lg p-2 text-danger text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'><Image src="images/trash.svg" alt='refresh' height={16} width={16} unoptimized={true} />Remove Users</button>
+                    <button className='border border-danger-light2 bg-danger-light2 rounded-lg p-2 text-danger text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
+                        onClick={() => { setOpen(true) }}><Image src="images/trash.svg" alt='refresh' height={16} width={16} unoptimized={true} />Remove Users</button>
                 </div>
             </div>
 

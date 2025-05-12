@@ -12,11 +12,13 @@ function AddUser({ onClose, onSave }) {
             <Input label="Phone Number" placeholder="Enter phone number" inputType="number" />
             <Select label="Status" isRequired={true} selectClass_="py-3.5! px-2.5! focus:border-primary/60!">
                 <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                <option value="suspended">Suspended</option>
+                <option value="pending invite">Pending Invite</option>
             </Select>
             <Select label="Role" isRequired={true} selectClass_="py-3.5! px-2.5! focus:border-primary/60!">
+                <option value="owner">Owner</option>
                 <option value="manager">Manager</option>
-                <option value="customer">Customer</option>
+                <option value="viewer">Viewer</option>
             </Select>
         </div>
 

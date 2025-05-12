@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
-export default function Model({ id = "", showHeader = true, customHeader = false, onClose, children, closeButton = true, title, modalBodyClass = "", modalClass = "", modelHeaderClass = "" }) {
+export default function Model({ id = "", showHeader = true, customHeader = false, onClose, children, closeButton = true, closeButton2 = false, title, modalBodyClass = "", modalClass = "", modelHeaderClass = "" }) {
     const ref = useRef(null);
     useEffect(() => {
         document.addEventListener('keydown', (event) => {
@@ -52,9 +52,11 @@ export default function Model({ id = "", showHeader = true, customHeader = false
                         <p className="capitalize font-semibold text-lg">{title || ""}</p>
 
                         {closeButton && <div onClick={() => { onClose() }} className="cursor-pointer">
-
                             <Image src="/images/close1.svg" alt="close" height={24} width={24} unoptimized={true} />
+                        </div>}
 
+                        {closeButton2 && <div onClick={() => { onClose() }} className="cursor-pointer">
+                            <Image src="/images/danger-close.svg" alt="close" height={24} width={24} unoptimized={true} />
                         </div>}
 
                     </div> : (customHeader ? <div className={`flex justify-between items-center rounded-t-3xl z-50 md:px-6 px-3 py-8 sticky top-0 bg-card ${modelHeaderClass}`}>

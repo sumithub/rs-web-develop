@@ -6,7 +6,6 @@ import { useState } from "react";
 export default function Input({ isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", error, icon, disabled, iconClass = "", class_ = "" }) {
     const [type, setType] = useState("password")
 
-
     const handleClick = () => {
         if (inputType === "password") {
             setType(type === "password" ? "text" : "password");
