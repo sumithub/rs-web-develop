@@ -7,3 +7,9 @@ export const USER_ACTIONS = [
     { label: "Remove User", value: "remove-user" },
     { label: "Send Invite", value: "send-invite" },
 ]
+
+export const TEMPLATE_ACTIONS = [
+    { label: "Edit", value: "edit" },
+    { label: "Preview", value: "preview" },
+    { label: "Clone", value: "clone" },
+]

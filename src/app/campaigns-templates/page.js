@@ -8,12 +8,15 @@ import Search from '../../components/form/Search'
 import DatePicker from '../../components/form/DatePicker'
 import Select from '../../components/form/Select'
 import AddTemplate from '../../components/Models/templates/AddTemplate'
+import { TEMPLATE_ACTIONS } from '../../constent/constArray'
+import Clone from '../../components/Models/templates/Clone'
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
     const [type, setType] = useState("")
     const [date, setDate] = useState("")
     const [open, setOpen] = useState(false)
+    const [openModal, setOpenModal] = useState(null)
 
     return (
         <AdminLayout >
@@ -28,6 +31,16 @@ function CampaignsTemplates() {
                     }}
                 />
             }
+
+            {openModal === "clone" &&
+                <Clone
+                    onClose={() => {
+                        setOpenModal(false)
+                    }}
+                />
+            }
+
+
 
             <div className="flex justify-between items-center w-full mb-4">
                 <Search
@@ -79,7 +92,11 @@ function CampaignsTemplates() {
                             <td>Email</td>
                             <td>Lorem ipsum....</td>
                             <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={TEMPLATE_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }} /></td>
                         </tr>
 
                         <tr>
@@ -87,7 +104,12 @@ function CampaignsTemplates() {
                             <td>Email</td>
                             <td>Lorem ipsum....</td>
                             <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={TEMPLATE_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -95,7 +117,12 @@ function CampaignsTemplates() {
                             <td>Email</td>
                             <td>Lorem ipsum....</td>
                             <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={TEMPLATE_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -103,7 +130,12 @@ function CampaignsTemplates() {
                             <td>Email</td>
                             <td>Lorem ipsum....</td>
                             <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={TEMPLATE_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -111,7 +143,12 @@ function CampaignsTemplates() {
                             <td>Email</td>
                             <td>Lorem ipsum....</td>
                             <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={TEMPLATE_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -119,7 +156,12 @@ function CampaignsTemplates() {
                             <td>Email</td>
                             <td>Lorem ipsum....</td>
                             <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={TEMPLATE_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
 
                         <tr>
@@ -127,7 +169,12 @@ function CampaignsTemplates() {
                             <td>Email</td>
                             <td>Lorem ipsum....</td>
                             <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown /></td>
+                            <td><Dropdown
+                                options={TEMPLATE_ACTIONS}
+                                onClickOption={(e) => {
+                                    setOpenModal(e)
+                                }}
+                            /></td>
                         </tr>
                     </tbody>
                 </table>
