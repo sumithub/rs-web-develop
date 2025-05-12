@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
+import { USER_ACTIONS } from '../constent/constArray';
 
-const Dropdown = ({ options = [], onClickOption, }) => {
+const Dropdown = ({ options = USER_ACTIONS, onClickOption, }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 

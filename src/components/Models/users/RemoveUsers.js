@@ -5,7 +5,7 @@ import Checkbox from "../../form/Checkbox";
 import CancelButton from "../../common/CancelButton"
 import SecondaryButton from "../../common/SecondaryButton"
 
-export default function DeleteUsers({ onClose }) {
+export default function RemoveUsers({ onClose }) {
     return <Model title="Remove users permanently" onClose={onClose} modalClass="w-1/2!">
         <div>
             <div className="flex items-center gap-2">

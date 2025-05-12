@@ -11,7 +11,7 @@ import DatePicker from '../../components/form/DatePicker';
 import Search from '../../components/form/Search';
 import Image from 'next/image';
 import AddUser from '../../components/Models/users/AddUser'
-import DeleteUsers from '../../components/Models/users/DeleteUsers'
+import DeleteUsers from '../../components/Models/users/RemoveUsers'
 import ResendInvitations from '../../components/Models/users/ResendInvitations'
 import ChangeUserRoles from '../../components/Models/users/ChangeUserRoles'
 import { USER_ACTIONS } from '../../constent/constArray';
@@ -19,7 +19,7 @@ import ResendInvitation from '../../components/Models/users/ResendInvitation';
 import SuspendUser from '../../components/Models/users/SuspendUser';
 import SuspendUsers from '../../components/Models/users/SuspendUsers';
 import ChangeUserRole from '../../components/Models/users/ChangeUserRole';
-import RemoveUser from '../../components/Models/users/RemoveUser';
+import DeleteModal from '../../components/Models/DeleteModal';
 import SendInvite from '../../components/Models/users/SendInvite';
 
 function Users() {
@@ -95,7 +95,7 @@ function Users() {
             }
 
             {openModal === "remove-user" &&
-                <RemoveUser
+                <DeleteModal
                     onClose={() => {
                         setOpenModal(false)
                     }} />
