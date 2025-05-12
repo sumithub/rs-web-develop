@@ -7,7 +7,7 @@ import Model from "./Model"
 function AddUser({ onClose, onSave }) {
     return <Model onClose={onClose} title="Invite New User" modalClass="w-[60%]!">
         <div>
-            <Input label="Full Name" isRequired={true}/>
+            <Input label="Full Name" isRequired={true} />
             <Input label="Email Address" isRequired={true}/>
             <Input label="Phone Number (Optional)"/>
             <Select label="Status" isRequired={true}>

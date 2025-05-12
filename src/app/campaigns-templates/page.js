@@ -7,14 +7,27 @@ import AdminLayout from '../../components/AdminLayout'
 import Search from '../../components/form/Search'
 import DatePicker from '../../components/form/DatePicker'
 import Select from '../../components/form/Select'
+import AddTemplate from '../../components/Models/AddTemplate'
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
     const [type, setType] = useState("")
     const [date, setDate] = useState("")
+    const [open, setOpen] = useState(false)
 
     return (
         <AdminLayout >
+            {open &&
+                <AddTemplate
+                    onClose={() => {
+                        setOpen(false)
+                    }}
+
+                    onSave={() => {
+                        setOpen(true)
+                    }}
+                />
+            }
 
             <div className="flex justify-between items-center w-full mb-4">
                 <Search
@@ -43,7 +56,8 @@ function CampaignsTemplates() {
                         onChange={(e) => setDate(e)}
                     />
 
-                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50">Create New Template</button>
+                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                    onClick={() => { setOpen(true) }}>Create New Template</button>
                 </div>
             </div>
 
