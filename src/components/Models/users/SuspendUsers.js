@@ -3,7 +3,7 @@ import CancelButton from "../../common/CancelButton"
 import SecondaryButton from "../../common/SecondaryButton"
 import Status from "../../Status"
 
-export default function SuspendUser({ onClose }) {
+export default function SuspendUsers({ onClose }) {
     return <Model title="Suspend User" onClose={onClose} modalClass="w-1/2!">
         <div>
             <div className="text-secondary text-xl font-semibold capitalize">are you sure you want to suspend these users?</div>

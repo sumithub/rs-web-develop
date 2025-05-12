@@ -8,7 +8,7 @@ export default function SuspendUser({ onClose }) {
         <div className="text-center">
             <div className="text-secondary text-xl font-semibold capitalize text-center mb-2">Confirm Action</div>
 
-            <div className="text-text3">Are You Sure you want to suspend/reactivate this user?
+            <div className="text-text3">Are You Sure you want to suspend/reactivate this user?<br />
                 This will restrict/grant access immediately.</div>
 
             <div className="grid grid-cols-2 gap-3 mt-6">
