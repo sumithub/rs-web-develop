@@ -47,7 +47,7 @@ export default function Model({ id = "", showHeader = true, customHeader = false
 
                 <div ref={ref} className={`${modalClass} h-full relative transform overflow-y-hidden rounded-3xl bg-white text-left shadow-xl transition-all md:w-full w-[90%] 2xl:max-w-7xl xl:max-w-[85%] max-w-[90%]`}>
 
-                    {showHeader ? <div className={`flex justify-between items-center rounded-t-3xl z-50 md:px-8 px-3 py-4 sticky top-0 bg-[#6FC3FF1a] ${modelHeaderClass}`}>
+                    {showHeader ? <div className={`flex justify-between items-center rounded-t-3xl z-50 md:px-6 px-3 py-4 sticky top-0 bg-[#6FC3FF1a] ${modelHeaderClass}`}>
 
                         <p className="capitalize font-semibold text-lg">{title || ""}</p>
 
@@ -57,12 +57,12 @@ export default function Model({ id = "", showHeader = true, customHeader = false
 
                         </div>}
 
-                    </div> : (customHeader ? <div className={`flex justify-between items-center rounded-t-3xl z-50 md:px-10 px-3 py-8 sticky top-0 bg-card ${modelHeaderClass}`}>
+                    </div> : (customHeader ? <div className={`flex justify-between items-center rounded-t-3xl z-50 md:px-6 px-3 py-8 sticky top-0 bg-card ${modelHeaderClass}`}>
                         {customHeader}
 
                     </div> : "")}
 
-                    <div id={id} className={`${modalBodyClass} pt-4 pb-8 md:px-10 px-3 max-h-[75vh] overflow-y-auto custom-scrollbar flex flex-col justify-between w-full`}>
+                    <div id={id} className={`${modalBodyClass} pt-4 pb-8 md:px-6 px-3 max-h-[75vh] overflow-y-auto custom-scrollbar flex flex-col justify-between w-full`}>
                         {children}
                     </div>
                 </div>
