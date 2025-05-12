@@ -39,7 +39,7 @@ export default function Model({ id = "", showHeader = true, customHeader = false
 
     return (<div className="relative z-[9999]">
 
-        <div className={`fixed inset-0 bg-black opacity-75 transition-opacity`}>
+        <div className={`fixed inset-0 bg-black opacity-65 transition-opacity`}>
 
         </div>
 
