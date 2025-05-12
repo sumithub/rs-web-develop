@@ -1,7 +1,7 @@
 import Input from "../form/Input";
 import Model from "./Model";
-import CancelButton from "../CancelButton"
-import SecondaryButton from "../SecondaryButton";
+import CancelButton from "../common/CancelButton"
+import SecondaryButton from "../common/SecondaryButton";
 
 export default function AddClient({ onClose, onSave, }) {
     return <Model onClose={onClose} title="add client" modalClass="w-[60%]!">

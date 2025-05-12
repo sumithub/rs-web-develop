@@ -39,9 +39,7 @@ export default function Model({ id = "", showHeader = true, customHeader = false
 
     return (<div className="relative z-[9999]">
 
-        <div className={`fixed inset-0 bg-black opacity-65 transition-opacity`}>
-
-        </div>
+        <div className={`fixed inset-0 bg-black opacity-65 transition-opacity`}></div>
 
         <div className="fixed inset-0 z-10 flex items-center justify-center">
 
@@ -65,9 +63,7 @@ export default function Model({ id = "", showHeader = true, customHeader = false
                     </div> : "")}
 
                     <div id={id} className={`${modalBodyClass} pt-4 pb-8 md:px-10 px-3 max-h-[75vh] overflow-y-auto custom-scrollbar flex flex-col justify-between w-full`}>
-
                         {children}
-
                     </div>
                 </div>
             </div>
