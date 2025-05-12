@@ -16,9 +16,9 @@ function AddTemplate({ onClose, onSave }) {
       <Input label="Sender Email" isRequired={true} placeholder="Enter Sender Email" />
     </div>
 
-    <div className="grid grid-cols-2 gap-3 mt-5">
+    <div className="grid grid-cols-3 gap-3 mt-5">
       <CancelButton />
-      <SecondaryButton title="Save & Draft" />
+      <SecondaryButton title="Save As Draft" />
       <SecondaryButton title="Save & Activate" />
     </div>
   </Model>
