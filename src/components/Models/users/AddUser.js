@@ -1,8 +1,8 @@
-import CancelButton from "../common/CancelButton"
-import SecondaryButton from "../common/SecondaryButton"
-import Input from "../form/Input"
-import Select from "../form/Select"
-import Model from "./Model"
+import CancelButton from "../../common/CancelButton"
+import SecondaryButton from "../../common/SecondaryButton"
+import Input from "../../form/Input"
+import Select from "../../form/Select"
+import Model from "../Model"
 
 function AddUser({ onClose, onSave }) {
     return <Model onClose={onClose} title="Invite New User" modalClass="w-1/2!">

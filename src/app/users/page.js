@@ -10,8 +10,11 @@ import Select from '../../components/form/Select';
 import DatePicker from '../../components/form/DatePicker';
 import Search from '../../components/form/Search';
 import Image from 'next/image';
-import AddUser from '../../components/Models/AddUser'
-import RemoveUser from '../../components/Models/RemoveUser'
+import AddUser from '../../components/Models/users/AddUser'
+import DeleteUsers from '../../components/Models/users/DeleteUsers'
+import ResendInvitations from '../../components/Models/users/ResendInvitations'
+import SuspendUsers from '../../components/Models/users/SuspendUsers'
+import ChangeUserRoles from '../../components/Models/users/ChangeUserRoles'
 
 function Users() {
     const [role, setRole] = useState("")
@@ -21,7 +24,10 @@ function Users() {
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
     const [openUser, setUserOpen] = useState(false)
-    const [open, setOpen] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
+    const [openInvite, setOpenInvite] = useState(false)
+    const [openSuspend, setOpeSuspend] = useState(false)
+    const [openRoles, setOpeRoles] = useState(false)
 
     return (
         <AdminLayout headerChild={<h1>filters</h1>}>
@@ -37,14 +43,50 @@ function Users() {
                 />
             }
 
-            {open &&
-                <RemoveUser
+            {openDelete &&
+                <DeleteUsers
                     onClose={() => {
-                        setOpen(false)
+                        setOpenDelete(false)
                     }}
 
                     onSave={() => {
-                        setOpen(true)
+                        setOpenDelete(true)
+                    }}
+                />
+            }
+
+            {openInvite &&
+                <ResendInvitations
+                    onClose={() => {
+                        setOpenInvite(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenInvite(true)
+                    }}
+                />
+            }
+
+            {openSuspend &&
+                <SuspendUsers
+                    onClose={() => {
+                        setOpeSuspend(false)
+                    }}
+
+                    onSave={() => {
+                        setOpeSuspend(true)
+                    }}
+                />
+            }
+
+            {openRoles &&
+                <ChangeUserRoles
+                    onClose={() => {
+                        setOpeRoles(false)
+                    }}
+
+                    onSave={() => {
+                        setOpeRoles(true)
                     }}
                 />
             }
@@ -104,14 +146,18 @@ function Users() {
                     </div>
                 </div>
                 <div className='grid grid-cols-4 gap-4'>
-                    <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'><Image src="images/add.svg" alt='add' height={16} width={16} unoptimized={true} />Resend Invite</button>
+                    <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
+                        onClick={() => { setOpenInvite(true) }}
+                    ><Image src="images/add.svg" alt='add' height={16} width={16} unoptimized={true} />Resend Invite</button>
 
-                    <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'><Image src="images/pause.svg" alt='pause' height={16} width={16} unoptimized={true} />Suspend Users</button>
+                    <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
+                        onClick={() => { setOpeSuspend(true) }}><Image src="images/pause.svg" alt='pause' height={16} width={16} unoptimized={true} />Suspend Users</button>
 
-                    <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'><Image src="images/refresh.svg" alt='refresh' height={16} width={16} unoptimized={true} />Change Role</button>
+                    <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
+                        onClick={() => { setOpeRoles(true) }}><Image src="images/refresh.svg" alt='refresh' height={16} width={16} unoptimized={true} />Change Role</button>
 
                     <button className='border border-danger-light2 bg-danger-light2 rounded-lg p-2 text-danger text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
-                        onClick={() => { setOpen(true) }}><Image src="images/trash.svg" alt='refresh' height={16} width={16} unoptimized={true} />Remove Users</button>
+                        onClick={() => { setOpenDelete(true) }}><Image src="images/trash.svg" alt='refresh' height={16} width={16} unoptimized={true} />Remove Users</button>
                 </div>
             </div>
 

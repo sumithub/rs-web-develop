@@ -9,7 +9,6 @@ export default function Model({ id = "", showHeader = true, customHeader = false
 
             if (event.key === 'Escape') {
                 onClose()
-
             }
         })
 
@@ -18,7 +17,6 @@ export default function Model({ id = "", showHeader = true, customHeader = false
             if (ref.current && (!ref.current.contains(e.target))) {
 
                 onClose()
-
             }
         };
 
@@ -28,7 +26,6 @@ export default function Model({ id = "", showHeader = true, customHeader = false
             return () => {
 
                 document.removeEventListener('mousedown', checkIfClickedOutside);
-
             };
         }
 

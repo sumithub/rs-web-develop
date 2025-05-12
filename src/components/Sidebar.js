@@ -33,9 +33,9 @@ export default function Sidebar() {
                                 <Image src="/sidebarIcons/location.svg" alt="location" height={20} width={20} unoptimized={true} />
 
                                 <div className="text-xs font-medium line-clamp-1">4517 Washington Ave. Manchester, Kentucky 39495</div>
-                                <button className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={20} width={20} /></button>
+                                <button className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={20} width={20} unoptimized={true} /></button>
 
-                                <button className="cursor-pointer"><Image src="/images/add1.svg" alt="add" height={25} width={25} /></button>
+                                <button className="cursor-pointer"><Image src="/images/add1.svg" alt="add" height={25} width={25} unoptimized={true} /></button>
                             </div>
                         </div>
 
