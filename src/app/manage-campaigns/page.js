@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image'
 import AdminLayout from '../../components/AdminLayout'
 import Checkbox from '../../components/form/Checkbox'
 import DatePicker from '../../components/form/DatePicker'
@@ -8,6 +9,7 @@ import PaginationDemo from '../../components/Pagination'
 import Status from '../../components/Status'
 import TableOrder from '../../components/TableOrder'
 import React, { useState } from 'react'
+import AddClient from "../../components/Models/AddClient"
 
 function ManageCampaigns() {
 
@@ -19,9 +21,21 @@ function ManageCampaigns() {
     // const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
+    const [open, setOpen] = useState(false)
 
     return (
         <AdminLayout>
+            {open &&
+                <AddClient
+                    onClose={() => {
+                        setOpen(false)
+                    }}
+
+                    onSave={() => {
+                        setOpen(true)
+                    }}
+                />
+            }
             <div>
                 <div className="2xl:flex lg:flex-wrap justify-between items-center w-full mb-5">
                     <Search
@@ -73,12 +87,13 @@ function ManageCampaigns() {
                             onChange={(e) => setDate(e)}
                         />
 
-                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50">Create campaign</button>
+                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                            onClick={() => { setOpen(true) }}>Create campaign</button>
                     </div>
                 </div>
 
-                <div className='flex items-center justify-between'>
-                    <div className="border border-border-color px-2 py-1 rounded-lg w-28 mb-5">
+                <div className='flex items-center justify-between mb-5'>
+                    <div className="border border-border-color px-2 py-1 rounded-lg w-28">
                         <div className="flex items-start justify-center gap-2 mt-1">
                             <Checkbox />
                             <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
@@ -128,9 +143,20 @@ function ManageCampaigns() {
                             </td>
                             <td>Jan 10,2025</td>
                             <td>Jan 15,2025</td>
-                            <td>150</td>
+                            <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
-                            <td></td>
+                            <td><div className='flex items-center gap-2'>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                </button>
+
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                </button>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                </button>
+                            </div></td>
                         </tr>
 
                         <tr>
@@ -142,9 +168,20 @@ function ManageCampaigns() {
                             </td>
                             <td>Jan 14,2025</td>
                             <td>Jan 20,2025</td>
-                            <td>150</td>
+                            <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
-                            <td></td>
+                            <td><div className='flex items-center gap-2'>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                </button>
+
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                </button>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                </button>
+                            </div></td>
                         </tr>
 
                         <tr>
@@ -156,9 +193,20 @@ function ManageCampaigns() {
                             </td>
                             <td>Jan 20,2025</td>
                             <td>Jan 28,2025</td>
-                            <td>150</td>
+                            <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
-                            <td></td>
+                            <td><div className='flex items-center gap-2'>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                </button>
+
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                </button>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                </button>
+                            </div></td>
                         </tr>
 
                         <tr>
@@ -170,9 +218,20 @@ function ManageCampaigns() {
                             </td>
                             <td>Jan 22,2025</td>
                             <td>Jan 30,2025</td>
-                            <td>150</td>
+                            <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
-                            <td></td>
+                            <td><div className='flex items-center gap-2'>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                </button>
+
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                </button>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                </button>
+                            </div></td>
                         </tr>
 
                         <tr>
@@ -184,9 +243,20 @@ function ManageCampaigns() {
                             </td>
                             <td>Jan 25,2025</td>
                             <td>Aug 10,2025</td>
-                            <td>150</td>
+                            <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
-                            <td></td>
+                            <td><div className='flex items-center gap-2'>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                </button>
+
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                </button>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                </button>
+                            </div></td>
                         </tr>
 
                         <tr>
@@ -198,9 +268,20 @@ function ManageCampaigns() {
                             </td>
                             <td>Jan 28,2025</td>
                             <td>Aug 12,2025</td>
-                            <td>150</td>
+                            <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
-                            <td></td>
+                            <td><div className='flex items-center gap-2'>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                </button>
+
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                </button>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                </button>
+                            </div></td>
                         </tr>
 
                         <tr>
@@ -212,9 +293,20 @@ function ManageCampaigns() {
                             </td>
                             <td>Jan 30,2025</td>
                             <td>Aug 15,2025</td>
-                            <td>150</td>
+                            <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
-                            <td></td>
+                            <td><div className='flex items-center gap-2'>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                </button>
+
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                </button>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                </button>
+                            </div></td>
                         </tr>
 
                         <tr>
@@ -226,9 +318,20 @@ function ManageCampaigns() {
                             </td>
                             <td>Aug 10,2025</td>
                             <td>Aug 20,2025</td>
-                            <td>150</td>
+                            <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
-                            <td></td>
+                            <td><div className='flex items-center gap-2'>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                </button>
+
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                </button>
+                                <button className='cursor-pointer'>
+                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                </button>
+                            </div></td>
                         </tr>
                     </tbody>
                 </table>
