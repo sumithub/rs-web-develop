@@ -10,6 +10,7 @@ import Select from '../../components/form/Select';
 import DatePicker from '../../components/form/DatePicker';
 import Search from '../../components/form/Search';
 import Image from 'next/image';
+import AddUser from '../../components/Models/AddUser'
 
 function Users() {
     const [role, setRole] = useState("")
@@ -18,11 +19,21 @@ function Users() {
     // const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
+    const [open, setOpen] = useState(false)
 
     return (
         <AdminLayout headerChild={<h1>filters</h1>}>
+            {open &&
+                <AddUser
+                     onClose={() => {
+                        setOpen(false)
+                    }}
 
-
+                    onSave={() => {
+                        setOpen(true)
+                    }}
+                />
+            }
 
             <div className="flex justify-between items-center w-full">
                 <div className='grid grid-cols-[3.3fr_1fr_1fr_1fr] gap-4'>
@@ -66,7 +77,8 @@ function Users() {
                 </div>
 
                 <div className="2xl:mt-0 mt-3">
-                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-full">Invite New User</button>
+                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-full"
+                     onClick={() => { setOpen(true) }}>Invite New User</button>
                 </div>
             </div>
             <div className='my-5 flex items-center justify-between'>
