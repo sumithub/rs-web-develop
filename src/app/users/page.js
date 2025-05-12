@@ -20,7 +20,7 @@ function Users() {
     const [search, setSearch] = useState("")
 
     return (
-        <AdminLayout>
+        <AdminLayout headerChild={<h1>filters</h1>}>
 
             <div className="flex justify-between items-center w-full">
                 <div className='grid grid-cols-[3.3fr_1fr_1fr_1fr] gap-4'>

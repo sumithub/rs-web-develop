@@ -14,7 +14,7 @@ function CampaignsTemplates() {
     const [date, setDate] = useState("")
 
     return (
-        <AdminLayout>
+        <AdminLayout >
 
             <div className="flex justify-between items-center w-full mb-4">
                 <Search

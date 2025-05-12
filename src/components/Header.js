@@ -1,14 +1,14 @@
 import Image from "next/image";
 
-export default function Header({ headerChild }) {
+export default function Header({ headerChild, mainHeading = "Hello users!", subHeading = "Welcome back to dashboard." }) {
     return <div className="border-b border-[#ADADAD33] py-[18px] px-4 ml-72 bg-white fixed top-0 inset-x-0 z-50">
         <div className="flex items-center justify-between w-full">
             <div>
-                <div className="text-secondary text-base font-semibold">Manage Reviews</div>
+                <div className="text-secondary text-base font-semibold">{mainHeading}</div>
                 <div className="flex gap-2 mt-1">
-                    <div className="text-secondary text-sm">Reviews</div>
-                    <Image src="/images/arrow-right.svg" alt="arrow" height={14} width={14} unoptimized={true} />
-                    <div className="text-primary text-sm font-semibold capitalize">Manage Reviews</div>
+                    <div className="text-secondary text-sm">{subHeading}</div>
+                    {/*<Image src="/images/arrow-right.svg" alt="arrow" height={14} width={14} unoptimized={true} />
+                    <div className="text-primary text-sm font-semibold capitalize">Manage Reviews</div>*/}
                 </div>
             </div>
 
