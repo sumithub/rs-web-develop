@@ -45,9 +45,7 @@ export default function Model({ id = "", showHeader = true, customHeader = false
                 <div ref={ref} className={`${modalClass} h-full relative transform overflow-y-hidden rounded-3xl bg-white text-left shadow-xl transition-all md:w-full w-[90%] 2xl:max-w-7xl xl:max-w-[85%] max-w-[90%]`}>
 
                     {showHeader ? <div className={`flex justify-between items-center rounded-t-3xl z-50 md:px-6 px-3 py-4 sticky top-0 bg-[#6FC3FF1a] ${modelHeaderClass}`}>
-
                         <p className="capitalize font-semibold text-lg">{title || ""}</p>
-
                         {closeButton && <div onClick={() => { onClose() }} className="cursor-pointer">
                             <Image src="/images/close1.svg" alt="close" height={24} width={24} unoptimized={true} />
                         </div>}

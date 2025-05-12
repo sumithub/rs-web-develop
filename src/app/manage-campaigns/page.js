@@ -25,7 +25,7 @@ function ManageCampaigns() {
 
     return (
         <AdminLayout>
-            {open &&
+            {/* {open &&
                 <AddClient
                     onClose={() => {
                         setOpen(false)
@@ -35,7 +35,7 @@ function ManageCampaigns() {
                         setOpen(true)
                     }}
                 />
-            }
+            } */}
             <div>
                 <div className="2xl:flex lg:flex-wrap justify-between items-center w-full mb-5">
                     <Search
@@ -88,7 +88,7 @@ function ManageCampaigns() {
                         />
 
                         <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
-                            onClick={() => { setOpen(true) }}>Create campaign</button>
+                        >Create campaign</button>
                     </div>
                 </div>
 

@@ -7,7 +7,7 @@ import AdminLayout from '../../components/AdminLayout'
 import Search from '../../components/form/Search'
 import DatePicker from '../../components/form/DatePicker'
 import Select from '../../components/form/Select'
-import AddTemplate from '../../components/Models/AddTemplate'
+import AddTemplate from '../../components/Models/templates/AddTemplate'
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
@@ -46,7 +46,8 @@ function CampaignsTemplates() {
                             setType(e.target.value)
                         }}>
                         <option value="email">Email</option>
-                        <option value="password">Password</option>
+                        <option value="sms">SMS</option>
+                        <option value="both">Both</option>
                     </Select>
                     <DatePicker
                         icon={true}
@@ -57,7 +58,7 @@ function CampaignsTemplates() {
                     />
 
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
-                    onClick={() => { setOpen(true) }}>Create New Template</button>
+                        onClick={() => { setOpen(true) }}>Create New Template</button>
                 </div>
             </div>
 
