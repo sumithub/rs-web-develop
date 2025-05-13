@@ -9,7 +9,7 @@ import PaginationDemo from '../../components/Pagination'
 import Status from '../../components/Status'
 import TableOrder from '../../components/TableOrder'
 import React, { useState } from 'react'
-import AddClient from "../../components/Models/AddClient"
+import ScheduleCampaign from "../../components/Models/manage-campaigns/ScheduleCampaign"
 
 function ManageCampaigns() {
 
@@ -36,6 +36,19 @@ function ManageCampaigns() {
                     }}
                 />
             } */}
+
+            {open &&
+                <ScheduleCampaign
+                    onClose={() => {
+                        setOpen(false)
+                    }}
+
+                    onSave={() => {
+                        setOpen(true)
+                    }}
+                />
+            }
+
             <div>
                 <div className="2xl:flex lg:flex-wrap justify-between items-center w-full mb-5">
                     <Search
@@ -88,7 +101,7 @@ function ManageCampaigns() {
                         />
 
                         <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
-                        >Create campaign</button>
+                            onClick={() => { setOpen(true) }}>Create campaign</button>
                     </div>
                 </div>
 
