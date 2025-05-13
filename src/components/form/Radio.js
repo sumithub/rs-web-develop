@@ -1,6 +1,6 @@
 export default function Radio({ disabled = false, label, checked, labelClass = "", inputClass = "", class_ = "", name, onChange, value }) {
-    return (<div className={`mt-4 xl:text-lg text-sm ${class_}`}>
-        <label className="flex items-center xl:gap-2 gap-[2px] cursor-pointer">
+    return (<div className={`text-sm ${class_}`}>
+        <label className="flex items-center gap-2 cursor-pointer">
             <input
                 disabled={disabled}
                 onChange={(e) => {
