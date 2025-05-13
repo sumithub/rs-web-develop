@@ -31,7 +31,7 @@ function Users() {
     const [openModal, setOpenModal] = useState(null)
 
     return (
-        <AdminLayout headerChild={<h1>filters</h1>}>
+        <AdminLayout>
             {(openModal === "edit" || openModal === "new") &&
                 <AddUser
                     onClose={() => {

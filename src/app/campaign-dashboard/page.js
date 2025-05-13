@@ -2,9 +2,24 @@ import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
 import DashboardCard from "../../components/DashboardCard";
 import DashboardChart from "../../components/DashboardChart";
+import DatePicker from "../../components/form/DatePicker";
+import Select from "../../components/form/Select";
 
 export default function CampaignDashboard() {
-    return <AdminLayout>
+    return <AdminLayout
+        headerChild={<div className="grid grid-cols-4 gap-3 justify-end items-end">
+            <Select defaultOption="Review Source">
+            </Select>
+            <Select
+
+                defaultOption="Star Rating">
+            </Select>
+            <DatePicker
+                icon={true}
+            />
+            <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50"><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
+        </div>}
+    >
         <div className="grid grid-cols-4 gap-5">
             <DashboardCard title="Total Campaigns Sent" count="500" img="/images/sound.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/total.png')]" />
 
