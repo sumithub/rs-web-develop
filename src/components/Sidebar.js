@@ -2,14 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/router"
 import { usePathname } from "next/navigation";
-import { title } from "process";
 
 export default function Sidebar() {
-    const pathname = useRouter.pathname
-    let [openSubMenu, setOpenSubMenu] = useState(false)
-
     const list = [
         { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
         { title: "Customers", link: "/campaigns", icon: "customer", submenu: [{ title: "User Management", link: "/users" }] },
