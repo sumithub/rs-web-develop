@@ -44,7 +44,7 @@ export default function ResendInvitations({ onClose }) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 mt-5">
-                    <CancelButton />
+                    <CancelButton title="Cancel" />
                     <SecondaryButton title="Confirm & resend" />
                 </div>
             </div>

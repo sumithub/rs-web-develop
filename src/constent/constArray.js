@@ -6,6 +6,7 @@ export const USER_ACTIONS = [
     { label: "Resend Invite", value: "resend-invite" },
     { label: "Remove User", value: "remove-user" },
     { label: "Send Invite", value: "send-invite" },
+    { label: "Setup Password", value: "setup-password" },
 ]
 
 export const TEMPLATE_ACTIONS = [

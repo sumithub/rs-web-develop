@@ -12,7 +12,7 @@ export default function ResendInvitation({ onClose }) {
             <div className="text-secondary text-xl font-semibold capitalize mt-4">A new invitation email will be sent.</div>
 
             <div className="grid grid-cols-2 gap-3 mt-6">
-                <CancelButton />
+                <CancelButton title="Cancel" />
                 <SecondaryButton title="Resend Invite" />
             </div>
         </div>

@@ -7,7 +7,7 @@ export default function SendInvite({ onClose }) {
         <div className="text-secondary text-xl font-semibold capitalize text-center">the invited user receives an email to verify their address and create a password.</div>
 
         <div className="grid grid-cols-2 gap-3 mt-6">
-            <CancelButton />
+            <CancelButton title="Cancel" />
             <SecondaryButton title="ok" />
         </div>
 

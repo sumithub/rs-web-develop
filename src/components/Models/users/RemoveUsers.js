@@ -40,7 +40,7 @@ export default function RemoveUsers({ onClose }) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 mt-6">
-                    <CancelButton />
+                    <CancelButton title="Cancel" />
                     <SecondaryButton title="Apply Changes" />
                 </div>
             </div>

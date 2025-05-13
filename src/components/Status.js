@@ -26,6 +26,9 @@ export default function Status({ status }) {
     else if (s === "draft") {
         bgClass = "bg-[#FFC1071A] text-primary"
     }
+    else if (s === "at risk") {
+        bgClass = "bg-[#FFC1071A] text-[#ff0000]"
+    }
 
     return <div>
         <button className={`${bgClass} rounded-4xl py-1.5 px-3 text-sm text-center disabled:pointer-events-none`}>{status}</button>

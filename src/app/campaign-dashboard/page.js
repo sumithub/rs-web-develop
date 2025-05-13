@@ -2,9 +2,22 @@ import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
 import DashboardCard from "../../components/DashboardCard";
 import DashboardChart from "../../components/DashboardChart";
+import DatePicker from "../../components/form/DatePicker";
+import Select from "../../components/form/Select";
 
 export default function CampaignDashboard() {
-    return <AdminLayout>
+    return <AdminLayout
+        headerChild={<div className="grid grid-cols-3 gap-3 justify-end items-end">
+            <Select defaultOption="Review Source">
+            </Select>
+            <Select
+                defaultOption="Star Rating">
+            </Select>
+            <DatePicker
+                icon={true}
+            />
+        </div>}
+    >
         <div className="grid grid-cols-4 gap-5">
             <DashboardCard title="Total Campaigns Sent" count="500" img="/images/sound.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/total.png')]" />
 
@@ -34,7 +47,7 @@ export default function CampaignDashboard() {
                 </DashboardChart>
 
                 <DashboardChart title="Individual Response Insights">
-                    <div className="mt-8 w-full border border-border-color rounded-tr-[20px] rounded-tl-[20px] overflow-hidden">
+                    <div className="mt-5 w-full border border-border-color rounded-tr-[20px] rounded-tl-[20px] overflow-hidden">
                         <table className="w-full">
                             <thead>
                                 <tr>

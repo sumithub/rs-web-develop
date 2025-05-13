@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 
 export default function AdminLayout({ children, headerChild }) {
     return <div className="bg-light">
-        <Header headerChild={headerChild}/>
+        <Header headerChild={headerChild} />
         <Sidebar />
         <div className={`pb-6 min-h-[calc(100dvh-114px)] px-0`}>
             <div className={`py-4 md:mt-4 min-h-[calc(100dvh_-_76px)] `}>
