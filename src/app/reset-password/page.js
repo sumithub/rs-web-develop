@@ -1,4 +1,3 @@
-import React from 'react';
 import AuthLayout from '../../components/common/AuthLayout';
 import Input from '../../components/form/Input';
 import Link from 'next/link';
