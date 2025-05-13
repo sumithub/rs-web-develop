@@ -38,6 +38,9 @@ export default function Test() {
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpen(true) }}>Selected Customers
             </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpen(true) }}>Select from Customer List
+            </div>
         </div>
     </AdminLayout>
 }
