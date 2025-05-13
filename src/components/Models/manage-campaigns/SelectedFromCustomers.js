@@ -41,7 +41,7 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
-                            <td><Status status="At Risk"/></td>
+                            <td><Status status="At Risk" /></td>
                             <td>Manual</td>
                             <td>Jun 18,2024</td>
                         </tr>
@@ -55,7 +55,7 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
-                            <td><Status status="At Risk"/></td>
+                            <td><Status status="At Risk" /></td>
                             <td>Manual</td>
                             <td>Jun 18,2024</td>
                         </tr>
@@ -69,7 +69,7 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
-                            <td><Status status="At Risk"/></td>
+                            <td><Status status="At Risk" /></td>
                             <td>Manual</td>
                             <td>Jun 18,2024</td>
                         </tr>
@@ -83,7 +83,7 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
-                            <td><Status status="At Risk"/></td>
+                            <td><Status status="At Risk" /></td>
                             <td>Manual</td>
                             <td>Jun 18,2024</td>
                         </tr>
@@ -97,7 +97,7 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
-                            <td><Status status="At Risk"/></td>
+                            <td><Status status="At Risk" /></td>
                             <td>Manual</td>
                             <td>Jun 18,2024</td>
                         </tr>
@@ -111,7 +111,7 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
-                            <td><Status status="At Risk"/></td>
+                            <td><Status status="At Risk" /></td>
                             <td>Manual</td>
                             <td>Jun 18,2024</td>
                         </tr>
@@ -125,7 +125,7 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
-                            <td><Status status="At Risk"/></td>
+                            <td><Status status="At Risk" /></td>
                             <td>Manual</td>
                             <td>Jun 18,2024</td>
                         </tr>
