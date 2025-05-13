@@ -6,7 +6,7 @@ import DatePicker from "../../components/form/DatePicker";
 import Select from "../../components/form/Select";
 
 export default function CampaignDashboard() {
-    return <AdminLayout
+    return <AdminLayout noCard={true}
         headerChild={<div className="grid grid-cols-3 gap-3 justify-end items-end">
             <Select defaultOption="Review Source">
             </Select>

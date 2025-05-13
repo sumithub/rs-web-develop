@@ -10,13 +10,13 @@ function AddTemplate({ onClose }) {
     <div className='flex items-start gap-4'>
 
       <div className='w-[60%]'>
-        <div className='shadow-xl rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
+        <div className='shadow-sm rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
 
           <div className='grid grid-cols-2 gap-3'>
-            <Select label="Template Type" isRequired={true} class_='mt-0!' selectClass_="py-3.5! px-2.5! focus:border-primary/60!">
+            <Select label="Template Type" isRequired={true} class_='mt-2!' selectClass_="py-3.5! px-2.5! focus:border-primary/60!">
               <option value="email template">Email Template</option>
             </Select>
-            <Input label="Template Name" isRequired={true} class_='mt-0!' placeholder="Enter Name" />
+            <Input label="Template Name" isRequired={true} class_='mt-2!' placeholder="Enter Name" />
           </div>
 
           <Input label="Subject Line" isRequired={true} placeholder="Enter Line" />
@@ -40,9 +40,9 @@ function AddTemplate({ onClose }) {
       </div>
 
       <div className='w-[40%] mt-4'>
-        <div className='shadow-xl rounded-[10px]'>
+        <div className='shadow-sm rounded-[10px]'>
 
-          <div className='bg-[#0396FF1a] px-5 py-4 rounded-tl-[15px] rounded-tr-[15px]'>
+          <div className='bg-[#0396FF1a] px-5 py-4 rounded-tl-[10px] rounded-tr-[10px]'>
             <div className='flex items-center gap-3'>
               <Image src="/images/eye1.svg" alt='eye' height={22} width={22} unoptimized={true} />
               <div className='text-secondary text-lg font-semibold'>Email Preview</div>

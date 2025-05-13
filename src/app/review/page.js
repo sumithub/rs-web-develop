@@ -33,7 +33,7 @@ export default function Review() {
         { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Flagged" },
     ]
 
-    return <AdminLayout >
+    return <AdminLayout noCard={true}>
 
         <div className="bg-light min-h-[calc(100dvh_-_85px)] mt-[85px]">
             <div className="grid grid-cols-3 gap-4">

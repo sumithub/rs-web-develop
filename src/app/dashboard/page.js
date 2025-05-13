@@ -8,6 +8,7 @@ import DatePicker from "../../components/form/DatePicker";
 
 export default function Dashboard() {
     return <AdminLayout
+        noCard={true}
         headerChild={<div className="grid grid-cols-4 gap-3 justify-end items-end">
             <Select defaultOption="Review Source">
             </Select>

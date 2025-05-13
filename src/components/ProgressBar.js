@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ProgressBar() {
     return <main>
-        <div className="w-full max-w-4xl mx-auto my-8 px-4">
+        <div className="w-full max-w-7xl mx-auto my-8 px-4">
             <div className="relative">
                 {/* Progress Line */}
                 <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-200 transform -translate-y-1/2"></div>

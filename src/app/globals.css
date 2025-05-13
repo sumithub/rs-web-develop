@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@source "../../src";
 
 :root {
   --primary: #0396FF;
@@ -196,7 +195,7 @@ body {
 
 .ldio-x2uulkbinbj>div div:nth-child(2) {
   transform: rotate(0deg) translate(12.69px, 12.69px);
-  ;
+
 }
 
 .ldio-x2uulkbinbj>div div:nth-child(3) {
