@@ -1,0 +1,16 @@
+export default function Radio({ disabled = false, label, checked, labelClass = "", inputClass = "", class_ = "", name, onChange, value }) {
+    return (<div className={`mt-4 xl:text-lg text-sm ${class_}`}>
+        <label className="flex items-center xl:gap-2 gap-[2px] cursor-pointer">
+            <input
+                disabled={disabled}
+                onChange={(e) => {
+                    if (onChange) {
+                        onChange(e)
+                    }
+                }}
+                type="radio" name={name} checked={checked} value={value} className={`${inputClass} border-4 border-border-color h-5 w-5 rounded-full text-text`} />
+            <div className={`${labelClass} xl:text-[15px] text-sm capitalize xl:ml-1 ml-[2px] whitespace-pre`}>{label} </div>
+        </label>
+    </div>
+    )
+}
