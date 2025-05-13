@@ -4,6 +4,7 @@ import Model from "../Model"
 import TableOrder from '../../../components/TableOrder'
 import PaginationDemo from '../../../components/Pagination'
 import Checkbox from '../../../components/form/Checkbox'
+import Status from '../../Status'
 
 
 
@@ -24,6 +25,9 @@ function SelectedCustomers({ onClose, onSave }) {
                             <th><TableOrder title="Customer Name" /></th>
                             <th><TableOrder title="Email" /></th>
                             <th><TableOrder title="Phone" /></th>
+                            <th><TableOrder title="Tags" /></th>
+                            <th><TableOrder title="Source" /></th>
+                            <th><TableOrder title="Date Added" /></th>
                         </tr>
                     </thead>
 
@@ -37,6 +41,9 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
+                            <td><Status status="At Risk"/></td>
+                            <td>Manual</td>
+                            <td>Jun 18,2024</td>
                         </tr>
 
                         <tr>
@@ -48,6 +55,9 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
+                            <td><Status status="At Risk"/></td>
+                            <td>Manual</td>
+                            <td>Jun 18,2024</td>
                         </tr>
 
                         <tr>
@@ -59,6 +69,9 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
+                            <td><Status status="At Risk"/></td>
+                            <td>Manual</td>
+                            <td>Jun 18,2024</td>
                         </tr>
 
                         <tr>
@@ -70,6 +83,9 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
+                            <td><Status status="At Risk"/></td>
+                            <td>Manual</td>
+                            <td>Jun 18,2024</td>
                         </tr>
 
                         <tr>
@@ -81,6 +97,9 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
+                            <td><Status status="At Risk"/></td>
+                            <td>Manual</td>
+                            <td>Jun 18,2024</td>
                         </tr>
 
                         <tr>
@@ -92,6 +111,9 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
+                            <td><Status status="At Risk"/></td>
+                            <td>Manual</td>
+                            <td>Jun 18,2024</td>
                         </tr>
 
                         <tr>
@@ -103,6 +125,9 @@ function SelectedCustomers({ onClose, onSave }) {
                             </td>
                             <td>john@example.com</td>
                             <td>+91 9876543210</td>
+                            <td><Status status="At Risk"/></td>
+                            <td>Manual</td>
+                            <td>Jun 18,2024</td>
                         </tr>
                     </tbody>
                 </table>

@@ -2,12 +2,13 @@
 import { useState } from "react";
 import AdminLayout from "../../components/AdminLayout";
 import SelectedCustomers from "../../components/Models/manage-campaigns/SelectedCustomers"
-
+import SelectedFromCustomers from "../../components/Models/manage-campaigns/SelectedFromCustomers"
 import Clone from "../../components/Models/templates/Clone"
 
 export default function Test() {
     const [openClone, setOpenClone] = useState(false)
     const [open, setOpen] = useState(false)
+    const [openSelect, setOpenSelect] = useState(false)
 
     return <AdminLayout>
 
@@ -32,6 +33,17 @@ export default function Test() {
                 }} />
         }
 
+        {openSelect &&
+            <SelectedFromCustomers
+                onClose={() => {
+                    setOpenSelect(false)
+                }}
+
+                onSave={() => {
+                    setOpenSelect(true)
+                }} />
+        }
+
         <div className="flex flex-col gap-y-3">
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenClone(true) }}>Clone
             </div>
@@ -39,7 +51,7 @@ export default function Test() {
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpen(true) }}>Selected Customers
             </div>
 
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpen(true) }}>Select from Customer List
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenSelect(true) }}>Select from Customer List
             </div>
         </div>
     </AdminLayout>
