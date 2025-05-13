@@ -191,7 +191,7 @@ function Users() {
                                     <div>Jaydon George</div>
                                 </div>
                             </td>
-                            <td>Manager</td>
+                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
                             <td><Status status="Active" /></td>
                             <td>Aug 05,2025</td>
                             <td><Dropdown
@@ -209,7 +209,7 @@ function Users() {
                                     <div>Jaydon George</div>
                                 </div>
                             </td>
-                            <td>Manager</td>
+                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
                             <td><Status status="Pending Invite" /></td>
                             <td>Aug 05,2025</td>
                             <td><Dropdown
@@ -227,7 +227,7 @@ function Users() {
                                     <div>Jaydon George</div>
                                 </div>
                             </td>
-                            <td>Manager</td>
+                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
                             <td><Status status="Active" /></td>
                             <td>Aug 05,2025</td>
                             <td><Dropdown
@@ -245,7 +245,7 @@ function Users() {
                                     <div>Jaydon George</div>
                                 </div>
                             </td>
-                            <td>Manager</td>
+                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
                             <td><Status status="Suspended" /></td>
                             <td>Aug 05,2025</td>
                             <td><Dropdown
@@ -263,7 +263,7 @@ function Users() {
                                     <div>Jaydon George</div>
                                 </div>
                             </td>
-                            <td>Manager</td>
+                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
                             <td><Status status="Active" /></td>
                             <td>Aug 05,2025</td>
                             <td><Dropdown
@@ -281,7 +281,7 @@ function Users() {
                                     <div>Jaydon George</div>
                                 </div>
                             </td>
-                            <td>Manager</td>
+                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
                             <td><Status status="Pending Invite" /></td>
                             <td>Aug 05,2025</td>
                             <td><Dropdown
@@ -299,7 +299,7 @@ function Users() {
                                     <div>Jaydon George</div>
                                 </div>
                             </td>
-                            <td>Manager</td>
+                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
                             <td><Status status="Active" /></td>
                             <td>Aug 05,2025</td>
                             <td><Dropdown
@@ -317,7 +317,7 @@ function Users() {
                                     <div>Jaydon George</div>
                                 </div>
                             </td>
-                            <td>Manager</td>
+                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
                             <td><Status status="Active" /></td>
                             <td>Aug 05,2025</td>
                             <td><Dropdown
@@ -333,7 +333,7 @@ function Users() {
                     <PaginationDemo />
                 </div>
             </div>
-        </AdminLayout>
+        </AdminLayout >
     )
 }
 

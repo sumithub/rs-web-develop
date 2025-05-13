@@ -7,17 +7,15 @@ import Select from "../../components/form/Select";
 
 export default function CampaignDashboard() {
     return <AdminLayout
-        headerChild={<div className="grid grid-cols-4 gap-3 justify-end items-end">
+        headerChild={<div className="grid grid-cols-3 gap-3 justify-end items-end">
             <Select defaultOption="Review Source">
             </Select>
             <Select
-
                 defaultOption="Star Rating">
             </Select>
             <DatePicker
                 icon={true}
             />
-            <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50"><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
         </div>}
     >
         <div className="grid grid-cols-4 gap-5">
@@ -49,7 +47,7 @@ export default function CampaignDashboard() {
                 </DashboardChart>
 
                 <DashboardChart title="Individual Response Insights">
-                    <div className="mt-8 w-full border border-border-color rounded-tr-[20px] rounded-tl-[20px] overflow-hidden">
+                    <div className="mt-5 w-full border border-border-color rounded-tr-[20px] rounded-tl-[20px] overflow-hidden">
                         <table className="w-full">
                             <thead>
                                 <tr>

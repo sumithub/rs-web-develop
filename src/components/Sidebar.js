@@ -24,7 +24,7 @@ export default function Sidebar() {
             <div className="relative h-full pb-10">
 
                 <div className="pt-5 text-center">
-                    <Link href="/" className="test-secondary text-base font-semibold uppercase text-center">logo</Link>
+                    <Link href="/" className="test-secondary text-xl font-semibold uppercase text-center">logo</Link>
                 </div>
                 <div className="relative h-full flex flex-col justify-between overflow-y-auto custom-scrollbar pb-10 pt-10">
                     <div>

@@ -13,7 +13,7 @@ export default function Input({ isRequired, label, placeholder, labelClass, inpu
     };
 
     return (
-        <div className={`${class_}mt-[15px]`}>
+        <div className={`${class_} mt-[15px]`}>
             <label className={`text-sm font-medium text-secondary ${labelClass}`}> {label}{isRequired && <span className="text-danger">*</span>}</label>
             <div className="relative">
                 {(inputType !== "password" && icon) && (
