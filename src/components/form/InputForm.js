@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function InputForm({ watch, setValue, clearValue = true, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "" }) {
+export default function InputForm({ class_ = "", watch, setValue, clearValue = true, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "" }) {
     const [type, setType] = useState("password")
     let error = "";
 
@@ -26,7 +26,7 @@ export default function InputForm({ watch, setValue, clearValue = true, isRequir
     };
 
     return (
-        <div className={`mt-[15px]`}>
+        <div className={`mt-[15px] ${class_}`}>
             <label className={`text-sm font-medium text-secondary ${labelClass}`}> {label}{isRequired && <span className="text-danger">*</span>}</label>
             <div className="relative">
                 {(inputType !== "password" && icon && watch(formProps?.name)) && (
@@ -53,10 +53,10 @@ export default function InputForm({ watch, setValue, clearValue = true, isRequir
                     placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
                     {...formProps}
                     disabled={disabled}
-                    className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3.5 px-2.5 text-sm text-secondary  ${inputClass}`}
+                    className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary  ${inputClass}`}
                 />
             </div>
-            {error && <p className="text-xs pt-[5px] capitalize text-danger">{error}</p>}
+            {error && <p className="text-xs pt-[3px] capitalize text-danger">{error}</p>}
         </div>
     );
 }

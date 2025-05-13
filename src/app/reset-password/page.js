@@ -1,4 +1,3 @@
-import React from 'react';
 import AuthLayout from '../../components/common/AuthLayout';
 import Input from '../../components/form/Input';
 import Link from 'next/link';
@@ -38,7 +37,7 @@ const ResetPasswordForm = () => {
                 error="Passwords do not match"
             />
         </div>
-        <button className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-5 py-3 rounded-[10px] border border-primary ">Send Mail</button>
+        <button className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-5 py-3 rounded-[10px] border border-primary cursor-pointer capitalize">reset password</button>
         <div className='flex justify-center mt-5'>
             <Link href="/login" className="flex gap-[15px]">
                 <Image src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />

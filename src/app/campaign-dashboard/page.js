@@ -1,0 +1,129 @@
+import Image from "next/image";
+import AdminLayout from "../../components/AdminLayout";
+import DashboardCard from "../../components/DashboardCard";
+import DashboardChart from "../../components/DashboardChart";
+import DatePicker from "../../components/form/DatePicker";
+import Select from "../../components/form/Select";
+
+export default function CampaignDashboard() {
+    return <AdminLayout
+        headerChild={<div className="grid grid-cols-3 gap-3 justify-end items-end">
+            <Select defaultOption="Review Source">
+            </Select>
+            <Select
+                defaultOption="Star Rating">
+            </Select>
+            <DatePicker
+                icon={true}
+            />
+        </div>}
+    >
+        <div className="grid grid-cols-4 gap-5">
+            <DashboardCard title="Total Campaigns Sent" count="500" img="/images/sound.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/total.png')]" />
+
+            <DashboardCard title="Total Messages Delivered" count="45000" img="/images/tick-sms.svg" bgClass="bg-success-light" textColor="text-success-light" bgImage="bg-[url('/images/average.png')]" />
+
+            <DashboardCard title="Open Rate " count="45.3%" img="/images/thumb.svg" bgClass="bg-custom-purple" textColor="text-custom-purple" bgImage="bg-[url('/images/review.png')]" />
+
+            <DashboardCard title="Click-Through Rate" count="12.7%" img="/images/dollar.svg" bgClass="bg-custom-yellow" textColor="text-custom-yellow!" bgImage="bg-[url('/images/active.png')]" />
+
+            <DashboardCard title="Response Rate" count="8.5%" img="/images/user1.svg" bgClass="bg-custom-yellow-dark" textColor="text-primary!" bgImage="bg-[url('/images/review.png')]" />
+
+            <DashboardCard title="Review Conversation Rate" count="5.2%" img="/images/viewers.svg" bgClass="bg-danger-light" textColor="text-success-light!" bgImage="bg-[url('/images/total.png')]" />
+
+            <DashboardCard title="Bounce Rate" count="3.8%" img="/images/sms-star.svg" bgClass="bg-success-dark" textColor="text-primary!" bgImage="bg-[url('/images/active.png')]" />
+
+            <DashboardCard title="Unsubscribe Rate" count="1.2%" img="/images/viewers1.svg" bgClass="bg-[#3BD699]" textColor="text-custom-yellow!" bgImage="bg-[url('/images/average.png')]" />
+        </div>
+
+        <div>
+            <div className="grid grid-cols-2 gap-5 mt-5 items-start">
+                <DashboardChart title="Campaign Funnel Breakdown" imgName="/images/breakdown.png" alt="breakdown" height={218} width={509} class_="my-5">
+                    <div className="text-base text-text3 text-center capitalize mt-2">Campaign Funnel Breakdown</div>
+                    <div className="text-xs text-text3 text-center capitalize">no of users</div>
+                </DashboardChart>
+
+                <DashboardChart title="Campaign Performance Over Time" imgName="/images/graph1.png" alt="graph" height={200} width={466}>
+                </DashboardChart>
+
+                <DashboardChart title="Individual Response Insights">
+                    <div className="mt-5 w-full border border-border-color rounded-tr-[20px] rounded-tl-[20px] overflow-hidden">
+                        <table className="w-full">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Timestamp</th>
+                                    <th>Action Taken</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td>USR10000</td>
+                                    <td>Jun 18,2024 10:00AM</td>
+                                    <td>opened</td>
+                                    <td>review submit</td>
+                                </tr>
+
+                                <tr>
+                                    <td>USR10000</td>
+                                    <td>Jun 18,2024 10:00AM</td>
+                                    <td>opened</td>
+                                    <td>review submit</td>
+                                </tr>
+
+                                <tr>
+                                    <td>USR10000</td>
+                                    <td>Jun 18,2024 10:00AM</td>
+                                    <td>opened</td>
+                                    <td>review submit</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </DashboardChart>
+
+                <DashboardChart title="Engagement Breakdown">
+                    <div className="flex items-start">
+                        <div className="w-[60%]">
+                            <Image src="/images/layer.png" alt="chart" height={235} width={283} className="object-contain w-full" />
+                        </div>
+                        <div className="mt-10 w-[40%] capitalize">
+                            <div className="flex items-center gap-3 mb-5">
+                                <div className="bg-primary h-3 w-3 rounded-full"></div>
+                                <div className="text-base text-secondary">opened</div>
+                            </div>
+
+                            <div className="flex  items-center gap-3 mb-5">
+                                <div className="bg-success-light h-3 w-3 rounded-full"></div>
+                                <div className="text-base text-secondary">Bounced</div>
+
+                            </div>
+
+                            <div className="flex  items-center gap-3 mb-5">
+                                <div className="bg-custom-yellow h-3 w-3 rounded-full"></div>
+                                <div className="text-base text-secondary">delivered</div>
+
+                            </div>
+
+                            <div className="flex  items-center gap-3 mb-5">
+                                <div className="bg-[#07DBFA] h-3 w-3 rounded-full"></div>
+                                <div className="text-base text-secondary">reviewed</div>
+
+                            </div>
+
+                            <div className="flex  items-center gap-3 mb-5">
+                                <div className="bg-custom-purple h-3 w-3 rounded-full"></div>
+                                <div className="text-base text-secondary">clicked</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </DashboardChart>
+            </div>
+        </div>
+
+    </AdminLayout>
+}
