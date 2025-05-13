@@ -11,7 +11,7 @@ export default function DeleteModal({ onClose, title = "user" }) {
         {/* <DeleteUser title="remove user confirmation" question="Are You Sure you want to Remove this user permanently?" /> */}
 
         <div className="grid grid-cols-2 gap-3 mt-5">
-            <CancelButton class_="border-danger2! bg-white! text-danger2!" />
+            <CancelButton title="Cancel" class_="border-danger2! bg-white! text-danger2!" />
             <SecondaryButton title="Remove permanently" />
         </div>
     </Model>

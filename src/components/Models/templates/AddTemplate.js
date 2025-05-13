@@ -24,7 +24,7 @@ function AddTemplate({ onClose }) {
           <Input label="Sender Email" isRequired={true} placeholder="Enter Sender Email" />
         </div>
         <div className="grid grid-cols-3 gap-3 mt-5">
-          <CancelButton />
+          <CancelButton title="clone template" />
           <SecondaryButton title="Save As Draft" class_='bg-white! text-primary! hover:text-white! hover:bg-primary!' />
           <SecondaryButton title="Save & Activate" />
         </div>
