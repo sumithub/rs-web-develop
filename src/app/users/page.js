@@ -21,6 +21,9 @@ import SuspendUsers from '../../components/Models/users/SuspendUsers';
 import ChangeUserRole from '../../components/Models/users/ChangeUserRole';
 import DeleteModal from '../../components/Models/DeleteModal';
 import SendInvite from '../../components/Models/users/SendInvite';
+import ChangePassword from '../../components/Models/users/ChangePassword';
+import SetupPassword from '../../components/Models/users/SetupPassword';
+
 
 function Users() {
     const [role, setRole] = useState("")
@@ -96,6 +99,20 @@ function Users() {
 
             {openModal === "remove-user" &&
                 <DeleteModal
+                    onClose={() => {
+                        setOpenModal(false)
+                    }} />
+            }
+
+            {openModal === "change-password" &&
+                <ChangePassword
+                    onClose={() => {
+                        setOpenModal(false)
+                    }} />
+            }
+
+            {openModal === "setup-password" &&
+                <SetupPassword
                     onClose={() => {
                         setOpenModal(false)
                     }} />
