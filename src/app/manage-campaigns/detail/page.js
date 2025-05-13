@@ -75,7 +75,7 @@ export default function Detail() {
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mb-4">
                         <div className="text-sm text-secondary">Primary Email Template<span className="text-danger">*</span></div>
 
                         <SecondaryButton title="Template selection" class_="text-sm! font-normal!" />
