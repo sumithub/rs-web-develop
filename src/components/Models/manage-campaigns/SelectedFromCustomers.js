@@ -5,16 +5,18 @@ import TableOrder from '../../../components/TableOrder'
 import PaginationDemo from '../../../components/Pagination'
 import Checkbox from '../../../components/form/Checkbox'
 import Status from '../../Status'
+import Select from "../../form/Select"
 
 
 
 function SelectedCustomers({ onClose, onSave }) {
     return (
-        <Model onClose={onClose} title="schedule campaign" modalClass="w-[60%]!" modalBodyClass="max-h-[90vh]!">
-            <div>
-                <div className="flex items-center justify-between mb-3">
-                    <Search placeholder="Search by Filter by name, email, phone" />
-                    <SecondaryButton title="Add Selected"></SecondaryButton>
+        <Model onClose={onClose} title="select from Customer List" modalClass="w-[60%]!" modalBodyClass="max-h-[90vh]!">
+            <div className="flex items-center justify-between mb-3">
+                <Search placeholder="Search by Filter by name, email, phone" mainClass="w-1/2!" />
+                <div className="flex items-center gap-3">
+                    <Select defaultOption="Filters"></Select>
+                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal!" />
                 </div>
             </div>
 
