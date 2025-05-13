@@ -39,7 +39,7 @@ export default function Input({ isRequired, label, placeholder, labelClass, inpu
                 <input
                     placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
                     disabled={disabled}
-                    className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3.5 px-2.5 text-sm text-secondary ${inputClass}`}
+                    className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
                 />
             </div>
             {error && <p className="text-xs pt-[5px] capitalize text-danger">{error}</p>}

@@ -257,3 +257,11 @@ td {
   border-bottom: 1px solid #E6E6E6;
   background-color: white;
 }
+
+
+.slick-list,
+.slick-track,
+.slick-slide,
+.slick-slide>div:first-child {
+  height: 100% !important;
+}

@@ -31,9 +31,10 @@ export default function Signup() {
     return (<>
         <div>
             <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Sign Up</h2>
-            <p className="text-xs pt-2.5 pb-[25px] capitalize text-center text-[#616E7C]">Let&#39;s get you all st up so you can access your personal account.</p>
+            <p className="text-xs sm:pt-1.5 pt-2.5 pb-2.5 capitalize text-center text-[#616E7C]">Let&#39;s get you all st up so you can access your personal account.</p>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
+                    class_="mt-0!"
                     label="Full Name"
                     name="name"
                     inputType="text"
@@ -85,7 +86,7 @@ export default function Signup() {
                     watch={watch}
                 />
 
-                <label htmlFor="terms" className="mt-[15px] gap-1.5 flex items-center">
+                <label htmlFor="terms" className="mt-[10px] gap-1.5 flex items-center">
                     <Checkbox2
                         id="terms" />
                     <div className="text-sm text-secondary">
@@ -102,12 +103,12 @@ export default function Signup() {
                 <button
                     type="submit"
                     disabled={loading}
-                    className="disabled:bg-primary/50 text-text text-lg mt-5 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary"
+                    className="disabled:bg-primary/50 text-text text-lg mt-3 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary"
                 >
                     {loading ? "Creating Account..." : "Create Account"}
                 </button>
 
-                <h2 className="text-sm text-center mt-5 capitalize text-secondary">
+                <h2 className="text-sm text-center mt-3 capitalize text-secondary">
                     Already have an account?
                     <Link href="/login" className="text-primary underline underline-offset-[3px]">
                         {" "}
