@@ -6,7 +6,7 @@ import Select from '../../form/Select'
 import Image from 'next/image'
 
 function AddTemplate({ onClose }) {
-  return <Model onClose={onClose} title="Invite New User" modalBodyClass='max-h-[85vh]'>
+  return <Model onClose={onClose} title="Create Email Template" modalBodyClass='max-h-[85vh]'>
     <div className='flex items-start gap-4'>
 
       <div className='w-[60%]'>
