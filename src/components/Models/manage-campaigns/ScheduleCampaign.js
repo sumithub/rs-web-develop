@@ -13,16 +13,16 @@ function ScheduleCampaign({ onClose, onSave }) {
     <Model onClose={onClose} title="schedule campaign" modalClass="w-[60%]!">
       <div>
         <div className='grid grid-cols-2 gap-3'>
-          <DatePicker label='Date' />
-          <Input inputType='time' label='Time' />
+          <DatePicker label='Date' icon={true} />
+          <Input inputType='time' label='Time' inputClass='py-2!' />
         </div>
 
         <div>
-          <Input inputType='time' label='Time Zone' />
+          <Input inputType='time' label='Time Zone' inputClass='py-2!' />
         </div>
 
         <div>
-          <div>Preferred Sending Time</div>
+          <div className='text-secondary text-lg font-medium my-4'>Preferred Sending Time</div>
           <Radio label="Morning (8 AM - 12 PM)" />
           <Radio label="Afternoon (12 PM - 4 PM)" />
           <Radio label="Evening (4 PM - 8 PM)" />
@@ -30,7 +30,7 @@ function ScheduleCampaign({ onClose, onSave }) {
         </div>
 
         <div>
-          <div>Days of the Week</div>
+          <div className='text-lg font-medium my-3'>Days of the Week</div>
           <div className="flex items-start gap-2">
             <Checkbox />
             <div>Monday</div>
@@ -47,7 +47,7 @@ function ScheduleCampaign({ onClose, onSave }) {
             <Checkbox />
             <div>Sunday</div>
           </div>
-          
+
         </div>
         <div>
           <div className="grid grid-cols-2 gap-3 mt-3">
