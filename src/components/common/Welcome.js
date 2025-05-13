@@ -36,6 +36,8 @@ const Item = ({ }) => {
         imgName = "login"
     } else if (pathname === "/reset-password") {
         imgName = "reset-password"
+    } else if (pathname === "/forgot-password") {
+        imgName = "forgot-password"
     } else {
         imgName = "signup"
     }
