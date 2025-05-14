@@ -9,7 +9,7 @@ import PaginationDemo from '../../components/Pagination'
 import Status from '../../components/Status'
 import TableOrder from '../../components/TableOrder'
 import React, { useState } from 'react'
-import ScheduleCampaign from "../../components/Models/manage-campaigns/ScheduleCampaign"
+import Link from 'next/link'
 
 function ManageCampaigns() {
 
@@ -21,33 +21,9 @@ function ManageCampaigns() {
     // const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
-    const [open, setOpen] = useState(false)
 
     return (
         <AdminLayout>
-            {/* {open &&
-                <AddClient
-                    onClose={() => {
-                        setOpen(false)
-                    }}
-
-                    onSave={() => {
-                        setOpen(true)
-                    }}
-                />
-            } */}
-
-            {open &&
-                <ScheduleCampaign
-                    onClose={() => {
-                        setOpen(false)
-                    }}
-
-                    onSave={() => {
-                        setOpen(true)
-                    }}
-                />
-            }
 
             <div>
                 <div className="2xl:flex lg:flex-wrap justify-between items-center w-full mb-5">
@@ -103,9 +79,10 @@ function ManageCampaigns() {
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
                         />
-
-                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
-                            onClick={() => { setOpen(true) }}>Create campaign</button>
+                        <Link href="/manage-campaigns/detail">
+                            <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                            >Create campaign</button>
+                        </Link>
                     </div>
                 </div>
 

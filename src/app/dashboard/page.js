@@ -13,11 +13,10 @@ export default function Dashboard() {
             <Select defaultOption="Review Source">
             </Select>
             <Select
-
-                defaultOption="Star Rating">
+                defaultOption="Star Ratings">
             </Select>
-            <DatePicker
 
+            <DatePicker
                 icon={true}
             />
             <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50"><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>

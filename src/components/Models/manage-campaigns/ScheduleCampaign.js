@@ -8,7 +8,7 @@ import CancelButton from "../../../components/common/CancelButton"
 import SecondaryButton from "../../../components/common/SecondaryButton";
 
 
-function ScheduleCampaign({ onClose, onSave }) {
+function ScheduleCampaign({ onClose }) {
   return (
     <Model onClose={onClose} title="schedule campaign" modalClass="w-[60%]!">
       <div>

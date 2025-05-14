@@ -11,7 +11,7 @@ import Select from "../../form/Select"
 
 function SelectedCustomers({ onClose, onSave }) {
     return (
-        <Model onClose={onClose} title="select from Customer List" modalClass="w-[60%]!" modalBodyClass="max-h-[90vh]!">
+        <Model onClose={onClose} title="select from Customer List" modalClass="w-[60%]!" >
             <div className="flex items-center justify-between mb-3">
                 <Search placeholder="Search by Filter by name, email, phone" mainClass="w-1/2!" />
                 <div className="flex items-center gap-4">
@@ -20,7 +20,7 @@ function SelectedCustomers({ onClose, onSave }) {
                 </div>
             </div>
 
-            <div className="table-class">
+            <div className="table-class overflow-y-auto!">
                 <table className="w-full">
                     <thead>
                         <tr>

@@ -11,7 +11,7 @@ export default function CampaignDashboard() {
             <Select defaultOption="Review Source">
             </Select>
             <Select
-                defaultOption="Star Rating">
+                defaultOption="Star Ratings">
             </Select>
             <DatePicker
                 icon={true}
