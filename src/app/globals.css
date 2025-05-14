@@ -328,11 +328,3 @@ td {
 .rdrDefinedRangesWrapper .rdrInputRanges {
   display: none;
 }
-
-.editor {
-  position: relative;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  outline: none;
-
-}
