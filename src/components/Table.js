@@ -52,7 +52,6 @@ export default function Table() {
                         <td>300</td>
                         <td>123</td>
                     </tr>
-
                 </tbody>
             </table>
         </div>

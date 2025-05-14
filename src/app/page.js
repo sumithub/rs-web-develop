@@ -11,9 +11,6 @@ export default function Home() {
         <Link href="/change-email">Change Email</Link>
         <Link href="/verification-email">verification email </Link>
         <Link href="/verify-email">verify email </Link>
-        <Link href="/review">review</Link>
-        <Link href="/manage-campaigns/detail">manage campaigns Detail</Link>
-
       </div>
     </div>
   </>)

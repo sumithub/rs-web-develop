@@ -8,7 +8,7 @@ import CancelButton from "../../../components/common/CancelButton"
 import SecondaryButton from "../../../components/common/SecondaryButton";
 
 
-function ScheduleCampaign({ onClose, onSave }) {
+function ScheduleCampaign({ onClose }) {
   return (
     <Model onClose={onClose} title="schedule campaign" modalClass="w-[60%]!">
       <div>
@@ -23,15 +23,15 @@ function ScheduleCampaign({ onClose, onSave }) {
 
         <div>
           <div className='text-secondary text-lg font-medium my-4'>Preferred Sending Time</div>
-          <Radio label="Morning (8 AM - 12 PM)" />
-          <Radio label="Afternoon (12 PM - 4 PM)" />
-          <Radio label="Evening (4 PM - 8 PM)" />
+          <Radio label="Morning (8 AM - 12 PM)" inputClass='mb-2!' />
+          <Radio label="Afternoon (12 PM - 4 PM)" inputClass='mb-2!' />
+          <Radio label="Evening (4 PM - 8 PM)" inputClass='mb-2!' />
           <Radio label="Any Time (Let system decide)" />
         </div>
 
         <div>
-          <div className='text-lg font-medium my-3'>Days of the Week</div>
-          <div className="flex items-start gap-2">
+          <div className='text-lg font-medium mt-3 mb-4'>Days of the Week</div>
+          <div className="flex items-start gap-4">
             <Checkbox />
             <div>Monday</div>
             <Checkbox />

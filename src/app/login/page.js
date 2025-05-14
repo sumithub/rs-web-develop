@@ -6,6 +6,7 @@ import Verify from '../../components/form/Verify';
 import Checkbox2 from '../../components/form/Checkbox2';
 import Link from 'next/link';
 import Image from 'next/image';
+import SecondaryButton from '../../components/common/SecondaryButton';
 function LoginPage() {
   return (<>
     <AuthLayout>
@@ -46,6 +47,7 @@ function LoginPage() {
               <h2 className="text-xs text-danger capitalize">Invalid email or password. Please try again.</h2>
             </div>
             <button className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-2.5 py-3 rounded-[10px] border border-primary cursor-pointer">Login</button>
+
             <h2 className='text-sm capitalize text-secondary pt-2.5 text-center'>Don&#39;t have an account? <Link href="/register" className='text-primary underline underline-offset-3'>Sign Up</Link></h2>
           </div>
         </div>

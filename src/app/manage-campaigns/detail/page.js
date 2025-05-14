@@ -1,5 +1,6 @@
+"use client"
 import AdminLayout from "../../../components/AdminLayout"
-import ProgressBar from "../../../components/ProgressBar"
+import ProgressBar from "../../../components/common/Progress"
 import CancelButton from "../../../components/common/CancelButton"
 import SecondaryButton from "../../../components/common/SecondaryButton"
 import Input from "../../../components/form/Input"
@@ -7,11 +8,59 @@ import CampaignCard from "../../../components/CampaignCard"
 import Select from "../../../components/form/Select"
 import Radio from "../../../components/form/Radio"
 import Checkbox from "../../../components/form/Checkbox"
+import ScheduleCampaign from "../../../components/Models/manage-campaigns/ScheduleCampaign"
+import SelectedFromCustomers from "../../../components/Models/manage-campaigns/SelectedFromCustomers"
+import EmailTemplate from "../../../components/Models/manage-campaigns/EmailTemplate"
 import Image from "next/image"
+import { useState } from "react"
 
 export default function Detail() {
+    const [openSchedule, setOpenSchedule] = useState(false)
+    const [openCustomer, setOpenCustomer] = useState(false)
+    const [openEmail, setOpenEmail] = useState(false)
+
     return <AdminLayout>
-        <ProgressBar />
+
+        {openSchedule &&
+            <ScheduleCampaign
+                onClose={() => {
+                    setOpenSchedule(false)
+                }}
+
+                onSave={() => {
+                    setOpenSchedule(true)
+                }}
+            />
+        }
+
+        {openCustomer &&
+            <SelectedFromCustomers
+                onClose={() => {
+                    setOpenCustomer(false)
+                }}
+
+                onSave={() => {
+                    setOpenCustomer(true)
+                }} />
+        }
+
+        {openEmail &&
+            <EmailTemplate
+                onClose={() => {
+                    setOpenEmail(false)
+                }}
+
+                onSave={() => {
+                    setOpenEmail(true)
+                }} />
+        }
+        <ProgressBar
+            totalSteps={4}
+            stepTitle1="Campaign Details"
+            stepTitle2="Customer Selection"
+            stepTitle3="Template Selection"
+            stepTitle4="Scheduling & Launch"
+        />
         <div className="">
             <div className="flex items-center justify-between mb-4">
                 <div className="text-secondary text-xl font-medium">Create New Campaign</div>
@@ -23,14 +72,13 @@ export default function Detail() {
 
             <div>
                 <CampaignCard title="Campaign Details" status="Active">
-                    <hr className="border-b border-border-color my-2" />
                     <div className="grid grid-cols-2 gap-3">
                         <Input label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!" />
                         <div>
-                            <div className="text-sm text-secondary font-medium capitalize mt-3 mb-2">Description</div>
+                            <div className="text-sm text-secondary font-medium capitalize mt-3 mb-1">Description</div>
                             <textarea
                                 placeholder="Write a content post"
-                                rows={1} className="rounded text-sm bg-white  w-full focus:border-primary focus:outline-0 focus-visible:outline-0 py-3.5 px-2.5 text-sm text-secondary! rounded-lg" />
+                                rows={1} className="bg-white  w-full focus:border-primary focus:outline-0 focus-visible:outline-0 py-3.5 px-2.5 text-sm text-secondary! rounded-lg" />
                         </div>
                     </div>
                 </CampaignCard>
@@ -38,10 +86,9 @@ export default function Detail() {
 
             <div>
                 <CampaignCard title="Targeting" status="Active">
-                    <hr className="border-b border-border-color my-2" />
                     <div className="flex items-center justify-between">
                         <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
-                        <SecondaryButton title="Add Customers" class_="text-sm! font-normal!" />
+                        <SecondaryButton title="Add Customers" class_="text-sm! font-normal!" onClick={() => { setOpenCustomer(true) }} />
                     </div>
                     <div>
                         <div className="flex items-center justify-between">
@@ -66,20 +113,19 @@ export default function Detail() {
 
             <div>
                 <CampaignCard title="Template Selection" status="Active">
-                    <hr className="border-b border-border-color my-2" />
                     <div className="flex gap-3 my-4">
                         <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
                         <div className="flex">
-                            <Radio label="Email" inputClass="mb-0!" labelClass="font-normal!" />
-                            <Radio label="SMS" inputClass="mb-0!" labelClass="font-normal!" />
-                            <Radio label="Both" inputClass="mb-0!" labelClass="font-normal!" />
+                            <Radio label="Email" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
+                            <Radio label="SMS" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
+                            <Radio label="Both" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
                         </div>
                     </div>
 
                     <div className="flex items-center justify-between mb-4">
                         <div className="text-sm text-secondary">Primary Email Template<span className="text-danger">*</span></div>
 
-                        <SecondaryButton title="Template selection" class_="text-sm! font-normal!" />
+                        <SecondaryButton title="Template selection" class_="text-sm! font-normal!" onClick={() => { setOpenEmail(true) }} />
                     </div>
 
                     <div className="bg-white p-3 rounded-lg">
@@ -162,21 +208,24 @@ export default function Detail() {
 
             <div>
                 <CampaignCard title="Scheduling & Launch" status="Active">
-                    <hr className="border-b border-border-color my-2" />
                     <div className="grid grid-cols-2 gap-3">
                         <Input label="Time Zone" isRequired={true} inputClass="bg-white!" />
-                        <Select label="Send Time" isRequired={true} defaultOption="morning (8 AM - 12 PM)" selectClass_="bg-white! py-3! focus:border-primary/60!"></Select>
+                        <Select label="Send Time" isRequired={true} selectClass_="bg-white! py-3! focus:border-primary/60!">
+                            <option value="">morning (8 AM - 12 PM)</option>
+                            <option value="">afternoon (12 PM - 4 PM)</option>
+                            <option value="">evening (4 PM - 8 PM)</option>
+                            <option value="">any time</option>
+                        </Select>
                     </div>
 
                     <Select label="Weekend Delivery" defaultOption="Restrict" selectClass_="bg-white! py-3! focus:border-primary/60!"></Select>
-
 
                 </CampaignCard>
             </div>
 
             <div className="grid grid-cols-3 gap-3 mt-7">
                 <SecondaryButton title="Save as Draft" />
-                <SecondaryButton title="Schedule for Later" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
+                <SecondaryButton title="Schedule for Later" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => { setOpenSchedule(true) }} />
                 <CancelButton title="Launch Now" />
             </div>
         </div>

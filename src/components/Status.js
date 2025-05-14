@@ -27,7 +27,7 @@ export default function Status({ status }) {
         bgClass = "bg-[#FFC1071A] text-primary"
     }
     else if (s === "at risk") {
-        bgClass = "bg-[#FFC1071A] text-[#ff0000]"
+        bgClass = "bg-[#ff00001A] text-[#ff0000]"
     }
 
     return <div>
