@@ -8,9 +8,11 @@ import Select from "../../../components/form/Select"
 import Radio from "../../../components/form/Radio"
 import Checkbox from "../../../components/form/Checkbox"
 import Image from "next/image"
+import HtmlEditor from "../../../components/form/editor/HtmlEditor"
 
 export default function Detail() {
     return <AdminLayout>
+        <HtmlEditor />
         <ProgressBar
             stepTitle1="Campaign Details"
             stepTitle2="Customer Selection"
