@@ -4,21 +4,18 @@ import DashboardChart from "../../components/DashboardChart"
 import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
 import Select from "../../components/form/Select";
-import DatePicker from "../../components/form/DatePicker";
+import DateRange from "../../components/form/DateRangePicker";
 
 export default function Dashboard() {
     return <AdminLayout
+        noCard={true}
         headerChild={<div className="grid grid-cols-4 gap-3 justify-end items-end">
             <Select defaultOption="Review Source">
             </Select>
             <Select
-
-                defaultOption="Star Rating">
+                defaultOption="Star Ratings">
             </Select>
-            <DatePicker
-
-                icon={true}
-            />
+            <DateRange />
             <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50"><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
         </div>}
     >

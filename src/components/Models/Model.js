@@ -42,9 +42,9 @@ export default function Model({ id = "", showHeader = true, customHeader = false
 
             <div className="flex items-center justify-center md:items-center p-4 md:p-0 w-full">
 
-                <div ref={ref} className={`${modalClass} h-full relative transform overflow-y-hidden rounded-3xl bg-white text-left shadow-xl transition-all md:w-full w-[90%] 2xl:max-w-7xl xl:max-w-[85%] max-w-[90%]`}>
+                <div ref={ref} className={`${modalClass} h-full relative transform overflow-y-hidden rounded-[10px] bg-white text-left shadow-xl transition-all md:w-full w-[90%] 2xl:max-w-7xl xl:max-w-[85%] max-w-[90%]`}>
 
-                    {showHeader ? <div className={`flex justify-between items-center rounded-t-3xl z-50 md:px-6 px-3 py-4 sticky top-0 bg-[#6FC3FF1a] ${modelHeaderClass}`}>
+                    {showHeader ? <div className={`flex justify-between items-center rounded-t-[10px] z-50 md:px-6 px-3 py-4 sticky top-0 bg-[#6FC3FF1a] ${modelHeaderClass}`}>
                         <p className="capitalize font-semibold text-lg">{title || ""}</p>
                         {closeButton && <div onClick={() => { onClose() }} className="cursor-pointer">
                             <Image src="/images/close1.svg" alt="close" height={24} width={24} unoptimized={true} />
@@ -54,7 +54,7 @@ export default function Model({ id = "", showHeader = true, customHeader = false
                             <Image src="/images/danger-close.svg" alt="close" height={24} width={24} unoptimized={true} />
                         </div>}
 
-                    </div> : (customHeader ? <div className={`flex justify-between items-center rounded-t-3xl z-50 md:px-6 px-3 py-8 sticky top-0 bg-card ${modelHeaderClass}`}>
+                    </div> : (customHeader ? <div className={`flex justify-between items-center rounded-t-[10px] z-50 md:px-6 px-3 py-8 sticky top-0 bg-card ${modelHeaderClass}`}>
                         {customHeader}
 
                     </div> : "")}

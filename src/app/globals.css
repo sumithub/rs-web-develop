@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@source "../../src";
 
 :root {
   --primary: #0396FF;
@@ -196,7 +195,7 @@ body {
 
 .ldio-x2uulkbinbj>div div:nth-child(2) {
   transform: rotate(0deg) translate(12.69px, 12.69px);
-  ;
+
 }
 
 .ldio-x2uulkbinbj>div div:nth-child(3) {
@@ -264,4 +263,68 @@ td {
 .slick-slide,
 .slick-slide>div:first-child {
   height: 100% !important;
+}
+
+.line {
+  width: 200px;
+  height: 2px;
+  background: #E8EEF2;
+}
+
+.steps {
+  position: relative;
+  display: flex;
+  font-size: 14px;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2.5px solid var(--text3);
+  cursor: pointer;
+  color: var(--text3);
+}
+
+.steps .step-title {
+  color: var(--secondary);
+  position: absolute;
+  width: max-content;
+  top: 100%;
+  font-size: 14px;
+  margin-top: 8px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.steps.active {
+  background: var(--primary);
+  border: 2.5px solid var(--primary);
+  color: white;
+}
+
+.steps.active .step-title {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.line.active {
+  background: var(--primary);
+}
+
+.completed .line {
+  background: var(--success);
+}
+
+.completed .steps {
+  background-color: var(--success);
+  border: 2.5px solid var(--success);
+}
+
+.completed .steps .line,
+.completed .steps .step-title {
+  color: var(--success);
+}
+
+.rdrDefinedRangesWrapper .rdrInputRanges {
+  display: none;
 }
