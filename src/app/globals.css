@@ -292,13 +292,14 @@ td {
   font-weight: 500;
   margin-top: 8px;
   text-transform: capitalize;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .steps.active {
   background: #28A745;
   border: 2.5px solid #28A745 !important;
   color: white;
+  cursor: pointer;
 }
 
 .steps.active .step-title {
@@ -306,5 +307,5 @@ td {
 }
 
 .line.active {
-  background: #1F2933;
+  background: red;
 }

@@ -1,5 +1,5 @@
 import AdminLayout from "../../../components/AdminLayout"
-import ProgressBar from "../../../components/ProgressBar"
+import ProgressBar from "../../../components/common/Progress"
 import CancelButton from "../../../components/common/CancelButton"
 import SecondaryButton from "../../../components/common/SecondaryButton"
 import Input from "../../../components/form/Input"
