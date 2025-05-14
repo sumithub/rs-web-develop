@@ -1,5 +1,5 @@
 import AdminLayout from "../../../components/AdminLayout"
-import ProgressBar from "../../../components/ProgressBar"
+import ProgressBar from "../../../components/common/Progress"
 import CancelButton from "../../../components/common/CancelButton"
 import SecondaryButton from "../../../components/common/SecondaryButton"
 import Input from "../../../components/form/Input"
@@ -11,7 +11,12 @@ import Image from "next/image"
 
 export default function Detail() {
     return <AdminLayout>
-        <ProgressBar />
+        <ProgressBar
+            stepTitle1="Campaign Details"
+            stepTitle2="Customer Selection"
+            stepTitle3="Template Selection"
+            stepTitle4="Scheduling & Launch"
+        />
         <div className="">
             <div className="flex items-center justify-between mb-4">
                 <div className="text-secondary text-xl font-medium">Create New Campaign</div>
