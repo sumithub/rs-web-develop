@@ -126,8 +126,10 @@ function ManageCampaigns() {
                                 setChangeStatus(e.target.value)
                             }}>
                             <option value="draft">Draft</option>
-                            <option value="delete">Delete</option>
-                            <option value="draft">Draft</option>
+                            <option value="scheduled">Scheduled</option>
+                            <option value="active">Active</option>
+                            <option value="completed">Completed</option>
+                            <option value="paused">Paused</option>
                         </Select>
 
                         <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'>Bulk Edit</button>
