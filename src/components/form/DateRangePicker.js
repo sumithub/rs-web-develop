@@ -27,15 +27,16 @@ function DateRange() {
         </button>
 
         {open &&
-            <div className='absolute top-full right-0'><DateRangePicker
-                showDateDisplay={false}
-                onChange={item => setState([item.selection])}
-                showSelectionPreview={true}
-                moveRangeOnFirstSelection={false}
-                months={2}
-                ranges={state}
-                direction="horizontal"
-            />
+            <div className='overflow-hidden absolute top-full right-0 border border-dark rounded-lg shadow-[0px_0px_40px_rgba(0,_0,_0,_0.08)]'>
+                <DateRangePicker
+                    showDateDisplay={false}
+                    onChange={item => setState([item.selection])}
+                    showSelectionPreview={true}
+                    moveRangeOnFirstSelection={false}
+                    months={2}
+                    ranges={state}
+                    direction="horizontal"
+                />
             </div>}
     </div>)
 }
