@@ -77,7 +77,7 @@ const MenuItem = ({ i, e, submenu }) => {
                     const isActive = (pathname === sub.link || pathname === (sub.link + "/[id]"))
                     return <li key={i} className="ml-[44px] relative">
                         <div className={`absolute w-10 h-full bg-transparent -top-1/2 -left-3 border-l border-[#24222029] ${i === (submenu.length - 1) ? "rounded-b-md" : ""}`}>
-                            <Image src='/sidebar-icons/side-line.svg' height={100} width={20} className="h-full w-auto -ml-[1px]" />
+                            <Image src='/sidebar-icons/side-line.svg' alt="" height={100} width={20} className="h-full w-auto -ml-[1px]" />
                         </div>
                         <Link href={sub.link}
                             className={`${isActive ? "bg-primary/5 text-secondary font-semibold" : "text-text3 font-medium"} hover:bg-primary/5 hover:text-secondary hover:font-semibold relative flex items-center px-2 py-3 text-sm rounded-[10px]`}>
