@@ -10,6 +10,8 @@ export default function DeleteModal({ onClose, title = "user" }) {
 
         {/* <DeleteUser title="remove user confirmation" question="Are You Sure you want to Remove this user permanently?" /> */}
 
+        <DeleteTag title="Delete Tag" question="Are you sure you want to delete the tag At Risk? This action cannot be undone." />
+
         <div className="grid grid-cols-2 gap-3 mt-5">
             <CancelButton title="Cancel" class_="border-danger2! bg-white! text-danger2!" />
             <SecondaryButton title="Remove permanently" />
@@ -18,6 +20,13 @@ export default function DeleteModal({ onClose, title = "user" }) {
 }
 
 const DeleteUser = ({ title, question }) => {
+    return <div className="flex flex-col items-center justify-center gap-y-4">
+        <Image src="/images/b-delete.svg" alt="delete" height={60} width={60} />
+        <div className="text-xl text-danger2 font-semibold capitalize">{title}</div>
+        <div className="text-sm text-text3 capitalize">{question}</div>
+    </div>
+}
+const DeleteTag = ({ title, question }) => {
     return <div className="flex flex-col items-center justify-center gap-y-4">
         <Image src="/images/b-delete.svg" alt="delete" height={60} width={60} />
         <div className="text-xl text-danger2 font-semibold capitalize">{title}</div>

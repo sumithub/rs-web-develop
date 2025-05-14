@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Input({ isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", error, icon, disabled, iconClass = "", class_ = "" }) {
+export default function Input({isTextArea,rows=3, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", error, icon, disabled, iconClass = "", class_ = "" }) {
     const [type, setType] = useState("password")
 
     const handleClick = () => {
@@ -36,11 +36,14 @@ export default function Input({ isRequired, label, placeholder, labelClass, inpu
                         className={`absolute cursor-pointer top-4 right-2.5 "w-6 h-6"`}
                         onClick={handleClick} />
                 )}
-                <input
+               {isTextArea? <textarea rows={rows}
+                    placeholder={placeholder} disabled={disabled}
+                    className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
+                />: <input
                     placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
                     disabled={disabled}
                     className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
-                />
+                />}
             </div>
             {error && <p className="text-xs pt-[5px] capitalize text-danger">{error}</p>}
         </div>

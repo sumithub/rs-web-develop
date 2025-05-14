@@ -7,7 +7,10 @@ import { usePathname } from "next/navigation";
 export default function Sidebar() {
     const list = [
         { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
-        { title: "Customers", link: "/campaigns", icon: "customer", submenu: [{ title: "User Management", link: "/users" }] },
+        {
+            title: "Customers", link: "/campaigns", icon: "customer",
+            submenu: [{ title: "User Management", link: "/users" }, { title: "Manage Customers", link: "/customers" },{ title: "Customer Tagging", link: "/customer-tagging" }]
+        },
         {
             title: "Reviews", link: "/reviews", icon: "message",
             submenu: [{ title: "Manage Reviews", link: "/review" }]

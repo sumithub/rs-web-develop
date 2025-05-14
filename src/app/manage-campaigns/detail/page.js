@@ -33,12 +33,9 @@ export default function Detail() {
                     <hr className="border-b border-border-color my-2" />
                     <div className="grid grid-cols-2 gap-3">
                         <Input label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!" />
-                        <div>
-                            <div className="text-sm text-secondary font-medium capitalize mt-3 mb-2">Description</div>
-                            <textarea
-                                placeholder="Write a content post"
-                                rows={1} className="rounded text-sm bg-white  w-full focus:border-primary focus:outline-0 focus-visible:outline-0 py-3.5 px-2.5 text-sm text-secondary! rounded-lg" />
-                        </div>
+                        <Input label="Description" placeholder="" inputClass="bg-white!" />
+                       
+                       
                     </div>
                 </CampaignCard>
             </div>
