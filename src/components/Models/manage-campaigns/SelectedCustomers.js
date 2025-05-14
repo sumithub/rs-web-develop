@@ -7,7 +7,7 @@ import Checkbox from '../../../components/form/Checkbox'
 
 function SelectedCustomers({ onClose }) {
     return (
-        <Model onClose={onClose} title="schedule campaign" modalClass="w-[60%]!" modalBodyClass="max-h-[90vh]!">
+        <Model onClose={onClose} title="Selected Customers" modalClass="w-[60%]!" modalBodyClass="max-h-[90vh]!">
             <div>
                 <div className="flex items-center justify-between mb-3">
                     <Search placeholder="Search by Filter by name, email, phone" mainClass="w-1/2!" />

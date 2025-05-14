@@ -65,8 +65,10 @@ function ManageCampaigns() {
                             onChange={(e) => {
                                 setSortBy(e.target.value)
                             }}>
-                            <option value="name">Name</option>
-                            <option value="status">Status</option>
+                            <option value="campaign ame">Campaign Name</option>
+                            <option value="date">date</option>
+                            <option value="customers count">Customers Count</option>
+                            <option value="status">status</option>
                         </Select>
 
                         <Select
@@ -76,8 +78,8 @@ function ManageCampaigns() {
                             onChange={(e) => {
                                 setType(e.target.value)
                             }}>
-                            <option value="type 1">Type 1</option>
-                            <option value="type 2">Type 2</option>
+                            <option value="industry">Industry</option>
+                            <option value="template">Template</option>
                         </Select>
 
                         <Select
@@ -88,8 +90,10 @@ function ManageCampaigns() {
                                 setStatus(e.target.value)
                             }}>
                             <option value="draft">Draft</option>
-                            <option value="delete">Delete</option>
-                            <option value="draft">Draft</option>
+                            <option value="scheduled">Scheduled</option>
+                            <option value="active">Active</option>
+                            <option value="completed">Completed</option>
+                            <option value="paused">Paused</option>
                         </Select>
 
                         <DatePicker
