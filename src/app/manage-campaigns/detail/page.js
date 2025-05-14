@@ -11,7 +11,12 @@ import Image from "next/image"
 
 export default function Detail() {
     return <AdminLayout>
-        <ProgressBar />
+        <ProgressBar
+            stepTitle1="Campaign Details"
+            stepTitle2="Customer Selection"
+            stepTitle3="Template Selection"
+            stepTitle4="Scheduling & Launch"
+        />
         <div className="">
             <div className="flex items-center justify-between mb-4">
                 <div className="text-secondary text-xl font-medium">Create New Campaign</div>
@@ -23,14 +28,13 @@ export default function Detail() {
 
             <div>
                 <CampaignCard title="Campaign Details" status="Active">
-                    <hr className="border-b border-border-color my-2" />
                     <div className="grid grid-cols-2 gap-3">
                         <Input label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!" />
                         <div>
-                            <div className="text-sm text-secondary font-medium capitalize mt-3 mb-2">Description</div>
+                            <div className="text-sm text-secondary font-medium capitalize mt-3 mb-1">Description</div>
                             <textarea
                                 placeholder="Write a content post"
-                                rows={1} className="rounded text-sm bg-white  w-full focus:border-primary focus:outline-0 focus-visible:outline-0 py-3.5 px-2.5 text-sm text-secondary! rounded-lg" />
+                                rows={1} className="bg-white  w-full focus:border-primary focus:outline-0 focus-visible:outline-0 py-3.5 px-2.5 text-sm text-secondary! rounded-lg" />
                         </div>
                     </div>
                 </CampaignCard>
@@ -38,7 +42,6 @@ export default function Detail() {
 
             <div>
                 <CampaignCard title="Targeting" status="Active">
-                    <hr className="border-b border-border-color my-2" />
                     <div className="flex items-center justify-between">
                         <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
                         <SecondaryButton title="Add Customers" class_="text-sm! font-normal!" />
@@ -66,7 +69,6 @@ export default function Detail() {
 
             <div>
                 <CampaignCard title="Template Selection" status="Active">
-                    <hr className="border-b border-border-color my-2" />
                     <div className="flex gap-3 my-4">
                         <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
                         <div className="flex">
@@ -162,7 +164,6 @@ export default function Detail() {
 
             <div>
                 <CampaignCard title="Scheduling & Launch" status="Active">
-                    <hr className="border-b border-border-color my-2" />
                     <div className="grid grid-cols-2 gap-3">
                         <Input label="Time Zone" isRequired={true} inputClass="bg-white!" />
                         <Select label="Send Time" isRequired={true} defaultOption="morning (8 AM - 12 PM)" selectClass_="bg-white! py-3! focus:border-primary/60!"></Select>

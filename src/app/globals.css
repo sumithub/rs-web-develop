@@ -264,3 +264,47 @@ td {
 .slick-slide>div:first-child {
   height: 100% !important;
 }
+
+.line {
+  width: 200px;
+  height: 2px;
+  background: #D9D9D9 !important;
+}
+
+.steps {
+  position: relative;
+  display: flex;
+  font-size: 14px;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2.5px solid #ADADAD !important;
+}
+
+.steps .step-title {
+  color: #1F2933;
+  position: absolute;
+  width: max-content;
+  top: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 8px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.steps.active {
+  background: #28A745;
+  border: 2.5px solid #28A745 !important;
+  color: white;
+}
+
+.steps.active .step-title {
+  color: #28A745;
+}
+
+.line.active {
+  background: #1F2933;
+}

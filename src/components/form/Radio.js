@@ -1,7 +1,7 @@
 "use client"
-export default function Radio({ disabled = false, label, checked, labelClass = "", inputClass = "", class_ = "", name, onChange, value }) {
-    return (<div className={`text-sm ${class_}`}>
-        <label className="flex items-center gap-2 cursor-pointer">
+export default function Radio({ disabled = false, label, checked, labelClass = "", inputClass = "", class_ = "", name, onChange, value, mainClass = "" }) {
+    return (<div className={`text-sm mt-4 ${class_}`}>
+        <label className={`flex items-center gap-2 cursor-pointer ${mainClass}`}>
             <input
                 disabled={disabled}
                 onChange={(e) => {
