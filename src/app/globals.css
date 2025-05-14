@@ -324,3 +324,7 @@ td {
 .completed .steps .step-title {
   color: var(--success);
 }
+
+.rdrDefinedRangesWrapper .rdrInputRanges {
+  display: none;
+}
