@@ -1,5 +1,5 @@
 import AdminLayout from "../../../components/AdminLayout"
-import ProgressBar from "../../../components/ProgressBar"
+import ProgressBar from "../../../components/common/Progress"
 import CancelButton from "../../../components/common/CancelButton"
 import SecondaryButton from "../../../components/common/SecondaryButton"
 import Input from "../../../components/form/Input"
@@ -8,10 +8,17 @@ import Select from "../../../components/form/Select"
 import Radio from "../../../components/form/Radio"
 import Checkbox from "../../../components/form/Checkbox"
 import Image from "next/image"
+import HtmlEditor from "../../../components/form/editor/HtmlEditor"
 
 export default function Detail() {
     return <AdminLayout>
-        <ProgressBar />
+        <HtmlEditor />
+        <ProgressBar
+            stepTitle1="Campaign Details"
+            stepTitle2="Customer Selection"
+            stepTitle3="Template Selection"
+            stepTitle4="Scheduling & Launch"
+        />
         <div className="">
             <div className="flex items-center justify-between mb-4">
                 <div className="text-secondary text-xl font-medium">Create New Campaign</div>
