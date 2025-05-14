@@ -268,7 +268,7 @@ td {
 .line {
   width: 200px;
   height: 2px;
-  background: #D9D9D9 !important;
+  background: #E8EEF2;
 }
 
 .steps {
@@ -280,32 +280,47 @@ td {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 2.5px solid #ADADAD !important;
+  border: 2.5px solid var(--text3);
+  cursor: pointer;
+  color: var(--text3);
 }
 
 .steps .step-title {
-  color: #1F2933;
+  color: var(--secondary);
   position: absolute;
   width: max-content;
   top: 100%;
   font-size: 14px;
-  font-weight: 500;
   margin-top: 8px;
   text-transform: capitalize;
   font-weight: 500;
 }
 
 .steps.active {
-  background: #28A745;
-  border: 2.5px solid #28A745 !important;
+  background: var(--primary);
+  border: 2.5px solid var(--primary);
   color: white;
-  cursor: pointer;
 }
 
 .steps.active .step-title {
-  color: #28A745;
+  color: var(--primary);
+  font-weight: 500;
 }
 
 .line.active {
-  background: red;
+  background: var(--primary);
+}
+
+.completed .line {
+  background: var(--success);
+}
+
+.completed .steps {
+  background-color: var(--success);
+  border: 2.5px solid var(--success);
+}
+
+.completed .steps .line,
+.completed .steps .step-title {
+  color: var(--success);
 }
