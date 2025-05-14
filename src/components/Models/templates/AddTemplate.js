@@ -4,6 +4,7 @@ import Input from '../../form/Input'
 import Model from '../Model'
 import Select from '../../form/Select'
 import Image from 'next/image'
+import HtmlEditor from "../../form/editor/HtmlEditor"
 
 function AddTemplate({ onClose }) {
   return <Model onClose={onClose} title="Create Email Template" modalBodyClass='max-h-[85vh]'>
@@ -26,10 +27,14 @@ function AddTemplate({ onClose }) {
             <Input label="Sender Email" isRequired={true} placeholder="Enter Sender Email" />
           </div>
 
-          <div className="text-sm text-secondary font-medium capitalize mt-3 mb-2">email body</div>
+          <div className='mt-5'>
+            <HtmlEditor label="Email Body" />
+          </div>
+
+          {/* <div className="text-sm text-secondary font-medium capitalize mt-3 mb-2">email body</div>
           <textarea
             required={true}
-            rows={15} className="rounded text-text3 text-sm border border-color w-full focus-visible:outline-none p-3" />
+            rows={15} className="rounded text-text3 text-sm border border-color w-full focus-visible:outline-none p-3" /> */}
 
           <div className="grid grid-cols-3 gap-3 mt-5">
             <CancelButton title="clone template" />
