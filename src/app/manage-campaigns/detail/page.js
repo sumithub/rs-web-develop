@@ -12,6 +12,7 @@ import Image from "next/image"
 export default function Detail() {
     return <AdminLayout>
         <ProgressBar
+            totalSteps={4}
             stepTitle1="Campaign Details"
             stepTitle2="Customer Selection"
             stepTitle3="Template Selection"
