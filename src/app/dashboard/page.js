@@ -3,12 +3,25 @@ import Table from "../../components/Table";
 import DashboardChart from "../../components/DashboardChart"
 import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
+import Select from "../../components/form/Select";
+import DateRange from "../../components/form/DateRangePicker";
 
 export default function Dashboard() {
-    return <AdminLayout>
-        <div className="bg-light min-h-[calc(100dvh_-_85px)] mt-[85px]">
+    return <AdminLayout
+        noCard={true}
+        headerChild={<div className="grid grid-cols-4 gap-3 justify-end items-end">
+            <Select defaultOption="Review Source">
+            </Select>
+            <Select
+                defaultOption="Star Ratings">
+            </Select>
+            <DateRange />
+            <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50"><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
+        </div>}
+    >
+        <div className="bg-light min-h-[calc(100dvh_-_85px)]">
             <div className="grid grid-cols-4 gap-5">
-                <DashboardCard title="total reviews" count="1.234" img="/images/sent.svg" bgClass="bg-primary" textColor="text-primary" icon="/images/course-up.svg" percentage="2.5%" bgImage="bg-[url('/images/total.png')]" />
+                <DashboardCard title="total reviews" count="1.234" img="/images/sms-star.svg" bgClass="bg-primary" textColor="text-primary" icon="/images/course-up.svg" percentage="2.5%" bgImage="bg-[url('/images/total.png')]" />
 
                 <DashboardCard title="Average Rating" count="68%" img="/images/star1.svg" bgClass="bg-success-light" textColor="text-success-light" icon="/images/course-up1.svg" percentage="8.2%" bgImage="bg-[url('/images/average.png')]" />
 
@@ -17,14 +30,13 @@ export default function Dashboard() {
                 <DashboardCard title="Active Campaigns" count="20%" img="/images/sms-star.svg" bgClass="bg-custom-yellow" textColor="text-custom-yellow!" icon="/images/course-up1.svg" percentage="8.2%" bgImage="bg-[url('/images/active.png')]" />
             </div>
             <div className="grid grid-cols-2 gap-5 mt-5 items-start">
-                <DashboardChart title="Review Count & Average Over Time">
-                    <div><Image src="/images/graph.png" alt="graph" height={235} width={509} className="w-full object-contain mt-5" /></div>
+                <DashboardChart title="Review Count & Average Over Time" imgName="/images/graph.png" alt="Review" height={235} width={509} class_="w-full object-contain mt-5">
                 </DashboardChart>
 
                 <DashboardChart title="Review Rating Distribution">
                     <div className="flex items-start">
                         <div className="w-[60%]">
-                            <Image src="/images/main-chart.png" alt="chart" height={235} width={283} className="object-contain w-full" />
+                            <Image src="/images/layer.png" alt="chart" height={235} width={283} className="object-contain w-full" />
                         </div>
                         <div className="mt-10 w-[40%]">
                             <div className="flex items-center gap-3 mb-2">
@@ -65,12 +77,10 @@ export default function Dashboard() {
                     </div>
                 </DashboardChart>
 
-                <DashboardChart title="Sentiment Trend">
-                    <Image src="/images/graph1.png" alt="graph" height={366} width={656} className="w-full" />
+                <DashboardChart title="Sentiment Trend" imgName="/images/graph1.png" alt="Sentiment" height={366} width={656} class_="w-full">
                 </DashboardChart>
 
-                <DashboardChart title="Top Review Sources">
-                    <Image src="/images/graph2.png" alt="graph" height={239} width={509} className="w-full h-auto object-contain" />
+                <DashboardChart title="Top Review Sources" imgName="/images/graph2.png" alt="Top Review" height={239} width={509} class_="w-full h-auto object-contain">
                 </DashboardChart>
             </div>
             <div>

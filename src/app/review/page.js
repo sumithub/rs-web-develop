@@ -33,7 +33,7 @@ export default function Review() {
         { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Flagged" },
     ]
 
-    return <AdminLayout >
+    return <AdminLayout noCard={true}>
 
         <div className="bg-light min-h-[calc(100dvh_-_85px)] mt-[85px]">
             <div className="grid grid-cols-3 gap-4">
@@ -188,6 +188,7 @@ export default function Review() {
                     </div> */}
 
                     <Search
+                        placeholder="Search by customer name, review content, or source."
                         onSearch={(s) => {
                             setSearch(s)
                         }}
@@ -237,13 +238,13 @@ export default function Review() {
                             <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
                         </button>
 
-                        <button className="bg-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50">Create Manual Review</button>
+                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50">Create Manual Review</button>
                     </div>
                 </div>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 mt-5">
                     <div className="flex items-start justify-center gap-2 mt-1">
                         <Checkbox />
-                        <div className="text-text3 text-sm capitalize">Select all</div>
+                        <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
                     </div>
                 </div>
 
