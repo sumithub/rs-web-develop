@@ -15,6 +15,7 @@ import Loading from "../../components/Loading";
 import Pagination from "../../components/Pagination"
 import Chart from "../../components/Chart"
 import AdminLayout from "../../components/AdminLayout"
+import AddManualReview from '../../components/Models/review/AddManualReview'
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -24,6 +25,7 @@ export default function Review() {
     // const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
+    const [open, setOpen] = useState(false)
 
     const list = [
         { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "New" },
@@ -34,6 +36,18 @@ export default function Review() {
     ]
 
     return <AdminLayout noCard={true}>
+
+        {open &&
+            <AddManualReview
+                onClose={() => {
+                    setOpen(false)
+                }}
+
+                onSave={() => {
+                    setOpen(true)
+                }}
+            />
+        }
 
         <div className="bg-light min-h-[calc(100dvh_-_85px)] mt-[85px]">
             <div className="grid grid-cols-3 gap-4">
@@ -238,7 +252,8 @@ export default function Review() {
                             <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
                         </button>
 
-                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50">Create Manual Review</button>
+                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                            onClick={() => { setOpen(true) }}>Add Manual Review</button>
                     </div>
                 </div>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 mt-5">
