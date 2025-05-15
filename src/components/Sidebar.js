@@ -9,13 +9,20 @@ export default function Sidebar() {
         { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
         {
             title: "Customers", link: "/campaigns", icon: "customer",
-            submenu: [{ title: "User Management", link: "/users" }, { title: "Manage Customers", link: "/customers" },{ title: "Customer Tagging", link: "/customer-tagging" }]
+            submenu: [{ title: "User Management", link: "/users" }, { title: "Manage Customers", link: "/customers" }, { title: "Customer Tagging", link: "/customer-tagging" }]
         },
         {
             title: "Reviews", link: "/reviews", icon: "message",
             submenu: [{ title: "Manage Reviews", link: "/review" }]
         },
-        { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
+        {
+            title: "Campaigns", link: "/campaigns", icon: "campaign",
+            submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }]
+        },
+        {
+            title: "Reports", link: "", icon: "report",
+            submenu: [{ title: "Review Analytics", link: "/review-analytics" },{ title: "Campaign Performance", link: "/campaign-performance" }, { title: "Sentiment Analysis", link: "/sentiment-analysis" }]
+        },
     ]
 
     return <div className="relative">
