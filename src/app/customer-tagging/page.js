@@ -9,7 +9,7 @@ import Status from "../../components/Status";
 import CreateTag from "../../components/Models/customers/CreateTag"
 import Edit from "../../components/Models/customers/Edit"
 import Image from "next/image";
-import DeleteTag from "../../components/Models/DeleteModal";
+import DeleteTag from "../../components/Models/customers/DeleteTag";
 
 export default function CustomerTagging() {
     const [filterBy, setFilterBy] = useState("")
@@ -46,7 +46,7 @@ export default function CustomerTagging() {
 
             {openTag &&
                 <DeleteTag
-                    onCloseDelete={() => {
+                    onClose={() => {
                         setOpenTag(false)
                     }}
 
