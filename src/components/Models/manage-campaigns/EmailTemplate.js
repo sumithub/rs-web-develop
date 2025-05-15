@@ -5,7 +5,7 @@ import Select from "../../form/Select"
 import TableOrder from "../../TableOrder"
 import Model from "../Model";
 
-export default function EmailTemplate({ onClose }) {
+export default function EmailTemplate({ onClose}) {
     return <Model title="E-mail Templates" onClose={onClose} modalClass="w-1/2!">
         <main>
             <div className="flex items-center justify-between mb-5">

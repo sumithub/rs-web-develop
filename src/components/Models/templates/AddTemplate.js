@@ -27,10 +27,14 @@ function AddTemplate({ onClose }) {
             <Input label="Sender Email" isRequired={true} placeholder="Enter Sender Email" />
           </div>
 
-          <div className='mt-5'>
-            <HtmlEditor label="Email Body" />
-          </div>
-
+            <HtmlEditor label="Email Body">
+              <div className='grid grid-cols-3 gap-4'>
+                <Input label="Customer Name" isRequired={true}/>
+                <Input label="Business Phone" isRequired={true}/>
+                <Input label="Insert Dynamic Fields" isRequired={true}/>
+              </div>
+            </HtmlEditor>
+          
           {/* <div className="text-sm text-secondary font-medium capitalize mt-3 mb-2">email body</div>
           <textarea
             required={true}
