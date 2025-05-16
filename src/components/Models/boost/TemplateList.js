@@ -16,9 +16,9 @@ function TemplateList({ onClose, onSave }) {
                         <Select defaultOption="filters" class_="mt-0!"></Select>
                         <SecondaryButton title="Select Template" class_="text-sm! font-normal!" />
                     </div>
+                </div>
 
-
-                </div><div className='table-class'>
+                <div className='table-class'>
                     <table className='w-full'>
                         <thead>
                             <tr>
