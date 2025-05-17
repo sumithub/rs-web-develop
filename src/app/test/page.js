@@ -12,6 +12,10 @@ import ShareOnSocialMedia from "../../components/Models/review/ShareOnSocialMedi
 import ShareViaEmail from "../../components/Models/review/ShareViaEmail";
 import AssignReviewToUser from "../../components/Models/review/AssignReviewToUser";
 import Carousel from "../../components/Models/review/Carousel";
+import GridWidget from "../../components/Models/review/GridWidget";
+import TestimonialWidget from "../../components/Models/review/TestimonialWidget";
+import StarBadgeWidget from "../../components/Models/review/StarBadgeWidget";
+import FloatingButtonWidget from "../../components/Models/review/FloatingButtonWidget";
 
 export default function Test() {
     const [open, setOpen] = useState(false)
@@ -21,10 +25,14 @@ export default function Test() {
     const [openBoost, setOpenBoost] = useState(false)
     const [openDetail, setOpenDetail] = useState(false)
     const [openResponse, setOpenResponse] = useState(false)
-    const [openMedia, setOpenMedia] = useState(false) 
-    const [openShare, setOpenShare] = useState(false) 
-    const [openAssign, setOpenAssign] = useState(false)     
-    const [openCarousel, setOpenCarousel] = useState(false)     
+    const [openMedia, setOpenMedia] = useState(false)
+    const [openShare, setOpenShare] = useState(false)
+    const [openAssign, setOpenAssign] = useState(false)
+    const [openCarousel, setOpenCarousel] = useState(false)
+    const [openGrid, setOpenGrid] = useState(false)
+    const [openTestimonial, setOpenTestimonial] = useState(false)
+    const [openStar, setOpenStar] = useState(false)
+    const [openFloating, setOpenFloating] = useState(false)
 
     return <AdminLayout>
 
@@ -141,13 +149,57 @@ export default function Test() {
         }
 
         {openCarousel &&
-            <Carousel 
+            <Carousel
                 onClose={() => {
                     setOpenCarousel(false)
                 }}
 
                 onSave={() => {
                     setOpenCarousel(true)
+                }} />
+        }
+
+        {openGrid &&
+            <GridWidget
+                onClose={() => {
+                    setOpenGrid(false)
+                }}
+
+                onSave={() => {
+                    setOpenGrid(true)
+                }} />
+        }
+
+        {openTestimonial &&
+            <TestimonialWidget
+                onClose={() => {
+                    setOpenTestimonial(false)
+                }}
+
+                onSave={() => {
+                    setOpenTestimonial(true)
+                }} />
+        }
+
+        {openStar &&
+            <StarBadgeWidget
+                onClose={() => {
+                    setOpenStar(false)
+                }}
+
+                onSave={() => {
+                    setOpenStar(true)
+                }} />
+        }
+
+        {openFloating &&
+            <FloatingButtonWidget
+                onClose={() => {
+                    setOpenFloating(false)
+                }}
+
+                onSave={() => {
+                    setOpenFloating(true)
                 }} />
         }
 
@@ -183,6 +235,18 @@ export default function Test() {
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenCarousel(true) }}>Carousel
+            </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenGrid(true) }}> Grid Widget
+            </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenTestimonial(true) }}> Testimonial Widget
+            </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenStar(true) }}>Star Badge Widget
+            </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenFloating(true) }}>Floating Button Widget
             </div>
         </div>
     </AdminLayout>

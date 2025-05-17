@@ -5,9 +5,9 @@ import Checkbox from "../../form/Checkbox";
 import SecondaryButton from "../../common/SecondaryButton";
 import CancelButton from "../../common/CancelButton";
 
-export default function Carousel({ onClose, OnSave }) {
+export default function FloatingButtonWidget({ onClose, OnSave }) {
     return (
-        <Model onClose={onClose} title="Carousel" modalClass="w-[60%]!">
+        <Model onClose={onClose} title="Floating Button Widget" modalClass="w-[60%]!">
             <div className="grid grid-cols-2 gap-4">
                 <div>
                     <div className="border border-border-color bg-[#0396FF1a] rounded-md">
@@ -16,9 +16,9 @@ export default function Carousel({ onClose, OnSave }) {
                         </div>
 
                         <div className="grid grid-cols-3 gap-2 p-2">
-                            <Input label="Color Scheme" isRequired={true} placeholder="Select Color" />
-                            <Select defaultOption="Select Font" label="Font Family" isRequired={true} />
-                            <Input label="Border Radius" isRequired={true} placeholder="Select Border Color" />
+                            <Input label="Color Scheme" placeholder="Select Color" />
+                            <Select defaultOption="Select Font" label="Font Family" />
+                            <Input label="Border Radius" placeholder="Select Border Color" />
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@ export default function Carousel({ onClose, OnSave }) {
 
                         <div className="grid grid-cols-2 gap-2 p-2 ">
                             <Input label="Number of Reviews" isRequired={true} placeholder="Enter review count" />
-                            <Input label="Minimum Rating" isRequired={true} placeholder="Enter Filtering" />
+                            <Input label="Minimum Rating" placeholder="Enter Filtering" />
                         </div>
 
                         <div className="p-2">
