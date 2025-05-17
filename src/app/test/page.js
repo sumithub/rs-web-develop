@@ -11,6 +11,7 @@ import ReviewResponseTemplates from "../../components/Models/review/ReviewRespon
 import ShareOnSocialMedia from "../../components/Models/review/ShareOnSocialMedia";
 import ShareViaEmail from "../../components/Models/review/ShareViaEmail";
 import AssignReviewToUser from "../../components/Models/review/AssignReviewToUser";
+import Carousel from "../../components/Models/review/Carousel";
 
 export default function Test() {
     const [open, setOpen] = useState(false)
@@ -22,7 +23,8 @@ export default function Test() {
     const [openResponse, setOpenResponse] = useState(false)
     const [openMedia, setOpenMedia] = useState(false) 
     const [openShare, setOpenShare] = useState(false) 
-    const [openAssign, setOpenAssign] = useState(false) 
+    const [openAssign, setOpenAssign] = useState(false)     
+    const [openCarousel, setOpenCarousel] = useState(false)     
 
     return <AdminLayout>
 
@@ -138,6 +140,17 @@ export default function Test() {
                 }} />
         }
 
+        {openCarousel &&
+            <Carousel 
+                onClose={() => {
+                    setOpenCarousel(false)
+                }}
+
+                onSave={() => {
+                    setOpenCarousel(true)
+                }} />
+        }
+
         <div className="flex flex-col gap-y-3">
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpen(true) }}>Selected Customers
             </div>
@@ -167,6 +180,9 @@ export default function Test() {
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenAssign(true) }}>Assign Review To User
+            </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenCarousel(true) }}>Carousel
             </div>
         </div>
     </AdminLayout>
