@@ -13,7 +13,7 @@ export default function Sidebar() {
         },
         {
             title: "Reviews", link: "/reviews", icon: "message",
-            submenu: [{ title: "Manage Reviews", link: "/review" }]
+            submenu: [{ title: "Manage Reviews", link: "/review" }, { title: "Review Widgets", link: "/review-widgets" }, { title: "Review Sources", link: "/review-sources" }]
         },
         {
             title: "Campaigns", link: "/campaigns", icon: "campaign",
@@ -21,7 +21,7 @@ export default function Sidebar() {
         },
         {
             title: "Reports", link: "", icon: "report",
-            submenu: [{ title: "Review Analytics", link: "/review-analytics" },{ title: "Campaign Performance", link: "/campaign-performance" }, { title: "Sentiment Analysis", link: "/sentiment-analysis" }]
+            submenu: [{ title: "Review Analytics", link: "/review-analytics" }, { title: "Campaign Performance", link: "/campaign-performance" }, { title: "Sentiment Analysis", link: "/sentiment-analysis" }]
         },
     ]
 
