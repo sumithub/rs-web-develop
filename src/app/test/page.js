@@ -10,6 +10,7 @@ import ReviewDetails from "../../components/Models/review/ReviewDetails";
 import ReviewResponseTemplates from "../../components/Models/review/ReviewResponseTemplates";
 import ShareOnSocialMedia from "../../components/Models/review/ShareOnSocialMedia";
 import ShareViaEmail from "../../components/Models/review/ShareViaEmail";
+import AssignReviewToUser from "../../components/Models/review/AssignReviewToUser";
 
 export default function Test() {
     const [open, setOpen] = useState(false)
@@ -21,6 +22,7 @@ export default function Test() {
     const [openResponse, setOpenResponse] = useState(false)
     const [openMedia, setOpenMedia] = useState(false) 
     const [openShare, setOpenShare] = useState(false) 
+    const [openAssign, setOpenAssign] = useState(false) 
 
     return <AdminLayout>
 
@@ -125,6 +127,17 @@ export default function Test() {
                 }} />
         }
 
+        {openAssign &&
+            <AssignReviewToUser
+                onClose={() => {
+                    setOpenAssign(false)
+                }}
+
+                onSave={() => {
+                    setOpenAssign(true)
+                }} />
+        }
+
         <div className="flex flex-col gap-y-3">
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpen(true) }}>Selected Customers
             </div>
@@ -151,6 +164,9 @@ export default function Test() {
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenShare(true) }}>Share Via Email
+            </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenAssign(true) }}>Assign Review To User
             </div>
         </div>
     </AdminLayout>
