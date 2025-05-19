@@ -19,6 +19,7 @@ import FloatingButtonWidget from "../../components/Models/review/FloatingButtonW
 import ConnectReviewSource from "../../components/Models/review/ConnectReviewSource";
 import DisconnectReviewSourceConfirmation from "../../components/Models/review/DisconnectReviewSourceConfirmation";
 import CodePreviewBox from "../../components/Models/review/CodePreviewBox";
+import ReviewDetail from "../../components/Models/review/ReviewDetail";
 
 export default function Test() {
     const [open, setOpen] = useState(false)
@@ -39,6 +40,7 @@ export default function Test() {
     const [openConnect, setOpenConnect] = useState(false)
     const [openDisconnect, setOpenDisconnect] = useState(false)
     const [openCode, setOpenCode] = useState(false)
+    const [openReviewDetail, setOpenReviewDetail] = useState(false)
 
     return <AdminLayout>
 
@@ -242,6 +244,17 @@ export default function Test() {
                 }} />
         }
 
+        {openReviewDetail &&
+            <ReviewDetail
+                onClose={() => {
+                    setOpenReviewDetail(false)
+                }}
+
+                onSave={() => {
+                    setOpenReviewDetail(true)
+                }} />
+        }
+
         <div className="flex flex-col gap-y-3">
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpen(true) }}>Selected Customers
             </div>
@@ -295,6 +308,9 @@ export default function Test() {
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenCode(true) }}>Code Preview Box
+            </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenReviewDetail(true) }}>Review Detail
             </div>
         </div>
     </AdminLayout>
