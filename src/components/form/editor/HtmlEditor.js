@@ -19,13 +19,14 @@ const HOTKEYS = {
 }
 const LIST_TYPES = ['numbered-list', 'bulleted-list']
 const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify']
-const RichTextExample = () => {
+const RichTextExample = ({children}) => {
     const renderElement = useCallback(props => <Element {...props} />, [])
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])
     const editor = useMemo(() => withHistory(withReact(createEditor())), [])
-    return (
+    return (<div className='border border-[#F4F4F4] rounded-lg mt-[15px] w-full'>
         <Slate editor={editor} initialValue={initialValue}>
-            <Toolbar>
+            <div className="bg-dark rounded-tr-lg rounded-tl-lg">
+            <Toolbar >
                 <MarkButton format="bold" icon={<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.34668 2.62565C3.34668 1.98398 3.87168 1.45898 4.51335 1.45898H7.50001C9.02835 1.45898 10.2708 2.70148 10.2708 4.22982C10.2708 5.75815 9.02835 7.00065 7.50001 7.00065H3.34668V2.62565Z" stroke="#1F2933" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     <path d="M3.34668 7H8.88835C10.4167 7 11.6592 8.2425 11.6592 9.77083C11.6592 11.2992 10.4167 12.5417 8.88835 12.5417H4.51335C3.87168 12.5417 3.34668 12.0167 3.34668 11.375V7V7Z" stroke="#1F2933" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -77,6 +78,9 @@ const RichTextExample = () => {
                 </svg>
                 } />
             </Toolbar>
+            </div>
+
+            <div className=' py-3 px-2.5'>
             <Editable className='outline-none'
                 renderElement={renderElement}
                 renderLeaf={renderLeaf}
@@ -92,8 +96,12 @@ const RichTextExample = () => {
                         }
                     }
                 }}
-            />
+            /> </div>
+            <div className='py-3 px-2.5'>
+            {children}
+            </div>
         </Slate>
+        </div>
     )
 }
 const toggleBlock = (editor, format) => {
