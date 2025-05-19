@@ -20,6 +20,8 @@ import ConnectReviewSource from "../../components/Models/review/ConnectReviewSou
 import DisconnectReviewSourceConfirmation from "../../components/Models/review/DisconnectReviewSourceConfirmation";
 import CodePreviewBox from "../../components/Models/review/CodePreviewBox";
 import ReviewDetail from "../../components/Models/review/ReviewDetail";
+import NoActionRequiredState from "../../components/Models/review/NoActionRequiredState";
+import RequestUpdate from "../../components/Models/review/RequestUpdate";
 
 export default function Test() {
     const [open, setOpen] = useState(false)
@@ -41,6 +43,8 @@ export default function Test() {
     const [openDisconnect, setOpenDisconnect] = useState(false)
     const [openCode, setOpenCode] = useState(false)
     const [openReviewDetail, setOpenReviewDetail] = useState(false)
+    const [openTest, setOpenTest] = useState(false)
+    const [openUpdate, setOpenUpdate] = useState(false)
 
     return <AdminLayout>
 
@@ -255,6 +259,28 @@ export default function Test() {
                 }} />
         }
 
+        {openTest &&
+            <NoActionRequiredState
+                onClose={() => {
+                    setOpenTest(false)
+                }}
+
+                onSave={() => {
+                    setOpenTest(true)
+                }} />
+        }
+
+        {openUpdate &&
+            <RequestUpdate
+                onClose={() => {
+                    setOpenUpdate(false)
+                }}
+
+                onSave={() => {
+                    setOpenUpdate(true)
+                }} />
+        }
+
         <div className="flex flex-col gap-y-3">
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpen(true) }}>Selected Customers
             </div>
@@ -311,6 +337,12 @@ export default function Test() {
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenReviewDetail(true) }}>Review Detail
+            </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenTest(true) }}>No Action Required State
+            </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenUpdate(true) }}>Request Update
             </div>
         </div>
     </AdminLayout>

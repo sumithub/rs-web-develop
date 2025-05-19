@@ -4,9 +4,9 @@ import SecondaryButton from "../../common/SecondaryButton";
 import Select from "../../form/Select";
 import Model from "../Model";
 
-export default function ReviewDetail({ onClose, onSave }) {
+export default function NoActionRequiredState({ onClose, onSave }) {
     return (
-        <Model onClose={onClose} title="Review Detail" modalClass="w-[60%]!">
+        <Model onClose={onClose} title="No Action Required State" modalClass="w-[60%]!">
             <div>
                 <div>
                     <ReviewCard title="Zain Levin" />
@@ -17,20 +17,19 @@ export default function ReviewDetail({ onClose, onSave }) {
                 </div>
 
                 <div>
-                    <Select defaultOption="Draft" />
+                    <Select defaultOption="No Action Required" />
                 </div>
 
 
 
 
 
-                <div className="mt-3">
-                    <div className="font-semibold text-lg">Additional Sharing Options:</div>
-                </div>
+                
 
 
-                <div className="grid grid-cols-2 gap-3 mt-4">
+                <div className="grid grid-cols-3 gap-3 mt-4">
                     <CancelButton title="copy reply" />
+                    <SecondaryButton title="share"/>
                     <SecondaryButton title="mark as responded" />
                 </div>
             </div>
