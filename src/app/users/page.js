@@ -23,6 +23,7 @@ import DeleteModal from '../../components/Models/DeleteModal';
 import SendInvite from '../../components/Models/users/SendInvite';
 import ChangePassword from '../../components/Models/users/ChangePassword';
 import SetupPassword from '../../components/Models/users/SetupPassword';
+import DateRange from '../../components/form/DateRangePicker';
 
 
 function Users() {
@@ -119,8 +120,7 @@ function Users() {
             }
 
 
-            <div className="flex justify-between items-center w-full">
-                <div className='grid grid-cols-[3.3fr_1fr_1fr_1fr] gap-4'>
+                <div className='grid grid-cols-[2.5fr_1fr_1fr_1fr_1fr] gap-3'>
                     <Search
                         mainClass='w-full!'
                         placeholder="Search by name, email, role."
@@ -152,20 +152,11 @@ function Users() {
                         <option value="viewer">Viewer</option>
                     </Select>
 
-                    <DatePicker
-                        icon={true}
-                        mainClass="mt-0!"
-                        value={date}
-                        dateFormat="dd/MM/yyyy"
-                        onChange={(e) => setDate(e)}
-                    />
-                </div>
-
-                <div className="2xl:mt-0 mt-3">
+                    <DateRange />
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-full"
                         onClick={() => { setOpenModal("new") }}>Invite New User</button>
                 </div>
-            </div>
+
             <div className='my-5 flex items-center justify-between'>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 cursor-pointer">
                     <div className="flex items-start justify-center gap-2 mt-1">
