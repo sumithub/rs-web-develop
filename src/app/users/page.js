@@ -6,8 +6,6 @@ import TableOrder from '../../components/TableOrder';
 import PaginationDemo from '../../components/Pagination';
 import AdminLayout from '../../components/AdminLayout';
 import Checkbox from '../../components/form/Checkbox';
-import Select from '../../components/form/Select';
-import DatePicker from '../../components/form/DatePicker';
 import Search from '../../components/form/Search';
 import Image from 'next/image';
 import AddUser from '../../components/Models/users/AddUser'
