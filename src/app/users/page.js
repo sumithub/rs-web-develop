@@ -6,8 +6,6 @@ import TableOrder from '../../components/TableOrder';
 import PaginationDemo from '../../components/Pagination';
 import AdminLayout from '../../components/AdminLayout';
 import Checkbox from '../../components/form/Checkbox';
-import Select from '../../components/form/Select';
-import DatePicker from '../../components/form/DatePicker';
 import Search from '../../components/form/Search';
 import Image from 'next/image';
 import AddUser from '../../components/Models/users/AddUser'
@@ -23,6 +21,8 @@ import DeleteModal from '../../components/Models/DeleteModal';
 import SendInvite from '../../components/Models/users/SendInvite';
 import ChangePassword from '../../components/Models/users/ChangePassword';
 import SetupPassword from '../../components/Models/users/SetupPassword';
+import DateRange from '../../components/form/DateRangePicker';
+import CustomSelectBox from '../../components/form/CustomSelectBox';
 
 
 function Users() {
@@ -119,53 +119,43 @@ function Users() {
             }
 
 
-            <div className="flex justify-between items-center w-full">
-                <div className='grid grid-cols-[3.3fr_1fr_1fr_1fr] gap-4'>
-                    <Search
-                        mainClass='w-full!'
-                        placeholder="Search by name, email, role."
-                        onSearch={(s) => {
-                            setSearch(s)
-                        }}
-                    />
-                    <Select
-                        class_="mt-0!"
-                        defaultOption="Status"
-                        value={status}
-                        onChange={(e) => {
-                            setStatus(e.target.value)
-                        }}>
-                        <option value="active">Active</option>
-                        <option value="suspended">Suspended</option>
-                        <option value="pendingInvite">Pending Invite</option>
-                    </Select>
+            <div className='grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-3'>
+                <Search
+                    mainClass='w-full!'
+                    placeholder="Search by name, email, role."
+                    onSearch={(s) => {
+                        setSearch(s)
+                    }}
+                />
+                <CustomSelectBox
+                    class_="mt-0!"
+                    defaultOption="Status"
+                    value={status}
+                    onChange={(e) => {
+                        setStatus(e.target.value)
+                    }}>
+                    <option value="active">Active</option>
+                    <option value="suspended">Suspended</option>
+                    <option value="pendingInvite">Pending Invite</option>
+                </CustomSelectBox>
 
-                    <Select
-                        class_="mt-0!"
-                        defaultOption="role"
-                        value={role}
-                        onChange={(e) => {
-                            setRole(e.target.value)
-                        }}>
-                        <option value="owner">Owner</option>
-                        <option value="manager">manager</option>
-                        <option value="viewer">Viewer</option>
-                    </Select>
+                <CustomSelectBox
+                    class_="mt-0!"
+                    defaultOption="role"
+                    value={role}
+                    onChange={(e) => {
+                        setRole(e.target.value)
+                    }}>
+                    <option value="owner">Owner</option>
+                    <option value="manager">manager</option>
+                    <option value="viewer">Viewer</option>
+                </CustomSelectBox>
 
-                    <DatePicker
-                        icon={true}
-                        mainClass="mt-0!"
-                        value={date}
-                        dateFormat="dd/MM/yyyy"
-                        onChange={(e) => setDate(e)}
-                    />
-                </div>
-
-                <div className="2xl:mt-0 mt-3">
-                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-full"
-                        onClick={() => { setOpenModal("new") }}>Invite New User</button>
-                </div>
+                <DateRange />
+                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-full"
+                    onClick={() => { setOpenModal("new") }}>Invite New User</button>
             </div>
+
             <div className='my-5 flex items-center justify-between'>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 cursor-pointer">
                     <div className="flex items-start justify-center gap-2 mt-1">

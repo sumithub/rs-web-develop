@@ -2,9 +2,6 @@
 import Image from "next/image";
 import { useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
-import Header from "../../components/Header"
-import Sidebar from "../../components/Sidebar"
-import Select from "../../components/form/Select";
 import Checkbox from "../../components/form/Checkbox";
 import Status from "../../components/Status";
 import TableOrder from "../../components/TableOrder";
@@ -15,6 +12,7 @@ import Loading from "../../components/Loading";
 import Pagination from "../../components/Pagination"
 import Chart from "../../components/Chart"
 import AdminLayout from "../../components/AdminLayout"
+import CustomSelectBox from '../../components/form/CustomSelectBox';
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -194,16 +192,19 @@ export default function Review() {
                         }}
                     />
                     <div className="grid grid-cols-[0.8fr_0.8fr_0.8fr_0.8fr_auto_1fr] items-start 2xl:gap-3 xl:gap-2 lg:gap-2 2xl:mt-0 mt-3">
-                        <Select
+                        <CustomSelectBox
                             class_="mt-0!"
                             defaultOption="start rating"
                             value={rating}
                             onChange={(e) => {
                                 setRating(e.target.value)
                             }}>
-                            <option value="rating 1">Rating 1</option>
-                            <option value="rating 2">Rating 2</option>
-                        </Select>
+                            <option value="1 star">1 Star & Up</option>
+                            <option value="4 star">4 Star & Up</option>
+                            <option value="3 star">3 Star & Up</option>
+                            <option value="2 star">2 Star & Up</option>
+                            <option value="1 star">1 Star & Up</option>
+                        </CustomSelectBox>
                         <DatePicker
                             icon={true}
                             mainClass="mt-0!"
@@ -211,7 +212,7 @@ export default function Review() {
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
                         />
-                        <Select
+                        <CustomSelectBox
                             class_="mt-0!"
                             defaultOption="Review Source"
                             value={reviewSource}
@@ -219,10 +220,11 @@ export default function Review() {
                                 setReviewSource(e.target.value)
                             }}>
                             <option value="google">Google</option>
-                            <option value="google 1">Google 1</option>
-                        </Select>
+                            <option value="yelp">Yelp</option>
+                            <option value="trustpilot and tripadvisor">Trustpilot and Tripadvisor</option>
+                        </CustomSelectBox>
 
-                        <Select
+                        <CustomSelectBox
                             class_="mt-0!"
                             defaultOption="Review Status"
                             value={status}
@@ -232,7 +234,7 @@ export default function Review() {
                             <option value="new">New</option>
                             <option value="responded">Responded</option>
                             <option value="flagged">Flagged</option>
-                        </Select>
+                        </CustomSelectBox>
 
                         <button className="cursor-pointer disabled:pointer-events-none">
                             <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />

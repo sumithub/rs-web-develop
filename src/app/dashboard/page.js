@@ -1,20 +1,45 @@
+"use client"
 import DashboardCard from "../../components/DashboardCard";
 import Table from "../../components/Table";
 import DashboardChart from "../../components/DashboardChart"
 import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
-import Select from "../../components/form/Select";
+import CustomSelectBox from '../../components/form/CustomSelectBox';
 import DateRange from "../../components/form/DateRangePicker";
+import { useState } from "react";
 
 export default function Dashboard() {
+    const [rating, setRating] = useState("")
+    const [reviewSource, setReviewSource] = useState("")
+
     return <AdminLayout
         noCard={true}
         headerChild={<div className="grid grid-cols-4 gap-3 justify-end items-end">
-            <Select defaultOption="Review Source">
-            </Select>
-            <Select
-                defaultOption="Star Ratings">
-            </Select>
+            <CustomSelectBox
+                class_="mt-0!"
+                defaultOption="Review Source"
+                value={reviewSource}
+                onChange={(e) => {
+                    setReviewSource(e.target.value)
+                }}>
+                <option value="google">Google</option>
+                <option value="yelp">Yelp</option>
+                <option value="trustpilot and tripadvisor">Trustpilot and Tripadvisor</option>
+            </CustomSelectBox>
+
+            <CustomSelectBox
+                class_="mt-0!"
+                defaultOption="start rating"
+                value={rating}
+                onChange={(e) => {
+                    setRating(e.target.value)
+                }}>
+                <option value="1 star">1 Star & Up</option>
+                <option value="4 star">4 Star & Up</option>
+                <option value="3 star">3 Star & Up</option>
+                <option value="2 star">2 Star & Up</option>
+                <option value="1 star">1 Star & Up</option>
+            </CustomSelectBox>
             <DateRange />
             <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50"><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
         </div>}

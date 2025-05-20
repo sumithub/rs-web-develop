@@ -14,7 +14,7 @@ export default function Sidebar() {
         },
         { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
 
-        { title: "Settings", icon: "settings", submenu: [{ title: "User Management", link: "/users" }] },
+        { title: "Settings", icon: "settings", submenu: [{ title: "Users", link: "/users" }] },
     ]
 
     return <div className="relative">
