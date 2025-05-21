@@ -42,7 +42,29 @@ export default function CustomSelectBox({
         }
     };
 
-    return (<div className={`relative w-48 ${class_}`}>
+    const ref = useRef(null);
+    useEffect(() => {
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                setIsOpen(false)
+            }
+        })
+
+        const checkIfClickedOutside = (e) => {
+            if (ref.current && (!ref.current.contains(e.target))) {
+                setIsOpen(false)
+            }
+        };
+
+        if (typeof window !== "undefined") {
+            document.addEventListener('mousedown', checkIfClickedOutside);
+            return () => {
+                document.removeEventListener('mousedown', checkIfClickedOutside);
+            };
+        }
+    }, []);
+
+    return (<div ref={ref} className={`relative w-48 ${class_}`}>
         {label && (
             <label className={`text-sm font-medium text-secondary mb-1 block capitalize ${labelClass}`}>
                 {label}{isRequired ? <span className="text-danger">*</span> : ""}

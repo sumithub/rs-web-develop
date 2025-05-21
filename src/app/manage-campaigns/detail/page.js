@@ -18,6 +18,7 @@ export default function Detail() {
     const [openSchedule, setOpenSchedule] = useState(false)
     const [openCustomer, setOpenCustomer] = useState(false)
     const [openEmail, setOpenEmail] = useState(false)
+    const [expandAll, setExpandall] = useState(true)
 
     return <AdminLayout>
 
@@ -65,13 +66,15 @@ export default function Detail() {
             <div className="flex items-center justify-between mb-4">
                 <div className="text-secondary text-xl font-medium">Create New Campaign</div>
                 <div className="flex items-center gap-2">
-                    <CancelButton title="Collapse All" class_="text-sm! font-normal!" />
-                    <SecondaryButton title="Expand All" class_="text-sm! font-normal!" />
+                    <CancelButton title="Collapse All" class_="text-sm! font-normal!"
+                        onClick={() => { setExpandall(false) }} />
+                    <SecondaryButton title="Expand All" class_="text-sm! font-normal!"
+                        onClick={() => { setExpandall(true) }} />
                 </div>
             </div>
 
             <div>
-                <CampaignCard title="Campaign Details" status="Active">
+                <CampaignCard expandAll={expandAll} setExpandall={setExpandall} title="Campaign Details" status="Active">
                     <div className="grid grid-cols-2 gap-3">
                         <Input label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!" />
                         <div>
@@ -85,7 +88,7 @@ export default function Detail() {
             </div>
 
             <div>
-                <CampaignCard title="Targeting" status="Active">
+                <CampaignCard expandAll={expandAll} setExpandall={setExpandall} title="Targeting" status="Active">
                     <div className="flex items-center justify-between">
                         <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
                         <SecondaryButton title="Add Customers" class_="text-sm! font-normal!" onClick={() => { setOpenCustomer(true) }} />
@@ -112,7 +115,7 @@ export default function Detail() {
             </div>
 
             <div>
-                <CampaignCard title="Template Selection" status="Active">
+                <CampaignCard expandAll={expandAll} setExpandall={setExpandall} title="Template Selection" status="Active">
                     <div className="flex gap-3 my-4">
                         <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
                         <div className="flex">
@@ -207,7 +210,7 @@ export default function Detail() {
             </div>
 
             <div>
-                <CampaignCard title="Scheduling & Launch" status="Active">
+                <CampaignCard expandAll={expandAll} setExpandall={setExpandall} title="Scheduling & Launch" status="Active">
                     <div className="grid grid-cols-2 gap-3">
                         <Input label="Time Zone" isRequired={true} inputClass="bg-white!" />
                         <Select label="Send Time" isRequired={true} selectClass_="bg-white! py-3! focus:border-primary/60!">
