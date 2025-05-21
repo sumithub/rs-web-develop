@@ -1,12 +1,33 @@
 "use client"
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 
 function DateRange() {
     const [open, setOpen] = useState(false)
+     const ref = useRef(null);
+    useEffect(() => {
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                setOpen(false)
+            }
+        })
+
+        const checkIfClickedOutside = (e) => {
+            if (ref.current && (!ref.current.contains(e.target))) {
+                setOpen(false)
+            }
+        };
+
+        if (typeof window !== "undefined") {
+            document.addEventListener('mousedown', checkIfClickedOutside);
+            return () => {
+                document.removeEventListener('mousedown', checkIfClickedOutside);
+            };
+        }
+    }, []);
 
     const toggleDatePicker = () => {
         setOpen(!open)
@@ -18,7 +39,7 @@ function DateRange() {
             key: 'selection'
         }
     ]);
-    return (<div className='relative'>
+    return (<div ref={ref} className='relative'>
         <button
             onClick={toggleDatePicker}
             className="cursor-pointer flex items-center gap-2 border border-border-color rounded-lg py-[7.7px]! px-2 capitalize text-[13px] text-text3 w-full focus-visible:outline-none shrink-0"        >
