@@ -59,7 +59,9 @@ function DateRange() {
                         ranges={state}
                         direction="horizontal"
                     />
-                    <button onClick={() => { setOpen(false) }} className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-1/5 py-1 rounded-[10px] border border-primary cursor-pointer absolute left-0! bottom-3 ml-5">Save</button>
+                    <div className='absolute left-14 bottom-5 w-[12%]'>
+                        <button onClick={() => { setOpen(false) }} className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full py-1 rounded-lg border border-primary cursor-pointer text-center">Save</button>
+                    </div>
                 </div>
             </div>
         }
