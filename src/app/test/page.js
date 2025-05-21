@@ -45,10 +45,7 @@ export default function Test() {
     const [openReviewDetail, setOpenReviewDetail] = useState(false)
     const [openTest, setOpenTest] = useState(false)
     const [openUpdate, setOpenUpdate] = useState(false)
-
     return <AdminLayout>
-
-
 
         {open &&
             <SelectedCustomers

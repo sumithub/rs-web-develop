@@ -35,7 +35,7 @@ export const Icon = React.forwardRef(({ className, ...props }, ref) => (
         vertical-align: text-bottom;
       `
         )}
-    />
+    ></span>
 ))
 export const Instruction = React.forwardRef(({ className, ...props }, ref) => (
     <div

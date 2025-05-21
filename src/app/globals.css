@@ -268,7 +268,7 @@ td {
 .line {
   width: 200px;
   height: 2px;
-  background: #D9D9D9;
+  background: #E8EEF2;
 }
 
 .steps {
@@ -280,30 +280,56 @@ td {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 2.5px solid #D9D9D9;
+  border: 2.5px solid var(--text3);
+  cursor: pointer;
+  color: var(--text3);
 }
 
 .steps .step-title {
-  color: #302E4F;
+  color: var(--secondary);
   position: absolute;
   width: max-content;
   top: 100%;
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 8px;
   text-transform: capitalize;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .steps.active {
-  background: #06C27E;
-  border: 2.5px solid #302E4F;
+  background: var(--primary);
+  border: 2.5px solid var(--primary);
   color: white;
 }
 
 .steps.active .step-title {
-  color: #06C27E;
+  color: var(--primary);
+  font-weight: 500;
 }
 
 .line.active {
-  background: #302E4F;
+  background: var(--primary);
+}
+
+.completed .line {
+  background: var(--success);
+}
+
+.completed .steps {
+  background-color: var(--success);
+  border: 2.5px solid var(--success);
+}
+
+.completed .steps .line,
+.completed .steps .step-title {
+  color: var(--success);
+}
+
+.rdrDefinedRangesWrapper .rdrInputRanges {
+  display: none;
+}
+
+.css-r5rnga{
+   margin: 0 !important;
+   padding: 12px  18px 12px !important;
 }

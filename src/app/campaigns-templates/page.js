@@ -6,10 +6,10 @@ import PaginationDemo from '../../components/Pagination'
 import AdminLayout from '../../components/AdminLayout'
 import Search from '../../components/form/Search'
 import DatePicker from '../../components/form/DatePicker'
-import Select from '../../components/form/Select'
 import AddTemplate from '../../components/Models/templates/AddTemplate'
 import { TEMPLATE_ACTIONS } from '../../constent/constArray'
 import Clone from '../../components/Models/templates/Clone'
+import CustomSelectBox from '../../components/form/CustomSelectBox';
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
@@ -51,7 +51,7 @@ function CampaignsTemplates() {
                 />
 
                 <div className="grid grid-cols-3 items-start 2xl:gap-3 xl:gap-2 lg:gap-2 2xl:mt-0 mt-3">
-                    <Select
+                    <CustomSelectBox
                         class_="mt-0!"
                         defaultOption="type"
                         value={type}
@@ -61,7 +61,7 @@ function CampaignsTemplates() {
                         <option value="email">Email</option>
                         <option value="sms">SMS</option>
                         <option value="both">Both</option>
-                    </Select>
+                    </CustomSelectBox>
                     <DatePicker
                         icon={true}
                         mainClass="mt-0!"

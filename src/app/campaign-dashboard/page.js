@@ -1,18 +1,43 @@
+"use client"
 import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
 import DashboardCard from "../../components/DashboardCard";
 import DashboardChart from "../../components/DashboardChart";
 import DatePicker from "../../components/form/DatePicker";
-import Select from "../../components/form/Select";
+import CustomSelectBox from '../../components/form/CustomSelectBox';
+import { useState } from "react";
 
 export default function CampaignDashboard() {
+    const [rating, setRating] = useState("")
+    const [reviewSource, setReviewSource] = useState("")
+
     return <AdminLayout noCard={true}
         headerChild={<div className="grid grid-cols-3 gap-3 justify-end items-end">
-            <Select defaultOption="Review Source">
-            </Select>
-            <Select
-                defaultOption="Star Rating">
-            </Select>
+            <CustomSelectBox
+                class_="mt-0!"
+                defaultOption="Review Source"
+                value={reviewSource}
+                onChange={(e) => {
+                    setReviewSource(e.target.value)
+                }}>
+                <option value="google">Google</option>
+                <option value="yelp">Yelp</option>
+                <option value="trustpilot and tripadvisor">Trustpilot and Tripadvisor</option>
+            </CustomSelectBox>
+
+            <CustomSelectBox
+                class_="mt-0!"
+                defaultOption="start rating"
+                value={rating}
+                onChange={(e) => {
+                    setRating(e.target.value)
+                }}>
+                <option value="1 star">1 Star & Up</option>
+                <option value="4 star">4 Star & Up</option>
+                <option value="3 star">3 Star & Up</option>
+                <option value="2 star">2 Star & Up</option>
+                <option value="1 star">1 Star & Up</option>
+            </CustomSelectBox>
             <DatePicker
                 icon={true}
             />

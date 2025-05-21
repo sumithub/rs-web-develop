@@ -4,13 +4,12 @@ import AdminLayout from '../../components/AdminLayout'
 import Checkbox from '../../components/form/Checkbox'
 import DatePicker from '../../components/form/DatePicker'
 import Search from '../../components/form/Search'
-import Select from '../../components/form/Select'
 import PaginationDemo from '../../components/Pagination'
 import Status from '../../components/Status'
 import TableOrder from '../../components/TableOrder'
 import React, { useState } from 'react'
-import ScheduleCampaign from "../../components/Models/manage-campaigns/ScheduleCampaign"
-
+import Link from 'next/link'
+import CustomSelectBox from '../../components/form/CustomSelectBox';
 function ManageCampaigns() {
 
     const [sortBy, setSortBy] = useState("")
@@ -21,34 +20,9 @@ function ManageCampaigns() {
     // const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
-    const [open, setOpen] = useState(false)
 
     return (
         <AdminLayout>
-            {/* {open &&
-                <AddClient
-                    onClose={() => {
-                        setOpen(false)
-                    }}
-
-                    onSave={() => {
-                        setOpen(true)
-                    }}
-                />
-            } */}
-
-            {open &&
-                <ScheduleCampaign
-                    onClose={() => {
-                        setOpen(false)
-                    }}
-
-                    onSave={() => {
-                        setOpen(true)
-                    }}
-                />
-            }
-
             <div>
                 <div className="2xl:flex lg:flex-wrap justify-between items-center w-full mb-5">
                     <Search
@@ -57,8 +31,8 @@ function ManageCampaigns() {
                             setSearch(s)
                         }}
                     />
-                    <div className="grid grid-cols-5 items-start gap-3">
-                        <Select
+                    <div className="grid grid-cols-5 items-start gap-3 2xl:mt-0 mt-3">
+                        <CustomSelectBox
                             class_="mt-0!"
                             defaultOption="sort by"
                             value={sortBy}
@@ -69,9 +43,9 @@ function ManageCampaigns() {
                             <option value="date">date</option>
                             <option value="customers count">Customers Count</option>
                             <option value="status">status</option>
-                        </Select>
+                        </CustomSelectBox>
 
-                        <Select
+                        <CustomSelectBox
                             class_="mt-0!"
                             defaultOption="select type"
                             value={type}
@@ -80,9 +54,9 @@ function ManageCampaigns() {
                             }}>
                             <option value="industry">Industry</option>
                             <option value="template">Template</option>
-                        </Select>
+                        </CustomSelectBox>
 
-                        <Select
+                        <CustomSelectBox
                             class_="mt-0!"
                             defaultOption="Status"
                             value={status}
@@ -94,7 +68,7 @@ function ManageCampaigns() {
                             <option value="active">Active</option>
                             <option value="completed">Completed</option>
                             <option value="paused">Paused</option>
-                        </Select>
+                        </CustomSelectBox>
 
                         <DatePicker
                             icon={true}
@@ -103,9 +77,10 @@ function ManageCampaigns() {
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
                         />
-
-                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
-                            onClick={() => { setOpen(true) }}>Create campaign</button>
+                        <Link href="/manage-campaigns/detail">
+                            <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                            >Create campaign</button>
+                        </Link>
                     </div>
                 </div>
 
@@ -118,7 +93,7 @@ function ManageCampaigns() {
                     </div>
 
                     <div className='grid grid-cols-3 gap-3'>
-                        <Select
+                        <CustomSelectBox
                             class_="mt-0!"
                             defaultOption="change Status"
                             value={changeStatus}
@@ -126,9 +101,11 @@ function ManageCampaigns() {
                                 setChangeStatus(e.target.value)
                             }}>
                             <option value="draft">Draft</option>
-                            <option value="delete">Delete</option>
-                            <option value="draft">Draft</option>
-                        </Select>
+                            <option value="scheduled">Scheduled</option>
+                            <option value="active">Active</option>
+                            <option value="completed">Completed</option>
+                            <option value="paused">Paused</option>
+                        </CustomSelectBox>
 
                         <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'>Bulk Edit</button>
 

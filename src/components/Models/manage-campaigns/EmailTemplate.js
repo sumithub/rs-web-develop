@@ -5,7 +5,7 @@ import Select from "../../form/Select"
 import TableOrder from "../../TableOrder"
 import Model from "../Model";
 
-export default function EmailTemplate({ onClose }) {
+export default function EmailTemplate({ onClose}) {
     return <Model title="E-mail Templates" onClose={onClose} modalClass="w-1/2!">
         <main>
             <div className="flex items-center justify-between mb-5">
@@ -28,31 +28,31 @@ export default function EmailTemplate({ onClose }) {
 
                     <tbody>
                         <tr>
-                            <td><div className="flex items-center gap-2"><Radio />Nature Template</div></td>
+                            <td><div className="flex items-center"><Radio mainClass="gap-0!" inputClass="mb-2!" class_="mt-2!" />Nature Template</div></td>
                             <td><div className="line-clamp-1">Lorem ipsum..</div></td>
                             <td>Email Template</td>
                         </tr>
 
                         <tr>
-                            <td><div className="flex"><Radio />Nature Template</div></td>
+                            <td><div className="flex items-center"><Radio mainClass="gap-0!" inputClass="mb-2!" class_="mt-2!" />Nature Template</div></td>
                             <td><div className="line-clamp-1">Lorem ipsum..</div></td>
                             <td>Email Template</td>
                         </tr>
 
                         <tr>
-                            <td><div className="flex items-center gap-2"><Radio />Nature Template</div></td>
+                            <td><div className="flex items-center"><Radio mainClass="gap-0!" inputClass="mb-2!" class_="mt-2!" />Nature Template</div></td>
                             <td><div className="line-clamp-1">Lorem ipsum..</div></td>
                             <td>Email Template</td>
                         </tr>
 
                         <tr>
-                            <td><div className="flex items-center gap-2"><Radio />Nature Template</div></td>
+                            <td><div className="flex items-center"><Radio mainClass="gap-0!" inputClass="mb-2!" class_="mt-2!" />Nature Template</div></td>
                             <td><div className="line-clamp-1">Lorem ipsum..</div></td>
                             <td>Email Template</td>
                         </tr>
 
                         <tr>
-                            <td><div className="flex items-center gap-2"><Radio />Nature Template</div></td>
+                            <td><div className="flex items-center"><Radio mainClass="gap-0!" inputClass="mb-2!" class_="mt-2!" />Nature Template</div></td>
                             <td><div className="line-clamp-1">Lorem ipsum..</div></td>
                             <td>Email Template</td>
                         </tr>
