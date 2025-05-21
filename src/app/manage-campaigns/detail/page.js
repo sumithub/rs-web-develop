@@ -18,7 +18,7 @@ export default function Detail() {
     const [openSchedule, setOpenSchedule] = useState(false)
     const [openCustomer, setOpenCustomer] = useState(false)
     const [openEmail, setOpenEmail] = useState(false)
-    const [expandAll, setExpandall] = useState(true)
+    const [expandAll, setExpandall] = useState(false)
 
     return <AdminLayout>
 

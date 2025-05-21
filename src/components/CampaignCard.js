@@ -4,7 +4,7 @@ import Status from "../components/Status"
 import { useEffect, useState } from "react"
 
 export default function CampaignCard({ children, title, status,expandAll }) {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
 
     useEffect(()=>{
         setOpen(expandAll)
