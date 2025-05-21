@@ -119,7 +119,7 @@ function Users() {
             }
 
 
-            <div className='grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-3'>
+            <div className='grid grid-cols-[2.5fr_1fr_1fr_1fr_1fr] gap-3'>
                 <Search
                     mainClass='w-full!'
                     placeholder="Search by name, email, role."
