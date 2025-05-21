@@ -31,7 +31,7 @@ function ManageCampaigns() {
                             setSearch(s)
                         }}
                     />
-                    <div className="grid grid-cols-5 items-start gap-3 mt-4">
+                    <div className="grid grid-cols-5 items-start gap-3 2xl:mt-0 mt-3">
                         <CustomSelectBox
                             class_="mt-0!"
                             defaultOption="sort by"
