@@ -36,7 +36,7 @@ export default function Sidebar() {
                 <div className="pt-5 text-center">
                     <Link href="/" className="test-secondary text-xl font-semibold uppercase text-center">logo</Link>
                 </div>
-                <div className="relative h-full flex flex-col justify-between overflow-y-auto custom-scrollbar pb-10 pt-10">
+                <div className="relative h-full flex flex-col justify-between overflow-y-auto custom-scrollbar pb-10 pt-10 scrollbar-none">
                     <div>
                         <div className="px-3 mb-4">
                             <div className="flex gap-1 items-center px-4 py-3 text-sm rounded-[10px] bg-primary text-white">
