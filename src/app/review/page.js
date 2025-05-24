@@ -13,6 +13,7 @@ import Pagination from "../../components/Pagination"
 import Chart from "../../components/Chart"
 import AdminLayout from "../../components/AdminLayout"
 import CustomSelectBox from '../../components/form/CustomSelectBox';
+import AddManualReview from '../../components/Models/review/AddManualReview';
 
 export default function Review() {
     const [rating, setRating] = useState("")

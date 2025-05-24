@@ -23,7 +23,7 @@ function AddCustomer({ onClose, onSave }) {
         </div>
 
         <div className="grid grid-cols-2 gap-3 mt-5">
-            <CancelButton title="Cancel" />
+            <CancelButton title="Cancel" onClick={onClose}/>
             <SecondaryButton title=" Apply Changes" />
         </div>
     </Model>

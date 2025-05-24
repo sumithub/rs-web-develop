@@ -9,7 +9,7 @@ export default function DeleteModal({ onClose, title = "Tag" }) {
         <DeleteTag title={`Delete ${title}`} question="Are You sure you want to delete the tag At Risk? This action cannot be undone." />
 
         <div className="grid grid-cols-2 gap-3 mt-5">
-            <CancelButton title="Cancel" class_="border-danger2! bg-white! text-danger2!" />
+            <CancelButton title="Cancel" class_="border-danger2! bg-white! text-danger2!" onClick={onClose}/>
             <SecondaryButton title=" Yes, Delete" />
         </div>
     </Model>

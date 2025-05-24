@@ -136,7 +136,7 @@ export default function ReviewResponseTemplates({ onClose, onSave }) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                    <CancelButton title="Cancel"/>
+                    <CancelButton title="Cancel" onClick={onClose}/>
                     <SecondaryButton title="Add Review"/>
                 </div>
             </div>

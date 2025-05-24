@@ -3,7 +3,6 @@ import Select from "../../form/Select";
 import Model from "../Model";
 import Checkbox from "../../form/Checkbox";
 import SecondaryButton from "../../common/SecondaryButton";
-import CancelButton from "../../common/CancelButton";
 
 export default function Carousel({ onClose, OnSave }) {
     return (

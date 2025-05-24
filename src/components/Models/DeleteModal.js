@@ -12,7 +12,7 @@ export default function DeleteModal({ onClose, title = "user" }) {
 
 
         <div className="grid grid-cols-2 gap-3 mt-5">
-            <CancelButton title="Cancel" class_="border-danger2! bg-white! text-danger2!" />
+            <CancelButton title="Cancel" class_="border-danger2! bg-white! text-danger2!" onClick={onClose}/>
             <SecondaryButton title="Remove permanently" />
         </div>
     </Model>

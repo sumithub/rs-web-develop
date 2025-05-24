@@ -29,7 +29,7 @@ export default function SuspendUsers({ onClose }) {
                 </div>
                 <div className="text-primary text-sm font-medium capitalize mt-8">You can reactivate suspended users later.</div>
                 <div className="grid grid-cols-2 gap-3 mt-5">
-                    <CancelButton title="Cancel" />
+                    <CancelButton title="Cancel" onClick={onClose}/>
                     <SecondaryButton title="Confirm & Suspend" />
                 </div>
             </div>
