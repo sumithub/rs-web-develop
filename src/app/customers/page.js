@@ -10,10 +10,7 @@ import PaginationDemo from '../../components/Pagination'
 import DeleteModal from '../../components/Models/DeleteModal';
 import AddCustomer from '../../components/Models/customers/AddCustomer';
 import ApplyTags from '../../components/Models/customers/ApplyTags';
-import Select from '../../components/form/Select'
-
-
-
+import CustomSelectBox from '../../components/form/CustomSelectBox'
 
 function Customers() {
     const [filterBy, setFilterBy] = useState("")
@@ -21,6 +18,8 @@ function Customers() {
     const [open, setOpen] = useState(false)
     const [openTags, setOpenTags] = useState(false)
     const [openModal, setOpenModal] = useState(null)
+    const [view, setView] = useState("allcustomer")
+
 
     return (
         <AdminLayout>
@@ -56,30 +55,42 @@ function Customers() {
                     }} />
             }
             <div>
-                <div className="flex justify-between items-center mb-3">
-                    <Search
-                        placeholder="Search by Filter by name, email, phone"
-                        onSearch={(s) => {
-                            setSearch(s)
-                        }}
-                    />
+                <div className="flex justify-between items-center mb-3 w-full">
+                    <div className='bg-white shadow-sm rounded-[10px] p-4'>
+                        <div className='flex items-center gap-3 w-full'>
+                            <div onClick={() => {
+                                setView("customer")
+                            }} className={`${view === "customer" ? "text-primary font-semibold underline underline-offset-4" : "text-text3 font-normal"} cursor-pointer`}>All Customers</div>
 
-                    <div className="flex items-center justify-between">
-                        <Select
+                            <div onClick={() => {
+                                setView("history")
+                            }} className={`${view === "history" ? "text-primary font-semibold underline underline-offset-4" : "text-text3 font-normal"} cursor-pointer`}>Customer List History</div>
+                        </div>
+
+                    </div>
+                    <div className='grid grid-cols-[1.8fr_0.8fr_0.4fr_0.6fr] gap-3 items-center w-full'>
+                        <Search
+                            mainClass='w-full!'
+                            placeholder="Search by Filter by name, email, phone"
+                            onSearch={(s) => {
+                                setSearch(s)
+                            }}
+                        />
+
+                        <CustomSelectBox
                             defaultOption="filters"
-                            class_='mt-0!'
+                            class_='mt-0! w-52!'
                             value={filterBy}
                             onChange={(e) => {
                                 setFilterBy(e.target.value)
                             }}
-
                         >
                             <option value="tags">Tags</option>
                             <option value="source: manual vs. imported">Source: Manual vs. Imported</option>
-                        </Select>
-                    </div>
+                        </CustomSelectBox>
 
-                    <div className="grid grid-cols-3 items-start gap-3">
+                        <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50"><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
+
                         <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
                             onClick={() => { setOpen(true) }}>Add New Customer</button>
                     </div>
@@ -129,7 +140,7 @@ function Customers() {
                             <td>+91 98765 43210</td>
                             <td><Status status="At Risk" /></td>
                             <td>Manual</td>
-                            <td></td>
+                            <td><Image src="/images/boost.svg" alt='edit' height={28} width={28} unoptimized={true} /></td>
                             <td>Jun 18,2024</td>
                             <td>
                                 <div className='flex items-center gap-2'>
