@@ -55,6 +55,7 @@ const data = {
 const options = {
     responsive: true,
     plugins: {
+        title: { text: 'Sentiment Trend', display: true, },
         legend: {
             position: 'top',
         },

@@ -22,7 +22,7 @@ const options = {
     aspectRatio: 2.4,
     plugins: {
         legend: { position: 'top', },
-        title: { display: false, text: 'Numbers by Month', },
+        title: { display: false, text: '', },
     },
     scales: {
         x: { grid: { display: false, }, },
