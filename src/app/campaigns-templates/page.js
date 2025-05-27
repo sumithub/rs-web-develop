@@ -10,6 +10,7 @@ import AddTemplate from '../../components/Models/templates/AddTemplate'
 import { TEMPLATE_ACTIONS } from '../../constent/constArray'
 import Clone from '../../components/Models/templates/Clone'
 import CustomSelectBox from '../../components/form/CustomSelectBox';
+import Edit from '../../components/Models/templates/Edit'
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
@@ -20,6 +21,14 @@ function CampaignsTemplates() {
 
     return (
         <AdminLayout >
+            {(openModal === "edit" || openModal === "new") &&
+                <Edit
+                    onClose={() => {
+                        setOpenModal(false)
+                    }}
+                />
+            }
+
             {open &&
                 <AddTemplate
                     onClose={() => {

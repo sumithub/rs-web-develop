@@ -10,6 +10,8 @@ import TableOrder from '../../components/TableOrder'
 import React, { useState } from 'react'
 import Link from 'next/link'
 import CustomSelectBox from '../../components/form/CustomSelectBox';
+import DeleteCampaign from '../../components/Models/manage-campaigns/DeleteCampaign'
+
 function ManageCampaigns() {
 
     const [sortBy, setSortBy] = useState("")
@@ -20,9 +22,21 @@ function ManageCampaigns() {
     // const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
+    const [open, setOpen] = useState(false)
 
     return (
         <AdminLayout>
+            {open &&
+                <DeleteCampaign
+                    onClose={() => {
+                        setOpen(false)
+                    }}
+
+                    onSave={() => {
+                        setOpen(true)
+                    }}
+                />
+            }
             <div>
                 <div className="2xl:flex lg:flex-wrap justify-between items-center w-full mb-5">
                     <Search
@@ -139,18 +153,22 @@ function ManageCampaigns() {
                             <td>Jan 15,2025</td>
                             <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
-                            <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
-                                </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
-                            </div></td>
+                            <td>
+                                <div className='flex items-center gap-2'>
+                                    <Link href="/manage-campaigns/detail">
+                                        <button className='cursor-pointer mt-2'>
+                                            <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                        </button>
+                                    </Link>
+                                    <button className='cursor-pointer'>
+                                        <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                    </button>
+                                    <button className='cursor-pointer'>
+                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                            onClick={() => { setOpen(true) }} />
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
 
                         <tr>
@@ -165,16 +183,18 @@ function ManageCampaigns() {
                             <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
                             <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
+                                <Link href="/manage-campaigns/detail">
+                                    <button className='cursor-pointer mt-2'>
+                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>
+                                </Link>
                                 <button className='cursor-pointer'>
                                     <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
                                 </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
+                               <button className='cursor-pointer'>
+                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                            onClick={() => { setOpen(true) }} />
+                                    </button>
                             </div></td>
                         </tr>
 
@@ -190,16 +210,18 @@ function ManageCampaigns() {
                             <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
                             <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
+                                <Link href="/manage-campaigns/detail">
+                                    <button className='cursor-pointer mt-2'>
+                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>
+                                </Link>
                                 <button className='cursor-pointer'>
                                     <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
                                 </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
+                               <button className='cursor-pointer'>
+                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                            onClick={() => { setOpen(true) }} />
+                                    </button>
                             </div></td>
                         </tr>
 
@@ -215,16 +237,18 @@ function ManageCampaigns() {
                             <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
                             <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
+                                <Link href="/manage-campaigns/detail">
+                                    <button className='cursor-pointer mt-2'>
+                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>
+                                </Link>
                                 <button className='cursor-pointer'>
                                     <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
                                 </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
+                               <button className='cursor-pointer'>
+                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                            onClick={() => { setOpen(true) }} />
+                                    </button>
                             </div></td>
                         </tr>
 
@@ -240,16 +264,18 @@ function ManageCampaigns() {
                             <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
                             <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
+                                <Link href="/manage-campaigns/detail">
+                                    <button className='cursor-pointer mt-2'>
+                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>
+                                </Link>
                                 <button className='cursor-pointer'>
                                     <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
                                 </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
+                               <button className='cursor-pointer'>
+                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                            onClick={() => { setOpen(true) }} />
+                                    </button>
                             </div></td>
                         </tr>
 
@@ -265,16 +291,18 @@ function ManageCampaigns() {
                             <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
                             <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
+                                <Link href="/manage-campaigns/detail">
+                                    <button className='cursor-pointer mt-2'>
+                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>
+                                </Link>
                                 <button className='cursor-pointer'>
                                     <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
                                 </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
+                               <button className='cursor-pointer'>
+                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                            onClick={() => { setOpen(true) }} />
+                                    </button>
                             </div></td>
                         </tr>
 
@@ -290,16 +318,18 @@ function ManageCampaigns() {
                             <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
                             <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
+                                <Link href="/manage-campaigns/detail">
+                                    <button className='cursor-pointer mt-2'>
+                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>
+                                </Link>
                                 <button className='cursor-pointer'>
                                     <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
                                 </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
+                               <button className='cursor-pointer'>
+                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                            onClick={() => { setOpen(true) }} />
+                                    </button>
                             </div></td>
                         </tr>
 
@@ -315,16 +345,18 @@ function ManageCampaigns() {
                             <td className='text-primary!'>150</td>
                             <td><Status status="Draft" /></td>
                             <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
+                                <Link href="/manage-campaigns/detail">
+                                    <button className='cursor-pointer mt-2'>
+                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>
+                                </Link>
                                 <button className='cursor-pointer'>
                                     <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
                                 </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
+                               <button className='cursor-pointer'>
+                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                            onClick={() => { setOpen(true) }} />
+                                    </button>
                             </div></td>
                         </tr>
                     </tbody>
