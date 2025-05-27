@@ -87,7 +87,7 @@ export default function ChangeUserRoles({ onClose }) {
             </div>
 
             <div className="grid grid-cols-2 gap-3 mt-6">
-                <CancelButton title="Cancel" />
+                <CancelButton title="Cancel" onClick={onClose}/>
                 <SecondaryButton title="Apply Changes" />
             </div>
         </div>

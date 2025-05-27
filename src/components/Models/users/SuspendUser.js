@@ -12,7 +12,7 @@ export default function SuspendUser({ onClose }) {
                 This will restrict/grant access immediately.</div>
 
             <div className="grid grid-cols-2 gap-3 mt-6">
-                <CancelButton title="Cancel" />
+                <CancelButton title="Cancel" onClick={onClose}/>
                 <SecondaryButton title="Confirm" />
             </div>
         </div>
