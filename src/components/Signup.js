@@ -33,7 +33,7 @@ export default function Signup() {
     };
 
     if (loading) {
-        return <Success message="Registration Successful! Please Verify Your Email Address To Activate Your Account" link="/" buttonTitle="Continue" />
+        return <Success message="Registration Successful! Please Verify Your Email Address To Activate Your Account" link="/dashboard" buttonTitle="Continue" />
     }
     return (<>
         <div>
