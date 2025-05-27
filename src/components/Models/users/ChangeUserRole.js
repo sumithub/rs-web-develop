@@ -23,7 +23,7 @@ export default function ChangeUserRole({ onClose, id, user = {} }) {
     try {
       setSending(true);
 
-      await axios.put(`/users/${id}/role`, { role: data.role });
+      await axios.put(`/api/users/${id}/role`, { role: data.role });
 
       toast.success("Role updated successfully");
       onClose();

@@ -21,9 +21,9 @@ function AddUser({ onClose, id }) {
             let res = null
 
             if (id !== "add") {
-                res = await axios.put("/" + id, data)
+                res = await axios.put("/api" + id, data)
             } else {
-                res = await axios.post("/", data)
+                res = await axios.post("/api", data)
             }
 
             toast.success("Updated Successfully")

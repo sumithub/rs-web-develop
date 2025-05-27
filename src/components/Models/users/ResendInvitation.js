@@ -24,7 +24,7 @@ export default function ResendInvitation({ onClose, user }) {
     const onSubmit = async (data) => {
         try {
             setSending(true);
-            await axios.post(`/users/${user?.id}/resend-invite`, data);
+            await axios.post(`/api/users/${user?.id}/resend-invite`, data);
             toast.success("Invitation resent successfully");
             onClose();
         } catch (error) {

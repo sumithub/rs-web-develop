@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useState } from "react";
 import InputForm from "./form/InputForm";
 import Success from "./common/Success";
+import axios from "axios";
+import Image from "next/image";
+import { validEmailRgx, validPasswordRgx } from "../../helper";
 
 export default function Signup() {
     const {
@@ -15,12 +18,17 @@ export default function Signup() {
         formState: { errors },
     } = useForm();
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("")
 
-    const onSubmit = async () => {
+    const onSubmit = async (data) => {
         try {
             setLoading(true);
+            await axios.post("/api", data)
+            setLoading(true)
         } catch (error) {
             console.error("Signup error:", error);
+            setLoading(false)
+            setError(error?.message);
         }
     };
 
@@ -55,12 +63,9 @@ export default function Signup() {
                         ...register("email", {
                             required: "Email is required",
                             pattern: {
-                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                value: validEmailRgx,
                                 message: "Email is invalid."
-                            },
-                            validate: (value) =>
-                                !["test@gmail.com", "admin@gmail.com"].includes(value) ||
-                                "This email address is already in use. Please try another."
+                            }
                         })
                     }}
                     setValue={setValue}
@@ -76,7 +81,7 @@ export default function Signup() {
                         ...register("password", {
                             required: true,
                             pattern: {
-                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]{8,}$/,
+                                value: validPasswordRgx,
                                 message: "Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character."
                             }
                         })
@@ -100,7 +105,10 @@ export default function Signup() {
                         </Link>
                     </div>
                 </label>
-                <button
+                {error && <div className='flex gap-2.5 justify-center mt-[15px]'>
+                    <Image src="/images/error.svg" alt='error.svg' width={15} height={14} />
+                    <h2 className="text-xs text-danger capitalize">{error}</h2>
+                </div>} <button
                     type="submit"
                     disabled={loading}
                     className="disabled:bg-primary/50 text-text text-lg mt-3 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary"

@@ -226,8 +226,12 @@ body {
   box-sizing: content-box;
 }
 
+button {
+  @apply cursor-pointer
+}
+
 :disabled {
-  @apply pointer-events-none
+  @apply pointer-events-none opacity-85
 }
 
 .table-class {

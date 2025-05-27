@@ -2,11 +2,13 @@
 import { useForm } from "react-hook-form";
 import Checkbox2 from "./form/Checkbox2";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputForm from "./form/InputForm";
-import Success from "./common/Success";
 import Verify from "./form/Verify";
 import Image from "next/image";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { validEmailRgx } from "../../helper"
 
 export default function Signin() {
     const {
@@ -18,25 +20,35 @@ export default function Signin() {
     } = useForm();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [verificationSuccess, setVerificationSuccess] = useState(false)
+    const router = useRouter()
 
-    const onSubmit = async () => {
+    useEffect(() => {
+        if (verificationSuccess) {
+            setTimeout(() => {
+                setVerificationSuccess(null)
+            }, 5000)
+        }
+    }, [verificationSuccess])
+
+    const onSubmit = async (data) => {
         try {
             setLoading(true);
+            await axios.post("/api", data)
+            setTimeout(() => {
+                router.push("/")
+            }, 1000);
         } catch (error) {
-            console.error("Signup error:", error);
-            setError("Invalid email or password. Please try again.");
+            setLoading(false)
+            setError(error?.message);
         }
     };
 
-    // if (loading) {
-    //     return <Success message="Registration Successful! Please Verify Your Email Address To Activate Your Account" link="/" buttonTitle="Continue" />
-    // }
     return (<>
         <div>
             <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Login to your account</h2>
             <p className="text-xs sm:pt-1.5 pt-2.5 pb-2.5 capitalize text-center text-[#616E7C]">Hey! We soar you working welcome back!</p>
             <form onSubmit={handleSubmit(onSubmit)}>
-
                 <InputForm
                     label="Email ID"
                     name="email"
@@ -44,18 +56,7 @@ export default function Signin() {
                     icon="/images/close.svg"
                     isRequired={true}
                     errors={errors}
-                    formProps={{
-                        ...register("email", {
-                            required: "Email is required",
-                            pattern: {
-                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: "Email is invalid."
-                            },
-                            validate: (value) =>
-                                !["test@gmail.com", "admin@gmail.com"].includes(value) ||
-                                "This email address is already in use. Please try another."
-                        })
-                    }}
+                    formProps={{ ...register("email", { required: "Email is required" }) }}
                     setValue={setValue}
                     watch={watch}
                 />
@@ -67,11 +68,7 @@ export default function Signin() {
                     placeholder="Create A Password"
                     formProps={{
                         ...register("password", {
-                            required: true,
-                            pattern: {
-                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]{8,}$/,
-                                message: "Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character."
-                            }
+                            required: true
                         })
                     }} isRequired={true} errors={errors}
                     setValue={setValue}
@@ -79,7 +76,7 @@ export default function Signin() {
                 />
 
 
-                <Verify />
+                {verificationSuccess !== null && <Verify verificationSuccess={verificationSuccess} onClick={() => { setVerificationSuccess(true) }} />}
                 <div className='flex justify-between mt-5'>
                     <div className='flex gap-1.5 items-center'>
                         <Checkbox2 class_="border-text-3"
@@ -98,7 +95,6 @@ export default function Signin() {
                     <button
                         disabled={loading}
                         className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-2.5 py-3 rounded-[10px] border border-primary cursor-pointer">Login</button>
-
                     <h2 className='text-sm capitalize text-secondary pt-2.5 text-center'>Don&#39;t have an account? <Link href="/register" className='text-primary underline underline-offset-3'>Sign Up</Link></h2>
                 </div>
             </form>
