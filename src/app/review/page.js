@@ -10,7 +10,7 @@ import Dropdown from "../../components/DropDown";
 import DatePicker from "../../components/form/DatePicker";
 import Loading from "../../components/Loading";
 import Pagination from "../../components/Pagination"
-import Chart from "../../components/Chart"
+import Chart from "../../components/charts/Chart"
 import AdminLayout from "../../components/AdminLayout"
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import AddManualReview from '../../components/Models/review/AddManualReview';
