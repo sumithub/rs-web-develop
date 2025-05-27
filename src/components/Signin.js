@@ -5,8 +5,10 @@ import Link from "next/link";
 import { useState } from "react";
 import InputForm from "./form/InputForm";
 import Success from "./common/Success";
+import Verify from "./form/Verify";
+import Image from "next/image";
 
-export default function Signup() {
+export default function Signin() {
     const {
         register,
         setValue,
@@ -15,35 +17,26 @@ export default function Signup() {
         formState: { errors },
     } = useForm();
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
 
     const onSubmit = async () => {
         try {
             setLoading(true);
         } catch (error) {
             console.error("Signup error:", error);
+            setError("Invalid email or password. Please try again.");
         }
     };
 
-    if (loading) {
-        return <Success message="Registration Successful! Please Verify Your Email Address To Activate Your Account" link="/" buttonTitle="Continue" />
-    }
+    // if (loading) {
+    //     return <Success message="Registration Successful! Please Verify Your Email Address To Activate Your Account" link="/" buttonTitle="Continue" />
+    // }
     return (<>
         <div>
-            <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Sign Up</h2>
-            <p className="text-xs sm:pt-1.5 pt-2.5 pb-2.5 capitalize text-center text-[#616E7C]">Let&#39;s get you all st up so you can access your personal account.</p>
+            <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Login to your account</h2>
+            <p className="text-xs sm:pt-1.5 pt-2.5 pb-2.5 capitalize text-center text-[#616E7C]">Hey! We soar you working welcome back!</p>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <InputForm
-                    class_="mt-0!"
-                    label="Full Name"
-                    name="name"
-                    inputType="text"
-                    placeholder="Enter Your Full Name"
-                    icon="/images/close.svg"
-                    formProps={{ ...register("name", { required: true, pattern: { value: /^[A-Za-z\s]+$/, message: "Please enter a valid first name (alphabetic characters only)." } }) }}
-                    isRequired={true} errors={errors}
-                    setValue={setValue}
-                    watch={watch}
-                />
+
                 <InputForm
                     label="Email ID"
                     name="email"
@@ -85,36 +78,29 @@ export default function Signup() {
                     watch={watch}
                 />
 
-                <label htmlFor="terms" className="mt-[10px] gap-1.5 flex items-center">
-                    <Checkbox2
-                        required={true}
-                        id="terms" />
-                    <div className="text-sm text-secondary">
-                        I Agree To Our{" "}
-                        <Link href="/" className="text-primary">
-                            Terms & Conditions
-                        </Link>{" "}
-                        And{" "}
-                        <Link href="/" className="text-primary">
-                            Privacy Policy
-                        </Link>
-                    </div>
-                </label>
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="disabled:bg-primary/50 text-text text-lg mt-3 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary"
-                >
-                    {loading ? "Creating Account..." : "Create Account"}
-                </button>
 
-                <h2 className="text-sm text-center mt-3 capitalize text-secondary">
-                    Already have an account?
-                    <Link href="/login" className="text-primary underline underline-offset-[3px]">
-                        {" "}
-                        Login
+                <Verify />
+                <div className='flex justify-between mt-5'>
+                    <div className='flex gap-1.5 items-center'>
+                        <Checkbox2 class_="border-text-3"
+                            required={false} />
+                        <h2 className='text-sm capitalize text-secondary'>Remember me</h2>
+                    </div>
+                    <Link href="/forgot-password">
+                        <h2 className='text-sm capitalize text-primary'>Forgot Password ?</h2>
                     </Link>
-                </h2>
+                </div>
+                <div>
+                    {error && <div className='flex gap-2.5 justify-center mt-[15px]'>
+                        <Image src="/images/error.svg" alt='error.svg' width={15} height={14} />
+                        <h2 className="text-xs text-danger capitalize">{error}</h2>
+                    </div>}
+                    <button
+                        disabled={loading}
+                        className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-2.5 py-3 rounded-[10px] border border-primary cursor-pointer">Login</button>
+
+                    <h2 className='text-sm capitalize text-secondary pt-2.5 text-center'>Don&#39;t have an account? <Link href="/register" className='text-primary underline underline-offset-3'>Sign Up</Link></h2>
+                </div>
             </form>
         </div>
     </>
