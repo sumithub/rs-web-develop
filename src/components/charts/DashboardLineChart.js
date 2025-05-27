@@ -30,22 +30,22 @@ const data = {
         {
             label: 'Negative',
             data: [30, 40, 35, 50, 45],
-            borderColor: 'red',
-            backgroundColor: 'red',
+            borderColor: '#DC3545',
+            backgroundColor: '#DC3545',
             tension: 0.4,
         },
         {
             label: 'Nuetral',
             data: [20, 25, 30, 35, 40],
-            borderColor: 'yellow',
-            backgroundColor: 'yellow',
+            borderColor: '#FFC107',
+            backgroundColor: '#FFC107',
             tension: 0.4,
         },
         {
             label: 'Positive',
             data: [10, 15, 20, 15, 10],
-            borderColor: 'blue',
-            backgroundColor: 'blue',
+            borderColor: '#0396FF',
+            backgroundColor: '#0396FF',
             borderDash: [5, 5], // makes it dotted
             tension: 0.4,
         },
@@ -59,6 +59,11 @@ const options = {
             position: 'top',
         },
     },
+    scales: {
+        y: {
+            grid: { display: false, },
+        }
+    }
 };
 
 export default function DashboardLineChart() {
