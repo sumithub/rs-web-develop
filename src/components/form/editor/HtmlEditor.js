@@ -28,19 +28,19 @@ const RichTextExample = ({children}) => {
             <div className="bg-dark rounded-tr-lg rounded-tl-lg">
             <Toolbar >
                 <MarkButton format="bold" icon={<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.34668 2.62565C3.34668 1.98398 3.87168 1.45898 4.51335 1.45898H7.50001C9.02835 1.45898 10.2708 2.70148 10.2708 4.22982C10.2708 5.75815 9.02835 7.00065 7.50001 7.00065H3.34668V2.62565Z" stroke="#1F2933" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M3.34668 7H8.88835C10.4167 7 11.6592 8.2425 11.6592 9.77083C11.6592 11.2992 10.4167 12.5417 8.88835 12.5417H4.51335C3.87168 12.5417 3.34668 12.0167 3.34668 11.375V7V7Z" stroke="#1F2933" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3.34668 2.62565C3.34668 1.98398 3.87168 1.45898 4.51335 1.45898H7.50001C9.02835 1.45898 10.2708 2.70148 10.2708 4.22982C10.2708 5.75815 9.02835 7.00065 7.50001 7.00065H3.34668V2.62565Z" stroke="#1F2933" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M3.34668 7H8.88835C10.4167 7 11.6592 8.2425 11.6592 9.77083C11.6592 11.2992 10.4167 12.5417 8.88835 12.5417H4.51335C3.87168 12.5417 3.34668 12.0167 3.34668 11.375V7V7Z" stroke="#1F2933" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 } />
                 <MarkButton format="italic" icon={<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6.11157 1.75H11.5074" stroke="#1F2933" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M3.48657 12.25H8.88241" stroke="#1F2933" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M8.8125 1.75L6.1875 12.25" stroke="#1F2933" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M6.11157 1.75H11.5074" stroke="#1F2933" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M3.48657 12.25H8.88241" stroke="#1F2933" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M8.8125 1.75L6.1875 12.25" stroke="#1F2933" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 } />
                 <MarkButton format="underline" icon={<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.41675 12.25H11.5834" stroke="#1F2933" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M3.41675 1.75V5.83333C3.41675 8.09083 5.24258 9.91667 7.50008 9.91667C9.75758 9.91667 11.5834 8.09083 11.5834 5.83333V1.75" stroke="#1F2933" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3.41675 12.25H11.5834" stroke="#1F2933" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M3.41675 1.75V5.83333C3.41675 8.09083 5.24258 9.91667 7.50008 9.91667C9.75758 9.91667 11.5834 8.09083 11.5834 5.83333V1.75" stroke="#1F2933" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 } />
                 {/* <MarkButton format="code" icon="code" />

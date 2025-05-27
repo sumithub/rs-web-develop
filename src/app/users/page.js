@@ -28,7 +28,6 @@ import CustomSelectBox from '../../components/form/CustomSelectBox';
 function Users() {
     const [role, setRole] = useState("")
     const [status, setStatus] = useState("")
-    const [date, setDate] = useState("")
     // const [list, setList] = useState([])
     const [search, setSearch] = useState("")
     const [openModal, setOpenModal] = useState(null)
