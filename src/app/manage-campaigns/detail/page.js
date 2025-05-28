@@ -88,7 +88,7 @@ export default function Detail({ }) {
                 stepTitle3="Template Selection"
                 stepTitle4="Scheduling & Launch"
             />
-            <div className="">
+            <div>
                 <div className="flex items-center justify-between mb-4">
                     <div className="text-secondary text-xl font-medium">Create New Campaign</div>
                     <div className="flex items-center gap-2">
@@ -107,10 +107,15 @@ export default function Detail({ }) {
                                 errors={errors}
                             />
                             <div>
-                                <div className="text-sm text-secondary font-medium capitalize mt-3 mb-1">Description</div>
+
+                                <InputForm label="Description" placeholder="Enter Name" isRequired={false} inputClass="bg-white!"
+                                    formProps={{ ...register("Description", { required: false }) }}
+                                    errors={errors}
+                                />
+                                {/* <div className="text-sm text-secondary font-medium capitalize mt-3 mb-1">Description</div>
                                 <textarea
                                     placeholder="Write a content post"
-                                    rows={1} className="bg-white  w-full focus:border-primary focus:outline-0 focus-visible:outline-0 py-3.5 px-2.5 text-sm text-secondary! rounded-lg" />
+                                    rows={1} className="bg-white  w-full focus:border-primary focus:outline-0 focus-visible:outline-0 py-3.5 px-2.5 text-sm text-secondary! rounded-lg" /> */}
                             </div>
                         </div>
                     </CampaignCard>

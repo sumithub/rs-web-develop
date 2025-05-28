@@ -99,7 +99,7 @@ function AddUser({ onClose, id }) {
                     }}
                 />
 
-                <InputForm label="Phone Number" placeholder="Enter phone number" inputType="number"
+                <InputForm label="Phone Number" placeholder="Enter phone number (optional)" inputType="number"
                     formProps={{ ...register("phone", { required: false }) }}
                     errors={errors}
                     setValue={setValue}

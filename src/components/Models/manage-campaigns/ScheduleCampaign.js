@@ -11,7 +11,6 @@ import axios from 'axios'
 import { getError } from "../../../../helper"
 import { useForm } from 'react-hook-form'
 
-
 function ScheduleCampaign({ onClose, id }) {
   const { register, handleSubmit, formState: { errors }, } = useForm();
   const [sending, setSending] = useState(false)
@@ -40,14 +39,16 @@ function ScheduleCampaign({ onClose, id }) {
   return (
     <Model onClose={onClose} title="schedule campaign" modalClass="w-[60%]!">
       <div>
-        <div className='grid grid-cols-2 gap-3 items-start 2xl:mt-0 mt-3'>
+        <div className='grid grid-cols-2 gap-3 items-center 2xl:mt-0 mt-3'>
           <DatePicker
+            labelClass='font-medium!'
             label='Date'
             icon={true} mainClass="mt-0!"
             value={date}
             dateFormat="dd/MM/yyyy"
             onChange={(e) => setDate(e)} />
-          <InputForm inputType='time' label='Time' inputClass='py-2!'
+
+          <InputForm inputType='time' label='Time' inputClass='py-2!' class_='mt-0!'
             formProps={{ ...register("time", { required: false }) }}
             errors={errors}
           />
@@ -69,7 +70,7 @@ function ScheduleCampaign({ onClose, id }) {
         </div>
 
         <div>
-          <div className='text-lg font-medium mt-3 mb-4'>Days of the Week</div>
+          <div className='text-lg font-medium mt-3 mb-4'>Days of the Week <span className='text-text3 font-normal'>(Optional)</span></div>
           <div className="flex items-start gap-4">
             <Checkbox />
             <div>Monday</div>
