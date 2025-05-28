@@ -28,3 +28,20 @@ export const templates = [
     { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: new Date('2024-06-18T10:00:00') },
     { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: new Date('2024-06-18T10:00:00') },
 ];
+
+export const manageCampaigns = [{ name: "Campaign 1", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+{ name: "Campaign 2", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+{ name: "Campaign 3", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+{ name: "Campaign 4", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+]
+
+export const reviews = [{ img: "/images/google.svg", source: "Google", totalReviews: 500, lastDays: 300, thisMonth: 300, lastMonth: 123 },
+{ img: "/images/yelp.svg", source: "Yelp", totalReviews: 200, lastDays: 70, thisMonth: 123, lastMonth: 123 },
+{ img: "/images/owl.svg", source: "Tripadvisor", totalReviews: 150, lastDays: 35, thisMonth: 132, lastMonth: 123 },
+]
+
+export const responseInsights = [
+    { id: "USR10000", date: "Jun 18,2024 10:00AM", actionToken: "opened", details: "review submit" },
+    { id: "USR10000", date: "Jun 18,2024 10:00AM", actionToken: "opened", details: "review submit" },
+    { id: "USR10000", date: "Jun 18,2024 10:00AM", actionToken: "opened", details: "review submit" },
+]

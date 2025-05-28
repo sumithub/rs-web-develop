@@ -28,7 +28,7 @@ export default function RemoveUsers({ onClose }) {
         try {
             setLoading(true);
             const ids = users.map((user) => user.id);
-            await axios.post("/api/users/remove", { ids }); // You can change the API route
+            await axios.post("/api", { ids }); 
             toast.success("Users removed successfully");
             onClose();
         } catch (error) {
