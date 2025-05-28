@@ -29,7 +29,24 @@ export default function Status({ status }) {
     else if (s === "at risk") {
         bgClass = "bg-[#ff00001A] text-[#ff0000]"
     }
-
+    else if (s === "yes") {
+        bgClass = "bg-[#0396FF1A] text-primary"
+    }
+    else if (s === "notify") {
+        bgClass = "bg-[#0396FF1A] text-primary"
+    }
+    else if (s === "inactive") {
+        bgClass = "bg-[#FFC1071A] text-custom-yellow-light"
+    }
+    else if (s === "alert") {
+        bgClass = "bg-[#DC35451A] text-danger"
+    }
+    else if (s === "no") {
+        bgClass = "bg-[#DC35451A] text-danger"
+    }
+    else if (s === "dismiss") {
+        bgClass = "bg-[#DC35451A] text-danger"
+    }
     return <div>
         <button className={`${bgClass} rounded-4xl py-1.5 px-3 text-sm text-center disabled:pointer-events-none`}>{status}</button>
     </div>

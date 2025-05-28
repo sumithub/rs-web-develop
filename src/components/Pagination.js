@@ -104,9 +104,9 @@ const Pagination = ({ totalPages = 10, initialPage = 1 }) => {
 };
 
 // Demo component to show the pagination in action
-const PaginationDemo = () => {
+const PaginationDemo = (class_ = "") => {
     return (
-        <div className="p-4">
+        <div className={`p-4 ${class_}`}>
             <Pagination totalPages={10} initialPage={1} />
         </div>
     );
