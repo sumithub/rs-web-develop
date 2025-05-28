@@ -32,6 +32,8 @@ export default function Search({ mainClass = "", selected, onRemove, hideSearchT
                     value={search}
                     onChange={(e) => {
                         setSearch(e.target.value)
+                        if (onSearch)
+                            onSearch(e.target.value)
                     }}
                     placeholder={placeholder} />
 

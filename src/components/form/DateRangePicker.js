@@ -5,7 +5,7 @@ import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 
-function DateRange() {
+function DateRange({ onChange }) {
     const [open, setOpen] = useState(false)
     const ref = useRef(null);
     useEffect(() => {
@@ -50,6 +50,8 @@ function DateRange() {
         const { startDate, endDate } = state[0];
         const formatted = `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
         setSavedRange(formatted);
+        if (onChange)
+            onChange({ startDate, endDate });
         setOpen(false);
     };
     return (
@@ -76,7 +78,8 @@ function DateRange() {
                             direction="horizontal"
                         />
                         <div className='absolute left-14 bottom-5 w-[12%]'>
-                            <button onClick={handleSave} className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full py-1 rounded-lg border border-primary cursor-pointer text-center">Save</button>
+                            <button onClick={handleSave}
+                                className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full py-1 rounded-lg border border-primary cursor-pointer text-center">Save</button>
                         </div>
                     </div>
                 </div>}
