@@ -74,9 +74,10 @@ function ChangeEmail() {
                         <Image src="/images/error.svg" alt='error.svg' width={15} height={14} />
                         <h2 className="text-xs text-danger capitalize">{error}</h2>
                     </div>}
-                    <div className='flex gap-4'>
-                        <button type='button' className="text-lg font-medium bg-dark hover:bg-white text-text3 w-full mt-5 py-3 rounded-[10px] border border-dark hover:border-border-color cursor-pointer">Cancel</button>
-
+                    <div className='grid grid-cols-2 gap-4'>
+                        <Link href="/login">
+                            <button type='button' className="text-lg font-medium bg-dark hover:bg-white text-text3 w-full mt-5 py-3 rounded-[10px] border border-dark hover:border-border-color cursor-pointer">Cancel</button>
+                        </Link>
                         <button disabled={loading} type='submit' className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-5 py-3 rounded-[10px] border border-primary cursor-pointer capitalize"                        >update email</button>
                     </div>
                 </form>
