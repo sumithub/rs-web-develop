@@ -8,7 +8,7 @@ import InputForm from '../../form/InputForm';
 import { getError } from '../../../../helper';
 
 function ChangePassword({ onClose, id }) {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false);
 
     const onSubmit = async (data) => {
@@ -17,12 +17,12 @@ function ChangePassword({ onClose, id }) {
             let res = null;
 
             if (id !== "add") {
-                res = await axios.put("/api" + id, data);
+                res = await axios.put("/api", data);
             } else {
                 res = await axios.post("/api", data);
             }
 
-            toast.success("Updated Successfully");
+            toast.success("Setup Password Successfully");
             setSending(false);
             onClose();
         } catch (error) {
@@ -42,24 +42,29 @@ function ChangePassword({ onClose, id }) {
                             placeholder="Enter new password"
                             class_='mt-0!'
                             formProps={{
-                                ...register("setupPassword", {
+                                ...register("newPassword", {
                                     required: "Password is required",
-                                    pattern: {
-                                        value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
-                                        message: "Minimum 6 characters, include a number"
+                                    minLength: {
+                                        value: 6,
+                                        message: "Password must be at least 6 characters"
                                     }
                                 })
                             }}
+                            errors={errors}
                         />
+
                         <InputForm
                             label="Confirm Password"
                             isRequired={true}
                             placeholder="Enter confirm password"
                             formProps={{
                                 ...register("confirmPassword", {
-                                    required: "Confirm your password",
+                                    required: "Please confirm your password",
+                                    validate: (val) =>
+                                        val === watch("newPassword") || "Passwords do not match",
                                 })
                             }}
+                            errors={errors}
                         />
                     </div>
 
