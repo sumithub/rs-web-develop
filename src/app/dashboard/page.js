@@ -1,20 +1,44 @@
 "use client"
 import DashboardCard from "../../components/DashboardCard";
-import Table from "../../components/Table";
 import DashboardChart from "../../components/DashboardChart"
 import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import DateRange from "../../components/form/DateRangePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardBarChart from "../../components/charts/DashboardBarChart";
 import DashboardPieChart from "../../components/charts/DashboardPieChart";
 import DashboardLineChart from "../../components/charts/DashboardLineChart";
 import StackedReviewChart from "../../components/charts/StackedReviewChart";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getError } from "../../../helper";
+import { reviews } from "../../constent/constArray";
+import Loading from "../../components/Loading";
 
 export default function Dashboard() {
     const [rating, setRating] = useState("")
     const [reviewSource, setReviewSource] = useState("")
+    const [loading, setLoading] = useState(true);
+    const [list, setList] = useState([])
+
+    useEffect(() => {
+        getReview()
+    }, [])
+
+    const getReview = async () => {
+        try {
+            setLoading(true)
+            setList([])
+            const res = await axios.get("/api")
+            setList(res.data || reviews)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
 
     return <AdminLayout
         noCard={true}
@@ -115,8 +139,33 @@ export default function Dashboard() {
                     <StackedReviewChart />
                 </DashboardChart>
             </div>
-            <div>
-                <Table />
+
+            <div className="mt-8 w-full border border-border-color rounded-[20px] overflow-hidden">
+                {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+                    <thead>
+                        <tr>
+                            <th>Source</th>
+                            <th>Total Reviews</th>
+                            <th>Last 30 Days</th>
+                            <th>This Month</th>
+                            <th>Last Month</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {list?.map((e, index) => <tr key={index}>
+                            <td>
+                                <div className="flex gap-2.5">
+                                    <Image src={e.img} alt="google.svg" width={17} height={17} unoptimized={true} />
+                                    {e.source}
+                                </div>
+                            </td>
+                            <td>{e.totalReviews}</td>
+                            <td>{e.lastDays}</td>
+                            <td>{e.thisMonth}</td>
+                            <td>{e.lastMonth}</td>
+                        </tr>)}
+                    </tbody>
+                </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
         </div>
     </AdminLayout>
