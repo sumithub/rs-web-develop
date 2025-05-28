@@ -18,7 +18,7 @@ function Customers() {
     const [open, setOpen] = useState(false)
     const [openTags, setOpenTags] = useState(false)
     const [openModal, setOpenModal] = useState(null)
-    const [view, setView] = useState("allcustomer")
+    const [view, setView] = useState("history")
 
 
     return (
@@ -114,7 +114,7 @@ function Customers() {
                 </div>
             </div>
 
-            <div className='table-class'>
+            {view === "customer" && <div className='table-class'>
                 <table className='w-full'>
                     <thead>
                         <tr>
@@ -339,7 +339,173 @@ function Customers() {
                     </tbody>
                 </table>
                 <PaginationDemo />
+            </div>}
+
+            {view === "history" && <div className='grid grid-cols-3 gap-x-5 gap-y-[15px]'>
+                <div className='border border-border2 rounded-[10px] p-[15px]'>
+                    <div className='flex justify-between items-center'>
+                        <div className='flex gap-2.5 items-center'>
+                            <Image src="/images/example.png" alt="example" width={38} height={38} />
+                            <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
+                        </div>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                    </div>
+                    <div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Date</h2>
+                            <h2 className='text-sm font-medium'>Jun 18,2024</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Source</h2>
+                            <h2 className='text-sm font-medium'>CSV Import</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Total customer</h2>
+                            <h2 className='text-sm font-medium'>150</h2>
+                        </div>
+                    </div>
+                    <div className='grid grid-cols-2 gap-[15px] pt-5'>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                    </div>
+                </div>
+                <div className='border border-border2 rounded-[10px] p-[15px]'>
+                    <div className='flex justify-between items-center'>
+                        <div className='flex gap-2.5 items-center'>
+                            <Image src="/images/example.png" alt="example" width={38} height={38} />
+                            <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
+                        </div>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                    </div>
+                    <div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Date</h2>
+                            <h2 className='text-sm font-medium'>Jun 18,2024</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Source</h2>
+                            <h2 className='text-sm font-medium'>CSV Import</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Total customer</h2>
+                            <h2 className='text-sm font-medium'>150</h2>
+                        </div>
+                    </div>
+                    <div className='grid grid-cols-2 gap-[15px] pt-5'>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                    </div>
+                </div>
+                <div className='border border-border2 rounded-[10px] p-[15px]'>
+                    <div className='flex justify-between items-center'>
+                        <div className='flex gap-2.5 items-center'>
+                            <Image src="/images/example.png" alt="example" width={38} height={38} />
+                            <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
+                        </div>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                    </div>
+                    <div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Date</h2>
+                            <h2 className='text-sm font-medium'>Jun 18,2024</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Source</h2>
+                            <h2 className='text-sm font-medium'>CSV Import</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Total customer</h2>
+                            <h2 className='text-sm font-medium'>150</h2>
+                        </div>
+                    </div>
+                    <div className='grid grid-cols-2 gap-[15px] pt-5'>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                    </div>
+                </div>
+                <div className='border border-border2 rounded-[10px] p-[15px]'>
+                    <div className='flex justify-between items-center'>
+                        <div className='flex gap-2.5 items-center'>
+                            <Image src="/images/example.png" alt="example" width={38} height={38} />
+                            <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
+                        </div>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                    </div>
+                    <div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Date</h2>
+                            <h2 className='text-sm font-medium'>Jun 18,2024</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Source</h2>
+                            <h2 className='text-sm font-medium'>CSV Import</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Total customer</h2>
+                            <h2 className='text-sm font-medium'>150</h2>
+                        </div>
+                    </div>
+                    <div className='grid grid-cols-2 gap-[15px] pt-5'>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                    </div>
+                </div>
+                <div className='border border-border2 rounded-[10px] p-[15px]'>
+                    <div className='flex justify-between items-center'>
+                        <div className='flex gap-2.5 items-center'>
+                            <Image src="/images/example.png" alt="example" width={38} height={38} />
+                            <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
+                        </div>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                    </div>
+                    <div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Date</h2>
+                            <h2 className='text-sm font-medium'>Jun 18,2024</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Source</h2>
+                            <h2 className='text-sm font-medium'>CSV Import</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Total customer</h2>
+                            <h2 className='text-sm font-medium'>150</h2>
+                        </div>
+                    </div>
+                    <div className='grid grid-cols-2 gap-[15px] pt-5'>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                    </div>
+                </div>
+                <div className='border border-border2 rounded-[10px] p-[15px]'>
+                    <div className='flex justify-between items-center'>
+                        <div className='flex gap-2.5 items-center'>
+                            <Image src="/images/example.png" alt="example" width={38} height={38} />
+                            <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
+                        </div>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                    </div>
+                    <div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Date</h2>
+                            <h2 className='text-sm font-medium'>Jun 18,2024</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Source</h2>
+                            <h2 className='text-sm font-medium'>CSV Import</h2>
+                        </div>
+                        <div className='flex items-center justify-between pt-[15px]'>
+                            <h2 className='text-sm font-medium text-text3'>Total customer</h2>
+                            <h2 className='text-sm font-medium'>150</h2>
+                        </div>
+                    </div>
+                    <div className='grid grid-cols-2 gap-[15px] pt-5'>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                    </div>
+                </div>
             </div>
+            }
         </AdminLayout>
     )
 }

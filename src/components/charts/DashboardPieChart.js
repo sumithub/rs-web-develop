@@ -11,25 +11,15 @@ import {
 // Register Pie chart elements
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const labels = ['A', 'B', 'C', 'D'];
+const labels_ = ['A', 'B', 'C', 'D'];
 const values = [40, 30, 20, 10];
 
 const max = Math.max(...values);
-const backgroundColors = values.map((value) =>
+const backgroundColors_ = values.map((value) =>
     value === max ? '#3354F4' : '#E6EEF5'
 );
 
-const data = {
-    labels,
-    datasets: [
-        {
-            label: '',
-            data: values,
-            backgroundColor: backgroundColors,
-            borderWidth: 1,
-        },
-    ],
-};
+
 
 const options = {
     responsive: true,
@@ -45,8 +35,18 @@ const options = {
     },
 };
 
-export default function DashboardPieChart() {
-    return (
+export default function DashboardPieChart({ labels, colors }) {
+    const data = {
+        labels: labels || labels_,
+        datasets: [
+            {
+                label: '',
+                data: values,
+                backgroundColor: colors || backgroundColors_,
+                borderWidth: 1,
+            },
+        ],
+    }; return (
         <div style={{ width: '100%', maxWidth: 300, margin: 'auto' }}>
             <Pie data={data} options={options} />
         </div>
