@@ -11,6 +11,7 @@ import {
     Legend,
 } from 'chart.js';
 import { title } from 'process';
+import { te } from 'date-fns/locale';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -34,7 +35,7 @@ const data = {
             data: values,
             backgroundColor: ['#0396FFff', '#0396FFcc', '#0396FF99', '#0396FF66', '#0396FF33'],
             borderRadius: 6,
-            barThickness: 40,
+            barThickness: 36,
         },
     ],
 };
@@ -51,7 +52,7 @@ const options = {
     scales: {
         x: {
             grid: { display: false, },
-
+            title: { text: 'Number of Users', display: true, font: { size: 16, }, },
             beginAtZero: true,
             ticks: {
                 // callback: function (value) {

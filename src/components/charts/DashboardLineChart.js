@@ -69,7 +69,7 @@ const options = {
 
 export default function DashboardLineChart() {
     return (
-        <div style={{ width: '100%', maxWidth: 700, margin: 'auto' }}>
+        <div style={{ width: '100%', maxWidth: 800, margin: 'auto' }}>
             <Line data={data} options={options} />
         </div>
     );

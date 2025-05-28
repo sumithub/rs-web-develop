@@ -68,12 +68,11 @@ export default function CampaignDashboard() {
 
         <div>
             <div className="grid grid-cols-2 gap-5 mt-5 items-start">
-                <DashboardChart title="Campaign Funnel Breakdown" height={218} width={509} class_="my-5">
+                <DashboardChart title="Campaign Funnel Breakdown" class_="my-5">
                     <SimpleHorizontalBarChart />
-                    <div className="text-xs text-text3 text-center capitalize">Number Of Users</div>
                 </DashboardChart>
 
-                <DashboardChart title="Campaign Performance Over Time" height={200} width={466}>
+                <DashboardChart title="Campaign Performance Over Time" >
                     <DashboardLineChart />
                 </DashboardChart>
 
@@ -119,7 +118,10 @@ export default function CampaignDashboard() {
                 <DashboardChart title="Engagement Breakdown">
                     <div className="flex items-start">
                         <div className="w-[60%]">
-                            <DashboardPieChart />
+                            <DashboardPieChart
+                                labels={["Opened", "Bounced", "Delivered", "Reviewed", "Clicked"]}
+                                colors={["#0396FF", "#16C098", "#FFAE4C", "#07DBFA", "#988AFC"]}
+                            />
                         </div>
                         <div className="mt-10 w-[40%] capitalize">
                             <div className="flex items-center gap-3 mb-5">
