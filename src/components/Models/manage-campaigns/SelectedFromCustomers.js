@@ -7,6 +7,8 @@ import Checkbox from '../../../components/form/Checkbox'
 import Status from '../../Status'
 import Select from "../../form/Select"
 
+
+
 function SelectedCustomers({ onClose, onSave }) {
     return (
         <Model onClose={onClose} title="select from Customer List" modalClass="w-[60%]!" >
