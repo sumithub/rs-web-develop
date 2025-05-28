@@ -28,3 +28,14 @@ export const templates = [
     { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: new Date('2024-06-18T10:00:00') },
     { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: new Date('2024-06-18T10:00:00') },
 ];
+
+export const manageCampaigns = [{ name: "Campaign 1", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+{ name: "Campaign 2", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+{ name: "Campaign 3", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+{ name: "Campaign 4", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+]
+
+export const reviews = [{ img: "/images/google.svg", totalReview: 500, lastDays: 300, thisMonth: 300, lastMonth: 300 },
+{ img: "/images/google.svg", totalReview: 500, lastDays: 300, thisMonth: 300, lastMonth: 300 },
+{ img: "/images/google.svg", totalReview: 500, lastDays: 300, thisMonth: 300, lastMonth: 300 },
+]

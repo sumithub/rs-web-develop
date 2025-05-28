@@ -250,6 +250,6 @@ export default function Users() {
                     <PaginationDemo />
                 </div>}
             </div>
-        </AdminLayout >
+        </AdminLayout>
     )
 }

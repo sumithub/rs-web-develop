@@ -24,7 +24,7 @@ export default function Status({ status }) {
         bgClass = "bg-[#ff00001A] text-[#ff0000]"
     }
     else if (s === "draft") {
-        bgClass = "bg-[#FFC1071A] text-primary"
+        bgClass = "bg-[#0396FF1A] text-primary"
     }
     else if (s === "at risk") {
         bgClass = "bg-[#ff00001A] text-[#ff0000]"
