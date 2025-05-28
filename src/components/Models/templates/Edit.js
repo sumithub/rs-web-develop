@@ -7,10 +7,11 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { getError } from "../../../../helper";
-export default function EditTemplate({ onClose, id }) {
-    const { register, handleSubmit, formState: { errors }, } = useForm();
-    const [sending, setSending] = useState(false)
+import DatePicker from "../../form/DatePicker";
 
+export default function EditTemplate({ onClose, id }) {
+    const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
+    const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
         try {
@@ -18,7 +19,7 @@ export default function EditTemplate({ onClose, id }) {
             let res = null
 
             if (id !== "add") {
-                res = await axios.put("/api" , data)
+                res = await axios.put("/api", data)
             } else {
                 res = await axios.post("/api", data)
             }
@@ -32,7 +33,7 @@ export default function EditTemplate({ onClose, id }) {
         }
     }
     return (
-        <Model onClose={onClose} title="Edit" modalClass="w-1/2! ">
+        <Model onClose={onClose} title="Edit Email Template" modalClass="w-1/2! ">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <InputForm label="Template Name" isRequired={true} placeholder="enter name"
@@ -47,9 +48,16 @@ export default function EditTemplate({ onClose, id }) {
                         formProps={{ ...register("subject", { required: false }) }}
                         errors={errors}
                     />
-                    <InputForm label="Last Updated"
+                    {/* <InputForm label="Last Updated"
                         formProps={{ ...register("last-updated", { required: false }) }}
                         errors={errors}
+                    /> */}
+
+                    <DatePicker
+                        class_="py-3! border-[#F4F4F4]!"
+                        labelClass="font-medium!"
+                        label="Last Updated"
+                        icon={true}
                     />
                 </div>
 

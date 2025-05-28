@@ -4,6 +4,10 @@ import React, { useState } from 'react'
 import TableOrder from '../../components/TableOrder'
 import Checkbox from '../../components/form/Checkbox'
 import Status from '../../components/Status'
+import BoostRequest from "../../components/Models/boost/BoostRequest";
+import RenameList from "../../components/Models/customers/RenameList";   
+import DeleteList from "../../components/Models/customers/DeleteList";   
+import Download from "../../components/Models/customers/Download";
 import Image from 'next/image'
 import Search from '../../components/form/Search'
 import PaginationDemo from '../../components/Pagination'
@@ -13,6 +17,10 @@ import ApplyTags from '../../components/Models/customers/ApplyTags';
 import CustomSelectBox from '../../components/form/CustomSelectBox'
 
 function Customers() {
+    const [openBoost, setOpenBoost] = useState(false)
+    const [openRename, setOpenRename] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
+    const [openDownload, setOpenDownload] = useState(false)
     const [filterBy, setFilterBy] = useState("")
     const [search, setSearch] = useState("")
     const [open, setOpen] = useState(false)
@@ -33,6 +41,53 @@ function Customers() {
                         setOpen(true)
                     }}
                 />
+            }
+
+            {openRename &&
+                <RenameList
+                    onClose={() => {
+                        setOpenRename(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenRename(true)
+                    }}
+                />
+            }
+
+            {openDelete &&
+                <DeleteList
+                    onClose={() => {
+                        setOpenDelete(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenDelete(true)
+                    }}
+                />
+            }
+
+            {openDownload &&
+                <Download
+                    onClose={() => {
+                        setOpenDownload(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenDownload(true)
+                    }}
+                />
+            }
+
+            {openBoost &&
+                <BoostRequest
+                    onClose={() => {
+                        setOpenBoost(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenBoost(true)
+                    }} />
             }
 
             {openTags &&
@@ -89,7 +144,8 @@ function Customers() {
                             <option value="source: manual vs. imported">Source: Manual vs. Imported</option>
                         </CustomSelectBox>
 
-                        <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50"><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
+                        <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50" onClick={() => { setOpenBoost(true) }}>
+                            <Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
 
                         <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
                             onClick={() => { setOpen(true) }}>Add New Customer</button>
@@ -348,7 +404,7 @@ function Customers() {
                             <Image src="/images/example.png" alt="example" width={38} height={38} />
                             <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
                         </div>
-                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'onClick={() => { setOpenDownload(true) }}><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
                     </div>
                     <div>
                         <div className='flex items-center justify-between pt-[15px]'>
@@ -365,8 +421,8 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
-                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'onClick={()=>{setOpenDelete(true)}}><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
                 <div className='border border-border2 rounded-[10px] p-[15px]'>
@@ -375,7 +431,7 @@ function Customers() {
                             <Image src="/images/example.png" alt="example" width={38} height={38} />
                             <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
                         </div>
-                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'onClick={() => { setOpenDownload(true) }}><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
                     </div>
                     <div>
                         <div className='flex items-center justify-between pt-[15px]'>
@@ -392,8 +448,8 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
-                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'onClick={()=>{setOpenDelete(true)}}><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
                 <div className='border border-border2 rounded-[10px] p-[15px]'>
@@ -402,7 +458,7 @@ function Customers() {
                             <Image src="/images/example.png" alt="example" width={38} height={38} />
                             <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
                         </div>
-                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'onClick={() => { setOpenDownload(true) }}><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
                     </div>
                     <div>
                         <div className='flex items-center justify-between pt-[15px]'>
@@ -419,8 +475,8 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
-                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'onClick={()=>{setOpenDelete(true)}}><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
                 <div className='border border-border2 rounded-[10px] p-[15px]'>
@@ -429,7 +485,7 @@ function Customers() {
                             <Image src="/images/example.png" alt="example" width={38} height={38} />
                             <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
                         </div>
-                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'onClick={() => { setOpenDownload(true) }}><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
                     </div>
                     <div>
                         <div className='flex items-center justify-between pt-[15px]'>
@@ -446,8 +502,8 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
-                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'onClick={()=>{setOpenDelete(true)}}><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
                 <div className='border border-border2 rounded-[10px] p-[15px]'>
@@ -456,7 +512,7 @@ function Customers() {
                             <Image src="/images/example.png" alt="example" width={38} height={38} />
                             <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
                         </div>
-                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'onClick={() => { setOpenDownload(true) }}><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
                     </div>
                     <div>
                         <div className='flex items-center justify-between pt-[15px]'>
@@ -473,8 +529,8 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
-                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'onClick={()=>{setOpenDelete(true)}}><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
                 <div className='border border-border2 rounded-[10px] p-[15px]'>
@@ -483,7 +539,7 @@ function Customers() {
                             <Image src="/images/example.png" alt="example" width={38} height={38} />
                             <h2 className="text-base font-semibold">DELETE EXAMPLE - Elwyn</h2>
                         </div>
-                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]'><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]' onClick={() => { setOpenDownload(true) }}><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
                     </div>
                     <div>
                         <div className='flex items-center justify-between pt-[15px]'>
@@ -500,8 +556,8 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
-                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'onClick={()=>{setOpenDelete(true)}}><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
             </div>

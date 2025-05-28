@@ -24,7 +24,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         getReview()
-    }, [])
+    }, [rating, reviewSource])
 
     const getReview = async () => {
         try {

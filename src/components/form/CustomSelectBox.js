@@ -64,7 +64,7 @@ export default function CustomSelectBox({
         }
     }, []);
 
-    return (<div ref={ref} className={`relative w-48 ${class_}`}>
+    return (<div ref={ref} className={`relative shrink-0 w-48 ${class_}`}>
         {label && (
             <label className={`text-sm font-medium text-secondary mb-1 block capitalize ${labelClass}`}>
                 {label}{isRequired ? <span className="text-danger">*</span> : ""}

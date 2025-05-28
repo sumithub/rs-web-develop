@@ -41,7 +41,24 @@ export const reviews = [{ img: "/images/google.svg", source: "Google", totalRevi
 ]
 
 export const responseInsights = [
-    { id: "USR10000", date: "Jun 18,2024 10:00AM", actionToken: "opened", details: "review submit" },
-    { id: "USR10000", date: "Jun 18,2024 10:00AM", actionToken: "opened", details: "review submit" },
-    { id: "USR10000", date: "Jun 18,2024 10:00AM", actionToken: "opened", details: "review submit" },
+    { id: "USR10000", date: new Date('2024-06-18T10:00:00'), actionToken: "opened", details: "review submit" },
+    { id: "USR10000", date: new Date('2024-06-18T10:00:00'), actionToken: "opened", details: "review submit" },
+    { id: "USR10000", date: new Date('2024-06-18T10:00:00'), actionToken: "opened", details: "review submit" },
+]
+
+export const customerList = [
+    { name: "John Doe", email: "john@example.com", phone: +919876543210, tag: "at risk", source: "Manual", date: "Jun 18,2024" },
+
+    { name: "John Doe", email: "john@example.com", phone: +919876543210, tag: "at risk", source: "Manual", date: "Jun 18,2024" },
+
+    { name: "John Doe", email: "john@example.com", phone: +919876543210, tag: "at risk", source: "Manual", date: "Jun 18,2024" },
+
+    { name: "John Doe", email: "john@example.com", phone: +919876543210, tag: "at risk", source: "Manual", date: "Jun 18,2024" },
+]
+
+export const emailTemplates = [
+    { name: "Nature Template", description: "Lorem ipsum..", type: "Email Template" },
+    { name: "Nature Template", description: "Lorem ipsum..", type: "Email Template" },
+    { name: "Nature Template", description: "Lorem ipsum..", type: "Email Template" },
+    { name: "Nature Template", description: "Lorem ipsum..", type: "Email Template" },
 ]
