@@ -18,7 +18,7 @@ import axios from "axios"
 import { getError } from "../../../../helper"
 import SelectForm from "../../../components/form/SelectForm"
 
-export default function Detail({ onClose, id }) {
+export default function Detail({ id }) {
     const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
     const [openSchedule, setOpenSchedule] = useState(false)
@@ -30,16 +30,14 @@ export default function Detail({ onClose, id }) {
         try {
             setSending(true)
             let res = null
-
             if (id !== "add") {
-                res = await axios.put("/api" + id, data)
+                res = await axios.put("/api", data)
             } else {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Updated Successfully")
+            toast.success("Detail Updated Successfully")
             setSending(false)
-            onClose()
         } catch (error) {
             toast.error(getError(error))
             setSending(false)
@@ -255,13 +253,13 @@ export default function Detail({ onClose, id }) {
                                 formProps={{ ...register("time-zone", { required: true }) }}
                                 errors={errors}
                             />
-                            <SelectForm label="Send Time" isRequired={true} defaultOption="any time" selectClass_="bg-white! py-3! focus:border-primary/60!"
+                            <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-3! focus:border-primary/60!"
                                 formProps={{ ...register("send-time", { required: true }) }}
                                 errors={errors}
                             >
-                                <option value="">morning (8 AM - 12 PM)</option>
-                                <option value="">afternoon (12 PM - 4 PM)</option>
-                                <option value="">evening (4 PM - 8 PM)</option>
+                                <option value="morning">morning (8 AM - 12 PM)</option>
+                                <option value="afternoon">afternoon (12 PM - 4 PM)</option>
+                                <option value="evening">evening (4 PM - 8 PM)</option>
                                 <option value="any-time">any time</option>
                             </SelectForm>
                         </div>

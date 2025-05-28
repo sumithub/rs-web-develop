@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import axios from "axios";
-
 import Model from "../Model";
-import InputForm from "../../form/InputForm";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import { getError } from "../../../../helper";
 
-export default function SuspendUser({ onClose, userId, isSuspended, onStatusChange }) {
+export default function SuspendUser({ onClose, isSuspended, onStatusChange }) {
     const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false);
 
@@ -19,8 +17,7 @@ export default function SuspendUser({ onClose, userId, isSuspended, onStatusChan
 
             const newStatus = !isSuspended;
 
-            // Replace this with your actual API endpoint
-            await axios.put(`/api/users/${userId}/status`, { suspended: newStatus });
+            await axios.put("/api", { suspended: newStatus });
 
             toast.success(`User ${newStatus ? "suspended" : "reactivated"} successfully`);
             onStatusChange?.(newStatus);

@@ -21,12 +21,12 @@ function AddTemplate({ onClose, id }) {
       let res = null
 
       if (id !== "add") {
-        res = await axios.put("/api" + id, data)
+        res = await axios.put("/api", data)
       } else {
         res = await axios.post("/api", data)
       }
 
-      toast.success("Updated Successfully")
+      toast.success("Template Created Successfully")
       setSending(false)
       onClose()
     } catch (error) {

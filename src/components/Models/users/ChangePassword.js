@@ -20,7 +20,7 @@ function ChangePassword({ onClose, id }) {
 
         try {
             setSending(true);
-            await axios.put(`/api/users/${id}/change-password`, {
+            await axios.put(`/api`, {
                 password: data.newPassword,
             });
 
@@ -52,7 +52,7 @@ function ChangePassword({ onClose, id }) {
                                     }
                                 })
                             }}
-                            error={errors.newPassword?.message}
+                            errors={errors}
                         />
 
                         <InputForm
@@ -66,7 +66,7 @@ function ChangePassword({ onClose, id }) {
                                         val === watch("newPassword") || "Passwords do not match",
                                 })
                             }}
-                            error={errors.confirmPassword?.message}
+                            errors={errors}
                         />
                     </div>
 
