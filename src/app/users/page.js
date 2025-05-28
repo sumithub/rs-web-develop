@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Status from "../../components/Status"
 import Dropdown from '../../components/DropDown';
 import TableOrder from '../../components/TableOrder';
@@ -12,7 +12,7 @@ import AddUser from '../../components/Models/users/AddUser'
 import DeleteUsers from '../../components/Models/users/RemoveUsers'
 import ResendInvitations from '../../components/Models/users/ResendInvitations'
 import ChangeUserRoles from '../../components/Models/users/ChangeUserRoles'
-import { USER_ACTIONS } from '../../constent/constArray';
+import { USER_ACTIONS, users } from '../../constent/constArray';
 import ResendInvitation from '../../components/Models/users/ResendInvitation';
 import SuspendUser from '../../components/Models/users/SuspendUser';
 import SuspendUsers from '../../components/Models/users/SuspendUsers';
@@ -23,14 +23,35 @@ import ChangePassword from '../../components/Models/users/ChangePassword';
 import SetupPassword from '../../components/Models/users/SetupPassword';
 import DateRange from '../../components/form/DateRangePicker';
 import CustomSelectBox from '../../components/form/CustomSelectBox';
+import axios from 'axios';
+import { formatDate, getError } from '../../../helper';
+import { toast } from 'react-toastify';
+import Loading from "../../components/Loading"
 
-
-function Users() {
+export default function Users() {
     const [role, setRole] = useState("")
     const [status, setStatus] = useState("")
-    // const [list, setList] = useState([])
+    const [list, setList] = useState([])
     const [search, setSearch] = useState("")
     const [openModal, setOpenModal] = useState(null)
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        getUser()
+    }, [search, status, role])
+
+    const getUser = async () => {
+        try {
+            setLoading(true)
+            const res = await axios.get("/api")
+            setList(res.data || users)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
 
     return (
         <AdminLayout>
@@ -117,7 +138,6 @@ function Users() {
                     }} />
             }
 
-
             <div className='grid grid-cols-[2.5fr_1fr_1fr_1fr_1fr] gap-3'>
                 <Search
                     mainClass='w-full!'
@@ -179,7 +199,8 @@ function Users() {
             </div>
 
             <div className='table-class'>
-                <table className='w-full'>
+
+                {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
                             <th><TableOrder title="Name" /></th>
@@ -190,16 +211,16 @@ function Users() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        {list?.map((e, index) => <tr key={index}>
                             <td>
                                 <div className="flex items-start gap-2">
                                     <Checkbox />
-                                    <div>Jaydon George</div>
+                                    <div>{e.name}</div>
                                 </div>
                             </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Active" /></td>
-                            <td>Aug 05,2025</td>
+                            <td><div className='flex items-center gap-1.5'>{e.role}<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
+                            <td><Status status={e.status} /></td>
+                            <td>{formatDate(e.lastActive)}</td>
                             <td><Dropdown
                                 options={USER_ACTIONS}
                                 onClickOption={(e) => {
@@ -207,140 +228,13 @@ function Users() {
                                 }}
                             /></td>
                         </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Pending Invite" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Active" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Suspended" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Active" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Pending Invite" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Active" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Active" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
+                        )}
                     </tbody>
-                </table>
-                <div>
+                </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                {list?.length > 0 && <div>
                     <PaginationDemo />
-                </div>
+                </div>}
             </div>
         </AdminLayout >
     )
 }
-
-export default Users
