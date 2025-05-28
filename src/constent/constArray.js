@@ -41,7 +41,7 @@ export const reviews = [{ img: "/images/google.svg", source: "Google", totalRevi
 ]
 
 export const responseInsights = [
-    { id: "USR10000", date: "Jun 18,2024 10:00AM", actionToken: "opened", details: "review submit" },
-    { id: "USR10000", date: "Jun 18,2024 10:00AM", actionToken: "opened", details: "review submit" },
-    { id: "USR10000", date: "Jun 18,2024 10:00AM", actionToken: "opened", details: "review submit" },
+    { id: "USR10000", date: new Date('2024-06-18T10:00:00'), actionToken: "opened", details: "review submit" },
+    { id: "USR10000", date: new Date('2024-06-18T10:00:00'), actionToken: "opened", details: "review submit" },
+    { id: "USR10000", date: new Date('2024-06-18T10:00:00'), actionToken: "opened", details: "review submit" },
 ]

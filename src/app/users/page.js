@@ -140,7 +140,7 @@ export default function Users() {
                     }} />
             }
 
-            <div className='grid grid-cols-[2.5fr_1fr_1fr_1fr_1fr] gap-3'>
+            <div className='grid grid-cols-[2.5fr_1fr_1fr_1.1fr_1fr] gap-3 items-center'>
                 <Search
                     mainClass='w-full!'
                     placeholder="Search by name, email, role."
@@ -209,7 +209,6 @@ export default function Users() {
             </div>
 
             <div className='table-class'>
-
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>

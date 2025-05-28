@@ -13,9 +13,8 @@ import CustomSelectBox from '../../components/form/CustomSelectBox';
 import Edit from '../../components/Models/templates/Edit'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { getError } from '../../../helper'
+import { formatDateTime, getError } from '../../../helper'
 import Loading from '../../components/Loading'
-import { format } from 'date-fns'
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
@@ -28,7 +27,7 @@ function CampaignsTemplates() {
 
     useEffect(() => {
         getTemplate()
-    }, [search, type])
+    }, [search, type, date])
 
     const getTemplate = async () => {
         try {
@@ -72,8 +71,6 @@ function CampaignsTemplates() {
                     }}
                 />
             }
-
-
 
             <div className="flex justify-between items-center w-full mb-4">
                 <Search
@@ -123,9 +120,9 @@ function CampaignsTemplates() {
                         {list?.map((e, index) => <tr key={index}>
                             <td>{e.name}</td>
                             <td>{e.type}</td>
-                            <td>{e.subject}</td>
+                            <td><div className='line-clamp-1'>{e.subject}</div></td>
                             {/* <td>Jun 18,2025|10:00Am</td> */}
-                            <td>{format(e.lastUpdated, 'MMM dd, yyyy | hh:mm a')}</td>
+                            <td>{formatDateTime(e.lastUpdated)}</td>
                             <td><Dropdown
                                 options={TEMPLATE_ACTIONS}
                                 onClickOption={(e) => {

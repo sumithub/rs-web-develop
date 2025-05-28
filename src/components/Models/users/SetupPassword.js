@@ -38,6 +38,7 @@ function ChangePassword({ onClose, id }) {
                     <div>
                         <InputForm
                             label="New Password"
+                            inputType="password"
                             isRequired={true}
                             placeholder="Enter new password"
                             class_='mt-0!'
@@ -55,6 +56,7 @@ function ChangePassword({ onClose, id }) {
 
                         <InputForm
                             label="Confirm Password"
+                            inputType="password"
                             isRequired={true}
                             placeholder="Enter confirm password"
                             formProps={{
