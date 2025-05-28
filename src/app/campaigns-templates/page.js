@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Dropdown from '../../components/DropDown'
 import TableOrder from '../../components/TableOrder'
 import PaginationDemo from '../../components/Pagination'
@@ -7,10 +7,15 @@ import AdminLayout from '../../components/AdminLayout'
 import Search from '../../components/form/Search'
 import DatePicker from '../../components/form/DatePicker'
 import AddTemplate from '../../components/Models/templates/AddTemplate'
-import { TEMPLATE_ACTIONS } from '../../constent/constArray'
+import { TEMPLATE_ACTIONS, templates } from '../../constent/constArray'
 import Clone from '../../components/Models/templates/Clone'
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import Edit from '../../components/Models/templates/Edit'
+import { toast } from 'react-toastify'
+import axios from 'axios'
+import { getError } from '../../../helper'
+import Loading from '../../components/Loading'
+import { format } from 'date-fns'
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
@@ -18,6 +23,25 @@ function CampaignsTemplates() {
     const [date, setDate] = useState("")
     const [open, setOpen] = useState(false)
     const [openModal, setOpenModal] = useState(null)
+    const [list, setList] = useState([])
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        getTemplate()
+    }, [search, type])
+
+    const getTemplate = async () => {
+        try {
+            setLoading(true)
+            const res = await axios.get("/api")
+            setList(res.data || templates)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
 
     return (
         <AdminLayout >
@@ -85,7 +109,7 @@ function CampaignsTemplates() {
             </div>
 
             <div className='table-class'>
-                <table className='w-full'>
+                {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
                             <th><TableOrder title="Template Name" /></th>
@@ -96,100 +120,23 @@ function CampaignsTemplates() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Hiking Template</td>
-                            <td>Email</td>
-                            <td>Lorem ipsum....</td>
-                            <td>Jun 18,2025|10:00Am</td>
+                        {list?.map((e, index) => <tr key={index}>
+                            <td>{e.name}</td>
+                            <td>{e.type}</td>
+                            <td>{e.subject}</td>
+                            {/* <td>Jun 18,2025|10:00Am</td> */}
+                            <td>{format(e.lastUpdated, 'MMM dd, yyyy | hh:mm a')}</td>
                             <td><Dropdown
                                 options={TEMPLATE_ACTIONS}
                                 onClickOption={(e) => {
                                     setOpenModal(e)
                                 }} /></td>
-                        </tr>
-
-                        <tr>
-                            <td>Hiking Template</td>
-                            <td>Email</td>
-                            <td>Lorem ipsum....</td>
-                            <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown
-                                options={TEMPLATE_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>Hiking Template</td>
-                            <td>Email</td>
-                            <td>Lorem ipsum....</td>
-                            <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown
-                                options={TEMPLATE_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>Hiking Template</td>
-                            <td>Email</td>
-                            <td>Lorem ipsum....</td>
-                            <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown
-                                options={TEMPLATE_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>Hiking Template</td>
-                            <td>Email</td>
-                            <td>Lorem ipsum....</td>
-                            <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown
-                                options={TEMPLATE_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>Hiking Template</td>
-                            <td>Email</td>
-                            <td>Lorem ipsum....</td>
-                            <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown
-                                options={TEMPLATE_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>Hiking Template</td>
-                            <td>Email</td>
-                            <td>Lorem ipsum....</td>
-                            <td>Jun 18,2025|10:00Am</td>
-                            <td><Dropdown
-                                options={TEMPLATE_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
+                        </tr>)}
                     </tbody>
-                </table>
-                <div>
+                </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                {list?.length > 0 && <div>
                     <PaginationDemo />
-                </div>
+                </div>}
             </div>
         </AdminLayout>
     )

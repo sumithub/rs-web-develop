@@ -18,13 +18,18 @@ import axios from "axios"
 import { getError } from "../../../../helper"
 import SelectForm from "../../../components/form/SelectForm"
 
+<<<<<<< HEAD
 export default function Detail({ id }) {
+=======
+export default function Detail({ }) {
+    const id = ""
+>>>>>>> fba54123848e0c6341a1da3a0b3e523b16a6a85a
     const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
     const [openSchedule, setOpenSchedule] = useState(false)
     const [openCustomer, setOpenCustomer] = useState(false)
     const [openEmail, setOpenEmail] = useState(false)
-    const [expandAll, setExpandall] = useState(false)
+    const [expandAll, setExpandAll] = useState(false)
 
     const onSubmit = async (data) => {
         try {
@@ -92,14 +97,14 @@ export default function Detail({ id }) {
                     <div className="text-secondary text-xl font-medium">Create New Campaign</div>
                     <div className="flex items-center gap-2">
                         <CancelButton title="Collapse All" class_="text-sm! font-normal!"
-                            onClick={() => { setExpandall(false) }} />
+                            onClick={() => { setExpandAll(false) }} />
                         <SecondaryButton title="Expand All" class_="text-sm! font-normal!"
-                            onClick={() => { setExpandall(true) }} />
+                            onClick={() => { setExpandAll(true) }} />
                     </div>
                 </div>
 
                 <div>
-                    <CampaignCard expandAll={expandAll} setExpandall={setExpandall} title="Campaign Details" status="Active">
+                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Campaign Details" status="Active">
                         <div className="grid grid-cols-2 gap-3">
                             <InputForm label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!"
                                 formProps={{ ...register("campaign-name", { required: true }) }}
@@ -116,7 +121,7 @@ export default function Detail({ id }) {
                 </div>
 
                 <div>
-                    <CampaignCard expandAll={expandAll} setExpandall={setExpandall} title="Targeting" status="Active">
+                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Targeting" status="Active">
                         <div className="flex items-center justify-between">
                             <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
                             <SecondaryButton title="Add Customers" class_="text-sm! font-normal!" onClick={() => { setOpenCustomer(true) }} />
@@ -149,7 +154,7 @@ export default function Detail({ id }) {
                 </div>
 
                 <div>
-                    <CampaignCard expandAll={expandAll} setExpandall={setExpandall} title="Template Selection" status="Active">
+                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Template Selection" status="Active">
                         <div className="flex gap-3 my-4">
                             <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
                             <div className="flex">
@@ -247,7 +252,7 @@ export default function Detail({ id }) {
                 </div>
 
                 <div>
-                    <CampaignCard expandAll={expandAll} setExpandall={setExpandall} title="Scheduling & Launch" status="Active">
+                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Scheduling & Launch" status="Active">
                         <div className="grid grid-cols-2 gap-3">
                             <InputForm label="Time Zone" isRequired={true} inputType="time" inputClass="bg-white!"
                                 formProps={{ ...register("time-zone", { required: true }) }}

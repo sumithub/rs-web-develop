@@ -9,7 +9,7 @@ export default function Sidebar() {
         { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
         {
             title: "Customers", link: "/campaigns", icon: "customer",
-            submenu: [{ title: "User Management", link: "/users" }, { title: "Manage Customers", link: "/customers" }, { title: "Customer Tagging", link: "/customer-tagging" }]
+            submenu: [{ title: "Manage Customers", link: "/customers" }, { title: "Customer Tagging", link: "/customer-tagging" }]
         },
         // { title: "Customers", link: "/campaigns", icon: "customer", submenu: [{ title: "User Management", link: "/users" }] },
         {
@@ -24,7 +24,7 @@ export default function Sidebar() {
             title: "Reports", link: "", icon: "report",
             submenu: [{ title: "Review Analytics", link: "/review-analytics" }, { title: "Campaign Performance", link: "/campaign-performance" }, { title: "Sentiment Analysis", link: "/sentiment-analysis" }]
         },
-        { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
+        // { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
 
         { title: "Settings", icon: "settings", submenu: [{ title: "Users", link: "/users" }] },
     ]
