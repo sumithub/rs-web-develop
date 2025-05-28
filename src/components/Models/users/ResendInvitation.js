@@ -13,18 +13,14 @@ export default function ResendInvitation({ onClose, user }) {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({
-        defaultValues: {
-            email: user?.email || "",
-        },
-    });
+    } = useForm();
 
     const [sending, setSending] = useState(false);
 
     const onSubmit = async (data) => {
         try {
             setSending(true);
-            await axios.post(`/api/users/${user?.id}/resend-invite`, data);
+            await axios.post("/api", data);
             toast.success("Invitation resent successfully");
             onClose();
         } catch (error) {
@@ -54,6 +50,7 @@ export default function ResendInvitation({ onClose, user }) {
                             },
                         }),
                     }}
+                    errors={errors}
                 />
 
                 <div className="text-secondary text-xl font-semibold capitalize mt-4">
