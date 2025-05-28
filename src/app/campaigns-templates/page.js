@@ -13,8 +13,9 @@ import CustomSelectBox from '../../components/form/CustomSelectBox';
 import Edit from '../../components/Models/templates/Edit'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { formatDateTime, getError } from '../../../helper'
+import { getError } from '../../../helper'
 import Loading from '../../components/Loading'
+import { format } from 'date-fns'
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
@@ -124,7 +125,7 @@ function CampaignsTemplates() {
                             <td>{e.type}</td>
                             <td>{e.subject}</td>
                             {/* <td>Jun 18,2025|10:00Am</td> */}
-                            <td>{formatDateTime(e.lastUpdated)}</td>
+                            <td>{format(e.lastUpdated, 'MMM dd, yyyy | hh:mm a')}</td>
                             <td><Dropdown
                                 options={TEMPLATE_ACTIONS}
                                 onClickOption={(e) => {
