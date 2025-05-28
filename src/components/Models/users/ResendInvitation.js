@@ -12,6 +12,7 @@ export default function ResendInvitation({ onClose, user }) {
     const {
         register,
         handleSubmit,
+        formState: { errors },
     } = useForm();
 
     const [sending, setSending] = useState(false);
@@ -49,6 +50,7 @@ export default function ResendInvitation({ onClose, user }) {
                             },
                         }),
                     }}
+                    errors={errors}
                 />
 
                 <div className="text-secondary text-xl font-semibold capitalize mt-4">
