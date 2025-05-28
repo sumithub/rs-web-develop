@@ -15,6 +15,7 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import { formatDateTime, getError } from '../../../helper'
 import Loading from '../../components/Loading'
+import Preview from '../../components/Models/manage-campaigns/Preview'
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
@@ -45,7 +46,15 @@ function CampaignsTemplates() {
     return (
         <AdminLayout >
             {(openModal === "edit" || openModal === "new") &&
-                <Edit
+                <AddTemplate
+                    onClose={() => {
+                        setOpenModal(false)
+                    }}
+                />
+            }
+
+            {(openModal === "preview" || openModal === "new") &&
+                <Preview
                     onClose={() => {
                         setOpenModal(false)
                     }}
