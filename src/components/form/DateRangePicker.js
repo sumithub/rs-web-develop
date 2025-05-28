@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import { formatDate } from '../../../helper';
 
 function DateRange({ onChange }) {
     const [open, setOpen] = useState(false)
@@ -48,7 +49,7 @@ function DateRange({ onChange }) {
 
     const handleSave = () => {
         const { startDate, endDate } = state[0];
-        const formatted = `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
+        const formatted = `${formatDate(startDate, "dd/MM/yyyy")} - ${formatDate(endDate, "dd/MM/yyyy")}`;
         setSavedRange(formatted);
         if (onChange)
             onChange({ startDate, endDate });
@@ -69,6 +70,7 @@ function DateRange({ onChange }) {
 
                     <div className='overflow-hidden absolute top-full right-0 border border-dark rounded-lg shadow-[0px_0px_40px_rgba(0,_0,_0,_0.08)]'>
                         <DateRangePicker
+                            dateDisplayFormat='dd/MM/yyyy'
                             showDateDisplay={false}
                             onChange={handleSelect}
                             showSelectionPreview={true}

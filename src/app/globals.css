@@ -166,6 +166,15 @@ body {
   width: 10.5rem !important;
 }
 
+.react-datepicker__header {
+  background: #f9fbfc !important;
+  background-color: #f9fbfc !important;
+}
+
+.react-datepicker {
+  border: 1px solid #ADADAD4D !important;
+  background-color: white !important;
+}
 
 .ldio-x2uulkbinbj>div {
   animation: ldio-x2uulkbinbj 1s infinite linear;
