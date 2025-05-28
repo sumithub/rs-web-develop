@@ -21,3 +21,10 @@ export const TEMPLATE_ACTIONS = [
     { label: "Preview", value: "preview" },
     { label: "Clone", value: "clone" },
 ]
+
+export const templates = [
+    { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: "Aug 05,2024" },
+    { name: "Hiking template", type: "SMS", subject: "Lorem ipsum....", lastUpdated: "Aug 05,2024" },
+    { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: "Aug 05,2024" },
+    { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: "Aug 05,2024" },
+];

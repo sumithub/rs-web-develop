@@ -24,3 +24,17 @@ export function formatDate(date, f) {
         return "xx"
     }
 }
+
+export function formatDateTime(date) {
+    if (!date)
+        return ""
+    try {
+        let d = date
+        if (typeof date === "string")
+            d = new Date(date);
+
+        return format(d, 'dd MMM, hh:mm a');
+    } catch (e) {
+        return "xx"
+    }
+}
