@@ -29,20 +29,22 @@ import { toast } from 'react-toastify';
 import Loading from "../../components/Loading"
 
 export default function Users() {
+    const [list, setList] = useState([])
     const [role, setRole] = useState("")
     const [status, setStatus] = useState("")
-    const [list, setList] = useState([])
     const [search, setSearch] = useState("")
+    const [dates, setDates] = useState(null)
     const [openModal, setOpenModal] = useState(null)
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getUser()
-    }, [search, status, role])
+    }, [search, status, role, dates])
 
     const getUser = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || users)
             setLoading(false)
@@ -170,7 +172,9 @@ export default function Users() {
                     <option value="viewer">Viewer</option>
                 </CustomSelectBox>
 
-                <DateRange />
+                <DateRange
+                    onChange={(dates) => { setDates(dates) }}
+                />
                 <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-full"
                     onClick={() => { setOpenModal("new") }}>Invite New User</button>
             </div>
@@ -178,7 +182,13 @@ export default function Users() {
             <div className='my-5 flex items-center justify-between'>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 cursor-pointer">
                     <div className="flex items-start justify-center gap-2 mt-1">
-                        <Checkbox />
+                        <Checkbox
+                            checked={list?.length > 0 && list.every(e => e.selected)}
+                            onChange={(checked) => {
+                                setList(list => list.map(e => ({ ...e, selected: checked })))
+                            }}
+
+                        />
                         <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
                     </div>
                 </div>
@@ -214,7 +224,12 @@ export default function Users() {
                         {list?.map((e, index) => <tr key={index}>
                             <td>
                                 <div className="flex items-start gap-2">
-                                    <Checkbox />
+                                    <Checkbox
+                                        checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                    />
                                     <div>{e.name}</div>
                                 </div>
                             </td>
