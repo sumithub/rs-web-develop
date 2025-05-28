@@ -8,6 +8,7 @@ import CustomSelectBox from '../../components/form/CustomSelectBox';
 import { useState } from "react";
 
 export default function CampaignDashboard() {
+    const [date, setDate] = useState("")
     const [rating, setRating] = useState("")
     const [reviewSource, setReviewSource] = useState("")
 
@@ -39,10 +40,11 @@ export default function CampaignDashboard() {
                 <option value="1 star">1 Star & Up</option>
             </CustomSelectBox>
             <DatePicker
-                icon={true}
-            />
-        </div>}
-    >
+                icon={true} mainClass="mt-0!"
+                value={date}
+                dateFormat="dd/MM/yyyy"
+                onChange={(e) => setDate(e)} />
+        </div>}>
         <div className="grid grid-cols-4 gap-5">
             <DashboardCard title="Total Campaigns Sent" count="500" img="/images/sound.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/total.png')]" />
 

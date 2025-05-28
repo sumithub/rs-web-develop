@@ -5,7 +5,7 @@ import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 
-function DateRange() {
+function DateRange({ onChange }) {
     const [open, setOpen] = useState(false)
     const ref = useRef(null);
     useEffect(() => {
@@ -39,33 +39,52 @@ function DateRange() {
             key: 'selection'
         }
     ]);
-    return (<div ref={ref} className='relative'>
-        <button
-            onClick={toggleDatePicker}
-            className="cursor-pointer flex items-center gap-2 border border-border-color rounded-lg py-[7.7px]! px-2 capitalize text-[13px] text-text3 w-full focus-visible:outline-none shrink-0"        >
-            Date Range Selector
-            <Image src="/images/calendar1.svg" alt='calendar' height={16} width={16} unoptimized={true} />
-        </button>
 
-        {open &&
-            <div>
-                <div className='overflow-hidden absolute top-full right-0 border border-dark rounded-lg shadow-[0px_0px_40px_rgba(0,_0,_0,_0.08)]'>
-                    <DateRangePicker
-                        showDateDisplay={false}
-                        onChange={item => setState([item.selection])}
-                        showSelectionPreview={true}
-                        moveRangeOnFirstSelection={false}
-                        months={2}
-                        ranges={state}
-                        direction="horizontal"
-                    />
-                    <div className='absolute left-14 bottom-5 w-[12%]'>
-                        <button onClick={() => { setOpen(false) }} className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full py-1 rounded-lg border border-primary cursor-pointer text-center">Save</button>
+    const [savedRange, setSavedRange] = useState("");
+
+    const handleSelect = (ranges) => {
+        setState([ranges.selection]);
+    };
+
+    const handleSave = () => {
+        const { startDate, endDate } = state[0];
+        const formatted = `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
+        setSavedRange(formatted);
+        if (onChange)
+            onChange({ startDate, endDate });
+        setOpen(false);
+    };
+    return (
+        <div ref={ref} className='relative'>
+            <button
+                onClick={toggleDatePicker}
+                className="cursor-pointer flex items-center gap-2 border border-border-color rounded-lg py-[7.7px]! px-2 capitalize text-[13px] text-text3 w-full focus-visible:outline-none shrink-0"        >
+                {savedRange || "Date Range Selector"}
+                <Image src="/images/calendar1.svg" alt='calendar' height={16} width={16} unoptimized={true} />
+            </button>
+
+
+            {open &&
+                <div>
+
+                    <div className='overflow-hidden absolute top-full right-0 border border-dark rounded-lg shadow-[0px_0px_40px_rgba(0,_0,_0,_0.08)]'>
+                        <DateRangePicker
+                            showDateDisplay={false}
+                            onChange={handleSelect}
+                            showSelectionPreview={true}
+                            moveRangeOnFirstSelection={false}
+                            months={2}
+                            ranges={state}
+                            direction="horizontal"
+                        />
+                        <div className='absolute left-14 bottom-5 w-[12%]'>
+                            <button onClick={handleSave}
+                                className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full py-1 rounded-lg border border-primary cursor-pointer text-center">Save</button>
+                        </div>
                     </div>
-                </div>
-            </div>
-        }
-    </div>)
+                </div>}
+        </div>
+    )
 }
 
 export default DateRange

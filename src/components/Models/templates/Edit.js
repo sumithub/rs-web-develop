@@ -1,16 +1,16 @@
+import { useForm } from "react-hook-form";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import Model from "../Model";
-import { getError } from "../../../../helper";
+import InputForm from "../../form/InputForm";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import InputForm from "../../form/InputForm";
-
-export default function CreateTag({ onClose, id }) {
+import { getError } from "../../../../helper";
+export default function EditTemplate({ onClose, id }) {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
+
 
     const onSubmit = async (data) => {
         try {
@@ -35,16 +35,20 @@ export default function CreateTag({ onClose, id }) {
         <Model onClose={onClose} title="Edit" modalClass="w-1/2! ">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <InputForm label="Tag Name" isRequired={true} placeholder="Enter Name"
-                        formProps={{ ...register("tag-name", { required: true }) }}
+                    <InputForm label="Template Name" isRequired={true} placeholder="enter name"
+                        formProps={{ ...register("template-name", { required: true }) }}
                         errors={errors}
                     />
-                    <InputForm label="Color Picker"
-                        formProps={{ ...register("color-picker", { required: false }) }}
+                    <InputForm label="Type"
+                        formProps={{ ...register("type", { required: false }) }}
                         errors={errors}
                     />
-                    <InputForm label="Description" isTextArea={true}
-                        formProps={{ ...register("description", { required: false }) }}
+                    <InputForm label="Subject"
+                        formProps={{ ...register("subject", { required: false }) }}
+                        errors={errors}
+                    />
+                    <InputForm label="Last Updated"
+                        formProps={{ ...register("last-updated", { required: false }) }}
                         errors={errors}
                     />
                 </div>

@@ -9,8 +9,22 @@ export const USER_ACTIONS = [
     { label: "Setup Password", value: "setup-password" },
 ]
 
+export const users = [
+    { name: "Jaydon George", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+];
+
 export const TEMPLATE_ACTIONS = [
     { label: "Edit", value: "edit" },
     { label: "Preview", value: "preview" },
     { label: "Clone", value: "clone" },
 ]
+
+export const templates = [
+    { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: "Aug 05,2024" },
+    { name: "Hiking template", type: "SMS", subject: "Lorem ipsum....", lastUpdated: "Aug 05,2024" },
+    { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: "Aug 05,2024" },
+    { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: "Aug 05,2024" },
+];

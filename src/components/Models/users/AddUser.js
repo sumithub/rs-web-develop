@@ -8,7 +8,7 @@ import Model from "../Model"
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
 import axios from "axios"
-import { getError } from "../../../../helper"
+import { getError, validEmailRgx } from "../../../../helper"
 
 function AddUser({ onClose, id }) {
     const { register, setValue, handleSubmit, clearErrors, formState: { errors }, } = useForm();
@@ -21,9 +21,9 @@ function AddUser({ onClose, id }) {
             let res = null
 
             if (id !== "add") {
-                res = await axios.put("/" + id, data)
+                res = await axios.put("/api" + id, data)
             } else {
-                res = await axios.post("/", data)
+                res = await axios.post("/api", data)
             }
 
             toast.success("Updated Successfully")
@@ -91,7 +91,7 @@ function AddUser({ onClose, id }) {
                         ...register("email", {
                             required: "Email is required",
                             pattern: {
-                                validEmailRgx: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                value: validEmailRgx,
                                 message: "Email is invalid."
                             },
 

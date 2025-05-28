@@ -23,26 +23,31 @@ const data = {
             label: 'Rating 1',
             data: [0, 1, 1, 2],
             backgroundColor: '#D0EAFF',
+            borderRadius: 5
         },
         {
             label: 'Rating 2',
             data: [0, 1, 1, 2],
             backgroundColor: '#A3D4FF',
+            borderRadius: 5
         },
         {
             label: 'Rating 3',
             data: [0, 1, 1, 2],
             backgroundColor: '#75BDFF',
+            borderRadius: 5
         },
         {
             label: 'Rating 4',
-            data: [0, 1, 1, 2],
+            data: [0, 1, 2, 2],
             backgroundColor: '#479EFF',
+            borderRadius: 5
         },
         {
             label: 'Rating 5',
             data: [1, 1, 1, 2],
             backgroundColor: '#0085FF',
+            borderRadius: 5
         },
     ],
 };
@@ -55,16 +60,18 @@ const options = {
             position: 'right',
         },
         title: {
-            display: true,
+            display: false,
             text: 'Top Review Sources',
         },
     },
     scales: {
         x: {
+            grid: { display: false, },
             stacked: true,
             beginAtZero: true,
         },
         y: {
+            grid: { display: false, },
             stacked: true,
         },
     },
