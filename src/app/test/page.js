@@ -5,7 +5,6 @@ import SelectedCustomers from "../../components/Models/manage-campaigns/Selected
 import SelectedFromCustomers from "../../components/Models/manage-campaigns/SelectedFromCustomers"
 import EmailTemplate from "../../components/Models/manage-campaigns/EmailTemplate"
 import TemplateList from "../../components/Models/boost/TemplateList"
-import BoostRequest from "../../components/Models/boost/BoostRequest";
 import ReviewDetails from "../../components/Models/review/ReviewDetails";
 import ReviewResponseTemplates from "../../components/Models/review/ReviewResponseTemplates";
 import ShareOnSocialMedia from "../../components/Models/review/ShareOnSocialMedia";
@@ -28,7 +27,6 @@ export default function Test() {
     const [openSelect, setOpenSelect] = useState(false)
     const [openEmail, setOpenEmail] = useState(false)
     const [openTemplate, setOpenTemplate] = useState(false)
-    const [openBoost, setOpenBoost] = useState(false)
     const [openDetail, setOpenDetail] = useState(false)
     const [openResponse, setOpenResponse] = useState(false)
     const [openMedia, setOpenMedia] = useState(false)
@@ -88,17 +86,6 @@ export default function Test() {
 
                 onSave={() => {
                     setOpenTemplate(true)
-                }} />
-        }
-
-        {openBoost &&
-            <BoostRequest
-                onClose={() => {
-                    setOpenBoost(false)
-                }}
-
-                onSave={() => {
-                    setOpenBoost(true)
                 }} />
         }
 
@@ -289,9 +276,6 @@ export default function Test() {
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenTemplate(true) }}>Template List
-            </div>
-
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenBoost(true) }}>Boost Request
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenDetail(true) }}>Review Details

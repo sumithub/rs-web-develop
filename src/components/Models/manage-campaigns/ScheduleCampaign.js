@@ -28,7 +28,7 @@ function ScheduleCampaign({ onClose, id }) {
         res = await axios.post("/api", data)
       }
 
-      toast.success("Confirm Successfully")
+      toast.success("Schedule Successfully")
       setSending(false)
       onClose()
     } catch (error) {

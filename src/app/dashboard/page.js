@@ -90,7 +90,10 @@ export default function Dashboard() {
                 <DashboardChart title="Review Rating Distribution">
                     <div className="flex items-start">
                         <div className="w-[60%]">
-                            <DashboardPieChart />
+                            <DashboardPieChart
+                                labels={["5", "4", "3", "2", "1"]}
+                                colors={["#0396FF", "#16C098", "#FFAE4C", "#07DBFA", "#988AFC"]}
+                            />
                         </div>
                         <div className="mt-10 w-[40%]">
                             <div className="flex items-center gap-3 mb-2">
