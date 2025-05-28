@@ -18,12 +18,8 @@ import axios from "axios"
 import { getError } from "../../../../helper"
 import SelectForm from "../../../components/form/SelectForm"
 
-<<<<<<< HEAD
-export default function Detail({ id }) {
-=======
 export default function Detail({ }) {
     const id = ""
->>>>>>> fba54123848e0c6341a1da3a0b3e523b16a6a85a
     const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
     const [openSchedule, setOpenSchedule] = useState(false)
