@@ -6,6 +6,9 @@ import DashboardChart from "../../components/DashboardChart";
 import DatePicker from "../../components/form/DatePicker";
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import { useState } from "react";
+import DashboardLineChart from "../../components/charts/DashboardLineChart";
+import DashboardPieChart from "../../components/charts/DashboardPieChart";
+import SimpleHorizontalBarChart from "../../components/charts/SimpleHorizontalBarChart";
 
 export default function CampaignDashboard() {
     const [date, setDate] = useState("")
@@ -65,12 +68,13 @@ export default function CampaignDashboard() {
 
         <div>
             <div className="grid grid-cols-2 gap-5 mt-5 items-start">
-                <DashboardChart title="Campaign Funnel Breakdown" imgName="/images/breakdown.png" alt="breakdown" height={218} width={509} class_="my-5">
-                    <div className="text-base text-text3 text-center capitalize mt-2">Campaign Funnel Breakdown</div>
-                    <div className="text-xs text-text3 text-center capitalize">no of users</div>
+                <DashboardChart title="Campaign Funnel Breakdown" height={218} width={509} class_="my-5">
+                    <SimpleHorizontalBarChart />
+                    <div className="text-xs text-text3 text-center capitalize">Number Of Users</div>
                 </DashboardChart>
 
-                <DashboardChart title="Campaign Performance Over Time" imgName="/images/graph1.png" alt="graph" height={200} width={466}>
+                <DashboardChart title="Campaign Performance Over Time" height={200} width={466}>
+                    <DashboardLineChart />
                 </DashboardChart>
 
                 <DashboardChart title="Individual Response Insights">
@@ -115,7 +119,7 @@ export default function CampaignDashboard() {
                 <DashboardChart title="Engagement Breakdown">
                     <div className="flex items-start">
                         <div className="w-[60%]">
-                            <Image src="/images/layer.png" alt="chart" height={235} width={283} className="object-contain w-full" />
+                            <DashboardPieChart />
                         </div>
                         <div className="mt-10 w-[40%] capitalize">
                             <div className="flex items-center gap-3 mb-5">
