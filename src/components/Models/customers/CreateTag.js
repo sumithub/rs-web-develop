@@ -18,7 +18,7 @@ export default function CreateTag({ onClose, id }) {
             let res = null
 
             if (id !== "add") {
-                res = await axios.put("/api" + id, data)
+                res = await axios.put("/api" , data)
             } else {
                 res = await axios.post("/api", data)
             }

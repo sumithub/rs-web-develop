@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import TableOrder from '../../components/TableOrder'
 import Checkbox from '../../components/form/Checkbox'
 import Status from '../../components/Status'
+import BoostRequest from "../../components/Models/boost/BoostRequest";
+import RenameList from "../../components/Models/customers/RenameList";
 import Image from 'next/image'
 import Search from '../../components/form/Search'
 import PaginationDemo from '../../components/Pagination'
@@ -13,6 +15,8 @@ import ApplyTags from '../../components/Models/customers/ApplyTags';
 import CustomSelectBox from '../../components/form/CustomSelectBox'
 
 function Customers() {
+    const [openBoost, setOpenBoost] = useState(false)
+    const [openRename, setOpenRename] = useState(false)
     const [filterBy, setFilterBy] = useState("")
     const [search, setSearch] = useState("")
     const [open, setOpen] = useState(false)
@@ -33,6 +37,29 @@ function Customers() {
                         setOpen(true)
                     }}
                 />
+            }
+
+            {openRename &&
+                <RenameList
+                    onClose={() => {
+                        setOpenRename(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenRename(true)
+                    }}
+                />
+            }
+
+            {openBoost &&
+                <BoostRequest
+                    onClose={() => {
+                        setOpenBoost(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenBoost(true)
+                    }} />
             }
 
             {openTags &&
@@ -89,7 +116,8 @@ function Customers() {
                             <option value="source: manual vs. imported">Source: Manual vs. Imported</option>
                         </CustomSelectBox>
 
-                        <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50"><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
+                        <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50" onClick={() => { setOpenBoost(true) }}>
+                            <Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
 
                         <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
                             onClick={() => { setOpen(true) }}>Add New Customer</button>
@@ -365,7 +393,7 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
                         <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
@@ -392,7 +420,7 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
                         <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
@@ -419,7 +447,7 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
                         <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
@@ -446,7 +474,7 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
                         <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
@@ -473,7 +501,7 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
                         <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
@@ -500,7 +528,7 @@ function Customers() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
                         <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center'><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>
