@@ -23,7 +23,7 @@ export default function RenameList({ onClose, id }) {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Rename Successfully")
+            toast.success("Renamed Successfully")
             setSending(false)
             onClose()
         } catch (error) {
