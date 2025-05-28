@@ -7,6 +7,11 @@ import AdminLayout from "../../components/AdminLayout";
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import DateRange from "../../components/form/DateRangePicker";
 import { useState } from "react";
+import DashboardBarChart from "../../components/charts/DashboardBarChart";
+import DashboardPieChart from "../../components/charts/DashboardPieChart";
+import DashboardLineChart from "../../components/charts/DashboardLineChart";
+import StackedReviewChart from "../../components/charts/StackedReviewChart";
+
 export default function Dashboard() {
     const [rating, setRating] = useState("")
     const [reviewSource, setReviewSource] = useState("")
@@ -54,13 +59,14 @@ export default function Dashboard() {
                 <DashboardCard title="Active Campaigns" count="20%" img="/images/sms-star.svg" bgClass="bg-custom-yellow" textColor="text-custom-yellow!" icon="/images/course-up1.svg" percentage="8.2%" bgImage="bg-[url('/images/active.png')]" />
             </div>
             <div className="grid grid-cols-2 gap-5 mt-5 items-start">
-                <DashboardChart title="Review Count & Average Over Time" imgName="/images/graph.png" alt="Review" height={235} width={509} class_="w-full object-contain mt-5">
+                <DashboardChart title="Review Count & Average Over Time" class_="w-full object-contain mt-5 p-12">
+                    <DashboardBarChart />
                 </DashboardChart>
 
                 <DashboardChart title="Review Rating Distribution">
                     <div className="flex items-start">
                         <div className="w-[60%]">
-                            <Image src="/images/layer.png" alt="chart" height={235} width={283} className="object-contain w-full" />
+                            <DashboardPieChart />
                         </div>
                         <div className="mt-10 w-[40%]">
                             <div className="flex items-center gap-3 mb-2">
@@ -101,10 +107,12 @@ export default function Dashboard() {
                     </div>
                 </DashboardChart>
 
-                <DashboardChart title="Sentiment Trend" imgName="/images/graph1.png" alt="Sentiment" height={366} width={656} class_="w-full">
+                <DashboardChart title="Sentiment Trend" height={366} width={656} class_="w-full">
+                    <DashboardLineChart />
                 </DashboardChart>
 
-                <DashboardChart title="Top Review Sources" imgName="/images/graph2.png" alt="Top Review" height={239} width={509} class_="w-full h-auto object-contain">
+                <DashboardChart title="Top Review Sources" height={239} width={509} class_="w-full h-auto object-contain">
+                    <StackedReviewChart />
                 </DashboardChart>
             </div>
             <div>

@@ -1,6 +1,7 @@
 "use client"
-export default function Select({ value = "", isRequired, label, children, disabled, onChange, defaultOption, selectClass_ = "", class_ = '', labelClass = "" }) {
 
+
+export default function Select({ value = "", isRequired, label, children, disabled, onChange, defaultOption, selectClass_ = "", class_ = '', labelClass = "" }) {
     return (<div className={`mt-4 text-lg relative ${class_}`}>
         {label && <label className={`text-sm font-medium text-secondary mb-1 block capitalize ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : ""}</label>}
         <div className="relative">

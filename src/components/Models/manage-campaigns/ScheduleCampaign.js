@@ -1,24 +1,63 @@
 import DatePicker from '../../../components/form/DatePicker'
-import React from 'react'
+import React, { useState } from 'react'
 import Model from '../Model'
-import Input from '../../form/Input'
 import Radio from '../../form/Radio'
 import Checkbox from '../../form/Checkbox'
 import CancelButton from "../../../components/common/CancelButton"
 import SecondaryButton from "../../../components/common/SecondaryButton";
+import InputForm from '../../form/InputForm'
+import { toast } from 'react-toastify'
+import axios from 'axios'
+import { getError } from "../../../../helper"
+import { useForm } from 'react-hook-form'
 
 
-function ScheduleCampaign({ onClose }) {
+function ScheduleCampaign({ onClose, id }) {
+  const { register, handleSubmit, formState: { errors }, } = useForm();
+  const [sending, setSending] = useState(false)
+  const [date, setDate] = useState("")
+
+  const onSubmit = async (data) => {
+    try {
+      setSending(true)
+      let res = null
+
+      if (id !== "add") {
+        res = await axios.put("/api", data)
+      } else {
+        res = await axios.post("/api", data)
+      }
+
+      toast.success("Confirm Successfully")
+      setSending(false)
+      onClose()
+    } catch (error) {
+      toast.error(getError(error))
+      setSending(false)
+    }
+  }
+
   return (
     <Model onClose={onClose} title="schedule campaign" modalClass="w-[60%]!">
       <div>
-        <div className='grid grid-cols-2 gap-3'>
-          <DatePicker label='Date' icon={true} />
-          <Input inputType='time' label='Time' inputClass='py-2!' />
+        <div className='grid grid-cols-2 gap-3 items-start 2xl:mt-0 mt-3'>
+          <DatePicker
+            label='Date'
+            icon={true} mainClass="mt-0!"
+            value={date}
+            dateFormat="dd/MM/yyyy"
+            onChange={(e) => setDate(e)} />
+          <InputForm inputType='time' label='Time' inputClass='py-2!'
+            formProps={{ ...register("time", { required: false }) }}
+            errors={errors}
+          />
         </div>
 
         <div>
-          <Input inputType='time' label='Time Zone' inputClass='py-2!' />
+          <InputForm inputType='time' label='Time Zone' inputClass='py-2!'
+            formProps={{ ...register("time-zone", { required: false }) }}
+            errors={errors}
+          />
         </div>
 
         <div>
@@ -51,8 +90,12 @@ function ScheduleCampaign({ onClose }) {
         </div>
         <div>
           <div className="grid grid-cols-2 gap-3 mt-3">
-            <CancelButton title="Cancel" />
-            <SecondaryButton title="confirm" />
+            <CancelButton title="Cancel" onClick={onClose} />
+            <SecondaryButton
+              title="Confirm"
+              type="button"
+              onClick={handleSubmit(onSubmit)}
+              disabled={sending} />
           </div>
         </div>
       </div>

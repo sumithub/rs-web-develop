@@ -226,8 +226,12 @@ body {
   box-sizing: content-box;
 }
 
+button {
+  @apply cursor-pointer
+}
+
 :disabled {
-  @apply pointer-events-none
+  @apply pointer-events-none opacity-85
 }
 
 .table-class {
@@ -329,7 +333,12 @@ td {
   display: none;
 }
 
-.css-r5rnga{
-   margin: 0 !important;
-   padding: 12px  18px 12px !important;
+.css-r5rnga {
+  margin: 0 !important;
+  padding: 12px 18px 12px !important;
+}
+
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

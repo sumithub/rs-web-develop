@@ -9,8 +9,33 @@ export const USER_ACTIONS = [
     { label: "Setup Password", value: "setup-password" },
 ]
 
+export const users = [
+    { name: "Jaydon George", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+];
+
 export const TEMPLATE_ACTIONS = [
     { label: "Edit", value: "edit" },
     { label: "Preview", value: "preview" },
     { label: "Clone", value: "clone" },
+]
+
+export const templates = [
+    { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: new Date('2024-06-18T10:00:00') },
+    { name: "Hiking template", type: "SMS", subject: "Lorem ipsum....", lastUpdated: new Date('2024-06-18T10:00:00') },
+    { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: new Date('2024-06-18T10:00:00') },
+    { name: "Hiking template", type: "Email", subject: "Lorem ipsum....", lastUpdated: new Date('2024-06-18T10:00:00') },
+];
+
+export const manageCampaigns = [{ name: "Campaign 1", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+{ name: "Campaign 2", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+{ name: "Campaign 3", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+{ name: "Campaign 4", createdOn: "Jan 10, 2025", launchDate: "Jan 15, 2025", customerCount: 150, status: "Draft" },
+]
+
+export const reviews = [{ img: "/images/google.svg", totalReview: 500, lastDays: 300, thisMonth: 300, lastMonth: 300 },
+{ img: "/images/google.svg", totalReview: 500, lastDays: 300, thisMonth: 300, lastMonth: 300 },
+{ img: "/images/google.svg", totalReview: 500, lastDays: 300, thisMonth: 300, lastMonth: 300 },
 ]

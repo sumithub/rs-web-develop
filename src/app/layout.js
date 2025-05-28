@@ -3,6 +3,8 @@ const inter = Inter({ subsets: ['latin'] })
 import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 export const metadata = {
   title: "Project 87",
@@ -26,6 +28,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className}>
+        <ToastContainer className="!z-[9999999]" />
         <div className='overflow-hidden bg-[#FEFEFE]'>
           {children}
         </div>
