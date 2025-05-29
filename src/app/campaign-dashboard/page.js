@@ -68,7 +68,8 @@ export default function CampaignDashboard() {
                 <option value="2 star">2 Star & Up</option>
                 <option value="1 star">1 Star & Up</option>
             </CustomSelectBox>
-            <DateRange />
+            <DateRange
+                onChange={(e) => { setDate(e) }} />
         </div>}>
         <div className="grid grid-cols-4 gap-5">
             <DashboardCard title="Total Campaigns Sent" count="500" img="/images/sound.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/total.png')]" />

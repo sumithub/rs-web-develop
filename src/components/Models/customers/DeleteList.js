@@ -15,7 +15,7 @@ export default function DeleteList({ onClose }) {
         try {
             setSending(true);
             await axios.put("/api");
-            toast.success("Delete List Successfully");
+            toast.success("List Deleted Successfully");
             onClose();
         } catch (error) {
             toast.error(getError(error));

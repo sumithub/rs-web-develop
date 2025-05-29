@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { getError, validEmailRgx } from '../../../../helper'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import DatePicker from '../../form/DatePicker'
+import DatePickerForm from '../../form/DatePickerForm'
 
 function AddTemplate({ onClose, id }) {
   const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm();
@@ -106,17 +106,17 @@ function AddTemplate({ onClose, id }) {
                   errors={errors}
                 />
 
-                {isEmail && <DatePicker label="Appointment Date" isRequired={true}
-                  formProps={{ ...register("businessPhone", { required: true }) }}
-                  errors={errors}
+                {isEmail && <DatePickerForm label="Appointment Date" isRequired={true}
+                  formProps={{ ...register("appointmentDate", { required: true }) }}
+                  errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}
                 />}
                 {isEmail && <InputForm label="Review Link" isRequired={true}
-                  formProps={{ ...register("businessPhone", { required: true }) }}
+                  formProps={{ ...register("reviewLink", { required: true }) }}
                   errors={errors}
                 />}
 
                 <InputForm label="Business Name" isRequired={true}
-                  formProps={{ ...register("businessPhone", { required: true }) }}
+                  formProps={{ ...register("businessName", { required: true }) }}
                   errors={errors}
                 />
                 <InputForm label="Insert Field" isRequired={true}
