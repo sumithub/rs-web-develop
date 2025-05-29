@@ -6,7 +6,7 @@ import DashboardChart from "../../components/DashboardChart";
 import DatePicker from "../../components/form/DatePicker";
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import { useEffect, useState } from "react";
-import DashboardLineChart from "../../components/charts/DashboardLineChart";
+import CampaignPerformanceChart from "../../components/charts/CampaignPerformanceChart";
 import DashboardPieChart from "../../components/charts/DashboardPieChart";
 import SimpleHorizontalBarChart from "../../components/charts/SimpleHorizontalBarChart";
 import { toast } from "react-toastify";
@@ -98,7 +98,7 @@ export default function CampaignDashboard() {
                 </DashboardChart>
 
                 <DashboardChart title="Campaign Performance Over Time" >
-                    <DashboardLineChart />
+                    <CampaignPerformanceChart />
                 </DashboardChart>
 
                 <DashboardChart title="Individual Response Insights">
