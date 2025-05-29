@@ -74,7 +74,7 @@ export default function RemoveUsers({ onClose }) {
                 <div className="grid grid-cols-2 gap-3 mt-6">
                     <CancelButton title="Cancel" onClick={onClose} />
                     <SecondaryButton
-                        title="Apply Changes"
+                        title="Remove Permanently"
                         onClick={handleRemove}
                         disabled={!confirm || loading}
                     />

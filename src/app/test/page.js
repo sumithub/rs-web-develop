@@ -2,16 +2,12 @@
 import { useState } from "react";
 import AdminLayout from "../../components/AdminLayout";
 import SelectedCustomers from "../../components/Models/manage-campaigns/SelectedCustomers"
-import SelectedFromCustomers from "../../components/Models/manage-campaigns/SelectedFromCustomers"
-import EmailTemplate from "../../components/Models/manage-campaigns/EmailTemplate"
-import TemplateList from "../../components/Models/boost/TemplateList"
 import ReviewDetails from "../../components/Models/review/ReviewDetails";
 import ReviewResponseTemplates from "../../components/Models/review/ReviewResponseTemplates";
 import ShareOnSocialMedia from "../../components/Models/review/ShareOnSocialMedia";
 import ShareViaEmail from "../../components/Models/review/ShareViaEmail";
 import AssignReviewToUser from "../../components/Models/review/AssignReviewToUser";
 import Carousel from "../../components/Models/review/Carousel";
-import GridWidget from "../../components/Models/review/GridWidget";
 import TestimonialWidget from "../../components/Models/review/TestimonialWidget";
 import StarBadgeWidget from "../../components/Models/review/StarBadgeWidget";
 import FloatingButtonWidget from "../../components/Models/review/FloatingButtonWidget";
@@ -24,16 +20,12 @@ import RequestUpdate from "../../components/Models/review/RequestUpdate";
 
 export default function Test() {
     const [open, setOpen] = useState(false)
-    const [openSelect, setOpenSelect] = useState(false)
-    const [openEmail, setOpenEmail] = useState(false)
-    const [openTemplate, setOpenTemplate] = useState(false)
     const [openDetail, setOpenDetail] = useState(false)
     const [openResponse, setOpenResponse] = useState(false)
     const [openMedia, setOpenMedia] = useState(false)
     const [openShare, setOpenShare] = useState(false)
     const [openAssign, setOpenAssign] = useState(false)
     const [openCarousel, setOpenCarousel] = useState(false)
-    const [openGrid, setOpenGrid] = useState(false)
     const [openTestimonial, setOpenTestimonial] = useState(false)
     const [openStar, setOpenStar] = useState(false)
     const [openFloating, setOpenFloating] = useState(false)
@@ -53,39 +45,6 @@ export default function Test() {
 
                 onSave={() => {
                     setOpen(true)
-                }} />
-        }
-
-        {openSelect &&
-            <SelectedFromCustomers
-                onClose={() => {
-                    setOpenSelect(false)
-                }}
-
-                onSave={() => {
-                    setOpenSelect(true)
-                }} />
-        }
-
-        {openEmail &&
-            <EmailTemplate
-                onClose={() => {
-                    setOpenEmail(false)
-                }}
-
-                onSave={() => {
-                    setOpenEmail(true)
-                }} />
-        }
-
-        {openTemplate &&
-            <TemplateList
-                onClose={() => {
-                    setOpenTemplate(false)
-                }}
-
-                onSave={() => {
-                    setOpenTemplate(true)
                 }} />
         }
 
@@ -152,17 +111,6 @@ export default function Test() {
 
                 onSave={() => {
                     setOpenCarousel(true)
-                }} />
-        }
-
-        {openGrid &&
-            <GridWidget
-                onClose={() => {
-                    setOpenGrid(false)
-                }}
-
-                onSave={() => {
-                    setOpenGrid(true)
                 }} />
         }
 
@@ -269,15 +217,6 @@ export default function Test() {
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpen(true) }}>Selected Customers
             </div>
 
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenSelect(true) }}>Select from Customer List
-            </div>
-
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenEmail(true) }}>Email Template
-            </div>
-
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenTemplate(true) }}>Template List
-            </div>
-
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenDetail(true) }}>Review Details
             </div>
 
@@ -294,9 +233,6 @@ export default function Test() {
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenCarousel(true) }}>Carousel
-            </div>
-
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenGrid(true) }}> Grid Widget
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenTestimonial(true) }}> Testimonial Widget

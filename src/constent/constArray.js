@@ -1,12 +1,19 @@
 export const USER_ACTIONS = [
-    { label: "Edit User", value: "edit" },
-    { label: "Suspend/Reactivate", value: "suspend/reactivate" },
-    { label: "Change Role", value: "role" },
-    { label: "Change Password", value: "change-password" },
-    { label: "Resend Invite", value: "resend-invite" },
-    { label: "Remove User", value: "remove-user" },
-    { label: "Send Invite", value: "send-invite" },
-    { label: "Setup Password", value: "setup-password" },
+    { label: "Edit User", value: "edit", icon: "/dropdown/edit.svg", hoverIcon: "/dropdown/edit-active.svg" },
+
+    { label: "Suspend/Reactivate", value: "suspend/reactivate", icon: "/dropdown/pause.svg", hoverIcon: "/dropdown/pause-active.svg" },
+
+    { label: "Change Role", value: "role", icon: "/dropdown/role.svg", hoverIcon: "/dropdown/role-active.svg" },
+
+    { label: "Change Password", value: "change-password", icon: "/dropdown/key.svg", hoverIcon: "/dropdown/key-active.svg" },
+
+    { label: "Resend Invite", value: "resend-invite", icon: "/dropdown/user.svg", hoverIcon: "/dropdown/user-active.svg" },
+
+    { label: "Remove User", value: "remove-user", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },
+
+    { label: "Send Invite", value: "send-invite", icon: "/dropdown/user.svg", hoverIcon: "/dropdown/user-active.svg" },
+
+    { label: "Setup Password", value: "setup-password", icon: "/dropdown/key.svg", hoverIcon: "/dropdown/key-active.svg" },
 ]
 
 export const users = [
