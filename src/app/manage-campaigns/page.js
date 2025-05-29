@@ -162,38 +162,26 @@ function ManageCampaigns() {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="name"
-                                onClick={(value) => {
-                                    setSortBy(value)
-                                }} /></th>
+                            /></th>
                             <th><TableOrder title="Created On"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="createdOn"
-                                onClick={(value) => {
-                                    setSortBy(value)
-                                }}
                             /></th>
                             <th><TableOrder title="Launch Date"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="launchDate"
-                                onClick={(value) => {
-                                    setSortBy(value)
-                                }} /></th>
+                            /></th>
                             <th><TableOrder title="Customers"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="customers"
-                                onClick={(value) => {
-                                    setSortBy(value)
-                                }} /></th>
+                            /></th>
                             <th><TableOrder title="Status"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="status"
-                                onClick={(value) => {
-                                    setSortBy(value)
-                                }}
                             /></th>
                             <th>Action</th>
                         </tr>

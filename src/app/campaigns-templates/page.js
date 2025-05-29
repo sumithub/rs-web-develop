@@ -10,7 +10,6 @@ import AddTemplate from '../../components/Models/templates/AddTemplate'
 import { TEMPLATE_ACTIONS, templates } from '../../constent/constArray'
 import Clone from '../../components/Models/templates/Clone'
 import CustomSelectBox from '../../components/form/CustomSelectBox';
-import Edit from '../../components/Models/templates/Edit'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { formatDateTime, getError } from '../../../helper'
@@ -25,6 +24,7 @@ function CampaignsTemplates() {
     const [openModal, setOpenModal] = useState(null)
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true);
+    const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
         getTemplate()
@@ -118,7 +118,11 @@ function CampaignsTemplates() {
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Template Name" /></th>
+                            <th><TableOrder title="Template Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="name"
+                            /></th>
                             <th><TableOrder title="Type" /></th>
                             <th><TableOrder title="Subject" /></th>
                             <th><TableOrder title="Last Updated" /></th>
