@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import CustomSelectBox from "../../form/CustomSelectBox";
 import Loading from "../../Loading";
 
-export default function EmailTemplate({ onClose }) {
+export default function EmailTemplate({ onClose, onSave }) {
 
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
@@ -53,7 +53,8 @@ export default function EmailTemplate({ onClose }) {
                         <option value="filter 1">Filter 1</option>
                         <option value="filter 2">Filter 2</option>
                     </CustomSelectBox>
-                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!" />
+                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
+                        onClick={onSave} />
                 </div>
             </div>
 

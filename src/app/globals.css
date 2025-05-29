@@ -278,12 +278,14 @@ td {
   height: 100% !important;
 }
 
+/* Default line styling */
 .line {
   width: 200px;
   height: 2px;
   background: #E8EEF2;
 }
 
+/* Default step styling */
 .steps {
   position: relative;
   display: flex;
@@ -296,8 +298,10 @@ td {
   border: 2.5px solid var(--text3);
   cursor: pointer;
   color: var(--text3);
+  background: white;
 }
 
+/* Default step title */
 .steps .step-title {
   color: var(--secondary);
   position: absolute;
@@ -309,6 +313,7 @@ td {
   font-weight: 500;
 }
 
+/* Active step (current step) - Blue */
 .steps.active {
   background: var(--primary);
   border: 2.5px solid var(--primary);
@@ -317,24 +322,38 @@ td {
 
 .steps.active .step-title {
   color: var(--primary);
+  font-weight: 600;
+}
+
+/* Completed step - Green */
+.steps.completed {
+  background: var(--success);
+  border: 2.5px solid var(--success);
+  color: white;
+}
+
+.steps.completed .step-title {
+  color: var(--success);
   font-weight: 500;
 }
 
-.line.active {
-  background: var(--primary);
-}
-
-.completed .line {
+/* Completed line - Green */
+.line.completed {
   background: var(--success);
 }
 
-.completed .steps {
-  background-color: var(--success);
-  border: 2.5px solid var(--success);
+/* Legacy support for old structure - can be removed if not needed */
+.all-completed .line {
+  background: var(--success);
 }
 
-.completed .steps .line,
-.completed .steps .step-title {
+.all-completed .steps {
+  background-color: var(--success);
+  border: 2.5px solid var(--success);
+  color: white;
+}
+
+.all-completed .steps .step-title {
   color: var(--success);
 }
 
