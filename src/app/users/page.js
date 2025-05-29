@@ -217,33 +217,21 @@ export default function Users() {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="name"
-                                onClick={(value) => {
-                                    setSortBy(value)
-                                }}
                             /></th>
                             <th><TableOrder title="Role"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="role"
-                                onClick={(value) => {
-                                    setSortBy(value)
-                                }}
                             /></th>
                             <th><TableOrder title="Status"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="status"
-                                onClick={(value) => {
-                                    setSortBy(value)
-                                }}
                             /></th>
                             <th><TableOrder title="Last Active"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="lastActive"
-                                onClick={(value) => {
-                                    setSortBy(value)
-                                }}
                             /></th>
                             <th>Action</th>
                         </tr>
