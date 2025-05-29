@@ -35,7 +35,13 @@ export default function Status({ status }) {
     else if (s === "notify") {
         bgClass = "bg-[#0396FF1A] text-primary"
     }
+    else if (s === "sent") {
+        bgClass = "bg-[#0396FF1A] text-primary"
+    }
     else if (s === "inactive") {
+        bgClass = "bg-[#FFC1071A] text-custom-yellow-light"
+    }
+    else if (s === "read") {
         bgClass = "bg-[#FFC1071A] text-custom-yellow-light"
     }
     else if (s === "alert") {

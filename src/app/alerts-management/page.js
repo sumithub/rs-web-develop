@@ -11,11 +11,19 @@ import Checkbox from "../../components/form/Checkbox";
 export default function AlertsManagement() {
     const Projects = [
         { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
+        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
+        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024", action: "Dismiss" },
+        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
+        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
+        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
+        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024", action: "Dismiss" },
+        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
+        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
     ]
     return (<>
         <AdminLayout>
             <div className="flex justify-between items-center gap-11">
-                <div className="w-1/4">
+                <div className="w-1/3">
                     <Search
                         mainClass='w-full!'
                         placeholder="Search by ID, Location And Client Name"
@@ -26,7 +34,7 @@ export default function AlertsManagement() {
                 </div>
                 <div className="flex gap-[15px]">
                     <CustomSelectBox
-                        defaultOption="filters"
+                        defaultOption="Filters"
                         class_='mt-0! w-28!'
                         selectClass_="py-2.5! px-2.5!"
                         // value={filterBy}
@@ -40,7 +48,7 @@ export default function AlertsManagement() {
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
                     // onClick={() => { setOpen(true) }}
                     >
-                        Add New Rule</button>
+                        Mark as Read</button>
                 </div>
             </div>
             <div className='table-class mt-[15px]'>

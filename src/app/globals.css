@@ -4,6 +4,7 @@
   --primary: #0396FF;
   --primary2: #6FC3FF;
   --secondary: #1F2933;
+  --secondary2: #F6F8FB;
   --text: #FEFEFE;
   --text3: #ADADAD;
   --border-color: #ADADAD4D;
@@ -29,6 +30,7 @@
   --border-primary: var(--primary);
   --color-primary2: var(--primary2);
   --color-secondary: var(--secondary);
+  --color-secondary2: var(--secondary2);
   --color-text: var(--text);
   --color-danger: var(--danger);
   --color-danger2: var(--danger2);

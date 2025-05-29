@@ -6,18 +6,19 @@ import Image from "next/image";
 import Search from "../../components/form/Search";
 import CustomSelectBox from "../../components/form/CustomSelectBox";
 import Status from "../../components/Status"
+import Checkbox from "../../components/form/Checkbox";
 
-export default function NotificationPreferencesManagement() {
+export default function NotificationsManagement() {
     const Projects = [
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "NO", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "No", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
+        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
     ]
     return (<>
         <AdminLayout>
@@ -47,7 +48,7 @@ export default function NotificationPreferencesManagement() {
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
                     // onClick={() => { setOpen(true) }}
                     >
-                        Edit Preferences</button>
+                        Resend</button>
                 </div>
             </div>
             <div className='table-class mt-[15px]'>
@@ -57,8 +58,10 @@ export default function NotificationPreferencesManagement() {
                             <th><TableOrder title="ID" /></th>
                             <th><TableOrder title="Client Name" /></th>
                             <th><TableOrder title="Location" /></th>
-                            <th><TableOrder title="Preference Type" /></th>
-                            <th><TableOrder title="Enabled" /></th>
+                            <th><TableOrder title="Medium" /></th>
+                            <th><TableOrder title="Recipient" /></th>
+                            <th><TableOrder title="Message" /></th>
+                            <th><TableOrder title="Status" /></th>
                             <th><TableOrder title="Created Date" /></th>
                             <th>Actions</th>
                         </tr>
@@ -66,22 +69,29 @@ export default function NotificationPreferencesManagement() {
                     <tbody>
                         {Projects.map((e, i) =>
                             <tr key={i}>
-                                <td>{e.id}</td>
+                                <td>
+                                    <div className="flex gap-2.5 items-center">
+                                        <Checkbox />
+                                        {e.id}
+                                    </div>
+                                </td>
                                 <td>{e.name}</td>
                                 <td>{e.location}</td>
-                                <td>{e.type}</td>
+                                <td>{e.medium}</td>
+                                <td>{e.recipient}</td>
+                                <td>{e.message}</td>
                                 <td>
-                                    <Status status={e.enabled} />
+                                    <Status status={e.status} />
                                 </td>
                                 <td>{e.date}</td>
                                 <td>
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer'>
-                                            <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                            <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
                                         </button>
 
                                         <button className='cursor-pointer'>
-                                            <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                            <Image src="/images/refresh1.svg" alt='refresh1' height={28} width={28} />
                                         </button>
                                     </div>
                                 </td>

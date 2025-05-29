@@ -23,7 +23,7 @@ export default function ClientRulesManagement() {
     return (<>
         <AdminLayout>
             <div className="flex justify-between items-center gap-11">
-                <div className="w-1/4">
+                <div className="w-1/3">
                     <Search
                         mainClass='w-full!'
                         placeholder="Search by ID, Location And Client Name"
@@ -34,7 +34,7 @@ export default function ClientRulesManagement() {
                 </div>
                 <div className="flex gap-[15px]">
                     <CustomSelectBox
-                        defaultOption="filters"
+                        defaultOption="Filters"
                         class_='mt-0! w-28!'
                         selectClass_="py-2.5! px-2.5!"
                         // value={filterBy}
