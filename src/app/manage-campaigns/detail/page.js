@@ -262,7 +262,7 @@ export default function Detail({ }) {
                                 errors={errors}
                             ></SelectForm>
                         </div>
-                        <SelectForm label="Cooldown Period" isRequired={true} defaultOption="7 Days" selectClass_="bg-white! py-3! focus:border-primary/60!"
+                        <SelectForm label="Cooldown Period" isRequired={true} defaultOption="-" selectClass_="bg-white! py-3! focus:border-primary/60!"
                             formProps={{ ...register("cooldown-period", { required: true }) }} errors={errors} clearErrors={clearErrors}>
                             <option>7 Days</option>
                         </SelectForm>
