@@ -110,7 +110,7 @@ function AddTemplate({ onClose, id }) {
                   errors={errors}
                 />}
 
-                <InputForm label="Business Phone" isRequired={true}
+                <InputForm label="Business Name" isRequired={true}
                   formProps={{ ...register("business-phone", { required: true }) }}
                   errors={errors}
                 />

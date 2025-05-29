@@ -17,20 +17,20 @@ export default function Input({ isTextArea, rows = 3, isRequired, label, placeho
             <label className={`text-sm font-medium text-secondary ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400">(Optional)</span>}</label>
             <div className="relative">
                 {(inputType !== "password" && icon) && (
-                    <Image
+                    <img
                         unoptimized
                         src={icon}
-                        alt="icon"
+                        alt=""
                         width={16}
                         height={16}
                         className={`absolute cursor-pointer top-4 right-2.5 ${iconClass}`}
                         onClick={handleClick} />
                 )}
                 {(inputType === "password") && (
-                    <Image
+                    <img
                         unoptimized
                         src={type !== "password" ? "/images/eyes.svg" : "/images/open-eye.svg"}
-                        alt="icon"
+                        alt=""
                         width={16}
                         height={16}
                         className={`absolute cursor-pointer top-4 right-2.5 "w-6 h-6"`}
