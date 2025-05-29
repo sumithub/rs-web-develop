@@ -10,6 +10,7 @@ import AddTemplate from '../../components/Models/templates/AddTemplate'
 import { TEMPLATE_ACTIONS, templates } from '../../constent/constArray'
 import Clone from '../../components/Models/templates/Clone'
 import CustomSelectBox from '../../components/form/CustomSelectBox';
+import Edit from '../../components/Models/templates/Edit'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { formatDateTime, getError } from '../../../helper'
@@ -29,7 +30,7 @@ function CampaignsTemplates() {
 
     useEffect(() => {
         getTemplate()
-    }, [search, type, date])
+    }, [search, type, date, sortBy])
 
     const getTemplate = async () => {
         try {
@@ -130,11 +131,19 @@ function CampaignsTemplates() {
                             <th><TableOrder title="Template Name"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="name"
-                            /></th>
-                            <th><TableOrder title="Type" /></th>
-                            <th><TableOrder title="Subject" /></th>
-                            <th><TableOrder title="Last Updated" /></th>
+                                field="templateName" /></th>
+                            <th><TableOrder title="Type"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="type" /></th>
+                            <th><TableOrder title="Subject"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="subject" /></th>
+                            <th><TableOrder title="Last Updated"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="lastUpdated" /></th>
                             <th>Action</th>
                         </tr>
                     </thead>

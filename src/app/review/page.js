@@ -24,6 +24,7 @@ export default function Review() {
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
     const [open, setOpen] = useState(false)
+    const [sortBy, setSortBy] = useState("")
 
     const list = [
         { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "New" },
@@ -270,12 +271,30 @@ export default function Review() {
                     <table className="w-full">
                         <thead>
                             <tr className="text-secondary text-sm font-semibold bg-dark border-b border-border-color text-left">
-                                <th className="py-4 px-4"><TableOrder title="Reviewer" /></th>
-                                <th className="py-4 px-4"><TableOrder title="Rating" /></th>
-                                <th className="py-4 px-4"><TableOrder title="Review Text" /></th>
-                                <th className="py-4 px-4"><TableOrder title="Source" /></th>
-                                <th className="py-4 px-4"><TableOrder title="Last Updated" /></th>
-                                <th className="py-4 px-4"><TableOrder title="Status" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Reviewer"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="reviewer" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Rating"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="rating" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Review Text"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="reviewText" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Source"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="source" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Last Updated"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="lastUpdated" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Status"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="status" /></th>
                                 <th className="py-4 px-4">Actions</th>
                             </tr>
                         </thead>

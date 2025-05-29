@@ -31,7 +31,7 @@ function ManageCampaigns() {
 
     useEffect(() => {
         getTemplate()
-    }, [search, sortBy1, type, status, changeStatus, date])
+    }, [search, sortBy1, type, status, changeStatus, date, sortBy])
 
     const getTemplate = async () => {
         try {
@@ -149,7 +149,9 @@ function ManageCampaigns() {
 
                         <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'>Bulk Edit</button>
 
-                        <button className='border border-danger-light2 bg-danger-light2 rounded-lg p-2 text-danger text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'>Bulk Delete</button>
+                        <button
+                            onClick={() => { setOpen("delete") }}
+                            className='border border-danger-light2 bg-danger-light2 rounded-lg p-2 text-danger text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'>Bulk Delete</button>
                     </div>
                 </div>
             </div>
@@ -161,7 +163,7 @@ function ManageCampaigns() {
                             <th><TableOrder title="Campaign Name"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="name"
+                                field="campaignName"
                             /></th>
                             <th><TableOrder title="Created On"
                                 sortBy={sortBy}

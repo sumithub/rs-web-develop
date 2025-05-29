@@ -5,8 +5,10 @@ import SecondaryButton from "../../common/SecondaryButton";
 import PaginationDemo from "../../Pagination";
 import TableOrder from "../../TableOrder";
 import Model from "../Model";
+import { useState } from "react";
 
 export default function ReviewResponseTemplates({ onClose, onSave }) {
+    const [sortBy, setSortBy] = useState("")
     return (
         <Model onClose={onClose} title="Review Response Templates" modalClass="w-[60%]!" modalBodyClass="max-h-[90vh]!">
             <div>
@@ -20,9 +22,18 @@ export default function ReviewResponseTemplates({ onClose, onSave }) {
                     <table className="w-full">
                         <thead>
                             <tr>
-                                <th><TableOrder title="Template Name" /></th>
-                                <th><TableOrder title="Last Updated" /></th>
-                                <th><TableOrder title="Template Name" /></th>
+                                <th><TableOrder title="Template Name"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="templateName" /></th>
+                                <th><TableOrder title="Last Updated"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="lastUpdated" /></th>
+                                <th><TableOrder title="Template Name"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="templateName" /></th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -136,8 +147,8 @@ export default function ReviewResponseTemplates({ onClose, onSave }) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                    <CancelButton title="Cancel" onClick={onClose}/>
-                    <SecondaryButton title="Add Review"/>
+                    <CancelButton title="Cancel" onClick={onClose} />
+                    <SecondaryButton title="Add Review" />
                 </div>
             </div>
         </Model>

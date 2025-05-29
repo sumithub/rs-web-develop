@@ -40,7 +40,7 @@ export default function Users() {
 
     useEffect(() => {
         getUser()
-    }, [search, status, role, dates])
+    }, [search, status, role, dates, sortBy])
 
     const getUser = async () => {
         try {

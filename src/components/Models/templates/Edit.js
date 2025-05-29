@@ -37,7 +37,7 @@ export default function EditTemplate({ onClose, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <InputForm label="Template Name" isRequired={true} placeholder="enter name"
-                        formProps={{ ...register("template-name", { required: true }) }}
+                        formProps={{ ...register("templateName", { required: true }) }}
                         errors={errors}
                     />
                     <InputForm label="Type"
@@ -49,7 +49,7 @@ export default function EditTemplate({ onClose, id }) {
                         errors={errors}
                     />
                     {/* <InputForm label="Last Updated"
-                        formProps={{ ...register("last-updated", { required: false }) }}
+                        formProps={{ ...register("lastUpdated", { required: false }) }}
                         errors={errors}
                     /> */}
 
