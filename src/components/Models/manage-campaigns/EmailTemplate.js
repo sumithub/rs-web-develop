@@ -45,7 +45,7 @@ export default function EmailTemplate({ onClose, onSave }) {
                     }} />
                 <div className="flex items-center gap-2">
                     <CustomSelectBox
-                        class_="mt-0!"
+                        class_="mt-0! w-32!"
                         defaultOption="Filters"
                         value={filter}
                         onChange={(e) => {

@@ -15,12 +15,14 @@ import { toast } from "react-toastify";
 import { getError } from "../../../helper";
 import { reviews } from "../../constent/constArray";
 import Loading from "../../components/Loading";
+import BoostRequest from "../../components/Models/boost/BoostRequest"
 
 export default function Dashboard() {
     const [rating, setRating] = useState("")
     const [reviewSource, setReviewSource] = useState("")
     const [loading, setLoading] = useState(true);
     const [list, setList] = useState([])
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         getReview()
@@ -42,7 +44,7 @@ export default function Dashboard() {
 
     return <AdminLayout
         noCard={true}
-        headerChild={<div className="grid grid-cols-4 gap-3 justify-end items-end">
+        headerChild={<div className="grid grid-cols-4 gap-3 justify-end items-center mt-3">
             <CustomSelectBox
                 class_="mt-0!"
                 defaultOption="Review Source"
@@ -69,9 +71,20 @@ export default function Dashboard() {
                 <option value="1 star">1 Star & Up</option>
             </CustomSelectBox>
             <DateRange />
-            <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50"><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
+            <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50" onClick={() => { setOpen(true) }}><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
         </div>}
     >
+        {open &&
+            <BoostRequest
+                onClose={() => {
+                    setOpen(false)
+                }}
+
+                onSave={() => {
+                    setOpen(true)
+                }}
+            />
+        }
         <div className="bg-light min-h-[calc(100dvh_-_85px)]">
             <div className="grid grid-cols-4 gap-5">
                 <DashboardCard title="total reviews" count="1.234" img="/images/sms-star.svg" bgClass="bg-primary" textColor="text-primary" icon="/images/course-up.svg" percentage="2.5%" bgImage="bg-[url('/images/total.png')]" />

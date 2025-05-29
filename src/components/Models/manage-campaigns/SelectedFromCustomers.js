@@ -38,15 +38,15 @@ function SelectedCustomers({ onClose, onSave }) {
     }
 
     return (
-        <Model onClose={onClose} title="Customer List" modalClass="w-[60%]!" >
+        <Model onClose={onClose} title="Select Customers From List" modalClass="w-[60%]!" >
             <div className="flex items-center justify-between mb-3">
-                <Search placeholder="Search by Filter by name, email, phone" mainClass="w-1/2!"
+                <Search placeholder="Search by Filter by name, email, phone" mainClass="w-[45%]!"
                     onSearch={(s) => {
                         setSearch(s)
                     }} />
                 <div className="flex items-center gap-4">
                     <CustomSelectBox
-                        class_="mt-0!"
+                        class_="mt-0! w-32!"
                         defaultOption="Filters"
                         value={filter}
                         onChange={(e) => {
@@ -55,7 +55,7 @@ function SelectedCustomers({ onClose, onSave }) {
                         <option value="filter 1">Filter 1</option>
                         <option value="filter 2">Filter 2</option>
                     </CustomSelectBox>
-                    <SecondaryButton title="Select Customers From List" class_="text-sm! font-normal! py-[7px]!"
+                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
                         onClick={onSave}
                     />
                 </div>
