@@ -133,10 +133,10 @@ function ManageCampaigns() {
                         </div>
                     </div>
 
-                    <div className='grid grid-cols-3 gap-3'>
+                    <div className='flex gap-3'>
 
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-40!"
                             defaultOption="change Status"
                             value={changeStatus}
                             onChange={(e) => {
