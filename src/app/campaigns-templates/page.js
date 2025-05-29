@@ -15,6 +15,7 @@ import axios from 'axios'
 import { formatDateTime, getError } from '../../../helper'
 import Loading from '../../components/Loading'
 import Preview from '../../components/Models/manage-campaigns/Preview'
+import DeleteTemplate from "../../components/Models/templates/DeleteTemplate"
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
@@ -47,6 +48,14 @@ function CampaignsTemplates() {
         <AdminLayout >
             {(openModal === "edit" || openModal === "new") &&
                 <AddTemplate
+                    onClose={() => {
+                        setOpenModal(false)
+                    }}
+                />
+            }
+
+            {openModal === "delete" &&
+                <DeleteTemplate
                     onClose={() => {
                         setOpenModal(false)
                     }}

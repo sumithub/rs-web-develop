@@ -24,9 +24,14 @@ export const users = [
 ];
 
 export const TEMPLATE_ACTIONS = [
-    { label: "Edit", value: "edit" },
-    { label: "Preview", value: "preview" },
-    { label: "Clone", value: "clone" },
+    { label: "Edit", value: "edit", icon: "/dropdown/edit.svg", hoverIcon: "/dropdown/edit-active.svg" },
+
+    { label: "Preview", value: "preview", icon: "/dropdown/eye.svg", hoverIcon: "/dropdown/eye-active.svg" },
+
+    { label: "Clone", value: "clone", icon: "/dropdown/clone.svg", hoverIcon: "/dropdown/clone-active.svg" },
+
+    { label: "Delete", value: "delete", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },
+
 ]
 
 export const templates = [
@@ -52,8 +57,6 @@ export const responseInsights = [
     { id: "USR10000", date: new Date('2024-06-18T10:00:00'), actionToken: "opened", details: "review submit" },
     { id: "USR10000", date: new Date('2024-06-18T10:00:00'), actionToken: "opened", details: "review submit" },
 ]
-
-
 
 export const emailTemplates = [
     { name: "Nature Template", description: "Lorem ipsum..", type: "Email Template" },
