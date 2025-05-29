@@ -1,20 +1,50 @@
 "use client"
 import DashboardCard from "../../components/DashboardCard";
-import Table from "../../components/Table";
 import DashboardChart from "../../components/DashboardChart"
 import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import DateRange from "../../components/form/DateRangePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import DashboardBarChart from "../../components/charts/DashboardBarChart";
+import DashboardPieChart from "../../components/charts/DashboardPieChart";
+import DashboardLineChart from "../../components/charts/DashboardLineChart";
+import StackedReviewChart from "../../components/charts/StackedReviewChart";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getError } from "../../../helper";
+import { reviews } from "../../constent/constArray";
+import Loading from "../../components/Loading";
+import BoostRequest from "../../components/Models/boost/BoostRequest"
 
 export default function Dashboard() {
     const [rating, setRating] = useState("")
     const [reviewSource, setReviewSource] = useState("")
+    const [loading, setLoading] = useState(true);
+    const [list, setList] = useState([])
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        getReview()
+    }, [rating, reviewSource])
+
+    const getReview = async () => {
+        try {
+            setLoading(true)
+            setList([])
+            const res = await axios.get("/api")
+            setList(res.data || reviews)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
 
     return <AdminLayout
         noCard={true}
-        headerChild={<div className="grid grid-cols-4 gap-3 justify-end items-end">
+        headerChild={<div className="grid grid-cols-4 gap-3 justify-end items-center mt-3">
             <CustomSelectBox
                 class_="mt-0!"
                 defaultOption="Review Source"
@@ -41,9 +71,20 @@ export default function Dashboard() {
                 <option value="1 star">1 Star & Up</option>
             </CustomSelectBox>
             <DateRange />
-            <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50"><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
+            <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50" onClick={() => { setOpen(true) }}><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
         </div>}
     >
+        {open &&
+            <BoostRequest
+                onClose={() => {
+                    setOpen(false)
+                }}
+
+                onSave={() => {
+                    setOpen(true)
+                }}
+            />
+        }
         <div className="bg-light min-h-[calc(100dvh_-_85px)]">
             <div className="grid grid-cols-4 gap-5">
                 <DashboardCard title="total reviews" count="1.234" img="/images/sms-star.svg" bgClass="bg-primary" textColor="text-primary" icon="/images/course-up.svg" percentage="2.5%" bgImage="bg-[url('/images/total.png')]" />
@@ -55,13 +96,17 @@ export default function Dashboard() {
                 <DashboardCard title="Active Campaigns" count="20%" img="/images/sms-star.svg" bgClass="bg-custom-yellow" textColor="text-custom-yellow!" icon="/images/course-up1.svg" percentage="8.2%" bgImage="bg-[url('/images/active.png')]" />
             </div>
             <div className="grid grid-cols-2 gap-5 mt-5 items-start">
-                <DashboardChart title="Review Count & Average Over Time" imgName="/images/graph.png" alt="Review" height={235} width={509} class_="w-full object-contain mt-5">
+                <DashboardChart title="Review Count & Average Over Time" class_="w-full object-contain mt-5 p-12">
+                    <DashboardBarChart />
                 </DashboardChart>
 
                 <DashboardChart title="Review Rating Distribution">
                     <div className="flex items-start">
                         <div className="w-[60%]">
-                            <Image src="/images/layer.png" alt="chart" height={235} width={283} className="object-contain w-full" />
+                            <DashboardPieChart
+                                labels={["5", "4", "3", "2", "1"]}
+                                colors={["#0396FF", "#16C098", "#FFAE4C", "#07DBFA", "#988AFC"]}
+                            />
                         </div>
                         <div className="mt-10 w-[40%]">
                             <div className="flex items-center gap-3 mb-2">
@@ -102,14 +147,41 @@ export default function Dashboard() {
                     </div>
                 </DashboardChart>
 
-                <DashboardChart title="Sentiment Trend" imgName="/images/graph1.png" alt="Sentiment" height={366} width={656} class_="w-full">
+                <DashboardChart title="Sentiment Trend" height={366} width={656} class_="w-full">
+                    <DashboardLineChart />
                 </DashboardChart>
 
-                <DashboardChart title="Top Review Sources" imgName="/images/graph2.png" alt="Top Review" height={239} width={509} class_="w-full h-auto object-contain">
+                <DashboardChart title="Top Review Sources" height={239} width={509} class_="w-full h-auto object-contain">
+                    <StackedReviewChart />
                 </DashboardChart>
             </div>
-            <div>
-                <Table />
+
+            <div className="mt-8 w-full border border-border-color rounded-[20px] overflow-hidden">
+                {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+                    <thead>
+                        <tr>
+                            <th>Source</th>
+                            <th>Total Reviews</th>
+                            <th>Last 30 Days</th>
+                            <th>This Month</th>
+                            <th>Last Month</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {list?.map((e, index) => <tr key={index}>
+                            <td>
+                                <div className="flex gap-2.5">
+                                    <Image src={e.img} alt="google.svg" width={17} height={17} unoptimized={true} />
+                                    {e.source}
+                                </div>
+                            </td>
+                            <td>{e.totalReviews}</td>
+                            <td>{e.lastDays}</td>
+                            <td>{e.thisMonth}</td>
+                            <td>{e.lastMonth}</td>
+                        </tr>)}
+                    </tbody>
+                </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
         </div>
     </AdminLayout>

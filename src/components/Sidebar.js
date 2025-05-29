@@ -7,24 +7,36 @@ import { usePathname } from "next/navigation";
 export default function Sidebar() {
     const list = [
         { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
+        {
+            title: "Customers", link: "/campaigns", icon: "customer",
+            submenu: [{ title: "Manage Customers", link: "/customers" }, { title: "Customer Tagging", link: "/customer-tagging" }]
+        },
         // { title: "Customers", link: "/campaigns", icon: "customer", submenu: [{ title: "User Management", link: "/users" }] },
         {
             title: "Reviews", link: "/reviews", icon: "message",
-            submenu: [{ title: "Manage Reviews", link: "/review" }]
+            submenu: [{ title: "Manage Reviews", link: "/review" }, { title: "Review Widgets", link: "/review-widgets" }, { title: "Review Sources", link: "/review-sources" }]
         },
-        { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
+        {
+            title: "Campaigns", link: "/campaigns", icon: "campaign",
+            submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }]
+        },
+        {
+            title: "Reports", link: "", icon: "report",
+            submenu: [{ title: "Review Analytics", link: "/review-analytics" }, { title: "Campaign Performance", link: "/campaign-performance" }, { title: "Sentiment Analysis", link: "/sentiment-analysis" }]
+        },
+        // { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
 
         { title: "Settings", icon: "settings", submenu: [{ title: "Users", link: "/users" }] },
     ]
 
-    return <div className="relative">
+    return <div className="relative z-0">
         <div className="bg-white h-[100vh] w-72 fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px] shadow-[0px_16px_44px_0px_#00000012]">
             <div className="relative h-full pb-10">
 
                 <div className="pt-5 text-center">
                     <Link href="/" className="test-secondary text-xl font-semibold uppercase text-center">logo</Link>
                 </div>
-                <div className="relative h-full flex flex-col justify-between overflow-y-auto custom-scrollbar pb-10 pt-10">
+                <div className="relative h-full flex flex-col justify-between overflow-y-auto custom-scrollbar pb-10 pt-10 scrollbar-none">
                     <div>
                         <div className="px-3 mb-4">
                             <div className="flex gap-1 items-center px-4 py-3 text-sm rounded-[10px] bg-primary text-white">

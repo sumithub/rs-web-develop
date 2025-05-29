@@ -5,11 +5,41 @@ import DashboardCard from "../../components/DashboardCard";
 import DashboardChart from "../../components/DashboardChart";
 import DatePicker from "../../components/form/DatePicker";
 import CustomSelectBox from '../../components/form/CustomSelectBox';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CampaignPerformanceChart from "../../components/charts/CampaignPerformanceChart";
+import DashboardPieChart from "../../components/charts/DashboardPieChart";
+import SimpleHorizontalBarChart from "../../components/charts/SimpleHorizontalBarChart";
+import { toast } from "react-toastify";
+import { formatDateTime, getError } from "../../../helper";
+import axios from "axios";
+import Loading from "../../components/Loading";
+import { responseInsights } from "../../constent/constArray";
+import DateRange from "../../components/form/DateRangePicker";
 
 export default function CampaignDashboard() {
+    const [date, setDate] = useState("")
     const [rating, setRating] = useState("")
     const [reviewSource, setReviewSource] = useState("")
+    const [loading, setLoading] = useState(true);
+    const [list, setList] = useState([])
+
+    useEffect(() => {
+        getInsights()
+    }, [date, rating, reviewSource])
+
+    const getInsights = async () => {
+        try {
+            setLoading(true)
+            setList([])
+            const res = await axios.get("/api")
+            setList(res.data || responseInsights)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
 
     return <AdminLayout noCard={true}
         headerChild={<div className="grid grid-cols-3 gap-3 justify-end items-end">
@@ -38,11 +68,9 @@ export default function CampaignDashboard() {
                 <option value="2 star">2 Star & Up</option>
                 <option value="1 star">1 Star & Up</option>
             </CustomSelectBox>
-            <DatePicker
-                icon={true}
-            />
-        </div>}
-    >
+            <DateRange
+                onChange={(e) => { setDate(e) }} />
+        </div>}>
         <div className="grid grid-cols-4 gap-5">
             <DashboardCard title="Total Campaigns Sent" count="500" img="/images/sound.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/total.png')]" />
 
@@ -63,17 +91,17 @@ export default function CampaignDashboard() {
 
         <div>
             <div className="grid grid-cols-2 gap-5 mt-5 items-start">
-                <DashboardChart title="Campaign Funnel Breakdown" imgName="/images/breakdown.png" alt="breakdown" height={218} width={509} class_="my-5">
-                    <div className="text-base text-text3 text-center capitalize mt-2">Campaign Funnel Breakdown</div>
-                    <div className="text-xs text-text3 text-center capitalize">no of users</div>
+                <DashboardChart title="Campaign Funnel Breakdown" class_="my-5">
+                    <SimpleHorizontalBarChart />
                 </DashboardChart>
 
-                <DashboardChart title="Campaign Performance Over Time" imgName="/images/graph1.png" alt="graph" height={200} width={466}>
+                <DashboardChart title="Campaign Performance Over Time" >
+                    <CampaignPerformanceChart />
                 </DashboardChart>
 
                 <DashboardChart title="Individual Response Insights">
                     <div className="mt-5 w-full border border-border-color rounded-tr-[20px] rounded-tl-[20px] overflow-hidden">
-                        <table className="w-full">
+                        {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -84,36 +112,24 @@ export default function CampaignDashboard() {
                             </thead>
                             <tbody>
 
-                                <tr>
-                                    <td>USR10000</td>
-                                    <td>Jun 18,2024 10:00AM</td>
-                                    <td>opened</td>
-                                    <td>review submit</td>
-                                </tr>
-
-                                <tr>
-                                    <td>USR10000</td>
-                                    <td>Jun 18,2024 10:00AM</td>
-                                    <td>opened</td>
-                                    <td>review submit</td>
-                                </tr>
-
-                                <tr>
-                                    <td>USR10000</td>
-                                    <td>Jun 18,2024 10:00AM</td>
-                                    <td>opened</td>
-                                    <td>review submit</td>
-                                </tr>
-
+                                {list?.map((e, index) => <tr key={index}>
+                                    <td>{e.id}</td>
+                                    <td>{formatDateTime(e.date)}</td>
+                                    <td className="capitalize">{e.actionToken}</td>
+                                    <td className="capitalize">{e.details}</td>
+                                </tr>)}
                             </tbody>
-                        </table>
+                        </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                     </div>
                 </DashboardChart>
 
                 <DashboardChart title="Engagement Breakdown">
                     <div className="flex items-start">
                         <div className="w-[60%]">
-                            <Image src="/images/layer.png" alt="chart" height={235} width={283} className="object-contain w-full" />
+                            <DashboardPieChart
+                                labels={["Opened", "Bounced", "Delivered", "Reviewed", "Clicked"]}
+                                colors={["#0396FF", "#16C098", "#FFAE4C", "#07DBFA", "#988AFC"]}
+                            />
                         </div>
                         <div className="mt-10 w-[40%] capitalize">
                             <div className="flex items-center gap-3 mb-5">

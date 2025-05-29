@@ -1,0 +1,154 @@
+/* Progress bar container */
+.flex.items-center.mb-7 {
+    gap: 0;
+    align-items: center;
+}
+
+/* Default line styling */
+.line {
+    width: 120px;
+    height: 3px;
+    background: #E5E7EB;
+    position: relative;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+/* Default step styling */
+.steps {
+    position: relative;
+    display: flex;
+    font-size: 14px;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background: #E5E7EB;
+    font-weight: 600;
+    z-index: 2;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+/* Step number styling */
+.steps .step-number {
+    line-height: 1;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Step title styling */
+.steps .step-title {
+    position: absolute;
+    width: max-content;
+    top: 100%;
+    font-size: 12px;
+    margin-top: 8px;
+    text-transform: capitalize;
+    font-weight: 500;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+}
+
+.steps .step-title.show {
+    display: block;
+}
+
+.steps .step-title.hide {
+    display: none;
+}
+
+/* Pending step styling */
+.steps.pending {
+    background: #E5E7EB;
+    color: #9CA3AF;
+}
+
+.steps.pending .step-title {
+    color: #1F2933;
+}
+
+/* Active step (current step) - Blue */
+.steps.active {
+    background: #0396FF;
+    color: white;
+    box-shadow: 0 0 0 4px rgba(3, 150, 255, 0.2);
+}
+
+.steps.active .step-title {
+    color: #0396FF;
+    font-weight: 600;
+}
+
+/* Completed step - Green with checkmark */
+.steps.completed {
+    background: #10B981;
+    color: white;
+}
+
+.steps.completed .step-title {
+    color: #10B981;
+    font-weight: 500;
+}
+
+.steps.completed .step-number {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Completed line - Green */
+.line.completed {
+    background: #10B981;
+}
+
+/* Pending line - Gray */
+.line.pending {
+    background: #E5E7EB;
+}
+
+/* Hover effects for clickable steps */
+.steps:hover {
+    transform: scale(1.05);
+}
+
+.steps.pending:hover {
+    cursor: default;
+    transform: none;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .line {
+        width: 80px;
+    }
+
+    .steps {
+        width: 28px;
+        height: 28px;
+    }
+
+    .steps .step-number {
+        font-size: 12px;
+    }
+
+    .steps .step-title {
+        font-size: 10px;
+        margin-top: 6px;
+    }
+
+    .steps.completed .step-number {
+        font-size: 14px;
+    }
+}
+
+/* Always show step titles on medium screens and up */
+@media (min-width: 768px) {
+    .steps .step-title.hide {
+        display: block !important;
+    }
+}

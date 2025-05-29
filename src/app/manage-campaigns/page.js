@@ -7,37 +7,74 @@ import Search from '../../components/form/Search'
 import PaginationDemo from '../../components/Pagination'
 import Status from '../../components/Status'
 import TableOrder from '../../components/TableOrder'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import CustomSelectBox from '../../components/form/CustomSelectBox';
-function ManageCampaigns() {
+import DeleteCampaign from '../../components/Models/manage-campaigns/DeleteCampaign'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import { formatDate, getError } from '../../../helper'
+import { manageCampaigns } from '../../constent/constArray'
+import Loading from '../../components/Loading'
 
-    const [sortBy, setSortBy] = useState("")
+function ManageCampaigns() {
+    const [sortBy1, setSortBy1] = useState("")
     const [type, setType] = useState("")
     const [status, setStatus] = useState("")
     const [changeStatus, setChangeStatus] = useState("")
     const [date, setDate] = useState("")
-    // const [list, setList] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [list, setList] = useState([])
+    const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
+    const [open, setOpen] = useState(false)
+    const [sortBy, setSortBy] = useState("")
+
+    useEffect(() => {
+        getTemplate()
+    }, [search, sortBy1, type, status, changeStatus, date, sortBy])
+
+    const getTemplate = async () => {
+        try {
+            setLoading(true)
+            const res = await axios.get("/api")
+            setList(res.data || manageCampaigns)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
 
     return (
         <AdminLayout>
+            {open &&
+                <DeleteCampaign
+                    onClose={() => {
+                        setOpen(false)
+                    }}
+
+                    onSave={() => {
+                        setOpen(true)
+                    }}
+                />
+            }
             <div>
-                <div className="2xl:flex lg:flex-wrap justify-between items-center w-full mb-5">
+                <div className="flex justify-between items-start w-full mb-5">
                     <Search
+                        mainClass='max-w-[270px]!'
                         placeholder="Search by campaign names"
                         onSearch={(s) => {
                             setSearch(s)
                         }}
                     />
-                    <div className="grid grid-cols-5 items-start gap-3 2xl:mt-0 mt-3">
+                    <div className="flex items-start gap-3">
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-40!"
                             defaultOption="sort by"
-                            value={sortBy}
+                            value={sortBy1}
                             onChange={(e) => {
-                                setSortBy(e.target.value)
+                                setSortBy1(e.target.value)
                             }}>
                             <option value="campaign ame">Campaign Name</option>
                             <option value="date">date</option>
@@ -46,7 +83,7 @@ function ManageCampaigns() {
                         </CustomSelectBox>
 
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="select type"
                             value={type}
                             onChange={(e) => {
@@ -57,7 +94,7 @@ function ManageCampaigns() {
                         </CustomSelectBox>
 
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="Status"
                             value={status}
                             onChange={(e) => {
@@ -77,8 +114,8 @@ function ManageCampaigns() {
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
                         />
-                        <Link href="/manage-campaigns/detail">
-                            <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                        <Link href="/manage-campaigns/detail" className='shrink-0'>
+                            <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0 w-full"
                             >Create campaign</button>
                         </Link>
                     </div>
@@ -87,14 +124,19 @@ function ManageCampaigns() {
                 <div className='flex items-center justify-between mb-5'>
                     <div className="border border-border-color px-2 py-1 rounded-lg w-28">
                         <div className="flex items-start justify-center gap-2 mt-1">
-                            <Checkbox />
+                            <Checkbox
+                                checked={list?.length > 0 && list.every(e => e.selected)}
+                                onChange={(checked) => {
+                                    setList(list => list.map(e => ({ ...e, selected: checked })))
+                                }} />
                             <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
                         </div>
                     </div>
 
-                    <div className='grid grid-cols-3 gap-3'>
+                    <div className='flex gap-3'>
+
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-40!"
                             defaultOption="change Status"
                             value={changeStatus}
                             onChange={(e) => {
@@ -109,227 +151,89 @@ function ManageCampaigns() {
 
                         <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'>Bulk Edit</button>
 
-                        <button className='border border-danger-light2 bg-danger-light2 rounded-lg p-2 text-danger text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'>Bulk Delete</button>
+                        <button
+                            onClick={() => { setOpen("delete") }}
+                            className='border border-danger-light2 bg-danger-light2 rounded-lg p-2 text-danger text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'>Bulk Delete</button>
                     </div>
                 </div>
             </div>
 
             <div className='table-class'>
-                <table className='w-full'>
+                {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Campaign Name" /></th>
-                            <th><TableOrder title="Created On" /></th>
-                            <th><TableOrder title="Launch Date" /></th>
-                            <th><TableOrder title="Customers" /></th>
-                            <th><TableOrder title="Status" /></th>
+                            <th><TableOrder title="Campaign Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="campaignName"
+                            /></th>
+                            <th><TableOrder title="Created On"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="createdOn"
+                            /></th>
+                            <th><TableOrder title="Launch Date"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="launchDate"
+                            /></th>
+                            <th><TableOrder title="Customers"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="customers"
+                            /></th>
+                            <th><TableOrder title="Status"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="status"
+                            /></th>
                             <th>Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
+                        {list?.map((e, index) => <tr key={index}>
                             <td>
                                 <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Campaign 1</div>
+                                    <Checkbox
+                                        checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                    />
+                                    <div>{e.name}</div>
                                 </div>
                             </td>
-                            <td>Jan 10,2025</td>
-                            <td>Jan 15,2025</td>
-                            <td className='text-primary!'>150</td>
-                            <td><Status status="Draft" /></td>
-                            <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
-                                </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
-                            </div></td>
-                        </tr>
-
-                        <tr>
+                            <td>{formatDate(e.createdOn)}</td>
+                            <td>{formatDate(e.launchDate)}</td>
+                            <td className='text-primary! underline underline-offset-4'>{e.customerCount}</td>
+                            <td><Status status={e.status} /></td>
                             <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Campaign 1</div>
+                                <div className='flex items-center gap-2'>
+                                    <Link href="/manage-campaigns/detail">
+                                        <button className='cursor-pointer mt-2'>
+                                            <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                        </button>
+                                    </Link>
+                                    <button className='cursor-pointer' onClick={() => {
+                                        navigator.clipboard.writeText("message")
+                                        toast.success("Copied")
+                                    }}>
+                                        <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                    </button>
+                                    <button className='cursor-pointer'>
+                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                            onClick={() => { setOpen(true) }} />
+                                    </button>
                                 </div>
                             </td>
-                            <td>Jan 14,2025</td>
-                            <td>Jan 20,2025</td>
-                            <td className='text-primary!'>150</td>
-                            <td><Status status="Draft" /></td>
-                            <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
-                                </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
-                            </div></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Campaign 1</div>
-                                </div>
-                            </td>
-                            <td>Jan 20,2025</td>
-                            <td>Jan 28,2025</td>
-                            <td className='text-primary!'>150</td>
-                            <td><Status status="Draft" /></td>
-                            <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
-                                </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
-                            </div></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Campaign 1</div>
-                                </div>
-                            </td>
-                            <td>Jan 22,2025</td>
-                            <td>Jan 30,2025</td>
-                            <td className='text-primary!'>150</td>
-                            <td><Status status="Draft" /></td>
-                            <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
-                                </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
-                            </div></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Campaign 1</div>
-                                </div>
-                            </td>
-                            <td>Jan 25,2025</td>
-                            <td>Aug 10,2025</td>
-                            <td className='text-primary!'>150</td>
-                            <td><Status status="Draft" /></td>
-                            <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
-                                </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
-                            </div></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Campaign 1</div>
-                                </div>
-                            </td>
-                            <td>Jan 28,2025</td>
-                            <td>Aug 12,2025</td>
-                            <td className='text-primary!'>150</td>
-                            <td><Status status="Draft" /></td>
-                            <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
-                                </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
-                            </div></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Campaign 1</div>
-                                </div>
-                            </td>
-                            <td>Jan 30,2025</td>
-                            <td>Aug 15,2025</td>
-                            <td className='text-primary!'>150</td>
-                            <td><Status status="Draft" /></td>
-                            <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
-                                </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
-                            </div></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Campaign 1</div>
-                                </div>
-                            </td>
-                            <td>Aug 10,2025</td>
-                            <td>Aug 20,2025</td>
-                            <td className='text-primary!'>150</td>
-                            <td><Status status="Draft" /></td>
-                            <td><div className='flex items-center gap-2'>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                </button>
-
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
-                                </button>
-                                <button className='cursor-pointer'>
-                                    <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                </button>
-                            </div></td>
-                        </tr>
+                        </tr>)}
                     </tbody>
-                </table>
-                <PaginationDemo />
+
+                </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                {list?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>
         </AdminLayout>
     )
