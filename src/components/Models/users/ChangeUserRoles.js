@@ -41,7 +41,6 @@ export default function ChangeUserRoles({ onClose }) {
         }
         setSending(true);
 
-        // Simulate async operation
         setTimeout(() => {
             setSending(false);
             toast.success(`Roles Changed Successfully`);
@@ -69,27 +68,20 @@ export default function ChangeUserRoles({ onClose }) {
                                             sortBy={sortBy}
                                             setSortBy={setSortBy}
                                             field="name"
-                                            onClick={(value) => {
-                                                setSortBy(value)
-                                            }} />
+                                        />
                                     </th>
                                     <th>
                                         <TableOrder title="Status"
                                             sortBy={sortBy}
                                             setSortBy={setSortBy}
                                             field="status"
-                                            onClick={(value) => {
-                                                setSortBy(value)
-                                            }} />
+                                        />
                                     </th>
                                     <th>
                                         <TableOrder title="Role"
                                             sortBy={sortBy}
                                             setSortBy={setSortBy}
                                             field="role"
-                                            onClick={(value) => {
-                                                setSortBy(value)
-                                            }}
                                         />
                                     </th>
                                 </tr>

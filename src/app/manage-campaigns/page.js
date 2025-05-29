@@ -18,7 +18,7 @@ import { manageCampaigns } from '../../constent/constArray'
 import Loading from '../../components/Loading'
 
 function ManageCampaigns() {
-    const [sortBy, setSortBy] = useState("")
+    const [sortBy1, setSortBy1] = useState("")
     const [type, setType] = useState("")
     const [status, setStatus] = useState("")
     const [changeStatus, setChangeStatus] = useState("")
@@ -27,10 +27,11 @@ function ManageCampaigns() {
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
     const [open, setOpen] = useState(false)
+    const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
         getTemplate()
-    }, [search, sortBy, type, status, changeStatus, date])
+    }, [search, sortBy1, type, status, changeStatus, date, sortBy])
 
     const getTemplate = async () => {
         try {
@@ -70,9 +71,9 @@ function ManageCampaigns() {
                         <CustomSelectBox
                             class_="mt-0!"
                             defaultOption="sort by"
-                            value={sortBy}
+                            value={sortBy1}
                             onChange={(e) => {
-                                setSortBy(e.target.value)
+                                setSortBy1(e.target.value)
                             }}>
                             <option value="campaign ame">Campaign Name</option>
                             <option value="date">date</option>
@@ -157,11 +158,31 @@ function ManageCampaigns() {
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Campaign Name" /></th>
-                            <th><TableOrder title="Created On" /></th>
-                            <th><TableOrder title="Launch Date" /></th>
-                            <th><TableOrder title="Customers" /></th>
-                            <th><TableOrder title="Status" /></th>
+                            <th><TableOrder title="Campaign Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="campaignName"
+                            /></th>
+                            <th><TableOrder title="Created On"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="createdOn"
+                            /></th>
+                            <th><TableOrder title="Launch Date"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="launchDate"
+                            /></th>
+                            <th><TableOrder title="Customers"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="customers"
+                            /></th>
+                            <th><TableOrder title="Status"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="status"
+                            /></th>
                             <th>Action</th>
                         </tr>
                     </thead>
