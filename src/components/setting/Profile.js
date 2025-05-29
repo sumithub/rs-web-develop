@@ -88,6 +88,20 @@ export default function Profile() {
                     class_="mt-0!"
                 />
             </div>
+            <div className="flex items-center gap-[10px] pt-[25px]">
+                <Image src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
+                <h2 className="capitalize text-sm font-medium">this Action Is Irreversible!</h2>
+            </div>
+            <div className="grid grid-cols-2 gap-5 pt-[25px] pb-8">
+                <button className="bg-secondary2 border border-secondary2 hover:bg-white rounded-[10px] py-3 px-3 text-text3 text-lg text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                // onClick={() => { setOpen(true) }}
+                >
+                    Delete Account</button>
+                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-[10px] py-3 px-3 text-white text-lg text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                // onClick={() => { setOpen(true) }}
+                >
+                    Update Password</button>
+            </div>
         </div>
     </>)
 }
