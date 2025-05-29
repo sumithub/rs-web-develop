@@ -39,7 +39,7 @@ export default function SentimentAnalysis() {
                                 <div>
                                     <h2 className="text-sm pt-2.5">Lorem Ipsum is simply dummy text of the printing and typesetting industry</h2>
                                     <div className="grid grid-cols-2 gap-5 py-5">
-                                        <div className="rounded-[10px] p-[15px] grid grid-cols-[1fr_5fr] items-center ga bg-primary/10">
+                                        <div className="rounded-[10px] p-[15px] grid grid-cols-[1fr_5fr] items-center gap-[10px] bg-primary/10">
                                             <Image src="/images/rounded1.png" alt="rounded1" width={49} height={49} />
                                             <div>
                                                 <div className="flex justify-between">
@@ -52,7 +52,7 @@ export default function SentimentAnalysis() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="rounded-[10px] p-[15px] grid grid-cols-[1fr_5fr] items-center ga bg-custom-purple-light/10">
+                                        <div className="rounded-[10px] p-[15px] grid grid-cols-[1fr_5fr] items-center gap-[10px] bg-custom-purple-light/10">
                                             <Image src="/images/rounded2.png" alt="rounded2" width={49} height={49} />
                                             <div>
                                                 <div className="flex justify-between">
@@ -76,7 +76,7 @@ export default function SentimentAnalysis() {
                                 <div>
                                     <h2 className="text-sm pt-2.5">Lorem Ipsum is simply dummy text of the printing and typesetting industry</h2>
                                     <div className="grid grid-cols-2 gap-5 py-5">
-                                        <div className="rounded-[10px] p-[15px] grid grid-cols-[1fr_5fr] items-center ga bg-primary/10">
+                                        <div className="rounded-[10px] p-[15px] grid grid-cols-[1fr_5fr] items-center gap-[10px] bg-primary/10">
                                             <Image src="/images/rounded1.png" alt="rounded1" width={49} height={49} />
                                             <div>
                                                 <div className="flex justify-between">
@@ -89,7 +89,7 @@ export default function SentimentAnalysis() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="rounded-[10px] p-[15px] grid grid-cols-[1fr_5fr] items-center ga bg-custom-purple-light/10">
+                                        <div className="rounded-[10px] p-[15px] grid grid-cols-[1fr_5fr] items-center gap-[10px] bg-custom-purple-light/10">
                                             <Image src="/images/rounded2.png" alt="rounded2" width={49} height={49} />
                                             <div>
                                                 <div className="flex justify-between">
@@ -113,7 +113,7 @@ export default function SentimentAnalysis() {
                                     <div className="grid grid-cols-2 gap-5 pt-5">
                                         <div>
                                             <h2>😊 Positive Sentiment</h2>
-                                            <ol className="list-none flex flex-col gap-[15px] pl-10 pt-[15px]">
+                                            <ol className="list-none flex flex-col gap-[15px] pl-2.5 pt-[15px]">
                                                 <li className="p-2.5">1 Lorem Ipsum</li>
                                                 <li className="p-2.5 bg-secondary2 rounded-[10px]">2 Lorem Ipsum</li>
                                                 <li className="p-2.5">3 Lorem Ipsum</li>
@@ -122,7 +122,7 @@ export default function SentimentAnalysis() {
                                         </div>
                                         <div>
                                             <h2>🙁 Negative Sentiment</h2>
-                                            <ol className="list-none flex flex-col gap-[15px] pl-10 pt-[15px]">
+                                            <ol className="list-none flex flex-col gap-[15px] pl-2.5 pt-[15px]">
                                                 <li className="p-2.5">1 Lorem Ipsum</li>
                                                 <li className="p-2.5 bg-secondary2 rounded-[10px]">2 Lorem Ipsum</li>
                                                 <li className="p-2.5">3 Lorem Ipsum</li>
