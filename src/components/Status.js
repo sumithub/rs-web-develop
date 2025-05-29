@@ -11,7 +11,7 @@ export default function Status({ status = "" }) {
         bgClass = "bg-[#0396FF1A] text-primary";
     } else if (
         s === "pending invite" ||
-        s === "in progress" ||
+        s === "in_progress" ||
         s === "flagged"
     ) {
         bgClass = "bg-[#FFC1071A] text-[#FFC107]";
