@@ -17,6 +17,11 @@ function AddTemplate({ onClose, id }) {
   const [sending, setSending] = useState(false)
   const [isEmail, setIsEmail] = useState(false)
 
+  const handleClick = () => {
+    toast.success("Cloned Successfully")
+    onClose()
+  }
+
   const onSubmit = async (data) => {
     try {
       setSending(true)
@@ -127,8 +132,8 @@ function AddTemplate({ onClose, id }) {
             rows={15} className="rounded text-text3 text-sm border border-color w-full focus-visible:outline-none p-3" /> */}
 
             <div className="grid grid-cols-3 gap-3 mt-5">
-              <CancelButton title="clone template" />
-              <SecondaryButton title="Save As Draft" class_='bg-white! text-primary! hover:text-white! hover:bg-primary!' type='submit'/>
+              <CancelButton title="clone template" onClick={handleClick} />
+              <SecondaryButton title="Save As Draft" class_='bg-white! text-primary! hover:text-white! hover:bg-primary!' type='submit' />
               <SecondaryButton title="Save & Activate" type="submit" disabled={sending} />
             </div>
           </div>
