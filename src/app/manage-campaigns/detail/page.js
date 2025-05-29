@@ -53,7 +53,7 @@ export default function Detail({ }) {
         let newActiveStep = 1
 
         // Check Campaign Details completion
-        const campaignDetailsComplete = watchedFields['campaign-name']?.trim()
+        const campaignDetailsComplete = watchedFields['campaignName']?.trim()
         let campaignDetailsStatus = 'pending'
         if (campaignDetailsComplete) {
             campaignDetailsStatus = 'completed'
@@ -65,7 +65,7 @@ export default function Detail({ }) {
         // Check Targeting completion
         const targetingComplete = campaignDetailsComplete &&
             customersSelected &&
-            watchedFields['cooldown-period']
+            watchedFields['cooldownPeriod']
         let targetingStatus = 'pending'
         if (targetingComplete) {
             targetingStatus = 'completed'
@@ -77,7 +77,7 @@ export default function Detail({ }) {
         // Check Template Selection completion
         const templateComplete = targetingComplete &&
             campaignType &&
-            templateSelected && watchedFields['frequency']
+            templateSelected
         let templateSelectionStatus = 'pending'
         if (templateComplete) {
             templateSelectionStatus = 'completed'
@@ -88,8 +88,8 @@ export default function Detail({ }) {
 
         // Check Scheduling completion
         const schedulingComplete = templateComplete &&
-            watchedFields['time-zone'] &&
-            watchedFields['send-time']
+            watchedFields['timeZone'] &&
+            watchedFields['sendTime']
         let schedulingStatus = 'pending'
         if (schedulingComplete) {
             schedulingStatus = 'completed'
@@ -358,7 +358,8 @@ export default function Detail({ }) {
                                     </div>
                                 </div>
 
-                                <SelectForm label="Frequency" defaultOption="Select Frequency" selectClass_="bg-white! py-3! focus:border-primary/60!"
+                                <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
+                                    selectClass_="bg-white! py-3! focus:border-primary/60!"
                                     formProps={{ ...register("frequency", { required: true }) }}
                                     errors={errors} >
                                     <option value="daily">Daily</option>
