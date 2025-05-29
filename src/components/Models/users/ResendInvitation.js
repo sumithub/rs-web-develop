@@ -6,7 +6,7 @@ import Model from "../Model";
 import InputForm from "../../form/InputForm";
 import SecondaryButton from "../../common/SecondaryButton";
 import CancelButton from "../../common/CancelButton";
-import { getError } from "../../../../helper";
+import { getError, validEmailRgx } from "../../../../helper";
 
 export default function ResendInvitation({ onClose, user }) {
     const {
@@ -46,7 +46,8 @@ export default function ResendInvitation({ onClose, user }) {
                         ...register("email", {
                             required: true,
                             pattern: {
-                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                value: validEmailRgx,
+                                message: "Email is invalid."
                             },
                         }),
                     }}

@@ -13,13 +13,11 @@ import { useEffect, useState } from "react"
 import { customerList } from "../../../constent/constArray"
 import CustomSelectBox from "../../form/CustomSelectBox"
 
-
 function SelectedCustomers({ onClose, onSave }) {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
     const [filter, setFilter] = useState("")
-
 
     useEffect(() => {
         getCustomer()

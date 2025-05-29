@@ -38,7 +38,6 @@ export default function Users() {
     const [loading, setLoading] = useState(true)
     const [sortBy, setSortBy] = useState("")
 
-
     useEffect(() => {
         getUser()
     }, [search, status, role, dates])
@@ -219,12 +218,33 @@ export default function Users() {
                                 setSortBy={setSortBy}
                                 field="name"
                                 onClick={(value) => {
-                                    getUser(role, status, lastActive, value)
+                                    getUser(role, status, value)
                                 }}
                             /></th>
-                            <th><TableOrder title="Role" /></th>
-                            <th><TableOrder title="Status" /></th>
-                            <th><TableOrder title="Last Active" /></th>
+                            <th><TableOrder title="Role"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="role"
+                                onClick={(value) => {
+                                    getUser(role, status, value)
+                                }}
+                            /></th>
+                            <th><TableOrder title="Status"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="status"
+                                onClick={(value) => {
+                                    getUser(role, status, value)
+                                }}
+                            /></th>
+                            <th><TableOrder title="Last Active"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="lastActive"
+                                onClick={(value) => {
+                                    getUser(role, status, value)
+                                }}
+                            /></th>
                             <th>Action</th>
                         </tr>
                     </thead>
