@@ -114,7 +114,7 @@ function AddTemplate({ onClose, id }) {
                   formProps={{ ...register("business-phone", { required: true }) }}
                   errors={errors}
                 />
-                <InputForm label="Insert Dynamic Fields" isRequired={true}
+                <InputForm label="Insert Field" isRequired={true}
                   formProps={{ ...register("insert-dynamic-fields", { required: true }) }}
                   errors={errors}
                 />
@@ -128,7 +128,7 @@ function AddTemplate({ onClose, id }) {
 
             <div className="grid grid-cols-3 gap-3 mt-5">
               <CancelButton title="clone template" />
-              <SecondaryButton title="Save As Draft" class_='bg-white! text-primary! hover:text-white! hover:bg-primary!' />
+              <SecondaryButton title="Save As Draft" class_='bg-white! text-primary! hover:text-white! hover:bg-primary!' type='button'/>
               <SecondaryButton title="Save & Activate" type="submit" disabled={sending} />
             </div>
           </div>
