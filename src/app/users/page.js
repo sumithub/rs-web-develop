@@ -35,7 +35,9 @@ export default function Users() {
     const [search, setSearch] = useState("")
     const [dates, setDates] = useState(null)
     const [openModal, setOpenModal] = useState(null)
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true)
+    const [sortBy, setSortBy] = useState("")
+
 
     useEffect(() => {
         getUser()
@@ -212,7 +214,14 @@ export default function Users() {
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Name" /></th>
+                            <th><TableOrder title="Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="name"
+                                onClick={(value) => {
+                                    getUser(role, status, lastActive, value)
+                                }}
+                            /></th>
                             <th><TableOrder title="Role" /></th>
                             <th><TableOrder title="Status" /></th>
                             <th><TableOrder title="Last Active" /></th>
