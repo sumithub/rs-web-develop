@@ -374,3 +374,33 @@ td {
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
+.react-international-phone-country-selector {
+  flex-shrink: 0 !important;
+}
+
+.react-international-phone-dial-code-preview {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  font-size: 14px !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+}
+
+.react-international-phone-input {
+  border-left: 0 !important;
+}
+
+.react-international-phone-input-container .react-international-phone-country-selector-button {
+  margin-right: 0 !important;
+  border-right: 0 !important;
+}
+
+.react-international-phone-dial-code-preview--disabled,
+.react-international-phone-input-container .react-international-phone-input--disabled,
+.react-international-phone-input-container .react-international-phone-country-selector-button:disabled {
+  background-color: var(--light);
+  border-color: var(--light);
+  color: var(--text);
+  opacity: 0.7;
+}

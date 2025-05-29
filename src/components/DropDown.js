@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
 import { USER_ACTIONS } from '../constent/constArray';
 
-const Dropdown = ({ options = USER_ACTIONS, onClickOption, class_ = "" }) => {
+const Dropdown = ({ options = USER_ACTIONS, onClickOption, class_ = "", }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -46,8 +46,8 @@ const Dropdown = ({ options = USER_ACTIONS, onClickOption, class_ = "" }) => {
                                 {e.label}
                             </button>
                         </li>
-
                     })}
+
                 </ul>
             </div>
         )}
