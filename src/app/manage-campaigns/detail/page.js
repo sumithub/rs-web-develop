@@ -230,7 +230,7 @@ export default function Detail({ }) {
                     status={getCardStatus('campaignDetails')}>
                     <div className="grid grid-cols-2 gap-3">
                         <InputForm label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!"
-                            formProps={{ ...register("campaign-name", { required: true }) }}
+                            formProps={{ ...register("campaignName", { required: true }) }}
                             errors={errors}
                         />
 
@@ -258,12 +258,12 @@ export default function Detail({ }) {
                                 <div className="text-danger text-lg font-semibold capitalize">5 customers are already in an active campaign.?</div>
                             </div>
                             <SelectForm defaultOption="Exclude Duplicates" selectClass_="bg-white!"
-                                formProps={{ ...register("exclude-duplicates", { required: false }) }}
+                                formProps={{ ...register("excludeDuplicates", { required: false }) }}
                                 errors={errors}
                             ></SelectForm>
                         </div>
                         <SelectForm label="Cooldown Period" isRequired={true} defaultOption="-" selectClass_="bg-white! py-3! focus:border-primary/60!"
-                            formProps={{ ...register("cooldown-period", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                            formProps={{ ...register("cooldownPeriod", { required: true }) }} errors={errors} clearErrors={clearErrors}>
                             <option>7 Days</option>
                         </SelectForm>
 
@@ -402,11 +402,11 @@ export default function Detail({ }) {
                     status={getCardStatus('scheduling')}>
                     <div className="grid grid-cols-2 gap-3">
                         <InputForm label="Time Zone" isRequired={true} inputType="time" inputClass="bg-white!"
-                            formProps={{ ...register("time-zone", { required: true }) }}
+                            formProps={{ ...register("timeZone", { required: true }) }}
                             errors={errors}
                         />
                         <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-3! focus:border-primary/60!"
-                            formProps={{ ...register("send-time", { required: true }) }}
+                            formProps={{ ...register("sendTime", { required: true }) }}
                             errors={errors}>
                             <option value="morning">morning (8 AM - 12 PM)</option>
                             <option value="afternoon">afternoon (12 PM - 4 PM)</option>
@@ -416,7 +416,7 @@ export default function Detail({ }) {
                     </div>
 
                     <SelectForm label="Weekend Delivery" defaultOption="Restrict" selectClass_="bg-white! py-3! focus:border-primary/60!"
-                        formProps={{ ...register("weekend-delivery", { required: false }) }}
+                        formProps={{ ...register("weekendDelivery", { required: false }) }}
                         errors={errors}
                     />
 

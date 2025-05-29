@@ -70,13 +70,13 @@ function AddTemplate({ onClose, id }) {
 
             {isEmail && <div className='grid grid-cols-2 gap-3'>
               <InputForm label="Sender Name" isRequired={true} placeholder="Enter Sender Name"
-                formProps={{ ...register("sender-name", { required: true }) }}
+                formProps={{ ...register("senderName", { required: true }) }}
                 errors={errors}
               />
               <InputForm label="Sender Email" isRequired={true} placeholder="Enter Sender Email"
                 errors={errors}
                 formProps={{
-                  ...register("sender-email", {
+                  ...register("senderEmail", {
                     required: true,
                     pattern: {
                       value: validEmailRgx,

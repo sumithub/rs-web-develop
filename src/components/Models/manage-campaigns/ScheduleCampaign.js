@@ -56,7 +56,7 @@ function ScheduleCampaign({ onClose, id }) {
 
         <div>
           <InputForm inputType='time' label='Time Zone' inputClass='py-2!'
-            formProps={{ ...register("time-zone", { required: false }) }}
+            formProps={{ ...register("timeZone", { required: false }) }}
             errors={errors}
           />
         </div>
