@@ -14,11 +14,7 @@ export default function ChangeUserRoles({ onClose }) {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({
-        defaultValues: {
-            role: "owner",
-        },
-    });
+    } = useForm();
 
     const [sending, setSending] = useState(false);
 
@@ -46,7 +42,7 @@ export default function ChangeUserRoles({ onClose }) {
         // Simulate async operation
         setTimeout(() => {
             setSending(false);
-            toast.success(`Roles changed to "${data.role}" successfully`);
+            toast.success(`Roles Changed Successfully`);
             onClose();
         }, 1000);
     };
@@ -94,8 +90,10 @@ export default function ChangeUserRoles({ onClose }) {
                     <SelectForm
                         label="Select new role"
                         isRequired={true}
+                        defaultOption="Select"
                         selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
-                        {...register("role", { required: true })}
+                        formProps={{ ...register("role", { required: true }) }}
+                        errors={errors}
                     >
                         <option value="owner">Owner</option>
                         <option value="manager">Manager</option>
