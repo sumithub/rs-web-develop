@@ -91,7 +91,7 @@ function CampaignsTemplates() {
                 />
             }
 
-            <div className="flex justify-between items-center w-full mb-4 shrink-0">
+            <div className="flex justify-between items-center w-full mb-4">
                 <Search
                     placeholder="Search by Template Name"
                     onSearch={(s) => {
@@ -112,7 +112,7 @@ function CampaignsTemplates() {
                         <option value="both">Both</option>
                     </CustomSelectBox>
 
-                    <div className='w-[35%]! shrink-0'>
+                    <div className='shrink-0!'>
                         <DatePicker
                             icon={true}
                             mainClass="mt-0!"

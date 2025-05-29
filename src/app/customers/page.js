@@ -115,11 +115,11 @@ function Customers() {
                         <div className='flex items-center gap-3 w-full'>
                             <div onClick={() => {
                                 setView("customer")
-                            }} className={`${view === "customer" ? "text-primary font-semibold underline underline-offset-4" : "text-text3 font-normal"} cursor-pointer`}>All Customers</div>
+                            }} className={`${view === "customer" ? "text-primary font-semibold underline underline-offset-4" : "text-text3 font-normal"} cursor-pointer shrink-0`}>All Customers</div>
 
                             <div onClick={() => {
                                 setView("history")
-                            }} className={`${view === "history" ? "text-primary font-semibold underline underline-offset-4" : "text-text3 font-normal"} cursor-pointer`}>Customer List History</div>
+                            }} className={`${view === "history" ? "text-primary font-semibold underline underline-offset-4" : "text-text3 font-normal"} cursor-pointer shrink-0`}>Customer List History</div>
                         </div>
 
                     </div>

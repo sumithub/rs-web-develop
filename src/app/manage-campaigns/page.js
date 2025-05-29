@@ -62,6 +62,7 @@ function ManageCampaigns() {
             <div>
                 <div className="flex justify-between items-start w-full mb-5">
                     <Search
+                        mainClass='max-w-[270px]!'
                         placeholder="Search by campaign names"
                         onSearch={(s) => {
                             setSearch(s)
@@ -113,7 +114,7 @@ function ManageCampaigns() {
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
                         />
-                        <Link href="/manage-campaigns/detail">
+                        <Link href="/manage-campaigns/detail" className='shrink-0'>
                             <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0 w-full"
                             >Create campaign</button>
                         </Link>
@@ -132,10 +133,10 @@ function ManageCampaigns() {
                         </div>
                     </div>
 
-                    <div className='grid grid-cols-3 gap-3'>
+                    <div className='flex gap-3'>
 
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-40!"
                             defaultOption="change Status"
                             value={changeStatus}
                             onChange={(e) => {
