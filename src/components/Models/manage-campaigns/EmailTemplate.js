@@ -50,8 +50,8 @@ export default function EmailTemplate({ onClose }) {
                         onChange={(e) => {
                             setFilter(e.target.value)
                         }}>
-                        <option value="Filter 1">Filter 1</option>
-                        <option value="Filter 2">Filter 2</option>
+                        <option value="filter 1">Filter 1</option>
+                        <option value="filter 2">Filter 2</option>
                     </CustomSelectBox>
                     <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!" />
                 </div>

@@ -127,11 +127,11 @@ export default function Detail({ }) {
                                 errors={errors}
                             />
 
-                            <InputForm label="Description" placeholder="Enter Name" isRequired={false} inputClass="bg-white!"
-                                formProps={{ ...register("description", { required: false }) }}
-                                errors={errors}
-                            />
-                            {/* <div>
+                        <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white!"
+                            formProps={{ ...register("description", { required: false }) }}
+                            errors={errors}
+                        />
+                        {/* <div>
                             <div className="text-sm text-secondary font-medium capitalize mt-3 mb-1">Description</div>
                             <textarea
                                 placeholder="Write a content post"

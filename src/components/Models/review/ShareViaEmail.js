@@ -3,12 +3,12 @@ import SecondaryButton from "../../common/SecondaryButton";
 import Input from "../../form/Input";
 import Model from "../Model";
 
-export default function ShareViaEmail({ onClose, onSave }) {
+export default function ShareViaEmail({ onClose }) {
     return (
         <Model onClose={onClose} title="Share via email" modalClass="w-[60%]!" modalBodyClass="max-h-[90vh]!">
             <div className="grid grid-cols-2 gap-3">
                 <div>
-                    <Input icon={true} />
+                    <Input label="" icon={true} />
                 </div>
 
                 <div className="mt-4">

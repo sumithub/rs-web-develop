@@ -36,7 +36,7 @@ export default function SuspendUser({ onClose, isSuspended, onStatusChange }) {
                     Confirm Action
                 </div>
 
-                <div className="text-text3">
+                <div className="text-text3 capitalize">
                     Are you sure you want to {isSuspended ? "reactivate" : "suspend"} this user?
                     <br />
                     This will {isSuspended ? "grant" : "restrict"} access immediately.
