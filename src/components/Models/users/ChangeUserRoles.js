@@ -41,7 +41,6 @@ export default function ChangeUserRoles({ onClose }) {
         }
         setSending(true);
 
-        // Simulate async operation
         setTimeout(() => {
             setSending(false);
             toast.success(`Roles Changed Successfully`);

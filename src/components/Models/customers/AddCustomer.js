@@ -42,7 +42,7 @@ function AddCustomer({ onClose, id }) {
                 </div>
                 <div>
                     <InputForm label="Customer Name" placeholder="Enter your name" isRequired={true} class_="mt-0!"
-                        formProps={{ ...register("customer-name", { required: true }) }}
+                        formProps={{ ...register("customerName", { required: true }) }}
                         errors={errors} />
                     <InputForm label="Email" placeholder="Enter email" isRequired={true}
                         formProps={{ ...register("email", { required: true }) }}

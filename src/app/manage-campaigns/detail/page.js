@@ -77,7 +77,7 @@ export default function Detail({ }) {
         // Check Template Selection completion
         const templateComplete = targetingComplete &&
             campaignType &&
-            templateSelected
+            templateSelected && watchedFields['frequency']
         let templateSelectionStatus = 'pending'
         if (templateComplete) {
             templateSelectionStatus = 'completed'
@@ -230,7 +230,7 @@ export default function Detail({ }) {
                     status={getCardStatus('campaignDetails')}>
                     <div className="grid grid-cols-2 gap-3">
                         <InputForm label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!"
-                            formProps={{ ...register("campaign-name", { required: true }) }}
+                            formProps={{ ...register("campaignName", { required: true }) }}
                             errors={errors}
                         />
 
@@ -258,12 +258,12 @@ export default function Detail({ }) {
                                 <div className="text-danger text-lg font-semibold capitalize">5 customers are already in an active campaign.?</div>
                             </div>
                             <SelectForm defaultOption="Exclude Duplicates" selectClass_="bg-white!"
-                                formProps={{ ...register("exclude-duplicates", { required: false }) }}
+                                formProps={{ ...register("excludeDuplicates", { required: false }) }}
                                 errors={errors}
                             ></SelectForm>
                         </div>
                         <SelectForm label="Cooldown Period" isRequired={true} defaultOption="-" selectClass_="bg-white! py-3! focus:border-primary/60!"
-                            formProps={{ ...register("cooldown-period", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                            formProps={{ ...register("cooldownPeriod", { required: true }) }} errors={errors} clearErrors={clearErrors}>
                             <option>7 Days</option>
                         </SelectForm>
 
@@ -285,11 +285,11 @@ export default function Detail({ }) {
                     <div className="flex gap-3 my-4">
                         <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
                         <div className="flex">
-                            <Radio label="Email" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
+                            <Radio name="type" label="Email" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
                                 onChange={() => handleCampaignTypeChange('email')} />
-                            <Radio label="SMS" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
+                            <Radio name="type" label="SMS" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
                                 onChange={() => handleCampaignTypeChange('sms')} />
-                            <Radio label="Both" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
+                            <Radio name="type" label="Both" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
                                 onChange={() => handleCampaignTypeChange('both')} />
                         </div>
                     </div>
@@ -312,7 +312,6 @@ export default function Detail({ }) {
                                         {templateSelected ? 'Lorem Ipsum..' : 'Please select a template'}
                                     </div>
                                 </div>
-
                                 <div className="flex items-center gap-3">
                                     <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:pointer-events-none cursor-pointer"
                                         onClick={() => { setOpenPreview(true) }}
@@ -331,7 +330,7 @@ export default function Detail({ }) {
                     </div>
                     <div className="mt-4">
                         <div className="flex items-start gap-2 mt-1">
-                            <Checkbox onChange={(e) => setReminderEnabled(e.target.checked)} />
+                            <Checkbox onChange={(checked) => setReminderEnabled(checked)} />
                             <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Enable Reminder Email</div>
                         </div>
 
@@ -339,8 +338,8 @@ export default function Detail({ }) {
                             <>
                                 <div className="flex items-center justify-between mb-4">
                                     <div className="text-secondary text-sm capitalize">Reminder Email Template</div>
-                                    <SecondaryButton title="Template selection" class_="text-sm! font-normal!" />
-                                </div>
+                                    <SecondaryButton title="Template selection" class_="text-sm! font-normal!"
+                                        onClick={() => { setOpenEmail(true) }} />                                </div>
 
                                 <div className="bg-white p-3 rounded-lg">
                                     <div className="bg-dark rounded-lg p-2">
@@ -360,13 +359,16 @@ export default function Detail({ }) {
                                 </div>
 
                                 <SelectForm label="Frequency" defaultOption="Select Frequency" selectClass_="bg-white! py-3! focus:border-primary/60!"
-                                    formProps={{ ...register("frequency", { required: false }) }}
-                                    errors={errors}
-                                />
+                                    formProps={{ ...register("frequency", { required: true }) }}
+                                    errors={errors} >
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                </SelectForm>
 
                                 <div className="flex items-center justify-between my-4">
                                     <div className="text-secondary text-sm font-medium">Final Reminder</div>
-                                    <SecondaryButton title="Template selection" class_="text-sm! font-normal!" />
+                                    <SecondaryButton title="Template selection" class_="text-sm! font-normal!"
+                                        onClick={() => { setOpenEmail(true) }} />
                                 </div>
 
                                 <div className="flex items-start gap-2 mt-1 mb-4">
@@ -402,11 +404,11 @@ export default function Detail({ }) {
                     status={getCardStatus('scheduling')}>
                     <div className="grid grid-cols-2 gap-3">
                         <InputForm label="Time Zone" isRequired={true} inputType="time" inputClass="bg-white!"
-                            formProps={{ ...register("time-zone", { required: true }) }}
+                            formProps={{ ...register("timeZone", { required: true }) }}
                             errors={errors}
                         />
                         <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-3! focus:border-primary/60!"
-                            formProps={{ ...register("send-time", { required: true }) }}
+                            formProps={{ ...register("sendTime", { required: true }) }}
                             errors={errors}>
                             <option value="morning">morning (8 AM - 12 PM)</option>
                             <option value="afternoon">afternoon (12 PM - 4 PM)</option>
@@ -416,7 +418,7 @@ export default function Detail({ }) {
                     </div>
 
                     <SelectForm label="Weekend Delivery" defaultOption="Restrict" selectClass_="bg-white! py-3! focus:border-primary/60!"
-                        formProps={{ ...register("weekend-delivery", { required: false }) }}
+                        formProps={{ ...register("weekendDelivery", { required: false }) }}
                         errors={errors}
                     />
 

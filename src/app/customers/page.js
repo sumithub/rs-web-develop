@@ -27,6 +27,7 @@ function Customers() {
     const [openTags, setOpenTags] = useState(false)
     const [openModal, setOpenModal] = useState(null)
     const [view, setView] = useState("history")
+    const [sortBy, setSortBy] = useState("")
 
 
     return (
@@ -173,13 +174,34 @@ function Customers() {
                 <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Customer Name" /></th>
-                            <th><TableOrder title="Email" /></th>
-                            <th><TableOrder title="Phone" /></th>
-                            <th><TableOrder title="Tags" /></th>
-                            <th><TableOrder title="Source" /></th>
-                            <th><TableOrder title="Boost" /></th>
-                            <th><TableOrder title="Date Added" /></th>
+                            <th><TableOrder title="Customer Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="customerName" /></th>
+                            <th><TableOrder title="Email"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="email" /></th>
+                            <th><TableOrder title="Phone"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="phone" /></th>
+                            <th><TableOrder title="Tags"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="tags" /></th>
+                            <th><TableOrder title="Source"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="source" /></th>
+                            <th><TableOrder title="Boost"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="boost" /></th>
+                            <th><TableOrder title="Date Added"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="dateAdded" /></th>
                             <th>Action</th>
                         </tr>
                     </thead>
