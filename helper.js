@@ -38,3 +38,15 @@ export function formatDateTime(date) {
         return "xx"
     }
 }
+
+
+export const phoneStyles = {
+    "--react-international-phone-border-radius": '8px',
+    "--react-international-phone-border-color": "#adadad4d",
+    "--react-international-phone-background-color": "#ffffff",
+    "--react-international-phone-text-color": "#242424",
+    "--react-international-phone-selected-dropdown-item-background-color": "#ffffff",
+    "--react-international-phone-country-selector-background-color-hover": "#ffffff",
+    "--react-international-phone-dropdown-item-background-color": "#ffffff",
+    "--react-international-phone-height": "44px",
+}
