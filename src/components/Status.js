@@ -5,30 +5,24 @@ export default function Status({ status }) {
     let s = status.toLowerCase()
     let bgClass = ""
 
-    if (s === "new") {
-        bgClass = "bg-[#28A7451A] text-success"
+    if (s === "new" || s === "completed" || s === "active") {
+        bgClass = "bg-[#28A7451A] text-success";
+    } else if (s === "responded" || s === "draft") {
+        bgClass = "bg-[#0396FF1A] text-primary";
+    } else if (
+        s === "pending invite" ||
+        s === "in progress" ||
+        s === "flagged"
+    ) {
+        bgClass = "bg-[#FFC1071A] text-[#FFC107]";
+    } else if (s === "suspended" || s === "at risk") {
+        bgClass = "bg-[#ff00001A] text-[#ff0000]";
+    } else if (s === "pending") {
+        bgClass = "bg-[#A9A9A91A] text-[#A9A9A9]";
+    } else {
+        bgClass = "bg-gray-100 text-gray-500";
     }
-    else if (s === "responded") {
-        bgClass = "bg-[#0396FF1A] text-primary"
-    }
-    else if (s === "flagged") {
-        bgClass = "bg-[#FFC1071A] text-[#FFC107]"
-    }
-    else if (s === "active") {
-        bgClass = "bg-[#28A7451A] text-success"
-    }
-    else if (s === "pending invite") {
-        bgClass = "bg-[#FFC1071A] text-[#FFC107]"
-    }
-    else if (s === "suspended") {
-        bgClass = "bg-[#ff00001A] text-[#ff0000]"
-    }
-    else if (s === "draft") {
-        bgClass = "bg-[#0396FF1A] text-primary"
-    }
-    else if (s === "at risk") {
-        bgClass = "bg-[#ff00001A] text-[#ff0000]"
-    }
+
 
     return <div>
         <button className={`${bgClass} rounded-4xl py-1.5 px-3 text-sm text-center disabled:pointer-events-none`}>{status}</button>

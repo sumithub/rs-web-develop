@@ -120,7 +120,7 @@ export default function Detail({ }) {
                 </div>
 
                 <div>
-                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Campaign Details" status="Active">
+                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Campaign Details" status="Completed">
                         <div className="grid grid-cols-2 gap-3">
                             <InputForm label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!"
                                 formProps={{ ...register("campaign-name", { required: true }) }}
@@ -142,7 +142,7 @@ export default function Detail({ }) {
                 </div>
 
                 <div>
-                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Targeting" status="Active">
+                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Targeting" status="In Progress">
                         <div className="flex items-center justify-between">
                             <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
                             <SecondaryButton title="Add Customers" class_="text-sm! font-normal!" onClick={() => { setOpenCustomer(true) }} />
@@ -175,7 +175,7 @@ export default function Detail({ }) {
                 </div>
 
                 <div>
-                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Template Selection" status="Active">
+                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Template Selection" status="Pending">
                         <div className="flex gap-3 my-4">
                             <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
                             <div className="flex">
@@ -273,7 +273,7 @@ export default function Detail({ }) {
                 </div>
 
                 <div>
-                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Scheduling & Launch" status="Active">
+                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Scheduling & Launch" status="Pending">
                         <div className="grid grid-cols-2 gap-3">
                             <InputForm label="Time Zone" isRequired={true} inputType="time" inputClass="bg-white!"
                                 formProps={{ ...register("time-zone", { required: true }) }}
