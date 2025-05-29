@@ -31,7 +31,7 @@ function ManageCampaigns() {
 
     useEffect(() => {
         getTemplate()
-    }, [search, sortBy1, type, status, changeStatus, date])
+    }, [search, sortBy1, type, status, changeStatus, date, sortBy])
 
     const getTemplate = async () => {
         try {
@@ -161,7 +161,7 @@ function ManageCampaigns() {
                             <th><TableOrder title="Campaign Name"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="name"
+                                field="campaignName"
                             /></th>
                             <th><TableOrder title="Created On"
                                 sortBy={sortBy}

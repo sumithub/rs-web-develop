@@ -16,10 +16,11 @@ function TemplateList({ onClose }) {
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
     const [filter, setFilter] = useState("")
+    const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
         getTemplate()
-    }, [search, filter])
+    }, [search, filter, sortBy])
 
     const getTemplate = async () => {
         try {
@@ -62,9 +63,18 @@ function TemplateList({ onClose }) {
                     {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                         <thead>
                             <tr>
-                                <th><TableOrder title='Template List' /></th>
-                                <th><TableOrder title='Description' /></th>
-                                <th><TableOrder title='Template Type ' /></th>
+                                <th><TableOrder title='Template List'
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="templateList" /></th>
+                                <th><TableOrder title='Description'
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="description" /></th>
+                                <th><TableOrder title='Template Type '
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="templateType" /></th>
                             </tr>
                         </thead>
                         <tbody>
