@@ -14,7 +14,7 @@ import { customerList } from "../../../constent/constArray"
 import CustomSelectBox from "../../form/CustomSelectBox"
 
 
-function SelectedCustomers({ onClose }) {
+function SelectedCustomers({ onClose, onSave }) {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
@@ -56,7 +56,9 @@ function SelectedCustomers({ onClose }) {
                         <option value="filter 1">Filter 1</option>
                         <option value="filter 2">Filter 2</option>
                     </CustomSelectBox>
-                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!" />
+                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
+                        onClick={onSave}
+                    />
                 </div>
             </div>
 

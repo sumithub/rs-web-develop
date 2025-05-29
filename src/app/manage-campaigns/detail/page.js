@@ -10,7 +10,7 @@ import ScheduleCampaign from "../../../components/Models/manage-campaigns/Schedu
 import SelectedFromCustomers from "../../../components/Models/manage-campaigns/SelectedFromCustomers"
 import EmailTemplate from "../../../components/Models/manage-campaigns/EmailTemplate"
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import InputForm from "../../../components/form/InputForm"
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
@@ -22,7 +22,7 @@ import Preview from "../../../components/Models/manage-campaigns/Preview"
 
 export default function Detail({ }) {
     const id = ""
-    const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
+    const { register, handleSubmit, clearErrors, formState: { errors }, watch } = useForm();
     const [sending, setSending] = useState(false)
     const [openSchedule, setOpenSchedule] = useState(false)
     const [openCustomer, setOpenCustomer] = useState(false)
@@ -30,6 +30,99 @@ export default function Detail({ }) {
     const [openEmail, setOpenEmail] = useState(false)
     const [expandAll, setExpandAll] = useState(false)
     const [openPreview, setOpenPreview] = useState(false)
+
+    const [cardStatuses, setCardStatuses] = useState({
+        campaignDetails: 'pending',
+        targeting: 'pending',
+        templateSelection: 'pending',
+        scheduling: 'pending'
+    })
+    const [activeStep, setActiveStep] = useState(1)
+    const [customersSelected, setCustomersSelected] = useState(false)
+    const [templateSelected, setTemplateSelected] = useState(false)
+    const [campaignType, setCampaignType] = useState('')
+    const [reminderEnabled, setReminderEnabled] = useState(false)
+
+    const watchedFields = watch()
+
+    useEffect(() => {
+        updateCardStatuses()
+    }, [watchedFields, customersSelected, templateSelected, campaignType])
+
+    const updateCardStatuses = () => {
+        let newActiveStep = 1
+
+        // Check Campaign Details completion
+        const campaignDetailsComplete = watchedFields['campaign-name']?.trim()
+        let campaignDetailsStatus = 'pending'
+        if (campaignDetailsComplete) {
+            campaignDetailsStatus = 'completed'
+            newActiveStep = 2
+        } else {
+            campaignDetailsStatus = activeStep === 1 ? 'in_progress' : 'pending'
+        }
+
+        // Check Targeting completion
+        const targetingComplete = campaignDetailsComplete &&
+            customersSelected &&
+            watchedFields['cooldown-period']
+        let targetingStatus = 'pending'
+        if (targetingComplete) {
+            targetingStatus = 'completed'
+            newActiveStep = 3
+        } else if (campaignDetailsComplete) {
+            targetingStatus = activeStep === 2 ? 'in_progress' : 'pending'
+        }
+
+        // Check Template Selection completion
+        const templateComplete = targetingComplete &&
+            campaignType &&
+            templateSelected
+        let templateSelectionStatus = 'pending'
+        if (templateComplete) {
+            templateSelectionStatus = 'completed'
+            newActiveStep = 4
+        } else if (targetingComplete) {
+            templateSelectionStatus = activeStep === 3 ? 'in_progress' : 'pending'
+        }
+
+        // Check Scheduling completion
+        const schedulingComplete = templateComplete &&
+            watchedFields['time-zone'] &&
+            watchedFields['send-time']
+        let schedulingStatus = 'pending'
+        if (schedulingComplete) {
+            schedulingStatus = 'completed'
+        } else if (templateComplete) {
+            schedulingStatus = activeStep === 4 ? 'in_progress' : 'pending'
+        }
+
+        // Create new status object without referencing current cardStatuses
+        const newStatuses = {
+            campaignDetails: campaignDetailsStatus,
+            targeting: targetingStatus,
+            templateSelection: templateSelectionStatus,
+            scheduling: schedulingStatus
+        }
+
+        // Only update if there are actual changes
+        setCardStatuses(prevStatuses => {
+            const hasChanged = Object.keys(newStatuses).some(key =>
+                prevStatuses[key] !== newStatuses[key]
+            )
+            return hasChanged ? newStatuses : prevStatuses
+        })
+        if (schedulingComplete) {
+            setActiveStep(5)
+        } else {
+            setActiveStep(prevStep => prevStep !== newActiveStep ? newActiveStep : prevStep)
+        }
+    }
+
+    const getCardStatus = (cardKey) => {
+        const status = cardStatuses[cardKey]
+        return status
+    }
 
     const onSubmit = async (data) => {
         try {
@@ -40,13 +133,26 @@ export default function Detail({ }) {
             } else {
                 res = await axios.post("/api", data)
             }
-
             toast.success("Detail Updated Successfully")
             setSending(false)
         } catch (error) {
             toast.error(getError(error))
             setSending(false)
         }
+    }
+
+    const handleCustomerSave = () => {
+        setCustomersSelected(true)
+        setOpenCustomer(false)
+    }
+
+    const handleTemplateSave = () => {
+        setTemplateSelected(true)
+        setOpenEmail(false)
+    }
+
+    const handleCampaignTypeChange = (type) => {
+        setCampaignType(type)
     }
 
     return <AdminLayout>
@@ -74,7 +180,7 @@ export default function Detail({ }) {
                 }}
 
                 onSave={() => {
-                    setOpenSchedule(true)
+                    setOpenSchedule(false)
                 }}
             />
         }
@@ -85,9 +191,8 @@ export default function Detail({ }) {
                     setOpenCustomer(false)
                 }}
 
-                onSave={() => {
-                    setOpenCustomer(true)
-                }} />
+                onSave={handleCustomerSave}
+            />
         }
 
         {openEmail &&
@@ -96,17 +201,18 @@ export default function Detail({ }) {
                     setOpenEmail(false)
                 }}
 
-                onSave={() => {
-                    setOpenEmail(true)
-                }} />
+                onSave={handleTemplateSave}
+            />
         }
+
         <ProgressBar
-            totalSteps={4}
+            currentStep={activeStep}
             stepTitle1="Campaign Details"
             stepTitle2="Customer Selection"
             stepTitle3="Template Selection"
             stepTitle4="Scheduling & Launch"
         />
+
         <div className="">
             <div className="flex items-center justify-between mb-4">
                 <div className="text-secondary text-xl font-medium">Create New Campaign</div>
@@ -119,7 +225,9 @@ export default function Detail({ }) {
             </div>
 
             <div>
-                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Campaign Details" status="Active">
+                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
+                    title="Campaign Details"
+                    status={getCardStatus('campaignDetails')}>
                     <div className="grid grid-cols-2 gap-3">
                         <InputForm label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!"
                             formProps={{ ...register("campaign-name", { required: true }) }}
@@ -130,21 +238,18 @@ export default function Detail({ }) {
                             formProps={{ ...register("description", { required: false }) }}
                             errors={errors}
                         />
-                        {/* <div>
-                            <div className="text-sm text-secondary font-medium capitalize mt-3 mb-1">Description</div>
-                            <textarea
-                                placeholder="Write a content post"
-                                rows={1} className="bg-white w-full focus:border-primary focus:outline-0 focus-visible:outline-0 py-3.5 px-2.5 text-sm text-secondary! rounded-lg" />
-                        </div> */}
                     </div>
                 </CampaignCard>
             </div>
 
             <div>
-                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Targeting" status="Active">
+                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
+                    title="Targeting"
+                    status={getCardStatus('targeting')}>
                     <div className="flex items-center justify-between">
                         <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
-                        <SecondaryButton title="Add Customers" class_="text-sm! font-normal!" onClick={() => { setOpenCustomer(true) }} />
+                        <SecondaryButton title="Add Customers" class_="text-sm! font-normal!"
+                            onClick={() => { setOpenCustomer(true) }} />
                     </div>
                     <div>
                         <div className="flex items-center justify-between">
@@ -165,7 +270,7 @@ export default function Detail({ }) {
                         <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
                             <div>Total Selected Customers</div>
                             <div className="flex items-center gap-2">
-                                <div>250 Customers</div>
+                                <div>{customersSelected ? '250 Customers' : '0 Customers'}</div>
                                 <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />
                             </div>
                         </div>
@@ -174,105 +279,127 @@ export default function Detail({ }) {
             </div>
 
             <div>
-                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Template Selection" status="Active">
+                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
+                    title="Template Selection"
+                    status={getCardStatus('templateSelection')}>
                     <div className="flex gap-3 my-4">
                         <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
                         <div className="flex">
-                            <Radio label="Email" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
-                            <Radio label="SMS" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
-                            <Radio label="Both" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
+                            <Radio label="Email" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
+                                onChange={() => handleCampaignTypeChange('email')} />
+                            <Radio label="SMS" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
+                                onChange={() => handleCampaignTypeChange('sms')} />
+                            <Radio label="Both" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
+                                onChange={() => handleCampaignTypeChange('both')} />
                         </div>
                     </div>
 
                     <div className="flex items-center justify-between mb-4">
                         <div className="text-sm text-secondary">Primary Email Template<span className="text-danger">*</span></div>
 
-                        <SecondaryButton title="Template selection" class_="text-sm! font-normal!" onClick={() => { setOpenEmail(true) }} />
+                        <SecondaryButton title="Template selection" class_="text-sm! font-normal!"
+                            onClick={() => { setOpenEmail(true) }} />
                     </div>
 
                     <div className="bg-white p-3 rounded-lg">
                         <div className="bg-dark rounded-lg p-2">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <div className="text-secondary text-sm font-medium">Nature Template</div>
-                                    <div className="text-text3 text-xs">Lorem Ipsum..</div>
+                                    <div className="text-secondary text-sm font-medium">
+                                        {templateSelected ? 'Nature Template' : 'No Template Selected'}
+                                    </div>
+                                    <div className="text-text3 text-xs">
+                                        {templateSelected ? 'Lorem Ipsum..' : 'Please select a template'}
+                                    </div>
                                 </div>
 
                                 <div className="flex items-center gap-3">
-                                    <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenPreview(true) }}> <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />Preview</button>
+                                    <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:pointer-events-none cursor-pointer"
+                                        onClick={() => { setOpenPreview(true) }}
+                                        disabled={!templateSelected}>
+                                        <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />Preview
+                                    </button>
 
-                                    <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenModal(true) }}> <Image src="/images/edit2.svg" alt='eye' height={14} width={14} unoptimized={true} />Edit</button>
+                                    <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:pointer-events-none cursor-pointer"
+                                        onClick={() => { setOpenModal(true) }}
+                                        disabled={!templateSelected}>
+                                        <Image src="/images/edit2.svg" alt='eye' height={14} width={14} unoptimized={true} />Edit
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="mt-4">
                         <div className="flex items-start gap-2 mt-1">
-                            <Checkbox />
+                            <Checkbox onChange={(e) => setReminderEnabled(e.target.checked)} />
                             <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Enable Reminder Email</div>
                         </div>
 
-                        <div className="flex items-center justify-between mb-4">
-                            <div className="text-secondary text-sm capitalize">Reminder Email Template</div>
-                            <SecondaryButton title="Template selection" class_="text-sm! font-normal!" />
-                        </div>
+                        {reminderEnabled && (
+                            <>
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="text-secondary text-sm capitalize">Reminder Email Template</div>
+                                    <SecondaryButton title="Template selection" class_="text-sm! font-normal!" />
+                                </div>
 
-                        <div className="bg-white p-3 rounded-lg">
-                            <div className="bg-dark rounded-lg p-2">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <div className="text-secondary text-sm font-medium">Nature Template</div>
-                                        <div className="text-text3 text-xs">Lorem Ipsum..</div>
-                                    </div>
+                                <div className="bg-white p-3 rounded-lg">
+                                    <div className="bg-dark rounded-lg p-2">
+                                        <div className="flex items-center justify-between">
+                                            <div>
+                                                <div className="text-secondary text-sm font-medium">Nature Template</div>
+                                                <div className="text-text3 text-xs">Lorem Ipsum..</div>
+                                            </div>
 
-                                    <div className="flex items-center gap-3">
-                                        <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenPreview(true) }}> <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />Preview</button>
+                                            <div className="flex items-center gap-3">
+                                                <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenPreview(true) }}> <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />Preview</button>
 
-                                        <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenModal(true) }}> <Image src="/images/edit2.svg" alt='eye' height={14} width={14} unoptimized={true} />Edit</button>
+                                                <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenModal(true) }}> <Image src="/images/edit2.svg" alt='eye' height={14} width={14} unoptimized={true} />Edit</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div>
-                        <SelectForm label="Frequency" defaultOption="Select Frequency" selectClass_="bg-white! py-3! focus:border-primary/60!"
-                            formProps={{ ...register("phone", { required: false }) }}
-                            errors={errors}
-                        ></SelectForm>
+                                <SelectForm label="Frequency" defaultOption="Select Frequency" selectClass_="bg-white! py-3! focus:border-primary/60!"
+                                    formProps={{ ...register("frequency", { required: false }) }}
+                                    errors={errors}
+                                />
 
-                        <div className="flex items-center justify-between my-4">
-                            <div className="text-secondary text-sm font-medium">Final Reminder</div>
-                            <SecondaryButton title="Template selection" class_="text-sm! font-normal!" />
-                        </div>
+                                <div className="flex items-center justify-between my-4">
+                                    <div className="text-secondary text-sm font-medium">Final Reminder</div>
+                                    <SecondaryButton title="Template selection" class_="text-sm! font-normal!" />
+                                </div>
 
-                        <div className="flex items-start gap-2 mt-1 mb-4">
-                            <Checkbox />
-                            <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Same as Reminder</div>
-                        </div>
+                                <div className="flex items-start gap-2 mt-1 mb-4">
+                                    <Checkbox />
+                                    <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Same as Reminder</div>
+                                </div>
 
-                        <div className="bg-white p-3 rounded-lg">
-                            <div className="bg-dark rounded-lg p-2">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <div className="text-secondary text-sm font-medium">Nature Template</div>
-                                        <div className="text-text3 text-xs">Lorem Ipsum..</div>
-                                    </div>
+                                <div className="bg-white p-3 rounded-lg">
+                                    <div className="bg-dark rounded-lg p-2">
+                                        <div className="flex items-center justify-between">
+                                            <div>
+                                                <div className="text-secondary text-sm font-medium">Nature Template</div>
+                                                <div className="text-text3 text-xs">Lorem Ipsum..</div>
+                                            </div>
 
-                                    <div className="flex items-center gap-3">
-                                        <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenPreview(true) }}> <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />Preview</button>
+                                            <div className="flex items-center gap-3">
+                                                <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenPreview(true) }}> <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />Preview</button>
 
-                                        <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenModal(true) }}> <Image src="/images/edit2.svg" alt='eye' height={14} width={14} unoptimized={true} />Edit</button>
+                                                <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenModal(true) }}> <Image src="/images/edit2.svg" alt='eye' height={14} width={14} unoptimized={true} />Edit</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </>
+                        )}
                     </div>
                 </CampaignCard>
             </div>
 
             <div>
-                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll} title="Scheduling & Launch" status="Active">
+                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
+                    title="Scheduling & Launch"
+                    status={getCardStatus('scheduling')}>
                     <div className="grid grid-cols-2 gap-3">
                         <InputForm label="Time Zone" isRequired={true} inputType="time" inputClass="bg-white!"
                             formProps={{ ...register("time-zone", { required: true }) }}
@@ -280,8 +407,7 @@ export default function Detail({ }) {
                         />
                         <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-3! focus:border-primary/60!"
                             formProps={{ ...register("send-time", { required: true }) }}
-                            errors={errors}
-                        >
+                            errors={errors}>
                             <option value="morning">morning (8 AM - 12 PM)</option>
                             <option value="afternoon">afternoon (12 PM - 4 PM)</option>
                             <option value="evening">evening (4 PM - 8 PM)</option>
@@ -292,7 +418,7 @@ export default function Detail({ }) {
                     <SelectForm label="Weekend Delivery" defaultOption="Restrict" selectClass_="bg-white! py-3! focus:border-primary/60!"
                         formProps={{ ...register("weekend-delivery", { required: false }) }}
                         errors={errors}
-                    ></SelectForm>
+                    />
 
                 </CampaignCard>
             </div>
