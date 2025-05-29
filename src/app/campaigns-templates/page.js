@@ -25,10 +25,11 @@ function CampaignsTemplates() {
     const [openModal, setOpenModal] = useState(null)
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true);
+    const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
         getTemplate()
-    }, [search, type, date])
+    }, [search, type, date, sortBy])
 
     const getTemplate = async () => {
         try {
@@ -118,10 +119,22 @@ function CampaignsTemplates() {
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Template Name" /></th>
-                            <th><TableOrder title="Type" /></th>
-                            <th><TableOrder title="Subject" /></th>
-                            <th><TableOrder title="Last Updated" /></th>
+                            <th><TableOrder title="Template Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="templateName" /></th>
+                            <th><TableOrder title="Type"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="type" /></th>
+                            <th><TableOrder title="Subject"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="subject" /></th>
+                            <th><TableOrder title="Last Updated"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="lastUpdated" /></th>
                             <th>Action</th>
                         </tr>
                     </thead>

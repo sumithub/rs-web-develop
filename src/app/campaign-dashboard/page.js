@@ -6,7 +6,7 @@ import DashboardChart from "../../components/DashboardChart";
 import DatePicker from "../../components/form/DatePicker";
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import { useEffect, useState } from "react";
-import DashboardLineChart from "../../components/charts/DashboardLineChart";
+import CampaignPerformanceChart from "../../components/charts/CampaignPerformanceChart";
 import DashboardPieChart from "../../components/charts/DashboardPieChart";
 import SimpleHorizontalBarChart from "../../components/charts/SimpleHorizontalBarChart";
 import { toast } from "react-toastify";
@@ -14,6 +14,7 @@ import { formatDateTime, getError } from "../../../helper";
 import axios from "axios";
 import Loading from "../../components/Loading";
 import { responseInsights } from "../../constent/constArray";
+import DateRange from "../../components/form/DateRangePicker";
 
 export default function CampaignDashboard() {
     const [date, setDate] = useState("")
@@ -67,11 +68,7 @@ export default function CampaignDashboard() {
                 <option value="2 star">2 Star & Up</option>
                 <option value="1 star">1 Star & Up</option>
             </CustomSelectBox>
-            <DatePicker
-                icon={true} mainClass="mt-0!"
-                value={date}
-                dateFormat="dd/MM/yyyy"
-                onChange={(e) => setDate(e)} />
+            <DateRange />
         </div>}>
         <div className="grid grid-cols-4 gap-5">
             <DashboardCard title="Total Campaigns Sent" count="500" img="/images/sound.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/total.png')]" />
@@ -98,7 +95,7 @@ export default function CampaignDashboard() {
                 </DashboardChart>
 
                 <DashboardChart title="Campaign Performance Over Time" >
-                    <DashboardLineChart />
+                    <CampaignPerformanceChart />
                 </DashboardChart>
 
                 <DashboardChart title="Individual Response Insights">

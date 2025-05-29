@@ -11,16 +11,17 @@ import { useEffect, useState } from "react";
 import CustomSelectBox from "../../form/CustomSelectBox";
 import Loading from "../../Loading";
 
-export default function EmailTemplate({ onClose }) {
+export default function EmailTemplate({ onClose, onSave }) {
 
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
     const [filter, setFilter] = useState("")
+    const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
         getTemplate()
-    }, [search, filter])
+    }, [search, filter, sortBy])
 
     const getTemplate = async () => {
         try {
@@ -50,10 +51,11 @@ export default function EmailTemplate({ onClose }) {
                         onChange={(e) => {
                             setFilter(e.target.value)
                         }}>
-                        <option value="Filter 1">Filter 1</option>
-                        <option value="Filter 2">Filter 2</option>
+                        <option value="filter 1">Filter 1</option>
+                        <option value="filter 2">Filter 2</option>
                     </CustomSelectBox>
-                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!" />
+                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
+                        onClick={onSave} />
                 </div>
             </div>
 
@@ -61,9 +63,18 @@ export default function EmailTemplate({ onClose }) {
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Template Name " /></th>
-                            <th><TableOrder title="Description" /></th>
-                            <th><TableOrder title="Template Type " /></th>
+                            <th><TableOrder title="Template Name "
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="templateName" /></th>
+                            <th><TableOrder title="Description"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="description" /></th>
+                            <th><TableOrder title="Template Type "
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="templateType" /></th>
                         </tr>
                     </thead>
 

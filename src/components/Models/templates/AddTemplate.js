@@ -17,6 +17,11 @@ function AddTemplate({ onClose, id }) {
   const [sending, setSending] = useState(false)
   const [isEmail, setIsEmail] = useState(false)
 
+  const handleClick = () => {
+    toast.success("Cloned Successfully")
+    onClose()
+  }
+
   const onSubmit = async (data) => {
     try {
       setSending(true)
@@ -70,13 +75,13 @@ function AddTemplate({ onClose, id }) {
 
             {isEmail && <div className='grid grid-cols-2 gap-3'>
               <InputForm label="Sender Name" isRequired={true} placeholder="Enter Sender Name"
-                formProps={{ ...register("sender-name", { required: true }) }}
+                formProps={{ ...register("senderName", { required: true }) }}
                 errors={errors}
               />
               <InputForm label="Sender Email" isRequired={true} placeholder="Enter Sender Email"
                 errors={errors}
                 formProps={{
-                  ...register("sender-email", {
+                  ...register("senderEmail", {
                     required: true,
                     pattern: {
                       value: validEmailRgx,
@@ -97,25 +102,25 @@ function AddTemplate({ onClose, id }) {
 
               <div className='grid grid-cols-3 gap-4'>
                 <InputForm label="Customer Name" isRequired={true}
-                  formProps={{ ...register("customer-name", { required: true }) }}
+                  formProps={{ ...register("customerName", { required: true }) }}
                   errors={errors}
                 />
 
                 {isEmail && <DatePicker label="Appointment Date" isRequired={true}
-                  formProps={{ ...register("business-phone", { required: true }) }}
+                  formProps={{ ...register("businessPhone", { required: true }) }}
                   errors={errors}
                 />}
                 {isEmail && <InputForm label="Review Link" isRequired={true}
-                  formProps={{ ...register("business-phone", { required: true }) }}
+                  formProps={{ ...register("businessPhone", { required: true }) }}
                   errors={errors}
                 />}
 
-                <InputForm label="Business Phone" isRequired={true}
-                  formProps={{ ...register("business-phone", { required: true }) }}
+                <InputForm label="Business Name" isRequired={true}
+                  formProps={{ ...register("businessPhone", { required: true }) }}
                   errors={errors}
                 />
-                <InputForm label="Insert Dynamic Fields" isRequired={true}
-                  formProps={{ ...register("insert-dynamic-fields", { required: true }) }}
+                <InputForm label="Insert Field" isRequired={true}
+                  formProps={{ ...register("insertDynamicFields", { required: true }) }}
                   errors={errors}
                 />
               </div>
@@ -127,8 +132,8 @@ function AddTemplate({ onClose, id }) {
             rows={15} className="rounded text-text3 text-sm border border-color w-full focus-visible:outline-none p-3" /> */}
 
             <div className="grid grid-cols-3 gap-3 mt-5">
-              <CancelButton title="clone template" />
-              <SecondaryButton title="Save As Draft" class_='bg-white! text-primary! hover:text-white! hover:bg-primary!' />
+              <CancelButton title="clone template" onClick={handleClick} />
+              <SecondaryButton title="Save As Draft" class_='bg-white! text-primary! hover:text-white! hover:bg-primary!' type='submit' />
               <SecondaryButton title="Save & Activate" type="submit" disabled={sending} />
             </div>
           </div>

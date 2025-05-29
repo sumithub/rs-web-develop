@@ -10,15 +10,13 @@ import { toast } from "react-toastify";
 import SelectForm from "../../form/SelectForm";
 
 export default function ChangeUserRoles({ onClose }) {
+    const [sortBy, setSortBy] = useState("")
+
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({
-        defaultValues: {
-            role: "owner",
-        },
-    });
+    } = useForm();
 
     const [sending, setSending] = useState(false);
 
@@ -43,10 +41,9 @@ export default function ChangeUserRoles({ onClose }) {
         }
         setSending(true);
 
-        // Simulate async operation
         setTimeout(() => {
             setSending(false);
-            toast.success(`Roles changed to "${data.role}" successfully`);
+            toast.success(`Roles Changed Successfully`);
             onClose();
         }, 1000);
     };
@@ -67,13 +64,25 @@ export default function ChangeUserRoles({ onClose }) {
                             <thead>
                                 <tr>
                                     <th>
-                                        <TableOrder title="Name" />
+                                        <TableOrder title="Name"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="name"
+                                        />
                                     </th>
                                     <th>
-                                        <TableOrder title="Status" />
+                                        <TableOrder title="Status"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="status"
+                                        />
                                     </th>
                                     <th>
-                                        <TableOrder title="Role" />
+                                        <TableOrder title="Role"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="role"
+                                        />
                                     </th>
                                 </tr>
                             </thead>
@@ -94,8 +103,10 @@ export default function ChangeUserRoles({ onClose }) {
                     <SelectForm
                         label="Select new role"
                         isRequired={true}
+                        defaultOption="Select"
                         selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
-                        {...register("role", { required: true })}
+                        formProps={{ ...register("role", { required: true }) }}
+                        errors={errors}
                     >
                         <option value="owner">Owner</option>
                         <option value="manager">Manager</option>

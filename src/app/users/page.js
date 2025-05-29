@@ -35,11 +35,12 @@ export default function Users() {
     const [search, setSearch] = useState("")
     const [dates, setDates] = useState(null)
     const [openModal, setOpenModal] = useState(null)
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true)
+    const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
         getUser()
-    }, [search, status, role, dates])
+    }, [search, status, role, dates, sortBy])
 
     const getUser = async () => {
         try {
@@ -212,10 +213,26 @@ export default function Users() {
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Name" /></th>
-                            <th><TableOrder title="Role" /></th>
-                            <th><TableOrder title="Status" /></th>
-                            <th><TableOrder title="Last Active" /></th>
+                            <th><TableOrder title="Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="name"
+                            /></th>
+                            <th><TableOrder title="Role"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="role"
+                            /></th>
+                            <th><TableOrder title="Status"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="status"
+                            /></th>
+                            <th><TableOrder title="Last Active"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="lastActive"
+                            /></th>
                             <th>Action</th>
                         </tr>
                     </thead>

@@ -17,6 +17,7 @@ export default function CustomerTagging() {
     const [open, setOpen] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
     const [openTag, setOpenTag] = useState(false)
+    const [sortBy, setSortBy] = useState(false)
 
     return (
         <AdminLayout>
@@ -90,9 +91,18 @@ export default function CustomerTagging() {
                 <table className="w-full">
                     <thead>
                         <tr>
-                            <th><TableOrder title="Tag Name" /></th>
-                            <th><TableOrder title="Description" /></th>
-                            <th><TableOrder title="Tagged Customers" /></th>
+                            <th><TableOrder title="Tag Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="tagName" /></th>
+                            <th><TableOrder title="Description"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="description" /></th>
+                            <th><TableOrder title="Tagged Customers"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="taggedCustomers" /></th>
                             <th>Action</th>
                         </tr>
                     </thead>

@@ -37,11 +37,11 @@ export default function CreateTag({ onClose, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <InputForm label="Tag Name" isRequired={true} placeholder="Enter Name"
-                        formProps={{ ...register("tag-name", { required: true }) }}
+                        formProps={{ ...register("tagName", { required: true }) }}
                         errors={errors}
                     />
                     <ColorInputForm label="Color Picker"
-                        formProps={{ ...register("color-picker", { required: false }) }}
+                        formProps={{ ...register("colorPicker", { required: false }) }}
                         setValue={setValue}
                         errors={errors}
                     />
@@ -50,7 +50,7 @@ export default function CreateTag({ onClose, id }) {
                         errors={errors}
                     />
                     <InputForm label="Tagged Customers"
-                        formProps={{ ...register("tagged-customers", { required: false }) }}
+                        formProps={{ ...register("taggedCustomers", { required: false }) }}
                         errors={errors}
                     />
                 </div>

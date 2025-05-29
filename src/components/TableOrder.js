@@ -1,31 +1,36 @@
-export default function TableOrder({ title, order }) {
+export default function TableOrder({ title, sortBy, setSortBy, field }) {
+    // Check if this field is currently being sorted
+    const isCurrentField = sortBy && sortBy.includes(field);
+    const sortDirection = isCurrentField ? sortBy.split(':')[1] : null;
+
     return <div>
-        <div className={`flex items-center gap-[6px] ${order ? "text-blue-700" : "text-secondary text-sm font-semibold"}`}>
+        <div className={`flex items-center gap-[6px] ${isCurrentField ? "text-primary" : "text-secondary text-sm font-semibold"}`}>
             <div>{title}</div>
-            <button className={`rounded-full bg-secondary w-4 h-4 flex items-center justify-center cursor-pointer`}
-            // onClick={() => {
-            //     if (!order) {
-            //         if (setOrderBy)
-            //             setOrderBy(field + ":desc")
-            //         if (onClick)
-            //             onClick(field + ":desc")
-            //     } else if (order === "desc") {
-            //         if (setOrderBy)
-            //             setOrderBy(field + ":asc")
-            //         if (onClick)
-            //             onClick(field + ":asc")
-            //     } else if (order === "asc") {
-            //         if (setOrderBy)
-            //             setOrderBy("")
-            //         if (onClick)
-            //             onClick("")
-            //     }
-            // }}
+            <button className={`flex items-center justify-center cursor-pointer`}
+                onClick={() => {
+                    if (!isCurrentField) {
+                        // Start with descending sort
+                        if (setSortBy) {
+                            setSortBy(field + ":desc");
+                        }
+                    } else if (sortDirection === "desc") {
+                        // Switch to ascending
+                        if (setSortBy) {
+                            setSortBy(field + ":asc");
+                        }
+                    } else if (sortDirection === "asc") {
+                        // Clear sorting
+                        if (setSortBy) {
+                            setSortBy("");
+                        }
+                    }
+                }}
             >
-                <div >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="white" d="M8 16H4l6 6V2H8zm6-11v17h2V8h4l-6-6z" /></svg>
+                <div className={`transition-all duration-300 ${isCurrentField ? "text-primary" : "text-secondary"}`}>
+                    <svg
+                        className={`transition-transform duration-300 ${sortDirection === "desc" ? "rotate-180" : ""}`}
+                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 56 56"><path fill="currentColor" d="M28 4c13.255 0 24 10.745 24 24S41.255 52 28 52S4 41.255 4 28S14.745 4 28 4m-.219 30.695c-1.031 0-1.781.657-1.781 1.64c0 1.009.75 1.665 1.781 1.665h15.57c1.032 0 1.758-.656 1.758-1.664c0-.984-.726-1.64-1.757-1.64zm2.938-7.757c-1.031 0-1.758.656-1.758 1.64c0 1.008.727 1.664 1.758 1.664h12.633c1.03 0 1.757-.656 1.757-1.664c0-.984-.726-1.64-1.757-1.64zm3.242-7.758c-1.031 0-1.781.656-1.781 1.64c0 1.008.75 1.664 1.78 1.664h9.368c1.031 0 1.781-.656 1.781-1.664c0-.984-.75-1.64-1.78-1.64zm-13.764-5.32c-.515 0-.914.21-1.383.656l-7.921 7.922c-.329.304-.493.726-.493 1.218c0 .961.75 1.688 1.711 1.688c.516 0 .938-.164 1.243-.516l2.906-2.93l2.367-2.835l-.188 4.968v15.211c0 1.032.75 1.758 1.758 1.758c1.031 0 1.758-.727 1.758-1.758v-15.21l-.187-4.946l2.367 2.813l2.906 2.93c.305.327.75.515 1.242.515c.961 0 1.688-.727 1.688-1.688c0-.492-.14-.914-.446-1.218l-7.968-7.922c-.47-.47-.844-.657-1.36-.657" /></svg>
                 </div>
-                {/* <Icon icon="lucide:sort-asc" className="text-lg transition-all duration-300" style={{ rotate: order === "desc" ? "180deg" : "" }} /> */}
             </button>
         </div>
     </div>

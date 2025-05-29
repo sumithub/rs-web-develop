@@ -13,17 +13,16 @@ import { useEffect, useState } from "react"
 import { customerList } from "../../../constent/constArray"
 import CustomSelectBox from "../../form/CustomSelectBox"
 
-
-function SelectedCustomers({ onClose }) {
+function SelectedCustomers({ onClose, onSave }) {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
     const [filter, setFilter] = useState("")
-
+    const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
         getCustomer()
-    }, [search, filter])
+    }, [search, filter, sortBy])
 
     const getCustomer = async () => {
         try {
@@ -39,7 +38,7 @@ function SelectedCustomers({ onClose }) {
     }
 
     return (
-        <Model onClose={onClose} title="select from Customer List" modalClass="w-[60%]!" >
+        <Model onClose={onClose} title="Customer List" modalClass="w-[60%]!" >
             <div className="flex items-center justify-between mb-3">
                 <Search placeholder="Search by Filter by name, email, phone" mainClass="w-1/2!"
                     onSearch={(s) => {
@@ -53,10 +52,12 @@ function SelectedCustomers({ onClose }) {
                         onChange={(e) => {
                             setFilter(e.target.value)
                         }}>
-                        <option value="Filter 1">Filter 1</option>
-                        <option value="Filter 2">Filter 2</option>
+                        <option value="filter 1">Filter 1</option>
+                        <option value="filter 2">Filter 2</option>
                     </CustomSelectBox>
-                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!" />
+                    <SecondaryButton title="Select Customers From List" class_="text-sm! font-normal! py-[7px]!"
+                        onClick={onSave}
+                    />
                 </div>
             </div>
 
@@ -64,12 +65,30 @@ function SelectedCustomers({ onClose }) {
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Customer Name" /></th>
-                            <th><TableOrder title="Email" /></th>
-                            <th><TableOrder title="Phone" /></th>
-                            <th><TableOrder title="Tags" /></th>
-                            <th><TableOrder title="Source" /></th>
-                            <th><TableOrder title="Date Added" /></th>
+                            <th><TableOrder title="Customer Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="customerName" /></th>
+                            <th><TableOrder title="Email"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="email" /></th>
+                            <th><TableOrder title="Phone"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="phone" /></th>
+                            <th><TableOrder title="Tags"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="tags" /></th>
+                            <th><TableOrder title="Source"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="source" /></th>
+                            <th><TableOrder title="Date Added"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="dateAdded" /></th>
                         </tr>
                     </thead>
 
