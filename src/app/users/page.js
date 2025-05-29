@@ -218,7 +218,7 @@ export default function Users() {
                                 setSortBy={setSortBy}
                                 field="name"
                                 onClick={(value) => {
-                                    getUser(role, status, value)
+                                    setSortBy(value)
                                 }}
                             /></th>
                             <th><TableOrder title="Role"
@@ -226,7 +226,7 @@ export default function Users() {
                                 setSortBy={setSortBy}
                                 field="role"
                                 onClick={(value) => {
-                                    getUser(role, status, value)
+                                    setSortBy(value)
                                 }}
                             /></th>
                             <th><TableOrder title="Status"
@@ -234,7 +234,7 @@ export default function Users() {
                                 setSortBy={setSortBy}
                                 field="status"
                                 onClick={(value) => {
-                                    getUser(role, status, value)
+                                    setSortBy(value)
                                 }}
                             /></th>
                             <th><TableOrder title="Last Active"
@@ -242,7 +242,7 @@ export default function Users() {
                                 setSortBy={setSortBy}
                                 field="lastActive"
                                 onClick={(value) => {
-                                    getUser(role, status, value)
+                                    setSortBy(value)
                                 }}
                             /></th>
                             <th>Action</th>

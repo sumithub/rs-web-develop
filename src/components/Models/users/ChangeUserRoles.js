@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import SelectForm from "../../form/SelectForm";
 
 export default function ChangeUserRoles({ onClose }) {
+    const [sortBy, setSortBy] = useState("")
+
     const {
         register,
         handleSubmit,
@@ -63,13 +65,32 @@ export default function ChangeUserRoles({ onClose }) {
                             <thead>
                                 <tr>
                                     <th>
-                                        <TableOrder title="Name" />
+                                        <TableOrder title="Name"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="name"
+                                            onClick={(value) => {
+                                                setSortBy(value)
+                                            }} />
                                     </th>
                                     <th>
-                                        <TableOrder title="Status" />
+                                        <TableOrder title="Status"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="status"
+                                            onClick={(value) => {
+                                                setSortBy(value)
+                                            }} />
                                     </th>
                                     <th>
-                                        <TableOrder title="Role" />
+                                        <TableOrder title="Role"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="role"
+                                            onClick={(value) => {
+                                                setSortBy(value)
+                                            }}
+                                        />
                                     </th>
                                 </tr>
                             </thead>
