@@ -1,23 +1,34 @@
+"use client"
 import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
 import DashboardCard from "../../components/DashboardCard";
-import DatePicker from "../../components/form/DatePicker";
 import Select from "../../components/form/Select";
 import Wordcloud from "../../components/charts/WordCloudChart";
 import SentimentBySourceChart from "../../components/charts/SentimentBySourceChart";
 import DashboardChart from "../../components/DashboardChart";
 import DashboardLineChart from "../../components/charts/DashboardLineChart";
 import SentimentTrendChart from "../../components/charts/SentimentTrendChart";
+import { useState } from "react";
+import DateRange from "../../components/form/DateRangePicker";
 
 export default function SentimentAnalysis() {
+    const [filterBy, setFilterBy] = useState("")
     return (
         <div>
             <AdminLayout
                 noCard={true}
-                headerChild={<div className="grid grid-cols-3 gap-3 justify-end items-end">
-                    <Select defaultOption="Select Sentiment">
+                headerChild={<div className="grid grid-cols-[1fr_1fr_auto] gap-3 justify-end items-end mt-3">
+                    <Select defaultOption="Select Sentiment"
+                        class_='mt-0!'
+                        value={filterBy}
+                        onChange={(e) => {
+                            setFilterBy(e.target.value)
+                        }}>
+                        <option value="positive">Positive</option>
+                        <option value="neutral">Neutral</option>
+                        <option value="negative">Negative</option>
                     </Select>
-                    <DatePicker
+                    <DateRange
 
                         icon={true}
 
