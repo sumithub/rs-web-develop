@@ -16,6 +16,7 @@ import axios from 'axios'
 import { formatDateTime, getError } from '../../../helper'
 import Loading from '../../components/Loading'
 import Preview from '../../components/Models/manage-campaigns/Preview'
+import DeleteTemplate from "../../components/Models/templates/DeleteTemplate"
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
@@ -54,6 +55,14 @@ function CampaignsTemplates() {
                 />
             }
 
+            {openModal === "delete" &&
+                <DeleteTemplate
+                    onClose={() => {
+                        setOpenModal(false)
+                    }}
+                />
+            }
+
             {(openModal === "preview" || openModal === "new") &&
                 <Preview
                     onClose={() => {
@@ -82,7 +91,7 @@ function CampaignsTemplates() {
                 />
             }
 
-            <div className="flex justify-between items-center w-full mb-4">
+            <div className="flex justify-between items-center w-full mb-4 shrink-0">
                 <Search
                     placeholder="Search by Template Name"
                     onSearch={(s) => {
@@ -90,9 +99,9 @@ function CampaignsTemplates() {
                     }}
                 />
 
-                <div className="grid grid-cols-3 items-start 2xl:gap-3 xl:gap-2 lg:gap-2 2xl:mt-0 mt-3">
+                <div className="flex items-center gap-3">
                     <CustomSelectBox
-                        class_="mt-0!"
+                        class_="mt-0! w-32!"
                         defaultOption="type"
                         value={type}
                         onChange={(e) => {
@@ -102,15 +111,18 @@ function CampaignsTemplates() {
                         <option value="sms">SMS</option>
                         <option value="both">Both</option>
                     </CustomSelectBox>
-                    <DatePicker
-                        icon={true}
-                        mainClass="mt-0!"
-                        value={date}
-                        dateFormat="dd/MM/yyyy"
-                        onChange={(e) => setDate(e)}
-                    />
 
-                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                    <div className='w-[35%]! shrink-0'>
+                        <DatePicker
+                            icon={true}
+                            mainClass="mt-0!"
+                            value={date}
+                            dateFormat="dd/MM/yyyy"
+                            onChange={(e) => setDate(e)}
+                        />
+                    </div>
+
+                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
                         onClick={() => { setOpen(true) }}>Create New Template</button>
                 </div>
             </div>

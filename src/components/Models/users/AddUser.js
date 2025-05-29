@@ -3,6 +3,7 @@ import { useState } from "react"
 import CancelButton from "../../common/CancelButton"
 import SecondaryButton from "../../common/SecondaryButton"
 import InputForm from "../../form/InputForm"
+import PhoneForm from "../../form/PhoneForm"
 import SelectForm from "../../form/SelectForm"
 import Model from "../Model"
 import { useForm } from "react-hook-form"
@@ -11,7 +12,7 @@ import axios from "axios"
 import { getError, validEmailRgx } from "../../../../helper"
 
 function AddUser({ onClose, id }) {
-    const { register, setValue, handleSubmit, clearErrors, formState: { errors }, } = useForm();
+    const { register, setValue, handleSubmit, clearErrors, formState: { errors }, watch } = useForm();
     // const [loading, setLoading] = useState(false);
     const [sending, setSending] = useState(false)
 
@@ -99,28 +100,22 @@ function AddUser({ onClose, id }) {
                     }}
                 />
 
-                <InputForm label="Phone Number" placeholder="Enter phone number (optional)" inputType="number"
+                <PhoneForm label="Primary Phone"
+                    placeholder="Enter phone number (optional)"
                     formProps={{ ...register("phone", { required: false }) }}
                     errors={errors}
+                    clearErrors={clearErrors}
                     setValue={setValue}
-
-                />
+                    watch={watch} />
 
                 <SelectForm label="Status"
                     selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                     isRequired={true}
-                    formProps={{ ...register("status", { required: true }) }} errors={errors} clearErrors={clearErrors}
-                >
+                    formProps={{ ...register("status", { required: true }) }} errors={errors} clearErrors={clearErrors}>
                     <option value="active">Active</option>
                     <option value="suspended">Suspended</option>
                     <option value="pending invite">Pending Invite</option>
                 </SelectForm>
-
-                {/* <Select label="Status" isRequired={true} selectClass_="py-3.5! px-2.5! focus:border-primary/60!">
-                    <option value="active">Active</option>
-                    <option value="suspended">Suspended</option>
-                    <option value="pending invite">Pending Invite</option>
-                </Select> */}
 
                 <SelectForm label="Role" isRequired={true} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                     formProps={{ ...register("role", { required: true }) }} errors={errors} clearErrors={clearErrors}>
@@ -128,11 +123,6 @@ function AddUser({ onClose, id }) {
                     <option value="manager">Manager</option>
                     <option value="viewer">Viewer</option>
                 </SelectForm>
-                {/* <Select label="Role" isRequired={true} selectClass_="py-3.5! px-2.5! focus:border-primary/60!">
-                    <option value="owner">Owner</option>
-                    <option value="manager">Manager</option>
-                    <option value="viewer">Viewer</option>
-                </Select> */}
             </div>
 
             <div className="grid grid-cols-2 gap-3 mt-5">

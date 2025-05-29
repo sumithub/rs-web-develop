@@ -19,6 +19,7 @@ import { getError } from "../../../../helper"
 import SelectForm from "../../../components/form/SelectForm"
 import AddTemplate from "../../../components/Models/templates/AddTemplate"
 import Preview from "../../../components/Models/manage-campaigns/Preview"
+import { useRouter } from "next/navigation"
 
 export default function Detail({ }) {
     const id = ""
@@ -30,7 +31,7 @@ export default function Detail({ }) {
     const [openEmail, setOpenEmail] = useState(false)
     const [expandAll, setExpandAll] = useState(false)
     const [openPreview, setOpenPreview] = useState(false)
-
+    const router = useRouter()
     const [cardStatuses, setCardStatuses] = useState({
         campaignDetails: 'pending',
         targeting: 'pending',
@@ -54,12 +55,15 @@ export default function Detail({ }) {
 
         // Check Campaign Details completion
         const campaignDetailsComplete = watchedFields['campaignName']?.trim()
+        const campaignNameTouched = watchedFields['campaignName'] !== undefined // Check if field has been touched
+
         let campaignDetailsStatus = 'pending'
         if (campaignDetailsComplete) {
             campaignDetailsStatus = 'completed'
             newActiveStep = 2
-        } else {
-            campaignDetailsStatus = activeStep === 1 ? 'in_progress' : 'pending'
+        } else if (campaignNameTouched) {
+            // If the field has been touched (even if empty), set to in_progress
+            campaignDetailsStatus = 'in_progress'
         }
 
         // Check Targeting completion
@@ -112,6 +116,7 @@ export default function Detail({ }) {
             )
             return hasChanged ? newStatuses : prevStatuses
         })
+
         if (schedulingComplete) {
             setActiveStep(5)
         } else {
@@ -154,6 +159,8 @@ export default function Detail({ }) {
     const handleCampaignTypeChange = (type) => {
         setCampaignType(type)
     }
+
+    const isAllPending = Object.values(cardStatuses).every(status => status === 'pending');
 
     return <AdminLayout>
 
@@ -427,11 +434,14 @@ export default function Detail({ }) {
             </div>
 
             <div className="grid grid-cols-3 gap-3 mt-7">
-                <SecondaryButton title="Save as Draft" type="button"
-                    onClick={handleSubmit(onSubmit)}
-                    disabled={sending} />
-                <SecondaryButton title="Schedule for Later" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => { setOpenSchedule(true) }} />
-                <CancelButton title="Launch Now" />
+                {isAllPending ? <CancelButton title="Cancel" type="button"
+                    onClick={() => { router.push("/manage-campaigns") }}
+                    disabled={sending} /> : <SecondaryButton title="Save as Draft" type="button"
+                        onClick={handleSubmit(onSubmit)}
+                        disabled={sending} />}
+                <SecondaryButton disabled={isAllPending} title="Schedule for Later" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => { setOpenSchedule(true) }} />
+                <CancelButton title="Launch Now" disabled={sending || isAllPending}
+                    onClick={handleSubmit(onSubmit)} />
             </div>
         </div>
     </AdminLayout>
