@@ -26,7 +26,7 @@ export default function DeleteModal({ onClose, title = "user" }) {
     };
     return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
         <form onSubmit={handleSubmit(onSubmit)} className="text-center">
-            <DeleteUser title={`Remove ${title}`} question={`Are You Sure you want to Remove this ${title} permanently?`} />
+            <DeleteUser title={`Delete ${title}`} question={`Are You Sure? You want To Delete This ${title}.`} />
 
             {/* <DeleteUser title="remove user confirmation" question="Are You Sure you want to Remove this user permanently?" /> */}
 
