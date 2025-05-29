@@ -142,7 +142,7 @@ export default function Users() {
             }
 
             <div className='flex items-center justify-between w-full'>
-                <div className='flex  gap-3 items-center w-full'>
+                <div className='flex gap-3 items-center w-full'>
                     <Search
                         mainClass='w-[35%]!'
                         placeholder="Search by name, email, role."

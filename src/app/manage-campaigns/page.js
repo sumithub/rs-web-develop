@@ -60,16 +60,16 @@ function ManageCampaigns() {
                 />
             }
             <div>
-                <div className="2xl:flex lg:flex-wrap justify-between items-center w-full mb-5">
+                <div className="flex justify-between items-start w-full mb-5">
                     <Search
                         placeholder="Search by campaign names"
                         onSearch={(s) => {
                             setSearch(s)
                         }}
                     />
-                    <div className="grid grid-cols-5 items-start gap-3 2xl:mt-0 mt-3">
+                    <div className="flex items-start gap-3">
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-40!"
                             defaultOption="sort by"
                             value={sortBy1}
                             onChange={(e) => {
@@ -82,7 +82,7 @@ function ManageCampaigns() {
                         </CustomSelectBox>
 
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="select type"
                             value={type}
                             onChange={(e) => {
@@ -93,7 +93,7 @@ function ManageCampaigns() {
                         </CustomSelectBox>
 
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="Status"
                             value={status}
                             onChange={(e) => {
@@ -114,7 +114,7 @@ function ManageCampaigns() {
                             onChange={(e) => setDate(e)}
                         />
                         <Link href="/manage-campaigns/detail">
-                            <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                            <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0 w-full"
                             >Create campaign</button>
                         </Link>
                     </div>
@@ -133,6 +133,7 @@ function ManageCampaigns() {
                     </div>
 
                     <div className='grid grid-cols-3 gap-3'>
+
                         <CustomSelectBox
                             class_="mt-0!"
                             defaultOption="change Status"
