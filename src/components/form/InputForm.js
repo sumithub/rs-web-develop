@@ -27,7 +27,7 @@ export default function InputForm({ class_ = "", watch, setValue, clearValue = t
 
     return (
         <div className={`mt-[15px] ${class_}`}>
-            <label className={`text-sm font-medium text-secondary ${labelClass}`}> {label}{isRequired && <span className="text-danger">*</span>}</label>
+            <label className={`text-sm font-medium text-secondary ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}</label>
             <div className="relative">
                 {(inputType !== "password" && icon && watch(formProps?.name)) && (
                     <Image

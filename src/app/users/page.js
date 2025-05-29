@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Status from "../../components/Status"
 import Dropdown from '../../components/DropDown';
 import TableOrder from '../../components/TableOrder';
@@ -12,7 +12,7 @@ import AddUser from '../../components/Models/users/AddUser'
 import DeleteUsers from '../../components/Models/users/RemoveUsers'
 import ResendInvitations from '../../components/Models/users/ResendInvitations'
 import ChangeUserRoles from '../../components/Models/users/ChangeUserRoles'
-import { USER_ACTIONS } from '../../constent/constArray';
+import { USER_ACTIONS, users } from '../../constent/constArray';
 import ResendInvitation from '../../components/Models/users/ResendInvitation';
 import SuspendUser from '../../components/Models/users/SuspendUser';
 import SuspendUsers from '../../components/Models/users/SuspendUsers';
@@ -23,15 +23,38 @@ import ChangePassword from '../../components/Models/users/ChangePassword';
 import SetupPassword from '../../components/Models/users/SetupPassword';
 import DateRange from '../../components/form/DateRangePicker';
 import CustomSelectBox from '../../components/form/CustomSelectBox';
+import axios from 'axios';
+import { formatDate, getError } from '../../../helper';
+import { toast } from 'react-toastify';
+import Loading from "../../components/Loading"
 
-
-function Users() {
+export default function Users() {
+    const [list, setList] = useState([])
     const [role, setRole] = useState("")
     const [status, setStatus] = useState("")
-    const [date, setDate] = useState("")
-    // const [list, setList] = useState([])
     const [search, setSearch] = useState("")
+    const [dates, setDates] = useState(null)
     const [openModal, setOpenModal] = useState(null)
+    const [loading, setLoading] = useState(true)
+    const [sortBy, setSortBy] = useState("")
+
+    useEffect(() => {
+        getUser()
+    }, [search, status, role, dates, sortBy])
+
+    const getUser = async () => {
+        try {
+            setLoading(true)
+            setList([])
+            const res = await axios.get("/api")
+            setList(res.data || users)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
 
     return (
         <AdminLayout>
@@ -118,48 +141,59 @@ function Users() {
                     }} />
             }
 
+            <div className='flex items-center justify-between w-full'>
+                <div className='flex gap-3 items-center w-full'>
+                    <Search
+                        mainClass='w-[35%]!'
+                        placeholder="Search by name, email, role."
+                        onSearch={(s) => {
+                            setSearch(s)
+                        }}
+                    />
+                    <CustomSelectBox
+                        class_="mt-0! w-36!"
+                        defaultOption="Status"
+                        value={status}
+                        onChange={(e) => {
+                            setStatus(e.target.value)
+                        }}>
+                        <option value="active">Active</option>
+                        <option value="suspended">Suspended</option>
+                        <option value="pendingInvite">Pending Invite</option>
+                    </CustomSelectBox>
 
-            <div className='grid grid-cols-[2.5fr_1fr_1fr_1fr_1fr] gap-3'>
-                <Search
-                    mainClass='w-full!'
-                    placeholder="Search by name, email, role."
-                    onSearch={(s) => {
-                        setSearch(s)
-                    }}
-                />
-                <CustomSelectBox
-                    class_="mt-0!"
-                    defaultOption="Status"
-                    value={status}
-                    onChange={(e) => {
-                        setStatus(e.target.value)
-                    }}>
-                    <option value="active">Active</option>
-                    <option value="suspended">Suspended</option>
-                    <option value="pendingInvite">Pending Invite</option>
-                </CustomSelectBox>
+                    <CustomSelectBox
+                        class_="mt-0! w-36!"
+                        defaultOption="role"
+                        value={role}
+                        onChange={(e) => {
+                            setRole(e.target.value)
+                        }}>
+                        <option value="owner">Owner</option>
+                        <option value="manager">manager</option>
+                        <option value="viewer">Viewer</option>
+                    </CustomSelectBox>
 
-                <CustomSelectBox
-                    class_="mt-0!"
-                    defaultOption="role"
-                    value={role}
-                    onChange={(e) => {
-                        setRole(e.target.value)
-                    }}>
-                    <option value="owner">Owner</option>
-                    <option value="manager">manager</option>
-                    <option value="viewer">Viewer</option>
-                </CustomSelectBox>
+                    <DateRange
+                        onChange={(dates) => { setDates(dates) }}
+                    />
+                </div>
 
-                <DateRange />
-                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-full"
+                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-32"
                     onClick={() => { setOpenModal("new") }}>Invite New User</button>
+
             </div>
 
             <div className='my-5 flex items-center justify-between'>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 cursor-pointer">
                     <div className="flex items-start justify-center gap-2 mt-1">
-                        <Checkbox />
+                        <Checkbox
+                            checked={list?.length > 0 && list.every(e => e.selected)}
+                            onChange={(checked) => {
+                                setList(list => list.map(e => ({ ...e, selected: checked })))
+                            }}
+
+                        />
                         <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
                     </div>
                 </div>
@@ -180,27 +214,48 @@ function Users() {
             </div>
 
             <div className='table-class'>
-                <table className='w-full'>
+                {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Name" /></th>
-                            <th><TableOrder title="Role" /></th>
-                            <th><TableOrder title="Status" /></th>
-                            <th><TableOrder title="Last Active" /></th>
+                            <th><TableOrder title="Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="name"
+                            /></th>
+                            <th><TableOrder title="Role"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="role"
+                            /></th>
+                            <th><TableOrder title="Status"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="status"
+                            /></th>
+                            <th><TableOrder title="Last Active"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="lastActive"
+                            /></th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        {list?.map((e, index) => <tr key={index}>
                             <td>
                                 <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
+                                    <Checkbox
+                                        checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                    />
+                                    <div>{e.name}</div>
                                 </div>
                             </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Active" /></td>
-                            <td>Aug 05,2025</td>
+                            <td><div className='flex items-center gap-1.5'>{e.role}<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
+                            <td><Status status={e.status} /></td>
+                            <td>{formatDate(e.lastActive)}</td>
                             <td><Dropdown
                                 options={USER_ACTIONS}
                                 onClickOption={(e) => {
@@ -208,140 +263,13 @@ function Users() {
                                 }}
                             /></td>
                         </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Pending Invite" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Active" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Suspended" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Active" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Pending Invite" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Active" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaydon George</div>
-                                </div>
-                            </td>
-                            <td><div className='flex items-center gap-1.5'>Manager<button className='cursor-pointer disabled:pointer-events-none'><Image src="/images/info.svg" alt="info" height={18} width={18} unoptimized={true} /></button></div></td>
-                            <td><Status status="Active" /></td>
-                            <td>Aug 05,2025</td>
-                            <td><Dropdown
-                                options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }}
-                            /></td>
-                        </tr>
+                        )}
                     </tbody>
-                </table>
-                <div>
+                </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                {list?.length > 0 && <div>
                     <PaginationDemo />
-                </div>
+                </div>}
             </div>
-        </AdminLayout >
+        </AdminLayout>
     )
 }
-
-export default Users

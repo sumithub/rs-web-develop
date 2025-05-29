@@ -10,9 +10,10 @@ import Dropdown from "../../components/DropDown";
 import DatePicker from "../../components/form/DatePicker";
 import Loading from "../../components/Loading";
 import Pagination from "../../components/Pagination"
-import Chart from "../../components/Chart"
+import Chart from "../../components/charts/Chart"
 import AdminLayout from "../../components/AdminLayout"
 import CustomSelectBox from '../../components/form/CustomSelectBox';
+import AddManualReview from '../../components/Models/review/AddManualReview';
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -22,6 +23,8 @@ export default function Review() {
     // const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
+    const [open, setOpen] = useState(false)
+    const [sortBy, setSortBy] = useState("")
 
     const list = [
         { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "New" },
@@ -32,6 +35,18 @@ export default function Review() {
     ]
 
     return <AdminLayout noCard={true}>
+
+        {open &&
+            <AddManualReview
+                onClose={() => {
+                    setOpen(false)
+                }}
+
+                onSave={() => {
+                    setOpen(true)
+                }}
+            />
+        }
 
         <div className="bg-light min-h-[calc(100dvh_-_85px)] mt-[85px]">
             <div className="grid grid-cols-3 gap-4">
@@ -240,7 +255,8 @@ export default function Review() {
                             <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
                         </button>
 
-                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50">Create Manual Review</button>
+                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                            onClick={() => { setOpen(true) }}>Add Manual Review</button>
                     </div>
                 </div>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 mt-5">
@@ -255,12 +271,30 @@ export default function Review() {
                     <table className="w-full">
                         <thead>
                             <tr className="text-secondary text-sm font-semibold bg-dark border-b border-border-color text-left">
-                                <th className="py-4 px-4"><TableOrder title="Reviewer" /></th>
-                                <th className="py-4 px-4"><TableOrder title="Rating" /></th>
-                                <th className="py-4 px-4"><TableOrder title="Review Text" /></th>
-                                <th className="py-4 px-4"><TableOrder title="Source" /></th>
-                                <th className="py-4 px-4"><TableOrder title="Last Updated" /></th>
-                                <th className="py-4 px-4"><TableOrder title="Status" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Reviewer"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="reviewer" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Rating"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="rating" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Review Text"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="reviewText" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Source"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="source" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Last Updated"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="lastUpdated" /></th>
+                                <th className="py-4 px-4"><TableOrder title="Status"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="status" /></th>
                                 <th className="py-4 px-4">Actions</th>
                             </tr>
                         </thead>

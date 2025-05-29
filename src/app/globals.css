@@ -4,6 +4,7 @@
   --primary: #0396FF;
   --primary2: #6FC3FF;
   --secondary: #1F2933;
+  --secondary2: #F6F8FB;
   --text: #FEFEFE;
   --text3: #ADADAD;
   --border-color: #ADADAD4D;
@@ -18,6 +19,7 @@
   --dark: #F6F8FB;
   --light: #F9FBFC;
   --custom-purple: #5470DE;
+  --custom-purple-light: #9787FF;
   --custom-yellow: #FFC246;
   --custom-yellow-dark: #FF9C23;
 
@@ -28,6 +30,7 @@
   --border-primary: var(--primary);
   --color-primary2: var(--primary2);
   --color-secondary: var(--secondary);
+  --color-secondary2: var(--secondary2);
   --color-text: var(--text);
   --color-danger: var(--danger);
   --color-danger2: var(--danger2);
@@ -42,6 +45,7 @@
   --color-dark: var(--dark);
   --color-light: var(--light);
   --color-custom-purple: var(--custom-purple);
+  --color-custom-purple-light: var(--custom-purple-light);
   --color-custom-yellow: var(--custom-yellow);
   --color-custom-yellow-dark: var(--custom-yellow-dark);
 }
@@ -166,6 +170,15 @@ body {
   width: 10.5rem !important;
 }
 
+.react-datepicker__header {
+  background: #f9fbfc !important;
+  background-color: #f9fbfc !important;
+}
+
+.react-datepicker {
+  border: 1px solid #ADADAD4D !important;
+  background-color: white !important;
+}
 
 .ldio-x2uulkbinbj>div {
   animation: ldio-x2uulkbinbj 1s infinite linear;
@@ -226,8 +239,12 @@ body {
   box-sizing: content-box;
 }
 
+button {
+  @apply cursor-pointer
+}
+
 :disabled {
-  @apply pointer-events-none
+  @apply pointer-events-none opacity-85
 }
 
 .table-class {
@@ -265,12 +282,14 @@ td {
   height: 100% !important;
 }
 
+/* Default line styling */
 .line {
   width: 200px;
   height: 2px;
   background: #E8EEF2;
 }
 
+/* Default step styling */
 .steps {
   position: relative;
   display: flex;
@@ -283,8 +302,10 @@ td {
   border: 2.5px solid var(--text3);
   cursor: pointer;
   color: var(--text3);
+  background: white;
 }
 
+/* Default step title */
 .steps .step-title {
   color: var(--secondary);
   position: absolute;
@@ -296,6 +317,7 @@ td {
   font-weight: 500;
 }
 
+/* Active step (current step) - Blue */
 .steps.active {
   background: var(--primary);
   border: 2.5px solid var(--primary);
@@ -304,24 +326,38 @@ td {
 
 .steps.active .step-title {
   color: var(--primary);
+  font-weight: 600;
+}
+
+/* Completed step - Green */
+.steps.completed {
+  background: var(--success);
+  border: 2.5px solid var(--success);
+  color: white;
+}
+
+.steps.completed .step-title {
+  color: var(--success);
   font-weight: 500;
 }
 
-.line.active {
-  background: var(--primary);
-}
-
-.completed .line {
+/* Completed line - Green */
+.line.completed {
   background: var(--success);
 }
 
-.completed .steps {
-  background-color: var(--success);
-  border: 2.5px solid var(--success);
+/* Legacy support for old structure - can be removed if not needed */
+.all-completed .line {
+  background: var(--success);
 }
 
-.completed .steps .line,
-.completed .steps .step-title {
+.all-completed .steps {
+  background-color: var(--success);
+  border: 2.5px solid var(--success);
+  color: white;
+}
+
+.all-completed .steps .step-title {
   color: var(--success);
 }
 
@@ -329,7 +365,42 @@ td {
   display: none;
 }
 
-.css-r5rnga{
-   margin: 0 !important;
-   padding: 12px  18px 12px !important;
+.css-r5rnga {
+  margin: 0 !important;
+  padding: 12px 18px 12px !important;
+}
+
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.react-international-phone-country-selector {
+  flex-shrink: 0 !important;
+}
+
+.react-international-phone-dial-code-preview {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  font-size: 14px !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+}
+
+.react-international-phone-input {
+  border-left: 0 !important;
+}
+
+.react-international-phone-input-container .react-international-phone-country-selector-button {
+  margin-right: 0 !important;
+  border-right: 0 !important;
+}
+
+.react-international-phone-dial-code-preview--disabled,
+.react-international-phone-input-container .react-international-phone-input--disabled,
+.react-international-phone-input-container .react-international-phone-country-selector-button:disabled {
+  background-color: var(--light);
+  border-color: var(--light);
+  color: var(--text);
+  opacity: 0.7;
 }
