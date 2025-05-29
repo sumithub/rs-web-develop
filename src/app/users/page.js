@@ -141,43 +141,47 @@ export default function Users() {
                     }} />
             }
 
-            <div className='grid grid-cols-[2.5fr_1fr_1fr_1.1fr_1fr] gap-3 items-center'>
-                <Search
-                    mainClass='w-full!'
-                    placeholder="Search by name, email, role."
-                    onSearch={(s) => {
-                        setSearch(s)
-                    }}
-                />
-                <CustomSelectBox
-                    class_="mt-0!"
-                    defaultOption="Status"
-                    value={status}
-                    onChange={(e) => {
-                        setStatus(e.target.value)
-                    }}>
-                    <option value="active">Active</option>
-                    <option value="suspended">Suspended</option>
-                    <option value="pendingInvite">Pending Invite</option>
-                </CustomSelectBox>
+            <div className='flex items-center justify-between w-full'>
+                <div className='flex  gap-3 items-center w-full'>
+                    <Search
+                        mainClass='w-[35%]!'
+                        placeholder="Search by name, email, role."
+                        onSearch={(s) => {
+                            setSearch(s)
+                        }}
+                    />
+                    <CustomSelectBox
+                        class_="mt-0! w-36!"
+                        defaultOption="Status"
+                        value={status}
+                        onChange={(e) => {
+                            setStatus(e.target.value)
+                        }}>
+                        <option value="active">Active</option>
+                        <option value="suspended">Suspended</option>
+                        <option value="pendingInvite">Pending Invite</option>
+                    </CustomSelectBox>
 
-                <CustomSelectBox
-                    class_="mt-0!"
-                    defaultOption="role"
-                    value={role}
-                    onChange={(e) => {
-                        setRole(e.target.value)
-                    }}>
-                    <option value="owner">Owner</option>
-                    <option value="manager">manager</option>
-                    <option value="viewer">Viewer</option>
-                </CustomSelectBox>
+                    <CustomSelectBox
+                        class_="mt-0! w-36!"
+                        defaultOption="role"
+                        value={role}
+                        onChange={(e) => {
+                            setRole(e.target.value)
+                        }}>
+                        <option value="owner">Owner</option>
+                        <option value="manager">manager</option>
+                        <option value="viewer">Viewer</option>
+                    </CustomSelectBox>
 
-                <DateRange
-                    onChange={(dates) => { setDates(dates) }}
-                />
-                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-full"
+                    <DateRange
+                        onChange={(dates) => { setDates(dates) }}
+                    />
+                </div>
+
+                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-32"
                     onClick={() => { setOpenModal("new") }}>Invite New User</button>
+
             </div>
 
             <div className='my-5 flex items-center justify-between'>

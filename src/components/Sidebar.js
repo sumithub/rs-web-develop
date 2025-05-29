@@ -29,7 +29,7 @@ export default function Sidebar() {
         { title: "Settings", icon: "settings", submenu: [{ title: "Users", link: "/users" }] },
     ]
 
-    return <div className="relative">
+    return <div className="relative z-0">
         <div className="bg-white h-[100vh] w-72 fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px] shadow-[0px_16px_44px_0px_#00000012]">
             <div className="relative h-full pb-10">
 
