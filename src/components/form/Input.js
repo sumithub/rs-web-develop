@@ -14,7 +14,7 @@ export default function Input({ isTextArea, rows = 3, isRequired, label, placeho
 
     return (
         <div className={`${class_} mt-[15px]`}>
-            <label className={`text-sm font-medium text-secondary ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}</label>
+            <label className={`text-sm font-medium text-secondary ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400">(Optional)</span>}</label>
             <div className="relative">
                 {(inputType !== "password" && icon) && (
                     <Image

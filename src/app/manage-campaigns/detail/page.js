@@ -126,7 +126,7 @@ export default function Detail({ }) {
                             errors={errors}
                         />
 
-                        <InputForm label="Description" placeholder="Enter Name" isRequired={false} inputClass="bg-white!"
+                        <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white!"
                             formProps={{ ...register("description", { required: false }) }}
                             errors={errors}
                         />
