@@ -40,6 +40,7 @@ export default function ShareOnSocialMedia({ onClose, onSave }) {
                         icon="/images/copy2.svg"
                         class_="mt-[25px]!"
                         placeholder="https://code-with.com"
+                        label=""
                     />
                 </div>
             </div>
