@@ -1,7 +1,15 @@
 "use client"
 import Image from "next/image"
+import { useState } from "react"
+import RenameList from "../Models/customers/RenameList"
+import DeleteList from "../Models/customers/DeleteList"
+import Download from "../Models/customers/Download"
 
 export default function GridView() {
+    const [openRename, setOpenRename] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
+    const [openDownload, setOpenDownload] = useState(false)
+
     const Project = [
         { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
         { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
@@ -17,6 +25,43 @@ export default function GridView() {
         { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
     ]
     return (<>
+
+        {openRename &&
+            <RenameList
+                onClose={() => {
+                    setOpenRename(false)
+                }}
+
+                onSave={() => {
+                    setOpenRename(true)
+                }}
+            />
+        }
+
+        {openDelete &&
+            <DeleteList
+                onClose={() => {
+                    setOpenDelete(false)
+                }}
+
+                onSave={() => {
+                    setOpenDelete(true)
+                }}
+            />
+        }
+
+        {openDownload &&
+            <Download
+                onClose={() => {
+                    setOpenDownload(false)
+                }}
+
+                onSave={() => {
+                    setOpenDownload(true)
+                }}
+            />
+        }
+
         <div className="grid grid-cols-3 gap-x-5 gap-y-[15px]">
             {Project.map((e, i) =>
                 <div key={i} className='border border-border2 rounded-[10px] p-[15px]'>

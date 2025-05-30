@@ -9,9 +9,10 @@ import { getError } from "../../../../helper"
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import PhoneForm from "../../form/PhoneForm"
 
 function AddCustomer({ onClose, id }) {
-    const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
+    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -44,16 +45,24 @@ function AddCustomer({ onClose, id }) {
                     <InputForm label="Customer Name" placeholder="Enter your name" isRequired={true} class_="mt-0!"
                         formProps={{ ...register("customerName", { required: true }) }}
                         errors={errors} />
+
                     <InputForm label="Email" placeholder="Enter email" isRequired={true}
                         formProps={{ ...register("email", { required: true }) }}
                         errors={errors} />
-                    <InputForm label="Phone" placeholder="Enter phone number" inputType="number" isRequired={true}
-                        formProps={{ ...register("phone", { required: true }) }}
-                        errors={errors} />
+
+                    <PhoneForm label="Primary Phone"
+                        placeholder="Enter phone number (optional)"
+                        formProps={{ ...register("phone", { required: false }) }}
+                        errors={errors}
+                        clearErrors={clearErrors}
+                        setValue={setValue}
+                        watch={watch} />
+
                     <SelectForm label="Tag" isRequired={true} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
-                        formProps={{ ...register("tag", { required: true }) }} errors={errors} clearErrors={clearErrors}
-                    >
+                        formProps={{ ...register("tag", { required: true }) }} errors={errors} clearErrors={clearErrors}>
                         <option value="high value">High Value</option>
+                        <option value="loyal">Loyal</option>
+                        <option value="instead of source">instead of source</option>
                     </SelectForm>
                 </div>
             </div>

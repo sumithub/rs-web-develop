@@ -34,7 +34,11 @@ export default function RenameList({ onClose, id }) {
     return (
         <Model onClose={onClose} title="Rename List" modalClass="w-1/2!">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <InputForm label="Add New Name" isRequired={true} placeholder="Enter Name"
+                <InputForm
+                    class_="mt-1!"
+                    label="Add New Name"
+                    isRequired={true}
+                    placeholder="Enter Name"
                     formProps={{ ...register("addNewName", { required: true }) }}
                     errors={errors} />
 
