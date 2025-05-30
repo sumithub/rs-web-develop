@@ -199,7 +199,7 @@ export default function Review() {
             </div>
 
             <div className="bg-white min-h-[calc(100vh_-_85px)] rounded-[10px] mt-5 p-5">
-                <div className="2xl:flex lg:flex-wrap justify-between items-center w-full">
+                <div className="2xl:flex lg:flex-wrap justify-between items-center w-full gap-[15px]">
                     {/* <div className="relative w-[32%]">
                         <div className="w-full">
                             <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-dark border border-border2 rounded-lg focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
