@@ -3,16 +3,40 @@ import Image from "next/image";
 import Model from "../Model";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getError } from "../../../../helper";
+import { useState } from "react";
 
 export default function DeleteModal({ onClose, title = "Tag" }) {
-    return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
-        <DeleteTag title={`Delete ${title}`} question="Are You sure you want to delete the tag At Risk? This action cannot be undone." />
+    const { handleSubmit } = useForm();
+    const [sending, setSending] = useState(false);
 
-        <div className="grid grid-cols-2 gap-3 mt-5">
-            <CancelButton title="Cancel" class_="border-danger2! bg-white! text-danger2!" onClick={onClose} />
-            <SecondaryButton title=" Yes, Delete" />
-        </div>
-    </Model>
+    const onSubmit = async () => {
+        try {
+            setSending(true);
+            await axios.put("/api");
+            toast.success("Tag Deleted Successfully");
+            onClose();
+        } catch (error) {
+            toast.error(getError(error));
+        } finally {
+            setSending(false);
+        }
+    };
+
+    return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
+        <form onSubmit={handleSubmit(onSubmit)} className="text-center">
+            <DeleteTag title={`Delete ${title}`} question="Are You sure you want to delete the tag At Risk? This action cannot be undone." />
+
+            <div className="grid grid-cols-2 gap-3 mt-5">
+                <CancelButton title="Cancel" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
+                />
+                <SecondaryButton title=" Yes, Delete" type="submit" disabled={sending} />
+            </div>
+        </form>
+    </Model >
 }
 
 const DeleteTag = ({ title, question }) => {
