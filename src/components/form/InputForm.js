@@ -1,9 +1,8 @@
 "use client";
-
 import Image from "next/image";
 import { useState } from "react";
 
-export default function InputForm({ class_ = "", watch, setValue, clearValue = true, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "" }) {
+export default function InputForm({ class_ = "", watch, setValue, clearValue = true, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "", isTextArea, rows }) {
     const [type, setType] = useState("password")
     let error = "";
 
@@ -15,7 +14,6 @@ export default function InputForm({ class_ = "", watch, setValue, clearValue = t
             error = "This field is required";
         }
     }
-
 
     const handleClick = () => {
         if (inputType === "password") {
@@ -29,6 +27,7 @@ export default function InputForm({ class_ = "", watch, setValue, clearValue = t
         <div className={`mt-[15px] ${class_}`}>
             <label className={`text-sm font-medium text-secondary ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}</label>
             <div className="relative">
+
                 {(inputType !== "password" && icon && watch(formProps?.name)) && (
                     <Image
                         unoptimized
@@ -49,12 +48,18 @@ export default function InputForm({ class_ = "", watch, setValue, clearValue = t
                         className={`absolute cursor-pointer top-4 right-2.5 "w-6 h-6"`}
                         onClick={handleClick} />
                 )}
-                <input
-                    placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
+                {isTextArea ? <textarea rows={rows}
+                    className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
+                    placeholder={placeholder || label}
                     {...formProps}
                     disabled={disabled}
-                    className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary  ${inputClass}`}
-                />
+                /> :
+                    <input
+                        placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
+                        {...formProps}
+                        disabled={disabled}
+                        className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
+                    />}
             </div>
             {error && <p className="text-xs pt-[3px] capitalize text-danger">{error}</p>}
         </div>

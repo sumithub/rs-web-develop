@@ -74,3 +74,10 @@ export const selectedCustomers = [
     { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
     { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
 ]
+
+export const customerTagging = [
+    { status: "At Risk", description: "Lorem ipsum dummy..", taggedCustomer: 150 },
+    { status: "VIP", description: "Lorem ipsum dummy..", taggedCustomer: 150 },
+    { status: "Priority", description: "Lorem ipsum dummy..", taggedCustomer: 150 },
+    { status: "Dp", description: "Lorem ipsum dummy..", taggedCustomer: 150 },
+]
