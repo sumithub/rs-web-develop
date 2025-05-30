@@ -16,8 +16,8 @@ import CustomSelectBox from '../../components/form/CustomSelectBox';
 import AddManualReview from '../../components/Models/review/AddManualReview';
 import axios from "axios";
 import { toast } from "react-toastify";
-import { getError } from "../../../helper";
-import { manageReview, REVIeEW_ACTIONS } from "../../constent/constArray";
+import { formatDateTime, getError } from "../../../helper";
+import { manageReview, REVIEW_ACTIONS } from "../../constent/constArray";
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -346,10 +346,10 @@ export default function Review() {
                                         </td>
                                         <td className="py-3 px-4">{e.review}</td>
                                         <td className="py-3 px-4">{e.source}</td>
-                                        <td className="py-3 px-4">{e.lastUpdate}</td>
+                                        <td className="py-3 px-4">{formatDateTime(e.lastUpdate)}</td>
                                         <td className="py-3 px-4"><Status status={e.status} /></td>
                                         <td className="py-3 px-4"><Dropdown
-                                            options={REVIeEW_ACTIONS}
+                                            options={REVIEW_ACTIONS}
                                             onClickOption={(e) => {
                                                 setOpenModal(e)
                                             }}

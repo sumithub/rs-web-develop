@@ -1,13 +1,10 @@
 "use client"
 import AdminLayout from '../../components/AdminLayout'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TableOrder from '../../components/TableOrder'
 import Checkbox from '../../components/form/Checkbox'
 import Status from '../../components/Status'
 import BoostRequest from "../../components/Models/boost/BoostRequest";
-import RenameList from "../../components/Models/customers/RenameList";
-import DeleteList from "../../components/Models/customers/DeleteList";
-import Download from "../../components/Models/customers/Download";
 import Image from 'next/image'
 import Search from '../../components/form/Search'
 import PaginationDemo from '../../components/Pagination'
@@ -18,19 +15,48 @@ import CustomSelectBox from '../../components/form/CustomSelectBox';
 import GridView from '../../components/customers/GridView';
 import ListView from '../../components/customers/ListView';
 import DatePicker from '../../components/form/DatePicker';
+import { allCustomers } from '../../constent/constArray'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import { formatDate, getError } from '../../../helper'
+import Loading from '../../components/Loading'
+import DeleteCustomer from "../../components/Models/customers/DeleteCustomer"
+import DeleteMultiCustomer from "../../components/Models/customers/DeleteMultiCustomers"
 
 function Customers() {
     const [openBoost, setOpenBoost] = useState(false)
-    const [openRename, setOpenRename] = useState(false)
-    const [openDelete, setOpenDelete] = useState(false)
-    const [openDownload, setOpenDownload] = useState(false)
     const [filterBy, setFilterBy] = useState("")
     const [search, setSearch] = useState("")
+    const [date, setDate] = useState("")
     const [open, setOpen] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
+    const [openMultiCustomer, setOpenMultiCustomer] = useState(false)
     const [openTags, setOpenTags] = useState(false)
     const [openModal, setOpenModal] = useState(null)
-    const [view, setView] = useState("history")
+    const [view, setView] = useState("customer")
+    const [tab, setTab] = useState("list")
     const [sortBy, setSortBy] = useState("")
+    const [list, setList] = useState([])
+    const [loading, setLoading] = useState(true)
+
+
+    useEffect(() => {
+        getCustomer()
+    }, [search, sortBy])
+
+    const getCustomer = async () => {
+        try {
+            setLoading(true)
+            setList([])
+            const res = await axios.get("/api")
+            setList(res.data || allCustomers)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
 
 
     return (
@@ -43,42 +69,6 @@ function Customers() {
 
                     onSave={() => {
                         setOpen(true)
-                    }}
-                />
-            }
-
-            {openRename &&
-                <RenameList
-                    onClose={() => {
-                        setOpenRename(false)
-                    }}
-
-                    onSave={() => {
-                        setOpenRename(true)
-                    }}
-                />
-            }
-
-            {openDelete &&
-                <DeleteList
-                    onClose={() => {
-                        setOpenDelete(false)
-                    }}
-
-                    onSave={() => {
-                        setOpenDelete(true)
-                    }}
-                />
-            }
-
-            {openDownload &&
-                <Download
-                    onClose={() => {
-                        setOpenDownload(false)
-                    }}
-
-                    onSave={() => {
-                        setOpenDownload(true)
                     }}
                 />
             }
@@ -112,6 +102,33 @@ function Customers() {
                         setOpenModal(false)
                     }} />
             }
+
+            {openDelete === "deleteCustomer" &&
+                <DeleteCustomer
+
+                    onClose={() => {
+                        setOpenDelete(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenDelete(true)
+                    }}
+                />
+            }
+
+            {openMultiCustomer === "deleteMultiCustomer" &&
+                <DeleteMultiCustomer
+
+                    onClose={() => {
+                        setOpenMultiCustomer(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenMultiCustomer(true)
+                    }}
+                />
+            }
+
             <div>
                 <div className="flex justify-between w-full items-center mb-3">
                     <div className='flex items-center gap-10 bg-white shadow-sm rounded-[10px] py-[15px] px-[25px]'>
@@ -123,7 +140,7 @@ function Customers() {
                             setView("history")
                         }} className={`${view === "history" ? "text-primary font-semibold underline underline-offset-4" : "text-text3 font-normal"} cursor-pointer shrink-0`}>Customer List History</div>
                     </div>
-                    {/* <div className='grid grid-cols-[2.4fr_0.5fr_0.7fr_1fr] gap-3 items-center'>
+                    {view === "customer" && <div className='grid grid-cols-[2.4fr_0.5fr_0.7fr_1fr] gap-3 items-center'>
                         <Search
                             mainClass='w-full!'
                             placeholder="Search by Filter by name, email, phone"
@@ -148,8 +165,9 @@ function Customers() {
 
                         <button className="bg-primary border border-primary text-xs hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
                             onClick={() => { setOpen(true) }}>Add New Customer</button>
-                    </div> */}
-                    <div className='flex justify-between items-center gap-[15px]'>
+                    </div>}
+
+                    {view === "history" && <div className='flex justify-between items-center gap-[15px]'>
                         <div className='w-60!'>
                             <Search
                                 mainClass='w-full!'
@@ -159,45 +177,62 @@ function Customers() {
                                 }}
                             />
                         </div>
-                        <DatePicker
+                        {tab === "list" && <DatePicker
                             mainClass="mt-0! w-28!"
-                            icon='/images/calendar1.svg'
-                        />
-                        <button>
-                            <Image src="/images/listview.svg" alt="listview" width={34} height={34} />
+                            value={date}
+                            dateFormat="dd/MM/yyyy"
+                            onChange={(e) => setDate(e)}
+                            icon={true}
+                        />}
+
+
+                        <button
+                            onClick={() => {
+                                setTab("list")
+                            }}
+                            className={`${tab === "list" ? "bg-primary" : ""}  border border-border-color h-9 w-9 rounded-lg flex items-center justify-center mx-auto`}>
+
+                            {tab === "grid" && <Image src="/images/list.svg" alt="list" width={16} height={16} />}
+                            {tab === "list" && <Image src="/images/list-active.svg" alt="list" width={16} height={16} />}
                         </button>
-                        <button>
-                            <Image src="/images/listview1.svg" alt="listview1" width={34} height={34} className='' />
+
+                        <button
+                            onClick={() => {
+                                setTab("grid")
+                            }}
+                            className={`${tab === "grid" ? "bg-primary" : ""}  border border-border-color h-9 w-9 rounded-lg flex items-center justify-center mx-auto`}>
+
+                            {tab === "list" && <Image src="/images/grid.svg" alt="grid" width={16} height={16} />}
+                            {tab === "grid" && <Image src="/images/grid-active.svg" alt="grid" width={16} height={16} />}
                         </button>
-                        <button>
-                            <Image src="/images/gridview.svg" alt="gridview" width={34} height={34} />
-                        </button>
-                        <button>
-                            <Image src="/images/gridview1.svg" alt="gridview1" width={34} height={34} />
-                        </button>
-                    </div>
+                    </div>}
                 </div>
 
-                <div className='flex items-center justify-between mb-5'>
+                {view === "customer" && <div className='flex items-center justify-between mb-5 w-full'>
                     <div className="border border-border-color px-2 py-1 rounded-lg w-28">
                         <div className="flex items-start justify-center gap-2 mt-1">
-                            <Checkbox />
+                            <Checkbox
+                                checked={list?.length > 0 && list.every(e => e.selected)}
+                                onChange={(checked) => {
+                                    setList(list => list.map(e => ({ ...e, selected: checked })))
+                                }}
+                            />
                             <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
                         </div>
                     </div>
 
-                    <div className='grid grid-cols-3 gap-3'>
+                    <div className='grid grid-cols-2 gap-3'>
                         <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
                             onClick={() => { setOpenTags(true) }}>Apply tags to multiple customers</button>
 
                         <button className='border border-danger-light2 bg-danger-light2 rounded-lg p-2 text-danger text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
-                            onClick={() => { setOpenModal("delete") }}>Delete multiple customers</button>
+                            onClick={() => { setOpenMultiCustomer("deleteMultiCustomer") }}>Delete multiple customers</button>
                     </div>
-                </div>
+                </div>}
             </div>
 
             {view === "customer" && <div className='table-class'>
-                <table className='w-full'>
+                {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
                             <th><TableOrder title="Customer Name"
@@ -232,221 +267,54 @@ function Customers() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        {list?.map((e, index) => <tr key={index}>
                             <td>
                                 <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>John Doe</div>
+                                    <Checkbox
+                                        checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                    />
+                                    <div>{e.customerName}</div>
                                 </div>
                             </td>
-                            <td>john@example.com</td>
-                            <td>+91 98765 43210</td>
-                            <td><Status status="At Risk" /></td>
-                            <td>Manual</td>
-                            <td><Image src="/images/boost.svg" alt='edit' height={28} width={28} unoptimized={true} /></td>
-                            <td>Jun 18,2024</td>
+                            <td>{e.email}</td>
+                            <td>{e.phone}</td>
+                            <td><Status status={e.status} /></td>
+                            <td>{e.source}</td>
+                            <td>
+                                <button>
+                                    <Image src="/images/boost.svg" alt='edit' height={28} width={28} unoptimized={true} />
+                                </button>
+                            </td>
+                            <td>{formatDate(e.date)}</td>
                             <td>
                                 <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'>
+                                    <button className='cursor-pointer'
+                                        onClick={() => { setOpen(true) }}
+                                    >
                                         <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
                                     </button>
 
-                                    <button className='cursor-pointer'>
+                                    <button className='cursor-pointer'
+                                        onClick={() => { setOpenDelete("deleteCustomer") }}
+                                    >
                                         <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
                                     </button>
                                 </div>
                             </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Corey Lubin</div>
-                                </div>
-                            </td>
-                            <td>Corey@example.com</td>
-                            <td>+91 96589 52356</td>
-                            <td><Status status="At Risk" /></td>
-                            <td> CSV Import</td>
-                            <td></td>
-                            <td>Jun 18,2024</td>
-                            <td>
-                                <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                    </button>
-
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>James Torff</div>
-                                </div>
-                            </td>
-                            <td>James@example.com</td>
-                            <td>+91 95478 25369</td>
-                            <td><Status status="At Risk" /></td>
-                            <td> CSV Import</td>
-                            <td></td>
-                            <td>Jun 18,2024</td>
-                            <td>
-                                <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                    </button>
-
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Craig Workman</div>
-                                </div>
-                            </td>
-                            <td>Craig@example.com</td>
-                            <td>+91 78596 58965</td>
-                            <td><Status status="At Risk" /></td>
-                            <td>Manual</td>
-                            <td></td>
-                            <td>Jun 18,2024</td>
-                            <td>
-                                <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                    </button>
-
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Phillip Vaccaro</div>
-                                </div>
-                            </td>
-                            <td>Phillip@example.com</td>
-                            <td>+91 98765 43210</td>
-                            <td><Status status="At Risk" /></td>
-                            <td> CSV Import</td>
-                            <td></td>
-                            <td>Jun 18,2024</td>
-                            <td>
-                                <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                    </button>
-
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Cooper Vetrovs</div>
-                                </div>
-                            </td>
-                            <td>Cooper@example.com</td>
-                            <td>+91 85789 65896</td>
-                            <td><Status status="At Risk" /></td>
-                            <td>Manual</td>
-                            <td></td>
-                            <td>Jun 18,2024</td>
-                            <td>
-                                <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                    </button>
-
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Jaxson Septimus</div>
-                                </div>
-                            </td>
-                            <td>Jaxson@example.com</td>
-                            <td>+91 82368 89658</td>
-                            <td><Status status="At Risk" /></td>
-                            <td> CSV Import</td>
-                            <td></td>
-                            <td>Jun 18,2024</td>
-                            <td>
-                                <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                    </button>
-
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox />
-                                    <div>Martin Culhane</div>
-                                </div>
-                            </td>
-                            <td>Martin@example.com</td>
-                            <td>+91 98569 58965</td>
-                            <td><Status status="At Risk" /></td>
-                            <td> CSV Import</td>
-                            <td></td>
-                            <td>Jun 18,2024</td>
-                            <td>
-                                <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                    </button>
-
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                        </tr>)}
                     </tbody>
-                </table>
-                <PaginationDemo />
+                </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                {list?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>}
 
             {view === "history" && <div className=''>
-                {/* <ListView /> */}
-                <GridView />
+                {tab === "list" && <ListView />}
+                {tab === "grid" && <GridView />}
             </div>
             }
         </AdminLayout>

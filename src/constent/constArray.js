@@ -83,14 +83,14 @@ export const customerTagging = [
 ]
 
 export const manageReview = [
-    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "New" },
+    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: new Date('2024-06-18T10:00:00') },
 
-    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Responded" },
+    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: new Date('2024-06-18T10:00:00'), status: "Responded" },
 
-    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Flagged" },
+    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: new Date('2024-06-18T10:00:00'), status: "Flagged" },
 ]
 
-export const REVIeEW_ACTIONS = [
+export const REVIEW_ACTIONS = [
     { label: "Replay Now", value: "replay-now", icon: "/dropdown/sms.svg", hoverIcon: "/dropdown/sms-active.svg" },
 
     { label: "Request Update", value: "request-update", icon: "/dropdown/role.svg", hoverIcon: "/dropdown/role-active.svg" },
@@ -100,4 +100,24 @@ export const REVIeEW_ACTIONS = [
     { label: "Share (Social Media, Email)", value: "share", icon: "/dropdown/share.svg", hoverIcon: "/dropdown/share-active.svg" },
 
     { label: "Delete", value: "delete", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },
+]
+
+export const allCustomers = [
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "At Risk", source: "Manual", date: "Jun 18,2024" },
+
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Vip", source: " CSV Import", date: "Jun 18,2024" },
+
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Priority", source: "Manual", date: "Jun 18,2024" },
+
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Dp", source: "CSV Import", date: "Jun 18,2024" },
+]
+
+export const customerHistory = [
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
 ]

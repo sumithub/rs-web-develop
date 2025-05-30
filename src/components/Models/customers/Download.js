@@ -28,7 +28,7 @@ export default function Download({ onClose }) {
                     Download CSV
                 </div>
 
-                <div className="flex align-items justify-center font-thin mb-4">
+                <div className="flex align-items justify-center font-thin mb-4 capitalize">
                     Allows users to retrieve imported data.
                 </div>
 

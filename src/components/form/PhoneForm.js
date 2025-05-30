@@ -16,9 +16,9 @@ export default function PhoneForm({ isRequired = false,
 }) {
     const error = isRequired && (errors?.[formProps?.name]?.message || errors?.[formProps?.name]?.type);
     const value = watch ? watch(formProps.name) : null;
-    return (<div className={`mt-4 text-lg relative ${class_}`}>
+    return (<div className={`mt-4 text-lg relative w-full ${class_}`}>
         {label && <label className={`text-sm font-medium text-secondary mb-1 block capitalize  ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}</label>}
-        <div className={`relative flex w-full  ${widthClass}`}>
+        <div className={`relative w-full! ${widthClass}`}>
             <PhoneInput
                 disabled={disabled}
                 showDisabledDialCodeAndPrefix={true}
@@ -26,7 +26,7 @@ export default function PhoneForm({ isRequired = false,
                 style={phoneStyles}
                 defaultCountry="us"
                 value={value || ""}
-                inputClassName="w-full"
+                inputClassName="w-full!"
                 onChange={(phone) => {
                     setValue(formProps.name, phone)
                     if (clearErrors) {
