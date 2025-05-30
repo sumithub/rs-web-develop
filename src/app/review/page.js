@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Checkbox from "../../components/form/Checkbox";
 import Status from "../../components/Status";
@@ -14,25 +14,41 @@ import Chart from "../../components/charts/Chart"
 import AdminLayout from "../../components/AdminLayout"
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import AddManualReview from '../../components/Models/review/AddManualReview';
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getError } from "../../../helper";
+import { manageReview, REVIeEW_ACTIONS } from "../../constent/constArray";
 
 export default function Review() {
     const [rating, setRating] = useState("")
     const [reviewSource, setReviewSource] = useState("")
     const [status, setStatus] = useState("")
     const [date, setDate] = useState("")
-    // const [list, setList] = useState([])
+    const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
     const [open, setOpen] = useState(false)
     const [sortBy, setSortBy] = useState("")
+    const [openModal, setOpenModal] = useState(null)
 
-    const list = [
-        { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "New" },
+    useEffect(() => {
+        getReview()
+    }, [search, status, rating, reviewSource, date, sortBy])
 
-        { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Responded" },
+    const getReview = async () => {
+        try {
+            setLoading(true)
+            setList([])
+            const res = await axios.get("/api")
+            setList(res.data || manageReview)
+            setLoading(false)
 
-        { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Flagged" },
-    ]
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
+
 
     return <AdminLayout noCard={true}>
 
@@ -220,6 +236,7 @@ export default function Review() {
                             <option value="2 star">2 Star & Up</option>
                             <option value="1 star">1 Star & Up</option>
                         </CustomSelectBox>
+
                         <DatePicker
                             icon={true}
                             mainClass="mt-0!"
@@ -236,7 +253,7 @@ export default function Review() {
                             }}>
                             <option value="google">Google</option>
                             <option value="yelp">Yelp</option>
-                            <option value="trustpilot and tripadvisor">Trustpilot and Tripadvisor</option>
+                            <option value="truspilot">Truspilot</option>
                         </CustomSelectBox>
 
                         <CustomSelectBox
@@ -261,7 +278,11 @@ export default function Review() {
                 </div>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 mt-5">
                     <div className="flex items-start justify-center gap-2 mt-1">
-                        <Checkbox />
+                        <Checkbox
+                            checked={list?.length > 0 && list.every(e => e.selected)}
+                            onChange={(checked) => {
+                                setList(list => list.map(e => ({ ...e, selected: checked })))
+                            }} />
                         <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
                     </div>
                 </div>
@@ -302,10 +323,15 @@ export default function Review() {
                         <tbody>
                             {loading ? <tr><td colSpan={6} className='text-center'><Loading /></td></tr> : (
                                 (list && list.length > 0) ? list.map((e, index) => {
-                                    return <tr key={index} className={`${index === 0 ? "" : "border-t"} border-border-color text-secondary text-sm text-left hover:bg-dark text-sm`}>
+                                    return <tr key={index} className={`${index === 0 ? "" : "border-t"} border-border-color text-secondary text-sm text-left hover:bg-dark`}>
                                         <td className="py-3 px-4">
                                             <div className="flex items-start gap-2">
-                                                <Checkbox />
+                                                <Checkbox
+                                                    checked={e.selected}
+                                                    onChange={(checked) => {
+                                                        setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                                    }}
+                                                />
                                                 <div>{e.name}</div>
                                             </div>
                                         </td>
@@ -322,7 +348,12 @@ export default function Review() {
                                         <td className="py-3 px-4">{e.source}</td>
                                         <td className="py-3 px-4">{e.lastUpdate}</td>
                                         <td className="py-3 px-4"><Status status={e.status} /></td>
-                                        <td className="py-3 px-4"><Dropdown /></td>
+                                        <td className="py-3 px-4"><Dropdown
+                                            options={REVIeEW_ACTIONS}
+                                            onClickOption={(e) => {
+                                                setOpenModal(e)
+                                            }}
+                                        /></td>
                                     </tr>
                                 }) : <tr><td colSpan={10} className='text-center! h-20 text-3xl text-secondary'>No data</td></tr>
                             )}

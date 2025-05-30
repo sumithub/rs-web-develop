@@ -81,3 +81,23 @@ export const customerTagging = [
     { status: "Priority", description: "Lorem ipsum dummy..", taggedCustomer: 150 },
     { status: "Dp", description: "Lorem ipsum dummy..", taggedCustomer: 150 },
 ]
+
+export const manageReview = [
+    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "New" },
+
+    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Responded" },
+
+    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Flagged" },
+]
+
+export const REVIeEW_ACTIONS = [
+    { label: "Replay Now", value: "replay-now", icon: "/dropdown/sms.svg", hoverIcon: "/dropdown/sms-active.svg" },
+
+    { label: "Request Update", value: "request-update", icon: "/dropdown/role.svg", hoverIcon: "/dropdown/role-active.svg" },
+
+    { label: "Assign to User", value: "assign-to-user", icon: "/dropdown/user.svg", hoverIcon: "/dropdown/user-active.svg" },
+
+    { label: "Share (Social Media, Email)", value: "share", icon: "/dropdown/share.svg", hoverIcon: "/dropdown/share-active.svg" },
+
+    { label: "Delete", value: "delete", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },
+]
