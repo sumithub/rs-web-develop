@@ -4,10 +4,23 @@ import Search from "../../form/Search";
 import Model from "../Model";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
+import AssignToUser from "../review/AssignToUser"
+import { useState } from "react";
 
 export default function AssignReviewToUser({ onClose, onSave }) {
+    const [openAssign, setOpenAssign] = useState(false)
     return (
         <Model onClose={onClose} title="Assign Review to a user" modalClass="w-[50%]!">
+            {openAssign &&
+                <AssignToUser
+                    onClose={() => {
+                        setOpenAssign(false)
+                    }}
+                    onSave={() => {
+                        setOpenAssign(true)
+                    }}
+                />
+            }
             <div className="flex pt-5 items-center justify-between">
                 <div className="flex items-start w-full gap-[15px]">
                     <Image src="/images/request.png" alt="request" width={46} height={46} />
@@ -59,8 +72,8 @@ export default function AssignReviewToUser({ onClose, onSave }) {
                 </div>
             </div>
             <div className="grid grid-cols-2 gap-5 mt-[30px]">
-                <CancelButton title="Cancel" class_="text-lg! font-medium!" />
-                <SecondaryButton title="Assign" class_="text-lg! font-medium!" />
+                <CancelButton title="Cancel" class_="text-lg! font-medium!" onClick={onClose} />
+                <SecondaryButton title="Assign" class_="text-lg! font-medium!" onClick={() => { setOpenAssign(true) }} />
             </div>
         </Model>
     )

@@ -81,7 +81,7 @@ function AddUser({ onClose, id }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <InputForm label="Full Name" placeholder="Enter your name" isRequired={true} class_="mt-0!"
-                    formProps={{ ...register("name", { required: true, pattern: { message: "Name is required" } }) }}
+                    formProps={{ ...register("name", { required: true }) }}
                     errors={errors}
                     setValue={setValue}
 
