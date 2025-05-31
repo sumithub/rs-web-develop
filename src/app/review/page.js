@@ -22,6 +22,7 @@ import ReviewDetail from "../../components/Models/review/ReviewDetail";
 import RequestUpdate from "../../components/Models/review/RequestUpdate";
 import AssignReviewToUser from "../../components/Models/review/AssignReviewToUser";
 import ReviewDetails from "../../components/Models/review/ReviewDetails";
+import DeleteTemplate from "../../components/Models/review/DeleteTemplate";
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -66,6 +67,13 @@ export default function Review() {
                     setOpen(true)
                 }}
             />
+        }
+
+        {openModal === "delete" &&
+            <DeleteTemplate
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
         }
 
         {openModal === "replay-now" &&
