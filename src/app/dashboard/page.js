@@ -65,10 +65,10 @@ export default function Dashboard() {
                     setRating(e.target.value)
                 }}>
                 <option value="1 star">1 Star & Up</option>
-                <option value="4 star">4 Star & Up</option>
-                <option value="3 star">3 Star & Up</option>
                 <option value="2 star">2 Star & Up</option>
-                <option value="1 star">1 Star & Up</option>
+                <option value="3 star">3 Star & Up</option>
+                <option value="4 star">4 Star & Up</option>
+                <option value="5 star">5 Star & Up</option>
             </CustomSelectBox>
             <DateRange />
             <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50" onClick={() => { setOpen(true) }}><Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
