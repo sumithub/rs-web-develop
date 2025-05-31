@@ -9,11 +9,17 @@ import { customerHistory } from "../../constent/constArray"
 import { toast } from "react-toastify"
 import Loading from "../Loading"
 import { formatDateTime } from "../../../helper"
+import DeleteList from "../Models/customers/DeleteList"
+import RenameList from "../Models/customers/RenameList"
+import Download from "../Models/customers/Download"
 
 export default function ListView(date, search) {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [sortBy, setSortBy] = useState("")
+    const [openDelete, setOpenDelete] = useState(false)
+    const [openEdit, setOpenEdit] = useState(false)
+    const [openDownload, setOpenDownload] = useState(false)
 
     useEffect(() => {
         getHistory()
@@ -34,6 +40,41 @@ export default function ListView(date, search) {
     }
 
     return (<>
+        {openDelete &&
+            <DeleteList
+                onClose={() => {
+                    setOpenDelete(false)
+                }}
+
+                onSave={() => {
+                    setOpenDelete(true)
+                }}
+            />
+        }
+
+        {openEdit &&
+            <RenameList
+                onClose={() => {
+                    setOpenEdit(false)
+                }}
+
+                onSave={() => {
+                    setOpenEdit(true)
+                }}
+            />
+        }
+
+        {openDownload &&
+            <Download
+                onClose={() => {
+                    setOpenDownload(false)
+                }}
+
+                onSave={() => {
+                    setOpenDownload(true)
+                }}
+            />
+        }
         <div className="table-class">
             {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                 <thead>
@@ -79,14 +120,14 @@ export default function ListView(date, search) {
                         <td className="text-primary! underline underline-offset-2">{e.taggedCustomers}</td>
                         <td>
                             <div className='flex items-center gap-2 justify-center'>
-                                <button className='cursor-pointer'>
+                                <button className='cursor-pointer' onClick={() => { setOpenEdit(true) }}>
                                     <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
                                 </button>
 
-                                <button className='cursor-pointer'>
+                                <button className='cursor-pointer' onClick={() => { setOpenDelete(true) }}>
                                     <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
                                 </button>
-                                <button className='cursor-pointer'>
+                                <button className='cursor-pointer' onClick={() => { setOpenDownload(true) }}>
                                     <Image src="/images/download.svg" alt='download' height={28} width={28} />
                                 </button>
                             </div>

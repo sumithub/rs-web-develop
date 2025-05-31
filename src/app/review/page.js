@@ -18,6 +18,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { formatDateTime, getError } from "../../../helper";
 import { manageReview, REVIEW_ACTIONS } from "../../constent/constArray";
+import ReviewDetail from "../../components/Models/review/ReviewDetail";
+import RequestUpdate from "../../components/Models/review/RequestUpdate";
+import AssignReviewToUser from "../../components/Models/review/AssignReviewToUser";
+import ReviewDetails from "../../components/Models/review/ReviewDetails";
+import DeleteTemplate from "../../components/Models/review/DeleteTemplate";
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -62,6 +67,41 @@ export default function Review() {
                     setOpen(true)
                 }}
             />
+        }
+
+        {openModal === "delete" &&
+            <DeleteTemplate
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
+        }
+
+        {openModal === "replay-now" &&
+            <ReviewDetail
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
+        }
+
+        {openModal === "request-update" &&
+            <RequestUpdate
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
+        }
+
+        {openModal === "assign-to-user" &&
+            <AssignReviewToUser
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
+        }
+
+        {openModal === "share" &&
+            <ReviewDetails
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
         }
 
         <div className="bg-light min-h-[calc(100dvh_-_85px)] mt-[85px]">
