@@ -4,6 +4,7 @@ import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import Select from "../../form/Select";
 import Model from "../Model";
+import HtmlEditor from "../../../components/form/editor/HtmlEditor";
 
 export default function RequestUpdate({ onClose, onSave }) {
     return (
@@ -39,8 +40,9 @@ export default function RequestUpdate({ onClose, onSave }) {
                     {/* <div>
                         <Select defaultOption="No Action Required" />
                     </div> */}
-                    <div>
+                    <div className="pt-5">
                         <div>Message</div>
+                        <HtmlEditor />
                     </div>
                     <div className="grid grid-cols-2 gap-3 mt-4">
                         <CancelButton title="cancel" onClick={onClose} />

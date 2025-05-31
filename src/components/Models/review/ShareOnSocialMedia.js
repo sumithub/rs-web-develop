@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Input from "../../form/Input";
 import Model from "../Model";
+import Link from "next/link";
 
 export default function ShareOnSocialMedia({ onClose, onSave }) {
     return (
@@ -9,31 +10,31 @@ export default function ShareOnSocialMedia({ onClose, onSave }) {
                 <div className="font-semibold">
                     Share This Review:
                 </div>
-                <div className="mt-2.5 grid grid-cols-6 gap-[18px]">
-                    <div className="text-center">
-                        <Image src="/images/fb.png" alt="fb" width={41} height={41} className="mx-auto" />
+                <div className="mt-[30px] grid grid-cols-6 gap-[18px]">
+                    <Link href="https://www.facebook.com/" target="_blank" className="text-center">
+                        <Image unoptimized={true} src="/images/fb.svg" alt="fb" width={41} height={41} className="mx-auto" />
                         <h2 className="mt-[15px] text-sm font-medium">Facebook</h2>
-                    </div>
-                    <div className="text-center">
-                        <Image src="/images/twitter.png" alt="twitter" width={41} height={41} className="mx-auto" />
+                    </Link>
+                    <Link href="https://x.com/" target="_blank" className="text-center">
+                        <Image unoptimized={true} src="/images/x.svg" alt="twitter" width={41} height={41} className="mx-auto" />
                         <h2 className="mt-[15px] text-sm font-medium">Twitter</h2>
-                    </div>
-                    <div className="text-center">
-                        <Image src="/images/in.png" alt="in" width={41} height={41} className="mx-auto" />
+                    </Link>
+                    <Link href="https://www.linkedin.com/" target="_blank" className="text-center">
+                        <Image unoptimized={true} src="/images/in.svg" alt="in" width={41} height={41} className="mx-auto" />
                         <h2 className="mt-[15px] text-sm font-medium">Linkedin</h2>
-                    </div>
-                    <div className="text-center">
-                        <Image src="/images/insta.png" alt="insta" width={41} height={41} className="mx-auto" />
+                    </Link>
+                    <Link href="https://www.instagram.com/" target="_blank" className="text-center">
+                        <Image unoptimized={true} src="/images/insta.svg" alt="insta" width={45} height={45} className="mx-auto" />
                         <h2 className="mt-[15px] text-sm font-medium">Instagram</h2>
-                    </div>
-                    <div className="text-center">
-                        <Image src="/images/dribble.png" alt="dribble" width={41} height={41} className="mx-auto" />
+                    </Link>
+                    <Link href="https://dribbble.com/" target="_blank" className="text-center">
+                        <Image unoptimized={true} src="/images/dribble.svg" alt="dribble" width={45} height={45} className="mx-auto" />
                         <h2 className="mt-[15px] text-sm font-medium">Dribble</h2>
-                    </div>
-                    <div className="text-center">
-                        <Image src="/images/more.png" alt="more" width={41} height={41} className="mx-auto" />
+                    </Link>
+                    <Link href="/" className="text-center">
+                        <Image unoptimized={true} src="/images/more.svg" alt="more" width={41} height={41} className="mx-auto" />
                         <h2 className="mt-[15px] text-sm font-medium">More</h2>
-                    </div>
+                    </Link>
                 </div>
                 <div>
                     <Input

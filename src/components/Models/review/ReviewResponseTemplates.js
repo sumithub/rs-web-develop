@@ -12,10 +12,12 @@ export default function ReviewResponseTemplates({ onClose, onSave }) {
     return (
         <Model onClose={onClose} title="Review Response Templates" modalClass="w-[60%]!" modalBodyClass="max-h-[90vh]!">
             <div>
-                <div className="flex gap-3">
-                    <Search placeholder="Search by Template Name" mainClass="w-1/2!" />
-                    <CancelButton title="Filter by Rating" />
-                    <SecondaryButton title="Create New Template" />
+                <div className="flex gap-3 justify-between">
+                    <Search placeholder="Search by Template Name" mainClass="w-2/5!" />
+                    <div className="flex gap-[15px]">
+                        <CancelButton title="Filter by Rating" />
+                        <SecondaryButton title="Create New Template" />
+                    </div>
                 </div>
 
                 <div className="table-class mt-3">
