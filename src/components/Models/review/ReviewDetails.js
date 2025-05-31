@@ -3,10 +3,25 @@ import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import Model from "../Model";
 import Link from "next/link";
+import { useState } from "react";
+import ShareOnSocialMedia from "../review/ShareOnSocialMedia"
+import ShareViaEmail from "../review/ShareViaEmail"
+import { toast } from "react-toastify";
+import { getError } from "../../../../helper";
 
 export default function ReviewDetails({ onClose, onSave }) {
     const [openMedia, setOpenMedia] = useState(false)
     const [openEmail, setOpenEmail] = useState(false)
+
+    const Copy = async () => {
+        try {
+            toast.success("Coped Successfully")
+            onClose()
+        } catch (error) {
+            toast.error(getError(error))
+            setSending(false)
+        }
+    }
     return (
         <Model onClose={onClose} title="Review Details" modalClass="w-[50%]!">
             {openMedia &&
@@ -60,7 +75,7 @@ export default function ReviewDetails({ onClose, onSave }) {
                     <div className="grid grid-cols-3 gap-[15px] mt-[15px]">
                         <SecondaryButton title="Share on social media" onClick={() => { setOpenMedia(true) }} />
                         <SecondaryButton title="share via email" onClick={() => { setOpenEmail(true) }} />
-                        <CancelButton title="copy link" />
+                        <CancelButton title="copy link" onClick={Copy}/>
                     </div>
                 </div>
                 <div className="mt-[30px] grid grid-cols-6 gap-[18px]">
