@@ -1,11 +1,9 @@
 import AdminLayout from "../../components/AdminLayout";
 
 export default function ReviewSources() {
-    return (
-        <div>
-            <AdminLayout>
+    return (<AdminLayout>
 
-            </AdminLayout>
-        </div>
+    </AdminLayout>
+
     )
 }

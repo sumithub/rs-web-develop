@@ -271,10 +271,10 @@ export default function Review() {
                                 setRating(e.target.value)
                             }}>
                             <option value="1 star">1 Star & Up</option>
-                            <option value="4 star">4 Star & Up</option>
-                            <option value="3 star">3 Star & Up</option>
                             <option value="2 star">2 Star & Up</option>
-                            <option value="1 star">1 Star & Up</option>
+                            <option value="3 star">3 Star & Up</option>
+                            <option value="4 star">4 Star & Up</option>
+                            <option value="5 star">5 Star & Up</option>
                         </CustomSelectBox>
 
                         <DatePicker
