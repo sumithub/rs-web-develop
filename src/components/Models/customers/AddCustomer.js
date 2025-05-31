@@ -2,7 +2,7 @@ import { toast } from "react-toastify"
 import CancelButton from "../../common/CancelButton"
 import SecondaryButton from "../../common/SecondaryButton"
 import InputForm from "../../form/InputForm"
-import Radio from "../../form/Radio"
+import RadioForm from "../../form/RadioForm"
 import SelectForm from "../../form/SelectForm"
 import Model from "../Model"
 import { getError } from "../../../../helper"
@@ -10,6 +10,8 @@ import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import PhoneForm from "../../form/PhoneForm"
+import Image from "next/image"
+import ImportCustomer from "../../../components/Models/customers/ImportCustomer"
 
 function AddCustomer({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
@@ -37,12 +39,22 @@ function AddCustomer({ onClose, id }) {
     return <Model onClose={onClose} title="Add new Customer" modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <div className="flex items-center">
-                    <Radio label="manually" />
-                    <Radio label="import" />
+                <div className="flex gap-4 items-center">
+                    <button type="button"><Image src="/images/arrow-box.svg" alt="arrow" height={30} width={30} unoptimized={true} /></button>
+
+                    <RadioForm
+                        label="manually"
+                        class_="mt-0!"
+
+                    />
+                    <RadioForm label="import"
+                        class_="mt-0!"
+
+                    />
                 </div>
+
                 <div>
-                    <InputForm label="Customer Name" placeholder="Enter your name" isRequired={true} class_="mt-0!"
+                    <InputForm label="Customer Name" placeholder="Enter your name" isRequired={true}
                         formProps={{ ...register("customerName", { required: true }) }}
                         errors={errors} />
 
@@ -65,6 +77,10 @@ function AddCustomer({ onClose, id }) {
                         <option value="instead of source">instead of source</option>
                     </SelectForm>
                 </div>
+
+                {/* <div className="mt-8">
+                    <ImportCustomer />
+                </div> */}
             </div>
 
             <div className="grid grid-cols-2 gap-3 mt-5">
