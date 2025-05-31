@@ -2,10 +2,36 @@ import Image from "next/image";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import Model from "../Model";
+import ShareOnSocialMedia from "./ShareOnSocialMedia";
+import { useState } from "react";
+import ShareViaEmail from "./ShareViaEmail";
 
 export default function ReviewDetails({ onClose, onSave }) {
+    const [openMedia, setOpenMedia] = useState(false)
+    const [openEmail, setOpenEmail] = useState(false)
     return (
         <Model onClose={onClose} title="Review Details" modalClass="w-[50%]!">
+            {openMedia &&
+                <ShareOnSocialMedia
+                    onClose={() => {
+                        setOpenMedia(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenMedia(true)
+                    }} />
+            }
+
+            {openEmail &&
+                <ShareViaEmail
+                    onClose={() => {
+                        setOpenEmail(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenEmail(true)
+                    }} />
+            }
             <div>
                 <div className="flex pt-1 items-center justify-between">
                     <div className="flex items-start w-full gap-[15px]">
@@ -34,8 +60,8 @@ export default function ReviewDetails({ onClose, onSave }) {
                 <div className="mt-[30px]">
                     <h2 className="text-base font-medium">Share this review:</h2>
                     <div className="grid grid-cols-3 gap-[15px] mt-[15px]">
-                        <SecondaryButton title="Share on social media" />
-                        <SecondaryButton title="share via email" />
+                        <SecondaryButton title="Share on social media" onClick={() => { setOpenMedia(true) }} />
+                        <SecondaryButton title="share via email" onClick={() => { setOpenEmail(true) }} />
                         <CancelButton title="copy link" />
                     </div>
                 </div>
