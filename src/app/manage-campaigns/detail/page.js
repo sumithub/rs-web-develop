@@ -7,7 +7,6 @@ import CampaignCard from "../../../components/CampaignCard"
 import Radio from "../../../components/form/Radio"
 import Checkbox from "../../../components/form/Checkbox"
 import ScheduleCampaign from "../../../components/Models/manage-campaigns/ScheduleCampaign"
-import SelectedFromCustomers from "../../../components/Models/manage-campaigns/SelectedFromCustomers"
 import EmailTemplate from "../../../components/Models/manage-campaigns/EmailTemplate"
 import Image from "next/image"
 import { useState, useEffect } from "react"
@@ -20,6 +19,7 @@ import SelectForm from "../../../components/form/SelectForm"
 import AddTemplate from "../../../components/Models/templates/AddTemplate"
 import Preview from "../../../components/Models/manage-campaigns/Preview"
 import { useRouter } from "next/navigation"
+import SelectedCustomers from "../../../components/Models/manage-campaigns/SelectedCustomers"
 
 export default function Detail({ }) {
     const id = ""
@@ -193,7 +193,7 @@ export default function Detail({ }) {
         }
 
         {openCustomer &&
-            <SelectedFromCustomers
+            <SelectedCustomers
                 onClose={() => {
                     setOpenCustomer(false)
                 }}

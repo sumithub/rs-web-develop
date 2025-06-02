@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";

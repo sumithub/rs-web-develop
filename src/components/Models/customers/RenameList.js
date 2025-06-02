@@ -1,3 +1,4 @@
+"use client"
 import InputForm from "../../form/InputForm";
 import Model from "../Model";
 import axios from "axios";

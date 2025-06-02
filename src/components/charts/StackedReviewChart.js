@@ -58,6 +58,7 @@ const options = {
     plugins: {
         legend: {
             position: 'right',
+            display: false
         },
         title: {
             display: false,

@@ -61,7 +61,8 @@ export default function CampaignDashboard() {
                 value={rating}
                 onChange={(e) => {
                     setRating(e.target.value)
-                }}>
+                }}
+                multiSelect={true}>
                 <option value="1 star">1 Star & Up</option>
                 <option value="2 star">2 Star & Up</option>
                 <option value="3 star">3 Star & Up</option>

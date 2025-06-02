@@ -57,16 +57,24 @@ export default function Signin() {
                     icon="/images/close.svg"
                     isRequired={true}
                     errors={errors}
-                    formProps={{ ...register("email", { required: "Email is required" }) }}
+                    formProps={{
+                        ...register("email", {
+                            required: "Email is required", pattern: {
+                                value: validEmailRgx,
+                                message: "Email is invalid."
+                            },
+                        })
+                    }}
                     setValue={setValue}
                     watch={watch}
+
                 />
 
                 <InputForm
                     label="Password"
                     name="password"
                     inputType="password"
-                    placeholder="Create A Password"
+                    placeholder="Enter Password"
                     formProps={{
                         ...register("password", {
                             required: true

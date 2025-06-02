@@ -63,7 +63,8 @@ export default function Dashboard() {
                 value={rating}
                 onChange={(e) => {
                     setRating(e.target.value)
-                }}>
+                }}
+                multiSelect={true}>
                 <option value="1 star">1 Star & Up</option>
                 <option value="2 star">2 Star & Up</option>
                 <option value="3 star">3 Star & Up</option>
@@ -87,7 +88,7 @@ export default function Dashboard() {
         }
         <div className="bg-light min-h-[calc(100dvh_-_85px)]">
             <div className="grid grid-cols-4 gap-5">
-                <DashboardCard title="total reviews" count="1.234" img="/images/sms-star.svg" bgClass="bg-primary" textColor="text-primary" icon="/images/course-up.svg" percentage="2.5%" bgImage="bg-[url('/images/total.png')]" />
+                <DashboardCard title="total reviews" count="1234" img="/images/sms-star.svg" bgClass="bg-primary" textColor="text-primary" icon="/images/course-up.svg" percentage="2.5%" bgImage="bg-[url('/images/total.png')]" />
 
                 <DashboardCard title="Average Rating" count="68%" img="/images/star1.svg" bgClass="bg-success-light" textColor="text-success-light" icon="/images/course-up1.svg" percentage="8.2%" bgImage="bg-[url('/images/average.png')]" />
 

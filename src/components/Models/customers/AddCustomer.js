@@ -1,3 +1,4 @@
+"use client"
 import { toast } from "react-toastify"
 import CancelButton from "../../common/CancelButton"
 import SecondaryButton from "../../common/SecondaryButton"
