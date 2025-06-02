@@ -6,7 +6,7 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { formatDate } from '../../../helper';
 
-function DateRange({ onChange }) {
+function DateRange({ onChange, class_ = "" }) {
     const [open, setOpen] = useState(false)
     const ref = useRef(null);
     useEffect(() => {
@@ -56,7 +56,7 @@ function DateRange({ onChange }) {
         setOpen(false);
     };
     return (
-        <div ref={ref} className='relative'>
+        <div ref={ref} className={`relative ${class_}`}>
             <button
                 onClick={toggleDatePicker}
                 className="cursor-pointer flex items-center gap-2 border border-border-color rounded-lg py-[7.7px]! px-2 capitalize text-[13px] text-text3 w-full focus-visible:outline-none shrink-0"        >
