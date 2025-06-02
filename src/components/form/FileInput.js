@@ -29,9 +29,6 @@ export default function FileInput({ onChange, accept }) {
 
         </label>
 
-        <div className="grid grid-cols-2 gap-3 mt-5">
-            <CancelButton title="Cancel" />
-            <SecondaryButton title=" Next" type="button" />
-        </div>
+
     </>
 }
