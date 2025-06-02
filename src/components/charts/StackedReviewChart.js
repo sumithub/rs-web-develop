@@ -81,7 +81,34 @@ const options = {
 export default function StackedReviewChart() {
     return (
         <div style={{ width: '100%', maxWidth: 700, margin: 'auto' }}>
-            <Bar data={data} options={options} />
+            <div className='relative'>
+                <div className='p-2.5 border border-border2 rounded-[10px] absolute z-10 right-0 -top-1.5'>
+                    <h2 className='text-sm'>Rating</h2>
+                    <div className='flex gap-[7px] items-center pt-[5px]'>
+                        <div className='w-[22px] h-[9px] bg-primary/20 rounded-[3px]' />
+                        <h2 className='text-xs'>1</h2>
+                    </div>
+                    <div className='flex gap-[7px] items-center pt-[5px]'>
+                        <div className='w-[22px] h-[9px] bg-primary/20 rounded-[3px]' />
+                        <h2 className='text-xs'>2</h2>
+                    </div>
+                    <div className='flex gap-[7px] items-center pt-[5px]'>
+                        <div className='w-[22px] h-[9px] bg-primary/30 rounded-[3px]' />
+                        <h2 className='text-xs'>3</h2>
+                    </div>
+                    <div className='flex gap-[7px] items-center pt-[5px]'>
+                        <div className='w-[22px] h-[9px] bg-primary/50 rounded-[3px]' />
+                        <h2 className='text-xs'>4</h2>
+                    </div>
+                    <div className='flex gap-[7px] items-center pt-[5px]'>
+                        <div className='w-[22px] h-[9px] bg-primary rounded-[3px]' />
+                        <h2 className='text-xs'>5</h2>
+                    </div>
+                </div>
+                <div className=''>
+                    <Bar data={data} options={options} />
+                </div>
+            </div>
         </div>
     );
 }
