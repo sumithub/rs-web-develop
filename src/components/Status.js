@@ -23,6 +23,9 @@ export default function Status({ status = "" }) {
     } else {
         bgClass = "bg-gray-100 text-gray-500";
     }
+    // else if (s === "connected") {
+    //     bgClass = "bg-[#A9A9A91A] text-[#A9A9A9]";
+    // }
 
 
     return <div>
