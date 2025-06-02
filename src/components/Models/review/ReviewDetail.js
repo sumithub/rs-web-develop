@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";

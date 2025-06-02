@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import Input from "../../form/Input";
 import Model from "../Model";
