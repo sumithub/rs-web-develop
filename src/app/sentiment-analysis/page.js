@@ -2,8 +2,6 @@
 import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
 import DashboardCard from "../../components/DashboardCard";
-import Select from "../../components/form/Select";
-import Wordcloud from "../../components/charts/WordCloudChart";
 import SentimentBySourceChart from "../../components/charts/SentimentBySourceChart";
 import DashboardChart from "../../components/DashboardChart";
 import DashboardLineChart from "../../components/charts/DashboardLineChart";
@@ -11,6 +9,7 @@ import SentimentTrendChart from "../../components/charts/SentimentTrendChart";
 import { useState } from "react";
 import DateRange from "../../components/form/DateRangePicker";
 import CustomSelectBox from "../../components/form/CustomSelectBox";
+import ConversationalTrends from "../../components/ConversationalTrends";
 
 export default function SentimentAnalysis() {
     const [filterBy, setFilterBy] = useState("")
@@ -119,7 +118,7 @@ export default function SentimentAnalysis() {
                             <DashboardChart title="Conversational Trends And Sentiment" >
                                 <div>
                                     <h2 className="text-sm pt-2.5">Lorem Ipsum is simply dummy text of the printing and typesetting industry</h2>
-                                    <Image src="/images/lorem-ipsum.png" alt="lorem-ipsum" width={602} height={121} className="pt-[15px]" />
+                                    <ConversationalTrends />
                                     <div className="grid grid-cols-2 gap-5 pt-5">
                                         <div>
                                             <h2>😊 Positive Sentiment</h2>
