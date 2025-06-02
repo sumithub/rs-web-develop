@@ -3,6 +3,7 @@
 :root {
   --primary: #0396FF;
   --primary2: #6FC3FF;
+  --primary3: #0096FF;
   --secondary: #1F2933;
   --secondary2: #F6F8FB;
   --text: #FEFEFE;
@@ -29,6 +30,7 @@
   --color-primary: var(--primary);
   --border-primary: var(--primary);
   --color-primary2: var(--primary2);
+  --color-primary3: var(--primary3);
   --color-secondary: var(--secondary);
   --color-secondary2: var(--secondary2);
   --color-text: var(--text);
