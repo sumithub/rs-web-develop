@@ -21,7 +21,9 @@ const options = {
     responsive: true,
     aspectRatio: 2.4,
     plugins: {
-        legend: { position: 'top', },
+        legend: {
+            display: false,
+        },
         title: { display: false, text: '', },
     },
     scales: {
