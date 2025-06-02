@@ -120,7 +120,7 @@ export default function Signup() {
                     <Checkbox2 id="terms"
                         checked={termsAccepted}
                         onChange={() => setTermsAccepted(!termsAccepted)} />
-                    <div className="text-sm text-secondary">
+                    <div className="text-sm text-secondary capitalize">
                         I Agree To The{" "}
                         <Link href="/" className="text-primary">Privacy Policy</Link> and{" "}
                         <Link href="/" className="text-secondary">
