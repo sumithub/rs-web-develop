@@ -88,17 +88,6 @@ export default function Test() {
                 }} />
         }
 
-        {openCode &&
-            <CodePreviewBox
-                onClose={() => {
-                    setOpenCode(false)
-                }}
-
-                onSave={() => {
-                    setOpenCode(true)
-                }} />
-        }
-
         {openTest &&
             <NoActionRequiredState
                 onClose={() => {
@@ -121,9 +110,6 @@ export default function Test() {
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenDisconnect(true) }}>Disconnect Review Source Confirmation
-            </div>
-
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenCode(true) }}>Code Preview Box
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenTest(true) }}>No Action Required State
