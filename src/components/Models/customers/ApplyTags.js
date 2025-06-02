@@ -32,28 +32,28 @@ function ApplyTags({ onClose }) {
                 <div className='text-xl font-semibold'>Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
                 <div className='my-[30px]'>
                     <div className='flex justify-between items-center'>
-                        <h2 className='text-base font-medium'>John Deo</h2>
+                        <h2 className='text-base font-medium'>{e.name}</h2>
                         <div className='w-1/5'>
-                            <Select
+                            <SelectForm
                                 selectClass_="border border-primary/10!"
                                 class_='mt-0!'
                                 defaultOption="VIP, High Value"
                             >
                                 <option>VIP, High Value</option>
-                            </Select>
+                            </SelectForm>
                         </div>
                     </div>
                     <hr className='border-t border-border2 my-[15px]' />
                     <div className='flex justify-between items-center'>
                         <h2 className='text-base font-medium'>Jaydon Bergson</h2>
                         <div className='w-1/5'>
-                            <Select
+                            <SelectForm
                                 selectClass_="border border-primary/10!"
                                 class_='mt-0!'
                                 defaultOption="VIP, High Value"
                             >
                                 <option>VIP, High Value</option>
-                            </Select>
+                            </SelectForm>
                         </div>
                     </div>
                     <hr className='border-t border-border2 my-[15px]' />
