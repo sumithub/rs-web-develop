@@ -11,7 +11,6 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import PhoneForm from "../../form/PhoneForm"
 import Image from "next/image"
-import ImportCustomer from "../../../components/Models/customers/ImportCustomer"
 
 function AddCustomer({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
@@ -63,15 +62,16 @@ function AddCustomer({ onClose, id }) {
                         errors={errors} />
 
                     <PhoneForm label="Primary Phone"
-                        placeholder="Enter phone number (optional)"
-                        formProps={{ ...register("phone", { required: false }) }}
+                        placeholder="Enter phone number"
+                        isRequired={true}
+                        formProps={{ ...register("phone", { required: true }) }}
                         errors={errors}
                         clearErrors={clearErrors}
                         setValue={setValue}
                         watch={watch} />
 
-                    <SelectForm label="Tag" isRequired={true} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
-                        formProps={{ ...register("tag", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                    <SelectForm label="Tag" isRequired={false} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                        formProps={{ ...register("tag", { required: false }) }} errors={errors} clearErrors={clearErrors}>
                         <option value="high value">High Value</option>
                         <option value="loyal">Loyal</option>
                         <option value="instead of source">instead of source</option>
