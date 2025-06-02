@@ -57,7 +57,7 @@ export default function Signup() {
                     label="Email ID"
                     name="email"
                     clearValue={true}
-                    placeholder="Enter Email"
+                    placeholder="Enter Your Email Address"
                     icon="/images/close.svg"
                     isRequired={true}
                     errors={errors}
@@ -97,14 +97,14 @@ export default function Signup() {
                         required={true}
                         id="terms" />
                     <div className="text-sm text-secondary">
-                        I Agree To Our{" "}
-                        <Link href="/" className="text-primary">
-                            Terms & Conditions
-                        </Link>{" "}
-                        And{" "}
+                        I Agree To The {" "}
                         <Link href="/" className="text-primary">
                             Privacy Policy
-                        </Link>
+                        </Link> and{" "}
+
+                        <Link href="/" className="text-secondary">
+                            <span className="text-primary"> Terms </span> of use wherever it&#39;s displayed.
+                        </Link>{" "}
                     </div>
                 </label>
                 {error && <div className='flex gap-2.5 justify-center mt-[15px]'>
