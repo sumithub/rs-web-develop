@@ -91,7 +91,7 @@ export const manageReview = [
 ]
 
 export const REVIEW_ACTIONS = [
-    { label: "Replay Now", value: "replay-now", icon: "/dropdown/sms.svg", hoverIcon: "/dropdown/sms-active.svg" },
+    { label: "Reply Now", value: "reply-now", icon: "/dropdown/sms.svg", hoverIcon: "/dropdown/sms-active.svg" },
 
     { label: "Request Update", value: "request-update", icon: "/dropdown/role.svg", hoverIcon: "/dropdown/role-active.svg" },
 

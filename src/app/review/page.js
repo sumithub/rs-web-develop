@@ -76,7 +76,7 @@ export default function Review() {
                 }} />
         }
 
-        {openModal === "replay-now" &&
+        {openModal === "reply-now" &&
             <ReviewDetail
                 onClose={() => {
                     setOpenModal(false)

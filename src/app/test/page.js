@@ -11,7 +11,6 @@ import ConnectReviewSource from "../../components/Models/review/ConnectReviewSou
 import DisconnectReviewSourceConfirmation from "../../components/Models/review/DisconnectReviewSourceConfirmation";
 import CodePreviewBox from "../../components/Models/review/CodePreviewBox";
 import NoActionRequiredState from "../../components/Models/review/NoActionRequiredState";
-import AssignToUser from "../../components/Models/review/AssignToUser";
 
 export default function Test() {
     const [open, setOpen] = useState(false)
@@ -24,7 +23,6 @@ export default function Test() {
     const [openDisconnect, setOpenDisconnect] = useState(false)
     const [openCode, setOpenCode] = useState(false)
     const [openTest, setOpenTest] = useState(false)
-    const [openAssign, setOpenAssign] = useState(false)
     return <AdminLayout>
 
         {open &&
@@ -35,17 +33,6 @@ export default function Test() {
 
                 onSave={() => {
                     setOpen(true)
-                }} />
-        }
-
-        {openAssign &&
-            <AssignToUser
-                onClose={() => {
-                    setOpenAssign(false)
-                }}
-
-                onSave={() => {
-                    setOpenAssign(true)
                 }} />
         }
 
@@ -150,9 +137,6 @@ export default function Test() {
 
         <div className="flex flex-col gap-y-3">
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpen(true) }}>Selected Customers
-            </div>
-
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenAssign(true) }}>Assign To User
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenResponse(true) }}>Review Response Templates

@@ -57,7 +57,7 @@ export default function RequestUpdate({ onClose, onSave }) {
                             <div>Message</div>
                             <HtmlEditor />
                         </div>
-                        <div className="grid grid-cols-2 gap-3 mt-4">
+                        <div className="grid grid-cols-2 gap-3 mt-50">
                             <CancelButton title="cancel" onClick={onClose} />
                             <SecondaryButton title="Request update" type="submit" disabled={sending} />
                         </div>
