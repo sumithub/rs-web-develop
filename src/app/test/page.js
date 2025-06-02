@@ -1,11 +1,9 @@
 "use client"
 import { useState } from "react";
 import AdminLayout from "../../components/AdminLayout";
-import SelectedCustomers from "../../components/Models/manage-campaigns/SelectedCustomers"
 import ReviewResponseTemplates from "../../components/Models/review/ReviewResponseTemplates";
 import ConnectReviewSource from "../../components/Models/review/ConnectReviewSource";
 import DisconnectReviewSourceConfirmation from "../../components/Models/review/DisconnectReviewSourceConfirmation";
-import CodePreviewBox from "../../components/Models/review/CodePreviewBox";
 import NoActionRequiredState from "../../components/Models/review/NoActionRequiredState";
 import ResendReportEmail from "../../components/Models/reports/ResendReportEmail";
 import ReportTemplate from "../../components/Models/reports/ReportTemplate";
@@ -13,25 +11,12 @@ import ReportTemplate from "../../components/Models/reports/ReportTemplate";
 export default function Test() {
     const [open, setOpen] = useState(false)
     const [openResponse, setOpenResponse] = useState(false)
-    const [openCarousel, setOpenCarousel] = useState(false)
     const [openConnect, setOpenConnect] = useState(false)
     const [openDisconnect, setOpenDisconnect] = useState(false)
-    const [openCode, setOpenCode] = useState(false)
     const [openTest, setOpenTest] = useState(false)
     const [openEmail, setOpenEmail] = useState(false)
     const [openSave, setOpenSave] = useState(false)
     return <AdminLayout>
-
-        {open &&
-            <SelectedCustomers
-                onClose={() => {
-                    setOpen(false)
-                }}
-
-                onSave={() => {
-                    setOpen(true)
-                }} />
-        }
 
         {openEmail &&
             <ResendReportEmail
@@ -88,17 +73,6 @@ export default function Test() {
                 }} />
         }
 
-        {openCode &&
-            <CodePreviewBox
-                onClose={() => {
-                    setOpenCode(false)
-                }}
-
-                onSave={() => {
-                    setOpenCode(true)
-                }} />
-        }
-
         {openTest &&
             <NoActionRequiredState
                 onClose={() => {
@@ -111,8 +85,6 @@ export default function Test() {
         }
 
         <div className="flex flex-col gap-y-3">
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpen(true) }}>Selected Customers
-            </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenResponse(true) }}>Review Response Templates
             </div>
@@ -121,9 +93,6 @@ export default function Test() {
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenDisconnect(true) }}>Disconnect Review Source Confirmation
-            </div>
-
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenCode(true) }}>Code Preview Box
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenTest(true) }}>No Action Required State

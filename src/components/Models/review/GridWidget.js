@@ -4,10 +4,23 @@ import Select from "../../form/Select";
 import Model from "../Model";
 import Checkbox from "../../form/Checkbox";
 import SecondaryButton from "../../common/SecondaryButton";
+import CodePreviewBox from "./CodePreviewBox";
+import { useState } from "react";
 
 export default function Carousel({ onClose, OnSave }) {
+    const [open, setOpen] = useState(false)
     return (
         <Model onClose={onClose} title="Grid Widget" modalClass="w-[60%]!">
+            {open &&
+                <CodePreviewBox
+                    onClose={() => {
+                        setOpen(false)
+                    }}
+
+                    onSave={() => {
+                        setOpen(true)
+                    }} />
+            }
             <div className="grid grid-cols-2 gap-4">
                 <div>
                     <div>
@@ -88,7 +101,7 @@ export default function Carousel({ onClose, OnSave }) {
                     </div>
 
                     <div className="p-4">
-                        <SecondaryButton title="Get Code" />
+                        <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} />
                     </div>
                 </div>
             </div>

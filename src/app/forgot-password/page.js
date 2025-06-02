@@ -7,6 +7,7 @@ import InputForm from '../../components/form/InputForm';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Success from '../../components/common/Success';
+import { validEmailRgx } from "../../../helper"
 
 function ForgotPassword() {
     const {
@@ -34,7 +35,7 @@ function ForgotPassword() {
     return (<AuthLayout>
         {success ? <Success message="Check your email to reset the password." /> : <div>
             <h2 className="text-[34px] leading-none font-semibold text-secondary capitalize text-center">Forgot password</h2>
-            <p className="text-xs pt-2.5 pb-[25px] capitalize text-center text-[#616E7C]">A password reset link has been sent to your email</p>
+            <p className="text-xs pt-2.5 pb-[25px] capitalize text-center text-[#616E7C]">No Worries, We’ll Send Your Reset Instruction.</p>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <InputForm
@@ -46,7 +47,14 @@ function ForgotPassword() {
                         isRequired={true}
                         icon="/images/close.svg"
                         errors={errors}
-                        formProps={{ ...register("email", { required: "Email is required" }) }}
+                        formProps={{
+                            ...register("email", {
+                                required: "Email is required", pattern: {
+                                    value: validEmailRgx,
+                                    message: "Email is invalid."
+                                }
+                            },)
+                        }}
                         setValue={setValue}
                         watch={watch}
                     />
