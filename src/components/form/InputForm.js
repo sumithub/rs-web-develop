@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function InputForm({ class_ = "", watch, setValue, clearValue = true, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "", isTextArea, rows }) {
+export default function InputForm({ class_ = "", watch, setValue, clearValue = false, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "", isTextArea, rows }) {
     const [type, setType] = useState("password")
     let error = "";
 
@@ -28,7 +28,7 @@ export default function InputForm({ class_ = "", watch, setValue, clearValue = t
             <label className={`text-sm font-medium text-secondary ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}</label>
             <div className="relative">
 
-                {(inputType !== "password" && icon && watch(formProps?.name)) && (
+                {(clearValue && inputType !== "password" && icon && watch(formProps?.name)) && (
                     <Image
                         unoptimized
                         src={icon}

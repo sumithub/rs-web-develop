@@ -52,6 +52,7 @@ export default function Signin() {
                 <InputForm
                     label="Email ID"
                     name="email"
+                    clearValue={true}
                     placeholder="Enter Email"
                     icon="/images/close.svg"
                     isRequired={true}
