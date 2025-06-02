@@ -1,3 +1,4 @@
+"use client"
 import Input from "../../form/Input";
 import Select from "../../form/Select";
 import Model from "../Model";

@@ -1,3 +1,4 @@
+"use client"
 import { toast } from "react-toastify";
 import Model from "../Model";
 import { getError } from "../../../../helper";
