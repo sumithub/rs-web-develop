@@ -4,8 +4,13 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const labels = ['Jan 2025', 'Feb 2025', 'Mar 2025', 'Apr 2025', 'May 2025'];
-const values = [2, 2.5, 3, 2, 3.5];
+const labels = [
+    'Jan 2025', 'Feb 2025', 'Mar 2025', 'Apr 2025',
+    'May 2025', 'Jun 2025', 'Jul 2025', 'Aug 2025',
+    'Sep 2025', 'Oct 2025', 'Nov 2025', 'Dec 2025'
+];
+
+const values = [2, 2.5, 3, 2, 3.5, 3.2, 2.8, 3.1, 2.9, 3.4, 3.6, 3.3];
 
 const max = Math.max(...values);
 const backgroundColors = values.map((value) => value === max ? '#3354F4' : '#E6EEF5');
