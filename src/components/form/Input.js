@@ -3,18 +3,20 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Input({ isTextArea, rows = 3, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", error, icon, disabled, iconClass = "", class_ = "" }) {
+export default function Input({ hideOptional = false, isTextArea, rows = 3, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", error, icon, disabled, iconClass = "", class_ = "", onIconClick }) {
     const [type, setType] = useState("password")
 
     const handleClick = () => {
         if (inputType === "password") {
             setType(type === "password" ? "text" : "password");
+        } else if (onIconClick) {
+            onIconClick()
         }
     };
 
     return (
         <div className={`${class_} mt-[15px]`}>
-            <label className={`text-sm font-medium text-secondary ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400">(Optional)</span>}</label>
+            <label className={`text-sm font-medium text-secondary ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : (hideOptional ? "" : <span className="text-neutral-400">(Optional)</span>)}</label>
             <div className="relative">
                 {(inputType !== "password" && icon) && (
                     <img

@@ -22,7 +22,6 @@ export default function ResetPasswordPage() {
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false)
 
-
     const onSubmit = async (data) => {
         try {
             setLoading(true);

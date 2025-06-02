@@ -25,7 +25,7 @@ const options = {
     responsive: true,
     plugins: {
         legend: {
-            position: 'top',
+            display: false
         },
         // You can add title if needed
         // title: {

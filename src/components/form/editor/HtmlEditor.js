@@ -27,9 +27,7 @@ const RichTextExample = ({ children, value, onChange }) => {
         <Slate editor={editor}
             initialValue={initialValue2}
             value={value || []}
-            onChange={value => {
-                onChange(value)
-            }}
+            onChange={onChange}
         >
             <div className="bg-dark rounded-tr-lg rounded-tl-lg">
                 <Toolbar >

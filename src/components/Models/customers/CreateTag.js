@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
@@ -8,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { getError } from "../../../../helper";
+import Image from "next/image";
 
 export default function CreateTag({ onClose, id }) {
     const { register, setValue, handleSubmit, formState: { errors }, } = useForm();
@@ -19,7 +21,7 @@ export default function CreateTag({ onClose, id }) {
             let res = null
 
             if (id !== "add") {
-                res = await axios.put("/api" , data)
+                res = await axios.put("/api", data)
             } else {
                 res = await axios.post("/api", data)
             }
@@ -32,11 +34,16 @@ export default function CreateTag({ onClose, id }) {
             setSending(false)
         }
     }
+
     return (
-        <Model onClose={onClose} title="Create New Tag" modalClass="w-1/2!">
+        <Model onClose={onClose} title={`${!id ? "Create New Tag" : "Edit"}`} modalClass="w-1/2!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <InputForm label="Tag Name" isRequired={true} placeholder="Enter Name"
+                    <InputForm
+                        class_="mt-2!"
+                        label="Tag Name"
+                        isRequired={true}
+                        placeholder="Enter Name"
                         formProps={{ ...register("tagName", { required: true }) }}
                         errors={errors}
                     />
@@ -45,17 +52,25 @@ export default function CreateTag({ onClose, id }) {
                         setValue={setValue}
                         errors={errors}
                     />
-                    <InputForm label="Description" isTextArea={true}
+                    <InputForm label="Description" isTextArea={true} rows={3}
                         formProps={{ ...register("description", { required: false }) }}
                         errors={errors}
                     />
-                    <InputForm label="Tagged Customers"
+                    <InputForm
+                        class_="mt-2!"
+                        label="Tagged Customers"
                         formProps={{ ...register("taggedCustomers", { required: false }) }}
                         errors={errors}
                     />
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 mt-3">
+                <div className="relative mt-4">
+                    <button type="button" className="flex bg-[#0396FF10] items-center gap-3 border border-[#0396FF80] rounded-[11px] py-2.5 px-3 text-primary text-sm font-medium w-full disabled:pointer-events-none disabled:opacity-50"><Image src="/images/setting.svg" alt="settings" height={36} width={36} unoptimized={true} />Updated</button>
+
+                    <button type="button" className="absolute right-3 top-4 disabled:pointer-events-none"><Image src="/images/close-square.svg" alt="close" height={18} width={18} unoptimized={true} /></button>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 mt-7">
                     <CancelButton title="Cancel" onClick={onClose} />
                     <SecondaryButton title="save" type="submit" disabled={sending} />
                 </div>

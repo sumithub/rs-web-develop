@@ -7,7 +7,6 @@ import CampaignCard from "../../../components/CampaignCard"
 import Radio from "../../../components/form/Radio"
 import Checkbox from "../../../components/form/Checkbox"
 import ScheduleCampaign from "../../../components/Models/manage-campaigns/ScheduleCampaign"
-import SelectedFromCustomers from "../../../components/Models/manage-campaigns/SelectedFromCustomers"
 import EmailTemplate from "../../../components/Models/manage-campaigns/EmailTemplate"
 import Image from "next/image"
 import { useState, useEffect } from "react"
@@ -20,6 +19,7 @@ import SelectForm from "../../../components/form/SelectForm"
 import AddTemplate from "../../../components/Models/templates/AddTemplate"
 import Preview from "../../../components/Models/manage-campaigns/Preview"
 import { useRouter } from "next/navigation"
+import SelectedCustomers from "../../../components/Models/manage-campaigns/SelectedCustomers"
 
 export default function Detail({ }) {
     const id = ""
@@ -40,8 +40,8 @@ export default function Detail({ }) {
     })
     const [activeStep, setActiveStep] = useState(1)
     const [customersSelected, setCustomersSelected] = useState(false)
-    const [templateSelected, setTemplateSelected] = useState(false)
-    const [campaignType, setCampaignType] = useState('')
+    const [templateSelected, setTemplateSelected] = useState(true)
+    const [campaignType, setCampaignType] = useState('email')
     const [reminderEnabled, setReminderEnabled] = useState(false)
 
     const watchedFields = watch()
@@ -193,7 +193,7 @@ export default function Detail({ }) {
         }
 
         {openCustomer &&
-            <SelectedFromCustomers
+            <SelectedCustomers
                 onClose={() => {
                     setOpenCustomer(false)
                 }}
@@ -293,11 +293,11 @@ export default function Detail({ }) {
                         <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
                         <div className="flex">
                             <Radio name="type" label="Email" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
-                                onChange={() => handleCampaignTypeChange('email')} />
+                                checked={campaignType === "email"} onChange={() => handleCampaignTypeChange('email')} />
                             <Radio name="type" label="SMS" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
-                                onChange={() => handleCampaignTypeChange('sms')} />
+                                checked={campaignType === "sms"} onChange={() => handleCampaignTypeChange('sms')} />
                             <Radio name="type" label="Both" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
-                                onChange={() => handleCampaignTypeChange('both')} />
+                                checked={campaignType === "both"} onChange={() => handleCampaignTypeChange('both')} />
                         </div>
                     </div>
 

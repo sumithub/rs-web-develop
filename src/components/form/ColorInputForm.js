@@ -57,6 +57,6 @@ export default function ColorInputForm({
             </div>
 
             {error && <p className="text-xs pt-[3px] capitalize text-danger">{error}</p>}
-        </div>
+        </div >
     );
 }
