@@ -15,12 +15,21 @@ import InputForm from "../../form/InputForm"
 import { useForm } from "react-hook-form"
 import RadioForm from "../../form/RadioForm"
 import Image from "next/image"
+
 export default function ImportCustomer() {
     const [activeStep, setActiveStep] = useState(1)
     const [sortBy, setSortBy] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
+
+    const IMPORTSUMMARY = [
+        { title: "File name", summary: "abc.csv" },
+        { title: "total customers in file", summary: 250 },
+        { title: "valid customers to import", summary: 245 },
+        { title: "duplicates skipped", summary: "03" },
+        { title: "assigned tag", summary: "VIP customers" },
+    ]
 
     useEffect(() => {
         getData()
@@ -232,11 +241,18 @@ export default function ImportCustomer() {
             <div>
                 <div className="text-secondary text-lg font-semibold capitalize mt-3">import summary</div>
 
-                <div className="flex items-center justify-between">
-                    <div className="text-text3 text-base capitalize">first name</div>
-                    <div className="text-secondary text-base font-medium">abc.csv</div>
-                    <hr className="border-b border-border-color" />
-
+                <div>
+                    {IMPORTSUMMARY.map((e, i) => <div key={i}>
+                        <div className="flex items-center justify-between my-3">
+                            <div className="text-text3 text-base capitalize font-normal!">{e.title}</div>
+                            <div className="text-secondary text-base font-medium capitalize">{e.summary}</div>
+                        </div>
+                        {/* <div className="flex items-center justify-between my-3">
+                            <div className="text-text3 text-base capitalize font-normal!">invalid entries</div>
+                            <div className="text-secondary text-base font-medium capitalize">02 | <span className="text-primary text-base font-medium underline underline-offset-4">view detail</span></div>
+                        </div> */}
+                        <hr className="border-t border-border-color" />
+                    </div>)}
                 </div>
             </div>
         </div>

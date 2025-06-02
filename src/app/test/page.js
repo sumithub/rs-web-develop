@@ -11,6 +11,8 @@ import ConnectReviewSource from "../../components/Models/review/ConnectReviewSou
 import DisconnectReviewSourceConfirmation from "../../components/Models/review/DisconnectReviewSourceConfirmation";
 import CodePreviewBox from "../../components/Models/review/CodePreviewBox";
 import NoActionRequiredState from "../../components/Models/review/NoActionRequiredState";
+import ResendReportEmail from "../../components/Models/reports/ResendReportEmail";
+import ReportTemplate from "../../components/Models/reports/ReportTemplate";
 
 export default function Test() {
     const [open, setOpen] = useState(false)
@@ -23,6 +25,8 @@ export default function Test() {
     const [openDisconnect, setOpenDisconnect] = useState(false)
     const [openCode, setOpenCode] = useState(false)
     const [openTest, setOpenTest] = useState(false)
+    const [openEmail, setOpenEmail] = useState(false)
+    const [openSave, setOpenSave] = useState(false)
     return <AdminLayout>
 
         {open &&
@@ -33,6 +37,28 @@ export default function Test() {
 
                 onSave={() => {
                     setOpen(true)
+                }} />
+        }
+
+        {openEmail &&
+            <ResendReportEmail
+                onClose={() => {
+                    setOpenEmail(false)
+                }}
+
+                onSave={() => {
+                    setOpenEmail(true)
+                }} />
+        }
+
+        {openSave &&
+            <ReportTemplate
+                onClose={() => {
+                    setOpenSave(false)
+                }}
+
+                onSave={() => {
+                    setOpenSave(true)
                 }} />
         }
 
@@ -164,6 +190,12 @@ export default function Test() {
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenTest(true) }}>No Action Required State
+            </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenEmail(true) }}>Resend Report Email
+            </div>
+
+            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenSave(true) }}>Report Template
             </div>
         </div>
     </AdminLayout>

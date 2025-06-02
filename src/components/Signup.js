@@ -43,6 +43,7 @@ export default function Signup() {
                 <InputForm
                     class_="mt-0!"
                     label="Full Name"
+                    clearValue={true}
                     name="name"
                     inputType="text"
                     placeholder="Enter Your Full Name"
@@ -55,6 +56,7 @@ export default function Signup() {
                 <InputForm
                     label="Email ID"
                     name="email"
+                    clearValue={true}
                     placeholder="Enter Email"
                     icon="/images/close.svg"
                     isRequired={true}

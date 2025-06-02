@@ -60,6 +60,7 @@ function ChangeEmail() {
                         <InputForm
                             label="New Email"
                             name="newEmail"
+                            clearValue={true}
                             inputType="text"
                             placeholder="Enter Email ID "
                             isRequired={true}
