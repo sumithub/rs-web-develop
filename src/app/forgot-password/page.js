@@ -7,7 +7,8 @@ import InputForm from '../../components/form/InputForm';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Success from '../../components/common/Success';
-import { validEmailRgx } from "../../../helper"
+import { getError, validEmailRgx } from "../../../helper"
+import { useRouter } from 'next/navigation';
 
 function ForgotPassword() {
     const {
@@ -20,7 +21,7 @@ function ForgotPassword() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false)
-
+    const router = useRouter()
 
     const onSubmit = async (data) => {
         try {
@@ -29,6 +30,7 @@ function ForgotPassword() {
             setSuccess(true)
         } catch (error) {
             setLoading(false)
+            router.push(`/reset-password-error?error=${getError(error)}`)
             setError(error?.message);
         }
     };
