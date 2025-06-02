@@ -11,6 +11,7 @@ import axios from "axios";
 import { getError } from "../../../../helper";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import ReviewCard from "../../ReviewCard";
 
 export default function ReviewDetail({ onClose, onSave, id }) {
     const { register, handleSubmit, formState: { errors }, } = useForm();
@@ -80,7 +81,10 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                             formProps={{ ...register("select", { required: false }) }}
                             errors={errors}
                         >
-                            <option>7 Days</option>
+                            <option value="noActionRequired">No action Required</option>
+                            <option value="actionRequired">Action required</option>
+                            <option value="draft">Draft</option>
+                            <option value="responded">Responded</option>
                         </SelectForm>
                         <HtmlEditor />
                     </div>
