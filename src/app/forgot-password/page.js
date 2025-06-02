@@ -51,7 +51,7 @@ function ForgotPassword() {
                             ...register("email", {
                                 required: "Email is required", pattern: {
                                     value: validEmailRgx,
-                                    message: "Email is invalid."
+                                    message: "Incorrect Email"
                                 }
                             },)
                         }}
