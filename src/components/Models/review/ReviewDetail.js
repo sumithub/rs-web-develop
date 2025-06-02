@@ -11,11 +11,12 @@ import axios from "axios";
 import { getError } from "../../../../helper";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import ReviewCard from "../../ReviewCard";
 
 export default function ReviewDetail({ onClose, onSave, id }) {
-    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [sending, setSending] = useState(false)
-
+    const [status, setStatus] = useState("")
     const copy = () => {
         try {
             toast.success("Coped Successfully")
@@ -48,6 +49,15 @@ export default function ReviewDetail({ onClose, onSave, id }) {
         <Model onClose={onClose} title="Review Detail" modalClass="w-[60%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
+                    {status === "noActionRequired" && <div>
+                        <div>
+                            <ReviewCard title="Zain Levin" />
+                        </div>
+
+                        <div className="mt-3 ps-[10vw]">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the .
+                        </div>
+                    </div>}
                     <div className="flex pt-1 items-center justify-between w-4/5">
                         <div className="flex items-start w-full gap-[15px]">
                             <Image src="/images/request.png" alt="request" width={46} height={46} />
@@ -77,13 +87,20 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                             class_="mt-[15px]! w-[10%]!"
                             selectClass_="rounded-full! py-2! px-2.5!"
                             defaultOption="select"
-                            formProps={{ ...register("select", { required: false }) }}
+                            formProps={{ ...register("status", { required: false }) }}
                             errors={errors}
+                            onChange={(e) => {
+                                setStatus(e.target.value)
+                            }}
                         >
-                            <option>7 Days</option>
+                            <option value="noActionRequired">No action Required</option>
+                            <option value="actionRequired">Action required</option>
+                            <option value="draft">Draft</option>
+                            <option value="responded">Responded</option>
                         </SelectForm>
                         <HtmlEditor />
                     </div>
+
                     <div>
                         <h2 className="text-lg font-medium pt-[15px]">Additional Sharing Options:</h2>
                         <div className="flex gap-[18px] pt-2.5">
@@ -97,12 +114,13 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                             </Link>
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-3 mt-[30px]">
+                    <div className="grid grid-cols-3 gap-3 mt-[30px]">
                         <CancelButton
                             title="copy reply"
                             class_="text-lg! font-medium! py-3"
                             onClick={copy}
                         />
+                        {status === "noActionRequired" && <SecondaryButton title="Share" />}
                         <SecondaryButton
                             title="mark as responded"
                             class_="text-lg! font-medium! py-3"

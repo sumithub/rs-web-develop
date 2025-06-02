@@ -22,7 +22,7 @@ export default function Signin() {
     const [error, setError] = useState(false);
     const [verificationSuccess, setVerificationSuccess] = useState(false)
     const router = useRouter()
-
+    const [checked, setChecked] = useState(false)
     useEffect(() => {
         if (verificationSuccess) {
             setTimeout(() => {
@@ -61,7 +61,7 @@ export default function Signin() {
                         ...register("email", {
                             required: "Email is required", pattern: {
                                 value: validEmailRgx,
-                                message: "Email is invalid."
+                                message: "Email is incorrect."
                             },
                         })
                     }}
@@ -87,11 +87,14 @@ export default function Signin() {
 
                 {verificationSuccess !== null && <Verify verificationSuccess={verificationSuccess} onClick={() => { setVerificationSuccess(true) }} />}
                 <div className='flex justify-between mt-5'>
-                    <div className='flex gap-1.5 items-center'>
+                    <label className='flex gap-1.5 items-center' htmlFor="remember">
                         <Checkbox2 class_="border-text-3"
+                            id="remember"
+                            checked={checked}
+                            onChange={(checked) => setChecked(checked)}
                             required={false} />
                         <h2 className='text-sm capitalize text-secondary'>Remember me</h2>
-                    </div>
+                    </label>
                     <Link href="/forgot-password">
                         <h2 className='text-sm capitalize text-primary'>Forgot Password ?</h2>
                     </Link>

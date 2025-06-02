@@ -3,6 +3,7 @@ import Image from "next/image";
 import Input from "../../form/Input";
 import Model from "../Model";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 export default function ShareOnSocialMedia({ onClose, onSave }) {
     return (
@@ -41,6 +42,10 @@ export default function ShareOnSocialMedia({ onClose, onSave }) {
                     <Input
                         hideOptional={true}
                         icon="/images/copy2.svg"
+                        onIconClick={() => {
+                            toast.success("Copied Successfully")
+                            onClose()
+                        }}
                         class_="mt-[25px]!"
                         placeholder="https://code-with.com"
                         label=""
