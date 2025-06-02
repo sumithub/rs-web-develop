@@ -51,7 +51,7 @@ export default function AssignReviewToUser({ onClose, onSave }) {
                 </div>
 
                 <div>
-                    <Search placeholder="Search by Name or Email" mainClass="w-full!" />
+                    <Search placeholder="Search by Name or Email" mainClass="w-[80%]! ml-auto!" />
                 </div>
             </div>
 
