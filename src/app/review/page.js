@@ -23,6 +23,7 @@ import RequestUpdate from "../../components/Models/review/RequestUpdate";
 import AssignReviewToUser from "../../components/Models/review/AssignReviewToUser";
 import ReviewDetails from "../../components/Models/review/ReviewDetails";
 import DeleteTemplate from "../../components/Models/review/DeleteTemplate";
+import DateRange from "../../components/form/DateRangePicker";
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -239,7 +240,7 @@ export default function Review() {
             </div>
 
             <div className="bg-white min-h-[calc(100vh_-_85px)] rounded-[10px] mt-5 p-5">
-                <div className="2xl:flex lg:flex-wrap justify-between items-center w-full gap-[15px]">
+                <div className="flex justify-between items-center w-full gap-[15px]">
                     {/* <div className="relative w-[32%]">
                         <div className="w-full">
                             <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-dark border border-border2 rounded-lg focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
@@ -262,30 +263,34 @@ export default function Review() {
                             setSearch(s)
                         }}
                     />
-                    <div className="grid grid-cols-[0.8fr_0.8fr_0.8fr_0.8fr_auto_1fr] items-start 2xl:gap-3 xl:gap-2 lg:gap-2 2xl:mt-0 mt-3">
+                    <div className="flex gap-3">
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="start rating"
                             value={rating}
                             onChange={(e) => {
                                 setRating(e.target.value)
                             }}>
-                            <option value="1 star">1 Star & Up</option>
-                            <option value="2 star">2 Star & Up</option>
-                            <option value="3 star">3 Star & Up</option>
-                            <option value="4 star">4 Star & Up</option>
-                            <option value="5 star">5 Star & Up</option>
+                            <option value="1 star">1 Star</option>
+                            <option value="2 star">2 Star</option>
+                            <option value="3 star">3 Star</option>
+                            <option value="4 star">4 Star</option>
+                            <option value="5 star">5 Star</option>
                         </CustomSelectBox>
 
-                        <DatePicker
+                        {/* <DatePicker
                             icon={true}
                             mainClass="mt-0!"
                             value={date}
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
-                        />
+                        /> */}
+
+                        <DateRange class_="shrink-0!"
+                            onChange={(e) => { setDate(e) }} />
+
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="Review Source"
                             value={reviewSource}
                             onChange={(e) => {
@@ -297,7 +302,7 @@ export default function Review() {
                         </CustomSelectBox>
 
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="Review Status"
                             value={status}
                             onChange={(e) => {
@@ -312,7 +317,7 @@ export default function Review() {
                             <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
                         </button>
 
-                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
                             onClick={() => { setOpen(true) }}>Add Manual Review</button>
                     </div>
                 </div>
@@ -395,7 +400,7 @@ export default function Review() {
                                             }}
                                         /></td>
                                     </tr>
-                                }) : <tr><td colSpan={10} className='text-center! h-20 text-3xl text-secondary'>No data</td></tr>
+                                }) : <tr><td colSpan={10} className='text-center! h-20 text-3xl text-danger'>No data</td></tr>
                             )}
                         </tbody>
                     </table>
