@@ -36,7 +36,7 @@ function AddCustomer({ onClose, id }) {
             setSending(false)
         }
     }
-    return <Model onClose={onClose} title="Add new Customer" modalClass="w-1/2!">
+    return <Model onClose={onClose} title="Add new Customer" modalClass="w-[65%]!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <div className="flex gap-4 items-center">

@@ -71,11 +71,11 @@ export default function ReviewDetails({ onClose, onSave }) {
                     </div>
                 </div>
                 <div className="mt-[30px]">
-                    <h2 className="text-base font-medium">Share this review:</h2>
+                    <h2 className="text-base capitalize font-medium">Share this review:</h2>
                     <div className="grid grid-cols-3 gap-[15px] mt-[15px]">
                         <SecondaryButton title="Share on social media" onClick={() => { setOpenMedia(true) }} />
                         <SecondaryButton title="share via email" onClick={() => { setOpenEmail(true) }} />
-                        <CancelButton title="copy link" onClick={Copy}/>
+                        <CancelButton title="copy link" onClick={Copy} />
                     </div>
                 </div>
                 <div className="mt-[30px] grid grid-cols-6 gap-[18px]">
