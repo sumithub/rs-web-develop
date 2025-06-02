@@ -11,6 +11,7 @@ import axios from "axios";
 import { getError } from "../../../../helper";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import ReviewCard from "../../ReviewCard";
 
 export default function ReviewDetail({ onClose, onSave, id }) {
     const { register, handleSubmit, formState: { errors }, } = useForm();
@@ -72,6 +73,18 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                         </div>
                     </div>
                     <h2 className="w-4/5 ml-auto mt-[15px] text-xs">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the .</h2>
+
+                    <div>
+                        <div>
+                            <ReviewCard title="Zain Levin" />
+                        </div>
+
+                        <div className="mt-3 ps-[10vw]">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the .
+                        </div>
+
+
+                    </div>
                     <div>
                         <SelectForm
                             class_="mt-[15px]! w-[10%]!"
@@ -80,7 +93,10 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                             formProps={{ ...register("select", { required: false }) }}
                             errors={errors}
                         >
-                            <option>7 Days</option>
+                            <option value="noActionRequired">No action Required</option>
+                            <option value="actionRequired">Action required</option>
+                            <option value="draft">Draft</option>
+                            <option value="responded">Responded</option>
                         </SelectForm>
                         <HtmlEditor />
                     </div>
