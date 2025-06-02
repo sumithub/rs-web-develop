@@ -121,3 +121,9 @@ export const customerHistory = [
 
     { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
 ]
+
+export const fieldMapping = [
+    { header: "Full Name", firstRow: "DELETE EXAMPLE - Elwyn" },
+    { header: "Phone Number", firstRow: +919856958962 },
+    { header: "Email", firstRow: "odavis@outlook.com" },
+]
