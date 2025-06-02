@@ -64,7 +64,7 @@ export default function ShareViaEmail({ onClose, onSave }) {
                             <Image src="/images/copy2.svg" alt="copy2" width={20} height={20} />
                         </div>
                     </div>
-                    <div className="w-2/6">
+                    <div className="w-[30%]">
                         <SecondaryButton
                             title="Search Users"
                             class_="py-[15px]! px-5! text-sm! font-normal!"

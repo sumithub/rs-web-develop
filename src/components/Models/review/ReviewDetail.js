@@ -74,6 +74,7 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                     <div>
                         <SelectForm
                             class_="mt-[15px]! w-[10%]!"
+                            selectClass_="rounded-full! py-2! px-2.5!"
                             defaultOption="select"
                             formProps={{ ...register("select", { required: false }) }}
                             errors={errors}

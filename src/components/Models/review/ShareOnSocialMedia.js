@@ -10,7 +10,7 @@ export default function ShareOnSocialMedia({ onClose, onSave }) {
                 <div className="font-semibold">
                     Share This Review:
                 </div>
-                <div className="mt-[30px] grid grid-cols-6 gap-[18px]">
+                <div className="mt-2.5 grid grid-cols-6 gap-[18px]">
                     <Link href="https://www.facebook.com/" target="_blank" className="text-center">
                         <Image unoptimized={true} src="/images/fb.svg" alt="fb" width={41} height={41} className="mx-auto" />
                         <h2 className="mt-[15px] text-sm font-medium">Facebook</h2>
@@ -38,6 +38,7 @@ export default function ShareOnSocialMedia({ onClose, onSave }) {
                 </div>
                 <div>
                     <Input
+                        hideOptional={true}
                         icon="/images/copy2.svg"
                         class_="mt-[25px]!"
                         placeholder="https://code-with.com"
