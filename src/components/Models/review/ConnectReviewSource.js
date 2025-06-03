@@ -48,11 +48,11 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
                     icon="/images/add-link.svg"
                     infoIcon="/images/url.svg"
                 />
-                <div className="flex gap-2.5 bg-danger/10 p-2.5 rounded-[7px] mt-[15px]">
+                <div className="flex items-center gap-2.5 bg-danger/10 p-2.5 rounded-[7px] mt-[15px]">
                     <Image src="/images/warning.svg" alt="warning" width={22} height={22} className="" />
                     <h2 className="text-sm">Paste your business profile URL from the platform's website.</h2>
                 </div>
-                <div className="grid grid-cols-2 gap-3 mt-6">
+                <div className="grid grid-cols-2 gap-3 mt-[30px]">
                     <CancelButton title="Cancel" onClick={onClose} class_="text-lg! font-medium! py-3!" />
                     <SecondaryButton title="Connect" type="submit" disabled={sending} class_="text-lg! font-medium! py-3!" />
                 </div>
