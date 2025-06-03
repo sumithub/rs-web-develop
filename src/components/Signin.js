@@ -17,13 +17,14 @@ export default function Signin() {
         setValue,
         watch,
         handleSubmit,
-        formState: { errors, isValid },
+        formState: { errors }
     } = useForm();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [verificationSuccess, setVerificationSuccess] = useState(false)
     const router = useRouter()
     const [checked, setChecked] = useState(false)
+
     useEffect(() => {
         if (verificationSuccess) {
             setTimeout(() => {
@@ -37,7 +38,7 @@ export default function Signin() {
             setLoading(true);
             await axios.post("/api", data)
             setTimeout(() => {
-                router.push("/")
+                router.push("/dashboard")
             }, 1000);
         } catch (error) {
             toast.error("Invalid email or password.Please try again.")
@@ -48,7 +49,7 @@ export default function Signin() {
 
     return (<>
         <div>
-            <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Login to your account</h2>
+            <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Login To Your Account</h2>
             <p className="text-xs sm:pt-1.5 pt-2.5 pb-2.5 capitalize text-center text-[#616E7C]">Hey! We soar you working welcome back!</p>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
@@ -70,7 +71,6 @@ export default function Signin() {
                     errors={errors}
                     setValue={setValue}
                     watch={watch}
-
                 />
 
                 <InputForm
@@ -112,7 +112,7 @@ export default function Signin() {
                     </div>}
                     <button
                         type="submit"
-                        disabled={!isValid || loading || !checked}
+                        disabled={Object.keys(errors).length > 0 || loading}
                         className="disabled:bg-primary/50 text-text text-lg mt-3 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary">Login</button>
                     <h2 className='text-sm capitalize text-secondary pt-2.5 text-center'>Don&#39;t have an account? <Link href="/register" className='text-primary underline underline-offset-3'>Sign Up</Link></h2>
                 </div>
