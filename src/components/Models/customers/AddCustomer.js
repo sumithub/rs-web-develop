@@ -12,6 +12,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import PhoneForm from "../../form/PhoneForm"
 import Image from "next/image"
+import ImportCustomer from "../customers/ImportCustomer"
 
 function AddCustomer({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
@@ -87,6 +88,9 @@ function AddCustomer({ onClose, id }) {
             <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="Cancel" onClick={onClose} />
                 <SecondaryButton title=" Apply Changes" type="submit" disabled={sending} />
+                {/* <SecondaryButton title="Next" type="button" />
+                                <SecondaryButton title="Import Customers" type="button" />
+                            <SecondaryButton title="Done" type="button" /> */}
             </div>
         </form>
     </Model>

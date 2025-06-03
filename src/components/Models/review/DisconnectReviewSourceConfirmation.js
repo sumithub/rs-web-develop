@@ -43,7 +43,7 @@ export default function DisconnectReviewSourceConfirmation({ onClose, onSave }) 
                 </div>
                 <div className="grid grid-cols-2 gap-3 mt-[30px]">
                     <CancelButton title="Cancel" onClick={onClose} class_="text-lg! font-medium! py-3!" />
-                    <SecondaryButton title="Connect" type="submit" disabled={sending} class_="text-lg! font-medium! py-3!" />
+                    <SecondaryButton title="confirm Disconnect" type="submit" disabled={sending} class_="text-lg! font-medium! py-3!" />
                 </div>
             </form>
         </Model>
