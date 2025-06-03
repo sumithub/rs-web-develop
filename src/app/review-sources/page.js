@@ -11,9 +11,9 @@ export default function ReviewSources() {
         <div className="flex justify-between">
             <div className="flex gap-5 w-full">
                 <div className="flex gap-2.5 items-center">
-                    <h2 className="text-lg font-medium shrink-0">Manage Review Sources</h2>
+                    <h2 className="text-lg capitalize font-medium shrink-0">Manage Review Sources</h2>
                     <div className="text-primary/10">|</div>
-                    <h2 className="text-lg font-medium shrink-0">Connect your business to review platforms</h2>
+                    <h2 className="text-lg capitalize font-medium shrink-0">Connect your business to review platforms</h2>
                 </div>
                 <div className="w-1/4">
                     <Search
@@ -39,7 +39,7 @@ export default function ReviewSources() {
         <div>
             <div className="pt-[15px]">
                 <h2 className="text-lg font-semibold">Popular Review Sources</h2>
-                <div className="pt-[15px] grid grid-cols-3 gap-5">
+                <div className="pt-[15px] grid grid-cols-3 gap-y-[15px] gap-x-5">
                     <ReviewCard />
                     <ReviewCard />
                 </div>
@@ -69,11 +69,12 @@ function ReviewCard() {
                 <hr className="border border-secondary/5 my-[15px]" />
                 <Input
                     label="URL"
-                    placeholder=""
+                    placeholder="https//www.google.com"
                     hideOptional={true}
                     isRequired={true}
                     icon="/images/add-link.svg"
                     infoIcon="/images/url.svg"
+                    inputClass="p-2.5!"
                 />
             </div>
             <div className="flex gap-4 mt-[25px]">
