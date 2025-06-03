@@ -45,12 +45,12 @@ function ChangeEmail() {
 
                 <div className='mt-5'>
                     <div className='flex gap-2'>
-                        <Image src="images/warning.svg" alt='warning' height={22} width={22} />
+                        <Image unoptimized={true} src="images/warning.svg" alt='warning' height={22} width={22} />
                         <div className='text-sm text-secondary font-medium capitalize'>if you entered the wrong email, update it below</div>
                     </div>
 
                     <div className='flex gap-2 mt-2'>
-                        <Image src="images/warning.svg" alt='warning' height={22} width={22} />
+                        <Image unoptimized={true} src="images/warning.svg" alt='warning' height={22} width={22} />
                         <div className='text-sm text-secondary font-medium capitalize'>a new verification email will be sent to the updated email.</div>
                     </div>
 
@@ -72,7 +72,7 @@ function ChangeEmail() {
                         />
                     </div>
                     {error && <div className='flex gap-2.5 justify-center mt-[15px]'>
-                        <Image src="/images/error.svg" alt='error.svg' width={15} height={14} />
+                        <Image unoptimized={true} src="/images/error.svg" alt='error.svg' width={15} height={14} />
                         <h2 className="text-xs text-danger capitalize">{error}</h2>
                     </div>}
                     <div className='grid grid-cols-2 gap-4'>
@@ -84,7 +84,7 @@ function ChangeEmail() {
                 </form>
                 <div className='flex justify-center mt-5'>
                     <Link href="/login" className="flex gap-[15px]">
-                        <Image src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
+                        <Image unoptimized={true} src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
                         <h2 className='text-sm text-secondary'>Back To Login</h2>
                     </Link>
                 </div>

@@ -147,12 +147,12 @@ export default function CustomerTagging() {
                             <td>
                                 <div className='flex items-center gap-2'>
                                     <button className='cursor-pointer'>
-                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28}
+                                        <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28}
                                             onClick={() => { setOpen(true) }} />
                                     </button>
 
                                     <button className='cursor-pointer'>
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                        <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28}
                                             onClick={() => { setOpenTag(true) }} />
                                     </button>
                                 </div>
