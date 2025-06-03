@@ -75,6 +75,12 @@ function ChangeEmail({ onClose, id }) {
                                             value: validEmailRgx,
                                             message: "Please enter a valid email address.",
                                         },
+                                        validate: (value) => {
+                                            if (value === "anu@gmail.com") {
+                                                return "This is your current email. Please enter a different one.";
+                                            }
+                                            return true;
+                                        }
                                     }),
                                 }}
                                 errors={errors}

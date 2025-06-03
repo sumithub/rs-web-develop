@@ -8,7 +8,6 @@ export default function Home() {
       <div className="flex flex-col gap-y-5">
         <Link href="/login">Login</Link>
         <Link href="/reset-password">Reset password</Link>
-        <Link href="/change-email">Change Email</Link>
         <Link href="/verification-email">verification email </Link>
         <Link href="/verify-email">verify email </Link>
         <Link href="/dashboard">dashboard </Link>
