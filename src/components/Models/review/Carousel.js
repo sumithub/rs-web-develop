@@ -58,16 +58,16 @@ export default function Carousel({ onClose, OnSave, id }) {
                             </div>
 
                             <div className="grid grid-cols-3 gap-2 p-2">
-                                <InputForm label="Color Scheme" isRequired={true} placeholder="Select Color"
-                                    formProps={{ ...register("colorScheme", { required: true }) }}
+                                <InputForm label="Color Scheme" isRequired={false} placeholder="Select Color"
+                                    formProps={{ ...register("colorScheme", { required: false }) }}
                                     errors={errors} />
-                                <SelectForm defaultOption="Select" label="Font Family" isRequired={true}
-                                    formProps={{ ...register("select", { required: true }) }}
+                                <SelectForm defaultOption="Select" label="Font Family" isRequired={false}
+                                    formProps={{ ...register("select", { required: false }) }}
                                     errors={errors} clearErrors={clearErrors} >
                                     <option value="selectFont">Select Font</option>
                                 </SelectForm>
-                                <InputForm label="Border Radius" isRequired={true} placeholder="Select Border Color"
-                                    formProps={{ ...register("borderRadius", { required: true }) }}
+                                <InputForm label="Border Radius" isRequired={false} placeholder="Select Border Color"
+                                    formProps={{ ...register("borderRadius", { required: false }) }}
                                     errors={errors} />
                             </div>
                         </div>
@@ -81,14 +81,14 @@ export default function Carousel({ onClose, OnSave, id }) {
                                 <InputForm label="Number of Reviews" isRequired={true} placeholder="Enter review count"
                                     formProps={{ ...register("numberOfReviews", { required: true }) }}
                                     errors={errors} />
-                                <InputForm label="Minimum Rating" isRequired={true} placeholder="Enter Filtering"
-                                    formProps={{ ...register("minimumRating", { required: true }) }}
+                                <InputForm label="Minimum Rating" isRequired={false} placeholder="Enter Filtering"
+                                    formProps={{ ...register("minimumRating", { required: false }) }}
                                     errors={errors} />
                             </div>
 
                             <div className="p-2">
-                                <SelectForm label="Sorting" isRequired={true} defaultOption="Enter sorting"
-                                    formProps={{ ...register("sorting", { required: true }) }}
+                                <SelectForm label="Sorting" isRequired={false} defaultOption="Enter sorting"
+                                    formProps={{ ...register("sorting", { required: false }) }}
                                     errors={errors} clearErrors={clearErrors}>
                                     <option value="latest">Latest</option>
                                     <option value="highest rated">Highest Rated</option>
@@ -127,8 +127,8 @@ export default function Carousel({ onClose, OnSave, id }) {
                             </div>
 
                             <div className="p-2">
-                                <SelectForm defaultOption="Select transitions" label="transitions" isRequired={true}
-                                    formProps={{ ...register("selectTransition", { required: true }) }}
+                                <SelectForm defaultOption="Select transitions" label="transitions" isRequired={false}
+                                    formProps={{ ...register("selectTransition", { required: false }) }}
                                     errors={errors} clearErrors={clearErrors}>
                                     <option value="slide">Slide</option>
                                     <option value="fade">Fade</option>
