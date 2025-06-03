@@ -16,7 +16,7 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
 
     return (
         <div className={`${class_} mt-[15px]`}>
-            {infoIcon && (
+            <label className={`text-sm font-medium text-secondary ${labelClass}`}>{infoIcon && (
                 <span className="cursor-pointer" title="More information">
                     {typeof infoIcon === "string" ? (
                         <Image
@@ -30,8 +30,7 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
                         infoIcon
                     )}
                 </span>
-            )}
-            <label className={`text-sm font-medium text-secondary ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : (hideOptional ? "" : <span className="text-neutral-400">(Optional)</span>)}</label>
+            )}{label}{isRequired ? <span className="text-danger">*</span> : (hideOptional ? "" : <span className="text-neutral-400">(Optional)</span>)}</label>
             <div className="relative">
                 {(inputType !== "password" && icon) && (
                     <img
