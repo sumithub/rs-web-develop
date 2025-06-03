@@ -82,10 +82,11 @@ export default function ImportCustomer() {
         <div>
             <ProgressBar
                 currentStep={activeStep}
-                stepTitle1="Field Mapping"
-                stepTitle2="Add List Details"
-                stepTitle3="Validation & Errors"
-                stepTitle4="Import Confirmation"
+                stepTitle1="Upload File"
+                stepTitle2="Field Mapping"
+                stepTitle3="Add List Details"
+                stepTitle4="Validation & Errors"
+                stepTitle5="Import Confirmation"
             />
 
             <FileInput />
