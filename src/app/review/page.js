@@ -9,7 +9,6 @@ import Search from "../../components/form/Search";
 import Dropdown from "../../components/DropDown";
 import DatePicker from "../../components/form/DatePicker";
 import Loading from "../../components/Loading";
-import Pagination from "../../components/Pagination"
 import Chart from "../../components/charts/Chart"
 import AdminLayout from "../../components/AdminLayout"
 import CustomSelectBox from '../../components/form/CustomSelectBox';
@@ -24,6 +23,7 @@ import AssignReviewToUser from "../../components/Models/review/AssignReviewToUse
 import ReviewDetails from "../../components/Models/review/ReviewDetails";
 import DeleteTemplate from "../../components/Models/review/DeleteTemplate";
 import DateRange from "../../components/form/DateRangePicker";
+import PaginationDemo from "../../components/Pagination";
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -334,7 +334,8 @@ export default function Review() {
 
                 <div className="w-full overflow-x-auto mt-5 border border-border-color rounded-[20px]">
 
-                    <table className="w-full">
+                    {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+
                         <thead>
                             <tr className="text-secondary text-sm font-semibold bg-dark border-b border-border-color text-left">
                                 <th className="py-4 px-4"><TableOrder title="Reviewer"
@@ -403,9 +404,12 @@ export default function Review() {
                                 }) : <tr><td colSpan={10} className='text-center! h-20 text-3xl text-danger'>No data</td></tr>
                             )}
                         </tbody>
-                    </table>
+                    </table> : <div className='text-center text-2xl text-danger mx-auto h-20 py-20'>No Data</div>)}
+                    {list?.length > 0 && <div>
+                        <PaginationDemo />
+                    </div>}
                 </div>
-                <Pagination />
+
             </div>
         </div>
     </AdminLayout>

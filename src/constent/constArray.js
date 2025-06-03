@@ -83,7 +83,7 @@ export const customerTagging = [
 ]
 
 export const manageReview = [
-    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: new Date('2024-06-18T10:00:00') },
+    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: new Date('2024-06-18T10:00:00'), status: "New" },
 
     { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: new Date('2024-06-18T10:00:00'), status: "Responded" },
 
