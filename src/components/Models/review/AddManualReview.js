@@ -1,7 +1,6 @@
 "use client"
 import SecondaryButton from "../../common/SecondaryButton";
 import CancelButton from "../../common/CancelButton";
-import DatePicker from "../../form/DatePicker";
 import Model from "../Model";
 import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
@@ -9,9 +8,10 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import InputForm from "../../form/InputForm";
+import DatePickerForm from "../../form/DatePickerForm";
 
 export default function AddManualReview({ onClose, onSave, id }) {
-    const { register, handleSubmit, setValue, formState: { errors }, } = useForm();
+    const { register, handleSubmit, setValue, formState: { errors }, watch, clearErrors } = useForm();
     const [sending, setSending] = useState(false)
     const [date, setDate] = useState("")
 
@@ -70,14 +70,9 @@ export default function AddManualReview({ onClose, onSave, id }) {
                     </div>
 
                     <div>
-                        <DatePicker label="Date" icon={true}
-                            mainClass="mt-0!"
-                            isRequired={true}
-                            value={date}
-                            dateFormat="dd/MM/yyyy"
-                            onChange={(e) => setDate(e)}
+                        <DatePickerForm label="Date" isRequired={true}
                             formProps={{ ...register("date", { required: true }) }}
-                            errors={errors}
+                            errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}
                         />
                     </div>
 
