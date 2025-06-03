@@ -17,7 +17,7 @@ export default function Signup() {
         setValue,
         watch,
         handleSubmit,
-        formState: { errors, isValid },
+        formState: { errors },
     } = useForm({ mode: "onChange" });
 
     const [loading, setLoading] = useState(false);
@@ -138,7 +138,7 @@ export default function Signup() {
 
                 <button
                     type="submit"
-                    disabled={!isValid || loading}  // ✅ Disable if not valid or loading
+                    disabled={Object.keys(errors).length > 0 || loading}
                     className="disabled:bg-primary/50 text-text text-lg mt-3 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary"
                 >
                     {loading ? "Creating Account..." : "Create Account"}

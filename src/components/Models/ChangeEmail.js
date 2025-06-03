@@ -10,7 +10,7 @@ import { validEmailRgx } from '../../../helper';
 import { toast } from 'react-toastify';
 
 function ChangeEmail({ onClose, id }) {
-    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
+    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
 
 
@@ -33,6 +33,8 @@ function ChangeEmail({ onClose, id }) {
             setSending(false)
         }
     }
+
+    console.log(errors)
 
     return (
         <Model onClose={onClose} title="Change Email" modalClass="w-[50%]!">
@@ -91,7 +93,7 @@ function ChangeEmail({ onClose, id }) {
                         </div>
                         <div className='grid grid-cols-2 gap-4'>
                             <button type='button' className="text-lg font-medium bg-dark hover:bg-white text-text3 w-full mt-5 py-3 rounded-[10px] border border-dark hover:border-border-color cursor-pointer" onClick={onClose}>Cancel</button>
-                            <button type='submit' disabled={sending} className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-5 py-3 rounded-[10px] border border-primary cursor-pointer capitalize">update email</button>
+                            <button type='submit' disabled={sending || Object.keys(errors).length > 0} className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-5 py-3 rounded-[10px] border border-primary cursor-pointer capitalize">update email</button>
                         </div>
                     </form>
                     <div className='flex justify-center mt-5'>
