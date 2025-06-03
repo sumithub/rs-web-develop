@@ -75,7 +75,6 @@ function AddUser({ onClose, id }) {
     //         toast.error("Something went wrong");
     //     }
     // };
-    console.log(errors)
 
     return <Model onClose={onClose} title={`${!id ? "Invite New" : "Edit"} User`} modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>

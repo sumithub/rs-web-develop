@@ -18,7 +18,7 @@ export default function Signup() {
         watch,
         handleSubmit,
         formState: { errors },
-    } = useForm({ mode: "onChange" });
+    } = useForm({});
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
