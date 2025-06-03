@@ -41,6 +41,16 @@ export default function ReviewSources() {
                 <h2 className="text-lg font-semibold">Popular Review Sources</h2>
                 <div className="pt-[15px] grid grid-cols-3 gap-5">
                     <ReviewCard />
+                    <ReviewCard />
+                </div>
+            </div>
+            <div className="pt-5">
+                <h2 className="text-lg font-semibold">All Review Sources</h2>
+                <div className="pt-[15px] grid grid-cols-3 gap-y-[15px] gap-x-5">
+                    <ReviewCard />
+                    <ReviewCard />
+                    <ReviewCard />
+                    <ReviewCard />
                 </div>
             </div>
         </div >
@@ -63,6 +73,7 @@ function ReviewCard() {
                     hideOptional={true}
                     isRequired={true}
                     icon="/images/add-link.svg"
+                    infoIcon="/images/url.svg"
                 />
             </div>
             <div className="flex gap-4 mt-[25px]">
