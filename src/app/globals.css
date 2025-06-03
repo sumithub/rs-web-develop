@@ -1,21 +1,27 @@
 @import "tailwindcss";
-@source "../../src";
 
 :root {
   --primary: #0396FF;
   --primary2: #6FC3FF;
   --secondary: #1F2933;
+  --secondary2: #F6F8FB;
   --text: #FEFEFE;
   --text3: #ADADAD;
   --border-color: #ADADAD4D;
   --border2: #E6E6E6;
   --danger: #DC3545;
+  --danger2: #FF4D4D;
+  --danger-light: #F15D5F;
+  --danger-light2: #F15D5F1a;
   --success: #28A745;
   --success-light: #07BEAA;
+  --success-dark: #328394;
   --dark: #F6F8FB;
   --light: #F9FBFC;
   --custom-purple: #5470DE;
+  --custom-purple-light: #9787FF;
   --custom-yellow: #FFC246;
+  --custom-yellow-dark: #FF9C23;
 
 }
 
@@ -24,24 +30,31 @@
   --border-primary: var(--primary);
   --color-primary2: var(--primary2);
   --color-secondary: var(--secondary);
+  --color-secondary2: var(--secondary2);
   --color-text: var(--text);
   --color-danger: var(--danger);
+  --color-danger2: var(--danger2);
+  --color-danger-light: var(--danger-light);
+  --color-danger-light2: var(--danger-light2);
   --color-border-color: var(--border-color);
   --color-border2: var(--border2);
   --color-text3: var(--text3);
   --color-success: var(--success);
   --color-success-light: var(--success-light);
+  --color-success-dark: var(--success-dark);
   --color-dark: var(--dark);
   --color-light: var(--light);
   --color-custom-purple: var(--custom-purple);
+  --color-custom-purple-light: var(--custom-purple-light);
   --color-custom-yellow: var(--custom-yellow);
+  --color-custom-yellow-dark: var(--custom-yellow-dark);
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--secondary);
-}
 
+}
 
 .slick-next:before,
 .slick-prev:before {
@@ -53,7 +66,7 @@ body {
   display: flex !important;
   align-items: center;
   justify-content: center;
-  bottom: 45px !important;
+  bottom: 20px !important;
   z-index: 20;
   gap: 8px !important;
 }
@@ -157,6 +170,15 @@ body {
   width: 10.5rem !important;
 }
 
+.react-datepicker__header {
+  background: #f9fbfc !important;
+  background-color: #f9fbfc !important;
+}
+
+.react-datepicker {
+  border: 1px solid #ADADAD4D !important;
+  background-color: white !important;
+}
 
 .ldio-x2uulkbinbj>div {
   animation: ldio-x2uulkbinbj 1s infinite linear;
@@ -186,7 +208,7 @@ body {
 
 .ldio-x2uulkbinbj>div div:nth-child(2) {
   transform: rotate(0deg) translate(12.69px, 12.69px);
-  ;
+
 }
 
 .ldio-x2uulkbinbj>div div:nth-child(3) {
@@ -217,9 +239,12 @@ body {
   box-sizing: content-box;
 }
 
+button {
+  @apply cursor-pointer
+}
 
 :disabled {
-  @apply pointer-events-none
+  @apply pointer-events-none opacity-85
 }
 
 .table-class {
@@ -234,7 +259,8 @@ th {
   font-weight: 600;
   color: #1F2933;
   text-align: start;
-  padding: 20px;
+  padding: 16px;
+  border-bottom: 1px solid #E6E6E6;
   background-color: #F6F8FB;
 }
 
@@ -243,7 +269,138 @@ td {
   font-weight: 400;
   color: #1F2933;
   text-align: start;
-  padding: 20px;
-  border-top: 1px solid #E6E6E6;
+  padding: 16px;
+  border-bottom: 1px solid #E6E6E6;
   background-color: white;
+}
+
+
+.slick-list,
+.slick-track,
+.slick-slide,
+.slick-slide>div:first-child {
+  height: 100% !important;
+}
+
+/* Default line styling */
+.line {
+  width: 200px;
+  height: 2px;
+  background: #E8EEF2;
+}
+
+/* Default step styling */
+.steps {
+  position: relative;
+  display: flex;
+  font-size: 14px;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2.5px solid var(--text3);
+  cursor: pointer;
+  color: var(--text3);
+  background: white;
+}
+
+/* Default step title */
+.steps .step-title {
+  color: var(--secondary);
+  position: absolute;
+  width: max-content;
+  top: 100%;
+  font-size: 14px;
+  margin-top: 8px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+/* Active step (current step) - Blue */
+.steps.active {
+  background: var(--primary);
+  border: 2.5px solid var(--primary);
+  color: white;
+}
+
+.steps.active .step-title {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Completed step - Green */
+.steps.completed {
+  background: var(--success);
+  border: 2.5px solid var(--success);
+  color: white;
+}
+
+.steps.completed .step-title {
+  color: var(--success);
+  font-weight: 500;
+}
+
+/* Completed line - Green */
+.line.completed {
+  background: var(--success);
+}
+
+/* Legacy support for old structure - can be removed if not needed */
+.all-completed .line {
+  background: var(--success);
+}
+
+.all-completed .steps {
+  background-color: var(--success);
+  border: 2.5px solid var(--success);
+  color: white;
+}
+
+.all-completed .steps .step-title {
+  color: var(--success);
+}
+
+.rdrDefinedRangesWrapper .rdrInputRanges {
+  display: none;
+}
+
+.css-r5rnga {
+  margin: 0 !important;
+  padding: 12px 18px 12px !important;
+}
+
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.react-international-phone-country-selector {
+  flex-shrink: 0 !important;
+}
+
+.react-international-phone-dial-code-preview {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  font-size: 14px !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+}
+
+.react-international-phone-input {
+  border-left: 0 !important;
+}
+
+.react-international-phone-input-container .react-international-phone-country-selector-button {
+  margin-right: 0 !important;
+  border-right: 0 !important;
+}
+
+.react-international-phone-dial-code-preview--disabled,
+.react-international-phone-input-container .react-international-phone-input--disabled,
+.react-international-phone-input-container .react-international-phone-country-selector-button:disabled {
+  background-color: var(--light);
+  border-color: var(--light);
+  color: var(--text);
+  opacity: 0.7;
 }

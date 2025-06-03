@@ -3,10 +3,9 @@ import React from 'react'
 import Signup from '../../components/Signup'
 
 function RegisterPage() {
-  return (
-    <AuthLayout>
-      <Signup />
-    </AuthLayout>
+  return (<AuthLayout cardClass='py-5!'>
+    <Signup />
+  </AuthLayout>
   )
 }
 

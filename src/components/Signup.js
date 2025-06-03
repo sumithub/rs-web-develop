@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useState } from "react";
 import InputForm from "./form/InputForm";
 import Success from "./common/Success";
+import axios from "axios";
+import Image from "next/image";
+import { validEmailRgx, validPasswordRgx } from "../../helper";
 
 export default function Signup() {
     const {
@@ -15,26 +18,30 @@ export default function Signup() {
         formState: { errors },
     } = useForm();
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("")
 
-    const onSubmit = async () => {
+    const onSubmit = async (data) => {
         try {
-            console.log("rrr")
             setLoading(true);
+            await axios.post("/api", data)
+            setLoading(true)
         } catch (error) {
             console.error("Signup error:", error);
+            setLoading(false)
+            setError(error?.message);
         }
     };
-    console.log(errors)
 
     if (loading) {
-        return <Success message="Registration Successful! Please Verify Your Email Address To Activate Your Account" link="/" buttonTitle="Continue" />
+        return <Success message="Registration Successful! Please Verify Your Email Address To Activate Your Account" link="/dashboard" buttonTitle="Continue" />
     }
     return (<>
         <div>
             <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Sign Up</h2>
-            <p className="text-xs pt-2.5 pb-[25px] capitalize text-center text-[#616E7C]">Let&#39;s get you all st up so you can access your personal account.</p>
+            <p className="text-xs sm:pt-1.5 pt-2.5 pb-2.5 capitalize text-center text-[#616E7C]">Let&#39;s get you all st up so you can access your personal account.</p>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
+                    class_="mt-0!"
                     label="Full Name"
                     name="name"
                     inputType="text"
@@ -56,12 +63,9 @@ export default function Signup() {
                         ...register("email", {
                             required: "Email is required",
                             pattern: {
-                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                value: validEmailRgx,
                                 message: "Email is invalid."
-                            },
-                            validate: (value) =>
-                                !["test@gmail.com", "admin@gmail.com"].includes(value) ||
-                                "This email address is already in use. Please try another."
+                            }
                         })
                     }}
                     setValue={setValue}
@@ -77,7 +81,7 @@ export default function Signup() {
                         ...register("password", {
                             required: true,
                             pattern: {
-                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]{8,}$/,
+                                value: validPasswordRgx,
                                 message: "Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character."
                             }
                         })
@@ -86,8 +90,9 @@ export default function Signup() {
                     watch={watch}
                 />
 
-                <label htmlFor="terms" className="mt-[15px] gap-1.5 flex items-center">
+                <label htmlFor="terms" className="mt-[10px] gap-1.5 flex items-center">
                     <Checkbox2
+                        required={true}
                         id="terms" />
                     <div className="text-sm text-secondary">
                         I Agree To Our{" "}
@@ -100,15 +105,18 @@ export default function Signup() {
                         </Link>
                     </div>
                 </label>
-                <button
+                {error && <div className='flex gap-2.5 justify-center mt-[15px]'>
+                    <Image src="/images/error.svg" alt='error.svg' width={15} height={14} />
+                    <h2 className="text-xs text-danger capitalize">{error}</h2>
+                </div>} <button
                     type="submit"
                     disabled={loading}
-                    className="disabled:bg-primary/50 text-text text-lg mt-5 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary"
+                    className="disabled:bg-primary/50 text-text text-lg mt-3 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary"
                 >
                     {loading ? "Creating Account..." : "Create Account"}
                 </button>
 
-                <h2 className="text-sm text-center mt-5 capitalize text-secondary">
+                <h2 className="text-sm text-center mt-3 capitalize text-secondary">
                     Already have an account?
                     <Link href="/login" className="text-primary underline underline-offset-[3px]">
                         {" "}
