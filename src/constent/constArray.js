@@ -127,3 +127,10 @@ export const fieldMapping = [
     { header: "Phone Number", firstRow: +919856958962 },
     { header: "Email", firstRow: "odavis@outlook.com" },
 ]
+
+export const reviewResponse = [
+    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
+]
