@@ -17,7 +17,7 @@ export default function Signin() {
         setValue,
         watch,
         handleSubmit,
-        formState: { errors, isValid },
+        formState: { errors },
     } = useForm();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -111,7 +111,7 @@ export default function Signin() {
                     </div>}
                     <button
                         type="submit"
-                        disabled={!isValid || loading || !checked}
+                        disabled={Object.keys(errors).length > 0 || loading || !checked}
                         className="disabled:bg-primary/50 text-text text-lg mt-3 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary">Login</button>
                     <h2 className='text-sm capitalize text-secondary pt-2.5 text-center'>Don&#39;t have an account? <Link href="/register" className='text-primary underline underline-offset-3'>Sign Up</Link></h2>
                 </div>
