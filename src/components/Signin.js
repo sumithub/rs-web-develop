@@ -48,7 +48,7 @@ export default function Signin() {
 
     return (<>
         <div>
-            <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Login to your account</h2>
+            <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Login To Your Account</h2>
             <p className="text-xs sm:pt-1.5 pt-2.5 pb-2.5 capitalize text-center text-[#616E7C]">Hey! We soar you working welcome back!</p>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
