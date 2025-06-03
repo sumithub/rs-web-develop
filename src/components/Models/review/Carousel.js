@@ -11,8 +11,6 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { getError } from "../../../../helper";
 import InputForm from "../../form/InputForm";
-import Image from "next/image";
-import Switch from "../../../components/form/Switch";
 
 export default function Carousel({ onClose, OnSave, id }) {
     const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
@@ -52,167 +50,123 @@ export default function Carousel({ onClose, OnSave, id }) {
                             setOpen(true)
                         }} />
                 }
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <div className="p-[15px] bg-dark rounded-[15px]">
-                            <h2 className="text-lg font-semibold">Design</h2>
-                            <div className="grid grid-cols-3 gap-[15px] pt-2.5">
-                                <InputForm
-                                    label="Color Scheme"
-                                    isRequired={true}
-                                    placeholder="Select Color"
-                                    formProps={{ ...register("colorScheme", { required: true }) }}
-                                    errors={errors}
-                                    inputClass="border border-primary3/10 p-2.5! bg-white!"
-                                    labelClass="pb-2.5! inline-block"
-                                    class_="mt-0!"
-                                />
-                                <SelectForm
-                                    defaultOption="Select"
-                                    label="Font Family"
-                                    labelClass="pb-2.5 inline-block mb-0!"
-                                    isRequired={true}
-                                    formProps={{ ...register("select", { required: true }) }}
-                                    errors={errors}
-                                    class_="mt-0!"
-                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
-                                    clearErrors={clearErrors} >
+                        <div className="border border-border-color bg-[#0396FF1a] rounded-md">
+                            <div className="mt-2 pl-2 font-semibold text-lg">
+                                Design
+                            </div>
+
+                            <div className="grid grid-cols-3 gap-2 p-2">
+                                <InputForm label="Color Scheme" isRequired={false} placeholder="Select Color"
+                                    formProps={{ ...register("colorScheme", { required: false }) }}
+                                    errors={errors} />
+                                <SelectForm defaultOption="Select" label="Font Family" isRequired={false}
+                                    formProps={{ ...register("select", { required: false }) }}
+                                    errors={errors} clearErrors={clearErrors} >
                                     <option value="selectFont">Select Font</option>
                                 </SelectForm>
-                                <InputForm
-                                    label="Border Radius"
-                                    isRequired={true}
-                                    placeholder="Select Border Color"
-                                    formProps={{ ...register("colorScheme", { required: true }) }}
-                                    errors={errors}
-                                    inputClass="border border-primary3/10 p-2.5! bg-white!"
-                                    labelClass="pb-2.5! inline-block"
-                                    class_="mt-0!"
-                                />
+                                <InputForm label="Border Radius" isRequired={false} placeholder="Select Border Color"
+                                    formProps={{ ...register("borderRadius", { required: false }) }}
+                                    errors={errors} />
                             </div>
                         </div>
 
-                        <div className="p-[15px] bg-dark rounded-[15px] mt-5">
-                            <h2 className="text-lg font-semibold">Content</h2>
-                            <div className="grid grid-cols-2 gap-5">
-                                <InputForm
-                                    label="Number of Reviews"
-                                    isRequired={true}
-                                    placeholder="Enter review count"
-                                    formProps={{ ...register("colorScheme", { required: true }) }}
-                                    errors={errors}
-                                    inputClass="border border-primary3/10 p-2.5! bg-white!"
-                                    labelClass="pb-2.5! inline-block"
-                                    class_="mt-0!"
-                                />
-                                <InputForm
-                                    label="Minimum Rating"
-                                    isRequired={true}
-                                    placeholder="Enter filtering"
-                                    formProps={{ ...register("colorScheme", { required: true }) }}
-                                    errors={errors}
-                                    inputClass="border border-primary3/10 p-2.5! bg-white!"
-                                    labelClass="pb-2.5! inline-block"
-                                    class_="mt-0!"
-                                />
+                        <div className="border border-border-color bg-[#0396FF1a] rounded-md mt-2">
+                            <div className="mt-2 pl-2 font-semibold text-lg">
+                                Content
                             </div>
 
-                            <div>
-                                <InputForm
-                                    label="sorting"
-                                    isRequired={true}
-                                    placeholder="Enter sorting"
-                                    formProps={{ ...register("colorScheme", { required: true }) }}
-                                    errors={errors}
-                                    inputClass="border border-primary3/10 p-2.5! bg-white!"
-                                    labelClass="pb-2.5! inline-block"
-                                    class_="mt-2.5!"
-                                />
+                            <div className="grid grid-cols-2 gap-2 p-2 ">
+                                <InputForm label="Number of Reviews" isRequired={true} placeholder="Enter review count"
+                                    formProps={{ ...register("numberOfReviews", { required: true }) }}
+                                    errors={errors} />
+                                <InputForm label="Minimum Rating" isRequired={false} placeholder="Enter Filtering"
+                                    formProps={{ ...register("minimumRating", { required: false }) }}
+                                    errors={errors} />
                             </div>
 
-                            <div className="pt-2.5 flex gap-[15px] items-center">
-                                <h2 className="text-base font-medium">Show Reviewer Details</h2>
-                                <Switch />
-                            </div>
-
-                        </div>
-
-                        <div className="p-[15px] bg-dark rounded-[15px] mt-5">
-                            <h2 className="text-lg font-semibold">Review Sources</h2>
-                            <h3 className="text-base pt-2.5 font-medium">Select up to 3</h3>
-                            <div className="flex gap-[15px] items-center pt-[15px]">
-                                <div className="flex gap-2.5 items-center">
-                                    <Checkbox />
-                                    <div>Google</div>
-                                </div>
-                                <div className="flex gap-2.5 items-center">
-                                    <Checkbox />
-                                    <div>Trustpilot</div>
-                                </div>
-                                <div className="flex gap-2.5 items-center">
-                                    <Checkbox />
-                                    <div>Yelp</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="p-[15px] bg-dark rounded-[15px] mt-5">
-                            <h2 className="text-lg font-semibold">Behaviour</h2>
-                            <div className="0">
-                                <SelectForm
-                                    defaultOption="Select Transitions"
-                                    label="Transitions"
-                                    labelClass="pb-2.5 inline-block mb-0!"
-                                    isRequired={true}
-                                    formProps={{ ...register("select", { required: true }) }}
-                                    errors={errors}
-                                    class_="mt-0!"
-                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
-                                    clearErrors={clearErrors} >
-                                    <option value="selectFont">Select Font</option>
+                            <div className="p-2">
+                                <SelectForm label="Sorting" isRequired={false} defaultOption="Enter sorting"
+                                    formProps={{ ...register("sorting", { required: false }) }}
+                                    errors={errors} clearErrors={clearErrors}>
+                                    <option value="latest">Latest</option>
+                                    <option value="highest rated">Highest Rated</option>
                                 </SelectForm>
                             </div>
-                            <div className="flex gap-[15px] items-center mt-2.5">
-                                <h2 className="text-base font-medium">Auto-Scroll</h2>
-                                <Switch />
+
+                            <div className="p-2 mb-2">
+                                Show Reviewer Details
                             </div>
                         </div>
-                        <div className="mt-[30px] grid grid-cols-2 gap-5">
-                            <SecondaryButton title="Save" type="submit" disabled={sending} class_="bg-white! text-primary!" />
+
+                        <div className="border border-border-color bg-[#0396FF1a] rounded-md mt-2 ">
+                            <div className="font-semibold text-lg mt-2 pl-2">
+                                Review Sources
+                            </div>
+
+                            <div className="pl-2">
+                                Select up to 3
+                            </div>
+
+                            <div className="pl-2 flex gap-2 mb-2">
+                                <Checkbox />
+                                <div>Google</div>
+
+                                <Checkbox />
+                                <div>Trustpilot</div>
+
+                                <Checkbox />
+                                <div>Yelp</div>
+                            </div>
+                        </div>
+
+                        <div className="border border-border-color bg-[#0396FF1a] rounded-md mt-2 ">
+                            <div className="font-semibold text-lg mt-2 pl-2">
+                                Behaviour
+                            </div>
+
+                            <div className="p-2">
+                                <SelectForm defaultOption="Select transitions" label="transitions" isRequired={false}
+                                    formProps={{ ...register("selectTransition", { required: false }) }}
+                                    errors={errors} clearErrors={clearErrors}>
+                                    <option value="slide">Slide</option>
+                                    <option value="fade">Fade</option>
+                                </SelectForm>
+                            </div>
+
+                            <div className="mb-2">
+                                <div className="pl-2">Auto-Scroll</div>
+                            </div>
+                        </div>
+
+                        <div className="mt-2 grid grid-cols-2 gap-4">
+                            <SecondaryButton title="Save" type="submit" disabled={sending} />
                             <CancelButton title="Next" />
                         </div>
                     </div>
 
-                    <div className="shadow-sm rounded-[15px]">
-                        <div className="bg-primary/10 rounded-t-[15px] px-5 py-[18px] flex gap-2.5 items-center">
-                            <Image src="/images/eye1.svg" alt="eye1" width={22} height={22} />
-                            <h2 className="text-lg font-semibold">Widget Preview</h2>
-                        </div>
-                        <div className="p-5">
-                            <div className="border border-border2 rounded-[10px] p-5">
-                                <div className="text-center pt-5">
-                                    <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
-                                    <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
-                                </div>
-                                <div className="flex justify-between items-center gap-2.5">
-                                    <Image src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
-                                    <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
-                                    <Image src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
-                                </div>
-                                <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br />
-                                    <span className="font-medium text-primary">Read More</span></p>
-                                <div className="my-10 flex justify-center">
-                                    <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary">
-                                        <span>
-                                            <Image src="/images/google.svg" alt="google" width={18} height={18} className="" />
-                                        </span>
-                                        Verified On Google
-                                    </button>
-                                </div>
-                                <div className="">
-                                    <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
-                                </div>
+                    <div className="border border-border-color rounded-md">
+                        <div className='bg-[#0396FF1a] px-5 py-4 rounded-tl-[10px] rounded-tr-[10px]'>
+                            <div className='flex items-center gap-3'>
+                                <div className='text-secondary text-lg font-semibold'>Widget Preview</div>
                             </div>
+                        </div>
+
+                        <div className='p-5'>
+                            <div className='border border-border-color rounded-[10px] p-5 text-secondary text-sm mb-8 leading-normal'>
+                                <div>Hi {"John Deo"},</div>
+
+                                <div className='my-5'>Thank you for your recent visit! We'd love to hear your feedback.</div>
+
+                                <div>Click the link below to leave a review:{"review_link"} Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+
+                                <div className='mt-10'>business_name</div>
+                            </div>
+                        </div>
+
+                        <div className="p-4">
+                            <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
                         </div>
                     </div>
                 </div>
