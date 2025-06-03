@@ -56,19 +56,19 @@ export default function CreateTag({ onClose, id }) {
                         formProps={{ ...register("description", { required: false }) }}
                         errors={errors}
                     />
-                    <InputForm
+                    {!id && <InputForm
                         class_="mt-2!"
                         label="Tagged Customers"
                         formProps={{ ...register("taggedCustomers", { required: false }) }}
                         errors={errors}
-                    />
+                    />}
                 </div>
 
-                <div className="relative mt-4">
+                {!id && <div className="relative mt-4">
                     <button type="button" className="flex bg-[#0396FF10] items-center gap-3 border border-[#0396FF80] rounded-[11px] py-2.5 px-3 text-primary text-sm font-medium w-full disabled:pointer-events-none disabled:opacity-50"><Image src="/images/setting.svg" alt="settings" height={36} width={36} unoptimized={true} />Updated</button>
 
                     <button type="button" className="absolute right-3 top-4 disabled:pointer-events-none"><Image src="/images/close-square.svg" alt="close" height={18} width={18} unoptimized={true} /></button>
-                </div>
+                </div>}
 
                 <div className="grid grid-cols-2 gap-3 mt-7">
                     <CancelButton title="Cancel" onClick={onClose} />

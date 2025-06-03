@@ -87,7 +87,7 @@ export default function Signup() {
                             required: "Email is required",
                             pattern: {
                                 value: validEmailRgx,
-                                message: "Email is invalid.",
+                                message: "Please enter a valid email address.",
                             },
                         }),
                     }}
@@ -106,7 +106,7 @@ export default function Signup() {
                             pattern: {
                                 value: validPasswordRgx,
                                 message:
-                                    "Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character.",
+                                    "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.",
                             },
                         }),
                     }}
@@ -119,7 +119,8 @@ export default function Signup() {
                 <label htmlFor="terms" className="mt-[10px] gap-1.5 flex items-center">
                     <Checkbox2 id="terms"
                         checked={termsAccepted}
-                        onChange={() => setTermsAccepted(!termsAccepted)} />
+                        onChange={() => setTermsAccepted(!termsAccepted)}
+                        errors={errors} />
                     <div className="text-sm text-secondary capitalize">
                         I Agree To The{" "}
                         <Link href="/" className="text-primary">Privacy Policy</Link> and{" "}
