@@ -1,7 +1,6 @@
 "use client"
 import Image from "next/image"
 import SecondaryButton from "../common/SecondaryButton"
-import CancelButton from "../common/CancelButton"
 
 export default function FileInput({ onChange, accept }) {
     return <>
@@ -29,7 +28,5 @@ export default function FileInput({ onChange, accept }) {
                 }} />
 
         </label>
-
-
     </>
 }

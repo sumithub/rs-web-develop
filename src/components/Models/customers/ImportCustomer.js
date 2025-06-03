@@ -15,6 +15,7 @@ import InputForm from "../../form/InputForm"
 import { useForm } from "react-hook-form"
 import RadioForm from "../../form/RadioForm"
 import Image from "next/image"
+import { title } from "process"
 
 export default function ImportCustomer() {
     const [activeStep, setActiveStep] = useState(1)
@@ -28,6 +29,12 @@ export default function ImportCustomer() {
         { title: "total customers in file", summary: 250 },
         { title: "valid customers to import", summary: 245 },
         { title: "duplicates skipped", summary: "03" },
+        { title: "assigned tag", summary: "VIP customers" },
+    ]
+
+    const IMPORTSUMMARY1 = [
+        { title: "imported customers ", summary: 245 },
+        { title: "customer list", summary: "new leads-march 2025" },
         { title: "assigned tag", summary: "VIP customers" },
     ]
 
@@ -71,17 +78,19 @@ export default function ImportCustomer() {
     }
 
     return <main>
-        <ProgressBar
-            currentStep={activeStep}
-            stepTitle1="Field Mapping"
-            stepTitle2="Add List Details"
-            stepTitle3="Validation & Errors"
-            stepTitle4="Import Confirmation"
-        />
 
-        {/* <FileInput /> */}
+        <div>
+            <ProgressBar
+                currentStep={activeStep}
+                stepTitle1="Field Mapping"
+                stepTitle2="Add List Details"
+                stepTitle3="Validation & Errors"
+                stepTitle4="Import Confirmation"
+            />
 
-        {/* <div>
+            <FileInput />
+
+            {/* <div>
             <div className="text-text3 text-sm capitalize">Map your CSV columns to their corresponding fields. Header Row and First Row reflect what's in your CSV file. Use the Mapping dropdown to select which attribute the column is associated with.</div>
 
             <div className='table-class mt-8'>
@@ -122,7 +131,7 @@ export default function ImportCustomer() {
             </div>
         </div> */}
 
-        {/* <div>
+            {/* <div>
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <InputForm label="last name" isRequired={true}
@@ -155,7 +164,7 @@ export default function ImportCustomer() {
             </form>
         </div> */}
 
-        {/* <div>
+            {/* <div>
             <div className="border border-border-color rounded-[20px] pt-3">
                 <div className="px-3">
                     <div className="flex items-center justify-between w-full">
@@ -231,35 +240,44 @@ export default function ImportCustomer() {
             </div>
         </div> */}
 
-        <div>
-            <div className="flex items-center justify-between">
-                <div className="text-success text-xl font-semibold">File validated successfully!</div>
+            {/* <div>
+                <div className="flex items-center justify-between">
+                    <div className="text-success text-xl font-semibold">File validated successfully!</div>
 
-                <button type="button" className="text-white text-base font-medium bg-primary px-2 py-1.5 rounded-lg border border-primary cursor-pointer capitalize disabled:pointer-events-none disabled:opacity-50 flex items-center gap-2"><Image src="/images/info-circle.svg" alt="info" height={16} width={16} unoptimized={true} />Download Sample CSV</button>
-            </div>
-
-            <div>
-                <div className="text-secondary text-lg font-semibold capitalize mt-3">import summary</div>
+                    <button type="button" className="text-white text-base font-medium bg-primary px-2 py-1.5 rounded-lg border border-primary cursor-pointer capitalize disabled:pointer-events-none disabled:opacity-50 flex items-center gap-2"><Image src="/images/info-circle.svg" alt="info" height={16} width={16} unoptimized={true} />Download Sample CSV</button>
+                </div>
 
                 <div>
-                    {IMPORTSUMMARY.map((e, i) => <div key={i}>
-                        <div className="flex items-center justify-between my-3">
-                            <div className="text-text3 text-base capitalize font-normal!">{e.title}</div>
-                            <div className="text-secondary text-base font-medium capitalize">{e.summary}</div>
-                        </div>
-                        {/* <div className="flex items-center justify-between my-3">
+                    <div className="text-secondary text-lg font-semibold capitalize mt-3">import summary</div>
+
+                    <div>
+                        {IMPORTSUMMARY.map((e, i) => <div key={i}>
+                            <div className="flex items-center justify-between my-3">
+                                <div className="text-text3 text-base capitalize font-normal!">{e.title}</div>
+                                <div className="text-secondary text-base font-medium capitalize">{e.summary}</div>
+                            </div>
+                            <div className="flex items-center justify-between my-3">
                             <div className="text-text3 text-base capitalize font-normal!">invalid entries</div>
                             <div className="text-secondary text-base font-medium capitalize">02 | <span className="text-primary text-base font-medium underline underline-offset-4">view detail</span></div>
-                        </div> */}
-                        <hr className="border-t border-border-color" />
-                    </div>)}
+                        </div>
+                            <hr className="border-t border-border-color" />
+                        </div>)}
+                    </div>
                 </div>
-            </div>
+            </div> */}
+
         </div>
 
-        <div className="grid grid-cols-2 gap-3 mt-5">
-            <CancelButton type="button" title="Cancel" />
-            <SecondaryButton title=" Next" type="button" />
-        </div>
+        {/* <div>
+            <div className="text-secondary text-lg font-semibold capitalize mt-3">import summary</div>
+            {IMPORTSUMMARY1.map((e, i) => <div key={i}>
+                <div className="flex items-center justify-between my-3">
+                    <div className="text-text3 text-base capitalize font-normal!">{e.title}</div>
+                    <div className="text-secondary text-base font-medium capitalize">{e.summary}</div>
+                </div>
+
+                <hr className="border-t border-border-color" />
+            </div>)}
+        </div> */}
     </main>
 }
