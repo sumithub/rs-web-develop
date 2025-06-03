@@ -51,7 +51,7 @@ export default function ReviewSources() {
             <div className="pt-5">
                 <h2 className="text-lg font-semibold">All Review Sources</h2>
                 <div className="pt-[15px] grid grid-cols-3 gap-y-[15px] gap-x-5">
-                    <ReviewCard status="disconnect" />
+                    <ReviewCard status="connect" />
                     <ReviewCard />
                     <ReviewCard />
                     <ReviewCard />
@@ -64,6 +64,7 @@ export default function ReviewSources() {
 function ReviewCard({ status }) {
     const [openDisconnect, setOpenDisconnect] = useState(false)
     const [openModal, setOpenModal] = useState(false)
+    const isConnected = status === "connect";
 
     return (
         <div className="p-[15px] shadow-sm rounded-[15px]">
@@ -102,18 +103,45 @@ function ReviewCard({ status }) {
                     inputClass="p-2.5!"
                 />
             </div>
-            {status === "disconnect" && < div className="flex gap-4 mt-[25px]">
-                <button className="text-lg leading-none w-full font-medium bg-danger border border-danger py-3 rounded-[10px] text-white"
-                    onClick={() => { setOpenDisconnect(true) }}>
-                    Disconnect
-                </button>
-                <button>
-                    <Image unoptimized={true} src="/images/edit.svg" alt="edit" width={46} height={46} onClick={() => { setOpenModal(true) }} />
-                </button>
-            </div>}
-            <button className="text-lg leading-none w-full font-medium bg-primary border border-primary hover:text-primary hover:bg-white py-3 rounded-[10px] mt-[25px] text-white" onClick={() => { setOpenModal(true) }}>
-                Connect
-            </button>
+            <div >
+                {isConnected ? (
+                    <div className="flex gap-4 mt-[25px]">
+                        <button
+                            className="text-lg leading-none w-full font-medium bg-danger border border-danger py-3 rounded-[10px] text-white"
+                            onClick={() => setOpenDisconnect(true)}
+                        >
+                            Disconnect
+                        </button>
+                        <button onClick={() => setOpenModal(true)}>
+                            <Image
+                                unoptimized
+                                src="/images/edit.svg"
+                                alt="Edit connection"
+                                width={46}
+                                height={46}
+                            />
+                        </button>
+                    </div>
+                ) : (
+                    <div className="flex gap-4 mt-[25px]">
+                        <button
+                            className="text-lg leading-none w-full font-medium bg-primary border border-primary hover:text-primary hover:bg-white py-3 rounded-[10px] text-white"
+                            onClick={() => setOpenModal(true)}
+                        >
+                            Connect
+                        </button>
+                        <button onClick={() => setOpenModal(true)}>
+                            <Image
+                                unoptimized
+                                src="/images/edit.svg"
+                                alt="Edit connection"
+                                width={46}
+                                height={46}
+                            />
+                        </button>
+                    </div>
+                )}
+            </div>
         </div >
     )
 }
