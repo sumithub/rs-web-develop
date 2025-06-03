@@ -16,7 +16,7 @@ const CustomInput = forwardRef(({ value, onClick, class_ = "", icon }, ref) => (
 
 function DatePicker({ label = '', showTimeInput = false, icon = "", class_, value, labelClass = "", isRequired, minDate, maxDate, onChange, mainClass }) {
     return (<div className={`mt-4 relative w-full text-lg z-[11] ${mainClass}`}>
-        {label && <label className={`text-sm text-secondary mb-1 block capitalize  ${labelClass}`}>{label}{isRequired ? <span>*</span> : <span className="text-neutral-400"> (Optional)</span>} </label>}
+        {label && <label className={`text-sm text-secondary mb-1 block capitalize  ${labelClass}`}>{label}{isRequired ? <span className='text-danger'>*</span> : <span className="text-neutral-400"> (Optional)</span>} </label>}
         <ReactDatePicker
             showYearDropdown={true}
             showMonthDropdown={true}

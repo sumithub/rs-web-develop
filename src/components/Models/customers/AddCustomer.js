@@ -18,7 +18,7 @@ import ImportCustomer from "../customers/ImportCustomer"
 function AddCustomer({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
-    const [type, setType] = useState("import")
+    const [type, setType] = useState("manually")
 
     const handleViewChange = (event) => {
         setType(event.target.value);

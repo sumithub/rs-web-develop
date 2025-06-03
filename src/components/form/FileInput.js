@@ -5,7 +5,7 @@ import SecondaryButton from "../common/SecondaryButton"
 export default function FileInput({ onChange, accept }) {
     return <>
         <div className="flex items-center justify-between mb-5">
-            <div className="laptop:text-xs tablet:text-[10px] text-base mt-0.5 mb-[2px] capitalize  line-clamp-1 overflow-hidden">Upload</div>
+            <div className="laptop:text-xs tablet:text-[10px] text-base mt-0.5 mb-[2px] capitalize  line-clamp-1 overflow-hidden">Upload<span className="text-danger">*</span></div>
             <button type="button" className="text-white text-base font-medium bg-primary px-2 py-1.5 rounded-lg border border-primary cursor-pointer capitalize  disabled:pointer-events-none disabled:opacity-50 flex items-center gap-2"><Image src="/images/info-circle.svg" alt="info" height={16} width={16} unoptimized={true} />Download Sample CSV</button>
         </div>
 

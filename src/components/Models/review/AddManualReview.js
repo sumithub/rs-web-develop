@@ -9,9 +9,10 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import InputForm from "../../form/InputForm";
+import Rating from "../../form/Rating";
 
 export default function AddManualReview({ onClose, onSave, id }) {
-    const { register, handleSubmit, setValue, formState: { errors }, } = useForm();
+    const { register, handleSubmit, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
     const [date, setDate] = useState("")
 
@@ -39,10 +40,19 @@ export default function AddManualReview({ onClose, onSave, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <div>
-                        <InputForm label="Add Rating" isRequired={true}
+                        <Rating
+                            label="Add Rating"
+                            isRequired={true}
+                            count={5}
+                            formProps={{ ...register("rating", { required: true }) }}
+                            errors={errors}
+                            setValue={setValue}
+                            watch={watch}
+                        />
+                        {/* <InputForm label="Add Rating" isRequired={true}
                             formProps={{ ...register("addRating", { required: true }) }}
                             errors={errors}
-                            setValue={setValue} />
+                            setValue={setValue} /> */}
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
@@ -71,7 +81,7 @@ export default function AddManualReview({ onClose, onSave, id }) {
 
                     <div>
                         <DatePicker label="Date" icon={true}
-                            mainClass="mt-0!"
+                            class_="py-3! px-2.5!"
                             isRequired={true}
                             value={date}
                             dateFormat="dd/MM/yyyy"

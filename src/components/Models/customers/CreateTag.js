@@ -59,6 +59,7 @@ export default function CreateTag({ onClose, id }) {
                     {!id && <InputForm
                         class_="mt-2!"
                         label="Tagged Customers"
+                        type="number"
                         formProps={{ ...register("taggedCustomers", { required: false }) }}
                         errors={errors}
                     />}

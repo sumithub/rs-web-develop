@@ -22,8 +22,9 @@ export default function ImportCustomer() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [tab, setTab] = useState(1);
+    const [image, setImage] = useState(null)
 
-    const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
+    const { register, handleSubmit, clearErrors, watch, formState: { errors }, } = useForm();
 
     const IMPORTSUMMARY = [
         { title: "File name", summary: "abc.csv" },
@@ -89,7 +90,15 @@ export default function ImportCustomer() {
                 stepTitle5="Import Confirmation"
             />
 
-            {tab === 1 && <FileInput />}
+            {tab === 1 &&
+
+                <FileInput localImage={image} image={watch("image")}
+                    onChange={(e) => {
+                        setImage(e.target.files[0]);
+                    }} />
+
+
+            }
 
             {tab === 2 && <div>
                 <div className="text-text3 text-sm capitalize">Map your CSV columns to their corresponding fields. Header Row and First Row reflect what's in your CSV file. Use the Mapping dropdown to select which attribute the column is associated with.</div>
