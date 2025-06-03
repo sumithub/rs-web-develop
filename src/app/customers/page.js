@@ -161,7 +161,7 @@ function Customers() {
                         </CustomSelectBox>
 
                         <button className="flex items-center text-xs justify-center gap-2 bg-primary border border-primary py-[10.5px] px-3 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50" onClick={() => { setOpenBoost(true) }}>
-                            <Image src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
+                            <Image unoptimized={true} src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
 
                         <button className="bg-primary border border-primary text-xs hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
                             onClick={() => { setOpen(true) }}>Add New Customer</button>
@@ -192,8 +192,8 @@ function Customers() {
                             }}
                             className={`${tab === "list" ? "bg-primary" : ""}  border border-border-color h-9 w-9 rounded-lg flex items-center justify-center mx-auto`}>
 
-                            {tab === "grid" && <Image src="/images/list.svg" alt="list" width={16} height={16} />}
-                            {tab === "list" && <Image src="/images/list-active.svg" alt="list" width={16} height={16} />}
+                            {tab === "grid" && <Image unoptimized={true} src="/images/list.svg" alt="list" width={16} height={16} />}
+                            {tab === "list" && <Image unoptimized={true} src="/images/list-active.svg" alt="list" width={16} height={16} />}
                         </button>
 
                         <button
@@ -202,8 +202,8 @@ function Customers() {
                             }}
                             className={`${tab === "grid" ? "bg-primary" : ""}  border border-border-color h-9 w-9 rounded-lg flex items-center justify-center mx-auto`}>
 
-                            {tab === "list" && <Image src="/images/grid.svg" alt="grid" width={16} height={16} />}
-                            {tab === "grid" && <Image src="/images/grid-active.svg" alt="grid" width={16} height={16} />}
+                            {tab === "list" && <Image unoptimized={true} src="/images/grid.svg" alt="grid" width={16} height={16} />}
+                            {tab === "grid" && <Image unoptimized={true} src="/images/grid-active.svg" alt="grid" width={16} height={16} />}
                         </button>
                     </div>}
                 </div>

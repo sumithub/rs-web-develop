@@ -26,15 +26,15 @@ export default function ShareOnSocialMedia({ onClose, onSave }) {
                         <h2 className="mt-[15px] text-sm font-medium">Linkedin</h2>
                     </Link>
                     <Link href="https://www.instagram.com/" target="_blank" className="text-center">
-                        <Image unoptimized={true} src="/images/insta.svg" alt="insta" width={45} height={45} className="mx-auto" />
+                        <Image unoptimized={true} src="/images/insta.svg" alt="insta" width={41} height={41} className="mx-auto" />
                         <h2 className="mt-[15px] text-sm font-medium">Instagram</h2>
                     </Link>
                     <Link href="https://dribbble.com/" target="_blank" className="text-center">
-                        <Image unoptimized={true} src="/images/dribble.svg" alt="dribble" width={45} height={45} className="mx-auto" />
+                        <Image unoptimized={true} src="/images/dribbble1.svg" alt="dribble" width={41} height={41} className="mx-auto" />
                         <h2 className="mt-[15px] text-sm font-medium">Dribble</h2>
                     </Link>
                     <Link href="/" className="text-center">
-                        <Image unoptimized={true} src="/images/more.svg" alt="more" width={41} height={41} className="mx-auto" />
+                        <Image unoptimized={true} src="/images/more.svg" alt="more" width={41} height={41} className="mx-auto rounded-[9px]" />
                         <h2 className="mt-[15px] text-sm font-medium">More</h2>
                     </Link>
                 </div>

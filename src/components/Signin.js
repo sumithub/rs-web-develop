@@ -9,6 +9,7 @@ import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { validEmailRgx } from "../../helper"
+import { toast } from "react-toastify";
 
 export default function Signin() {
     const {
@@ -36,9 +37,10 @@ export default function Signin() {
             setLoading(true);
             await axios.post("/api", data)
             setTimeout(() => {
-                router.push("/")
+                router.push("/dashboard")
             }, 1000);
         } catch (error) {
+            toast.error("Invalid email or password.Please try again.")
             setLoading(false)
             setError(error?.message);
         }
@@ -46,7 +48,7 @@ export default function Signin() {
 
     return (<>
         <div>
-            <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Login to your account</h2>
+            <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Login To Your Account</h2>
             <p className="text-xs sm:pt-1.5 pt-2.5 pb-2.5 capitalize text-center text-[#616E7C]">Hey! We soar you working welcome back!</p>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
@@ -56,18 +58,18 @@ export default function Signin() {
                     placeholder="Enter Email"
                     icon="/images/close.svg"
                     isRequired={true}
-                    errors={errors}
                     formProps={{
                         ...register("email", {
-                            required: "Email is required", pattern: {
+                            required: "Email is required",
+                            pattern: {
                                 value: validEmailRgx,
-                                message: "Email is incorrect."
+                                message: "Please enter a valid email address."
                             },
                         })
                     }}
+                    errors={errors}
                     setValue={setValue}
                     watch={watch}
-
                 />
 
                 <InputForm
@@ -77,7 +79,10 @@ export default function Signin() {
                     placeholder="Enter Password"
                     formProps={{
                         ...register("password", {
-                            required: true
+                            required: true,
+                            pattern: {
+                                message: "Password cannot be empty."
+                            }
                         })
                     }} isRequired={true} errors={errors}
                     setValue={setValue}
@@ -105,8 +110,9 @@ export default function Signin() {
                         <h2 className="text-xs text-danger capitalize">{error}</h2>
                     </div>}
                     <button
-                        disabled={loading}
-                        className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-2.5 py-3 rounded-[10px] border border-primary cursor-pointer">Login</button>
+                        type="submit"
+                        disabled={Object.keys(errors).length > 0 || loading || !checked}
+                        className="disabled:bg-primary/50 text-text text-lg mt-3 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary">Login</button>
                     <h2 className='text-sm capitalize text-secondary pt-2.5 text-center'>Don&#39;t have an account? <Link href="/register" className='text-primary underline underline-offset-3'>Sign Up</Link></h2>
                 </div>
             </form>

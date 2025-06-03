@@ -2,17 +2,12 @@
 import { useState } from "react";
 import AdminLayout from "../../components/AdminLayout";
 import ReviewResponseTemplates from "../../components/Models/review/ReviewResponseTemplates";
-import ConnectReviewSource from "../../components/Models/review/ConnectReviewSource";
-import DisconnectReviewSourceConfirmation from "../../components/Models/review/DisconnectReviewSourceConfirmation";
 import NoActionRequiredState from "../../components/Models/review/NoActionRequiredState";
 import ResendReportEmail from "../../components/Models/reports/ResendReportEmail";
 import ReportTemplate from "../../components/Models/reports/ReportTemplate";
 
 export default function Test() {
-    const [open, setOpen] = useState(false)
     const [openResponse, setOpenResponse] = useState(false)
-    const [openConnect, setOpenConnect] = useState(false)
-    const [openDisconnect, setOpenDisconnect] = useState(false)
     const [openTest, setOpenTest] = useState(false)
     const [openEmail, setOpenEmail] = useState(false)
     const [openSave, setOpenSave] = useState(false)
@@ -51,28 +46,6 @@ export default function Test() {
                 }} />
         }
 
-        {openConnect &&
-            <ConnectReviewSource
-                onClose={() => {
-                    setOpenConnect(false)
-                }}
-
-                onSave={() => {
-                    setOpenConnect(true)
-                }} />
-        }
-
-        {openDisconnect &&
-            <DisconnectReviewSourceConfirmation
-                onClose={() => {
-                    setOpenDisconnect(false)
-                }}
-
-                onSave={() => {
-                    setOpenDisconnect(true)
-                }} />
-        }
-
         {openTest &&
             <NoActionRequiredState
                 onClose={() => {
@@ -87,12 +60,6 @@ export default function Test() {
         <div className="flex flex-col gap-y-3">
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenResponse(true) }}>Review Response Templates
-            </div>
-
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenConnect(true) }}>Connect Review Source
-            </div>
-
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenDisconnect(true) }}>Disconnect Review Source Confirmation
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenTest(true) }}>No Action Required State

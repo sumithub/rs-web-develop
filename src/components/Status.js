@@ -5,7 +5,7 @@ export default function Status({ status = "" }) {
     let s = status.toLowerCase()
     let bgClass = ""
 
-    if (s === "new" || s === "completed" || s === "active" || s === "vip") {
+    if (s === "new" || s === "completed" || s === "active" || s === "vip" || s === "connected") {
         bgClass = "bg-[#28A7451A] text-success";
     } else if (s === "responded" || s === "draft" || s === "priority") {
         bgClass = "bg-[#0396FF1A] text-primary";
@@ -18,14 +18,11 @@ export default function Status({ status = "" }) {
         bgClass = "bg-[#FFC1071A] text-[#FFC107]";
     } else if (s === "suspended" || s === "at risk") {
         bgClass = "bg-[#ff00001A] text-[#ff0000]";
-    } else if (s === "pending") {
+    } else if (s === "pending" || s === "not_connected") {
         bgClass = "bg-[#A9A9A91A] text-[#A9A9A9]";
     } else {
         bgClass = "bg-gray-100 text-gray-500";
     }
-    // else if (s === "connected") {
-    //     bgClass = "bg-[#A9A9A91A] text-[#A9A9A9]";
-    // }
 
 
     return <div>

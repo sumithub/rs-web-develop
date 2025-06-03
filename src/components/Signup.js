@@ -1,13 +1,15 @@
 "use client"
 import { useForm } from "react-hook-form";
-import Checkbox2 from "./form/Checkbox2";
 import Link from "next/link";
 import { useState } from "react";
 import InputForm from "./form/InputForm";
+import CheckboxForm from "./form/CheckboxForm";
 import Success from "./common/Success";
 import axios from "axios";
 import Image from "next/image";
 import { validEmailRgx, validPasswordRgx } from "../../helper";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
     const {
@@ -15,18 +17,19 @@ export default function Signup() {
         setValue,
         watch,
         handleSubmit,
-        formState: { errors, isValid },  // ✅ Add isValid
-    } = useForm({ mode: "onChange" });   // ✅ Enable onChange mode
+        formState: { errors },
+    } = useForm({ mode: "onChange" });
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [termsAccepted, setTermsAccepted] = useState(false);
-
+    const route = useRouter();
     const onSubmit = async (data) => {
         try {
             setLoading(true);
             await axios.post("/api", data);
-            setLoading(true);
+            toast.success("Account created! Please check your email to verify your account.")
+            route.push("/verification-email");
+            setLoading(false);
         } catch (error) {
             console.error("Signup error:", error);
             setLoading(false);
@@ -34,15 +37,6 @@ export default function Signup() {
         }
     };
 
-    if (loading) {
-        return (
-            <Success
-                message="Registration Successful! Please Verify Your Email Address To Activate Your Account"
-                link="/dashboard"
-                buttonTitle="Continue"
-            />
-        );
-    }
 
     return (
         <div>
@@ -61,7 +55,11 @@ export default function Signup() {
                     icon="/images/close.svg"
                     formProps={{
                         ...register("name", {
-                            required: "Name is required",
+                            required: true,
+                            minLength: {
+                                value: 3,
+                                message: "Full Name must be at least 3 characters.",
+                            },
                             pattern: {
                                 value: /^[A-Za-z\s]+$/,
                                 message: "Please enter a valid name (letters only)",
@@ -84,10 +82,10 @@ export default function Signup() {
                     errors={errors}
                     formProps={{
                         ...register("email", {
-                            required: "Email is required",
+                            required: true,
                             pattern: {
                                 value: validEmailRgx,
-                                message: "Email is invalid.",
+                                message: "Please enter a valid email address.",
                             },
                         }),
                     }}
@@ -106,7 +104,7 @@ export default function Signup() {
                             pattern: {
                                 value: validPasswordRgx,
                                 message:
-                                    "Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character.",
+                                    "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.",
                             },
                         }),
                     }}
@@ -116,19 +114,21 @@ export default function Signup() {
                     watch={watch}
                 />
 
-                <label htmlFor="terms" className="mt-[10px] gap-1.5 flex items-center">
-                    <Checkbox2 id="terms"
-                        checked={termsAccepted}
-                        onChange={() => setTermsAccepted(!termsAccepted)} />
-                    <div className="text-sm text-secondary capitalize">
+                <CheckboxForm
+                    class_="flex justify-end items-center flex-row-reverse mt-[10px]"
+                    inputClass="ml-0! mr-1"
+                    id={"termsAccepted"}
+                    checked={watch("termsAccepted")}
+                    errors={errors}
+                    formProps={{ ...register("termsAccepted", { required: "You must agree to the terms and conditions to proceed." }) }}
+                    label={<div className="text-sm text-secondary capitalize">
                         I Agree To The{" "}
                         <Link href="/" className="text-primary">Privacy Policy</Link> and{" "}
                         <Link href="/" className="text-secondary">
                             <span className="text-primary"> Terms </span> of use wherever it&#39;s displayed.
                         </Link>
-                    </div>
-                </label>
-
+                    </div>}
+                />
                 {error && (
                     <div className="flex gap-2.5 justify-center mt-[15px]">
                         <Image src="/images/error.svg" alt="error" width={15} height={14} />
@@ -138,7 +138,7 @@ export default function Signup() {
 
                 <button
                     type="submit"
-                    disabled={!isValid || loading || !termsAccepted}  // ✅ Disable if not valid or loading
+                    disabled={Object.keys(errors).length > 0 || loading}
                     className="disabled:bg-primary/50 text-text text-lg mt-3 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary"
                 >
                     {loading ? "Creating Account..." : "Create Account"}
