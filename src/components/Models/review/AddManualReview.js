@@ -72,9 +72,12 @@ export default function AddManualReview({ onClose, onSave, id }) {
                     <div>
                         <DatePicker label="Date" icon={true}
                             mainClass="mt-0!"
+                            isRequired={true}
                             value={date}
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
+                            formProps={{ ...register("date", { required: true }) }}
+                            errors={errors}
                         />
                     </div>
 
