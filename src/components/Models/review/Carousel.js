@@ -105,20 +105,32 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     labelClass="pb-2.5! inline-block"
                                     class_="mt-0!"
                                 />
-                                <InputForm
+                                {/* <InputForm
                                     label="Minimum Rating"
                                     isRequired={true}
-                                    placeholder="Enter filtering"
+                                    placeholder="Enter Filtering"
                                     formProps={{ ...register("colorScheme", { required: true }) }}
                                     errors={errors}
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
                                     class_="mt-0!"
-                                />
+                                /> */}
+                                <SelectForm
+                                    defaultOption="Enter Filtering"
+                                    label="Minimum Rating"
+                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    isRequired={true}
+                                    formProps={{ ...register("select", { required: true }) }}
+                                    errors={errors}
+                                    class_="mt-0!"
+                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                    clearErrors={clearErrors} >
+                                    <option value="selectFont">Select Font</option>
+                                </SelectForm>
                             </div>
 
                             <div>
-                                <InputForm
+                                {/* <InputForm
                                     label="sorting"
                                     isRequired={true}
                                     placeholder="Enter sorting"
@@ -127,7 +139,20 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
                                     class_="mt-2.5!"
-                                />
+                                /> */}
+
+                                <SelectForm
+                                    defaultOption="Enter sorting"
+                                    label="Sorting"
+                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    isRequired={true}
+                                    formProps={{ ...register("select", { required: true }) }}
+                                    errors={errors}
+                                    class_="mt-2.5!"
+                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                    clearErrors={clearErrors} >
+                                    <option value="selectFont">Select Font</option>
+                                </SelectForm>
                             </div>
 
                             <div className="pt-2.5 flex gap-[15px] items-center">
@@ -190,7 +215,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                         </div>
                         <div className="p-5">
                             <div className="border border-border2 rounded-[10px] p-5">
-                                <div className="text-center pt-5">
+                                <div className="text-center">
                                     <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
                                     <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
                                 </div>

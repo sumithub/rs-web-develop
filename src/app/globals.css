@@ -19,6 +19,7 @@
   --success-dark: #328394;
   --dark: #F6F8FB;
   --light: #F9FBFC;
+  --light2: #63CBF1;
   --custom-purple: #5470DE;
   --custom-purple-light: #9787FF;
   --custom-yellow: #FFC246;
@@ -46,6 +47,7 @@
   --color-success-dark: var(--success-dark);
   --color-dark: var(--dark);
   --color-light: var(--light);
+  --color-light2: var(--light2);
   --color-custom-purple: var(--custom-purple);
   --color-custom-purple-light: var(--custom-purple-light);
   --color-custom-yellow: var(--custom-yellow);
