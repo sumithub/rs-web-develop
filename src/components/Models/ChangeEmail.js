@@ -34,8 +34,6 @@ function ChangeEmail({ onClose, id }) {
         }
     }
 
-    console.log(errors)
-
     return (
         <Model onClose={onClose} title="Change Email" modalClass="w-[50%]!">
             <div>

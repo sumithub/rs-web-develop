@@ -161,7 +161,7 @@ function Customers() {
                         </CustomSelectBox>
 
                         <button className="flex items-center text-xs justify-center gap-2 bg-primary border border-primary py-[10.5px] px-3 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50" onClick={() => { setOpenBoost(true) }}>
-                            <Image unoptimized={true} src="/images/flash.svg" alt="flash" height={16} width={16} unoptimized={true} />Boost</button>
+                            <Image unoptimized={true} src="/images/flash.svg" alt="flash" height={16} width={16} />Boost</button>
 
                         <button className="bg-primary border border-primary text-xs hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
                             onClick={() => { setOpen(true) }}>Add New Customer</button>
