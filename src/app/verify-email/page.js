@@ -35,6 +35,9 @@ function VerifyEmail() {
                     <button className="text-text3 text-lg font-medium bg-dark border border-dark hover:bg-white w-full mt-5 py-3 rounded-[10px] border border-dark cursor-pointer"
                         onClick={() => {
                             setView("error")
+                            setTimeout(() => {
+                                setView(false)
+                            }, 1000 * 60);
                         }}
                     >Resend Verification Email</button>
                 </div>
