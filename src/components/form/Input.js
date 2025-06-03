@@ -16,7 +16,7 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
 
     return (
         <div className={`${class_} mt-[15px]`}>
-            <label className={`text-sm font-medium flex items-center gap-[5px] text-secondary ${labelClass}`}>{infoIcon && (
+            <label className={`text-sm font-medium inline-flex items-center gap-[5px] text-secondary ${labelClass}`}>{infoIcon && (
                 <span className="cursor-pointer" title="More information">
                     {typeof infoIcon === "string" ? (
                         <Image
