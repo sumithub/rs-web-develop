@@ -37,7 +37,7 @@ export default function Signin() {
             setLoading(true);
             await axios.post("/api", data)
             setTimeout(() => {
-                router.push("/")
+                router.push("/dashboard")
             }, 1000);
         } catch (error) {
             toast.error("Invalid email or password.Please try again.")
@@ -70,7 +70,6 @@ export default function Signin() {
                     errors={errors}
                     setValue={setValue}
                     watch={watch}
-
                 />
 
                 <InputForm
