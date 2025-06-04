@@ -1,5 +1,5 @@
 "use client";
-import { useActionState, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProgressBar from "../../../components/common/Progress";
 import SelectForm from "../../form/SelectForm";
 import Loading from "../../Loading";
@@ -22,14 +22,12 @@ export default function ImportCustomer({ onBack }) {
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [tab, setTab] = useState(1);
-    const [image, setImage] = useState(null);
     const [importDone, setImportDone] = useState(false);
 
     const {
         register,
         handleSubmit,
         clearErrors,
-        watch,
         formState: { errors },
     } = useForm();
 
@@ -86,17 +84,14 @@ export default function ImportCustomer({ onBack }) {
         setTab(1);
         setActiveStep(1);
         setImportDone(false);
-        setImage(null);
         setList([]);
     };
-
 
     const handleBack = () => {
         if (tab > 1) {
             setTab(tab - 1);
             setActiveStep(activeStep - 1);
         } else if (onBack) {
-            // If we're on the first step and onBack function is provided, call it
             onBack();
         }
     };
@@ -355,6 +350,10 @@ export default function ImportCustomer({ onBack }) {
                                 <div className="text-text3 capitalize">{d.title}</div>
                                 <div className="text-secondary font-medium capitalize">{d.summary}</div>
                             </div>
+                            {/* <div className="flex justify-between">
+                                <div className="text-text3 capitalize">invalid entries</div>
+                                <div className="text-secondary font-medium capitalize mr-2">02 <span className="border-l border-border-color "></span><span className="text-primary underline ml-2">view detail</span></div>
+                            </div> */}
                             <hr className="my-4 border-t border-border-color" />
                         </div>))}
                     </>
@@ -371,6 +370,8 @@ export default function ImportCustomer({ onBack }) {
                                     <div className="flex justify-between">
                                         <div className="text-text3 capitalize">{d.title}</div>
                                         <div className="text-secondary font-medium capitalize">{d.summary}</div>
+
+
                                     </div>
                                     <hr className="my-4 border-t border-border-color" />
                                 </div>

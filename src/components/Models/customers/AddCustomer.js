@@ -25,14 +25,18 @@ function AddCustomer({ onClose, id }) {
     };
 
     const handleBackClick = () => {
-        if (type === "import") {
-
-            setType("manually");
-        } else {
-            // If we're in manually mode, close the modal or handle as needed
-            onClose();
-        }
+        setType("manually");
     };
+
+    //  const handleBackClick = () => {
+    //     if (type === "import") {
+
+    //         setType("manually");
+    //     } else {
+    //         onClose();
+    //     }
+    // };
+
 
     const onSubmit = async (data) => {
         try {

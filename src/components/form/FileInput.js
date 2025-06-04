@@ -78,11 +78,10 @@ export default function FileInput() {
                     <div className="mb-4">
                         <div className="text-secondary text-lg font-semibold capitalize mb-2">Drag & Drop a.CSV File Here</div>
 
-                        <div className="text-text3 text-sm text-center capitalize">Upload up to 500 customers per file. The following column titles are allowed: First Name, Last Name, Email, Phone, Employee First Name, Employee Last Name, and Tag. Use this
-                            <button
-                                onClick={downloadSampleCSV}
-                                className="text-primary underline font-medium">Template
-                            </button>
+                        <div className="text-text3 text-sm text-center capitalize">Upload up to 500 customers per file. The following column titles are allowed: First Name, Last Name, Email, Phone, Employee First Name, Employee Last Name, and Tag. Use this <button
+                            onClick={downloadSampleCSV}
+                            className="text-primary underline font-medium"> Template
+                        </button>
                         </div>
                     </div>
 
