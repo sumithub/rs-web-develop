@@ -13,12 +13,12 @@ import { getError } from "../../../../helper";
 import InputForm from "../../form/InputForm";
 import Image from "next/image";
 import Switch from "../../../components/form/Switch";
+import GridWidget from "../../Models/review/GridWidget";
 
-export default function Carousel({ onClose, OnSave, id }) {
+export default function Carousel({ title, onClose, OnSave, id, onNext }) {
     const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
-    const [tab, setTab] = useState(1);
 
     const onSubmit = async (data) => {
         try {
@@ -41,7 +41,12 @@ export default function Carousel({ onClose, OnSave, id }) {
     }
 
     return (
-        <Model onClose={onClose} title="Carousel" modalClass="w-[80%]!">
+        <Model onClose={onClose} title={title} modalClass="w-[80%]!" >
+            {/* {title === "gridWidget" && (
+                <GridWidget
+                    onNext={() => onNext("gridWidget")}
+                />
+            )} */}
             <form onSubmit={handleSubmit(onSubmit)}>
                 {open &&
                     <CodePreviewBox
@@ -55,7 +60,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                 }
                 <div className="grid grid-cols-2 gap-5">
                     <div>
-                        <div className="p-[15px] bg-dark rounded-[15px]">
+                        {(title.includes("carousel") || title.includes("gridWidget")) && (<div className="p-[15px] bg-dark rounded-[15px]">
                             <h2 className="text-lg font-semibold">Design</h2>
                             <div className="grid grid-cols-3 gap-[15px] pt-2.5">
                                 <InputForm
@@ -91,12 +96,12 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     class_="mt-0!"
                                 />
                             </div>
-                        </div>
+                        </div>)}
 
-                        <div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(title.includes("carousel")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Content</h2>
                             <div className="grid grid-cols-2 gap-5">
-                                <InputForm
+                                {(!title.includes("testimonialWidget")) && (<InputForm
                                     label="Number of Reviews"
                                     isRequired={true}
                                     placeholder="Enter review count"
@@ -105,9 +110,9 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
                                     class_="mt-0!"
-                                />
+                                />)}
 
-                                {/* <div>
+                                {(title.includes("testimonialWidget")) && (<div>
                                     <SelectForm
                                         defaultOption="Select sorting"
                                         label="Sorting"
@@ -125,17 +130,17 @@ export default function Carousel({ onClose, OnSave, id }) {
                                         <h2 className="text-base font-medium">Show Reviewer Details</h2>
                                         <Switch />
                                     </div>
-                                </div> */}
+                                </div>)}
 
-                                {/* <InputForm label="button label" isRequired={true}
+                                {(title.includes("floatingButtonWidget")) && (<InputForm label="button label" isRequired={true}
                                     formProps={{ ...register("buttonLabel", { required: true }) }}
                                     errors={errors}
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
                                     class_="mt-0!"
-                                /> */}
+                                />)}
 
-                                {/* <InputForm
+                                {(title.includes("carousel")) && (<InputForm
                                     label="Minimum Rating"
                                     isRequired={true}
                                     placeholder="Enter Filtering"
@@ -144,7 +149,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
                                     class_="mt-0!"
-                                />  */}
+                                />)}
                                 <SelectForm
                                     defaultOption="Select Minimum Rating"
                                     label="Minimum Rating"
@@ -160,7 +165,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                             </div>
 
                             <div>
-                                {/* <InputForm
+                                {(title.includes("carousel")) && (<InputForm
                                     label="sorting"
                                     isRequired={true}
                                     placeholder="Enter sorting"
@@ -169,7 +174,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
                                     class_="mt-2.5!"
-                                /> */}
+                                />)}
 
                                 <SelectForm
                                     defaultOption="Select sorting"
@@ -190,9 +195,9 @@ export default function Carousel({ onClose, OnSave, id }) {
                                 <h2 className="text-base font-medium">Show Reviewer Details</h2>
                                 <Switch />
                             </div>
-                        </div>
+                        </div>)}
 
-                        <div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(title.includes("gridWidget") || title.includes("carousel") || title.includes("testimonialWidget") || title.includes("floatingButtonWidget") || title.includes("starBadgeWidget")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Review Sources</h2>
                             <h3 className="text-base pt-2.5 font-medium">Select up to 3</h3>
                             <div className="flex gap-[15px] items-center pt-[15px]">
@@ -209,9 +214,9 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     <div>Yelp</div>
                                 </div>
                             </div>
-                        </div>
+                        </div>)}
 
-                        <div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(title.includes("carousel")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Behavior</h2>
                             <div className="0">
                                 <SelectForm
@@ -231,9 +236,9 @@ export default function Carousel({ onClose, OnSave, id }) {
                                 <h2 className="text-base font-medium">Auto-Scroll</h2>
                                 <Switch />
                             </div>
-                        </div>
+                        </div>)}
 
-                        {/* <div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(title.includes("floatingButtonWidget")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Behavior</h2>
                             <div className="0">
                                 <SelectForm
@@ -253,11 +258,11 @@ export default function Carousel({ onClose, OnSave, id }) {
                                 <h2 className="text-base font-medium">Auto-Trigger Popup</h2>
                                 <Switch />
                             </div>
-                        </div> */}
+                        </div>)}
 
                         <div className="mt-[30px] grid grid-cols-2 gap-5">
                             <SecondaryButton title="Save" type="submit" disabled={sending} class_="bg-white! text-primary!" />
-                            <SecondaryButton title="Next" />
+                            <SecondaryButton title="Next" onClick={onNext} />
                         </div>
                     </div>
 
