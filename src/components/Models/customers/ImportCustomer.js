@@ -1,7 +1,6 @@
 "use client";
 import { useActionState, useEffect, useState } from "react";
 import ProgressBar from "../../../components/common/Progress";
-import FileInput from "../../../components/form/FileInput";
 import SelectForm from "../../form/SelectForm";
 import Loading from "../../Loading";
 import TableOrder from "../../TableOrder";
@@ -15,6 +14,7 @@ import InputForm from "../../form/InputForm";
 import { useForm } from "react-hook-form";
 import RadioForm from "../../form/RadioForm";
 import Image from "next/image";
+import FileInput from "../../form/FileInput";
 
 export default function ImportCustomer() {
     const [activeStep, setActiveStep] = useState(1);
@@ -105,13 +105,14 @@ export default function ImportCustomer() {
                 )}
 
                 {tab === 1 && (
-                    <FileInput
-                        localImage={image}
-                        image={watch("image")}
-                        onChange={(e) => {
-                            setImage(e.target.files[0]);
-                        }}
-                    />
+                    <FileInput />
+                    // <FileInput
+                    //     localImage={image}
+                    //     image={watch("image")}
+                    //     onChange={(e) => {
+                    //         setImage(e.target.files[0]);
+                    //     }}
+                    // />
                 )}
 
                 {tab === 2 && (
@@ -315,55 +316,45 @@ export default function ImportCustomer() {
                 {tab === 5 && (
                     <>
                         <div className="flex items-center justify-between w-full">
-                            <div className="flex items-center gap-2">
-
-                                <div className="text-success text-xl font-semibold capitalize">
-                                    File validated successfully!
-                                </div>
+                            <div className="text-success text-xl font-semibold capitalize">
+                                File validated successfully!
                             </div>
-                            <SecondaryButton
-                                title="Download Sample CSV"
-                                type="button"
-                                class_="shrink-0! text-xs!"
-                            />
+                            <button type="button" className="text-white text-xs font-medium bg-primary p-2 rounded-lg border border-primary cursor-pointer capitalize disabled:pointer-events-none disabled:opacity-50 flex items-center gap-2"><Image src="/images/info-circle.svg" alt="info" height={16} width={16} unoptimized={true} />Download Sample CSV</button>
                         </div>
 
-                        <div className="font-semibold text-xl">
+                        <div className="font-semibold text-xl mb-3 mt-4">
                             Import Summary
                         </div>
-                        <div >
-                            <div className="gap-10">
-                                {IMPORTSUMMARY.map((d, i) => (
-                                    <div key={i} className="flex justify-between">
-                                        <div className="text-text3">{d.title}</div>
-                                        <hr className="my-4 border-t border-border2" />
-                                        <div>{d.summary}</div>
-                                    </div>
-                                ))}
+
+                        {IMPORTSUMMARY.map((d, i) => (<div key={1}>
+                            <div className="flex justify-between">
+                                <div className="text-text3 capitalize">{d.title}</div>
+                                <div className="text-secondary font-medium capitalize">{d.summary}</div>
                             </div>
-                        </div>
+                            <hr className="my-4 border-t border-border-color" />
+                        </div>))}
                     </>
                 )}
 
                 {tab === 6 && (
                     <>
-                        <div className="font-semibold text-xl mb-2">
+                        <div className="font-semibold text-xl mb-3">
                             Import Summary
                         </div>
-                        <div >
+                        <div>
                             <div className="gap-10">
-                                {IMPORTSUMMARY1.map((d, i) => (
-                                    <div key={i} className="flex justify-between">
-                                        <div className="text-text3">{d.title}</div>
-                                        <hr className="my-4 border border-border-color" />
-                                        <div>{d.summary}</div>
+                                {IMPORTSUMMARY1.map((d, i) => (<div key={i}>
+                                    <div className="flex justify-between">
+                                        <div className="text-text3 capitalize">{d.title}</div>
+                                        <div className="text-secondary font-medium capitalize">{d.summary}</div>
                                     </div>
+                                    <hr className="my-4 border-t border-border-color" />
+                                </div>
                                 ))}
                             </div>
                         </div>
                     </>
                 )}
-
 
                 <div className={`grid gap-3 mt-5 ${tab === 6 ? "grid-cols-1" : "grid-cols-2"}`}>
                     {!importDone && tab !== 3 && (
@@ -398,7 +389,6 @@ export default function ImportCustomer() {
                         />
                     )}
                 </div>
-
             </div>
         </main>
     );
