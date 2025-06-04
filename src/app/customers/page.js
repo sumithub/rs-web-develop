@@ -22,6 +22,7 @@ import { formatDate, getError } from '../../../helper'
 import Loading from '../../components/Loading'
 import DeleteCustomer from "../../components/Models/customers/DeleteCustomer"
 import DeleteMultiCustomer from "../../components/Models/customers/DeleteMultiCustomers"
+import DateRange from '../../components/form/DateRangePicker'
 
 function Customers() {
     const [openBoost, setOpenBoost] = useState(false)
@@ -177,14 +178,18 @@ function Customers() {
                                 }}
                             />
                         </div>
-                        {tab === "list" && <DatePicker
+
+                        {tab === "list" && <DateRange
+                            onChange={(e) => { setDate(e) }}
+                        />}
+
+                        {/* {tab === "list" && <DatePicker
                             mainClass="mt-0! w-28!"
                             value={date}
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
                             icon={true}
-                        />}
-
+                        />} */}
 
                         <button
                             onClick={() => {

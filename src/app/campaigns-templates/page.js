@@ -17,6 +17,7 @@ import { formatDateTime, getError } from '../../../helper'
 import Loading from '../../components/Loading'
 import Preview from '../../components/Models/manage-campaigns/Preview'
 import DeleteTemplate from "../../components/Models/templates/DeleteTemplate"
+import DateRange from '../../components/form/DateRangePicker'
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
@@ -101,7 +102,7 @@ function CampaignsTemplates() {
 
                 <div className="flex items-center gap-3">
                     <CustomSelectBox
-                        class_="mt-0! w-32!"
+                        class_="mt-0!"
                         defaultOption="type"
                         value={type}
                         onChange={(e) => {
@@ -113,13 +114,16 @@ function CampaignsTemplates() {
                     </CustomSelectBox>
 
                     <div className='shrink-0!'>
-                        <DatePicker
+                        <DateRange
+                            onChange={(e) => { setDate(e) }}
+                        />
+                        {/* <DatePicker
                             icon={true}
                             mainClass="mt-0!"
                             value={date}
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
-                        />
+                        /> */}
                     </div>
 
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
