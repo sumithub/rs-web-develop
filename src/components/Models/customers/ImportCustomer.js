@@ -16,7 +16,7 @@ import RadioForm from "../../form/RadioForm";
 import Image from "next/image";
 import FileInput from "../../form/FileInput";
 
-export default function ImportCustomer() {
+export default function ImportCustomer({ onBack }) {
     const [activeStep, setActiveStep] = useState(1);
     const [sortBy, setSortBy] = useState("");
     const [list, setList] = useState([]);
@@ -90,10 +90,21 @@ export default function ImportCustomer() {
         setList([]);
     };
 
+
+    const handleBack = () => {
+        if (tab > 1) {
+            setTab(tab - 1);
+            setActiveStep(activeStep - 1);
+        } else if (onBack) {
+            // If we're on the first step and onBack function is provided, call it
+            onBack();
+        }
+    };
+
     return (
         <main>
             <div>
-                {!importDone && (
+                {!importDone && (<>
                     <ProgressBar
                         currentStep={activeStep}
                         stepTitle1="Upload File"
@@ -102,17 +113,11 @@ export default function ImportCustomer() {
                         stepTitle4="Validation & Errors"
                         stepTitle5="Import Confirmation"
                     />
-                )}
+                </>)}
 
                 {tab === 1 && (
                     <FileInput />
-                    // <FileInput
-                    //     localImage={image}
-                    //     image={watch("image")}
-                    //     onChange={(e) => {
-                    //         setImage(e.target.files[0]);
-                    //     }}
-                    // />
+
                 )}
 
                 {tab === 2 && (
@@ -245,7 +250,7 @@ export default function ImportCustomer() {
                             </div>
 
                             <div className="grid grid-cols-2 gap-3 mt-5">
-                                <CancelButton title="Cancel" />
+                                <CancelButton title="Cancel" onClick={handleBack} />
                                 <SecondaryButton
                                     title="Next"
                                     type="submit"
@@ -378,7 +383,7 @@ export default function ImportCustomer() {
                 <div className={`grid gap-3 mt-5 ${tab === 6 ? "grid-cols-1" : "grid-cols-2"}`}>
                     {!importDone && tab !== 3 && (
                         <>
-                            <CancelButton title="Cancel" />
+                            <CancelButton title="Cancel" onClick={handleBack} />
                             {tab === 5 ? (
                                 <SecondaryButton
                                     title="Import Customer"
@@ -412,3 +417,9 @@ export default function ImportCustomer() {
         </main>
     );
 }
+
+
+
+
+
+
