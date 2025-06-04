@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import ProgressBar from "../../../components/common/Progress";
 import FileInput from "../../../components/form/FileInput";
 import SelectForm from "../../form/SelectForm";
@@ -20,7 +20,7 @@ export default function ImportCustomer() {
     const [activeStep, setActiveStep] = useState(1);
     const [sortBy, setSortBy] = useState("");
     const [list, setList] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [tab, setTab] = useState(1);
     const [image, setImage] = useState(null);
     const [importDone, setImportDone] = useState(false);
@@ -64,8 +64,10 @@ export default function ImportCustomer() {
         }
     };
 
-    const onSubmit = async (data) => {
-        try {
+    const onSubmit = async () => {
+        if (tab === 3) {
+            toast.success("List Details Added Successfully")
+        } else try {
             toast.success("Saved Successfully");
         } catch (error) {
             toast.error(getError(error));
@@ -80,6 +82,7 @@ export default function ImportCustomer() {
     };
 
     const handleDone = () => {
+        toast.success("Imported Successfully")
         setTab(1);
         setActiveStep(1);
         setImportDone(false);
@@ -177,7 +180,10 @@ export default function ImportCustomer() {
                 )}
 
                 {tab === 3 && (
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit((data) => {
+                        onSubmit(data);
+                        handleNext();
+                    })}>
                         <InputForm
                             label="list name"
                             isRequired={true}
@@ -188,7 +194,7 @@ export default function ImportCustomer() {
                         <SelectForm
                             label="Tag"
                             selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
-                            formProps={{ ...register("tag", { required: true }) }}
+                            formProps={{ ...register("tag", { required: false }) }}
                             errors={errors}
                             clearErrors={clearErrors}
                         >
@@ -217,6 +223,15 @@ export default function ImportCustomer() {
                                 <RadioForm label="Ignore duplicates" />
                                 <RadioForm label="Overwrite existing" />
                                 <RadioForm label="Allow duplicates" />
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-3 mt-5">
+                                <CancelButton title="Cancel" />
+                                <SecondaryButton
+                                    title="Next"
+                                    type="submit"
+                                    disabled={loading}
+                                />
                             </div>
                         </div>
                     </form>
@@ -351,7 +366,7 @@ export default function ImportCustomer() {
 
 
                 <div className={`grid gap-3 mt-5 ${tab === 6 ? "grid-cols-1" : "grid-cols-2"}`}>
-                    {!importDone ? (
+                    {!importDone && tab !== 3 && (
                         <>
                             <CancelButton title="Cancel" />
                             {tab === 5 ? (
@@ -365,10 +380,16 @@ export default function ImportCustomer() {
                                     }}
                                 />
                             ) : (
-                                <SecondaryButton title="Next" type="button" onClick={handleNext} />
+                                <SecondaryButton
+                                    title="Next"
+                                    type="button"
+                                    disabled={loading}
+                                    onClick={handleNext}
+                                />
                             )}
                         </>
-                    ) : (
+                    )}
+                    {importDone && (
                         <SecondaryButton
                             title="Done"
                             type="button"
@@ -377,6 +398,7 @@ export default function ImportCustomer() {
                         />
                     )}
                 </div>
+
             </div>
         </main>
     );
