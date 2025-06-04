@@ -29,7 +29,7 @@ export default function Detail({ }) {
     const [openCustomer, setOpenCustomer] = useState(false)
     const [openModal, setOpenModal] = useState(false)
     const [openEmail, setOpenEmail] = useState(false)
-    const [expandAll, setExpandAll] = useState(false)
+    const [expandAll, setExpandAll] = useState(undefined)
     const [openPreview, setOpenPreview] = useState(false)
     const router = useRouter()
     const [cardStatuses, setCardStatuses] = useState({
@@ -220,7 +220,7 @@ export default function Detail({ }) {
             stepTitle4="Scheduling & Launch"
         />
 
-        <div className="">
+        <div>
             <div className="flex items-center justify-between mb-4">
                 <div className="text-secondary text-xl font-medium">Create New Campaign</div>
                 <div className="flex items-center gap-2">
@@ -232,7 +232,9 @@ export default function Detail({ }) {
             </div>
 
             <div>
-                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
+                <CampaignCard
+                    openByDefault={true}
+                    expandAll={expandAll} setExpandAll={setExpandAll}
                     title="Campaign Details"
                     status={getCardStatus('campaignDetails')}>
                     <div className="grid grid-cols-2 gap-3">
