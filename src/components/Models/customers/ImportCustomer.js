@@ -326,7 +326,7 @@ export default function ImportCustomer() {
                             Import Summary
                         </div>
 
-                        {IMPORTSUMMARY.map((d, i) => (<div key={1}>
+                        {IMPORTSUMMARY.map((d, i) => (<div key={i}>
                             <div className="flex justify-between">
                                 <div className="text-text3 capitalize">{d.title}</div>
                                 <div className="text-secondary font-medium capitalize">{d.summary}</div>
