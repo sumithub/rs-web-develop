@@ -130,16 +130,18 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
                                 <div className="">
                                     <div>
                                         <div className="text-secondary text-xl font-medium mb-[15px]">Star Rating Badge</div>
-                                        <div className="flex">
+                                        <div className="grid grid-cols-[1fr_2fr]">
                                             <div className="text-secondary">
                                                 {/* <div className="text-xs font-semibold">Total</div> */}
-                                                <div className="text-[22px] font-semibold my-1">4.3</div>
+                                                <div className="text-[46px] text-end font-semibold">4.5</div>
                                                 <div className="flex items-center gap-1">
                                                     <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
                                                     <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
                                                     <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
-                                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />  <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                                    <Image src="/images/star2.svg" alt="star2" height={14} width={14} unoptimized={true} />
                                                 </div>
+                                                <h2 className="text-sm font-semibold">&#40;200&#41;</h2>
 
                                                 <div className="flex items-center justify-between mt-2">
                                                     <div>
@@ -154,7 +156,7 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
                                             </div>
 
                                             <div>
-                                                <div className="grid grid-cols-[0.1fr_auto] items-center">
+                                                {/* <div className="grid grid-cols-[0.1fr_auto] items-center">
                                                     <div className="text-text3 text-sm">5</div>
                                                     <ProgressBar completed={100} bgColor="#FFC107" height="12px"
                                                         isLabelVisible={false} borderRadius="2px"
@@ -179,12 +181,18 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
                                                     <ProgressBar completed={50} bgColor="#FFC107" height="12px"
                                                         isLabelVisible={false} borderRadius="2px"
                                                     />
-                                                </div>
+                                                </div> */}
 
-                                                <div className="grid grid-cols-{1fr_1.5fr} items-center">
-                                                    <div className="text-text3 text-sm">1</div>
-                                                    <div className="flex justify-between">
-                                                        <ProgressBar completed={50} bgColor="#FFC107" height="12px"
+                                                <div className="flex gap-5 items-center justify-between">
+                                                    <div className="flex gap-[5px]">
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                    </div>
+                                                    <div className="grid grid-cols-[0.6fr_auto] w-full items-center">
+                                                        <ProgressBar completed={50} bgColor="#FFC107" height="8px"
                                                             isLabelVisible={false} borderRadius="2px"
                                                         />
                                                         <div className="text-text3 text-sm">0.5</div>
