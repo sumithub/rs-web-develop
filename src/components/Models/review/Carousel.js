@@ -18,6 +18,7 @@ export default function Carousel({ onClose, OnSave, id }) {
     const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
+    const [tab, setTab] = useState(1);
 
     const onSubmit = async (data) => {
         try {
@@ -105,6 +106,35 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     labelClass="pb-2.5! inline-block"
                                     class_="mt-0!"
                                 />
+
+                                {/* <div>
+                                    <SelectForm
+                                        defaultOption="Select sorting"
+                                        label="Sorting"
+                                        labelClass="pb-2.5 inline-block mb-0!"
+                                        isRequired={true}
+                                        formProps={{ ...register("select", { required: true }) }}
+                                        errors={errors}
+                                        class_="mt-0!"
+                                        selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                        clearErrors={clearErrors} >
+                                        <option value="latest">Latest</option>
+                                        <option value="highest-rated">Highest Rated</option>
+                                    </SelectForm>
+                                    <div className="pt-2.5 flex gap-[15px] items-center">
+                                        <h2 className="text-base font-medium">Show Reviewer Details</h2>
+                                        <Switch />
+                                    </div>
+                                </div> */}
+
+                                {/* <InputForm label="button label" isRequired={true}
+                                    formProps={{ ...register("buttonLabel", { required: true }) }}
+                                    errors={errors}
+                                    inputClass="border border-primary3/10 p-2.5! bg-white!"
+                                    labelClass="pb-2.5! inline-block"
+                                    class_="mt-0!"
+                                /> */}
+
                                 {/* <InputForm
                                     label="Minimum Rating"
                                     isRequired={true}
@@ -114,9 +144,9 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
                                     class_="mt-0!"
-                                /> */}
+                                />  */}
                                 <SelectForm
-                                    defaultOption="Enter Filtering"
+                                    defaultOption="Select Minimum Rating"
                                     label="Minimum Rating"
                                     labelClass="pb-2.5 inline-block mb-0!"
                                     isRequired={true}
@@ -142,7 +172,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                                 /> */}
 
                                 <SelectForm
-                                    defaultOption="Enter sorting"
+                                    defaultOption="Select sorting"
                                     label="Sorting"
                                     labelClass="pb-2.5 inline-block mb-0!"
                                     isRequired={true}
@@ -151,7 +181,8 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     class_="mt-2.5!"
                                     selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
                                     clearErrors={clearErrors} >
-                                    <option value="selectFont">Select Font</option>
+                                    <option value="latest">Latest</option>
+                                    <option value="highest-rated">Highest Rated</option>
                                 </SelectForm>
                             </div>
 
@@ -159,7 +190,6 @@ export default function Carousel({ onClose, OnSave, id }) {
                                 <h2 className="text-base font-medium">Show Reviewer Details</h2>
                                 <Switch />
                             </div>
-
                         </div>
 
                         <div className="p-[15px] bg-dark rounded-[15px] mt-5">
@@ -182,7 +212,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                         </div>
 
                         <div className="p-[15px] bg-dark rounded-[15px] mt-5">
-                            <h2 className="text-lg font-semibold">Behaviour</h2>
+                            <h2 className="text-lg font-semibold">Behavior</h2>
                             <div className="0">
                                 <SelectForm
                                     defaultOption="Select Transitions"
@@ -202,9 +232,32 @@ export default function Carousel({ onClose, OnSave, id }) {
                                 <Switch />
                             </div>
                         </div>
+
+                        {/* <div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                            <h2 className="text-lg font-semibold">Behavior</h2>
+                            <div className="0">
+                                <SelectForm
+                                    defaultOption="Select Popup"
+                                    label="Popup Delay"
+                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    isRequired={true}
+                                    formProps={{ ...register("select", { required: true }) }}
+                                    errors={errors}
+                                    class_="mt-0!"
+                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                    clearErrors={clearErrors} >
+                                    <option value="selectFont">Select Font</option>
+                                </SelectForm>
+                            </div>
+                            <div className="flex gap-[15px] items-center mt-2.5">
+                                <h2 className="text-base font-medium">Auto-Trigger Popup</h2>
+                                <Switch />
+                            </div>
+                        </div> */}
+
                         <div className="mt-[30px] grid grid-cols-2 gap-5">
                             <SecondaryButton title="Save" type="submit" disabled={sending} class_="bg-white! text-primary!" />
-                            <CancelButton title="Next" />
+                            <SecondaryButton title="Next" />
                         </div>
                     </div>
 
