@@ -7,7 +7,6 @@ import Status from "../../components/Status";
 import TableOrder from "../../components/TableOrder";
 import Search from "../../components/form/Search";
 import Dropdown from "../../components/DropDown";
-import DatePicker from "../../components/form/DatePicker";
 import Loading from "../../components/Loading";
 import Chart from "../../components/charts/Chart"
 import AdminLayout from "../../components/AdminLayout"
@@ -318,7 +317,7 @@ export default function Review() {
                         </button>
 
                         <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
-                            onClick={() => { setOpen(true) }}>Add Manual Review</button>
+                            onClick={() => { setOpen(true) }}>Create Manual Review</button>
                     </div>
                 </div>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 mt-5">
