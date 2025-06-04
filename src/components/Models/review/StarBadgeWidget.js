@@ -160,8 +160,8 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                     </div>
-                                                    <div className="flex gap-2 w-full items-center justify-between">
-                                                        <ProgressBar completed={50} bgColor="#FFC107" height="8px" width="200px"
+                                                    <div className="grid grid-cols-[0.9fr_auto] gap-2 w-full items-center justify-between">
+                                                        <ProgressBar completed={50} bgColor="#FFC107" height="8px" width="180px"
                                                             isLabelVisible={false} borderRadius="12px"
                                                         />
                                                         <div className="text-xs font-semibold">250</div>
@@ -175,8 +175,8 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                     </div>
-                                                    <div className="flex gap-2 w-full items-center justify-between">
-                                                        <ProgressBar completed={40} bgColor="#FFC107" height="8px" width="200px"
+                                                    <div className="grid grid-cols-[0.9fr_auto] gap-2 w-full items-center justify-between">
+                                                        <ProgressBar completed={40} bgColor="#FFC107" height="8px" width="180px"
                                                             isLabelVisible={false} borderRadius="12px"
                                                         />
                                                         <div className="text-xs font-semibold">200</div>
@@ -190,8 +190,8 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                     </div>
-                                                    <div className="flex gap-2 w-full items-center justify-between">
-                                                        <ProgressBar completed={60} bgColor="#FFC107" height="8px" width="200px"
+                                                    <div className="grid grid-cols-[0.9fr_auto] gap-2 w-full items-center justify-between">
+                                                        <ProgressBar completed={60} bgColor="#FFC107" height="8px" width="180px"
                                                             isLabelVisible={false} borderRadius="12px"
                                                         />
                                                         <div className="text-xs font-semibold">500</div>
@@ -205,8 +205,8 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                     </div>
-                                                    <div className="flex gap-2 w-full items-center justify-between">
-                                                        <ProgressBar completed={15} bgColor="#FFC107" height="8px" width="200px"
+                                                    <div className="grid grid-cols-[0.9fr_auto] gap-2 w-full items-center justify-between">
+                                                        <ProgressBar completed={15} bgColor="#FFC107" height="8px" width="180px"
                                                             isLabelVisible={false} borderRadius="12px"
                                                         />
                                                         <div className="text-xs font-semibold">10</div>
@@ -220,11 +220,11 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
                                                         <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                     </div>
-                                                    <div className="flex gap-2 w-full items-center justify-between">
-                                                        <ProgressBar completed={5} bgColor="#FFC107" height="8px" width="200px"
+                                                    <div className="grid grid-cols-[0.9fr_auto] gap-2 w-full items-center justify-between">
+                                                        <ProgressBar completed={5} bgColor="#FFC107" height="8px" width="180px"
                                                             isLabelVisible={false} borderRadius="12px"
                                                         />
-                                                        <div className="text-xs font-semibold">0.5</div>
+                                                        <div className="text-xs font-semibold">05</div>
                                                     </div>
                                                 </div>
                                             </div>
