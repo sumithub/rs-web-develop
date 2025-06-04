@@ -24,6 +24,20 @@ function AddCustomer({ onClose, id }) {
         setType(event.target.value);
     };
 
+    const handleBackClick = () => {
+        setType("manually");
+    };
+
+    //  const handleBackClick = () => {
+    //     if (type === "import") {
+
+    //         setType("manually");
+    //     } else {
+    //         onClose();
+    //     }
+    // };
+
+
     const onSubmit = async (data) => {
         try {
             setSending(true)
@@ -47,10 +61,9 @@ function AddCustomer({ onClose, id }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 {!id && <div className="flex gap-4 items-center">
-                    <button type="button"><Image src="/images/arrow-box.svg" alt="arrow" height={30} width={30} unoptimized={true} /></button>
+                    <button type="button" onClick={handleBackClick}><Image src="/images/arrow-box.svg" alt="arrow" height={30} width={30} unoptimized={true} /></button>
 
                     <Radio
-
                         label="manually"
                         class_="mt-0!"
                         value="manually"
@@ -102,16 +115,28 @@ function AddCustomer({ onClose, id }) {
                             <div className="text-sm text-secondary font-medium">Duplicate Handling<span className="text-danger">*</span></div>
 
                             <div className="flex items-center gap-4">
-                                <RadioForm label="Ignore duplicates" class_="mt-2!" />
-                                <RadioForm label="Overwrite existing" class_="mt-2!" />
-                                <RadioForm label="Allow duplicates" class_="mt-2!" />
+                                <RadioForm label="Ignore duplicates"
+                                    class_="mt-2!"
+                                    name="duplicateHandling"
+                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
+                                    errors={errors}
+                                />
+                                <RadioForm
+                                    label="Overwrite existing"
+                                    class_="mt-2!"
+                                    name="duplicateHandling"
+                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
+                                    errors={errors}
+                                />
+                                <RadioForm
+                                    label="Allow duplicates"
+                                    class_="mt-2!"
+                                    name="duplicateHandling"
+                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
+                                    errors={errors} />
                             </div>
                         </div>
                     </div>}
-                </div>}
-
-                {type === "import" && <div className="mt-8">
-                    <ImportCustomer />
                 </div>}
             </div>
 
@@ -120,6 +145,10 @@ function AddCustomer({ onClose, id }) {
                 <SecondaryButton title=" Apply Changes" type="submit" disabled={sending} />
             </div>}
         </form>
+
+        {type === "import" && <div className="mt-8">
+            <ImportCustomer />
+        </div>}
     </Model>
 
 }

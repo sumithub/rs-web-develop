@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import AdminLayout from '../../components/AdminLayout'
 import Checkbox from '../../components/form/Checkbox'
-import DatePicker from '../../components/form/DatePicker'
 import Search from '../../components/form/Search'
 import PaginationDemo from '../../components/Pagination'
 import Status from '../../components/Status'

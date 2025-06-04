@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import ProgressBar from "../../../components/common/Progress";
-import FileInput from "../../../components/form/FileInput";
 import SelectForm from "../../form/SelectForm";
 import Loading from "../../Loading";
 import TableOrder from "../../TableOrder";
@@ -15,21 +14,20 @@ import InputForm from "../../form/InputForm";
 import { useForm } from "react-hook-form";
 import RadioForm from "../../form/RadioForm";
 import Image from "next/image";
+import FileInput from "../../form/FileInput";
 
-export default function ImportCustomer() {
+export default function ImportCustomer({ onBack }) {
     const [activeStep, setActiveStep] = useState(1);
     const [sortBy, setSortBy] = useState("");
     const [list, setList] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [tab, setTab] = useState(1);
-    const [image, setImage] = useState(null);
     const [importDone, setImportDone] = useState(false);
 
     const {
         register,
         handleSubmit,
         clearErrors,
-        watch,
         formState: { errors },
     } = useForm();
 
@@ -64,8 +62,10 @@ export default function ImportCustomer() {
         }
     };
 
-    const onSubmit = async (data) => {
-        try {
+    const onSubmit = async () => {
+        if (tab === 3) {
+            toast.success("List Details Added Successfully")
+        } else try {
             toast.success("Saved Successfully");
         } catch (error) {
             toast.error(getError(error));
@@ -80,17 +80,26 @@ export default function ImportCustomer() {
     };
 
     const handleDone = () => {
+        toast.success("Imported Successfully")
         setTab(1);
         setActiveStep(1);
         setImportDone(false);
-        setImage(null);
         setList([]);
+    };
+
+    const handleBack = () => {
+        if (tab > 1) {
+            setTab(tab - 1);
+            setActiveStep(activeStep - 1);
+        } else if (onBack) {
+            onBack();
+        }
     };
 
     return (
         <main>
             <div>
-                {!importDone && (
+                {!importDone && (<>
                     <ProgressBar
                         currentStep={activeStep}
                         stepTitle1="Upload File"
@@ -99,16 +108,11 @@ export default function ImportCustomer() {
                         stepTitle4="Validation & Errors"
                         stepTitle5="Import Confirmation"
                     />
-                )}
+                </>)}
 
                 {tab === 1 && (
-                    <FileInput
-                        localImage={image}
-                        image={watch("image")}
-                        onChange={(e) => {
-                            setImage(e.target.files[0]);
-                        }}
-                    />
+                    <FileInput />
+
                 )}
 
                 {tab === 2 && (
@@ -157,7 +161,7 @@ export default function ImportCustomer() {
                                                 <td>{e.header}</td>
                                                 <td>{e.firstRow}</td>
                                                 <td>
-                                                    <SelectForm>
+                                                    <SelectForm selectClass_="border-primary3/10">
                                                         <option value="fullName">full Name</option>
                                                         <option value="phoneNumber">Phone Number</option>
                                                         <option value="email">Email</option>
@@ -177,7 +181,10 @@ export default function ImportCustomer() {
                 )}
 
                 {tab === 3 && (
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit((data) => {
+                        onSubmit(data);
+                        handleNext();
+                    })}>
                         <InputForm
                             label="list name"
                             isRequired={true}
@@ -188,7 +195,7 @@ export default function ImportCustomer() {
                         <SelectForm
                             label="Tag"
                             selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
-                            formProps={{ ...register("tag", { required: true }) }}
+                            formProps={{ ...register("tag", { required: false }) }}
                             errors={errors}
                             clearErrors={clearErrors}
                         >
@@ -213,10 +220,37 @@ export default function ImportCustomer() {
                                 </button>
                             </div>
 
-                            <div className="flex items-center gap-4">
-                                <RadioForm label="Ignore duplicates" />
-                                <RadioForm label="Overwrite existing" />
-                                <RadioForm label="Allow duplicates" />
+                            <div className="flex gap-4">
+                                <RadioForm
+                                    label="Ignore duplicates"
+                                    inputClass='mb-2!'
+                                    name="duplicateHandling"
+                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
+                                    errors={errors}
+                                />
+                                <RadioForm
+                                    label="Overwrite existing"
+                                    inputClass='mb-2!'
+                                    name="duplicateHandling"
+                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
+                                    errors={errors}
+                                />
+                                <RadioForm
+                                    label="Allow duplicates"
+                                    inputClass='mb-2!'
+                                    name="duplicateHandling"
+                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
+                                    errors={errors}
+                                />
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-3 mt-5">
+                                <CancelButton title="Cancel" onClick={handleBack} />
+                                <SecondaryButton
+                                    title="Next"
+                                    type="submit"
+                                    disabled={loading}
+                                />
                             </div>
                         </div>
                     </form>
@@ -242,6 +276,7 @@ export default function ImportCustomer() {
                                     <SecondaryButton
                                         title="Download Error Report"
                                         type="button"
+                                        onClick={() => { toast.success('Download Successfully') }}
                                         class_="shrink-0! text-xs!"
                                     />
                                 </div>
@@ -253,7 +288,7 @@ export default function ImportCustomer() {
                             <div className="bg-danger-light2 rounded-[20px] overflow-hidden mt-3">
                                 <div className="grid grid-cols-3 p-4">
                                     <TableOrder
-                                        title=" Row"
+                                        title="Row"
                                         sortBy={sortBy}
                                         setSortBy={setSortBy}
                                         field="row"
@@ -300,61 +335,56 @@ export default function ImportCustomer() {
                 {tab === 5 && (
                     <>
                         <div className="flex items-center justify-between w-full">
-                            <div className="flex items-center gap-2">
-
-                                <div className="text-danger text-xl font-semibold capitalize">
-                                    File validated successfully!
-                                </div>
+                            <div className="text-success text-xl font-semibold capitalize">
+                                File validated successfully!
                             </div>
-                            <SecondaryButton
-                                title="Download Sample CSV"
-                                type="button"
-                                class_="shrink-0! text-xs!"
-                            />
+                            <button type="button" className="text-white text-xs font-medium bg-primary p-2 rounded-lg border border-primary cursor-pointer capitalize disabled:pointer-events-none disabled:opacity-50 flex items-center gap-2" onClick={() => { toast.success('Download Successfully') }}><Image src="/images/info-circle.svg" alt="info" height={16} width={16} unoptimized={true} />Download Sample CSV</button>
                         </div>
 
-                        <div className="font-semibold text-xl">
+                        <div className="font-semibold text-xl mb-3 mt-4">
                             Import Summary
                         </div>
-                        <div className="">
-                            <div className="gap-10">
-                                {IMPORTSUMMARY.map((d, i) => (
-                                    <div key={i} className="flex justify-between">
-                                        <div className="text-text3">{d.title}</div>
-                                        <hr className="my-4 border-border-color" />
-                                        <div>{d.summary}</div>
-                                    </div>
-                                ))}
+
+                        {IMPORTSUMMARY.map((d, i) => (<div key={i}>
+                            <div className="flex justify-between">
+                                <div className="text-text3 capitalize">{d.title}</div>
+                                <div className="text-secondary font-medium capitalize">{d.summary}</div>
                             </div>
-                        </div>
+                            {/* <div className="flex justify-between">
+                                <div className="text-text3 capitalize">invalid entries</div>
+                                <div className="text-secondary font-medium capitalize mr-2">02 <span className="border-l border-border-color "></span><span className="text-primary underline ml-2">view detail</span></div>
+                            </div> */}
+                            <hr className="my-4 border-t border-border-color" />
+                        </div>))}
                     </>
                 )}
 
                 {tab === 6 && (
                     <>
-                        <div className="font-semibold text-xl">
+                        <div className="font-semibold text-xl mb-3">
                             Import Summary
                         </div>
-                        <div >
+                        <div>
                             <div className="gap-10">
-                                {IMPORTSUMMARY1.map((d, i) => (
-                                    <div key={i} className="flex justify-between">
-                                        <div className="text-text3">{d.title}</div>
-                                        <hr className="my-4 border-border-color" />
+                                {IMPORTSUMMARY1.map((d, i) => (<div key={i}>
+                                    <div className="flex justify-between">
+                                        <div className="text-text3 capitalize">{d.title}</div>
+                                        <div className="text-secondary font-medium capitalize">{d.summary}</div>
 
-                                        <div>{d.summary}</div>
+
                                     </div>
+                                    <hr className="my-4 border-t border-border-color" />
+                                </div>
                                 ))}
                             </div>
                         </div>
                     </>
                 )}
 
-
                 <div className={`grid gap-3 mt-5 ${tab === 6 ? "grid-cols-1" : "grid-cols-2"}`}>
-                    {!importDone ? (
+                    {!importDone && tab !== 3 && (
                         <>
-                            <CancelButton title="Cancel" />
+                            <CancelButton title="Cancel" onClick={handleBack} />
                             {tab === 5 ? (
                                 <SecondaryButton
                                     title="Import Customer"
@@ -366,10 +396,16 @@ export default function ImportCustomer() {
                                     }}
                                 />
                             ) : (
-                                <SecondaryButton title="Next" type="button" onClick={handleNext} />
+                                <SecondaryButton
+                                    title="Next"
+                                    type="button"
+                                    disabled={loading}
+                                    onClick={handleNext}
+                                />
                             )}
                         </>
-                    ) : (
+                    )}
+                    {importDone && (
                         <SecondaryButton
                             title="Done"
                             type="button"
@@ -382,3 +418,9 @@ export default function ImportCustomer() {
         </main>
     );
 }
+
+
+
+
+
+
