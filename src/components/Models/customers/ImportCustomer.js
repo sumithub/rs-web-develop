@@ -253,7 +253,7 @@ export default function ImportCustomer() {
                             <div className="bg-danger-light2 rounded-[20px] overflow-hidden mt-3">
                                 <div className="grid grid-cols-3 p-4">
                                     <TableOrder
-                                        title=" Row"
+                                        title="Row"
                                         sortBy={sortBy}
                                         setSortBy={setSortBy}
                                         field="row"
@@ -302,7 +302,7 @@ export default function ImportCustomer() {
                         <div className="flex items-center justify-between w-full">
                             <div className="flex items-center gap-2">
 
-                                <div className="text-danger text-xl font-semibold capitalize">
+                                <div className="text-success text-xl font-semibold capitalize">
                                     File validated successfully!
                                 </div>
                             </div>
@@ -316,12 +316,12 @@ export default function ImportCustomer() {
                         <div className="font-semibold text-xl">
                             Import Summary
                         </div>
-                        <div className="">
+                        <div >
                             <div className="gap-10">
                                 {IMPORTSUMMARY.map((d, i) => (
                                     <div key={i} className="flex justify-between">
                                         <div className="text-text3">{d.title}</div>
-                                        <hr className="my-4 border-border-color" />
+                                        <hr className="my-4 border-t border-border2" />
                                         <div>{d.summary}</div>
                                     </div>
                                 ))}
@@ -332,7 +332,7 @@ export default function ImportCustomer() {
 
                 {tab === 6 && (
                     <>
-                        <div className="font-semibold text-xl">
+                        <div className="font-semibold text-xl mb-2">
                             Import Summary
                         </div>
                         <div >
@@ -340,8 +340,7 @@ export default function ImportCustomer() {
                                 {IMPORTSUMMARY1.map((d, i) => (
                                     <div key={i} className="flex justify-between">
                                         <div className="text-text3">{d.title}</div>
-                                        <hr className="my-4 border-border-color" />
-
+                                        <hr className="my-4 border border-border-color" />
                                         <div>{d.summary}</div>
                                     </div>
                                 ))}

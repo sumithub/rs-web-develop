@@ -109,10 +109,6 @@ function AddCustomer({ onClose, id }) {
                         </div>
                     </div>}
                 </div>}
-
-                {type === "import" && <div className="mt-8">
-                    <ImportCustomer />
-                </div>}
             </div>
 
             {type === "manually" && <div className="grid grid-cols-2 gap-3 mt-5">
@@ -120,6 +116,10 @@ function AddCustomer({ onClose, id }) {
                 <SecondaryButton title=" Apply Changes" type="submit" disabled={sending} />
             </div>}
         </form>
+
+        {type === "import" && <div className="mt-8">
+            <ImportCustomer />
+        </div>}
     </Model>
 
 }
