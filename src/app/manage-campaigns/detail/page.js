@@ -20,16 +20,17 @@ import AddTemplate from "../../../components/Models/templates/AddTemplate"
 import Preview from "../../../components/Models/manage-campaigns/Preview"
 import { useRouter } from "next/navigation"
 import SelectedCustomers from "../../../components/Models/manage-campaigns/SelectedCustomers"
+import RadioForm from "../../../components/form/RadioForm"
 
 export default function Detail({ }) {
     const id = ""
-    const { register, handleSubmit, clearErrors, formState: { errors }, watch } = useForm();
+    const { register, handleSubmit, setValue, clearErrors, formState: { errors }, watch } = useForm({ defaultValues: { customerSource: "existing" } });
     const [sending, setSending] = useState(false)
     const [openSchedule, setOpenSchedule] = useState(false)
     const [openCustomer, setOpenCustomer] = useState(false)
     const [openModal, setOpenModal] = useState(false)
     const [openEmail, setOpenEmail] = useState(false)
-    const [expandAll, setExpandAll] = useState(false)
+    const [expandAll, setExpandAll] = useState(undefined)
     const [openPreview, setOpenPreview] = useState(false)
     const router = useRouter()
     const [cardStatuses, setCardStatuses] = useState({
@@ -45,6 +46,10 @@ export default function Detail({ }) {
     const [reminderEnabled, setReminderEnabled] = useState(false)
 
     const watchedFields = watch()
+
+    // useEffect(() => {
+    //     setValue("customerSource", "existing")
+    // }, [])
 
     useEffect(() => {
         updateCardStatuses()
@@ -220,7 +225,7 @@ export default function Detail({ }) {
             stepTitle4="Scheduling & Launch"
         />
 
-        <div className="">
+        <div>
             <div className="flex items-center justify-between mb-4">
                 <div className="text-secondary text-xl font-medium">Create New Campaign</div>
                 <div className="flex items-center gap-2">
@@ -232,7 +237,9 @@ export default function Detail({ }) {
             </div>
 
             <div>
-                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
+                <CampaignCard
+                    openByDefault={true}
+                    expandAll={expandAll} setExpandAll={setExpandAll}
                     title="Campaign Details"
                     status={getCardStatus('campaignDetails')}>
                     <div className="grid grid-cols-2 gap-3">
@@ -253,16 +260,38 @@ export default function Detail({ }) {
                 <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
                     title="Targeting"
                     status={getCardStatus('targeting')}>
-                    <div className="flex items-center justify-between">
+                    <div className="my-4">
                         <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
-                        <SecondaryButton title="Add Customers" class_="text-sm! font-normal!"
-                            onClick={() => { setOpenCustomer(true) }} />
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <RadioForm
+                                    checked={watch("customerSource") === "existing"}
+                                    name="customerSource"
+                                    label="Existing List"
+                                    value="existing"
+                                    formProps={{ ...register("customerSource", { required: true }) }}
+                                    errors={errors}
+                                />
+                                <RadioForm
+                                    checked={watch("customerSource") === "CSV"}
+                                    name="customerSource"
+                                    value="CSV"
+                                    label="CSV"
+                                    formProps={{ ...register("customerSource", { required: true }) }}
+                                    errors={errors}
+                                />
+                            </div>
+                            <SecondaryButton title="Add Customers" class_="text-sm! font-normal!"
+                                onClick={() => { setOpenCustomer(true) }} />
+                        </div>
                     </div>
                     <div>
                         <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2 my-5">
-                                <Image src="/images/warning.svg" alt="warning" height={22} width={22} />
-                                <div className="text-danger text-lg font-semibold capitalize">5 customers are already in an active campaign.?</div>
+                            <div>
+                                {customersSelected && <div className="flex items-center gap-2 my-5">
+                                    <Image src="/images/warning.svg" alt="warning" height={22} width={22} />
+                                    <div className="text-danger text-lg font-semibold capitalize">5 customers are already in an active campaign.?</div>
+                                </div>}
                             </div>
                             <SelectForm defaultOption="Exclude Duplicates" selectClass_="bg-white!"
                                 formProps={{ ...register("excludeDuplicates", { required: false }) }}
@@ -274,13 +303,13 @@ export default function Detail({ }) {
                             <option>7 Days</option>
                         </SelectForm>
 
-                        <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
+                        {customersSelected && <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
                             <div>Total Selected Customers</div>
                             <div className="flex items-center gap-2">
                                 <div>{customersSelected ? '250 Customers' : '0 Customers'}</div>
                                 <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />
                             </div>
-                        </div>
+                        </div>}
                     </div>
                 </CampaignCard>
             </div>

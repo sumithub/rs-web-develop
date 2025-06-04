@@ -39,7 +39,7 @@ export default function Carousel({ onClose, OnSave, id }) {
         }
     }
     return (
-        <Model onClose={onClose} title="Grid Widget" modalClass="w-[60%]!">
+        <Model onClose={onClose} title="Grid Widget" modalClass="w-[80%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 {open &&
                     <CodePreviewBox
@@ -58,7 +58,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                             <div className="grid grid-cols-3 gap-[15px] pt-2.5">
                                 <InputForm
                                     label="Color Scheme"
-                                    isRequired={true}
+                                    // isRequired={true}
                                     placeholder="Select Color"
                                     formProps={{ ...register("colorScheme", { required: true }) }}
                                     errors={errors}
@@ -70,7 +70,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     defaultOption="Select"
                                     label="Font Family"
                                     labelClass="pb-2.5 inline-block mb-0!"
-                                    isRequired={true}
+                                    // isRequired={true}
                                     formProps={{ ...register("select", { required: true }) }}
                                     errors={errors}
                                     class_="mt-0!"
@@ -80,7 +80,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                                 </SelectForm>
                                 <InputForm
                                     label="Border Radius"
-                                    isRequired={true}
+                                    // isRequired={true}
                                     placeholder="Select Border Color"
                                     formProps={{ ...register("colorScheme", { required: true }) }}
                                     errors={errors}
@@ -93,7 +93,7 @@ export default function Carousel({ onClose, OnSave, id }) {
 
                         <div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Content</h2>
-                            <div className="grid grid-cols-2 gap-5">
+                            <div className="grid grid-cols-2 gap-5 mt-2.5">
                                 <InputForm
                                     label="Number of Reviews"
                                     isRequired={true}
@@ -108,7 +108,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     defaultOption="Enter filtering"
                                     label="Minimum Rating"
                                     labelClass="pb-2.5 inline-block mb-0!"
-                                    isRequired={true}
+                                    // isRequired={true}
                                     formProps={{ ...register("select", { required: true }) }}
                                     errors={errors}
                                     class_="mt-0!"
@@ -186,7 +186,6 @@ export default function Carousel({ onClose, OnSave, id }) {
                                         </div>
                                     </div>
                                 </div>
-
                                 <p className="text-xs pt-[15px] capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br />
                                     <span className="font-medium text-light2">Read More</span></p>
                                 <div className="my-[25px]">

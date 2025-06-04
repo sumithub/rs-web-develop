@@ -13,12 +13,18 @@ import Carousel from "../../components/Models/review/Carousel";
 
 export default function ReviewWidgets() {
     const [openCarousel, setOpenCarousel] = useState(false)
-    const [openStar, setOpenStar] = useState(false)
-    const [openFloating, setOpenFloating] = useState(false)
-    const [openTestimonial, setOpenTestimonial] = useState(false)
-    const [openGrid, setOpenGrid] = useState(false)
+    // const [openStar, setOpenStar] = useState(false)
+    // const [openFloating, setOpenFloating] = useState(false)
+    // const [openTestimonial, setOpenTestimonial] = useState(false)
+    // const [openGrid, setOpenGrid] = useState(false)
+    const [modalTitle, setModalTitle] = useState("");
+
+    const handleOpenModal = (title) => {
+        setModalTitle(title);
+        setOpenCarousel(true);
+    };
     return (<AdminLayout>
-        {openGrid &&
+        {/* {openGrid &&
             <GridWidget
                 onClose={() => {
                     setOpenGrid(false)
@@ -60,10 +66,11 @@ export default function ReviewWidgets() {
                 onSave={() => {
                     setOpenStar(true)
                 }} />
-        }
+        } */}
 
         {openCarousel &&
             <Carousel
+                title={modalTitle}
                 onClose={() => {
                     setOpenCarousel(false)
                 }}
@@ -88,7 +95,10 @@ export default function ReviewWidgets() {
                 </div>
 
                 <div className="mt-3 p-4 mb-3">
-                    <SecondaryButton title="Carousel Review Widget" onClick={() => { setOpenCarousel(true) }} />
+                    <SecondaryButton
+                        title="Carousel Review Widget"
+                        onClick={() => handleOpenModal("Carousel")}
+                    />
                 </div>
             </div>
 
@@ -107,7 +117,10 @@ export default function ReviewWidgets() {
                 </div>
 
                 <div className="mt-3 p-4 mb-3">
-                    <CancelButton title="Grid Review Widget" onClick={() => { setOpenGrid(true) }} />
+                    <CancelButton
+                        title="Grid Review Widget"
+                        onClick={() => handleOpenModal("Grid Widget")}
+                    />
                 </div>
             </div>
 
@@ -126,7 +139,10 @@ export default function ReviewWidgets() {
                 </div>
 
                 <div className="mt-3 p-4 mb-3">
-                    <CancelButton title="Testimonial Card Widget" onClick={() => { setOpenTestimonial(true) }} />
+                    <CancelButton
+                        title="Testimonial Card Widget"
+                        onClick={() => handleOpenModal("Testimonial Widget")}
+                    />
                 </div>
             </div>
 
@@ -145,7 +161,10 @@ export default function ReviewWidgets() {
                 </div>
 
                 <div className="mt-3 p-4 mb-3">
-                    <CancelButton title="Floating Review" onClick={() => { setOpenFloating(true) }} />
+                    <CancelButton
+                        title="Floating Review"
+                        onClick={() => handleOpenModal("Floating Button Widget")}
+                    />
                 </div>
             </div>
 
@@ -164,7 +183,10 @@ export default function ReviewWidgets() {
                 </div>
 
                 <div className="mt-3 p-4 mb-3">
-                    <CancelButton title="Star Rating Badge" onClick={() => { setOpenStar(true) }} />
+                    <CancelButton
+                        title="Star Rating Badge"
+                        onClick={() => handleOpenModal("Star Badge Widget")}
+                    />
                 </div>
             </div>
 

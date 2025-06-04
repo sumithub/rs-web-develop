@@ -1,24 +1,49 @@
-import Image from "next/image"
+import Image from "next/image";
 
 export default function Rating(props) {
     const {
+        isRequired,
         setValue,
         watch,
         label,
         disabled,
         containerClass = "",
-        count = 3
-    } = props
+        count = 5,
+        formProps,
+        errors
+    } = props;
 
-    return (<div className={`laptop:mb-2 mb-3 relative ${containerClass}`}>
-        {label && <label className={`inline left-1.5 -top-2 px-1 capitalize pb-1 font-medium text-xs z-1 leading-none ${!disabled && "bg-white"}`} >{label}</label>}
-        <div className="capitalize font-normal w-full laptop:px-2 laptop:pt-[10px] laptop:pb-2 tablet:px-[6px] px-2 tablet:py-[10px] py-3 border rounded-md text-xs h-9 flex gap-1 items-center">
-            {Array(count).fill('*').map((star, i) => {
-                return <span key={i} className="cursor-pointer" onClick={() => { setValue("rating", i + 1) }}>
-                    <Image src="/images.star.svg" alt="star" height={16} width={16} className={`${watch("rating") > i ? "custom-yellow" : "text-text3"} laptop:text-xl tablet:text-base`} />
-                </span>
-            })}
+    let error = "";
+    if (formProps?.name && errors?.[formProps.name]) {
+        const fieldError = errors[formProps.name];
+        if (fieldError.type === "pattern" || fieldError.type === "validate") {
+            error = fieldError.message;
+        } else {
+            error = "This field is required";
+        }
+    }
+
+    return (
+        <div className={`laptop:mb-2 mb-3 relative ${containerClass}`}>
+            {label && (
+                <label className={`text-sm font-medium text-secondary capitalize ${!disabled && ""}`}>
+                    {label} {isRequired ? <span className="text-danger">*</span> : ""}
+                </label>
+            )}
+            <div className={`capitalize font-normal w-full  border rounded-lg text-sm py-3 px-2.5 flex gap-1 items-center ${error ? "border-danger" : "border-[#F4F4F4]"}`}>
+                {Array(count).fill('*').map((star, i) => (
+                    <span key={i} className="cursor-pointer" onClick={() => setValue(formProps?.name, i + 1)}>
+                        <Image
+                            src={`${watch(formProps?.name) > i ? "/images/star.svg" : "/images/rating-star.svg"}`}
+                            alt="star"
+                            height={16}
+                            width={16}
+                            className={`${watch(formProps?.name) > i ? "custom-yellow" : "text-text3"}`}
+                        />
+                    </span>
+                ))}
+            </div>
+            {error && <p className="text-xs pt-[3px] capitalize text-danger">{error}</p>}
         </div>
-    </div>
-    )
+    );
 }
