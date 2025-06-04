@@ -130,60 +130,29 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
                                 <div className="">
                                     <div>
                                         <div className="text-secondary text-xl font-medium mb-[15px]">Star Rating Badge</div>
-                                        <div className="grid grid-cols-[1fr_2fr]">
-                                            <div className="text-secondary">
+                                        <div className="grid grid-cols-[0.8fr_auto_2fr] gap-5">
+                                            <div className="text-end">
                                                 {/* <div className="text-xs font-semibold">Total</div> */}
                                                 <div className="text-[46px] text-end font-semibold">4.5</div>
-                                                <div className="flex items-center gap-1">
-                                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
-                                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
-                                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
-                                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
-                                                    <Image src="/images/star2.svg" alt="star2" height={14} width={14} unoptimized={true} />
+                                                <div className="flex gap-2.5 pt-[5px] justify-end">
+                                                    <div className="flex items-center gap-1">
+                                                        <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                                        <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                                        <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                                        <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                                        <Image src="/images/star2.svg" alt="star2" height={14} width={14} unoptimized={true} />
+                                                    </div>
+                                                    <h2 className="text-sm text-primary font-semibold">&#40;200&#41;</h2>
                                                 </div>
-                                                <h2 className="text-sm font-semibold">&#40;200&#41;</h2>
-
-                                                <div className="flex items-center justify-between mt-2">
-                                                    <div>
-                                                        <div className="2xl:text-sm lg:text-[10px] mb-1.5">Ratings</div>
-                                                        <div className="2xl:text-base text-sm font-semibold">233</div>
-                                                    </div>
-                                                    <div>
-                                                        <div className="2xl:text-sm lg:text-[10px] capitalize mb-1.5">Rating With Reviews</div>
-                                                        <div className="2xl:text-base text-sm font-semibold">217</div>
-                                                    </div>
+                                                <div className="pt-[5px]">
+                                                    <h2 className="text-text3 text-sm">Food 4.5</h2>
+                                                    <h2 className="text-text3 text-sm py-[5px]">Ambience 3.7</h2>
+                                                    <h2 className="text-text3 text-sm">Service 4.2</h2>
                                                 </div>
                                             </div>
-
+                                            <hr className="border border-border2 h-full" />
                                             <div>
-                                                {/* <div className="grid grid-cols-[0.1fr_auto] items-center">
-                                                    <div className="text-text3 text-sm">5</div>
-                                                    <ProgressBar completed={100} bgColor="#FFC107" height="12px"
-                                                        isLabelVisible={false} borderRadius="2px"
-                                                    />
-                                                </div>
-
-                                                <div className="grid grid-cols-[0.1fr_auto] items-center my-1.5">
-                                                    <div className="text-text3 text-sm">4</div>
-                                                    <ProgressBar completed={80} bgColor="#FFC107" height="12px"
-                                                        isLabelVisible={false} borderRadius="2px"
-                                                    />
-                                                </div>
-                                                <div className="grid grid-cols-[0.1fr_auto] items-center">
-                                                    <div className="text-text3 text-sm">3</div>
-                                                    <ProgressBar completed={50} bgColor="#FFC107" height="12px"
-                                                        isLabelVisible={false} borderRadius="2px"
-                                                    />
-                                                </div>
-
-                                                <div className="grid grid-cols-[0.1fr_auto] items-center my-1.5">
-                                                    <div className="text-text3 text-sm">2</div>
-                                                    <ProgressBar completed={50} bgColor="#FFC107" height="12px"
-                                                        isLabelVisible={false} borderRadius="2px"
-                                                    />
-                                                </div> */}
-
-                                                <div className="flex gap-5 items-center justify-between">
+                                                <div className="flex gap-10 items-center justify-between">
                                                     <div className="flex gap-[5px]">
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
@@ -191,11 +160,71 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                         <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
                                                     </div>
-                                                    <div className="grid grid-cols-[0.6fr_auto] w-full items-center">
-                                                        <ProgressBar completed={50} bgColor="#FFC107" height="8px"
-                                                            isLabelVisible={false} borderRadius="2px"
+                                                    <div className="flex gap-2 w-full items-center justify-between">
+                                                        <ProgressBar completed={50} bgColor="#FFC107" height="8px" width="200px"
+                                                            isLabelVisible={false} borderRadius="12px"
                                                         />
-                                                        <div className="text-text3 text-sm">0.5</div>
+                                                        <div className="text-xs font-semibold">250</div>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-10 items-center justify-between mt-5">
+                                                    <div className="flex gap-[5px]">
+                                                        <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                    </div>
+                                                    <div className="flex gap-2 w-full items-center justify-between">
+                                                        <ProgressBar completed={40} bgColor="#FFC107" height="8px" width="200px"
+                                                            isLabelVisible={false} borderRadius="12px"
+                                                        />
+                                                        <div className="text-xs font-semibold">200</div>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-10 items-center justify-between mt-5">
+                                                    <div className="flex gap-[5px]">
+                                                        <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                    </div>
+                                                    <div className="flex gap-2 w-full items-center justify-between">
+                                                        <ProgressBar completed={60} bgColor="#FFC107" height="8px" width="200px"
+                                                            isLabelVisible={false} borderRadius="12px"
+                                                        />
+                                                        <div className="text-xs font-semibold">500</div>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-10 items-center justify-between mt-5">
+                                                    <div className="flex gap-[5px]">
+                                                        <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                    </div>
+                                                    <div className="flex gap-2 w-full items-center justify-between">
+                                                        <ProgressBar completed={15} bgColor="#FFC107" height="8px" width="200px"
+                                                            isLabelVisible={false} borderRadius="12px"
+                                                        />
+                                                        <div className="text-xs font-semibold">10</div>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-10 items-center justify-between mt-5">
+                                                    <div className="flex gap-[5px]">
+                                                        <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                                    </div>
+                                                    <div className="flex gap-2 w-full items-center justify-between">
+                                                        <ProgressBar completed={5} bgColor="#FFC107" height="8px" width="200px"
+                                                            isLabelVisible={false} borderRadius="12px"
+                                                        />
+                                                        <div className="text-xs font-semibold">0.5</div>
                                                     </div>
                                                 </div>
                                             </div>
