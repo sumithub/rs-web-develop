@@ -161,7 +161,7 @@ export default function ImportCustomer() {
                                                 <td>{e.header}</td>
                                                 <td>{e.firstRow}</td>
                                                 <td>
-                                                    <SelectForm>
+                                                    <SelectForm selectClass_="border-primary3/10">
                                                         <option value="fullName">full Name</option>
                                                         <option value="phoneNumber">Phone Number</option>
                                                         <option value="email">Email</option>
@@ -220,10 +220,28 @@ export default function ImportCustomer() {
                                 </button>
                             </div>
 
-                            <div className="flex items-center gap-4">
-                                <RadioForm label="Ignore duplicates" />
-                                <RadioForm label="Overwrite existing" />
-                                <RadioForm label="Allow duplicates" />
+                            <div className="flex gap-4">
+                                <RadioForm
+                                    label="Ignore duplicates"
+                                    inputClass='mb-2!'
+                                    name="duplicateHandling"
+                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
+                                    errors={errors}
+                                />
+                                <RadioForm
+                                    label="Overwrite existing"
+                                    inputClass='mb-2!'
+                                    name="duplicateHandling"
+                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
+                                    errors={errors}
+                                />
+                                <RadioForm
+                                    label="Allow duplicates"
+                                    inputClass='mb-2!'
+                                    name="duplicateHandling"
+                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
+                                    errors={errors}
+                                />
                             </div>
 
                             <div className="grid grid-cols-2 gap-3 mt-5">
@@ -258,6 +276,7 @@ export default function ImportCustomer() {
                                     <SecondaryButton
                                         title="Download Error Report"
                                         type="button"
+                                        onClick={() => { toast.success('Download Successfully') }}
                                         class_="shrink-0! text-xs!"
                                     />
                                 </div>
@@ -319,7 +338,7 @@ export default function ImportCustomer() {
                             <div className="text-success text-xl font-semibold capitalize">
                                 File validated successfully!
                             </div>
-                            <button type="button" className="text-white text-xs font-medium bg-primary p-2 rounded-lg border border-primary cursor-pointer capitalize disabled:pointer-events-none disabled:opacity-50 flex items-center gap-2"><Image src="/images/info-circle.svg" alt="info" height={16} width={16} unoptimized={true} />Download Sample CSV</button>
+                            <button type="button" className="text-white text-xs font-medium bg-primary p-2 rounded-lg border border-primary cursor-pointer capitalize disabled:pointer-events-none disabled:opacity-50 flex items-center gap-2" onClick={() => { toast.success('Download Successfully') }}><Image src="/images/info-circle.svg" alt="info" height={16} width={16} unoptimized={true} />Download Sample CSV</button>
                         </div>
 
                         <div className="font-semibold text-xl mb-3 mt-4">
