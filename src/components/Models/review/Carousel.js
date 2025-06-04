@@ -40,7 +40,7 @@ export default function Carousel({ onClose, OnSave, id }) {
     }
 
     return (
-        <Model onClose={onClose} title="Carousel" modalClass="w-[60%]!">
+        <Model onClose={onClose} title="Carousel" modalClass="w-[80%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 {open &&
                     <CodePreviewBox
