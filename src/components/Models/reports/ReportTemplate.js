@@ -80,7 +80,7 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                 <div className="mt-3.5 inline-block ">
                     <SecondaryButton
                         title="Add Custom Section"
-                        class_="text-xs! font-normal!"
+                        class_="text-xs! font-normal! py-3.5! px-2.5!"
                         onClick={onSave}
                     />
                 </div>
