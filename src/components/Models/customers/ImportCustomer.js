@@ -16,8 +16,7 @@ import RadioForm from "../../form/RadioForm";
 import Image from "next/image";
 import FileInput from "../../form/FileInput";
 
-export default function ImportCustomer({ onBack }) {
-    const [activeStep, setActiveStep] = useState(1);
+export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
     const [sortBy, setSortBy] = useState("");
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -111,8 +110,21 @@ export default function ImportCustomer({ onBack }) {
                 </>)}
 
                 {tab === 1 && (
-                    <FileInput />
-
+                    <FileInput
+                        formProps={{
+                            ...register('csvFile', {
+                                required: "Please upload a CSV file",
+                                validate: (value) => {
+                                    if (!value) return "Please upload a CSV file";
+                                    if (value.type !== 'text/csv') return "Please select a valid CSV file";
+                                    return true;
+                                }
+                            })
+                        }}
+                        errors={errors}
+                        isRequired={true}
+                        label="Upload file"
+                    />
                 )}
 
                 {tab === 2 && (
@@ -161,7 +173,7 @@ export default function ImportCustomer({ onBack }) {
                                                 <td>{e.header}</td>
                                                 <td>{e.firstRow}</td>
                                                 <td>
-                                                    <SelectForm selectClass_="border-primary3/10">
+                                                    <SelectForm selectClass_="border-primary3/10" class_="mt-0!">
                                                         <option value="fullName">full Name</option>
                                                         <option value="phoneNumber">Phone Number</option>
                                                         <option value="email">Email</option>
@@ -204,7 +216,7 @@ export default function ImportCustomer({ onBack }) {
                             <option value="instead of source">instead of source</option>
                         </SelectForm>
 
-                        <div>
+                        {tab !== 6 && (<div>
                             <div className="flex gap-2 mt-4">
                                 <div className="text-sm text-secondary font-medium">
                                     Duplicate Handling<span className="text-danger">*</span>
@@ -252,7 +264,7 @@ export default function ImportCustomer({ onBack }) {
                                     disabled={loading}
                                 />
                             </div>
-                        </div>
+                        </div>)}
                     </form>
                 )}
 
