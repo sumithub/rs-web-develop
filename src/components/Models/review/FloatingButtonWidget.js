@@ -210,7 +210,7 @@ export default function Carousel({ onClose, OnSave, id }) {
 
                     <div className="shadow-sm rounded-[15px]">
                         <div className="bg-primary/10 rounded-t-[15px] px-5 py-[18px] flex gap-2.5 items-center">
-                            <Image src="/images/eye1.svg" alt="eye1" width={22} height={22} />
+                            <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={22} height={22} />
                             <h2 className="text-lg font-semibold">Widget Preview</h2>
                         </div>
                         <div className="p-5">
@@ -232,7 +232,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                                     </div>
                                     <button className="border border-primary p-2.5 rounded-lg bg-dark">
                                         <span>
-                                            <Image src="/images/google.svg" alt="google" width={18} height={18} className="" />
+                                            <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
                                         </span>
                                     </button>
                                 </div>

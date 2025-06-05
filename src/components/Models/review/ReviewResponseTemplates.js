@@ -25,7 +25,6 @@ export default function ReviewResponseTemplates({ onClose }) {
     const [loading, setLoading] = useState(true)
     const [rating, setRating] = useState("")
 
-
     useEffect(() => {
         getReviewResponse()
     }, [search, sortBy, rating])
@@ -99,11 +98,11 @@ export default function ReviewResponseTemplates({ onClose }) {
                                 setRating(e.target.value)
                             }}
                             multiSelect={true}>
-                            <option value="1 star">1 Star & Up</option>
-                            <option value="2 star">2 Star & Up</option>
-                            <option value="3 star">3 Star & Up</option>
-                            <option value="4 star">4 Star & Up</option>
-                            <option value="5 star">5 Star & Up</option>
+                            <option value="1 star">1 Star</option>
+                            <option value="2 star">2 Star</option>
+                            <option value="3 star">3 Star</option>
+                            <option value="4 star">4 Star</option>
+                            <option value="5 star">5 Star</option>
                         </CustomSelectBox>
                         <SecondaryButton title="Create New Template" class_="text-xs! px-2.5! py-2.5!" onClick={() => { setOpen(true) }} type="button" />
                     </div>
@@ -148,11 +147,11 @@ export default function ReviewResponseTemplates({ onClose }) {
                                 <td>
                                     <div className='flex items-center gap-2' >
                                         <button className='cursor-pointer' onClick={() => { setOpen(true) }} type="button">
-                                            <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
 
                                         <button className='cursor-pointer' onClick={() => { setOpenDelete(true) }} type="button">
-                                            <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
                                         </button>
                                     </div>
                                 </td>

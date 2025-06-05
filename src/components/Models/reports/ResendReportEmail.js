@@ -81,7 +81,7 @@ export default function ResendReportEmail({ onClose, id, onSave }) {
                 </div>
 
                 <div className="flex gap-3 mt-3">
-                    <Image src="/images/warning.svg" alt="warning" height={22} width={22} />
+                    <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                     <div>
                         Failed to Deliver (Lisa)
                     </div>

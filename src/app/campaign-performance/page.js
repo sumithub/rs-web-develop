@@ -34,6 +34,9 @@ import DashboardPieChart from '../../components/charts/DashboardPieChart'
 import StackedReviewChart from '../../components/charts/StackedReviewChart'
 import DashboardLineChart from '../../components/charts/DashboardLineChart'
 import DateRangePicker from '../../components/form/DateRangePicker'
+import ResendReportEmail from '../../components/Models/reports/ResendReportEmail'
+import Download from '../../components/Models/customers/Download'
+
 function ReviewAnalytics() {
     const [openBoost, setOpenBoost] = useState(false)
     const [filterBy, setFilterBy] = useState("")
@@ -44,11 +47,13 @@ function ReviewAnalytics() {
     const [openMultiCustomer, setOpenMultiCustomer] = useState(false)
     const [openTags, setOpenTags] = useState(false)
     const [openModal, setOpenModal] = useState(null)
-    const [view, setView] = useState("history")
+    const [view, setView] = useState("report")
     const [tab, setTab] = useState("list")
     const [sortBy, setSortBy] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
+    const [openEmail, setOpenEmail] = useState(false)
+    const [openDownload, setOpenDownload] = useState(false)
 
 
     useEffect(() => {
@@ -83,6 +88,29 @@ function ReviewAnalytics() {
 
     return (
         <AdminLayout>
+
+            {openEmail &&
+                <ResendReportEmail
+                    onClose={() => {
+                        setOpenEmail(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenEmail(true)
+                    }} />
+            }
+
+            {openDownload &&
+                <Download
+                    onClose={() => {
+                        setOpenDownload(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenDownload(true)
+                    }}
+                />
+            }
             <div>
                 <div className="flex justify-between w-full items-center mb-[15px]">
                     <div className='flex items-center gap-10 bg-white shadow-sm rounded-[10px] py-[15px] px-[25px]'>
@@ -296,7 +324,7 @@ function ReviewAnalytics() {
                                     <Image unoptimized={true} src="/images/copy2.svg" alt="copy2" width={20} height={20} />
                                 </div>
                             </div>
-                            <div className="w-[30%]">
+                            <div className="w-[30%] shrink-0">
                                 <SecondaryButton
                                     title="Search Users"
                                     class_="py-[15px]! px-5! text-sm! font-normal!"
@@ -438,19 +466,19 @@ function ReviewAnalytics() {
                                 <Status status={e.status} />
                             </div>
                             <div className='grid grid-cols-2 gap-[15px] mt-5'>
-                                <button className='text-primary text-base py-2.5 font-medium bg-primary/10 rounded-lg flex justify-center items-center gap-2'>
+                                <button onClick={() => { setOpenDownload(true) }} className='text-primary text-base py-2.5 font-medium bg-primary/10 rounded-lg flex justify-center items-center gap-2'>
                                     <Image unoptimized={true} src="/images/download2.svg" alt='download2' width={16} height={16} />
                                     Download
                                 </button>
-                                <button className='text-danger text-base py-2.5 font-medium bg-danger/10 rounded-lg flex justify-center items-center gap-2'>
+                                <button onClick={() => { setOpenEmail(true) }} className='text-danger text-base py-2.5 font-medium bg-danger/10 rounded-lg flex justify-center items-center gap-2'>
                                     <Image unoptimized={true} src="/images/refresh2.svg" alt='refresh2' width={16} height={16} />
                                     Resend E-mail
                                 </button>
                             </div>
                         </div>)}
                 </div>
+                <PaginationDemo />
             </div>}
-
         </AdminLayout>
     )
 }

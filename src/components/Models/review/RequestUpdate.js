@@ -66,7 +66,7 @@ export default function RequestUpdate({ onClose, onSave }) {
                     <div className="bg-white rounded-[15px] shadow-sm">
                         <div className='bg-primary/10 py-[18px] px-5 rounded-t-[15px] '>
                             <div className='flex items-center gap-2.5'>
-                                <Image src="/images/eye1.svg" alt="eye1" width={22} height={22} />
+                                <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={22} height={22} />
                                 <div className='text-secondary text-lg font-semibold'>Email Preview</div>
                             </div>
                         </div>

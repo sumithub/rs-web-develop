@@ -114,7 +114,7 @@ function ReviewCard({ status }) {
                         </button>
                         <button onClick={() => setOpenModal(true)}>
                             <Image
-                                unoptimized
+                                unoptimized={true}
                                 src="/images/edit.svg"
                                 alt="Edit connection"
                                 width={46}
@@ -132,7 +132,7 @@ function ReviewCard({ status }) {
                         </button>
                         <button onClick={() => setOpenModal(true)}>
                             <Image
-                                unoptimized
+                                unoptimized={true}
                                 src="/images/edit.svg"
                                 alt="Edit connection"
                                 width={46}

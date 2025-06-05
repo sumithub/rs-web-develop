@@ -122,7 +122,7 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
 
                     <div className="shadow-sm rounded-[15px]">
                         <div className="bg-primary/10 rounded-t-[15px] px-5 py-[18px] flex gap-2.5 items-center">
-                            <Image src="/images/eye1.svg" alt="eye1" width={22} height={22} />
+                            <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={22} height={22} />
                             <h2 className="text-lg font-semibold">Widget Preview</h2>
                         </div>
                         <div className="p-5">
