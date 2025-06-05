@@ -38,7 +38,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         register,
         handleSubmit,
         clearErrors,
-        getValues, // Add this for accessing form values
+        getValues,
         formState: { errors },
     } = useForm();
 
@@ -73,7 +73,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         }
     };
 
-    // Add function to store file information in tab 1
     const handleFileUpload = (file) => {
         setImportData(prev => ({
             ...prev,
@@ -82,7 +81,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         }));
     };
 
-    // Add function to collect field mappings in tab 2
     const handleFieldMappingChange = (index, value) => {
         const updatedMappings = [...importData.fieldMappings];
         updatedMappings[index] = {
@@ -97,9 +95,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         }));
     };
 
-    // Update onSaveListDetails to work with useForm
     const onSaveListDetails = (formData) => {
-        // Store the form data from useForm
         setImportData(prev => ({
             ...prev,
             listName: formData.listName,
@@ -111,7 +107,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         handleNext();
     };
 
-    // Update the onSubmit function to handle different tabs
     const onSubmit = async (formData) => {
         if (tab === 3) {
             onSaveListDetails(formData);
@@ -131,15 +126,11 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         }
     };
 
-    // Updated handleDone with POST API call
     const handleDone = async () => {
         try {
             setLoading(true);
 
-            // Get current form values
             const currentFormData = getValues();
-
-            // Prepare the complete import data to send to the API
             const postData = {
                 fileName: importData.fileName || "abc.csv",
                 listName: importData.listName || currentFormData.listName,
