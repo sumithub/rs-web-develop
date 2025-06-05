@@ -3,6 +3,7 @@
 :root {
   --primary: #0396FF;
   --primary2: #6FC3FF;
+  --primary3: #0096FF;
   --secondary: #1F2933;
   --secondary2: #F6F8FB;
   --text: #FEFEFE;
@@ -18,6 +19,7 @@
   --success-dark: #328394;
   --dark: #F6F8FB;
   --light: #F9FBFC;
+  --light2: #63CBF1;
   --custom-purple: #5470DE;
   --custom-purple-light: #9787FF;
   --custom-yellow: #FFC246;
@@ -29,6 +31,7 @@
   --color-primary: var(--primary);
   --border-primary: var(--primary);
   --color-primary2: var(--primary2);
+  --color-primary3: var(--primary3);
   --color-secondary: var(--secondary);
   --color-secondary2: var(--secondary2);
   --color-text: var(--text);
@@ -44,6 +47,7 @@
   --color-success-dark: var(--success-dark);
   --color-dark: var(--dark);
   --color-light: var(--light);
+  --color-light2: var(--light2);
   --color-custom-purple: var(--custom-purple);
   --color-custom-purple-light: var(--custom-purple-light);
   --color-custom-yellow: var(--custom-yellow);

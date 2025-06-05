@@ -1,38 +1,59 @@
 "use client"
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Checkbox from "../../components/form/Checkbox";
 import Status from "../../components/Status";
 import TableOrder from "../../components/TableOrder";
 import Search from "../../components/form/Search";
 import Dropdown from "../../components/DropDown";
-import DatePicker from "../../components/form/DatePicker";
 import Loading from "../../components/Loading";
-import Pagination from "../../components/Pagination"
 import Chart from "../../components/charts/Chart"
 import AdminLayout from "../../components/AdminLayout"
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import AddManualReview from '../../components/Models/review/AddManualReview';
+import axios from "axios";
+import { toast } from "react-toastify";
+import { formatDateTime, getError } from "../../../helper";
+import { manageReview, REVIEW_ACTIONS } from "../../constent/constArray";
+import ReviewDetail from "../../components/Models/review/ReviewDetail";
+import RequestUpdate from "../../components/Models/review/RequestUpdate";
+import AssignReviewToUser from "../../components/Models/review/AssignReviewToUser";
+import ReviewDetails from "../../components/Models/review/ReviewDetails";
+import DeleteTemplate from "../../components/Models/review/DeleteTemplate";
+import DateRange from "../../components/form/DateRangePicker";
+import PaginationDemo from "../../components/Pagination";
 
 export default function Review() {
     const [rating, setRating] = useState("")
     const [reviewSource, setReviewSource] = useState("")
     const [status, setStatus] = useState("")
     const [date, setDate] = useState("")
-    // const [list, setList] = useState([])
+    const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
     const [open, setOpen] = useState(false)
     const [sortBy, setSortBy] = useState("")
+    const [openModal, setOpenModal] = useState(null)
 
-    const list = [
-        { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "New" },
+    useEffect(() => {
+        getReview()
+    }, [search, status, rating, reviewSource, date, sortBy])
 
-        { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Responded" },
+    const getReview = async () => {
+        try {
+            setLoading(true)
+            setList([])
+            const res = await axios.get("/api")
+            setList(res.data || manageReview)
+            setLoading(false)
 
-        { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: "	Jun 18,2024 | 10:00AM", status: "Flagged" },
-    ]
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
+
 
     return <AdminLayout noCard={true}>
 
@@ -46,6 +67,41 @@ export default function Review() {
                     setOpen(true)
                 }}
             />
+        }
+
+        {openModal === "delete" &&
+            <DeleteTemplate
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
+        }
+
+        {openModal === "reply-now" &&
+            <ReviewDetail
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
+        }
+
+        {openModal === "request-update" &&
+            <RequestUpdate
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
+        }
+
+        {openModal === "assign-to-user" &&
+            <AssignReviewToUser
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
+        }
+
+        {openModal === "share" &&
+            <ReviewDetails
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
         }
 
         <div className="bg-light min-h-[calc(100dvh_-_85px)] mt-[85px]">
@@ -183,7 +239,7 @@ export default function Review() {
             </div>
 
             <div className="bg-white min-h-[calc(100vh_-_85px)] rounded-[10px] mt-5 p-5">
-                <div className="2xl:flex lg:flex-wrap justify-between items-center w-full">
+                <div className="flex justify-between items-center w-full gap-[15px]">
                     {/* <div className="relative w-[32%]">
                         <div className="w-full">
                             <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-dark border border-border2 rounded-lg focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
@@ -206,29 +262,34 @@ export default function Review() {
                             setSearch(s)
                         }}
                     />
-                    <div className="grid grid-cols-[0.8fr_0.8fr_0.8fr_0.8fr_auto_1fr] items-start 2xl:gap-3 xl:gap-2 lg:gap-2 2xl:mt-0 mt-3">
+                    <div className="flex gap-3">
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="start rating"
                             value={rating}
                             onChange={(e) => {
                                 setRating(e.target.value)
                             }}>
-                            <option value="1 star">1 Star & Up</option>
-                            <option value="4 star">4 Star & Up</option>
-                            <option value="3 star">3 Star & Up</option>
-                            <option value="2 star">2 Star & Up</option>
-                            <option value="1 star">1 Star & Up</option>
+                            <option value="1 star">1 Star</option>
+                            <option value="2 star">2 Star</option>
+                            <option value="3 star">3 Star</option>
+                            <option value="4 star">4 Star</option>
+                            <option value="5 star">5 Star</option>
                         </CustomSelectBox>
-                        <DatePicker
+
+                        {/* <DatePicker
                             icon={true}
                             mainClass="mt-0!"
                             value={date}
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
-                        />
+                        /> */}
+
+                        <DateRange class_="shrink-0!"
+                            onChange={(e) => { setDate(e) }} />
+
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="Review Source"
                             value={reviewSource}
                             onChange={(e) => {
@@ -236,11 +297,11 @@ export default function Review() {
                             }}>
                             <option value="google">Google</option>
                             <option value="yelp">Yelp</option>
-                            <option value="trustpilot and tripadvisor">Trustpilot and Tripadvisor</option>
+                            <option value="truspilot">Truspilot</option>
                         </CustomSelectBox>
 
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="Review Status"
                             value={status}
                             onChange={(e) => {
@@ -255,20 +316,25 @@ export default function Review() {
                             <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
                         </button>
 
-                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
-                            onClick={() => { setOpen(true) }}>Add Manual Review</button>
+                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
+                            onClick={() => { setOpen(true) }}>Create Manual Review</button>
                     </div>
                 </div>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 mt-5">
                     <div className="flex items-start justify-center gap-2 mt-1">
-                        <Checkbox />
+                        <Checkbox
+                            checked={list?.length > 0 && list.every(e => e.selected)}
+                            onChange={(checked) => {
+                                setList(list => list.map(e => ({ ...e, selected: checked })))
+                            }} />
                         <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
                     </div>
                 </div>
 
                 <div className="w-full overflow-x-auto mt-5 border border-border-color rounded-[20px]">
 
-                    <table className="w-full">
+                    {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+
                         <thead>
                             <tr className="text-secondary text-sm font-semibold bg-dark border-b border-border-color text-left">
                                 <th className="py-4 px-4"><TableOrder title="Reviewer"
@@ -302,10 +368,15 @@ export default function Review() {
                         <tbody>
                             {loading ? <tr><td colSpan={6} className='text-center'><Loading /></td></tr> : (
                                 (list && list.length > 0) ? list.map((e, index) => {
-                                    return <tr key={index} className={`${index === 0 ? "" : "border-t"} border-border-color text-secondary text-sm text-left hover:bg-dark text-sm`}>
+                                    return <tr key={index} className={`${index === 0 ? "" : "border-t"} border-border-color text-secondary text-sm text-left hover:bg-dark`}>
                                         <td className="py-3 px-4">
                                             <div className="flex items-start gap-2">
-                                                <Checkbox />
+                                                <Checkbox
+                                                    checked={e.selected}
+                                                    onChange={(checked) => {
+                                                        setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                                    }}
+                                                />
                                                 <div>{e.name}</div>
                                             </div>
                                         </td>
@@ -320,16 +391,24 @@ export default function Review() {
                                         </td>
                                         <td className="py-3 px-4">{e.review}</td>
                                         <td className="py-3 px-4">{e.source}</td>
-                                        <td className="py-3 px-4">{e.lastUpdate}</td>
+                                        <td className="py-3 px-4">{formatDateTime(e.lastUpdate)}</td>
                                         <td className="py-3 px-4"><Status status={e.status} /></td>
-                                        <td className="py-3 px-4"><Dropdown /></td>
+                                        <td className="py-3 px-4"><Dropdown
+                                            options={REVIEW_ACTIONS}
+                                            onClickOption={(e) => {
+                                                setOpenModal(e)
+                                            }}
+                                        /></td>
                                     </tr>
-                                }) : <tr><td colSpan={10} className='text-center! h-20 text-3xl text-secondary'>No data</td></tr>
+                                }) : <tr><td colSpan={10} className='text-center! h-20 text-3xl text-danger'>No data</td></tr>
                             )}
                         </tbody>
-                    </table>
+                    </table> : <div className='text-center text-2xl text-danger mx-auto h-20 py-20'>No Data</div>)}
+                    {list?.length > 0 && <div>
+                        <PaginationDemo />
+                    </div>}
                 </div>
-                <Pagination />
+
             </div>
         </div>
     </AdminLayout>

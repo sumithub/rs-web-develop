@@ -5,11 +5,26 @@ import ReviewCard from "../../components/ReviewCard"
 import GridWidget from "../../components/Models/review/GridWidget";
 import CancelButton from "../../components/common/CancelButton";
 import { useState } from "react";
+import SecondaryButton from "../../components/common/SecondaryButton";
+import TestimonialWidget from "../../components/Models/review/TestimonialWidget";
+import FloatingButtonWidget from "../../components/Models/review/FloatingButtonWidget";
+import StarBadgeWidget from "../../components/Models/review/StarBadgeWidget";
+import Carousel from "../../components/Models/review/Carousel";
 
 export default function ReviewWidgets() {
-    const [openGrid, setOpenGrid] = useState(false)
+    const [openCarousel, setOpenCarousel] = useState(false)
+    // const [openStar, setOpenStar] = useState(false)
+    // const [openFloating, setOpenFloating] = useState(false)
+    // const [openTestimonial, setOpenTestimonial] = useState(false)
+    // const [openGrid, setOpenGrid] = useState(false)
+    const [modalTitle, setModalTitle] = useState("");
+
+    const handleOpenModal = (title) => {
+        setModalTitle(title);
+        setOpenCarousel(true);
+    };
     return (<AdminLayout>
-        {openGrid &&
+        {/* {openGrid &&
             <GridWidget
                 onClose={() => {
                     setOpenGrid(false)
@@ -17,6 +32,51 @@ export default function ReviewWidgets() {
 
                 onSave={() => {
                     setOpenGrid(true)
+                }} />
+        }
+
+        {openTestimonial &&
+            <TestimonialWidget
+                onClose={() => {
+                    setOpenTestimonial(false)
+                }}
+
+                onSave={() => {
+                    setOpenTestimonial(true)
+                }} />
+        }
+
+        {openFloating &&
+            <FloatingButtonWidget
+                onClose={() => {
+                    setOpenFloating(false)
+                }}
+
+                onSave={() => {
+                    setOpenFloating(true)
+                }} />
+        }
+
+        {openStar &&
+            <StarBadgeWidget
+                onClose={() => {
+                    setOpenStar(false)
+                }}
+
+                onSave={() => {
+                    setOpenStar(true)
+                }} />
+        } */}
+
+        {openCarousel &&
+            <Carousel
+                title={modalTitle}
+                onClose={() => {
+                    setOpenCarousel(false)
+                }}
+
+                onSave={() => {
+                    setOpenCarousel(true)
                 }} />
         }
         <main className="grid grid-cols-3 gap-3">
@@ -35,7 +95,10 @@ export default function ReviewWidgets() {
                 </div>
 
                 <div className="mt-3 p-4 mb-3">
-                    <CancelButton title="Grid Review Widget" onClick={() => { setOpenGrid(true) }} />
+                    <SecondaryButton
+                        title="Carousel Review Widget"
+                        onClick={() => handleOpenModal("Carousel")}
+                    />
                 </div>
             </div>
 
@@ -54,7 +117,10 @@ export default function ReviewWidgets() {
                 </div>
 
                 <div className="mt-3 p-4 mb-3">
-                    <CancelButton title="Grid Review Widget" onClick={() => { setOpenGrid(true) }} />
+                    <CancelButton
+                        title="Grid Review Widget"
+                        onClick={() => handleOpenModal("Grid Widget")}
+                    />
                 </div>
             </div>
 
@@ -73,7 +139,54 @@ export default function ReviewWidgets() {
                 </div>
 
                 <div className="mt-3 p-4 mb-3">
-                    <CancelButton title="Grid Review Widget" onClick={() => { setOpenGrid(true) }} />
+                    <CancelButton
+                        title="Testimonial Card Widget"
+                        onClick={() => handleOpenModal("Testimonial Widget")}
+                    />
+                </div>
+            </div>
+
+            <div className="border border-border-color rounded-md">
+                <div className="mt-2 p-2">
+                    <ReviewCard />
+                </div>
+
+                <div className="p-4">
+                    <div className="border border-border-color rounded-md mt-3 p-4">
+                        <div className="flex gap-2.5 ">
+                            <Image src="/images/google.svg" alt="google.svg" width={20} height={20.47} unoptimized={true} />
+                            Verified On Google
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-3 p-4 mb-3">
+                    <CancelButton
+                        title="Floating Review"
+                        onClick={() => handleOpenModal("Floating Button Widget")}
+                    />
+                </div>
+            </div>
+
+            <div className="border border-border-color rounded-md">
+                <div className="mt-2 p-2">
+                    <ReviewCard />
+                </div>
+
+                <div className="p-4">
+                    <div className="border border-border-color rounded-md mt-3 p-4">
+                        <div className="flex gap-2.5 ">
+                            <Image src="/images/google.svg" alt="google.svg" width={20} height={20.47} unoptimized={true} />
+                            Verified On Google
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-3 p-4 mb-3">
+                    <CancelButton
+                        title="Star Rating Badge"
+                        onClick={() => handleOpenModal("Star Badge Widget")}
+                    />
                 </div>
             </div>
 

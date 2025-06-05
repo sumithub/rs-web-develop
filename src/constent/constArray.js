@@ -74,3 +74,63 @@ export const selectedCustomers = [
     { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
     { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
 ]
+
+export const customerTagging = [
+    { status: "At Risk", description: "Lorem ipsum dummy..", taggedCustomer: 150 },
+    { status: "VIP", description: "Lorem ipsum dummy..", taggedCustomer: 150 },
+    { status: "Priority", description: "Lorem ipsum dummy..", taggedCustomer: 150 },
+    { status: "Dp", description: "Lorem ipsum dummy..", taggedCustomer: 150 },
+]
+
+export const manageReview = [
+    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: new Date('2024-06-18T10:00:00'), status: "New" },
+
+    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: new Date('2024-06-18T10:00:00'), status: "Responded" },
+
+    { name: "Hiking template", review: "Great!", source: "Google", lastUpdate: new Date('2024-06-18T10:00:00'), status: "Flagged" },
+]
+
+export const REVIEW_ACTIONS = [
+    { label: "Reply Now", value: "reply-now", icon: "/dropdown/sms.svg", hoverIcon: "/dropdown/sms-active.svg" },
+
+    { label: "Request Update", value: "request-update", icon: "/dropdown/role.svg", hoverIcon: "/dropdown/role-active.svg" },
+
+    { label: "Assign to User", value: "assign-to-user", icon: "/dropdown/user.svg", hoverIcon: "/dropdown/user-active.svg" },
+
+    { label: "Share (Social Media, Email)", value: "share", icon: "/dropdown/share.svg", hoverIcon: "/dropdown/share-active.svg" },
+
+    { label: "Delete", value: "delete", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },
+]
+
+export const allCustomers = [
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "At Risk", source: "Manual", date: "Jun 18,2024" },
+
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Vip", source: " CSV Import", date: "Jun 18,2024" },
+
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Priority", source: "Manual", date: "Jun 18,2024" },
+
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Dp", source: "CSV Import", date: "Jun 18,2024" },
+]
+
+export const customerHistory = [
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
+]
+
+export const fieldMapping = [
+    { header: "Full Name", firstRow: "DELETE EXAMPLE - Elwyn" },
+    { header: "Phone Number", firstRow: +919856958962 },
+    { header: "Email", firstRow: "odavis@outlook.com" },
+]
+
+export const reviewResponse = [
+    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
+]

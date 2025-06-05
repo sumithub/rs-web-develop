@@ -1,3 +1,4 @@
+"use client"
 import DatePicker from '../../../components/form/DatePicker'
 import React, { useState } from 'react'
 import Model from '../Model'

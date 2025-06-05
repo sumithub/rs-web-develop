@@ -75,13 +75,12 @@ function AddUser({ onClose, id }) {
     //         toast.error("Something went wrong");
     //     }
     // };
-    console.log(errors)
 
     return <Model onClose={onClose} title={`${!id ? "Invite New" : "Edit"} User`} modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <InputForm label="Full Name" placeholder="Enter your name" isRequired={true} class_="mt-0!"
-                    formProps={{ ...register("name", { required: true, pattern: { message: "Name is required" } }) }}
+                    formProps={{ ...register("name", { required: true }) }}
                     errors={errors}
                     setValue={setValue}
 
