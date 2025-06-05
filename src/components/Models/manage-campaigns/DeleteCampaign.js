@@ -28,8 +28,8 @@ export default function DeleteModal({ onClose, title = "Campaign" }) {
         <form onSubmit={handleSubmit(onSubmit)} className="text-center">
             <DeleteCampaign title={`Delete ${title}`} question="Are You sure you want to delete the Campaign At Risk? This action cannot be undone." />
             <div className="grid grid-cols-2 gap-3 mt-5">
-                <CancelButton title="Cancel" class_="border-danger2! bg-white! text-danger2!" onClick={onClose} />
-                <SecondaryButton title=" Yes, Delete" type="submit" disabled={sending}/>
+                <CancelButton title="Cancel" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose} />
+                <SecondaryButton title=" Yes, Delete" type="submit" disabled={sending} />
             </div>
         </form>
     </Model>

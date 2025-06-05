@@ -11,7 +11,7 @@ import { templateList } from '../../../constent/constArray'
 import Loading from '../../Loading'
 import CustomSelectBox from '../../form/CustomSelectBox'
 
-function TemplateList({ onClose }) {
+function TemplateList({ onClose, onSave }) {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
@@ -55,7 +55,8 @@ function TemplateList({ onClose }) {
                             <option value="filter 1">Filter 1</option>
                             <option value="filter 2">Filter 2</option>
                         </CustomSelectBox>
-                        <SecondaryButton title="Select Template" class_="text-sm! font-normal!" />
+                        <SecondaryButton title="Select Template" class_="text-sm! font-normal!"
+                            onClick={onSave} />
                     </div>
                 </div>
 

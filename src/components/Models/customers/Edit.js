@@ -1,3 +1,4 @@
+"use client"
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import Model from "../Model";

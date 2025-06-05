@@ -11,7 +11,7 @@ import { getError } from "../../../../helper"
 import { selectedCustomers } from "../../../constent/constArray"
 import Loading from "../../Loading"
 
-function SelectedCustomers({ onClose }) {
+function SelectedCustomers({ onClose, onSave }) {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
@@ -43,7 +43,8 @@ function SelectedCustomers({ onClose }) {
                             setSearch(s)
                         }}
                     />
-                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal!" />
+                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal!"
+                        onClick={onSave} />
                 </div>
             </div>
 

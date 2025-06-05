@@ -9,6 +9,7 @@ import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { validEmailRgx } from "../../helper"
+import { toast } from "react-toastify";
 
 export default function Signin() {
     const {
@@ -16,12 +17,13 @@ export default function Signin() {
         setValue,
         watch,
         handleSubmit,
-        formState: { errors },
+        formState: { errors }
     } = useForm();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [verificationSuccess, setVerificationSuccess] = useState(false)
     const router = useRouter()
+    const [checked, setChecked] = useState(false)
 
     useEffect(() => {
         if (verificationSuccess) {
@@ -36,9 +38,10 @@ export default function Signin() {
             setLoading(true);
             await axios.post("/api", data)
             setTimeout(() => {
-                router.push("/")
+                router.push("/dashboard")
             }, 1000);
         } catch (error) {
+            toast.error("Invalid email or password.Please try again.")
             setLoading(false)
             setError(error?.message);
         }
@@ -46,17 +49,26 @@ export default function Signin() {
 
     return (<>
         <div>
-            <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Login to your account</h2>
+            <h2 className="text-[34px] leading-none font-semibold text-secondary text-center">Login To Your Account</h2>
             <p className="text-xs sm:pt-1.5 pt-2.5 pb-2.5 capitalize text-center text-[#616E7C]">Hey! We soar you working welcome back!</p>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
                     label="Email ID"
                     name="email"
+                    clearValue={true}
                     placeholder="Enter Email"
                     icon="/images/close.svg"
                     isRequired={true}
+                    formProps={{
+                        ...register("email", {
+                            required: "Email is required",
+                            pattern: {
+                                value: validEmailRgx,
+                                message: "Please enter a valid email address."
+                            },
+                        })
+                    }}
                     errors={errors}
-                    formProps={{ ...register("email", { required: "Email is required" }) }}
                     setValue={setValue}
                     watch={watch}
                 />
@@ -65,10 +77,13 @@ export default function Signin() {
                     label="Password"
                     name="password"
                     inputType="password"
-                    placeholder="Create A Password"
+                    placeholder="Enter Password"
                     formProps={{
                         ...register("password", {
-                            required: true
+                            required: true,
+                            pattern: {
+                                message: "Password cannot be empty."
+                            }
                         })
                     }} isRequired={true} errors={errors}
                     setValue={setValue}
@@ -78,11 +93,14 @@ export default function Signin() {
 
                 {verificationSuccess !== null && <Verify verificationSuccess={verificationSuccess} onClick={() => { setVerificationSuccess(true) }} />}
                 <div className='flex justify-between mt-5'>
-                    <div className='flex gap-1.5 items-center'>
+                    <label className='flex gap-1.5 items-center' htmlFor="remember">
                         <Checkbox2 class_="border-text-3"
+                            id="remember"
+                            checked={checked}
+                            onChange={(checked) => setChecked(checked)}
                             required={false} />
                         <h2 className='text-sm capitalize text-secondary'>Remember me</h2>
-                    </div>
+                    </label>
                     <Link href="/forgot-password">
                         <h2 className='text-sm capitalize text-primary'>Forgot Password ?</h2>
                     </Link>
@@ -93,8 +111,9 @@ export default function Signin() {
                         <h2 className="text-xs text-danger capitalize">{error}</h2>
                     </div>}
                     <button
-                        disabled={loading}
-                        className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-2.5 py-3 rounded-[10px] border border-primary cursor-pointer">Login</button>
+                        type="submit"
+                        disabled={Object.keys(errors).length > 0 || loading}
+                        className="disabled:bg-primary/50 text-text text-lg mt-3 rounded-[10px] border border-primary hover:bg-text hover:text-primary cursor-pointer font-medium text-center py-3 px-3.5 w-full bg-primary">Login</button>
                     <h2 className='text-sm capitalize text-secondary pt-2.5 text-center'>Don&#39;t have an account? <Link href="/register" className='text-primary underline underline-offset-3'>Sign Up</Link></h2>
                 </div>
             </form>
