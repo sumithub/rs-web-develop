@@ -110,8 +110,21 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                 </>)}
 
                 {tab === 1 && (
-                    <FileInput />
-
+                    <FileInput
+                        formProps={{
+                            ...register('csvFile', {
+                                required: "Please upload a CSV file",
+                                validate: (value) => {
+                                    if (!value) return "Please upload a CSV file";
+                                    if (value.type !== 'text/csv') return "Please select a valid CSV file";
+                                    return true;
+                                }
+                            })
+                        }}
+                        errors={errors}
+                        isRequired={true}
+                        label="Upload file"
+                    />
                 )}
 
                 {tab === 2 && (
@@ -160,7 +173,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                                                 <td>{e.header}</td>
                                                 <td>{e.firstRow}</td>
                                                 <td>
-                                                    <SelectForm selectClass_="border-primary3/10">
+                                                    <SelectForm selectClass_="border-primary3/10" class_="mt-0!">
                                                         <option value="fullName">full Name</option>
                                                         <option value="phoneNumber">Phone Number</option>
                                                         <option value="email">Email</option>

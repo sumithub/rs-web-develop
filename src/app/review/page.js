@@ -23,6 +23,7 @@ import ReviewDetails from "../../components/Models/review/ReviewDetails";
 import DeleteTemplate from "../../components/Models/review/DeleteTemplate";
 import DateRange from "../../components/form/DateRangePicker";
 import PaginationDemo from "../../components/Pagination";
+import ReviewNoData from "../../components/ReviewNoData"
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -241,22 +242,6 @@ export default function Review() {
 
             <div className="bg-white min-h-[calc(100vh_-_85px)] rounded-[10px] mt-5 p-5">
                 <div className="flex justify-between items-center w-full gap-[15px]">
-                    {/* <div className="relative w-[32%]">
-                        <div className="w-full">
-                            <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-dark border border-border2 rounded-lg focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
-
-                                value={search}
-                                onChange={(e) => {
-                                    setSearch(e.target.value)
-                                }}
-                                placeholder="Search by customer name, review content, or source." />
-
-                            <span className="absolute text-center top-1 right-0 py-2 px-2">
-                                <Image src="/images/search.svg" alt="search" height={14} width={14} unoptimized={true} />
-                            </span>
-                        </div>
-                    </div> */}
-
                     <Search
                         placeholder="Search by customer name, review content, or source."
                         onSearch={(s) => {
@@ -278,13 +263,7 @@ export default function Review() {
                             <option value="5 star">5 Star</option>
                         </CustomSelectBox>
 
-                        {/* <DatePicker
-                            icon={true}
-                            mainClass="mt-0!"
-                            value={date}
-                            dateFormat="dd/MM/yyyy"
-                            onChange={(e) => setDate(e)}
-                        /> */}
+
 
                         <DateRange class_="shrink-0!"
                             onChange={(e) => { setDate(e) }} />
@@ -412,5 +391,7 @@ export default function Review() {
 
             </div>
         </div>
+
+        {/* <ReviewNoData /> */}
     </AdminLayout>
 }

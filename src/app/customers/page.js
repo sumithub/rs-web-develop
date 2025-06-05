@@ -59,7 +59,6 @@ function Customers() {
         }
     }
 
-
     return (
         <AdminLayout>
             {open &&

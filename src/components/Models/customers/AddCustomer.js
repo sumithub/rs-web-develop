@@ -38,7 +38,6 @@ function AddCustomer({ onClose, id }) {
     //     }
     // };
 
-
     const onSubmit = async (data) => {
         try {
             setSending(true)
@@ -153,7 +152,6 @@ function AddCustomer({ onClose, id }) {
                 setActiveStep={setActiveStep} />
         </div>}
     </Model>
-
 }
 
 export default AddCustomer
