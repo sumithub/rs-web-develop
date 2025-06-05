@@ -148,11 +148,11 @@ export default function ReviewResponseTemplates({ onClose }) {
                                 <td>
                                     <div className='flex items-center gap-2' >
                                         <button className='cursor-pointer' onClick={() => { setOpen(true) }} type="button">
-                                            <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
 
                                         <button className='cursor-pointer' onClick={() => { setOpenDelete(true) }} type="button">
-                                            <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
                                         </button>
                                     </div>
                                 </td>

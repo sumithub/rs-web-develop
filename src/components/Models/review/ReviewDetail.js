@@ -105,11 +105,11 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                         <h2 className="text-lg font-medium pt-[15px]">Additional Sharing Options:</h2>
                         <div className="flex gap-[18px] pt-2.5">
                             <Link href="https://www.google.com/" target="_blank" className="px-5">
-                                <Image src="/images/google.svg" alt="google" width={41} height={41} className="mx-auto" />
+                                <Image unoptimized={true} src="/images/google.svg" alt="google" width={41} height={41} className="mx-auto" />
                                 <h2 className="text-sm text-center font-medium pt-[15px]">Google</h2>
                             </Link>
                             <Link href="https://www.trustpilot.com/" target="_blank" className="px-5">
-                                <Image src="/images/trustpilot.svg" alt="trustpilot" width={41} height={41} className="mx-auto" />
+                                <Image unoptimized={true} src="/images/trustpilot.svg" alt="trustpilot" width={41} height={41} className="mx-auto" />
                                 <h2 className="text-sm text-center font-medium pt-[15px]">Trustpilot</h2>
                             </Link>
                         </div>
