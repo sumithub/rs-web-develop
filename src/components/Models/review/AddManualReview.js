@@ -54,12 +54,12 @@ export default function AddManualReview({ onClose, onSave, id }) {
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
-                        <InputForm label="First Name" isRequired={true} inputClass="border-primary3/10!"
+                        <InputForm label="First Name" isRequired={true}
                             formProps={{ ...register("firstName", { required: true }) }}
                             errors={errors}
                             setValue={setValue} />
 
-                        <InputForm label="Last Name" isRequired={true} inputClass="border-primary3/10!"
+                        <InputForm label="Last Name" isRequired={true}
                             formProps={{ ...register("lastName", { required: true }) }}
                             errors={errors}
                             setValue={setValue} />
@@ -85,13 +85,13 @@ export default function AddManualReview({ onClose, onSave, id }) {
                     </div>
 
                     <div>
-                        <InputForm label="Feedback" isRequired={true} inputClass="border-primary3/10!"
+                        <InputForm label="Feedback" isRequired={true}
                             formProps={{ ...register("feedback", { required: true }) }}
                             errors={errors} />
                     </div>
 
                     <div>
-                        <DatePickerForm label="Date" isRequired={true} icon={true} customClass="border-primary3/10!"
+                        <DatePickerForm label="Date" isRequired={true} icon={true}
                             formProps={{ ...register("date", { required: true }) }}
                             errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}
                         />

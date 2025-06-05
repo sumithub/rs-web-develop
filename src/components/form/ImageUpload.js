@@ -79,7 +79,7 @@ export default function ImageUpload({
                 {isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}
             </label>
 
-            <div className={`mt-1 border ${error ? "border-danger" : "border-primary3/10"} rounded-lg py-3 px-2.5 bg-white`}>
+            <div className={`mt-1 border ${error ? "border-danger" : "border-[#F4F4F4]"} rounded-lg py-3 px-2.5 bg-white`}>
                 {!currentValue && !uploadedFileName ? (
                     // Show upload button when no image is uploaded
 

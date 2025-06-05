@@ -47,7 +47,7 @@ export default function Rating(props) {
                     {label} {isRequired ? <span className="text-danger">*</span> : ""}
                 </label>
             )}
-            <div className={`capitalize font-normal w-full border hover:border-primary/60 rounded-lg text-sm py-3 px-2.5 flex gap-1 items-center ${error ? "border-danger" : "border-primary3/10"}`}>
+            <div className={`capitalize font-normal w-full border hover:border-primary/60 rounded-lg text-sm py-3 px-2.5 flex gap-1 items-center ${error ? "border-danger" : "border-[#F4F4F4]"}`}>
                 {Array(count).fill('*').map((star, i) => (
                     <span
                         key={i}
