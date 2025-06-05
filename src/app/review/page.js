@@ -24,6 +24,7 @@ import DeleteTemplate from "../../components/Models/review/DeleteTemplate";
 import DateRange from "../../components/form/DateRangePicker";
 import PaginationDemo from "../../components/Pagination";
 import ReviewNoData from "../../components/ReviewNoData"
+import SecondaryButton from "../../components/common/SecondaryButton";
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -109,14 +110,14 @@ export default function Review() {
             <div className="grid grid-cols-3 gap-4">
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
-                        <div className="text-secondary text-base font-semibold mb-3">Most mentioned keywords</div>
+                        <div className="text-secondary text-base font-semibold mb-3 capitalize">Most mentioned keywords</div>
                         <Chart />
                     </div>
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
-                        <div className="text-secondary text-base font-semibold mb-3">Average rating trend</div>
+                        <div className="text-secondary text-base font-semibold mb-3 capitalize">Average rating trend</div>
                         <div className="grid grid-cols-2 gap-5">
                             <div className="text-secondary">
                                 <div className="text-xs font-semibold">Total</div>
@@ -131,11 +132,11 @@ export default function Review() {
 
                                 <div className="flex items-center justify-between mt-2">
                                     <div>
-                                        <div className="2xl:text-sm lg:text-[10px] mb-1.5">Ratings</div>
+                                        <div className="2xl:text-xs lg:text-[10px] mb-1.5">Ratings</div>
                                         <div className="2xl:text-base text-sm font-semibold">233</div>
                                     </div>
                                     <div>
-                                        <div className="2xl:text-sm lg:text-[10px] capitalize mb-1.5">Rating With Reviews</div>
+                                        <div className="2xl:text-xs lg:text-[10px] capitalize mb-1.5">Rating With Reviews</div>
                                         <div className="2xl:text-base text-sm font-semibold">217</div>
                                     </div>
                                 </div>
@@ -182,7 +183,7 @@ export default function Review() {
 
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
-                        <div className="text-secondary text-base font-semibold mb-3">Sentiment analysis</div>
+                        <div className="text-secondary text-base font-semibold mb-3 capitalize">Sentiment analysis</div>
                         <div>
                             <div>
                                 <ProgressBar completed={50} bgColor="#28A745" height="5px"
@@ -263,13 +264,11 @@ export default function Review() {
                             <option value="5 star">5 Star</option>
                         </CustomSelectBox>
 
-
-
                         <DateRange class_="shrink-0!"
                             onChange={(e) => { setDate(e) }} />
 
                         <CustomSelectBox
-                            class_="mt-0! w-32!"
+                            class_="mt-0! w-40!"
                             defaultOption="Review Source"
                             value={reviewSource}
                             onChange={(e) => {
@@ -281,7 +280,7 @@ export default function Review() {
                         </CustomSelectBox>
 
                         <CustomSelectBox
-                            class_="mt-0! w-32!"
+                            class_="mt-0! w-[135px]!"
                             defaultOption="Review Status"
                             value={status}
                             onChange={(e) => {
@@ -292,12 +291,13 @@ export default function Review() {
                             <option value="flagged">Flagged</option>
                         </CustomSelectBox>
 
-                        <button className="cursor-pointer disabled:pointer-events-none">
+                        {/* <button className="cursor-pointer disabled:pointer-events-none shrink-0">
                             <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
-                        </button>
+                        </button> */}
 
-                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
-                            onClick={() => { setOpen(true) }}>Create Manual Review</button>
+                        <div className="shrink-0!">
+                            <SecondaryButton title="Create Manual Review" class_="text-xs! py-2.5!" onClick={() => { setOpen(true) }} />
+                        </div>
                     </div>
                 </div>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 mt-5">
@@ -388,7 +388,6 @@ export default function Review() {
                         <PaginationDemo />
                     </div>}
                 </div>
-
             </div>
         </div>
 

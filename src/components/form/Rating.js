@@ -5,6 +5,8 @@ export default function Rating(props) {
         isRequired,
         setValue,
         watch,
+        clearErrors,  // Add clearErrors prop
+        trigger,      // Add trigger prop
         label,
         disabled,
         containerClass = "",
@@ -23,6 +25,21 @@ export default function Rating(props) {
         }
     }
 
+    const handleRatingClick = (rating) => {
+        // Set the rating value
+        setValue(formProps?.name, rating);
+
+        // Clear the error for this field
+        if (clearErrors) {
+            clearErrors(formProps?.name);
+        }
+
+        // Or trigger validation to clear error
+        if (trigger) {
+            trigger(formProps?.name);
+        }
+    };
+
     return (
         <div className={`laptop:mb-2 mb-3 relative ${containerClass}`}>
             {label && (
@@ -30,9 +47,13 @@ export default function Rating(props) {
                     {label} {isRequired ? <span className="text-danger">*</span> : ""}
                 </label>
             )}
-            <div className={`capitalize font-normal w-full  border rounded-lg text-sm py-3 px-2.5 flex gap-1 items-center ${error ? "border-danger" : "border-[#F4F4F4]"}`}>
+            <div className={`capitalize font-normal w-full border hover:border-primary/60 rounded-lg text-sm py-3 px-2.5 flex gap-1 items-center ${error ? "border-danger" : "border-primary3/10"}`}>
                 {Array(count).fill('*').map((star, i) => (
-                    <span key={i} className="cursor-pointer" onClick={() => setValue(formProps?.name, i + 1)}>
+                    <span
+                        key={i}
+                        className={`cursor-pointer ${disabled ? 'pointer-events-none opacity-50' : ''}`}
+                        onClick={() => !disabled && handleRatingClick(i + 1)}
+                    >
                         <Image
                             src={`${watch(formProps?.name) > i ? "/images/star.svg" : "/images/rating-star.svg"}`}
                             alt="star"
