@@ -62,7 +62,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                 }
                 <div className="grid grid-cols-2 gap-5">
                     <div>
-                        {(normalizedTitle === "carousel" || normalizedTitle === "gridWidget") && (<div className="p-[15px] bg-dark rounded-[15px]">
+                        {(normalizedTitle === "carousel" || normalizedTitle === "gridwidget") && (<div className="p-[15px] bg-dark rounded-[15px]">
                             <h2 className="text-lg font-semibold">Design</h2>
                             <div className="grid grid-cols-3 gap-[15px] pt-2.5">
                                 <InputForm
@@ -103,7 +103,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                         {(normalizedTitle === "carousel") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Content</h2>
                             <div className="grid grid-cols-2 gap-5">
-                                {(normalizedTitle !== "testimonialWidget") && (<InputForm
+                                {(normalizedTitle !== "testimonialwidget") && (<InputForm
                                     label="Number of Reviews"
                                     isRequired={true}
                                     placeholder="Enter review count"
@@ -114,7 +114,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     class_="mt-0!"
                                 />)}
 
-                                {(normalizedTitle === "testimonialWidget") && (<div>
+                                {(normalizedTitle === "testimonialwidget") && (<div>
                                     <SelectForm
                                         defaultOption="Select sorting"
                                         label="Sorting"
@@ -134,7 +134,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     </div>
                                 </div>)}
 
-                                {(normalizedTitle === "floatingButtonWidget") && (<InputForm label="button label" isRequired={true}
+                                {(normalizedTitle === "floatingbuttonwidget") && (<InputForm label="button label" isRequired={true}
                                     formProps={{ ...register("buttonLabel", { required: true }) }}
                                     errors={errors}
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
@@ -142,7 +142,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     class_="mt-0!"
                                 />)}
 
-                                {(normalizedTitle === "carousel") && (<InputForm
+                                {(normalizedTitle !== "carousel") && (<InputForm
                                     label="Minimum Rating"
                                     isRequired={true}
                                     placeholder="Enter Filtering"
@@ -199,7 +199,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
                         </div>)}
 
-                        {(normalizedTitle === "gridWidget" || normalizedTitle === "carousel" || normalizedTitle === "testimonialWidget" || normalizedTitle === "floatingButtonWidget" || normalizedTitle === "starBadgeWidget") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(normalizedTitle === "gridwidget" || normalizedTitle === "carousel" || normalizedTitle === "testimonialwidget" || normalizedTitle === "floatingbuttonwidget" || normalizedTitle === "starbadgewidget") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Review Sources</h2>
                             <h3 className="text-base pt-2.5 font-medium">Select up to 3</h3>
                             <div className="flex gap-[15px] items-center pt-[15px]">
@@ -223,7 +223,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             <div className="0">
                                 <SelectForm
                                     defaultOption="Select Transitions"
-                                    label="Transitions"
+                                    label="Transitions Effect"
                                     labelClass="pb-2.5 inline-block mb-0!"
                                     isRequired={true}
                                     formProps={{ ...register("select", { required: true }) }}
@@ -240,7 +240,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
                         </div>)}
 
-                        {(normalizedTitle === "floatingButtonWidget") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(normalizedTitle === "floatingbuttonwidget") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Behavior</h2>
                             <div className="0">
                                 <SelectForm
