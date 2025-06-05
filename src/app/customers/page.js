@@ -59,7 +59,6 @@ function Customers() {
         }
     }
 
-
     return (
         <AdminLayout>
             {open &&
@@ -290,7 +289,7 @@ function Customers() {
                             <td>{e.source}</td>
                             <td>
                                 <button>
-                                    <Image src="/images/boost.svg" alt='edit' height={28} width={28} unoptimized={true} />
+                                    <Image unoptimized={true} src="/images/boost.svg" alt='edit' height={28} width={28} />
                                 </button>
                             </td>
                             <td>{formatDate(e.date)}</td>
@@ -299,13 +298,13 @@ function Customers() {
                                     <button className='cursor-pointer'
                                         onClick={() => { setOpen(true) }}
                                     >
-                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                        <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                     </button>
 
                                     <button className='cursor-pointer'
                                         onClick={() => { setOpenDelete("deleteCustomer") }}
                                     >
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                        <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
                                     </button>
                                 </div>
                             </td>

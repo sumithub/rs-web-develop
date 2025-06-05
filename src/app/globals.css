@@ -10,6 +10,7 @@
   --text3: #ADADAD;
   --border-color: #ADADAD4D;
   --border2: #E6E6E6;
+  --input-border: #F4F4F4;
   --danger: #DC3545;
   --danger2: #FF4D4D;
   --danger-light: #F15D5F;
@@ -41,6 +42,7 @@
   --color-danger-light2: var(--danger-light2);
   --color-border-color: var(--border-color);
   --color-border2: var(--border2);
+  --color-input-border: var(--input-border);
   --color-text3: var(--text3);
   --color-success: var(--success);
   --color-success-light: var(--success-light);

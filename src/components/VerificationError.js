@@ -16,7 +16,7 @@ function VerificationError() {
         <button className="text-text3 text-lg font-medium bg-dark w-full mt-5 py-3 rounded-[10px] border border-dark ">Resend Verification Email</button>
         <div className='flex justify-center mt-5'>
           <Link href="/login" className="flex gap-[15px]">
-            <Image src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
+            <Image unoptimized={true} src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
             <h2 className='text-sm text-secondary'>Back To Login</h2>
           </Link>
         </div>

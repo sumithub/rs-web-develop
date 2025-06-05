@@ -19,6 +19,8 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
     const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
+    const normalizedTitle = title?.toLowerCase();
+
 
     const onSubmit = async (data) => {
         try {
@@ -60,7 +62,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                 }
                 <div className="grid grid-cols-2 gap-5">
                     <div>
-                        {(title.includes("carousel") || title.includes("gridWidget")) && (<div className="p-[15px] bg-dark rounded-[15px]">
+                        {(normalizedTitle === "carousel" || normalizedTitle === "gridwidget") && (<div className="p-[15px] bg-dark rounded-[15px]">
                             <h2 className="text-lg font-semibold">Design</h2>
                             <div className="grid grid-cols-3 gap-[15px] pt-2.5">
                                 <InputForm
@@ -98,10 +100,10 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
                         </div>)}
 
-                        {(title.includes("carousel")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(normalizedTitle === "carousel") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Content</h2>
                             <div className="grid grid-cols-2 gap-5">
-                                {(!title.includes("testimonialWidget")) && (<InputForm
+                                {(normalizedTitle !== "testimonialwidget") && (<InputForm
                                     label="Number of Reviews"
                                     isRequired={true}
                                     placeholder="Enter review count"
@@ -112,7 +114,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     class_="mt-0!"
                                 />)}
 
-                                {(title.includes("testimonialWidget")) && (<div>
+                                {(normalizedTitle === "testimonialwidget") && (<div>
                                     <SelectForm
                                         defaultOption="Select sorting"
                                         label="Sorting"
@@ -132,7 +134,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     </div>
                                 </div>)}
 
-                                {(title.includes("floatingButtonWidget")) && (<InputForm label="button label" isRequired={true}
+                                {(normalizedTitle === "floatingbuttonwidget") && (<InputForm label="button label" isRequired={true}
                                     formProps={{ ...register("buttonLabel", { required: true }) }}
                                     errors={errors}
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
@@ -140,7 +142,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     class_="mt-0!"
                                 />)}
 
-                                {(title.includes("carousel")) && (<InputForm
+                                {(normalizedTitle !== "carousel") && (<InputForm
                                     label="Minimum Rating"
                                     isRequired={true}
                                     placeholder="Enter Filtering"
@@ -165,7 +167,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
 
                             <div>
-                                {(title.includes("carousel")) && (<InputForm
+                                {(normalizedTitle === "carousel") && (<InputForm
                                     label="sorting"
                                     isRequired={true}
                                     placeholder="Enter sorting"
@@ -176,7 +178,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     class_="mt-2.5!"
                                 />)}
 
-                                <SelectForm
+                                {(normalizedTitle !== "carousel") && (<SelectForm
                                     defaultOption="Select sorting"
                                     label="Sorting"
                                     labelClass="pb-2.5 inline-block mb-0!"
@@ -188,7 +190,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     clearErrors={clearErrors} >
                                     <option value="latest">Latest</option>
                                     <option value="highest-rated">Highest Rated</option>
-                                </SelectForm>
+                                </SelectForm>)}
                             </div>
 
                             <div className="pt-2.5 flex gap-[15px] items-center">
@@ -197,7 +199,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
                         </div>)}
 
-                        {(title.includes("gridWidget") || title.includes("carousel") || title.includes("testimonialWidget") || title.includes("floatingButtonWidget") || title.includes("starBadgeWidget")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(normalizedTitle === "gridwidget" || normalizedTitle === "carousel" || normalizedTitle === "testimonialwidget" || normalizedTitle === "floatingbuttonwidget" || normalizedTitle === "starbadgewidget") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Review Sources</h2>
                             <h3 className="text-base pt-2.5 font-medium">Select up to 3</h3>
                             <div className="flex gap-[15px] items-center pt-[15px]">
@@ -216,12 +218,12 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
                         </div>)}
 
-                        {(title.includes("carousel")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(normalizedTitle === "carousel") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Behavior</h2>
                             <div className="0">
                                 <SelectForm
                                     defaultOption="Select Transitions"
-                                    label="Transitions"
+                                    label="Transitions Effect"
                                     labelClass="pb-2.5 inline-block mb-0!"
                                     isRequired={true}
                                     formProps={{ ...register("select", { required: true }) }}
@@ -238,7 +240,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
                         </div>)}
 
-                        {(title.includes("floatingButtonWidget")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(normalizedTitle === "floatingbuttonwidget") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Behavior</h2>
                             <div className="0">
                                 <SelectForm
@@ -262,13 +264,13 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
 
                         <div className="mt-[30px] grid grid-cols-2 gap-5">
                             <SecondaryButton title="Save" type="submit" disabled={sending} class_="bg-white! text-primary!" />
-                            <SecondaryButton title="Next" onClick={onNext} />
+                            <SecondaryButton title="Next" onClick={() => onNext?.(title)} />
                         </div>
                     </div>
 
                     <div className="shadow-sm rounded-[15px]">
                         <div className="bg-primary/10 rounded-t-[15px] px-5 py-[18px] flex gap-2.5 items-center">
-                            <Image src="/images/eye1.svg" alt="eye1" width={22} height={22} />
+                            <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={22} height={22} />
                             <h2 className="text-lg font-semibold">Widget Preview</h2>
                         </div>
                         <div className="p-5">
@@ -278,16 +280,16 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
                                 </div>
                                 <div className="flex justify-between items-center gap-2.5">
-                                    <Image src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
+                                    <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
                                     <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
-                                    <Image src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
+                                    <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
                                 </div>
                                 <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br />
                                     <span className="font-medium text-primary">Read More</span></p>
                                 <div className="my-10 flex justify-center">
                                     <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary">
                                         <span>
-                                            <Image src="/images/google.svg" alt="google" width={18} height={18} className="" />
+                                            <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
                                         </span>
                                         Verified On Google
                                     </button>

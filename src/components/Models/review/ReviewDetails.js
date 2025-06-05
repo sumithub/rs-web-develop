@@ -48,7 +48,7 @@ export default function ReviewDetails({ onClose, onSave }) {
             <div>
                 <div className="flex pt-1 items-center justify-between">
                     <div className="flex items-start w-full gap-[15px]">
-                        <Image src="/images/request.png" alt="request" width={46} height={46} />
+                        <Image unoptimized={true} src="/images/request.png" alt="request" width={46} height={46} />
                         <div className="w-full">
                             <div className="flex justify-between">
                                 <div className="">

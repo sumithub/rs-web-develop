@@ -48,7 +48,7 @@ export default function ColorInputForm({
                     </button>
                 )}
 
-                <div className={`border ${error ? "border-danger" : "border-[#F4F4F4]"} hover:border-primary/60 w-full h-12 rounded-lg px-2.5 text-sm text-secondary`}>
+                <div className={`border ${error ? "border-danger" : "border-input-border"} hover:border-primary/60 w-full h-12 rounded-lg px-2.5 text-sm text-secondary`}>
                     <input
                         type="color"
                         placeholder={placeholder}

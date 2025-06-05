@@ -41,7 +41,7 @@ export default function Template({ onClose, title = "Template" }) {
 
 const DeleteTemplate = ({ title, question }) => {
     return <div className="flex flex-col items-center justify-center gap-y-4">
-        <Image src="/images/b-delete.svg" alt="delete" height={60} width={60} />
+        <Image unoptimized={true} src="/images/b-delete.svg" alt="delete" height={60} width={60} />
         <div className="text-xl text-danger2 font-semibold capitalize">{title}</div>
         <div className="text-sm text-text3 capitalize text-center">{question}</div>
     </div>

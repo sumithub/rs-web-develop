@@ -41,33 +41,37 @@ export default function Detail({ }) {
     })
     const [activeStep, setActiveStep] = useState(1)
     const [customersSelected, setCustomersSelected] = useState(false)
-    const [templateSelected, setTemplateSelected] = useState(true)
+
+    // Enhanced template state management
+    const [selectedTemplates, setSelectedTemplates] = useState({
+        primary: null,
+        reminder: null,
+        final: null
+    })
+    const [templateSelectionMode, setTemplateSelectionMode] = useState('primary') // 'primary', 'reminder', 'final'
+
     const [campaignType, setCampaignType] = useState('email')
     const [reminderEnabled, setReminderEnabled] = useState(false)
+    const [sameAsFinal, setSameAsFinal] = useState(false)
 
     const watchedFields = watch()
 
-    // useEffect(() => {
-    //     setValue("customerSource", "existing")
-    // }, [])
-
     useEffect(() => {
         updateCardStatuses()
-    }, [watchedFields, customersSelected, templateSelected, campaignType])
+    }, [watchedFields, customersSelected, selectedTemplates, campaignType])
 
     const updateCardStatuses = () => {
         let newActiveStep = 1
 
         // Check Campaign Details completion
         const campaignDetailsComplete = watchedFields['campaignName']?.trim()
-        const campaignNameTouched = watchedFields['campaignName'] !== undefined // Check if field has been touched
+        const campaignNameTouched = watchedFields['campaignName'] !== undefined
 
         let campaignDetailsStatus = 'pending'
         if (campaignDetailsComplete) {
             campaignDetailsStatus = 'completed'
             newActiveStep = 2
         } else if (campaignNameTouched) {
-            // If the field has been touched (even if empty), set to in_progress
             campaignDetailsStatus = 'in_progress'
         }
 
@@ -86,7 +90,8 @@ export default function Detail({ }) {
         // Check Template Selection completion
         const templateComplete = targetingComplete &&
             campaignType &&
-            templateSelected
+            selectedTemplates.primary &&
+            (!reminderEnabled || (selectedTemplates.reminder && watchedFields['frequency']))
         let templateSelectionStatus = 'pending'
         if (templateComplete) {
             templateSelectionStatus = 'completed'
@@ -106,7 +111,6 @@ export default function Detail({ }) {
             schedulingStatus = activeStep === 4 ? 'in_progress' : 'pending'
         }
 
-        // Create new status object without referencing current cardStatuses
         const newStatuses = {
             campaignDetails: campaignDetailsStatus,
             targeting: targetingStatus,
@@ -114,7 +118,6 @@ export default function Detail({ }) {
             scheduling: schedulingStatus
         }
 
-        // Only update if there are actual changes
         setCardStatuses(prevStatuses => {
             const hasChanged = Object.keys(newStatuses).some(key =>
                 prevStatuses[key] !== newStatuses[key]
@@ -130,20 +133,28 @@ export default function Detail({ }) {
     }
 
     const getCardStatus = (cardKey) => {
-        const status = cardStatuses[cardKey]
-        return status
+        return cardStatuses[cardKey]
     }
 
     const onSubmit = async (data) => {
         try {
             setSending(true)
+            // Include template data in submission
+            const submissionData = {
+                ...data,
+                templates: selectedTemplates,
+                campaignType,
+                reminderEnabled,
+                sameAsFinal
+            }
+
             let res = null
             if (id !== "add") {
-                res = await axios.put("/api", data)
+                res = await axios.put("/api", submissionData)
             } else {
-                res = await axios.post("/api", data)
+                res = await axios.post("/api", submissionData)
             }
-            toast.success("Detail Updated Successfully")
+            toast.success("Campaign Created Successfully")
             setSending(false)
         } catch (error) {
             toast.error(getError(error))
@@ -156,13 +167,109 @@ export default function Detail({ }) {
         setOpenCustomer(false)
     }
 
-    const handleTemplateSave = () => {
-        setTemplateSelected(true)
+    const handleTemplateSave = (templateData) => {
+        setSelectedTemplates(prev => ({
+            ...prev,
+            [templateSelectionMode]: templateData
+        }))
         setOpenEmail(false)
     }
 
     const handleCampaignTypeChange = (type) => {
         setCampaignType(type)
+        // Reset templates when campaign type changes
+        setSelectedTemplates({
+            primary: null,
+            reminder: null,
+            final: null
+        })
+    }
+
+    const openTemplateSelector = (mode) => {
+        setTemplateSelectionMode(mode)
+        setOpenEmail(true)
+    }
+
+    const handleReminderToggle = (checked) => {
+        setReminderEnabled(checked)
+        if (!checked) {
+            // Clear reminder and final templates when disabled
+            setSelectedTemplates(prev => ({
+                ...prev,
+                reminder: null,
+                final: null
+            }))
+            setSameAsFinal(false)
+        }
+    }
+
+    const handleSameAsFinalToggle = (checked) => {
+        setSameAsFinal(checked)
+        if (checked) {
+            setSelectedTemplates(prev => ({
+                ...prev,
+                final: prev.reminder
+            }))
+        } else {
+            setSelectedTemplates(prev => ({
+                ...prev,
+                final: null
+            }))
+        }
+    }
+
+    const renderTemplateCard = (templateType, template, label, isRequired = false) => {
+        const hasTemplate = template !== null
+
+        return (
+            <div className="mb-4">
+                <div className="flex items-center justify-between mb-2">
+                    <div className="text-sm text-secondary">
+                        {label}
+                        {isRequired && <span className="text-danger">*</span>}
+                    </div>
+                    <SecondaryButton
+                        title="Select Template"
+                        class_="text-sm! font-normal!"
+                        onClick={() => openTemplateSelector(templateType)}
+                    />
+                </div>
+
+                <div className="bg-white p-3 rounded-lg">
+                    <div className="bg-dark rounded-lg p-2">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <div className="text-secondary text-sm font-medium">
+                                    {hasTemplate ? template.name || "Nature Template" : 'No Template Selected'}
+                                </div>
+                                <div className="text-text3 text-xs">
+                                    {hasTemplate ? template.description || 'Template description...' : 'Please select a template'}
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <button
+                                    className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                                    onClick={() => setOpenPreview(true)}
+                                    disabled={!hasTemplate}
+                                >
+                                    <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />
+                                    Preview
+                                </button>
+
+                                <button
+                                    className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                                    onClick={() => setOpenModal(true)}
+                                    disabled={!hasTemplate}
+                                >
+                                    <Image src="/images/edit2.svg" alt='edit' height={14} width={14} unoptimized={true} />
+                                    Edit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     const isAllPending = Object.values(cardStatuses).every(status => status === 'pending');
@@ -179,6 +286,7 @@ export default function Detail({ }) {
 
         {openPreview &&
             <Preview
+                template={selectedTemplates[templateSelectionMode]}
                 onClose={() => {
                     setOpenPreview(false)
                 }}
@@ -190,7 +298,6 @@ export default function Detail({ }) {
                 onClose={() => {
                     setOpenSchedule(false)
                 }}
-
                 onSave={() => {
                     setOpenSchedule(false)
                 }}
@@ -202,17 +309,17 @@ export default function Detail({ }) {
                 onClose={() => {
                     setOpenCustomer(false)
                 }}
-
                 onSave={handleCustomerSave}
             />
         }
 
         {openEmail &&
             <EmailTemplate
+                mode={templateSelectionMode}
+                campaignType={campaignType}
                 onClose={() => {
                     setOpenEmail(false)
                 }}
-
                 onSave={handleTemplateSave}
             />
         }
@@ -289,8 +396,8 @@ export default function Detail({ }) {
                         <div className="flex items-center justify-between">
                             <div>
                                 {customersSelected && <div className="flex items-center gap-2 my-5">
-                                    <Image src="/images/warning.svg" alt="warning" height={22} width={22} />
-                                    <div className="text-danger text-lg font-semibold capitalize">5 customers are already in an active campaign.?</div>
+                                    <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
+                                    <div className="text-danger text-lg font-semibold capitalize">5 customers are already in an active campaign.</div>
                                 </div>}
                             </div>
                             <SelectForm defaultOption="Exclude Duplicates" selectClass_="bg-white!"
@@ -318,6 +425,8 @@ export default function Detail({ }) {
                 <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
                     title="Template Selection"
                     status={getCardStatus('templateSelection')}>
+
+                    {/* Campaign Type Selection */}
                     <div className="flex gap-3 my-4">
                         <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
                         <div className="flex">
@@ -330,108 +439,50 @@ export default function Detail({ }) {
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-between mb-4">
-                        <div className="text-sm text-secondary">Primary Email Template<span className="text-danger">*</span></div>
+                    {/* Primary Template */}
+                    {renderTemplateCard('primary', selectedTemplates.primary, `Primary ${campaignType === 'email' ? 'Email' : campaignType === 'sms' ? 'SMS' : 'Email'} Template`, true)}
 
-                        <SecondaryButton title="Template selection" class_="text-sm! font-normal!"
-                            onClick={() => { setOpenEmail(true) }} />
-                    </div>
-
-                    <div className="bg-white p-3 rounded-lg">
-                        <div className="bg-dark rounded-lg p-2">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <div className="text-secondary text-sm font-medium">
-                                        {templateSelected ? 'Nature Template' : 'No Template Selected'}
-                                    </div>
-                                    <div className="text-text3 text-xs">
-                                        {templateSelected ? 'Lorem Ipsum..' : 'Please select a template'}
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:pointer-events-none cursor-pointer"
-                                        onClick={() => { setOpenPreview(true) }}
-                                        disabled={!templateSelected}>
-                                        <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />Preview
-                                    </button>
-
-                                    <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:pointer-events-none cursor-pointer"
-                                        onClick={() => { setOpenModal(true) }}
-                                        disabled={!templateSelected}>
-                                        <Image src="/images/edit2.svg" alt='eye' height={14} width={14} unoptimized={true} />Edit
-                                    </button>
-                                </div>
+                    {/* Reminder Email Toggle */}
+                    {campaignType !== 'sms' && (
+                        <div className="mt-4">
+                            <div className="flex items-start gap-2 mt-1 mb-4">
+                                <Checkbox onChange={handleReminderToggle} checked={reminderEnabled} />
+                                <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Enable Reminder Email</div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="mt-4">
-                        <div className="flex items-start gap-2 mt-1">
-                            <Checkbox onChange={(checked) => setReminderEnabled(checked)} />
-                            <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Enable Reminder Email</div>
-                        </div>
 
-                        {reminderEnabled && (
-                            <>
-                                <div className="flex items-center justify-between mb-4">
-                                    <div className="text-secondary text-sm capitalize">Reminder Email Template</div>
-                                    <SecondaryButton title="Template selection" class_="text-sm! font-normal!"
-                                        onClick={() => { setOpenEmail(true) }} />                                </div>
+                            {reminderEnabled && (
+                                <>
+                                    {/* Reminder Template */}
+                                    {renderTemplateCard('reminder', selectedTemplates.reminder, 'Reminder Email Template', true)}
 
-                                <div className="bg-white p-3 rounded-lg">
-                                    <div className="bg-dark rounded-lg p-2">
-                                        <div className="flex items-center justify-between">
-                                            <div>
-                                                <div className="text-secondary text-sm font-medium">Nature Template</div>
-                                                <div className="text-text3 text-xs">Lorem Ipsum..</div>
+                                    {/* Frequency Selection */}
+                                    <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
+                                        selectClass_="bg-white! py-3! focus:border-primary/60!"
+                                        formProps={{ ...register("frequency", { required: reminderEnabled }) }}
+                                        errors={errors} >
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                    </SelectForm>
+
+                                    {/* Final Reminder Section - Only show after frequency and reminder template are selected */}
+                                    {selectedTemplates.reminder && watchedFields['frequency'] && (
+                                        <div className="mt-6">
+                                            <div className="text-secondary text-sm font-medium mb-4">Final Reminder</div>
+
+                                            <div className="flex items-start gap-2 mt-1 mb-4">
+                                                <Checkbox onChange={handleSameAsFinalToggle} checked={sameAsFinal} />
+                                                <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Same as Reminder</div>
                                             </div>
 
-                                            <div className="flex items-center gap-3">
-                                                <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenPreview(true) }}> <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />Preview</button>
+                                            {!sameAsFinal && renderTemplateCard('final', selectedTemplates.final, 'Final Reminder Template')}
 
-                                                <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenModal(true) }}> <Image src="/images/edit2.svg" alt='eye' height={14} width={14} unoptimized={true} />Edit</button>
-                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
-                                    selectClass_="bg-white! py-3! focus:border-primary/60!"
-                                    formProps={{ ...register("frequency", { required: true }) }}
-                                    errors={errors} >
-                                    <option value="daily">Daily</option>
-                                    <option value="weekly">Weekly</option>
-                                </SelectForm>
-
-                                <div className="flex items-center justify-between my-4">
-                                    <div className="text-secondary text-sm font-medium">Final Reminder</div>
-                                    <SecondaryButton title="Template selection" class_="text-sm! font-normal!"
-                                        onClick={() => { setOpenEmail(true) }} />
-                                </div>
-
-                                <div className="flex items-start gap-2 mt-1 mb-4">
-                                    <Checkbox />
-                                    <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Same as Reminder</div>
-                                </div>
-
-                                <div className="bg-white p-3 rounded-lg">
-                                    <div className="bg-dark rounded-lg p-2">
-                                        <div className="flex items-center justify-between">
-                                            <div>
-                                                <div className="text-secondary text-sm font-medium">Nature Template</div>
-                                                <div className="text-text3 text-xs">Lorem Ipsum..</div>
-                                            </div>
-
-                                            <div className="flex items-center gap-3">
-                                                <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenPreview(true) }}> <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />Preview</button>
-
-                                                <button className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:pointer-events-none cursor-pointer" onClick={() => { setOpenModal(true) }}> <Image src="/images/edit2.svg" alt='eye' height={14} width={14} unoptimized={true} />Edit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        )}
-                    </div>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                    )}
                 </CampaignCard>
             </div>
 
@@ -458,7 +509,6 @@ export default function Detail({ }) {
                         formProps={{ ...register("weekendDelivery", { required: false }) }}
                         errors={errors}
                     />
-
                 </CampaignCard>
             </div>
 

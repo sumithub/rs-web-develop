@@ -41,7 +41,7 @@ export default function SentimentAnalysis() {
         <div>
             <AdminLayout
                 noCard={true}
-                headerChild={<div className="grid grid-cols-[1fr_1fr_auto] gap-3 justify-end items-end mt-3">
+                headerChild={<div className="grid grid-cols-2 gap-3 justify-end items-end">
                     <CustomSelectBox defaultOption="Select Sentiment"
                         class_='mt-0!'
                         value={filterBy}
@@ -56,9 +56,9 @@ export default function SentimentAnalysis() {
                     <DateRange
                         icon={true}
                         onChange={(e) => { setDate(e) }} />
-                    <button className="cursor-pointer disabled:pointer-events-none">
+                    {/* <button className="cursor-pointer disabled:pointer-events-none">
                         <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
-                    </button>
+                    </button> */}
                 </div>}>
                 <div className="bg-light min-h-[calc(100dvh_-_85px)]">
                     {loading ? <Loading /> : <>
