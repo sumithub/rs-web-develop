@@ -19,6 +19,7 @@ function AddCustomer({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
     const [type, setType] = useState("manually")
+    const [activeStep, setActiveStep] = useState(1);
 
     const handleViewChange = (event) => {
         setType(event.target.value);
@@ -57,10 +58,10 @@ function AddCustomer({ onClose, id }) {
             setSending(false)
         }
     }
-    return <Model onClose={onClose} title={`${!id ? "Add new Customer" : "Edit Customers List"}`} modalClass="w-[65%]!">
+    return <Model onClose={onClose} title={activeStep === 6 ? "Customers Imported Successfully!" : type === "import" ? "Import Customers" : (!id ? "Add new Customer" : "Edit Customers List")} modalClass="w-[65%]!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-                {!id && <div className="flex gap-4 items-center">
+                {!id && activeStep !== 6 && <div className="flex gap-4 items-center">
                     <button type="button" onClick={handleBackClick}><Image src="/images/arrow-box.svg" alt="arrow" height={30} width={30} unoptimized={true} /></button>
 
                     <Radio
@@ -147,7 +148,9 @@ function AddCustomer({ onClose, id }) {
         </form>
 
         {type === "import" && <div className="mt-8">
-            <ImportCustomer />
+            <ImportCustomer
+                activeStep={activeStep}
+                setActiveStep={setActiveStep} />
         </div>}
     </Model>
 

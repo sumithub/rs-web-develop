@@ -16,8 +16,7 @@ import RadioForm from "../../form/RadioForm";
 import Image from "next/image";
 import FileInput from "../../form/FileInput";
 
-export default function ImportCustomer({ onBack }) {
-    const [activeStep, setActiveStep] = useState(1);
+export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
     const [sortBy, setSortBy] = useState("");
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -204,7 +203,7 @@ export default function ImportCustomer({ onBack }) {
                             <option value="instead of source">instead of source</option>
                         </SelectForm>
 
-                        <div>
+                        {tab !== 6 && (<div>
                             <div className="flex gap-2 mt-4">
                                 <div className="text-sm text-secondary font-medium">
                                     Duplicate Handling<span className="text-danger">*</span>
@@ -252,7 +251,7 @@ export default function ImportCustomer({ onBack }) {
                                     disabled={loading}
                                 />
                             </div>
-                        </div>
+                        </div>)}
                     </form>
                 )}
 
