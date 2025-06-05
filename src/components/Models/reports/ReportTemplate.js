@@ -45,12 +45,14 @@ export default function ReportTemplate({ onClose, id, onSave }) {
         }
     }
     return (
-        <Model onClose={onClose} title="Resend Report Email" modalClass="w-[60%]!">
+        <Model onClose={onClose} title="Resend Report Email" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <SelectForm
                         defaultOption="select"
                         label="Template Name"
+                        class_="mt-0!"
+                        selectClass_="py-2.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("select", { required: true }) }}
                         errors={errors}>
@@ -58,12 +60,12 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                     </SelectForm>
                 </div>
 
-                <div className="mt-3">
+                <div className="mt-3.5">
                     <div className="font-semibold text-xl">
                         Select Report Sections
                     </div>
 
-                    <div className="flex justfy-between align-center gap-2 mt-3">
+                    <div className="flex justfy-between align-center gap-5 mt-3.5">
                         <Checkbox />
                         <div>Reviews Overview</div>
 
@@ -75,31 +77,35 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                     </div>
                 </div>
 
-                <div className="mt-3 inline-block">
-                    <SecondaryButton title="Add Custom Section" onClick={onSave} />
+                <div className="mt-3.5 inline-block ">
+                    <SecondaryButton
+                        title="Add Custom Section"
+                        class_="text-xs! font-normal!"
+                        onClick={onSave}
+                    />
                 </div>
 
-                <div className="mt-3">
+                <div className="mt-3.5">
                     <div className="font-semibold text-xl">
                         Default Charts
                     </div>
 
-                    <div className="mt-3">
-                        <div className="flex gap-2">
+                    <div className="mt-3.5">
+                        <div className="flex gap-2.5">
                             <Image src="/images/Frame.png" alt="frame" width={25} height={10} />
-                            Review Over Time
+                            <h2 className="text-sm">Review Over Time</h2>
                             <Checkbox />
                         </div>
 
-                        <div className="flex gap-2 mt-2">
+                        <div className="flex gap-2.5 mt-3.5">
                             <Image src="/images/Frame1.png" alt="frame1" width={25} height={10} />
-                            Review Rating Distribution
+                            <h2 className="text-sm">Review Rating Distribution</h2>
                             <Checkbox />
                         </div>
 
-                        <div className="flex gap-2 mt-2">
+                        <div className="flex gap-2.5 mt-3.5">
                             <Image src="/images/Frame2.png" alt="frame2" width={25} height={10} />
-                            Top Review Sources
+                            <h2 className="text-sm">Top Review Sources</h2>
                             <Checkbox />
                         </div>
                     </div>
@@ -109,6 +115,8 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                     <SelectForm
                         defaultOption="select"
                         label="Default Schedule"
+                        class_="mt-3.5!"
+                        selectClass_="py-2.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("select", { required: true }) }}
                         errors={errors}>
@@ -116,23 +124,39 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                     </SelectForm>
                 </div>
 
-                <div className="grid grid-cols-[_1fr_auto] gap-3 mt-2">
-                    <InputForm
-                        label="Default Recipients"
-                        icon="/images/copy2.svg"
-                        isRequired={true}
-                        formProps={{ ...register("defaultRecipients", { required: true }) }}
-                        errors={errors}
-                    />
-
-                    <div className="mt-10">
-                        <SecondaryButton title="Add" onClick={onSave} />
+                <div className="grid grid-cols-[_1fr_auto] gap-3 mt-3.5 ">
+                    <div className="flex items-end gap-3.5">
+                        <div className="w-full">
+                            <h2 className="text-sm pb-2.5 font-medium">Default Recipients<span className="text-danger">*</span></h2>
+                            <div className="w-full border border-primary/10 rounded-lg p-2.5 flex justify-between items-center">
+                                <div className="flex gap-[15px]">
+                                    <div className="flex gap-[7px] border border-primary/10 rounded-lg p-[5px] items-center">
+                                        <Image src="/images/request.png" alt="request" width={17} height={17} />
+                                        <h2 className="text-sm">Richard</h2>
+                                        <Image unoptimized={true} src="/images/close-square.svg" alt="close-square" width={14} height={14} />
+                                    </div>
+                                    <div className="flex gap-[7px] border border-primary/10 rounded-lg p-[5px] items-center">
+                                        <Image src="/images/request.png" alt="request" width={17} height={17} />
+                                        <h2 className="text-sm">Sophia</h2>
+                                        <Image unoptimized={true} src="/images/close-square.svg" alt="close-square" width={14} height={14} />
+                                    </div>
+                                </div>
+                                <div>
+                                    <Image unoptimized={true} src="/images/copy2.svg" alt="copy2" width={20} height={20} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-[20%] shrink-0">
+                            <SecondaryButton title="Add" onClick={onSave}
+                                class_="py-4! px-2.5! text-sm font-normal!"
+                            />
+                        </div>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 mt-5">
-                    <CancelButton title="Delete Template" onClick={delete1} />
-                    <SecondaryButton title="Save Changes" type="submit" disabled={sending} />
+                <div className="grid grid-cols-2 gap-5 mt-[30px]">
+                    <CancelButton title="Delete Template" onClick={delete1} class_="text-lg! py-3!" />
+                    <SecondaryButton title="Save Changes" type="submit" disabled={sending} class_="text-lg! py-3!" />
                 </div>
             </form>
         </Model>
