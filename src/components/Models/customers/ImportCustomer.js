@@ -42,7 +42,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         trigger,
         formState: { errors },
     } = useForm({
-        mode: 'onChange' // Enable real-time validation
+        mode: 'onChange'
     });
 
     const IMPORTSUMMARY = [
@@ -103,7 +103,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
             default:
                 isValid = true;
         }
-
         return isValid;
     };
 
@@ -111,7 +110,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         const isValid = await validateCurrentStep();
 
         if (isValid && tab < 6) {
-            // Save form data for step 3
             if (tab === 3) {
                 const formData = getValues();
                 setImportData(prev => ({
@@ -171,6 +169,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                 <div>
                     {!importDone && (
                         <ProgressBar
+                            class_="mt-8!"
                             currentStep={activeStep}
                             stepTitle1="Upload File"
                             stepTitle2="Field Mapping"
@@ -449,7 +448,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
 
                     {tab === 6 && (
                         <>
-                            <div className="font-semibold text-xl mb-3">
+                            <div className="font-semibold text-xl my-3">
                                 Import Summary
                             </div>
                             <div>

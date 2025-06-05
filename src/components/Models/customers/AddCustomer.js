@@ -146,7 +146,7 @@ function AddCustomer({ onClose, id }) {
             </div>}
         </form>
 
-        {type === "import" && <div className="mt-8">
+        {type === "import" && <div>
             <ImportCustomer
                 activeStep={activeStep}
                 setActiveStep={setActiveStep}
