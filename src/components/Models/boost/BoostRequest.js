@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import SecondaryButton from "../../common/SecondaryButton";
 import Checkbox from "../../form/Checkbox";
@@ -11,12 +12,15 @@ import SelectedCustomers from "../manage-campaigns/SelectedFromCustomers";
 import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import { useForm } from "react-hook-form";
+import PhoneForm from "../../form/PhoneForm";
+import AddCustomer from "../customers/AddCustomer";
 
 export default function BoostRequest({ onClose, onSave }) {
-    const { handleSubmit } = useForm();
+    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [openTemplate, setOpenTemplate] = useState(false)
     const [openSelect, setOpenSelect] = useState(false)
+    const [open, setOpen] = useState(false)
 
     const onSubmit = async () => {
         try {
@@ -53,6 +57,17 @@ export default function BoostRequest({ onClose, onSave }) {
                             setOpenSelect(true)
                         }} />
                 }
+
+                {open &&
+                    <AddCustomer
+                        onClose={() => {
+                            setOpen(false)
+                        }}
+
+                        onSave={() => {
+                            setOpen(true)
+                        }} />
+                }
                 <div>
                     <div className="font-bold text-base">
                         Send Review, Referral, Or Feedback Requests To One Or More Customers
@@ -60,7 +75,7 @@ export default function BoostRequest({ onClose, onSave }) {
 
                     <div className="flex gap-[10vw] mt-4">
                         <Search placeholder="Search by email, name or phone number" mainClass="w-1/2!" />
-                        <SecondaryButton title="Add New Customer" />
+                        <SecondaryButton title="Add New Customer" onClick={() => { setOpenSelect(true) }} />
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
@@ -69,7 +84,14 @@ export default function BoostRequest({ onClose, onSave }) {
                     </div>
 
                     <div>
-                        <Input label="Phone Number" isRequired={true} />
+                        <PhoneForm label="Primary Phone"
+                            placeholder="Enter phone number"
+                            isRequired={true}
+                            formProps={{ ...register("primaryPhone", { required: true }) }}
+                            errors={errors}
+                            clearErrors={clearErrors}
+                            setValue={setValue}
+                            watch={watch} />
                     </div>
 
                     <div className="flex justfy-between align-center gap-[6vw]">

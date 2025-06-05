@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import AdminLayout from '../../components/AdminLayout'
 import Checkbox from '../../components/form/Checkbox'
-import DatePicker from '../../components/form/DatePicker'
 import Search from '../../components/form/Search'
 import PaginationDemo from '../../components/Pagination'
 import Status from '../../components/Status'
@@ -16,6 +15,7 @@ import { toast } from 'react-toastify'
 import { formatDate, getError } from '../../../helper'
 import { manageCampaigns } from '../../constent/constArray'
 import Loading from '../../components/Loading'
+import DateRange from '../../components/form/DateRangePicker'
 
 function ManageCampaigns() {
     const [sortBy1, setSortBy1] = useState("")
@@ -107,13 +107,17 @@ function ManageCampaigns() {
                             <option value="paused">Paused</option>
                         </CustomSelectBox>
 
-                        <DatePicker
+                        <DateRange class_="shrink-0!"
+                            onChange={(e) => { setDate(e) }}
+                        />
+
+                        {/* <DatePicker
                             icon={true}
                             mainClass="mt-0!"
                             value={date}
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
-                        />
+                        /> */}
                         <Link href="/manage-campaigns/detail" className='shrink-0'>
                             <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0 w-full"
                             >Create campaign</button>

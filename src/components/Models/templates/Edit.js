@@ -1,3 +1,4 @@
+"use client"
 import { useForm } from "react-hook-form";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";

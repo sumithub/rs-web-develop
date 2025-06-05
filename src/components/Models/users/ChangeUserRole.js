@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -23,7 +24,7 @@ export default function ChangeUserRole({ onClose, id, user = {} }) {
     try {
       setSending(true);
 
-      await axios.put("/api",  data );
+      await axios.put("/api", data);
 
       toast.success("Role Changed Successfully");
       onClose();
