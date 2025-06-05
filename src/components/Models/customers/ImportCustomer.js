@@ -16,17 +16,29 @@ import RadioForm from "../../form/RadioForm";
 import Image from "next/image";
 import FileInput from "../../form/FileInput";
 
-export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
+export default function ImportCustomer({ onBack, activeStep, setActiveStep, onClose }) {
     const [sortBy, setSortBy] = useState("");
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [tab, setTab] = useState(1);
     const [importDone, setImportDone] = useState(false);
 
+    const [importData, setImportData] = useState({
+        fileName: "",
+        fieldMappings: [],
+        validationResults: {
+            totalCustomers: 250,
+            validCustomers: 245,
+            duplicatesSkipped: 3,
+            importedCustomers: 245
+        }
+    });
+
     const {
         register,
         handleSubmit,
         clearErrors,
+        getValues, // Add this for accessing form values
         formState: { errors },
     } = useForm();
 
@@ -61,13 +73,54 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
         }
     };
 
-    const onSubmit = async () => {
+    // Add function to store file information in tab 1
+    const handleFileUpload = (file) => {
+        setImportData(prev => ({
+            ...prev,
+            fileName: file?.name || "",
+            csvFile: file
+        }));
+    };
+
+    // Add function to collect field mappings in tab 2
+    const handleFieldMappingChange = (index, value) => {
+        const updatedMappings = [...importData.fieldMappings];
+        updatedMappings[index] = {
+            header: list[index]?.header,
+            firstRow: list[index]?.firstRow,
+            mappedTo: value
+        };
+
+        setImportData(prev => ({
+            ...prev,
+            fieldMappings: updatedMappings
+        }));
+    };
+
+    // Update onSaveListDetails to work with useForm
+    const onSaveListDetails = (formData) => {
+        // Store the form data from useForm
+        setImportData(prev => ({
+            ...prev,
+            listName: formData.listName,
+            tag: formData.tag,
+            duplicateHandling: formData.duplicateHandling
+        }));
+
+        toast.success("List Details Added Successfully");
+        handleNext();
+    };
+
+    // Update the onSubmit function to handle different tabs
+    const onSubmit = async (formData) => {
         if (tab === 3) {
-            toast.success("List Details Added Successfully")
-        } else try {
-            toast.success("Saved Successfully");
-        } catch (error) {
-            toast.error(getError(error));
+            onSaveListDetails(formData);
+        } else {
+            try {
+                toast.success("Saved Successfully");
+            } catch (error) {
+                toast.error(getError(error));
+            }
         }
     };
 
@@ -78,12 +131,36 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
         }
     };
 
-    const handleDone = () => {
-        toast.success("Imported Successfully")
-        setTab(1);
-        setActiveStep(1);
-        setImportDone(false);
-        setList([]);
+    // Updated handleDone with POST API call
+    const handleDone = async () => {
+        try {
+            setLoading(true);
+
+            // Get current form values
+            const currentFormData = getValues();
+
+            // Prepare the complete import data to send to the API
+            const postData = {
+                fileName: importData.fileName || "abc.csv",
+                listName: importData.listName || currentFormData.listName,
+                assignedTag: importData.tag || currentFormData.tag,
+                duplicateHandling: importData.duplicateHandling || currentFormData.duplicateHandling,
+                fieldMappings: importData.fieldMappings,
+                totalCustomers: importData.validationResults.totalCustomers,
+                validCustomers: importData.validationResults.validCustomers,
+                duplicatesSkipped: importData.validationResults.duplicatesSkipped,
+                importedCustomers: importData.validationResults.importedCustomers,
+                importedAt: new Date().toISOString(),
+                customerList: "new leads-march 2025"
+            };
+
+            await axios.post("/api", postData);
+            toast.success("Imported Successfully");
+            onClose();
+        } catch (error) {
+            toast.error(getError(error));
+            setLoading(false);
+        }
     };
 
     const handleBack = () => {
@@ -94,7 +171,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
             onBack();
         }
     };
-
     return (
         <main>
             <div>
@@ -111,14 +187,11 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
 
                 {tab === 1 && (
                     <FileInput
+                        accept=".csv"
                         formProps={{
                             ...register('csvFile', {
-                                required: "Please upload a CSV file",
-                                validate: (value) => {
-                                    if (!value) return "Please upload a CSV file";
-                                    if (value.type !== 'text/csv') return "Please select a valid CSV file";
-                                    return true;
-                                }
+                                required: false,
+                                onChange: (e) => handleFileUpload(e.target.files[0])
                             })
                         }}
                         errors={errors}
@@ -173,8 +246,13 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                                                 <td>{e.header}</td>
                                                 <td>{e.firstRow}</td>
                                                 <td>
-                                                    <SelectForm selectClass_="border-primary3/10" class_="mt-0!">
-                                                        <option value="fullName">full Name</option>
+                                                    <SelectForm
+                                                        selectClass_="border-primary3/10"
+                                                        class_="mt-0!"
+                                                        onChange={(e) => handleFieldMappingChange(index, e.target.value)}
+                                                    >
+                                                        <option value="">Select mapping</option>
+                                                        <option value="fullName">Full Name</option>
                                                         <option value="phoneNumber">Phone Number</option>
                                                         <option value="email">Email</option>
                                                     </SelectForm>
@@ -193,10 +271,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                 )}
 
                 {tab === 3 && (
-                    <form onSubmit={handleSubmit((data) => {
-                        onSubmit(data);
-                        handleNext();
-                    })}>
+                    <form onSubmit={handleSubmit(onSubmit)} className="mt-5">
                         <InputForm
                             label="list name"
                             isRequired={true}
@@ -211,9 +286,10 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                             errors={errors}
                             clearErrors={clearErrors}
                         >
+                            <option value="">Select tag</option>
                             <option value="high value">High Value</option>
                             <option value="loyal">Loyal</option>
-                            <option value="instead of source">instead of source</option>
+                            <option value="instead of source">Instead of source</option>
                         </SelectForm>
 
                         {tab !== 6 && (<div>
@@ -237,6 +313,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                                     label="Ignore duplicates"
                                     inputClass='mb-2!'
                                     name="duplicateHandling"
+                                    value="ignore"
                                     formProps={{ ...register("duplicateHandling", { required: true }) }}
                                     errors={errors}
                                 />
@@ -244,6 +321,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                                     label="Overwrite existing"
                                     inputClass='mb-2!'
                                     name="duplicateHandling"
+                                    value="overwrite"
                                     formProps={{ ...register("duplicateHandling", { required: true }) }}
                                     errors={errors}
                                 />
@@ -251,6 +329,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                                     label="Allow duplicates"
                                     inputClass='mb-2!'
                                     name="duplicateHandling"
+                                    value="allow"
                                     formProps={{ ...register("duplicateHandling", { required: true }) }}
                                     errors={errors}
                                 />
@@ -351,7 +430,10 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                             <div className="text-success text-xl font-semibold capitalize">
                                 File validated successfully!
                             </div>
-                            <button type="button" className="text-white text-xs font-medium bg-primary p-2 rounded-lg border border-primary cursor-pointer capitalize disabled:pointer-events-none disabled:opacity-50 flex items-center gap-2" onClick={() => { toast.success('Download Successfully') }}><Image src="/images/info-circle.svg" alt="info" height={16} width={16} unoptimized={true} />Download Sample CSV</button>
+                            <button type="button" className="text-white text-xs font-medium bg-primary p-2 rounded-lg border border-primary cursor-pointer capitalize disabled:pointer-events-none disabled:opacity-50 flex items-center gap-2" onClick={() => { toast.success('Download Successfully') }}>
+                                <Image src="/images/info-circle.svg" alt="info" height={16} width={16} unoptimized={true} />
+                                Download Sample CSV
+                            </button>
                         </div>
 
                         <div className="font-semibold text-xl mb-3 mt-4">
@@ -363,10 +445,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                                 <div className="text-text3 capitalize">{d.title}</div>
                                 <div className="text-secondary font-medium capitalize">{d.summary}</div>
                             </div>
-                            {/* <div className="flex justify-between">
-                                <div className="text-text3 capitalize">invalid entries</div>
-                                <div className="text-secondary font-medium capitalize mr-2">02 <span className="border-l border-border-color "></span><span className="text-primary underline ml-2">view detail</span></div>
-                            </div> */}
                             <hr className="my-4 border-t border-border-color" />
                         </div>))}
                     </>
@@ -383,8 +461,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                                     <div className="flex justify-between">
                                         <div className="text-text3 capitalize">{d.title}</div>
                                         <div className="text-secondary font-medium capitalize">{d.summary}</div>
-
-
                                     </div>
                                     <hr className="my-4 border-t border-border-color" />
                                 </div>
@@ -424,6 +500,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
                             type="button"
                             onClick={handleDone}
                             class_="w-full!"
+                            disabled={loading}
                         />
                     )}
                 </div>
@@ -431,9 +508,3 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep }) {
         </main>
     );
 }
-
-
-
-
-
-
