@@ -263,6 +263,7 @@ export default function ImportCustomer({ onBack }) {
                                 <div className="flex items-center justify-between w-full">
                                     <div className="flex items-center gap-2">
                                         <Image
+                                            unoptimized={true}
                                             src="/images/warning.svg"
                                             alt="warning"
                                             height={22}

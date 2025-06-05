@@ -44,7 +44,7 @@ function ReviewAnalytics() {
     const [openMultiCustomer, setOpenMultiCustomer] = useState(false)
     const [openTags, setOpenTags] = useState(false)
     const [openModal, setOpenModal] = useState(null)
-    const [view, setView] = useState("history")
+    const [view, setView] = useState("report")
     const [tab, setTab] = useState("list")
     const [sortBy, setSortBy] = useState("")
     const [list, setList] = useState([])

@@ -38,7 +38,7 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <h2 className="text-lg font-semibold">Connect to Yelp</h2>
-                    <Image src="/images/yelp-logo.svg" alt="yelp-logo" width={116} height={47} className="pt-2.5" />
+                    <Image unoptimized={true} src="/images/yelp-logo.svg" alt="yelp-logo" width={116} height={47} className="pt-2.5" />
                 </div>
                 <Input
                     label="Business Profile URL"
@@ -49,7 +49,7 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
                     infoIcon="/images/url.svg"
                 />
                 <div className="flex items-center gap-2.5 bg-danger/10 p-2.5 rounded-[7px] mt-[15px]">
-                    <Image src="/images/warning.svg" alt="warning" width={22} height={22} className="" />
+                    <Image unoptimized={true} src="/images/warning.svg" alt="warning" width={22} height={22} className="" />
                     <h2 className="text-sm">Paste your business profile URL from the platform's website.</h2>
                 </div>
                 <div className="grid grid-cols-2 gap-3 mt-[30px]">

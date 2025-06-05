@@ -268,7 +268,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
 
                     <div className="shadow-sm rounded-[15px]">
                         <div className="bg-primary/10 rounded-t-[15px] px-5 py-[18px] flex gap-2.5 items-center">
-                            <Image src="/images/eye1.svg" alt="eye1" width={22} height={22} />
+                            <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={22} height={22} />
                             <h2 className="text-lg font-semibold">Widget Preview</h2>
                         </div>
                         <div className="p-5">
@@ -278,16 +278,16 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
                                 </div>
                                 <div className="flex justify-between items-center gap-2.5">
-                                    <Image src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
+                                    <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
                                     <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
-                                    <Image src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
+                                    <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
                                 </div>
                                 <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br />
                                     <span className="font-medium text-primary">Read More</span></p>
                                 <div className="my-10 flex justify-center">
                                     <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary">
                                         <span>
-                                            <Image src="/images/google.svg" alt="google" width={18} height={18} className="" />
+                                            <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
                                         </span>
                                         Verified On Google
                                     </button>

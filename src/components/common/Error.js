@@ -23,7 +23,7 @@ function Error({ onClick, error }) {
       }}>Back</button>
     <div className='flex justify-center mt-10'>
       <Link href="/login" className="flex gap-[15px]">
-        <Image src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
+        <Image unoptimized={true} src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
         <h2 className='text-sm text-secondary'>Back To Login</h2>
       </Link>
     </div>

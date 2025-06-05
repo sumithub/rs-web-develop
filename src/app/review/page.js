@@ -124,7 +124,8 @@ export default function Review() {
                                     <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
                                     <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
                                     <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
-                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />  <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
                                 </div>
 
                                 <div className="flex items-center justify-between mt-2">

@@ -289,7 +289,7 @@ export default function Detail({ }) {
                         <div className="flex items-center justify-between">
                             <div>
                                 {customersSelected && <div className="flex items-center gap-2 my-5">
-                                    <Image src="/images/warning.svg" alt="warning" height={22} width={22} />
+                                    <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                                     <div className="text-danger text-lg font-semibold capitalize">5 customers are already in an active campaign.?</div>
                                 </div>}
                             </div>
