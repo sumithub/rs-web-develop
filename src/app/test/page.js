@@ -7,20 +7,8 @@ import ReportTemplate from "../../components/Models/reports/ReportTemplate";
 
 export default function Test() {
     const [openResponse, setOpenResponse] = useState(false)
-    const [openEmail, setOpenEmail] = useState(false)
     const [openSave, setOpenSave] = useState(false)
     return <AdminLayout>
-
-        {openEmail &&
-            <ResendReportEmail
-                onClose={() => {
-                    setOpenEmail(false)
-                }}
-
-                onSave={() => {
-                    setOpenEmail(true)
-                }} />
-        }
 
         {openSave &&
             <ReportTemplate
@@ -47,9 +35,6 @@ export default function Test() {
         <div className="flex flex-col gap-y-3">
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenResponse(true) }}>Review Response Templates
-            </div>
-
-            <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenEmail(true) }}>Resend Report Email
             </div>
 
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenSave(true) }}>Report Template
