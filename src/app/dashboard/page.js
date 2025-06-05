@@ -46,11 +46,12 @@ export default function Dashboard() {
 
     return <AdminLayout
         noCard={true}
-        headerChild={<div className="grid grid-cols-4 gap-3 justify-end items-center mt-3">
+        headerChild={<div className="flex gap-3 justify-end items-center mt-3">
             <CustomSelectBox
-                class_="mt-0!"
+                class_="mt-0! w-52!"
                 defaultOption="Review Source"
                 value={reviewSource}
+                multiSelect={true}
                 onChange={(e) => {
                     setReviewSource(e.target.value)
                 }}>
@@ -67,11 +68,11 @@ export default function Dashboard() {
                     setRating(e.target.value)
                 }}
                 multiSelect={true}>
-                <option value="1 star">1 Star & Up</option>
-                <option value="2 star">2 Star & Up</option>
-                <option value="3 star">3 Star & Up</option>
-                <option value="4 star">4 Star & Up</option>
-                <option value="5 star">5 Star & Up</option>
+                <option value="1 star">1 Star</option>
+                <option value="2 star">2 Star</option>
+                <option value="3 star">3 Star</option>
+                <option value="4 star">4 Star</option>
+                <option value="5 star">5 Star</option>
             </CustomSelectBox>
             <DateRange onChange={(e) => { setDate(e) }} />
             <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50" onClick={() => { setOpen(true) }}><Image unoptimized={true} src="/images/flash.svg" alt="flash" height={16} width={16} />Boost</button>
