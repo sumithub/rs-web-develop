@@ -19,6 +19,8 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
     const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
+    const normalizedTitle = title?.toLowerCase();
+
 
     const onSubmit = async (data) => {
         try {
@@ -60,7 +62,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                 }
                 <div className="grid grid-cols-2 gap-5">
                     <div>
-                        {(title.includes("carousel") || title.includes("gridWidget")) && (<div className="p-[15px] bg-dark rounded-[15px]">
+                        {(normalizedTitle === "carousel" || normalizedTitle === "gridWidget") && (<div className="p-[15px] bg-dark rounded-[15px]">
                             <h2 className="text-lg font-semibold">Design</h2>
                             <div className="grid grid-cols-3 gap-[15px] pt-2.5">
                                 <InputForm
@@ -98,10 +100,10 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
                         </div>)}
 
-                        {(title.includes("carousel")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(normalizedTitle === "carousel") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Content</h2>
                             <div className="grid grid-cols-2 gap-5">
-                                {(!title.includes("testimonialWidget")) && (<InputForm
+                                {(normalizedTitle !== "testimonialWidget") && (<InputForm
                                     label="Number of Reviews"
                                     isRequired={true}
                                     placeholder="Enter review count"
@@ -112,7 +114,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     class_="mt-0!"
                                 />)}
 
-                                {(title.includes("testimonialWidget")) && (<div>
+                                {(normalizedTitle === "testimonialWidget") && (<div>
                                     <SelectForm
                                         defaultOption="Select sorting"
                                         label="Sorting"
@@ -132,7 +134,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     </div>
                                 </div>)}
 
-                                {(title.includes("floatingButtonWidget")) && (<InputForm label="button label" isRequired={true}
+                                {(normalizedTitle === "floatingButtonWidget") && (<InputForm label="button label" isRequired={true}
                                     formProps={{ ...register("buttonLabel", { required: true }) }}
                                     errors={errors}
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
@@ -140,7 +142,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     class_="mt-0!"
                                 />)}
 
-                                {(title.includes("carousel")) && (<InputForm
+                                {(normalizedTitle === "carousel") && (<InputForm
                                     label="Minimum Rating"
                                     isRequired={true}
                                     placeholder="Enter Filtering"
@@ -165,7 +167,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
 
                             <div>
-                                {(title.includes("carousel")) && (<InputForm
+                                {(normalizedTitle === "carousel") && (<InputForm
                                     label="sorting"
                                     isRequired={true}
                                     placeholder="Enter sorting"
@@ -176,7 +178,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     class_="mt-2.5!"
                                 />)}
 
-                                <SelectForm
+                                {(normalizedTitle !== "carousel") && (<SelectForm
                                     defaultOption="Select sorting"
                                     label="Sorting"
                                     labelClass="pb-2.5 inline-block mb-0!"
@@ -188,7 +190,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     clearErrors={clearErrors} >
                                     <option value="latest">Latest</option>
                                     <option value="highest-rated">Highest Rated</option>
-                                </SelectForm>
+                                </SelectForm>)}
                             </div>
 
                             <div className="pt-2.5 flex gap-[15px] items-center">
@@ -197,7 +199,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
                         </div>)}
 
-                        {(title.includes("gridWidget") || title.includes("carousel") || title.includes("testimonialWidget") || title.includes("floatingButtonWidget") || title.includes("starBadgeWidget")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(normalizedTitle === "gridWidget" || normalizedTitle === "carousel" || normalizedTitle === "testimonialWidget" || normalizedTitle === "floatingButtonWidget" || normalizedTitle === "starBadgeWidget") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Review Sources</h2>
                             <h3 className="text-base pt-2.5 font-medium">Select up to 3</h3>
                             <div className="flex gap-[15px] items-center pt-[15px]">
@@ -216,7 +218,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
                         </div>)}
 
-                        {(title.includes("carousel")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(normalizedTitle === "carousel") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Behavior</h2>
                             <div className="0">
                                 <SelectForm
@@ -238,7 +240,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             </div>
                         </div>)}
 
-                        {(title.includes("floatingButtonWidget")) && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        {(normalizedTitle === "floatingButtonWidget") && (<div className="p-[15px] bg-dark rounded-[15px] mt-5">
                             <h2 className="text-lg font-semibold">Behavior</h2>
                             <div className="0">
                                 <SelectForm
@@ -262,7 +264,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
 
                         <div className="mt-[30px] grid grid-cols-2 gap-5">
                             <SecondaryButton title="Save" type="submit" disabled={sending} class_="bg-white! text-primary!" />
-                            <SecondaryButton title="Next" onClick={onNext} />
+                            <SecondaryButton title="Next" onClick={() => onNext?.(title)} />
                         </div>
                     </div>
 

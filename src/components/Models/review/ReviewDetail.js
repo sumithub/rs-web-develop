@@ -19,7 +19,7 @@ export default function ReviewDetail({ onClose, onSave, id }) {
     const [status, setStatus] = useState("")
     const copy = () => {
         try {
-            toast.success("Coped Successfully")
+            toast.success("Copied Successfully")
             onClose()
         } catch (error) {
             toast.error(getError(error))
@@ -46,7 +46,7 @@ export default function ReviewDetail({ onClose, onSave, id }) {
         }
     }
     return (
-        <Model onClose={onClose} title="Review Detail" modalClass="w-[60%]!">
+        <Model onClose={onClose} title={status === "noActionRequired" ? "No Action Required" : "Review Detail"} modalClass="w-[60%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     {status === "noActionRequired" && <div>
@@ -122,7 +122,10 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                             class_="text-lg! font-medium! py-3"
                             onClick={copy}
                         />
-                        {status === "noActionRequired" && <SecondaryButton title="Share" />}
+                        {status === "noActionRequired" && <SecondaryButton title="Share" onClick={() => {
+                            toast.success("Shared Successfully")
+                            onClose()
+                        }} />}
                         <SecondaryButton
                             title="mark as responded"
                             class_="text-lg! font-medium! py-3"
