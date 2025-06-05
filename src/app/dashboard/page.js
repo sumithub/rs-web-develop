@@ -46,7 +46,7 @@ export default function Dashboard() {
 
     return <AdminLayout
         noCard={true}
-        headerChild={<div className="flex gap-3 justify-end items-center mt-3">
+        headerChild={<div className="flex gap-3 justify-end items-center">
             <CustomSelectBox
                 class_="mt-0! w-52!"
                 defaultOption="Review Source"
@@ -162,7 +162,7 @@ export default function Dashboard() {
                 </div>
 
                 <div className="mt-8 w-full border border-border-color rounded-[20px] overflow-hidden">
-                    <table className='w-full'>
+                    {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                         <thead>
                             <tr>
                                 <th>Source</th>
@@ -186,8 +186,7 @@ export default function Dashboard() {
                                 <td>{e.lastMonth}</td>
                             </tr>)}
                         </tbody>
-                    </table>
-                    <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>
+                    </table> : <div className='text-center text-2xl text-danger mx-auto h-20'>No Data</div>)}
                 </div>
             </>}
         </div>

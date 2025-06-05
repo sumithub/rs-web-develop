@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 // eslint-disable-next-line react/display-name
 const CustomInput = forwardRef(({ value, onClick, icon }, ref) => (<> <div className="w-full cursor-pointer relative" onClick={onClick} ref={ref}>
-    <div className={`border border-[#F4F4F4] rounded-lg py-3 px-2.5 capitalize text-sm text-text3 w-full focus-visible:outline-none shrink-0`}>{value || "Select"}</div>
+    <div className={`border border-input-border rounded-lg py-3 px-2.5 capitalize text-sm text-text3 w-full focus-visible:outline-none shrink-0`}>{value || "Select"}</div>
     {icon && <Image src="/images/calendar1.svg" alt='calendar' height={16} width={16} unoptimized={true} className='absolute top-2.5 right-2' />}
 </div>
 </>

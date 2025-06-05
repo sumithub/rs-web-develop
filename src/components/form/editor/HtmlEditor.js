@@ -23,7 +23,7 @@ const RichTextExample = ({ children, value, onChange }) => {
     const renderElement = useCallback(props => <Element {...props} />, [])
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])
     const editor = useMemo(() => withHistory(withReact(createEditor())), [])
-    return (<div className='border border-[#F4F4F4] rounded-lg mt-[15px] w-full'>
+    return (<div className='border border-input-border rounded-lg mt-[15px] w-full'>
         <Slate editor={editor}
             initialValue={initialValue2}
             value={value || []}
