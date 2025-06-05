@@ -6,7 +6,7 @@ export default function FileInput({ formProps,
     errors,
     isRequired = false,
     label = "Upload file",
-    class_ = "" }) {
+    class_ = "", accept }) {
     const [selectedFile, setSelectedFile] = useState(null);
     const [isDragOver, setIsDragOver] = useState(false);
 
@@ -115,7 +115,7 @@ export default function FileInput({ formProps,
                 <input
                     id="csv-file-input"
                     type="file"
-                    accept=".csv"
+                    accept={accept}
                     onChange={handleFileSelect}
                     className="hidden"
                 />

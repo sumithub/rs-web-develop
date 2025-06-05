@@ -296,7 +296,7 @@ function ReviewAnalytics() {
                                     <Image unoptimized={true} src="/images/copy2.svg" alt="copy2" width={20} height={20} />
                                 </div>
                             </div>
-                            <div className="w-[30%]">
+                            <div className="w-[30%] shrink-0">
                                 <SecondaryButton
                                     title="Search Users"
                                     class_="py-[15px]! px-5! text-sm! font-normal!"
@@ -449,6 +449,7 @@ function ReviewAnalytics() {
                             </div>
                         </div>)}
                 </div>
+                <PaginationDemo />
             </div>}
 
         </AdminLayout>

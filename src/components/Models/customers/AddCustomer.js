@@ -149,7 +149,8 @@ function AddCustomer({ onClose, id }) {
         {type === "import" && <div className="mt-8">
             <ImportCustomer
                 activeStep={activeStep}
-                setActiveStep={setActiveStep} />
+                setActiveStep={setActiveStep}
+                onClose={onClose} />
         </div>}
     </Model>
 }
