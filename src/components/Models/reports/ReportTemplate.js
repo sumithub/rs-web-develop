@@ -9,7 +9,6 @@ import SelectForm from "../../form/SelectForm";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Checkbox from "../../form/Checkbox";
-import InputForm from "../../form/InputForm";
 import Image from "next/image";
 
 export default function ReportTemplate({ onClose, id, onSave }) {
@@ -45,7 +44,7 @@ export default function ReportTemplate({ onClose, id, onSave }) {
         }
     }
     return (
-        <Model onClose={onClose} title="Resend Report Email" modalClass="w-[50%]!">
+        <Model onClose={onClose} title="Report Template" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <SelectForm
@@ -80,7 +79,7 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                 <div className="mt-3.5 inline-block ">
                     <SecondaryButton
                         title="Add Custom Section"
-                        class_="text-xs! font-normal! py-3.5! px-2.5!"
+                        class_="text-sm! font-normal! py-2.5! px-2.5!"
                         onClick={onSave}
                     />
                 </div>
@@ -146,17 +145,17 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-[20%] shrink-0">
+                        <div className="w-[20%] mb-1 shrink-0">
                             <SecondaryButton title="Add" onClick={onSave}
-                                class_="py-4! px-2.5! text-sm font-normal!"
+                                class_="py-3! px-2.5! text-base! font-normal!"
                             />
                         </div>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-5 mt-[30px]">
-                    <CancelButton title="Delete Template" onClick={delete1} class_="text-lg! py-3!" />
-                    <SecondaryButton title="Save Changes" type="submit" disabled={sending} class_="text-lg! py-3!" />
+                    <CancelButton title="Delete Template" onClick={delete1} class_="text-lg! py-[9px]!" />
+                    <SecondaryButton title="Save Changes" type="submit" disabled={sending} class_="text-lg! py-[9px]!" />
                 </div>
             </form>
         </Model>
