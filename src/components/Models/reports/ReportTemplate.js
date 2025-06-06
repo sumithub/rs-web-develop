@@ -45,7 +45,7 @@ export default function ReportTemplate({ onClose, id, onSave }) {
         }
     }
     return (
-        <Model onClose={onClose} title="Resend Report Email" modalClass="w-[50%]!">
+        <Model onClose={onClose} title="Report Template" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <SelectForm
