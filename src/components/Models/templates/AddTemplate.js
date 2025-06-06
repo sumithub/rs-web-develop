@@ -11,7 +11,6 @@ import { useState } from 'react'
 import { getError, validEmailRgx } from '../../../../helper'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import DatePickerForm from '../../form/DatePickerForm'
 
 function AddTemplate({ onClose, id }) {
   const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm();
@@ -46,7 +45,6 @@ function AddTemplate({ onClose, id }) {
   let body = watch("body") || []
   return <Model onClose={onClose} title="Create Email Template" modalBodyClass='max-h-[85vh]'>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <HtmlEditor />
       <div className='flex items-start gap-4'>
         <div className='w-[60%]'>
           <div className='shadow-sm rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
@@ -94,12 +92,14 @@ function AddTemplate({ onClose, id }) {
               />
             </div>}
 
-            {/* <HtmlEditor label="Email Body"
+            <HtmlEditor
               value={body}
               onChange={(value) => {
                 clearErrors("body")
                 setValue("body", value)
-              }}
+              }} />
+            {/* <HtmlEditor label="Email Body"
+              
             >
 
               <div className='grid grid-cols-3 gap-4'>
@@ -152,11 +152,10 @@ function AddTemplate({ onClose, id }) {
             </div>
             <div className='p-5'>
               <div className='border border-border-color rounded-[10px] p-5 text-secondary text-sm mb-8 leading-normal'>
-                <div
-                  dangerouslySetInnerHTML={{ __html: serializeToHTML(body) }}
+                <div className='tiptap'
+                  dangerouslySetInnerHTML={{ __html: body }}
                 />
               </div>
-              <Image src="/images/template.png" alt='template' height={196} width={407} className='w-full mx-auto object-contain' />
             </div>
           </div>
         </div>

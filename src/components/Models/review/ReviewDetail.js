@@ -3,7 +3,6 @@ import Image from "next/image";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import Model from "../Model";
-import HtmlEditor from "../../../components/form/editor/HtmlEditor";
 import Link from "next/link";
 import SelectForm from "../../form/SelectForm";
 import { toast } from "react-toastify";
@@ -12,6 +11,7 @@ import { getError } from "../../../../helper";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import ReviewCard from "../../ReviewCard";
+import HtmlEditor from "../../form/HtmlEditor";
 
 export default function ReviewDetail({ onClose, onSave, id }) {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();

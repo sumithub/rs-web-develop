@@ -2,11 +2,11 @@ import Image from "next/image";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import Model from "../Model";
-import HtmlEditor from "../../../components/form/editor/HtmlEditor";
 import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import HtmlEditor from "../../form/HtmlEditor";
 
 export default function RequestUpdate({ onClose, onSave }) {
     const { handleSubmit } = useForm();
