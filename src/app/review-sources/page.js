@@ -60,7 +60,9 @@ export default function ReviewSources() {
                     onChange={(e) => {
                         setFilterBy(e.target.value)
                     }}
-                ></CustomSelectBox>
+                ><option value="filter 1">Filter 1</option>
+                    <option value="filter 2">Filter 2</option>
+                </CustomSelectBox>
             </div>
         </div>
         {loading ? <Loading /> : (<div>
@@ -81,7 +83,7 @@ export default function ReviewSources() {
                 </div>
             </div>
         </div >)}
-    </AdminLayout >
+    </AdminLayout>
     )
 }
 function ReviewCard({ status }) {
