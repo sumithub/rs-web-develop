@@ -38,7 +38,7 @@ function SelectedCustomers({ onClose, onSave }) {
     }
 
     return (
-        <Model onClose={onClose} title="Customer List" modalClass="w-[60%]!" >
+        <Model onClose={onClose} title="select from Customer List" modalClass="w-[60%]!" >
             <div className="flex items-center justify-between mb-3">
                 <Search placeholder="Search by Filter by name, email, phone" mainClass="w-[45%]!"
                     onSearch={(s) => {
@@ -107,7 +107,7 @@ function SelectedCustomers({ onClose, onSave }) {
                             <td>{e.email}</td>
                             <td>{e.phone}</td>
                             <td><Status status={e.status} /></td>
-                            <td>{e.status}</td>
+                            <td>{e.source}</td>
                             <td>{formatDate(e.date)}</td>
                         </tr>)}
                     </tbody>

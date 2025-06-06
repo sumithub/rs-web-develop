@@ -43,7 +43,7 @@ function Customers() {
 
     useEffect(() => {
         getCustomer()
-    }, [search, sortBy])
+    }, [search, sortBy, filterBy])
 
     const getCustomer = async () => {
         try {
@@ -105,7 +105,6 @@ function Customers() {
 
             {openDelete === "deleteCustomer" &&
                 <DeleteCustomer
-
                     onClose={() => {
                         setOpenDelete(false)
                     }}
@@ -131,7 +130,7 @@ function Customers() {
 
             <div>
                 <div className="flex justify-between w-full items-center mb-3">
-                    <div className='flex items-center gap-10 bg-white shadow-sm rounded-[10px] py-[15px] px-[25px]'>
+                    <div className='flex items-center gap-10 bg-white shadow-sm rounded-[10px] py-[15px] px-[25px] w-[43%]'>
                         <div onClick={() => {
                             setView("customer")
                         }} className={`${view === "customer" ? "text-primary font-semibold underline underline-offset-4" : "text-text3 font-normal"} cursor-pointer shrink-0`}>All Customers</div>
@@ -140,9 +139,8 @@ function Customers() {
                             setView("history")
                         }} className={`${view === "history" ? "text-primary font-semibold underline underline-offset-4" : "text-text3 font-normal"} cursor-pointer shrink-0`}>Customer List History</div>
                     </div>
-                    {view === "customer" && <div className='grid grid-cols-[2.4fr_0.5fr_0.7fr_1fr] gap-3 items-center'>
+                    {view === "customer" && <div className='flex gap-3 items-center justify-end w-full'>
                         <Search
-                            mainClass='w-full!'
                             placeholder="Search by Filter by name, email, phone"
                             onSearch={(s) => {
                                 setSearch(s)
@@ -150,7 +148,7 @@ function Customers() {
                         />
                         <CustomSelectBox
                             defaultOption="filters"
-                            class_='mt-0! w-32!'
+                            class_='mt-0!'
                             value={filterBy}
                             onChange={(e) => {
                                 setFilterBy(e.target.value)
@@ -160,10 +158,10 @@ function Customers() {
                             <option value="source: manual vs. imported">Source: Manual vs. Imported</option>
                         </CustomSelectBox>
 
-                        <button className="flex items-center text-xs justify-center gap-2 bg-primary border border-primary py-[10.5px] px-3 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50" onClick={() => { setOpenBoost(true) }}>
+                        <button className="flex items-center text-xs justify-center gap-2 bg-primary border border-primary py-[10.5px] px-3 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0" onClick={() => { setOpenBoost(true) }}>
                             <Image unoptimized={true} src="/images/flash.svg" alt="flash" height={16} width={16} />Boost</button>
 
-                        <button className="bg-primary border border-primary text-xs hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                        <button className="bg-primary border border-primary text-xs hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
                             onClick={() => { setOpen(true) }}>Add New Customer</button>
                     </div>}
 
