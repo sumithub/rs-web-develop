@@ -274,8 +274,8 @@ export default function Detail({ }) {
 
     const isAllPending = Object.values(cardStatuses).every(status => status === 'pending');
 
-    return <AdminLayout>
-
+    return <AdminLayout
+        cardClass="w-[70%]! relative h-[85vh] overflow-y-auto pt-0! scrollbar-none">
         {openModal &&
             <AddTemplate
                 onClose={() => {
@@ -324,13 +324,16 @@ export default function Detail({ }) {
             />
         }
 
-        <ProgressBar
-            currentStep={activeStep}
-            stepTitle1="Campaign Details"
-            stepTitle2="Customer Selection"
-            stepTitle3="Template Selection"
-            stepTitle4="Scheduling & Launch"
-        />
+        {/* Sticky Progress Bar */}
+        <div className="sticky top-0 z-10 bg-white pt-5">
+            <ProgressBar
+                currentStep={activeStep}
+                stepTitle1="Campaign Details"
+                stepTitle2="Customer Selection"
+                stepTitle3="Template Selection"
+                stepTitle4="Scheduling & Launch"
+            />
+        </div>
 
         <div>
             <div className="flex items-center justify-between mb-4">
