@@ -44,6 +44,7 @@ export default function CampaignDashboard() {
             <CustomSelectBox
                 class_="mt-0!"
                 defaultOption="Review Source"
+                multiSelect={true}
                 value={reviewSource}
                 onChange={(e) => {
                     setReviewSource(e.target.value)
@@ -61,11 +62,11 @@ export default function CampaignDashboard() {
                     setRating(e.target.value)
                 }}
                 multiSelect={true}>
-                <option value="1 star">1 Star & Up</option>
-                <option value="2 star">2 Star & Up</option>
-                <option value="3 star">3 Star & Up</option>
-                <option value="4 star">4 Star & Up</option>
-                <option value="5 star">5 Star & Up</option>
+                <option value="1 star">1 Star</option>
+                <option value="2 star">2 Star</option>
+                <option value="3 star">3 Star</option>
+                <option value="4 star">4 Star</option>
+                <option value="5 star">5 Star</option>
             </CustomSelectBox>
             <DateRange
                 onChange={(e) => { setDate(e) }} />

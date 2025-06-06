@@ -38,7 +38,7 @@ function SelectedCustomers({ onClose, onSave }) {
     }
 
     return (
-        <Model onClose={onClose} title="Customer List" modalClass="w-[60%]!" >
+        <Model onClose={onClose} title="select from Customer List" modalClass="w-[60%]!" >
             <div className="flex items-center justify-between mb-3">
                 <Search placeholder="Search by Filter by name, email, phone" mainClass="w-[45%]!"
                     onSearch={(s) => {
@@ -55,8 +55,12 @@ function SelectedCustomers({ onClose, onSave }) {
                         <option value="filter 1">Filter 1</option>
                         <option value="filter 2">Filter 2</option>
                     </CustomSelectBox>
-                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
-                        onClick={onSave}
+                    <SecondaryButton type="button" title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
+                        onClick={() => {
+                            if (onSave) {
+                                onSave()
+                            }
+                        }}
                     />
                 </div>
             </div>
@@ -107,7 +111,7 @@ function SelectedCustomers({ onClose, onSave }) {
                             <td>{e.email}</td>
                             <td>{e.phone}</td>
                             <td><Status status={e.status} /></td>
-                            <td>{e.status}</td>
+                            <td>{e.source}</td>
                             <td>{formatDate(e.date)}</td>
                         </tr>)}
                     </tbody>

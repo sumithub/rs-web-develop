@@ -75,12 +75,12 @@ function VerificationEmail() {
 
                     <div className='mt-5'>
                         <div className='flex gap-2'>
-                            <Image src="images/warning.svg" alt='warning' height={22} width={22} />
+                            <Image unoptimized={true} src="images/warning.svg" alt='warning' height={22} width={22} />
                             <div className='text-sm text-secondary font-medium capitalize'>please check your inbox(or spam folder) and click the verification link.</div>
                         </div>
 
                         <div className='flex gap-2 mt-2'>
-                            <Image src="images/warning.svg" alt='warning' height={22} width={22} />
+                            <Image unoptimized={true} src="images/warning.svg" alt='warning' height={22} width={22} />
                             <div className='text-sm text-secondary font-medium capitalize'>if you don't receive an email, wait 60 seconds before trying again.</div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@ function VerificationEmail() {
 
                     <div className='flex justify-center mt-5'>
                         <Link href="/login" className="flex gap-[15px]">
-                            <Image src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
+                            <Image unoptimized={true} src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
                             <h2 className='text-sm text-secondary'>Back To Login</h2>
                         </Link>
                     </div>

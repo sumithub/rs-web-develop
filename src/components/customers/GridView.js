@@ -70,7 +70,7 @@ export default function GridView() {
                             <Image src="/images/example.png" alt="example" width={38} height={38} />
                             <h2 className="text-base font-semibold">{e.title}</h2>
                         </div>
-                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]' onClick={() => { setOpenDownload(true) }}><span><Image src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
+                        <button className='text-xs font-medium bg-primary rounded-[10px] text-white px-[9.5px] py-[8.5px] flex items-center gap-[5px]' onClick={() => { setOpenDownload(true) }}><span><Image unoptimized={true} src="/images/document.svg" alt='document' width={18} height={18} /> </span> Download</button>
                     </div>
                     <div>
                         <div className='flex items-center justify-between pt-[15px]'>
@@ -87,8 +87,8 @@ export default function GridView() {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-[15px] pt-5'>
-                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
-                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenDelete(true) }}><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                        <button className='bg-primary/10 rounded-lg text-primary text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenRename(true) }}><span><Image unoptimized={true} src="/images/user4.svg" alt="user4" width={16} height={16} /></span> Rename</button>
+                        <button className='bg-danger/10 rounded-lg text-danger text-sm py-[10.5px] font-medium flex justify-center gap-2 items-center' onClick={() => { setOpenDelete(true) }}><span><Image unoptimized={true} src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     </div>
                 </div>)}
         </div>

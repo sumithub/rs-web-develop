@@ -1,7 +1,7 @@
 "use client"
 import "../../styles/progress-bar.css"
 
-export default function ProgressTopBar({ stepTitle1, stepTitle2, stepTitle3, stepTitle4, stepTitle5, currentStep }) {
+export default function ProgressTopBar({ stepTitle1, stepTitle2, stepTitle3, stepTitle4, stepTitle5, currentStep, class_ = "" }) {
     const step = currentStep
 
     const getStepStatus = (stepNumber) => {
@@ -23,7 +23,7 @@ export default function ProgressTopBar({ stepTitle1, stepTitle2, stepTitle3, ste
     ].filter(s => s.title)
 
     return (
-        <div className="flex justify-center items-center md:mb-10 mb-6">
+        <div className={`flex justify-center items-center md:mb-10 mb-6 ${class_}`}>
             <div className="flex items-center mb-7">
                 {steps.map((stepItem, index) => {
                     const stepStatus = getStepStatus(stepItem.number)

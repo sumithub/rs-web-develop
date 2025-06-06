@@ -3,7 +3,7 @@ import CancelButton from '../../common/CancelButton'
 import SecondaryButton from '../../common/SecondaryButton'
 import Model from '../Model'
 import Image from 'next/image'
-import HtmlEditor from "../../form/editor/HtmlEditor"
+import HtmlEditor from "../../form/HtmlEditor"
 import InputForm from '../../form/InputForm'
 import SelectForm from '../../form/SelectForm'
 import { useForm } from 'react-hook-form'
@@ -11,7 +11,6 @@ import { useState } from 'react'
 import { getError, validEmailRgx } from '../../../../helper'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import DatePickerForm from '../../form/DatePickerForm'
 
 function AddTemplate({ onClose, id }) {
   const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm();
@@ -93,12 +92,16 @@ function AddTemplate({ onClose, id }) {
               />
             </div>}
 
-            <HtmlEditor label="Email Body"
-              value={body}
-              onChange={(value) => {
-                clearErrors("body")
-                setValue("body", value)
-              }}
+            <div className='mt-5'>
+              <HtmlEditor
+                value={body}
+                onChange={(value) => {
+                  clearErrors("body")
+                  setValue("body", value)
+                }} />
+            </div>
+            {/* <HtmlEditor label="Email Body"
+              
             >
 
               <div className='grid grid-cols-3 gap-4'>
@@ -125,7 +128,7 @@ function AddTemplate({ onClose, id }) {
                   errors={errors}
                 />
               </div>
-            </HtmlEditor>
+            </HtmlEditor> */}
 
             {/* <div className="text-sm text-secondary font-medium capitalize mt-3 mb-2">email body</div>
           <textarea
@@ -151,11 +154,10 @@ function AddTemplate({ onClose, id }) {
             </div>
             <div className='p-5'>
               <div className='border border-border-color rounded-[10px] p-5 text-secondary text-sm mb-8 leading-normal'>
-                <div
-                  dangerouslySetInnerHTML={{ __html: serializeToHTML(body) }}
+                <div className='tiptap'
+                  dangerouslySetInnerHTML={{ __html: body }}
                 />
               </div>
-              <Image src="/images/template.png" alt='template' height={196} width={407} className='w-full mx-auto object-contain' />
             </div>
           </div>
         </div>

@@ -120,7 +120,7 @@ export default function ChangeUserRoles({ onClose }) {
                     </div>
 
                     <div className="flex items-center gap-2 my-5">
-                        <Image src="/images/warning.svg" alt="warning" height={22} width={22} />
+                        <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                         <div className="text-danger text-lg font-semibold capitalize">
                             The following users were removed because they are pending
                         </div>
@@ -141,7 +141,7 @@ export default function ChangeUserRoles({ onClose }) {
                     ))}
 
                     <div className="flex items-center gap-2 my-5">
-                        <Image src="/images/warning.svg" alt="warning" height={22} width={22} />
+                        <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                         <div className="text-danger text-lg font-semibold capitalize">
                             Role changes are only allowed for active users.
                         </div>

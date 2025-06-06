@@ -49,7 +49,7 @@ export default function ResendInvitations({ onClose }) {
 
                 <div>
                     <div className="flex items-center gap-2 my-5">
-                        <Image src="/images/warning.svg" alt="warning" height={22} width={22} />
+                        <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                         <div className="text-danger text-lg font-semibold capitalize">The following users were removed because they are active:</div>
                     </div>
                     <div className="flex items-center justify-between mt-5">
@@ -65,7 +65,7 @@ export default function ResendInvitations({ onClose }) {
 
                     <div className="grid grid-cols-2 gap-3 mt-5">
                         <CancelButton title="Cancel" onClick={onClose} />
-                        <SecondaryButton title="Confirm & resend" type="submit" disabled={sending}/>
+                        <SecondaryButton title="Confirm & resend" type="submit" disabled={sending} />
                     </div>
                 </div>
             </div>

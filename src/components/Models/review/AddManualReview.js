@@ -10,11 +10,11 @@ import { useState } from "react";
 import InputForm from "../../form/InputForm";
 import Rating from "../../form/Rating";
 import DatePickerForm from "../../form/DatePickerForm";
+import ImageUpload from "../../form/ImageUpload"
 
 export default function AddManualReview({ onClose, onSave, id }) {
-    const { register, handleSubmit, setValue, formState: { errors }, watch, clearErrors } = useForm();
+    const { register, handleSubmit, setValue, formState: { errors }, watch, clearErrors, trigger } = useForm();
     const [sending, setSending] = useState(false)
-    const [date, setDate] = useState("")
 
     const onSubmit = async (data) => {
         try {
@@ -48,11 +48,9 @@ export default function AddManualReview({ onClose, onSave, id }) {
                             errors={errors}
                             setValue={setValue}
                             watch={watch}
+                            clearErrors={clearErrors}
+                            trigger={trigger}
                         />
-                        {/* <InputForm label="Add Rating" isRequired={true}
-                            formProps={{ ...register("addRating", { required: true }) }}
-                            errors={errors}
-                            setValue={setValue} /> */}
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
@@ -60,6 +58,7 @@ export default function AddManualReview({ onClose, onSave, id }) {
                             formProps={{ ...register("firstName", { required: true }) }}
                             errors={errors}
                             setValue={setValue} />
+
                         <InputForm label="Last Name" isRequired={true}
                             formProps={{ ...register("lastName", { required: true }) }}
                             errors={errors}
@@ -67,9 +66,21 @@ export default function AddManualReview({ onClose, onSave, id }) {
                     </div>
 
                     <div>
-                        <InputForm label="Add Image" placeholder="Upload Image" isRequired={true}
-                            formProps={{ ...register("addImage", { required: true }) }}
+
+                        <ImageUpload
+                            label="Add Image"
+                            isRequired={true}
+                            formProps={{
+                                ...register("profileImage", {
+                                    required: true
+                                }),
+                                name: "profileImage"
+                            }}
                             errors={errors}
+                            setValue={setValue}
+                            watch={watch}
+                            clearErrors={clearErrors}
+                            trigger={trigger}
                         />
                     </div>
 
@@ -80,7 +91,7 @@ export default function AddManualReview({ onClose, onSave, id }) {
                     </div>
 
                     <div>
-                        <DatePickerForm label="Date" isRequired={true}
+                        <DatePickerForm label="Date" isRequired={true} icon={true}
                             formProps={{ ...register("date", { required: true }) }}
                             errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}
                         />

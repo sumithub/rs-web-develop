@@ -23,6 +23,8 @@ import ReviewDetails from "../../components/Models/review/ReviewDetails";
 import DeleteTemplate from "../../components/Models/review/DeleteTemplate";
 import DateRange from "../../components/form/DateRangePicker";
 import PaginationDemo from "../../components/Pagination";
+import ReviewNoData from "../../components/ReviewNoData"
+import SecondaryButton from "../../components/common/SecondaryButton";
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -108,14 +110,14 @@ export default function Review() {
             <div className="grid grid-cols-3 gap-4">
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
-                        <div className="text-secondary text-base font-semibold mb-3">Most mentioned keywords</div>
+                        <div className="text-secondary text-base font-semibold mb-3 capitalize">Most mentioned keywords</div>
                         <Chart />
                     </div>
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
-                        <div className="text-secondary text-base font-semibold mb-3">Average rating trend</div>
+                        <div className="text-secondary text-base font-semibold mb-3 capitalize">Average rating trend</div>
                         <div className="grid grid-cols-2 gap-5">
                             <div className="text-secondary">
                                 <div className="text-xs font-semibold">Total</div>
@@ -124,16 +126,17 @@ export default function Review() {
                                     <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
                                     <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
                                     <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
-                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />  <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                    <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
                                 </div>
 
                                 <div className="flex items-center justify-between mt-2">
                                     <div>
-                                        <div className="2xl:text-sm lg:text-[10px] mb-1.5">Ratings</div>
+                                        <div className="2xl:text-xs lg:text-[10px] mb-1.5">Ratings</div>
                                         <div className="2xl:text-base text-sm font-semibold">233</div>
                                     </div>
                                     <div>
-                                        <div className="2xl:text-sm lg:text-[10px] capitalize mb-1.5">Rating With Reviews</div>
+                                        <div className="2xl:text-xs lg:text-[10px] capitalize mb-1.5">Rating With Reviews</div>
                                         <div className="2xl:text-base text-sm font-semibold">217</div>
                                     </div>
                                 </div>
@@ -180,7 +183,7 @@ export default function Review() {
 
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
-                        <div className="text-secondary text-base font-semibold mb-3">Sentiment analysis</div>
+                        <div className="text-secondary text-base font-semibold mb-3 capitalize">Sentiment analysis</div>
                         <div>
                             <div>
                                 <ProgressBar completed={50} bgColor="#28A745" height="5px"
@@ -240,22 +243,6 @@ export default function Review() {
 
             <div className="bg-white min-h-[calc(100vh_-_85px)] rounded-[10px] mt-5 p-5">
                 <div className="flex justify-between items-center w-full gap-[15px]">
-                    {/* <div className="relative w-[32%]">
-                        <div className="w-full">
-                            <input type="text" className="block md:py-2 pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-dark border border-border2 rounded-lg focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
-
-                                value={search}
-                                onChange={(e) => {
-                                    setSearch(e.target.value)
-                                }}
-                                placeholder="Search by customer name, review content, or source." />
-
-                            <span className="absolute text-center top-1 right-0 py-2 px-2">
-                                <Image src="/images/search.svg" alt="search" height={14} width={14} unoptimized={true} />
-                            </span>
-                        </div>
-                    </div> */}
-
                     <Search
                         placeholder="Search by customer name, review content, or source."
                         onSearch={(s) => {
@@ -277,19 +264,11 @@ export default function Review() {
                             <option value="5 star">5 Star</option>
                         </CustomSelectBox>
 
-                        {/* <DatePicker
-                            icon={true}
-                            mainClass="mt-0!"
-                            value={date}
-                            dateFormat="dd/MM/yyyy"
-                            onChange={(e) => setDate(e)}
-                        /> */}
-
                         <DateRange class_="shrink-0!"
                             onChange={(e) => { setDate(e) }} />
 
                         <CustomSelectBox
-                            class_="mt-0! w-32!"
+                            class_="mt-0! w-40!"
                             defaultOption="Review Source"
                             value={reviewSource}
                             onChange={(e) => {
@@ -301,7 +280,7 @@ export default function Review() {
                         </CustomSelectBox>
 
                         <CustomSelectBox
-                            class_="mt-0! w-32!"
+                            class_="mt-0! w-[135px]!"
                             defaultOption="Review Status"
                             value={status}
                             onChange={(e) => {
@@ -312,12 +291,13 @@ export default function Review() {
                             <option value="flagged">Flagged</option>
                         </CustomSelectBox>
 
-                        <button className="cursor-pointer disabled:pointer-events-none">
+                        {/* <button className="cursor-pointer disabled:pointer-events-none shrink-0">
                             <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
-                        </button>
+                        </button> */}
 
-                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
-                            onClick={() => { setOpen(true) }}>Create Manual Review</button>
+                        <div className="shrink-0!">
+                            <SecondaryButton title="Create Manual Review" class_="text-xs! py-2.5!" onClick={() => { setOpen(true) }} />
+                        </div>
                     </div>
                 </div>
                 <div className="border border-border-color px-2 py-1 rounded-lg w-28 mt-5">
@@ -408,8 +388,9 @@ export default function Review() {
                         <PaginationDemo />
                     </div>}
                 </div>
-
             </div>
         </div>
+
+        {/* <ReviewNoData /> */}
     </AdminLayout>
 }

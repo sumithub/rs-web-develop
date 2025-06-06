@@ -167,13 +167,13 @@ export default function Carousel({ onClose, OnSave, id }) {
 
                     <div className="shadow-sm rounded-[15px]">
                         <div className="bg-primary/10 rounded-t-[15px] px-5 py-[18px] flex gap-2.5 items-center">
-                            <Image src="/images/eye1.svg" alt="eye1" width={22} height={22} />
+                            <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={22} height={22} />
                             <h2 className="text-lg font-semibold">Widget Preview</h2>
                         </div>
                         <div className="p-5">
                             <div className="border border-border2 rounded-[10px] p-5">
                                 <div className="flex gap-[15px]">
-                                    <Image src="/images/john-die2.png" alt="john-die2" width={71} height={71} className="" />
+                                    <Image unoptimized={true} src="/images/john-die2.png" alt="john-die2" width={71} height={71} className="" />
                                     <div>
                                         <h2 className="text-xl font-medium">John Die</h2>
                                         <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>

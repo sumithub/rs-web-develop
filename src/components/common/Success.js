@@ -5,7 +5,7 @@ import React from 'react'
 function Success({ message, link, buttonTitle, desc }) {
   return (<>
     <div>
-      <Image src="/images/success.svg" alt='success.svg' width={96} height={96} className='mx-auto' />
+      <Image unoptimized={true} src="/images/success.svg" alt='success.svg' width={96} height={96} className='mx-auto' />
       <h2 className='text-[34px] pt-2.5 leading-none font-semibold text-secondary capitalize text-center'>{message}</h2>
 
       {desc && <div className='text-sm text-secondary text-center pt-4'>{desc}</div>}

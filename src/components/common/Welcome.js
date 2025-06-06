@@ -46,6 +46,7 @@ const Item = ({ }) => {
         <div className="flex-1 flex items-center justify-center transition transition-all duration-700 py-5" >
             <div className="relative w-full px-14 h-full flex items-center justify-center">
                 <Image
+                    unoptimized={true}
                     src={`/images/image-1.svg`}
                     alt="image-1"
                     width={209}
@@ -61,6 +62,7 @@ const Item = ({ }) => {
                     className="z-10 rounded-[23px] object-contain max-h-[400px]"
                 />
                 <Image
+                    unoptimized={true}
                     src="/images/image-2.svg"
                     alt="image-2"
                     width={209}

@@ -55,7 +55,7 @@ export default function EditTemplate({ onClose, id }) {
                     /> */}
 
                     <DatePicker
-                        class_="py-3! border-[#F4F4F4]!"
+                        class_="py-3! border-input-border!"
                         labelClass="font-medium!"
                         label="Last Updated"
                         icon={true}

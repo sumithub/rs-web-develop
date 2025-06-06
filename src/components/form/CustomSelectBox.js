@@ -12,6 +12,7 @@ export default function CustomSelectBox({
     selectClass_ = "",
     class_ = '',
     labelClass = "",
+    paddingClass = "",
     multiSelect = false,
     placeholder = "Select options..."
 }) {
@@ -174,7 +175,7 @@ export default function CustomSelectBox({
                     {/* Default option for single select */}
                     {!multiSelect && defaultOption !== "" && (
                         <div
-                            className={`px-4 py-2 text-sm cursor-pointer capitalize ${value === "" ? 'bg-primary text-white' : 'hover:bg-dark text-text3'}`}
+                            className={`px-4 py-2 text-sm cursor-pointer capitalize ${paddingClass} ${value === "" ? 'bg-primary text-white' : 'hover:bg-dark text-text3'}`}
                             onClick={() => handleSelect("")}
                         >
                             {defaultOption || ``}

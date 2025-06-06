@@ -62,14 +62,14 @@ function ForgotPassword() {
                     />
                 </div>
                 {error && <div className='flex gap-2.5 justify-center mt-[15px]'>
-                    <Image src="/images/error.svg" alt='error.svg' width={15} height={14} />
+                    <Image unoptimized={true} src="/images/error.svg" alt='error.svg' width={15} height={14} />
                     <h2 className="text-xs text-danger capitalize">{error}</h2>
                 </div>}
                 <button type='submit' disabled={loading} className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full mt-5 py-3 rounded-[10px] border border-primary cursor-pointer">Send Reset Link</button>
             </form>
             <div className='flex justify-center mt-5'>
                 <Link href="/login" className="flex gap-[15px]">
-                    <Image src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
+                    <Image unoptimized={true} src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
                     <h2 className='text-sm text-secondary'>Back To Login</h2>
                 </Link>
             </div>

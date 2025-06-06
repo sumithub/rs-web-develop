@@ -58,7 +58,7 @@ const Pagination = ({ totalPages = 10, initialPage = 1 }) => {
     return (
         <div className="flex items-center justify-center space-x-1 my-4">
             {/* Previous button */}
-            <button
+            <button type='button'
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
                 className={`px-3 py-1 rounded-md cursor-pointer font-semibold ${currentPage === 1
@@ -76,7 +76,7 @@ const Pagination = ({ totalPages = 10, initialPage = 1 }) => {
                         {page}
                     </span>
                 ) : (
-                    <button
+                    <button type='button'
                         key={`page-${page}`}
                         onClick={() => handlePageChange(page)}
                         className={`w-8 h-8 flex items-center justify-center rounded-md cursor-pointer text-sm ${currentPage === page
@@ -90,7 +90,7 @@ const Pagination = ({ totalPages = 10, initialPage = 1 }) => {
             ))}
 
             {/* Next button */}
-            <button
+            <button type='button'
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
                 className={`px-3 py-1 rounded-md cursor-pointer font-semibold ${currentPage === totalPages

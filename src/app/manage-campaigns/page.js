@@ -216,17 +216,17 @@ function ManageCampaigns() {
                                 <div className='flex items-center gap-2'>
                                     <Link href="/manage-campaigns/detail">
                                         <button className='cursor-pointer mt-2'>
-                                            <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
                                     </Link>
                                     <button className='cursor-pointer' onClick={() => {
                                         navigator.clipboard.writeText("message")
                                         toast.success("Copied")
                                     }}>
-                                        <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                        <Image unoptimized={true} src="/images/copy.svg" alt='copy' height={28} width={28} />
                                     </button>
                                     <button className='cursor-pointer'>
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                        <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28}
                                             onClick={() => { setOpen(true) }} />
                                     </button>
                                 </div>

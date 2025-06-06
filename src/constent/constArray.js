@@ -62,10 +62,10 @@ export const templateList = [
 ]
 
 export const customerList = [
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, tag: "at risk", source: "Manual", date: "Jun 18,2024" },
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, tag: "at risk", source: "Manual", date: "Jun 18,2024" },
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, tag: "at risk", source: "Manual", date: "Jun 18,2024" },
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, tag: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
 ]
 
 export const selectedCustomers = [

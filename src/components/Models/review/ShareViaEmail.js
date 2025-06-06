@@ -52,16 +52,16 @@ export default function ShareViaEmail({ onClose, onSave }) {
                             <div className="flex gap-[7px] border border-primary/10 rounded-lg p-[5px] items-center">
                                 <Image src="/images/request.png" alt="request" width={17} height={17} />
                                 <h2 className="text-sm">Richard</h2>
-                                <Image src="/images/close-square.svg" alt="close-square" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/close-square.svg" alt="close-square" width={14} height={14} />
                             </div>
                             <div className="flex gap-[7px] border border-primary/10 rounded-lg p-[5px] items-center">
                                 <Image src="/images/request.png" alt="request" width={17} height={17} />
                                 <h2 className="text-sm">Sophia</h2>
-                                <Image src="/images/close-square.svg" alt="close-square" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/close-square.svg" alt="close-square" width={14} height={14} />
                             </div>
                         </div>
                         <div>
-                            <Image src="/images/copy2.svg" alt="copy2" width={20} height={20} />
+                            <Image unoptimized={true} src="/images/copy2.svg" alt="copy2" width={20} height={20} />
                         </div>
                     </div>
                     <div className="w-[30%]">

@@ -107,7 +107,7 @@ export default function Signin() {
                 </div>
                 <div>
                     {error && <div className='flex gap-2.5 justify-center mt-[15px]'>
-                        <Image src="/images/error.svg" alt='error.svg' width={15} height={14} />
+                        <Image unoptimized={true} src="/images/error.svg" alt='error.svg' width={15} height={14} />
                         <h2 className="text-xs text-danger capitalize">{error}</h2>
                     </div>}
                     <button

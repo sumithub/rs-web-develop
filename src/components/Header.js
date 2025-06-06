@@ -14,13 +14,13 @@ export default function Header({ headerChild, mainHeading = "Hello users!", subH
 
             <div className="flex items-center gap-4">
                 {headerChild && <div>{headerChild}</div>}
-                <div className="relative mt-3">
+                <div className="relative">
                     <span className="absolute z-20 -right-1/12 text-xs -top-1/28 bg-danger text-white h-3.5 w-3.5 flex items-center justify-center p-1 rounded-md">
                         <span className="text-[10px]">4</span>
                     </span>
                     <Image src="/images/notification.svg" alt="message" height={36} width={36} unoptimized={true} />
                 </div>
-                <Image src="/images/user3.jpg" alt="user" height={45} width={45} className="h-[45px] w-[45px] rounded-full flex items-center justify-center border border-gray-300 object-cover mt-3" />
+                <Image src="/images/user3.jpg" alt="user" height={45} width={45} className="h-[45px] w-[45px] rounded-full flex items-center justify-center border border-gray-300 object-cover" />
             </div>
         </div>
     </div>
