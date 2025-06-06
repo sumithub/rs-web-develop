@@ -70,7 +70,7 @@ export default function BoostRequest({ onClose, onSave }) {
                         }} />
                 }
                 <div>
-                    <div className="text-lg font-semibold">
+                    <div className="text-lg font-semibold capitalize">
                         Send review, referral, or feedback requests to one or more customers
                     </div>
 
@@ -98,8 +98,8 @@ export default function BoostRequest({ onClose, onSave }) {
                     </div>
 
                     <div className="flex items-center justify-between mt-4">
-                        <div className="">
-                            Choose From Existing Customer<span className="text-text3 text-lg"> (Optional)</span>
+                        <div className="text-lg font-semibold">
+                            Choose From Existing Customer<span className="text-text3 font-normal"> (Optional)</span>
                         </div>
                         <div className="">
                             <SecondaryButton title="select from customer List"

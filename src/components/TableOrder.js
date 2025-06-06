@@ -6,7 +6,7 @@ export default function TableOrder({ title, sortBy, setSortBy, field }) {
     return <div>
         <div className={`flex items-center gap-[6px] ${isCurrentField ? "text-primary" : "text-secondary text-sm font-semibold"}`}>
             <div>{title}</div>
-            <button className={`flex items-center justify-center cursor-pointer`}
+            <button type="button" className={`flex items-center justify-center cursor-pointer`}
                 onClick={() => {
                     if (!isCurrentField) {
                         // Start with descending sort

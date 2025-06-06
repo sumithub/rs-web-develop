@@ -139,6 +139,7 @@ function ReviewCard({ status }) {
                         <h2 className="text-base font-medium pt-2.5">Google Reviews</h2>
                         <hr className="border border-secondary/5 my-[15px]" />
                         {isConnected && (<InputForm
+                            disabled={sending}
                             label="URL"
                             placeholder="https//www.google.com"
                             hideOptional={true}
