@@ -92,12 +92,14 @@ function AddTemplate({ onClose, id }) {
               />
             </div>}
 
-            <HtmlEditor
-              value={body}
-              onChange={(value) => {
-                clearErrors("body")
-                setValue("body", value)
-              }} />
+            <div className='mt-5'>
+              <HtmlEditor
+                value={body}
+                onChange={(value) => {
+                  clearErrors("body")
+                  setValue("body", value)
+                }} />
+            </div>
             {/* <HtmlEditor label="Email Body"
               
             >
