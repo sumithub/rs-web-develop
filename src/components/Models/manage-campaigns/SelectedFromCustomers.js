@@ -55,8 +55,12 @@ function SelectedCustomers({ onClose, onSave }) {
                         <option value="filter 1">Filter 1</option>
                         <option value="filter 2">Filter 2</option>
                     </CustomSelectBox>
-                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
-                        onClick={onSave}
+                    <SecondaryButton type="button" title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
+                        onClick={() => {
+                            if (onSave) {
+                                onSave()
+                            }
+                        }}
                     />
                 </div>
             </div>
