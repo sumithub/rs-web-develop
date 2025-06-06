@@ -10,21 +10,39 @@ import Model from "../Model";
 import TemplateList from "./TemplateList";
 import SelectedCustomers from "../manage-campaigns/SelectedFromCustomers";
 import { toast } from "react-toastify";
-import { getError } from "../../../../helper";
+import { getError, validEmailRgx } from "../../../../helper";
 import { useForm } from "react-hook-form";
 import PhoneForm from "../../form/PhoneForm";
 import AddCustomer from "../customers/AddCustomer";
 import Image from "next/image";
+import axios from "axios";
+import InputForm from "../../form/InputForm";
+import SelectForm from "../../form/SelectForm";
 
-export default function BoostRequest({ onClose, onSave }) {
-    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
+export default function BoostRequest({ onClose, onSave, id }) {
+    const {
+        register,
+        setValue,
+        watch,
+        clearErrors,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
     const [sending, setSending] = useState(false)
     const [openTemplate, setOpenTemplate] = useState(false)
     const [openSelect, setOpenSelect] = useState(false)
     const [open, setOpen] = useState(false)
 
-    const onSubmit = async () => {
+    const onSubmit = async (data) => {
         try {
+            setSending(true)
+            let res = null
+
+            if (id !== "add") {
+                res = await axios.put("/api", data)
+            } else {
+                res = await axios.post("/api", data)
+            }
             toast.success("Request Send Successfully")
             setSending(false)
             onClose()
@@ -82,19 +100,33 @@ export default function BoostRequest({ onClose, onSave }) {
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
-                        <Input label="Name" isRequired={true} />
-                        <Input label="Email" isRequired={true} />
+                        <InputForm label="Name" isRequired={true}
+                            formProps={{ ...register("name", { required: true }) }}
+                            errors={errors}
+                            clearErrors={clearErrors} />
+                        <InputForm
+                            label="Email"
+                            isRequired={true}
+                            formProps={{
+                                ...register("email", {
+                                    required: true,
+                                    pattern: {
+                                        value: validEmailRgx,
+                                        message: "Incorrect Email"
+                                    }
+                                })
+                            }}
+                            errors={errors} />
                     </div>
 
                     <div>
-                        <PhoneForm label="Phone Number"
-                            placeholder="Enter phone number"
+                        <PhoneForm
+                            label="Phone Number"
                             isRequired={true}
-                            formProps={{ ...register("primaryPhone", { required: true }) }}
+                            formProps={{ ...register("phoneNumber", { required: true }) }}
                             errors={errors}
-                            clearErrors={clearErrors}
                             setValue={setValue}
-                            watch={watch} />
+                        />
                     </div>
 
                     <div className="flex items-center justify-between mt-4">
@@ -109,12 +141,12 @@ export default function BoostRequest({ onClose, onSave }) {
                     </div>
 
                     <div>
-                        <Select defaultOption="Default Campaign" label="Choose Campaign"
+                        <SelectForm defaultOption="Default Campaign" label="Choose Campaign"
                             labelClass="mb-2.5!"
                             selectClass_="py-2.5! px-2.5!"
                         >
-                            <option>1</option>
-                        </Select>
+                            <option value={1}>1</option>
+                        </SelectForm>
                         <div className="mt-2.5 flex gap-2.5 items-center">
                             <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                             <h2 className="text-sm font-medium capitalize">customer will be added to this campaign for automated follow-ups</h2>
@@ -169,10 +201,10 @@ export default function BoostRequest({ onClose, onSave }) {
                                 <h3 className="text-text3 text-xs">Lorem Ipsum..</h3>
                             </div>
                             <div className="flex gap-2.5">
-                                <button className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5">
+                                <button className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
                                     <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={12} height={12} />
                                     Preview</button>
-                                <button className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5">
+                                <button className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
                                     <Image unoptimized={true} src="/images/edit2.svg" alt="edit2" width={12} height={12} />
                                     Edit</button>
                             </div>
@@ -193,10 +225,10 @@ export default function BoostRequest({ onClose, onSave }) {
                                 <h3 className="text-text3 text-xs">Lorem Ipsum..</h3>
                             </div>
                             <div className="flex gap-2.5">
-                                <button className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5">
+                                <button className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
                                     <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={12} height={12} />
                                     Preview</button>
-                                <button className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5">
+                                <button className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
                                     <Image unoptimized={true} src="/images/edit2.svg" alt="edit2" width={12} height={12} />
                                     Edit</button>
                             </div>
@@ -254,7 +286,9 @@ export default function BoostRequest({ onClose, onSave }) {
                                 </div>
                             </div>
                         </div>
-                        <button className="border border-primary bg-primary py-3 mt-[30px] hover:text-primary hover:bg-white w-full rounded-[10px] text-lg font-medium text-white">Send Now</button>
+                        <button className="border border-primary bg-primary py-3 mt-[30px] hover:text-primary hover:bg-white w-full rounded-[10px] text-lg font-medium text-white"
+                            type="submit"
+                            disabled={sending}>Send Now</button>
                     </div>
                 </div>
             </form>
