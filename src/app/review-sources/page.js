@@ -141,7 +141,7 @@ function ReviewCard({ status }) {
                         {isConnected && (<InputForm
                             disabled={sending}
                             label="URL"
-                            placeholder="https//www.google.com"
+                            placeholder="Add URL"
                             hideOptional={true}
                             isRequired={true}
                             icon="/images/add-link.svg"
