@@ -80,7 +80,7 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                 <div className="mt-3.5 inline-block ">
                     <SecondaryButton
                         title="Add Custom Section"
-                        class_="text-xs! font-normal! py-3.5! px-2.5!"
+                        class_="text-sm! font-normal! py-2.5! px-2.5!"
                         onClick={onSave}
                     />
                 </div>
@@ -146,9 +146,9 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-[20%] shrink-0">
+                        <div className="w-[20%] mb-1 shrink-0">
                             <SecondaryButton title="Add" onClick={onSave}
-                                class_="py-4! px-2.5! text-sm font-normal!"
+                                class_="py-3! px-2.5! text-base! font-normal!"
                             />
                         </div>
                     </div>
