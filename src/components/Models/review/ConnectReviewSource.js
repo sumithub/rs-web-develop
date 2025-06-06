@@ -7,11 +7,11 @@ import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import Input from "../../form/Input";
 import Image from "next/image";
+import InputForm from "../../form/InputForm";
 
 export default function ConnectReviewSource({ onClose, onSave, id }) {
-    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -40,13 +40,16 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
                     <h2 className="text-lg font-semibold">Connect to Yelp</h2>
                     <Image unoptimized={true} src="/images/yelp-logo.svg" alt="yelp-logo" width={116} height={47} className="pt-2.5" />
                 </div>
-                <Input
+                <InputForm
                     label="Business Profile URL"
                     placeholder="https//www.google.com"
                     hideOptional={true}
                     isRequired={true}
                     icon="/images/add-link.svg"
                     infoIcon="/images/url.svg"
+                    formProps={{ ...register("url", { required: true }) }}
+                    errors={errors}
+                    clearErrors={clearErrors}
                 />
                 <div className="flex items-center gap-2.5 bg-danger/10 p-2.5 rounded-[7px] mt-[15px]">
                     <Image unoptimized={true} src="/images/warning.svg" alt="warning" width={22} height={22} className="" />

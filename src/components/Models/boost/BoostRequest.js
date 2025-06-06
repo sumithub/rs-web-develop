@@ -55,7 +55,7 @@ export default function BoostRequest({ onClose, onSave }) {
                         }}
 
                         onSave={() => {
-                            setOpenSelect(true)
+                            setOpenSelect(false)
                         }} />
                 }
 
@@ -78,7 +78,7 @@ export default function BoostRequest({ onClose, onSave }) {
                         <Search placeholder="Search by email, name or phone number" mainClass="w-3/5!" />
                         <SecondaryButton title="Add New Customer"
                             class_="text-sm!"
-                            onClick={() => { setOpenSelect(true) }} />
+                            onClick={() => { setOpen(true) }} />
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
@@ -101,7 +101,7 @@ export default function BoostRequest({ onClose, onSave }) {
                         <div className="text-lg font-semibold">
                             Choose From Existing Customer<span className="text-text3 font-normal"> (Optional)</span>
                         </div>
-                        <div className="">
+                        <div>
                             <SecondaryButton title="select from customer List"
                                 class_="text-sm!"
                                 onClick={() => { setOpenSelect(true) }} />

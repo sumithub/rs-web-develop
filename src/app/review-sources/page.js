@@ -7,12 +7,11 @@ import Status from "../../components/Status";
 import { useEffect, useState } from "react";
 import DisconnectReviewSourceConfirmation from "../../components/Models/review/DisconnectReviewSourceConfirmation";
 import ConnectReviewSource from "../../components/Models/review/ConnectReviewSource";
-import InputForm from "../../components/form/InputForm";
 import axios from "axios";
 import { getError } from "../../../helper";
-import { useForm } from "react-hook-form";
 import Loading from "../../components/Loading";
 import { toast } from "react-toastify";
+import Input from "../../components/form/Input";
 
 export default function ReviewSources() {
     const [loading, setLoading] = useState(true)
@@ -89,114 +88,89 @@ function ReviewCard({ status }) {
     const [openDisconnect, setOpenDisconnect] = useState(false)
     const [openModal, setOpenModal] = useState(false)
     const isConnected = status !== "connected";
-    const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
-    const [sending, setSending] = useState(false)
-
-    const onSubmit = async (data) => {
-        try {
-            setSending(true)
-            let res = null
-
-            if (id !== "add") {
-                res = await axios.put("/api", data)
-            } else {
-                res = await axios.post("/api", data)
-            }
-            setSending(false)
-            onClose()
-        } catch (error) {
-            setSending(false)
-        }
-    }
 
     return (
-        <>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="p-[15px] shadow-sm rounded-[15px]">
-                    {openDisconnect &&
-                        <DisconnectReviewSourceConfirmation
-                            onClose={() => {
-                                setOpenDisconnect(false)
-                            }}
 
-                            onSave={() => {
-                                setOpenDisconnect(true)
-                            }} />
-                    }
+        <div className="p-[15px] shadow-sm rounded-[15px]">
+            {openDisconnect &&
+                <DisconnectReviewSourceConfirmation
+                    onClose={() => {
+                        setOpenDisconnect(false)
+                    }}
 
-                    {openModal &&
-                        <ConnectReviewSource
-                            onClose={() => {
-                                setOpenModal(false)
-                            }}
-                        />
-                    }
-                    <div className="flex items-start justify-between">
-                        <Image unoptimized={true} src="/images/google2.svg" alt="google2" width={87} height={36} />
-                        <Status status={isConnected ? "connected" : "not connected"} />
+                    onSave={() => {
+                        setOpenDisconnect(true)
+                    }} />
+            }
+
+            {openModal &&
+                <ConnectReviewSource
+                    onClose={() => {
+                        setOpenModal(false)
+                    }}
+                />
+            }
+            <div className="flex items-start justify-between">
+                <Image unoptimized={true} src="/images/google2.svg" alt="google2" width={87} height={36} />
+                <Status status={isConnected ? "connected" : "not connected"} />
+            </div>
+            <div>
+                <h2 className="text-base font-medium pt-2.5">Google Reviews</h2>
+                <hr className="border border-secondary/5 my-[15px]" />
+                {isConnected && (<Input
+                    label="URL"
+                    placeholder="Add URL"
+                    hideOptional={true}
+                    isRequired={true}
+                    infoIcon="/images/url.svg"
+                    inputClass="p-2.5!"
+                    icon="/images/add-link.svg"
+                />)}
+                {!isConnected && (<div className="flex items-center gap-2.5 bg-danger/10 p-2.5 rounded-[7px] mt-[15px]">
+                    <Image unoptimized={true} src="/images/warning.svg" alt="warning" width={22} height={22} className="" />
+                    <h2 className="text-sm">You Are not Connected to Google.</h2>
+                </div>)}
+            </div>
+            <div >
+                {isConnected ? (
+                    <div className="flex gap-4 mt-[25px]">
+                        <button
+                            className="text-lg leading-none w-full font-medium bg-danger border border-danger py-3 rounded-[10px] text-white"
+                            onClick={() => setOpenDisconnect(true)}
+                        >
+                            Disconnect
+                        </button>
+                        <button onClick={() => setOpenModal(true)}>
+                            <Image
+                                unoptimized={true}
+                                src="/images/edit.svg"
+                                alt="Edit connection"
+                                width={46}
+                                height={46}
+                            />
+                        </button>
                     </div>
-                    <div>
-                        <h2 className="text-base font-medium pt-2.5">Google Reviews</h2>
-                        <hr className="border border-secondary/5 my-[15px]" />
-                        {isConnected && (<InputForm
-                            disabled={sending}
-                            label="URL"
-                            placeholder="Add URL"
-                            hideOptional={true}
-                            isRequired={true}
-                            icon="/images/add-link.svg"
-                            infoIcon="/images/url.svg"
-                            inputClass="p-2.5!"
-                            formProps={{ ...register("url", { required: true }) }}
-                            errors={errors}
-                            clearErrors={clearErrors}
-                        />)}
-                        {!isConnected && (<div className="flex items-center gap-2.5 bg-danger/10 p-2.5 rounded-[7px] mt-[15px]">
-                            <Image unoptimized={true} src="/images/warning.svg" alt="warning" width={22} height={22} className="" />
-                            <h2 className="text-sm">You Are not Connected to Google.</h2>
-                        </div>)}
+                ) : (
+                    <div className="flex gap-4 mt-[25px]">
+                        <button
+                            className="text-lg leading-none w-full font-medium bg-primary border border-primary hover:text-primary hover:bg-white py-3 rounded-[10px] text-white"
+                            onClick={() => setOpenModal(true)}
+                        >
+                            Connect
+                        </button>
+                        <button onClick={() => setOpenModal(true)}>
+                            <Image
+                                unoptimized={true}
+                                src="/images/edit.svg"
+                                alt="Edit connection"
+                                width={46}
+                                height={46}
+                            />
+                        </button>
                     </div>
-                    <div >
-                        {isConnected ? (
-                            <div className="flex gap-4 mt-[25px]">
-                                <button
-                                    className="text-lg leading-none w-full font-medium bg-danger border border-danger py-3 rounded-[10px] text-white"
-                                    onClick={() => setOpenDisconnect(true)}
-                                >
-                                    Disconnect
-                                </button>
-                                <button onClick={() => setOpenModal(true)}>
-                                    <Image
-                                        unoptimized={true}
-                                        src="/images/edit.svg"
-                                        alt="Edit connection"
-                                        width={46}
-                                        height={46}
-                                    />
-                                </button>
-                            </div>
-                        ) : (
-                            <div className="flex gap-4 mt-[25px]">
-                                <button
-                                    className="text-lg leading-none w-full font-medium bg-primary border border-primary hover:text-primary hover:bg-white py-3 rounded-[10px] text-white"
-                                    onClick={() => setOpenModal(true)}
-                                >
-                                    Connect
-                                </button>
-                                <button onClick={() => setOpenModal(true)}>
-                                    <Image
-                                        unoptimized={true}
-                                        src="/images/edit.svg"
-                                        alt="Edit connection"
-                                        width={46}
-                                        height={46}
-                                    />
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                </div >
-            </form>
-        </>
+                )}
+            </div>
+        </div >
+
     )
 }
