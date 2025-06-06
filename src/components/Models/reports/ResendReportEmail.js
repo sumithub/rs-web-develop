@@ -35,80 +35,64 @@ export default function ResendReportEmail({ onClose, id, onSave }) {
         }
     }
     return (
-        <Model onClose={onClose} title="Resend Report Email" modalClass="w-[60%]!">
+        <Model onClose={onClose} title="Resend Report Email" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid grid-cols-[_1fr_auto]">
-                    <div className="font-thin">
-                        Report
-                    </div>
-
-                    <div >
-                        Monthly Review Report
-                    </div>
+                <div className="flex justify-between">
+                    <h2 className="text-base text-text3">Report</h2>
+                    <h2 className="text-base font-medium">Monthly Review Report</h2>
                 </div>
-                <hr className="border-t border-border-color mt-3" />
-
-                <div className="grid grid-cols-[_1fr_auto] mt-3">
-                    <div className="font-thin">
-                        Client (Optional)
-                    </div>
-
-                    <div>
-                        ABC Corp
-                    </div>
+                <hr className="border-t border-secondary/5 my-3.5" />
+                <div className="flex justify-between">
+                    <h2 className="text-base text-text3">Client (Optional)</h2>
+                    <h2 className="text-base font-medium">ABC Corp</h2>
                 </div>
-                <hr className="border-t border-border-color mt-3" />
-
-                <div className="grid grid-cols-[_1fr_auto] mt-3">
-                    <div className="font-thin">
-                        Report Date
-                    </div>
-
-                    <div>
-                        Feb 28, 2025
-                    </div>
+                <hr className="border-t border-secondary/5 my-3.5" />
+                <div className="flex justify-between">
+                    <h2 className="text-base text-text3">Report Date</h2>
+                    <h2 className="text-base font-medium">Feb 28, 2025</h2>
                 </div>
-                <hr className="border-t border-border-color mt-3" />
-
-                <div className="grid grid-cols-[_1fr_auto] mt-3">
-                    <div className="font-thin">
-                        Email (Optional)
-                    </div>
-
-                    <div>
-                        john@email.com
-                    </div>
+                <hr className="border-t border-secondary/5 my-3.5" />
+                <div className="flex justify-between">
+                    <h2 className="text-base text-text3">Email (Optional)</h2>
+                    <h2 className="text-base font-medium">john@email.com</h2>
                 </div>
-
-                <div className="flex gap-3 mt-3">
+                <div className="flex items-center gap-2.5 mt-3.5">
                     <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
-                    <div>
-                        Failed to Deliver (Lisa)
+                    <h2 className="text-sm font-medium">Failed to Deliver (Lisa)</h2>
+                </div>
+                <div className="mt-3.5">
+                    <h2 className="text-sm">Resend to Existing Recipients?</h2>
+                    <div className="flex gap-5 pt-5">
+                        <Radio label="Yes" class_="mt-0!" />
+                        <Radio label="No" class_="mt-0!" />
                     </div>
                 </div>
 
-                <div className="mt-3">
-                    <div>
-                        Resend to Existing Recipients?
+                <div className="flex items-end gap-3.5 pt-3.5">
+                    <div className="w-full">
+                        <h2 className="text-sm pb-2.5 font-medium">Add Additional Recipients<span className="font-normal text-text3">(Optional)</span></h2>
+                        <div className="w-full border border-primary/10 rounded-lg p-2.5 flex justify-between items-center">
+                            <div className="flex gap-[15px]">
+                                <div className="flex gap-[7px] border border-primary/10 rounded-lg p-[5px] items-center">
+                                    <Image src="/images/request.png" alt="request" width={17} height={17} />
+                                    <h2 className="text-sm">Richard</h2>
+                                    <Image unoptimized={true} src="/images/close-square.svg" alt="close-square" width={14} height={14} />
+                                </div>
+                                <div className="flex gap-[7px] border border-primary/10 rounded-lg p-[5px] items-center">
+                                    <Image src="/images/request.png" alt="request" width={17} height={17} />
+                                    <h2 className="text-sm">Sophia</h2>
+                                    <Image unoptimized={true} src="/images/close-square.svg" alt="close-square" width={14} height={14} />
+                                </div>
+                            </div>
+                            <div>
+                                <Image unoptimized={true} src="/images/copy2.svg" alt="copy2" width={20} height={20} />
+                            </div>
+                        </div>
                     </div>
-
-                    <div className="flex gap-3">
-                        <Radio label="Yes" />
-                        <Radio label="No" />
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-[_1fr_auto] gap-3 mt-3">
-                    <InputForm
-                        label="Add Additional Recipients"
-                        class_="mt-0! w-full!"
-                        icon="/images/copy2.svg"
-                        formProps={{ ...register("addAdditionalRecipients", { required: false }) }}
-                        errors={errors}
-                    />
-
-                    <div className="mt-6.5">
-                        <SecondaryButton title="Add" onClick={onSave} />
+                    <div className="w-[20%] shrink-0">
+                        <SecondaryButton title="Add" onClick={onSave}
+                            class_="py-4! px-2.5! text-sm font-normal!"
+                        />
                     </div>
                 </div>
 
@@ -116,16 +100,17 @@ export default function ResendReportEmail({ onClose, id, onSave }) {
                     <InputForm
                         label="Add Custom Message"
                         class_="mt-0! w-full!"
-                        isTextArea={true}
+                        isTextArea={true} inputClass="mt-2.5"
                         formProps={{ ...register("addCustomMessage", { required: false }) }}
                         errors={errors}
+                        rows={5}
                         placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
                     />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 mt-5">
-                    <CancelButton title="Cancel" onClick={onClose} />
-                    <SecondaryButton title="Send Report Again" type="submit" disabled={sending} />
+                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg! py-3! font-normal!" />
+                    <SecondaryButton title="Send Report Again" type="submit" disabled={sending} class_="text-lg! py-3! font-normal!" />
                 </div>
             </form>
         </Model >

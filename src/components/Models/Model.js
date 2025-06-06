@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
-export default function Model({ id = "", showHeader = true, customHeader = false, onClose, children, closeButton = true, closeButton2 = false, title, modalBodyClass = "", modalClass = "", modelHeaderClass = "" }) {
+export default function Model({ id = "", showHeader = true, customHeader = false, onClose, boostIcon = false, children, closeButton = true, closeButton2 = false, title, modalBodyClass = "", modalClass = "", modelHeaderClass = "" }) {
     const ref = useRef(null);
     useEffect(() => {
         document.addEventListener('keydown', (event) => {
@@ -45,7 +45,9 @@ export default function Model({ id = "", showHeader = true, customHeader = false
                 <div ref={ref} className={`${modalClass} h-full relative transform overflow-y-hidden rounded-[10px] bg-white text-left shadow-xl transition-all md:w-full w-[90%] 2xl:max-w-7xl xl:max-w-[85%] max-w-[90%]`}>
 
                     {showHeader ? <div className={`flex justify-between items-center rounded-t-[10px] z-50 md:px-6 px-3 py-4 sticky top-0 bg-[#6FC3FF1a] ${modelHeaderClass}`}>
-                        <p className="capitalize font-semibold text-lg">{title || ""}</p>
+                        <div className="flex gap-2.5">
+                            {boostIcon && <Image unoptimized={true} src="/images/flash1.svg" alt="flash1" width={20} height={20} />}
+                            <p className="capitalize font-semibold text-lg">{title || ""}</p></div>
                         {closeButton && <div onClick={() => { onClose() }} className="cursor-pointer">
                             <Image src="/images/close1.svg" alt="close" height={24} width={24} unoptimized={true} />
                         </div>}

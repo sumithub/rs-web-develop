@@ -34,7 +34,7 @@ export default function BoostRequest({ onClose, onSave }) {
         }
     }
     return (
-        <Model onClose={onClose} title="Boost Request" modalClass="w-1/2!">
+        <Model onClose={onClose} title="Boost Request" modalClass="w-1/2!" boostIcon={true}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {openTemplate &&
                     <TemplateList
