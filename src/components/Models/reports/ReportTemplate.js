@@ -9,7 +9,6 @@ import SelectForm from "../../form/SelectForm";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Checkbox from "../../form/Checkbox";
-import InputForm from "../../form/InputForm";
 import Image from "next/image";
 
 export default function ReportTemplate({ onClose, id, onSave }) {
@@ -155,8 +154,8 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-5 mt-[30px]">
-                    <CancelButton title="Delete Template" onClick={delete1} class_="text-lg! py-3!" />
-                    <SecondaryButton title="Save Changes" type="submit" disabled={sending} class_="text-lg! py-3!" />
+                    <CancelButton title="Delete Template" onClick={delete1} class_="text-lg! py-[9px]!" />
+                    <SecondaryButton title="Save Changes" type="submit" disabled={sending} class_="text-lg! py-[9px]!" />
                 </div>
             </form>
         </Model>

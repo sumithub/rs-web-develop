@@ -140,7 +140,7 @@ export default function ReviewWidgets() {
                 <CancelButton
                     title="Grid Review Widget"
                     class_="mt-5! bg-white border-primary text-primary! py-3 rounded-[10px] hover:bg-primary! hover:text-white!"
-                    onClick={() => handleOpenModal("Grid Widget")}
+                    onClick={() => handleOpenModal("GridWidget")}
                 />
             </div>
 
@@ -169,7 +169,7 @@ export default function ReviewWidgets() {
                 <CancelButton
                     title="Testimonial Card Widget"
                     class_="mt-5! bg-white border-primary text-primary! py-3 rounded-[10px] hover:bg-primary! hover:text-white!"
-                    onClick={() => handleOpenModal("Testimonial Widget")}
+                    onClick={() => handleOpenModal("TestimonialWidget")}
                 />
             </div>
 
@@ -198,7 +198,7 @@ export default function ReviewWidgets() {
                 <CancelButton
                     title="Floating Review"
                     class_="mt-5! bg-white border-primary text-primary! py-3 rounded-[10px] hover:bg-primary! hover:text-white!"
-                    onClick={() => handleOpenModal("Floating Button Widget")}
+                    onClick={() => handleOpenModal("FloatingButtonWidget")}
                 />
             </div>
 
@@ -305,7 +305,7 @@ export default function ReviewWidgets() {
                 <CancelButton
                     title="Star Rating Badge"
                     class_="mt-5! bg-white border-primary text-primary! py-3 rounded-[10px] hover:bg-primary! hover:text-white!"
-                    onClick={() => handleOpenModal("Star Badge Widget")}
+                    onClick={() => handleOpenModal("StarBadgeWidget")}
                 />
 
             </div>
