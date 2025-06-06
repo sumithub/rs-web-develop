@@ -161,10 +161,23 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         }
     };
 
+    // const handleBack = () => {
+    //     if (tab > 1) {
+    //         setTab(tab - 1);
+    //         setActiveStep(activeStep - 1);
+    //     } else if (onBack) {
+    //         onBack();
+    //     }
+    // };
+
+
     const handleBack = () => {
         if (tab > 1) {
             setTab(tab - 1);
             setActiveStep(activeStep - 1);
+        } else if (tab === 1) {
+            // Close the modal when on first tab
+            onClose();
         } else if (onBack) {
             onBack();
         }
