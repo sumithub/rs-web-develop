@@ -7,10 +7,8 @@ import Status from "../../components/Status";
 import { useEffect, useState } from "react";
 import DisconnectReviewSourceConfirmation from "../../components/Models/review/DisconnectReviewSourceConfirmation";
 import ConnectReviewSource from "../../components/Models/review/ConnectReviewSource";
-import InputForm from "../../components/form/InputForm";
 import axios from "axios";
 import { getError } from "../../../helper";
-import { useForm } from "react-hook-form";
 import Loading from "../../components/Loading";
 import { toast } from "react-toastify";
 import Input from "../../components/form/Input";
@@ -90,25 +88,6 @@ function ReviewCard({ status }) {
     const [openDisconnect, setOpenDisconnect] = useState(false)
     const [openModal, setOpenModal] = useState(false)
     const isConnected = status !== "connected";
-    const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
-    const [sending, setSending] = useState(false)
-
-    const onSubmit = async (data) => {
-        try {
-            setSending(true)
-            let res = null
-
-            if (id !== "add") {
-                res = await axios.put("/api", data)
-            } else {
-                res = await axios.post("/api", data)
-            }
-            setSending(false)
-            onClose()
-        } catch (error) {
-            setSending(false)
-        }
-    }
 
     return (
 
@@ -139,16 +118,12 @@ function ReviewCard({ status }) {
                 <h2 className="text-base font-medium pt-2.5">Google Reviews</h2>
                 <hr className="border border-secondary/5 my-[15px]" />
                 {isConnected && (<Input
-                    disabled={sending}
                     label="URL"
                     placeholder="Add URL"
                     hideOptional={true}
                     isRequired={true}
                     infoIcon="/images/url.svg"
                     inputClass="p-2.5!"
-                    formProps={{ ...register("url", { required: true }) }}
-                    errors={errors}
-                    clearErrors={clearErrors}
                     icon="/images/add-link.svg"
                 />)}
                 {!isConnected && (<div className="flex items-center gap-2.5 bg-danger/10 p-2.5 rounded-[7px] mt-[15px]">
