@@ -95,7 +95,7 @@ function ReviewCard({ status }) {
                 <hr className="border border-secondary/5 my-[15px]" />
                 <Input
                     label="URL"
-                    placeholder="https//www.google.com"
+                    placeholder="Add URL"
                     hideOptional={true}
                     isRequired={true}
                     icon="/images/add-link.svg"
