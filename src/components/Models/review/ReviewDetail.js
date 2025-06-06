@@ -116,19 +116,22 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                             </Link>
                         </div>
                     </div>)}
-                    <div className="grid grid-cols-3 gap-3 mt-[30px]">
+                    <div className={`grid ${status === "noActionRequired" ? "grid-cols-3" : "grid-cols-2"} gap-3 mt-[30px] justify-between"`}>
                         <CancelButton
                             title="copy reply"
                             class_="text-lg! font-medium! py-3"
                             onClick={copy}
                         />
-                        {status === "noActionRequired" && <SecondaryButton title="Share" onClick={() => {
-                            toast.success("Shared Successfully")
-                            onClose()
-                        }} />}
+                        {status === "noActionRequired" && <SecondaryButton
+                            title="Share"
+                            class_="text-lg! font-medium! py-3"
+                            onClick={() => {
+                                toast.success("Shared Successfully")
+                                onClose()
+                            }} />}
                         <SecondaryButton
                             title="mark as responded"
-                            class_="text-lg! font-medium! py-3"
+                            class_="text-lg! font-medium! py-3 "
                             type="submit"
                             disabled={sending}
                         />

@@ -238,8 +238,8 @@ export default function BoostRequest({ onClose, onSave }) {
                                     </div>
                                     <hr className="border-t border-border2 my-3" />
                                     <div className="flex justify-between items-center">
-                                        <h2 className="text-text3 capitalize text-base">E-Mail : janesmith@gamil.com <span>|</span>SMS : (123)456-7890</h2>
-                                        <h3 className="text-base font-medium">03</h3>
+                                        <h2 className="text-text3 capitalize text-base">jane smith</h2>
+                                        <h3 className="text-base font-medium">e-mail : janesmith@gamil.com <span className="text-secondary/5">|</span> SMS : (123)456-7890</h3>
                                     </div>
                                 </div>
                                 <hr className="border-t border-border2 my-3.5" />
