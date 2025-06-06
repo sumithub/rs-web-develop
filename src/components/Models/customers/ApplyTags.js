@@ -39,7 +39,7 @@ function ApplyTags({ onClose }) {
                                 class_='mt-0!'
                                 defaultOption="VIP, High Value"
                             >
-                                <option>VIP, High Value</option>
+                                <option value="vip">VIP, High Value</option>
                             </SelectForm>
                         </div>
                     </div>
@@ -65,7 +65,7 @@ function ApplyTags({ onClose }) {
                                 class_='mt-0!'
                                 defaultOption="Imported List A"
                             >
-                                <option>Imported List A</option>
+                                <option value="imported">Imported List A</option>
                             </SelectForm>
                         </div>
                     </div>
