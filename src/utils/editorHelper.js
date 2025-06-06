@@ -81,12 +81,12 @@ export const MenuBar = ({ disable }) => {
         setShowFontSizeDropdown(false)
     }
 
-    const applyColoredHighlight = (textColor, bgColor) => {
-        editor.chain().focus().toggleHighlight({ color: bgColor }).run()
-        setTimeout(() => {
-            editor.chain().focus().setColor(textColor).run()
-        }, 10)
-    }
+    // const applyColoredHighlight = (textColor, bgColor) => {
+    //     editor.chain().focus().toggleHighlight({ color: bgColor }).run()
+    //     setTimeout(() => {
+    //         editor.chain().focus().setColor(textColor).run()
+    //     }, 10)
+    // }
 
     const setLink = useCallback(() => {
         const previousUrl = editor.getAttributes('link').href
@@ -391,7 +391,7 @@ export const MenuBar = ({ disable }) => {
             </svg>
         </button>
         {/* Color Highlight Buttons */}
-        <button
+        {/* <button
             type="button"
             onClick={() => {
                 editor.chain().focus().setColor('#171717').run()
@@ -436,7 +436,7 @@ export const MenuBar = ({ disable }) => {
             className={`bg-yellow-100! text-yellow-700! ${editor.isActive('highlight', { color: '#fef9c2' }) ? 'is-active' : ''}`}
             disabled={disable}>
             A
-        </button>
+        </button> */}
     </div >
     )
 }
