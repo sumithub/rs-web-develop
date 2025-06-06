@@ -3,7 +3,7 @@ import CancelButton from '../../common/CancelButton'
 import SecondaryButton from '../../common/SecondaryButton'
 import Model from '../Model'
 import Image from 'next/image'
-import HtmlEditor from "../../form/editor/HtmlEditor"
+import HtmlEditor from "../../form/HtmlEditor"
 import InputForm from '../../form/InputForm'
 import SelectForm from '../../form/SelectForm'
 import { useForm } from 'react-hook-form'
@@ -46,6 +46,7 @@ function AddTemplate({ onClose, id }) {
   let body = watch("body") || []
   return <Model onClose={onClose} title="Create Email Template" modalBodyClass='max-h-[85vh]'>
     <form onSubmit={handleSubmit(onSubmit)}>
+      <HtmlEditor />
       <div className='flex items-start gap-4'>
         <div className='w-[60%]'>
           <div className='shadow-sm rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
@@ -93,7 +94,7 @@ function AddTemplate({ onClose, id }) {
               />
             </div>}
 
-            <HtmlEditor label="Email Body"
+            {/* <HtmlEditor label="Email Body"
               value={body}
               onChange={(value) => {
                 clearErrors("body")
@@ -125,7 +126,7 @@ function AddTemplate({ onClose, id }) {
                   errors={errors}
                 />
               </div>
-            </HtmlEditor>
+            </HtmlEditor> */}
 
             {/* <div className="text-sm text-secondary font-medium capitalize mt-3 mb-2">email body</div>
           <textarea

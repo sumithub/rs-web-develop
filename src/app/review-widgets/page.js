@@ -119,7 +119,7 @@ export default function ReviewWidgets() {
                 <div className="mt-3 p-4 mb-3">
                     <CancelButton
                         title="Grid Review Widget"
-                        onClick={() => handleOpenModal("Grid Widget")}
+                        onClick={() => handleOpenModal("GridWidget")}
                     />
                 </div>
             </div>
@@ -141,7 +141,7 @@ export default function ReviewWidgets() {
                 <div className="mt-3 p-4 mb-3">
                     <CancelButton
                         title="Testimonial Card Widget"
-                        onClick={() => handleOpenModal("Testimonial Widget")}
+                        onClick={() => handleOpenModal("TestimonialWidget")}
                     />
                 </div>
             </div>
@@ -163,7 +163,7 @@ export default function ReviewWidgets() {
                 <div className="mt-3 p-4 mb-3">
                     <CancelButton
                         title="Floating Review"
-                        onClick={() => handleOpenModal("Floating Button Widget")}
+                        onClick={() => handleOpenModal("FloatingButtonWidget")}
                     />
                 </div>
             </div>
@@ -185,7 +185,7 @@ export default function ReviewWidgets() {
                 <div className="mt-3 p-4 mb-3">
                     <CancelButton
                         title="Star Rating Badge"
-                        onClick={() => handleOpenModal("Star Badge Widget")}
+                        onClick={() => handleOpenModal("StarBadgeWidget")}
                     />
                 </div>
             </div>
