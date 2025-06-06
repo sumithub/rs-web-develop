@@ -46,12 +46,19 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     });
 
     const IMPORTSUMMARY = [
-        { title: "File name", summary: "abc.csv" },
-        { title: "total customers in file", summary: 250 },
-        { title: "valid customers to import", summary: 245 },
-        { title: "duplicates skipped", summary: "03" },
-        { title: "assigned tag", summary: "VIP customers" },
+        { title: "File Name", summary: "Abc.Csv" },
+        { title: "Total Customers In File", summary: "250" },
+        { title: "Valid Customers To Import", summary: "245" },
+        { title: "Duplicates Skipped", summary: "03" },
+        {
+            title: "Invalid Entries",
+            summary: "02",
+            hasDetail: true,
+            detailType: "invalid_entries"
+        },
+        { title: "Assigned Tag", summary: "VIP Customers" }
     ];
+
 
     const IMPORTSUMMARY1 = [
         { title: "imported customers ", summary: 245 },
@@ -154,12 +161,42 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         }
     };
 
+    // const handleBack = () => {
+    //     if (tab > 1) {
+    //         setTab(tab - 1);
+    //         setActiveStep(activeStep - 1);
+    //     } else if (onBack) {
+    //         onBack();
+    //     }
+    // };
+
+
     const handleBack = () => {
         if (tab > 1) {
             setTab(tab - 1);
             setActiveStep(activeStep - 1);
+        } else if (tab === 1) {
+            // Close the modal when on first tab
+            onClose();
         } else if (onBack) {
             onBack();
+        }
+    };
+
+
+    const handleViewDetail = (detailType, title) => {
+        switch (detailType) {
+            case 'invalid_entries':
+                // Handle invalid entries detail view
+                console.log('Opening invalid entries details...');
+                // You can:
+                // - Open a modal
+                // - Navigate to a detail page
+                // - Show a dropdown with details
+                // - Make an API call to fetch detailed data
+                break;
+            default:
+                console.log(`View detail for: ${title}`);
         }
     };
 
@@ -434,15 +471,47 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
 
                             {IMPORTSUMMARY.map((d, i) => (
                                 <div key={i}>
-                                    <div className="flex justify-between">
+                                    <div className="flex justify-between text-base">
                                         <div className="text-text3 capitalize">{d.title}</div>
-                                        <div className="text-secondary font-medium capitalize">{d.summary}</div>
+                                        <div className="text-secondary font-medium capitalize">
+                                            {d.hasDetail ? (
+                                                <div className="flex items-center capitalize">
+                                                    <span>{d.summary}</span>
+                                                    <span className="border-r border-border-color h-4 mx-2"></span>
+                                                    <button
+                                                        className="text-primary underline cursor-pointer disabled:pointer-events-none capitalize"
+                                                        onClick={() => handleViewDetail(d.detailType, d.title)}
+                                                    >view detail
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                d.summary
+                                            )}
+                                        </div>
                                     </div>
                                     {i !== IMPORTSUMMARY.length - 1 && (
                                         <hr className="my-4 border-t border-border-color" />
                                     )}
                                 </div>
                             ))}
+
+                            {/* {IMPORTSUMMARY.map((d, i) => (
+                                <div key={i}>
+                                    <div className="flex justify-between text-base">
+                                        <div className="text-text3 capitalize">{d.title}</div>
+                                        <div className="text-secondary font-medium capitalize">{d.summary}</div>
+                                    </div>
+
+                                    <div className="flex justify-between text-base">
+                                        <div className="text-text3 capitalize">invalid entries</div>
+                                        <div className="text-secondary font-medium capitalize border-border-color">02<span className="border-r border-border-color pr-2"></span><span className="text-primary underline pl-2">view detail</span></div>
+                                    </div>
+
+                                    {i !== IMPORTSUMMARY.length - 1 && (
+                                        <hr className="my-4 border-t border-border-color" />
+                                    )}
+                                </div>
+                            ))} */}
                         </>
                     )}
 

@@ -15,7 +15,6 @@ export default function CampaignCard({ children, title, status, expandAll, openB
     }, [expandAll, openByDefault]);
 
     return <main>
-
         <div className="bg-dark rounded-[15px] p-4 mb-3">
             <div onClick={() => { setOpen(!open) }} className="flex items-center justify-between cursor-pointer">
                 <div className="flex items-center gap-2">
