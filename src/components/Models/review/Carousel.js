@@ -76,22 +76,22 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     class_="mt-0!"
                                 />
                                 <SelectForm
-                                    defaultOption="Select"
                                     label="Font Family"
-                                    labelClass="pb-2.5 inline-block mb-0!"
                                     isRequired={true}
-                                    formProps={{ ...register("select", { required: true }) }}
+                                    defaultOption="Select"
+                                    formProps={{ ...register("fontFamily", { required: true }) }}
                                     errors={errors}
                                     class_="mt-0!"
+                                    labelClass="pb-2.5 inline-block mb-0!"
                                     selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
                                     clearErrors={clearErrors} >
-                                    <option value="selectFont">Select Font</option>
+                                    <option value="selectFont">Inter</option>
                                 </SelectForm>
                                 <InputForm
                                     label="Border Radius"
                                     isRequired={true}
                                     placeholder="Select Border Color"
-                                    formProps={{ ...register("colorScheme", { required: true }) }}
+                                    formProps={{ ...register("borderRadius", { required: true }) }}
                                     errors={errors}
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
@@ -107,7 +107,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     label="Number of Reviews"
                                     isRequired={true}
                                     placeholder="Enter review count"
-                                    formProps={{ ...register("colorScheme", { required: true }) }}
+                                    formProps={{ ...register("numberOfReviews", { required: true }) }}
                                     errors={errors}
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
@@ -116,13 +116,13 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
 
                                 {(normalizedTitle === "testimonialwidget") && (<div>
                                     <SelectForm
-                                        defaultOption="Select sorting"
                                         label="Sorting"
-                                        labelClass="pb-2.5 inline-block mb-0!"
                                         isRequired={true}
-                                        formProps={{ ...register("select", { required: true }) }}
+                                        defaultOption="Select"
+                                        formProps={{ ...register("sorting", { required: true }) }}
                                         errors={errors}
                                         class_="mt-0!"
+                                        labelClass="pb-2.5 inline-block mb-0!"
                                         selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
                                         clearErrors={clearErrors} >
                                         <option value="latest">Latest</option>
@@ -146,23 +146,24 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     label="Minimum Rating"
                                     isRequired={true}
                                     placeholder="Enter Filtering"
-                                    formProps={{ ...register("colorScheme", { required: true }) }}
+                                    formProps={{ ...register("minimumRating", { required: true }) }}
                                     errors={errors}
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
                                     class_="mt-0!"
                                 />)}
                                 <SelectForm
-                                    defaultOption="Select Minimum Rating"
                                     label="Minimum Rating"
-                                    labelClass="pb-2.5 inline-block mb-0!"
                                     isRequired={true}
-                                    formProps={{ ...register("select", { required: true }) }}
+                                    defaultOption="Select"
+                                    formProps={{ ...register("minimumRating", { required: true }) }}
                                     errors={errors}
                                     class_="mt-0!"
+                                    labelClass="pb-2.5 inline-block mb-0!"
                                     selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
                                     clearErrors={clearErrors} >
-                                    <option value="selectFont">Select Font</option>
+                                    <option value="Rating1">Rating 1</option>
+                                    <option value="Rating">Rating 2</option>
                                 </SelectForm>
                             </div>
 
@@ -171,7 +172,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     label="sorting"
                                     isRequired={true}
                                     placeholder="Enter sorting"
-                                    formProps={{ ...register("colorScheme", { required: true }) }}
+                                    formProps={{ ...register("sorting", { required: true }) }}
                                     errors={errors}
                                     inputClass="border border-primary3/10 p-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
@@ -179,17 +180,17 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                 />)}
 
                                 {(normalizedTitle !== "carousel") && (<SelectForm
-                                    defaultOption="Select sorting"
                                     label="Sorting"
-                                    labelClass="pb-2.5 inline-block mb-0!"
                                     isRequired={true}
-                                    formProps={{ ...register("select", { required: true }) }}
+                                    defaultOption="Select"
+                                    formProps={{ ...register("sorting", { required: true }) }}
                                     errors={errors}
-                                    class_="mt-2.5!"
+                                    class_="mt-0!"
+                                    labelClass="pb-2.5 inline-block mb-0!"
                                     selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
                                     clearErrors={clearErrors} >
                                     <option value="latest">Latest</option>
-                                    <option value="highest-rated">Highest Rated</option>
+                                    <option value="highestRated">Highest Rated</option>
                                 </SelectForm>)}
                             </div>
 
@@ -222,16 +223,17 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             <h2 className="text-lg font-semibold">Behavior</h2>
                             <div className="0">
                                 <SelectForm
-                                    defaultOption="Select Transitions"
-                                    label="Transitions Effect"
-                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    label="Transition Effect"
                                     isRequired={true}
-                                    formProps={{ ...register("select", { required: true }) }}
+                                    defaultOption="Select"
+                                    formProps={{ ...register("transitionEffect", { required: true }) }}
                                     errors={errors}
                                     class_="mt-0!"
+                                    labelClass="pb-2.5 inline-block mb-0!"
                                     selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
                                     clearErrors={clearErrors} >
-                                    <option value="selectFont">Select Font</option>
+                                    <option value="slide">Slide</option>
+                                    <option value="fade">Fade</option>
                                 </SelectForm>
                             </div>
                             <div className="flex gap-[15px] items-center mt-2.5">
@@ -244,16 +246,16 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             <h2 className="text-lg font-semibold">Behavior</h2>
                             <div className="0">
                                 <SelectForm
-                                    defaultOption="Select Popup"
                                     label="Popup Delay"
-                                    labelClass="pb-2.5 inline-block mb-0!"
                                     isRequired={true}
-                                    formProps={{ ...register("select", { required: true }) }}
+                                    defaultOption="Select"
+                                    formProps={{ ...register("popupDelay", { required: true }) }}
                                     errors={errors}
                                     class_="mt-0!"
+                                    labelClass="pb-2.5 inline-block mb-0!"
                                     selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
                                     clearErrors={clearErrors} >
-                                    <option value="selectFont">Select Font</option>
+                                    <option value="xyz">xyz...</option>
                                 </SelectForm>
                             </div>
                             <div className="flex gap-[15px] items-center mt-2.5">
@@ -287,7 +289,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                 <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br />
                                     <span className="font-medium text-primary">Read More</span></p>
                                 <div className="my-10 flex justify-center">
-                                    <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary">
+                                    <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary" type="button">
                                         <span>
                                             <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
                                         </span>
