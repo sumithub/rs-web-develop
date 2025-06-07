@@ -18,9 +18,9 @@ import Loading from "../../components/Loading";
 import BoostRequest from "../../components/Models/boost/BoostRequest"
 
 export default function Dashboard() {
-    const [rating, setRating] = useState("")
+    const [rating, setRating] = useState([])
     const [date, setDate] = useState("")
-    const [reviewSource, setReviewSource] = useState("")
+    const [reviewSource, setReviewSource] = useState([])
     const [loading, setLoading] = useState(true);
     const [list, setList] = useState([])
     const [open, setOpen] = useState(false)

@@ -10,7 +10,7 @@ import CustomSelectBox from '../../form/CustomSelectBox'
 
 function ApplyTags({ onClose }) {
     const [sending, setSending] = useState(false);
-    const [type, setType] = useState("")
+    const [type, setType] = useState([])
 
     const onSubmit = async () => {
         try {
