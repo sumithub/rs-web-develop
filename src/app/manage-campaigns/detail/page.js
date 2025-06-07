@@ -24,7 +24,7 @@ import RadioForm from "../../../components/form/RadioForm"
 
 export default function Detail({ }) {
     const id = ""
-    const { register, handleSubmit, setValue, clearErrors, formState: { errors }, watch } = useForm({ defaultValues: { customerSource: "existing" } });
+    const { register, handleSubmit, clearErrors, formState: { errors }, watch } = useForm({ defaultValues: { customerSource: "existing" } });
     const [sending, setSending] = useState(false)
     const [openSchedule, setOpenSchedule] = useState(false)
     const [openCustomer, setOpenCustomer] = useState(false)
@@ -565,7 +565,7 @@ export default function Detail({ }) {
                                         errors={errors}
                                     />
                                 </div>
-                                <SecondaryButton title="Add Customers" class_="text-sm! font-normal!"
+                                <SecondaryButton title={watch("customerSource") === "CSV" ? "Choose File" : "Add Customers"} class_="text-sm! font-normal!"
                                     type="button"
                                     onClick={() => { setOpenCustomer(true) }} />
                             </div>
