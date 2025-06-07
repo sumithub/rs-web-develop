@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-export default function Header({ headerChild, headerSearch, mainHeading = "Hello users!", subHeading = "Welcome back to dashboard." }) {
-    return <div className="border-b border-border-color py-[18px] px-4 ml-72 bg-white fixed top-0 inset-x-0 z-50">
+export default function Header({ headerChild, headerSearch, mainHeading = "Hello users!", subHeading = "Welcome back to dashboard.", collapse }) {
+    return <div className={`border-b border-border-color py-[18px] px-4 ${collapse ? "ml-20" : "ml-72"} transition-all bg-white fixed top-0 inset-x-0 z-50`}>
         <div className="flex items-center justify-between w-full">
             <div>
                 <div className="text-secondary text-base font-semibold">{mainHeading}</div>
