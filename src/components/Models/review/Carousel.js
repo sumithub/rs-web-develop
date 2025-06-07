@@ -18,6 +18,8 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
     const normalizedTitle = title?.toLowerCase();
+    const [clickSwitch, setClickSwitch] = useState(false)
+    const [clickSwitch1, setClickSwitch1] = useState(false)
 
     const onSubmit = async (data) => {
         try {
@@ -184,7 +186,6 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                         clearErrors={clearErrors} >
                                         <option value="latest">Latest</option>
                                         <option value="highest-rated">Highest Rated</option>
-                                        <option value="oldest">Oldest</option>
                                     </SelectForm>
                                 </div>}
 
@@ -201,7 +202,6 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                         clearErrors={clearErrors} >
                                         <option value="latest">Latest</option>
                                         <option value="highest-rated">Highest Rated</option>
-                                        <option value="oldest">Oldest</option>
                                     </SelectForm>
                                     <SelectForm
                                         label="Minimum Rating"
@@ -223,7 +223,10 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                 {/* Show Reviewer Details */}
                                 <div className="pt-2.5 flex gap-[15px] items-center">
                                     <h2 className="text-base font-medium">Show Reviewer Details</h2>
-                                    <Switch />
+                                    <Switch
+                                        checked={clickSwitch1}
+                                        onChange={() => setClickSwitch1(prev => !prev)}
+                                    />
                                 </div>
                             </div>
                         )}
@@ -265,7 +268,6 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                             clearErrors={clearErrors} >
                                             <option value="slide">Slide</option>
                                             <option value="fade">Fade</option>
-                                            <option value="zoom">Zoom</option>
                                         </SelectForm>
                                     )}
 
@@ -291,7 +293,9 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     <h2 className="text-base font-medium">
                                         {normalizedTitle === "carousel" ? "Auto-Scroll" : "Auto-Trigger Popup"}
                                     </h2>
-                                    <Switch />
+                                    <Switch
+                                        checked={clickSwitch}
+                                        onChange={() => setClickSwitch(prev => !prev)} />
                                 </div>
                             </div>
                         )}

@@ -57,7 +57,8 @@ export default function Dashboard() {
                 }}>
                 <option value="google">Google</option>
                 <option value="yelp">Yelp</option>
-                <option value="trustpilot and tripadvisor">Trustpilot and Tripadvisor</option>
+                <option value="trustpilot">Trustpilot</option>
+                <option value="tripadvisor">Tripadvisor</option>
             </CustomSelectBox>
 
             <CustomSelectBox
