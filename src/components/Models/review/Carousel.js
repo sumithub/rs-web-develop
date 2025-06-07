@@ -56,16 +56,16 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
 
     return (
         <Model onClose={onClose} title={title} modalClass="w-[80%]!" >
+            {open &&
+                <CodePreviewBox
+                    onClose={() => {
+                        setOpen(false)
+                    }}
+                    onSave={() => {
+                        setOpen(true)
+                    }} />
+            }
             <form onSubmit={handleSubmit(onSubmit)}>
-                {open &&
-                    <CodePreviewBox
-                        onClose={() => {
-                            setOpen(false)
-                        }}
-                        onSave={() => {
-                            setOpen(true)
-                        }} />
-                }
                 <div className="grid grid-cols-2 gap-5">
                     <div>
                         {/* Design Section */}
