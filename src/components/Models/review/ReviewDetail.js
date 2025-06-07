@@ -85,21 +85,22 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                         <h2 className="w-4/5 ml-auto capitalize mt-[15px] text-xs">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the .</h2>
                     </>)}
                     <div>
-                        <SelectForm
-                            class_="mt-[15px]! w-[10%]!"
-                            selectClass_="rounded-full! py-2! px-2.5!"
-                            defaultOption="select"
-                            formProps={{ ...register("status", { required: false }) }}
-                            errors={errors}
-                            onChange={(e) => {
-                                setStatus(e.target.value)
-                            }}
-                        >
-                            <option value="noActionRequired">No action Required</option>
-                            <option value="actionRequired">Action required</option>
-                            <option value="draft">Draft</option>
-                            <option value="responded">Responded</option>
-                        </SelectForm>
+                        <div className="w-[20%] mt-3.5 mb-5">
+                            <SelectForm
+                                selectClass_="rounded-full! py-2! px-2.5!"
+                                defaultOption="select"
+                                formProps={{ ...register("status", { required: false }) }}
+                                errors={errors}
+                                onChange={(e) => {
+                                    setStatus(e.target.value)
+                                }}
+                            >
+                                <option value="noActionRequired">No action Required</option>
+                                <option value="actionRequired">Action required</option>
+                                <option value="draft">Draft</option>
+                                <option value="responded">Responded</option>
+                            </SelectForm>
+                        </div>
                         <HtmlEditor />
                     </div>
 

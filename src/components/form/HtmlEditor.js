@@ -30,7 +30,7 @@ export default function HtmlEditor({
         error = errors[formProps?.name]?.message
     }
 
-    return (<div className={`laptop:mb-2 mb-3 w-full relative ${containerClass}`}>
+    return (<div className={`laptop:mb-2 mb-3 w-full relative border border-border-color rounded-[10px] ${containerClass}`}>
         {(label || inlineLabel) ? (inlineLabel ?
             <label className="inline left-1.5 top-4 px-1 bg-white capitalize pb-1 font-medium text-xs z-1">
                 {label}{isRequired && <span className="text-danger">*</span>}
@@ -54,7 +54,7 @@ export default function HtmlEditor({
                         setValue(formProps.name, html)
                     }
                 }}
-                slotBefore={readOnly ? undefined : <div className='mb-4'><MenuBar /></div>}
+                slotBefore={readOnly ? undefined : <div className=''><MenuBar /></div>}
                 extensions={extensions}
                 content={value || ""}
             />
