@@ -579,14 +579,18 @@ export default function Detail({ }) {
                             <div className="grid grid-cols-[3fr_1fr] items-start gap-3">
                                 <SelectForm label="Cooldown Period" isRequired={true} defaultOption="-" selectClass_="bg-white! py-3! focus:border-primary/60!"
                                     formProps={{ ...register("cooldownPeriod", { required: true }) }} errors={errors} clearErrors={clearErrors}>
-                                    <option>7 Days</option>
+                                    <option value="7">7 Days</option>
+                                    <option value="14">14 Days</option>
+                                    <option value="21">21 Days</option>
                                 </SelectForm>
                                 {watch("customerSource") && <SelectForm
                                     class_="mt-10"
-                                    defaultOption="Exclude Duplicates" selectClass_="bg-white! py-3!"
+                                    defaultOption="" selectClass_="bg-white! py-3!"
                                     formProps={{ ...register("excludeDuplicates", { required: false }) }}
-                                    errors={errors}
-                                ></SelectForm>}
+                                    errors={errors}>
+                                    <option value="Exclude Duplicates">Exclude Duplicates</option>
+                                    <option value="Proceed Anyway">Proceed Anyway</option>
+                                </SelectForm>}
                             </div>
 
                             {customersSelected && <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
