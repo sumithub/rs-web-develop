@@ -20,6 +20,7 @@ import InputForm from "../../form/InputForm";
 import SelectForm from "../../form/SelectForm";
 
 export default function BoostRequest({ onClose, onSave, id }) {
+    const [select, setSelect] = useState("")
     const {
         register,
         setValue,
@@ -164,17 +165,26 @@ export default function BoostRequest({ onClose, onSave, id }) {
                             <Radio
                                 label="Email"
                                 class_="mt-0!"
+                                name="sendVia"
                                 mainClass="text-sm! font-mediun!"
+                                checked={select === "email"}
+                                onChange={() => { setSelect("email") }}
                             />
                             <Radio
                                 label="SMS"
                                 class_="mt-0!"
+                                name="sendVia"
                                 mainClass="text-sm! font-mediun!"
+                                checked={select === "sms"}
+                                onChange={() => { setSelect("sms") }}
                             />
                             <Radio
                                 label="Both"
                                 class_="mt-0!"
+                                name="sendVia"
                                 mainClass="text-sm! font-mediun!"
+                                checked={select === "both"}
+                                onChange={() => { setSelect("both") }}
                             />
                         </div>
                     </div>
