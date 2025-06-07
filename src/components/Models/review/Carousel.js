@@ -268,7 +268,6 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                             clearErrors={clearErrors} >
                                             <option value="slide">Slide</option>
                                             <option value="fade">Fade</option>
-                                            <option value="zoom">Zoom</option>
                                         </SelectForm>
                                     )}
 
