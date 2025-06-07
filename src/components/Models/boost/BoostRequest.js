@@ -53,40 +53,40 @@ export default function BoostRequest({ onClose, onSave, id }) {
     }
     return (
         <Model onClose={onClose} title="Boost Request" modalClass="w-1/2!" boostIcon={true}>
+            {openTemplate &&
+                <TemplateList
+                    onClose={() => {
+                        setOpenTemplate(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenTemplate(true)
+                    }}
+                />
+            }
+
+            {openSelect &&
+                <SelectedCustomers
+                    onClose={() => {
+                        setOpenSelect(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenSelect(false)
+                    }} />
+            }
+
+            {open &&
+                <AddCustomer
+                    onClose={() => {
+                        setOpen(false)
+                    }}
+
+                    onSave={() => {
+                        setOpen(true)
+                    }} />
+            }
             <form onSubmit={handleSubmit(onSubmit)}>
-                {openTemplate &&
-                    <TemplateList
-                        onClose={() => {
-                            setOpenTemplate(false)
-                        }}
-
-                        onSave={() => {
-                            setOpenTemplate(true)
-                        }}
-                    />
-                }
-
-                {openSelect &&
-                    <SelectedCustomers
-                        onClose={() => {
-                            setOpenSelect(false)
-                        }}
-
-                        onSave={() => {
-                            setOpenSelect(false)
-                        }} />
-                }
-
-                {open &&
-                    <AddCustomer
-                        onClose={() => {
-                            setOpen(false)
-                        }}
-
-                        onSave={() => {
-                            setOpen(true)
-                        }} />
-                }
                 <div>
                     <div className="text-lg font-semibold capitalize">
                         Send review, referral, or feedback requests to one or more customers
@@ -123,7 +123,12 @@ export default function BoostRequest({ onClose, onSave, id }) {
                         <PhoneForm
                             label="Phone Number"
                             isRequired={true}
-                            formProps={{ ...register("phoneNumber", { required: true }) }}
+                            placeholder="Enter phone number"
+                            formProps={{
+                                ...register("phoneNumber", {
+                                    required: "Phone number is required",
+                                })
+                            }}
                             errors={errors}
                             setValue={setValue}
                         />

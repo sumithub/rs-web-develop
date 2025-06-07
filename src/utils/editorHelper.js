@@ -317,7 +317,7 @@ export const MenuBar = ({ disable }) => {
             </button>
         </div>
     )
-    return (<div className="button-group">
+    return (<div className="button-group bg-[#F8F8F8] p-2 border-b border-border-color rounded-tr-[10px] rounded-tl-[10px]">
         <button
             type="button"
             onClick={() => editor.chain().focus().undo().run()}
@@ -347,11 +347,11 @@ export const MenuBar = ({ disable }) => {
                 onClick={() => setShowFontFamilyDropdown(!showFontFamilyDropdown)}
                 disabled={disable}
                 style={{
-                    minWidth: '120px',
-                    padding: '4px 8px',
-                    border: '1px solid #ccc',
+                    // minWidth: '120px',
+                    // padding: '4px 8px',
+                    // border: '1px solid #ccc',
                     borderRadius: '4px',
-                    backgroundColor: '#fff',
+                    // backgroundColor: '#fff',
                     cursor: 'pointer',
                     textAlign: 'left'
                 }}>
@@ -407,11 +407,11 @@ export const MenuBar = ({ disable }) => {
                 onClick={() => setShowFontSizeDropdown(!showFontSizeDropdown)}
                 disabled={disable}
                 style={{
-                    minWidth: '50px',
+                    minWidth: '20px',
                     padding: '4px 8px',
-                    border: '1px solid #ccc',
+                    // border: '1px solid #ccc',
                     borderRadius: '4px',
-                    backgroundColor: '#fff',
+                    // backgroundColor: '#fff',
                     cursor: 'pointer'
                 }}>
                 {getCurrentFontSize()}px
@@ -469,8 +469,8 @@ export const MenuBar = ({ disable }) => {
                 <path d="M3.34668 2.62565C3.34668 1.98398 3.87168 1.45898 4.51335 1.45898H7.50001C9.02835 1.45898 10.2708 2.70148 10.2708 4.22982C10.2708 5.75815 9.02835 7.00065 7.50001 7.00065H3.34668V2.62565Z" stroke="#1F2933" strokeWidth="2" strokeLinejoin="round" stroke-linejoin="round" />
                 <path d="M3.34668 7H8.88835C10.4167 7 11.6592 8.2425 11.6592 9.77083C11.6592 11.2992 10.4167 12.5417 8.88835 12.5417H4.51335C3.87168 12.5417 3.34668 12.0167 3.34668 11.375V7V7Z" stroke="#1F2933" strokeWidth="2" strokeLinejoin="round" stroke-linejoin="round" />
             </svg>
-
         </button>
+
         <button
             type="button"
             onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -505,13 +505,13 @@ export const MenuBar = ({ disable }) => {
                 disabled={disable}
                 style={{
                     padding: '4px 8px',
-                    border: '1px solid #ccc',
+                    // border: '1px solid #ccc',
                     borderRadius: '4px',
-                    backgroundColor: '#fff',
+                    // backgroundColor: '#fff',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '4px'
+                    gap: '2px'
                 }}
                 title="Text Color">
                 <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -544,13 +544,13 @@ export const MenuBar = ({ disable }) => {
                 disabled={disable}
                 style={{
                     padding: '4px 8px',
-                    border: '1px solid #ccc',
+                    // border: '1px solid #ccc',
                     borderRadius: '4px',
-                    backgroundColor: '#fff',
+                    // backgroundColor: '#fff',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '4px'
+                    gap: '2px'
                 }}
                 className={editor.isActive('highlight') ? 'is-active' : ''}
                 title="Background Color">
