@@ -395,6 +395,7 @@ export default function Detail({ }) {
                     </div>
                     <SecondaryButton
                         title="Select Template"
+                        type="button"
                         class_="text-sm! font-normal!"
                         onClick={() => openTemplateSelector(templateType)}
                     />
@@ -415,6 +416,7 @@ export default function Detail({ }) {
                                 <button
                                     className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                                     onClick={() => setOpenPreview(true)}
+                                    type="button"
                                     disabled={!hasTemplate}
                                 >
                                     <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />
@@ -424,6 +426,7 @@ export default function Detail({ }) {
                                 <button
                                     className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                                     onClick={() => setOpenModal(true)}
+                                    type="button"
                                     disabled={!hasTemplate}
                                 >
                                     <Image src="/images/edit2.svg" alt='edit' height={14} width={14} unoptimized={true} />
@@ -509,8 +512,10 @@ export default function Detail({ }) {
                     <div className="text-secondary text-xl font-medium">Create New Campaign</div>
                     <div className="flex items-center gap-2">
                         <CancelButton title="Collapse All" class_="text-sm! font-normal!"
+                            type="button"
                             onClick={() => { setExpandAll(false) }} />
                         <SecondaryButton title="Expand All" class_="text-sm! font-normal!"
+                            type="button"
                             onClick={() => { setExpandAll(true) }} />
                     </div>
                 </div>
@@ -561,6 +566,7 @@ export default function Detail({ }) {
                                     />
                                 </div>
                                 <SecondaryButton title="Add Customers" class_="text-sm! font-normal!"
+                                    type="button"
                                     onClick={() => { setOpenCustomer(true) }} />
                             </div>
                         </div>
@@ -571,6 +577,7 @@ export default function Detail({ }) {
                                         <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                                         <div className="text-danger text-lg font-semibold capitalize">{customersSelected || 5} customers are already in an active campaign.</div>
                                         <SecondaryButton title="View Details" class_="text-sm! font-normal!"
+                                            type="button"
                                             onClick={() => { setOpenCustomer("details") }} />
                                     </div>}
                                 </div>
@@ -627,6 +634,7 @@ export default function Detail({ }) {
                                             ? 'border-primary text-primary bg-primary/5'
                                             : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                                             }`}
+                                        type="button"
                                         onClick={() => setActiveTab('email')}
                                     >
                                         Email Templates
@@ -636,6 +644,7 @@ export default function Detail({ }) {
                                             ? 'border-primary text-primary bg-primary/5'
                                             : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                                             }`}
+                                        type="button"
                                         onClick={() => setActiveTab('sms')}
                                     >
                                         SMS Templates
@@ -878,7 +887,7 @@ export default function Detail({ }) {
                         onClick={() => { router.push("/manage-campaigns") }}
                         disabled={sending} /> : <SecondaryButton title="Save as Draft" type="submit"
                             disabled={sending} />}
-                    <SecondaryButton disabled={isAllPending} title="Schedule for Later" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => { setOpenSchedule(true) }} />
+                    <SecondaryButton disabled={isAllPending} title="Schedule for Later" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => { setOpenSchedule(true) }} type="button" />
                     <CancelButton title="Launch Now" disabled={sending || isAllPending} type="submit" />
                 </div>
             </form>
