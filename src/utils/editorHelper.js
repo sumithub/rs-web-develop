@@ -11,6 +11,7 @@ import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
 import { Extension } from '@tiptap/core'
 import { useCallback, useEffect, useState } from 'react'
+import { FontFamily } from '@tiptap/extension-font-family'
 
 // Custom FontSize extension
 const FontSize = Extension.create({
@@ -64,8 +65,29 @@ const FontSize = Extension.create({
 export const MenuBar = ({ disable }) => {
     const { editor } = useCurrentEditor()
     const [showFontSizeDropdown, setShowFontSizeDropdown] = useState(false)
+    const [showFontFamilyDropdown, setShowFontFamilyDropdown] = useState(false)
+    const [showTextColorDropdown, setShowTextColorDropdown] = useState(false)
+    const [showBackgroundColorDropdown, setShowBackgroundColorDropdown] = useState(false)
 
     const fontSizes = [8, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48, 56, 60]
+
+    const fontFamilies = [
+        { name: 'Inter', value: null },
+        { name: 'Arial', value: 'Arial, sans-serif' },
+        { name: 'Helvetica', value: 'Helvetica, Arial, sans-serif' },
+        { name: 'Times New Roman', value: 'Times New Roman, Times, serif' },
+        { name: 'Georgia', value: 'Georgia, serif' },
+        { name: 'Courier New', value: 'Courier New, Courier, monospace' },
+    ]
+
+    // Predefined colors
+    const colors = [
+        '#000000', '#333333', '#666666', '#999999', '#CCCCCC', '#FFFFFF',
+        '#FF0000', '#FF6600', '#FFCC00', '#00FF00', '#0066FF', '#6600FF',
+        '#FF3366', '#FF9933', '#FFFF00', '#33FF66', '#3366FF', '#9933FF',
+        '#990000', '#CC3300', '#996600', '#006600', '#003366', '#330066',
+        '#FF99CC', '#FFCC99', '#FFFF99', '#99FFCC', '#99CCFF', '#CC99FF'
+    ]
 
     if (!editor) {
         return null
@@ -76,17 +98,55 @@ export const MenuBar = ({ disable }) => {
         return fontSize ? parseInt(fontSize.replace('px', '')) : 16
     }
 
+    const getCurrentFontFamily = () => {
+        const fontFamily = editor.getAttributes('textStyle').fontFamily
+        const currentFont = fontFamilies.find(font => font.value === fontFamily)
+        return currentFont ? currentFont.name : 'Inter'
+    }
+
+    const getCurrentTextColor = () => {
+        const color = editor.getAttributes('textStyle').color
+        return color || '#000000'
+    }
+
+    const getCurrentBackgroundColor = () => {
+        const highlight = editor.getAttributes('highlight')
+        return highlight.color || '#FFFF00'
+    }
+
     const setFontSize = (size) => {
         editor.chain().focus().setFontSize(`${size}px`).run()
         setShowFontSizeDropdown(false)
     }
 
-    // const applyColoredHighlight = (textColor, bgColor) => {
-    //     editor.chain().focus().toggleHighlight({ color: bgColor }).run()
-    //     setTimeout(() => {
-    //         editor.chain().focus().setColor(textColor).run()
-    //     }, 10)
-    // }
+    const setFontFamily = (fontFamily) => {
+        if (fontFamily) {
+            editor.chain().focus().setMark('textStyle', { fontFamily }).run()
+        } else {
+            editor.chain().focus().unsetMark('textStyle').run()
+        }
+        setShowFontFamilyDropdown(false)
+    }
+
+    const setTextColor = (color) => {
+        editor.chain().focus().setColor(color).run()
+        setShowTextColorDropdown(false)
+    }
+
+    const setBackgroundColor = (color) => {
+        editor.chain().focus().toggleHighlight({ color }).run()
+        setShowBackgroundColorDropdown(false)
+    }
+
+    const removeTextColor = () => {
+        editor.chain().focus().unsetColor().run()
+        setShowTextColorDropdown(false)
+    }
+
+    const removeBackgroundColor = () => {
+        editor.chain().focus().unsetHighlight().run()
+        setShowBackgroundColorDropdown(false)
+    }
 
     const setLink = useCallback(() => {
         const previousUrl = editor.getAttributes('link').href
@@ -106,7 +166,6 @@ export const MenuBar = ({ disable }) => {
         // update link
         editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
     }, [editor])
-
 
     const handleImageFile = useCallback((file) => {
         if (file && file.type.startsWith('image/')) {
@@ -176,11 +235,20 @@ export const MenuBar = ({ disable }) => {
         }
     }, [editor, handleImageFile])
 
-    // Close dropdown when clicking outside
+    // Close dropdowns when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (!event.target.closest('.font-size-dropdown')) {
                 setShowFontSizeDropdown(false)
+            }
+            if (!event.target.closest('.font-family-dropdown')) {
+                setShowFontFamilyDropdown(false)
+            }
+            if (!event.target.closest('.text-color-dropdown')) {
+                setShowTextColorDropdown(false)
+            }
+            if (!event.target.closest('.background-color-dropdown')) {
+                setShowBackgroundColorDropdown(false)
             }
         }
 
@@ -188,6 +256,67 @@ export const MenuBar = ({ disable }) => {
         return () => document.removeEventListener('click', handleClickOutside)
     }, [])
 
+    const ColorPicker = ({ colors, onColorSelect, onRemoveColor, currentColor, title }) => (
+        <div style={{
+            position: 'absolute',
+            top: '100%',
+            left: '0',
+            backgroundColor: '#fff',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            zIndex: 1000,
+            padding: '8px',
+            minWidth: '200px'
+        }}>
+            <div style={{ marginBottom: '8px', fontSize: '12px', fontWeight: 'bold', color: '#666' }}>
+                {title}
+            </div>
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(6, 1fr)',
+                gap: '4px',
+                marginBottom: '8px'
+            }}>
+                {colors.map(color => (
+                    <button
+                        key={color}
+                        type="button"
+                        onClick={() => onColorSelect(color)}
+                        style={{
+                            width: '24px',
+                            height: '24px',
+                            backgroundColor: color,
+                            border: currentColor === color ? '2px solid #000' : '1px solid #ccc',
+                            borderRadius: '3px',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}
+                        title={color}
+                    >
+                        {color === '#FFFFFF' && <div style={{ width: '2px', height: '12px', backgroundColor: '#ccc' }} />}
+                    </button>
+                ))}
+            </div>
+            <button
+                type="button"
+                onClick={onRemoveColor}
+                style={{
+                    width: '100%',
+                    padding: '4px 8px',
+                    border: '1px solid #ccc',
+                    borderRadius: '3px',
+                    backgroundColor: '#f5f5f5',
+                    cursor: 'pointer',
+                    fontSize: '12px'
+                }}
+            >
+                Remove {title.toLowerCase()}
+            </button>
+        </div>
+    )
     return (<div className="button-group">
         <button
             type="button"
@@ -210,6 +339,66 @@ export const MenuBar = ({ disable }) => {
             </svg>
 
         </button>
+
+        {/* Font Family Dropdown */}
+        <div className="font-family-dropdown" style={{ position: 'relative', display: 'inline-block' }}>
+            <button
+                type="button"
+                onClick={() => setShowFontFamilyDropdown(!showFontFamilyDropdown)}
+                disabled={disable}
+                style={{
+                    minWidth: '120px',
+                    padding: '4px 8px',
+                    border: '1px solid #ccc',
+                    borderRadius: '4px',
+                    backgroundColor: '#fff',
+                    cursor: 'pointer',
+                    textAlign: 'left'
+                }}>
+                {getCurrentFontFamily()}
+
+                <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ float: 'right', marginTop: '2px' }}>
+                    <path d="M10.46 4.47469L7.20004 7.73469C6.81504 8.11969 6.18504 8.11969 5.80004 7.73469L2.54004 4.47469" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinejoin="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            {showFontFamilyDropdown && (
+                <div style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: '0',
+                    backgroundColor: '#fff',
+                    border: '1px solid #ccc',
+                    borderRadius: '4px',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                    zIndex: 1000,
+                    minWidth: '180px',
+                    maxHeight: '300px',
+                    overflowY: 'auto'
+                }}>
+                    {fontFamilies.map(font => (
+                        <button
+                            key={font.name}
+                            type="button"
+                            onClick={() => setFontFamily(font.value)}
+                            style={{
+                                display: 'block',
+                                width: '100%',
+                                padding: '8px 12px',
+                                border: 'none',
+                                backgroundColor: getCurrentFontFamily() === font.name ? '#e3f2fd' : 'transparent',
+                                cursor: 'pointer',
+                                textAlign: 'left',
+                                fontSize: '14px',
+                                fontFamily: font.value || 'inherit'
+                            }}
+                            onMouseEnter={(e) => e.target.style.backgroundColor = '#f5f5f5'}
+                            onMouseLeave={(e) => e.target.style.backgroundColor = getCurrentFontFamily() === font.name ? '#e3f2fd' : 'transparent'}>
+                            {font.name}
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
 
         {/* Font Size Dropdown */}
         <div className="font-size-dropdown" style={{ position: 'relative', display: 'inline-block' }}>
@@ -306,6 +495,86 @@ export const MenuBar = ({ disable }) => {
                 <path d="M2.5 13H12.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
             </svg>
         </button>
+
+
+        {/* Text Color Dropdown */}
+        <div className="text-color-dropdown" style={{ position: 'relative', display: 'inline-block' }}>
+            <button
+                type="button"
+                onClick={() => setShowTextColorDropdown(!showTextColorDropdown)}
+                disabled={disable}
+                style={{
+                    padding: '4px 8px',
+                    border: '1px solid #ccc',
+                    borderRadius: '4px',
+                    backgroundColor: '#fff',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                }}
+                title="Text Color">
+                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.5 1L3.5 13H5L6 10H9L10 13H11.5L7.5 1Z" fill={getCurrentTextColor()} />
+                    <path d="M6.5 8L7.5 5L8.5 8H6.5Z" fill="#fff" />
+                </svg>
+                <div style={{
+                    width: '12px',
+                    height: '3px',
+                    backgroundColor: getCurrentTextColor(),
+                    borderRadius: '1px'
+                }} />
+            </button>
+            {showTextColorDropdown && (
+                <ColorPicker
+                    colors={colors}
+                    onColorSelect={setTextColor}
+                    onRemoveColor={removeTextColor}
+                    currentColor={getCurrentTextColor()}
+                    title="Text Color"
+                />
+            )}
+        </div>
+
+        {/* Background Color Dropdown */}
+        <div className="background-color-dropdown" style={{ position: 'relative', display: 'inline-block' }}>
+            <button
+                type="button"
+                onClick={() => setShowBackgroundColorDropdown(!showBackgroundColorDropdown)}
+                disabled={disable}
+                style={{
+                    padding: '4px 8px',
+                    border: '1px solid #ccc',
+                    borderRadius: '4px',
+                    backgroundColor: '#fff',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                }}
+                className={editor.isActive('highlight') ? 'is-active' : ''}
+                title="Background Color">
+                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 10H12L10 7L8 9L6 6L3 10Z" fill="#1F2933" />
+                    <circle cx="5" cy="4" r="1.5" fill="#1F2933" />
+                </svg>
+                <div style={{
+                    width: '12px',
+                    height: '3px',
+                    backgroundColor: getCurrentBackgroundColor(),
+                    borderRadius: '1px'
+                }} />
+            </button>
+            {showBackgroundColorDropdown && (
+                <ColorPicker
+                    colors={colors}
+                    onColorSelect={setBackgroundColor}
+                    onRemoveColor={removeBackgroundColor}
+                    currentColor={getCurrentBackgroundColor()}
+                    title="Background Color"
+                />
+            )}
+        </div>
 
         {/* Image from File Button */}
         <button
@@ -443,6 +712,9 @@ export const MenuBar = ({ disable }) => {
 
 export const extensions = [
     FontSize,
+    FontFamily.configure({
+        types: ['textStyle'], // This tells the extension which marks can have font family
+    }),
     Highlight.configure({
         multicolor: true,
     }),
