@@ -138,12 +138,12 @@
     .button-group {
         display: flex;
         flex-wrap: wrap;
-        /* gap: 0.25rem; */
+        gap: 5px;
         width: 100% !important;
     }
 
     .button-group button {
-        padding: 4px 8px;
+        padding: 2px 4px;
         background-color: #f8fafc;
         /* border: 1px solid #cbd5e1; */
         /* border-radius: 0.25rem; */
@@ -156,11 +156,11 @@
     }
 
     .button-group button:hover {
-        background-color: #f1f5f9;
+        background-color: var(--color-border2);
     }
 
     .button-group button.is-active {
-        background-color: #e2e8f0;
+        background-color: var(--color-border2);
         font-weight: bold;
     }
 
