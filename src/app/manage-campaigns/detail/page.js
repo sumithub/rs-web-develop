@@ -147,7 +147,6 @@ export default function Detail({ }) {
                 reminderEnabled,
                 sameAsFinal
             }
-
             let res = null
             if (id !== "add") {
                 res = await axios.put("/api", submissionData)
@@ -336,195 +335,195 @@ export default function Detail({ }) {
         </div>
 
         <div>
-            <div className="flex items-center justify-between mb-4">
-                <div className="text-secondary text-xl font-medium">Create New Campaign</div>
-                <div className="flex items-center gap-2">
-                    <CancelButton title="Collapse All" class_="text-sm! font-normal!"
-                        onClick={() => { setExpandAll(false) }} />
-                    <SecondaryButton title="Expand All" class_="text-sm! font-normal!"
-                        onClick={() => { setExpandAll(true) }} />
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="flex items-center justify-between mb-4">
+                    <div className="text-secondary text-xl font-medium">Create New Campaign</div>
+                    <div className="flex items-center gap-2">
+                        <CancelButton title="Collapse All" class_="text-sm! font-normal!"
+                            onClick={() => { setExpandAll(false) }} />
+                        <SecondaryButton title="Expand All" class_="text-sm! font-normal!"
+                            onClick={() => { setExpandAll(true) }} />
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <CampaignCard
-                    openByDefault={true}
-                    expandAll={expandAll} setExpandAll={setExpandAll}
-                    title="Campaign Details"
-                    status={getCardStatus('campaignDetails')}>
-                    <div className="grid grid-cols-2 gap-3">
-                        <InputForm label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!"
-                            formProps={{ ...register("campaignName", { required: true }) }}
-                            errors={errors}
-                        />
-
-                        <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white!"
-                            formProps={{ ...register("description", { required: false }) }}
-                            errors={errors}
-                        />
-                    </div>
-                </CampaignCard>
-            </div>
-
-            <div>
-                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
-                    title="Targeting"
-                    status={getCardStatus('targeting')}>
-                    <div className="my-4">
-                        <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <RadioForm
-                                    checked={watch("customerSource") === "existing"}
-                                    name="customerSource"
-                                    label="Existing List"
-                                    value="existing"
-                                    formProps={{ ...register("customerSource", { required: true }) }}
-                                    errors={errors}
-                                />
-                                <RadioForm
-                                    checked={watch("customerSource") === "CSV"}
-                                    name="customerSource"
-                                    value="CSV"
-                                    label="CSV"
-                                    formProps={{ ...register("customerSource", { required: true }) }}
-                                    errors={errors}
-                                />
-                            </div>
-                            <SecondaryButton title="Add Customers" class_="text-sm! font-normal!"
-                                onClick={() => { setOpenCustomer(true) }} />
-                        </div>
-                    </div>
-                    <div>
-                        <div className="flex items-center justify-between">
-                            <div>
-                                {customersSelected && <div className="flex items-center gap-2 my-5">
-                                    <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
-                                    <div className="text-danger text-lg font-semibold capitalize">5 customers are already in an active campaign.</div>
-                                </div>}
-                            </div>
-                            <SelectForm defaultOption="Exclude Duplicates" selectClass_="bg-white!"
-                                formProps={{ ...register("excludeDuplicates", { required: false }) }}
+                <div>
+                    <CampaignCard
+                        openByDefault={true}
+                        expandAll={expandAll} setExpandAll={setExpandAll}
+                        title="Campaign Details"
+                        status={getCardStatus('campaignDetails')}>
+                        <div className="grid grid-cols-2 gap-3">
+                            <InputForm label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!"
+                                formProps={{ ...register("campaignName", { required: true }) }}
                                 errors={errors}
-                            ></SelectForm>
+                            />
+
+                            <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white!"
+                                formProps={{ ...register("description", { required: false }) }}
+                                errors={errors}
+                            />
                         </div>
-                        <SelectForm label="Cooldown Period" isRequired={true} defaultOption="-" selectClass_="bg-white! py-3! focus:border-primary/60!"
-                            formProps={{ ...register("cooldownPeriod", { required: true }) }} errors={errors} clearErrors={clearErrors}>
-                            <option>7 Days</option>
-                        </SelectForm>
+                    </CampaignCard>
+                </div>
 
-                        {customersSelected && <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
-                            <div>Total Selected Customers</div>
-                            <div className="flex items-center gap-2">
-                                <div>{customersSelected ? '250 Customers' : '0 Customers'}</div>
-                                <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />
+                <div>
+                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
+                        title="Targeting"
+                        status={getCardStatus('targeting')}>
+                        <div className="my-4">
+                            <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <RadioForm
+                                        checked={watch("customerSource") === "existing"}
+                                        name="customerSource"
+                                        label="Existing List"
+                                        value="existing"
+                                        formProps={{ ...register("customerSource", { required: true }) }}
+                                        errors={errors}
+                                    />
+                                    <RadioForm
+                                        checked={watch("customerSource") === "CSV"}
+                                        name="customerSource"
+                                        value="CSV"
+                                        label="CSV"
+                                        formProps={{ ...register("customerSource", { required: true }) }}
+                                        errors={errors}
+                                    />
+                                </div>
+                                <SecondaryButton title="Add Customers" class_="text-sm! font-normal!"
+                                    onClick={() => { setOpenCustomer(true) }} />
                             </div>
-                        </div>}
-                    </div>
-                </CampaignCard>
-            </div>
-
-            <div>
-                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
-                    title="Template Selection"
-                    status={getCardStatus('templateSelection')}>
-
-                    {/* Campaign Type Selection */}
-                    <div className="flex gap-3 my-4">
-                        <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
-                        <div className="flex">
-                            <Radio name="type" label="Email" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
-                                checked={campaignType === "email"} onChange={() => handleCampaignTypeChange('email')} />
-                            <Radio name="type" label="SMS" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
-                                checked={campaignType === "sms"} onChange={() => handleCampaignTypeChange('sms')} />
-                            <Radio name="type" label="Both" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
-                                checked={campaignType === "both"} onChange={() => handleCampaignTypeChange('both')} />
                         </div>
-                    </div>
-
-                    {/* Primary Template */}
-                    {renderTemplateCard('primary', selectedTemplates.primary, `Primary ${campaignType === 'email' ? 'Email' : campaignType === 'sms' ? 'SMS' : 'Email'} Template`, true)}
-
-                    {/* Reminder Email Toggle */}
-                    {campaignType !== 'sms' && (
-                        <div className="mt-4">
-                            <div className="flex items-start gap-2 mt-1 mb-4">
-                                <Checkbox onChange={handleReminderToggle} checked={reminderEnabled} />
-                                <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Enable Reminder Email</div>
+                        <div>
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    {customersSelected && <div className="flex items-center gap-2 my-5">
+                                        <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
+                                        <div className="text-danger text-lg font-semibold capitalize">5 customers are already in an active campaign.</div>
+                                    </div>}
+                                </div>
+                                <SelectForm defaultOption="Exclude Duplicates" selectClass_="bg-white!"
+                                    formProps={{ ...register("excludeDuplicates", { required: false }) }}
+                                    errors={errors}
+                                ></SelectForm>
                             </div>
+                            <SelectForm label="Cooldown Period" isRequired={true} defaultOption="-" selectClass_="bg-white! py-3! focus:border-primary/60!"
+                                formProps={{ ...register("cooldownPeriod", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                                <option>7 Days</option>
+                            </SelectForm>
 
-                            {reminderEnabled && (
-                                <>
-                                    {/* Reminder Template */}
-                                    {renderTemplateCard('reminder', selectedTemplates.reminder, 'Reminder Email Template', true)}
+                            {customersSelected && <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
+                                <div>Total Selected Customers</div>
+                                <div className="flex items-center gap-2">
+                                    <div>{customersSelected ? '250 Customers' : '0 Customers'}</div>
+                                    <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />
+                                </div>
+                            </div>}
+                        </div>
+                    </CampaignCard>
+                </div>
 
-                                    {/* Frequency Selection */}
-                                    <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
-                                        selectClass_="bg-white! py-3! focus:border-primary/60!"
-                                        formProps={{ ...register("frequency", { required: reminderEnabled }) }}
-                                        errors={errors} >
-                                        <option value="daily">Daily</option>
-                                        <option value="weekly">Weekly</option>
-                                        <option value="monthly">Monthly</option>
-                                    </SelectForm>
+                <div>
+                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
+                        title="Template Selection"
+                        status={getCardStatus('templateSelection')}>
 
-                                    {/* Final Reminder Section - Only show after frequency and reminder template are selected */}
-                                    {selectedTemplates.reminder && watchedFields['frequency'] && (
-                                        <div className="mt-6">
-                                            <div className="text-secondary text-sm font-medium mb-4">Final Reminder</div>
+                        {/* Campaign Type Selection */}
+                        <div className="flex gap-3 my-4">
+                            <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
+                            <div className="flex">
+                                <Radio name="type" label="Email" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
+                                    checked={campaignType === "email"} onChange={() => handleCampaignTypeChange('email')} />
+                                <Radio name="type" label="SMS" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
+                                    checked={campaignType === "sms"} onChange={() => handleCampaignTypeChange('sms')} />
+                                <Radio name="type" label="Both" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
+                                    checked={campaignType === "both"} onChange={() => handleCampaignTypeChange('both')} />
+                            </div>
+                        </div>
 
-                                            <div className="flex items-start gap-2 mt-1 mb-4">
-                                                <Checkbox onChange={handleSameAsFinalToggle} checked={sameAsFinal} />
-                                                <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Same as Reminder</div>
+                        {/* Primary Template */}
+                        {renderTemplateCard('primary', selectedTemplates.primary, `Primary ${campaignType === 'email' ? 'Email' : campaignType === 'sms' ? 'SMS' : 'Email'} Template`, true)}
+
+                        {/* Reminder Email Toggle */}
+                        {campaignType !== 'sms' && (
+                            <div className="mt-4">
+                                <div className="flex items-start gap-2 mt-1 mb-4">
+                                    <Checkbox onChange={handleReminderToggle} checked={reminderEnabled} />
+                                    <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Enable Reminder Email</div>
+                                </div>
+
+                                {reminderEnabled && (
+                                    <>
+                                        {/* Reminder Template */}
+                                        {renderTemplateCard('reminder', selectedTemplates.reminder, 'Reminder Email Template', true)}
+
+                                        {/* Frequency Selection */}
+                                        <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
+                                            selectClass_="bg-white! py-3! focus:border-primary/60!"
+                                            formProps={{ ...register("frequency", { required: reminderEnabled }) }}
+                                            errors={errors} >
+                                            <option value="daily">Daily</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="monthly">Monthly</option>
+                                        </SelectForm>
+
+                                        {/* Final Reminder Section - Only show after frequency and reminder template are selected */}
+                                        {selectedTemplates.reminder && watchedFields['frequency'] && (
+                                            <div className="mt-6">
+                                                <div className="text-secondary text-sm font-medium mb-4">Final Reminder</div>
+
+                                                <div className="flex items-start gap-2 mt-1 mb-4">
+                                                    <Checkbox onChange={handleSameAsFinalToggle} checked={sameAsFinal} />
+                                                    <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Same as Reminder</div>
+                                                </div>
+
+                                                {!sameAsFinal && renderTemplateCard('final', selectedTemplates.final, 'Final Reminder Template')}
+
                                             </div>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        )}
+                    </CampaignCard>
+                </div>
 
-                                            {!sameAsFinal && renderTemplateCard('final', selectedTemplates.final, 'Final Reminder Template')}
-
-                                        </div>
-                                    )}
-                                </>
-                            )}
+                <div>
+                    <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
+                        title="Scheduling & Launch"
+                        status={getCardStatus('scheduling')}>
+                        <div className="grid grid-cols-2 gap-3">
+                            <InputForm label="Time Zone" isRequired={true} inputType="time" inputClass="bg-white!"
+                                formProps={{ ...register("timeZone", { required: true }) }}
+                                errors={errors}
+                            />
+                            <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-3! focus:border-primary/60!"
+                                formProps={{ ...register("sendTime", { required: true }) }}
+                                errors={errors}>
+                                <option value="morning">morning (8 AM - 12 PM)</option>
+                                <option value="afternoon">afternoon (12 PM - 4 PM)</option>
+                                <option value="evening">evening (4 PM - 8 PM)</option>
+                                <option value="any-time">any time</option>
+                            </SelectForm>
                         </div>
-                    )}
-                </CampaignCard>
-            </div>
 
-            <div>
-                <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
-                    title="Scheduling & Launch"
-                    status={getCardStatus('scheduling')}>
-                    <div className="grid grid-cols-2 gap-3">
-                        <InputForm label="Time Zone" isRequired={true} inputType="time" inputClass="bg-white!"
-                            formProps={{ ...register("timeZone", { required: true }) }}
+                        <SelectForm label="Weekend Delivery" defaultOption="Restrict" selectClass_="bg-white! py-3! focus:border-primary/60!"
+                            formProps={{ ...register("weekendDelivery", { required: false }) }}
                             errors={errors}
                         />
-                        <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-3! focus:border-primary/60!"
-                            formProps={{ ...register("sendTime", { required: true }) }}
-                            errors={errors}>
-                            <option value="morning">morning (8 AM - 12 PM)</option>
-                            <option value="afternoon">afternoon (12 PM - 4 PM)</option>
-                            <option value="evening">evening (4 PM - 8 PM)</option>
-                            <option value="any-time">any time</option>
-                        </SelectForm>
-                    </div>
+                    </CampaignCard>
+                </div>
 
-                    <SelectForm label="Weekend Delivery" defaultOption="Restrict" selectClass_="bg-white! py-3! focus:border-primary/60!"
-                        formProps={{ ...register("weekendDelivery", { required: false }) }}
-                        errors={errors}
-                    />
-                </CampaignCard>
-            </div>
-
-            <div className="grid grid-cols-3 gap-3 mt-7">
-                {isAllPending ? <CancelButton title="Cancel" type="button"
-                    onClick={() => { router.push("/manage-campaigns") }}
-                    disabled={sending} /> : <SecondaryButton title="Save as Draft" type="button"
-                        onClick={handleSubmit(onSubmit)}
-                        disabled={sending} />}
-                <SecondaryButton disabled={isAllPending} title="Schedule for Later" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => { setOpenSchedule(true) }} />
-                <CancelButton title="Launch Now" disabled={sending || isAllPending}
-                    onClick={handleSubmit(onSubmit)} />
-            </div>
+                <div className="grid grid-cols-3 gap-3 mt-7">
+                    {isAllPending ? <CancelButton title="Cancel" type="button"
+                        onClick={() => { router.push("/manage-campaigns") }}
+                        disabled={sending} /> : <SecondaryButton title="Save as Draft" type="submit"
+                            disabled={sending} />}
+                    <SecondaryButton disabled={isAllPending} title="Schedule for Later" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => { setOpenSchedule(true) }} />
+                    <CancelButton title="Launch Now" disabled={sending || isAllPending} type="submit" />
+                </div>
+            </form>
         </div>
     </AdminLayout>
 }
