@@ -1,9 +1,9 @@
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
-export default function AdminLayout({ children, headerChild, cardClass = "", noCard = false, class_ = "", mainClass = "" }) {
+export default function AdminLayout({ children, headerChild, headerSearch, cardClass = "", noCard = false, class_ = "", mainClass = "" }) {
     return <div className="bg-light">
-        <Header headerChild={headerChild} />
+        <Header headerChild={headerChild} headerSearch={headerSearch} />
         <Sidebar />
         <div className={`pb-2 min-h-[calc(100dvh-114px)] px-0`}>
             <div className={`py-4 md:mt-4 min-h-[calc(100dvh_-_76px)] ${mainClass}`}>

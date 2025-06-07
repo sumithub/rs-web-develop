@@ -317,7 +317,7 @@ export const MenuBar = ({ disable }) => {
             </button>
         </div>
     )
-    return (<div className="button-group bg-[#F8F8F8] p-2 border-b border-border-color rounded-tr-[10px] rounded-tl-[10px]">
+    return (<div className="button-group bg-[#F8F8F8] p-2 border-b border-border2 rounded-tr-[10px] rounded-tl-[10px]">
         <button
             type="button"
             onClick={() => editor.chain().focus().undo().run()}
@@ -329,7 +329,7 @@ export const MenuBar = ({ disable }) => {
             </svg>
 
         </button>
-        <button
+        <button className='border-r border-text3'
             type="button"
             onClick={() => editor.chain().focus().redo().run()}
             disabled={disable || !editor.can().chain().focus().redo().run()}>
@@ -337,12 +337,11 @@ export const MenuBar = ({ disable }) => {
                 <path d="M13.1526 13.7324H7.15259C5.08259 13.7324 3.40259 12.0524 3.40259 9.98242C3.40259 7.91242 5.08259 6.23242 7.15259 6.23242H15.4026" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinejoin="round" stroke-linejoin="round" />
                 <path d="M13.6775 8.10758L15.5975 6.18758L13.6775 4.26758" stroke="#ADADAD" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
             </svg>
-
         </button>
 
         {/* Font Family Dropdown */}
         <div className="font-family-dropdown" style={{ position: 'relative', display: 'inline-block' }}>
-            <button
+            <button className='border-r border-text3'
                 type="button"
                 onClick={() => setShowFontFamilyDropdown(!showFontFamilyDropdown)}
                 disabled={disable}
@@ -350,7 +349,7 @@ export const MenuBar = ({ disable }) => {
                     // minWidth: '120px',
                     // padding: '4px 8px',
                     // border: '1px solid #ccc',
-                    borderRadius: '4px',
+                    // borderRadius: '4px',
                     // backgroundColor: '#fff',
                     cursor: 'pointer',
                     textAlign: 'left'
@@ -402,7 +401,7 @@ export const MenuBar = ({ disable }) => {
 
         {/* Font Size Dropdown */}
         <div className="font-size-dropdown" style={{ position: 'relative', display: 'inline-block' }}>
-            <button
+            <button className='border-r border-text3'
                 type="button"
                 onClick={() => setShowFontSizeDropdown(!showFontSizeDropdown)}
                 disabled={disable}
@@ -410,7 +409,7 @@ export const MenuBar = ({ disable }) => {
                     minWidth: '20px',
                     padding: '4px 8px',
                     // border: '1px solid #ccc',
-                    borderRadius: '4px',
+                    // borderRadius: '4px',
                     // backgroundColor: '#fff',
                     cursor: 'pointer'
                 }}>
@@ -489,7 +488,7 @@ export const MenuBar = ({ disable }) => {
             type="button"
             onClick={() => editor.chain().focus().toggleUnderline().run()}
             disabled={disable || !editor.can().chain().focus().toggleUnderline().run()}
-            className={editor.isActive('underline') ? 'is-active' : ''}>
+            className={`${editor.isActive('underline') ? 'is-active' : ''} border-r border-text3`} >
             <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.5 2V6.5C3.5 9.26 5.74 11.5 8.5 11.5C11.26 11.5 13.5 9.26 13.5 6.5V2" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
                 <path d="M2.5 13H12.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
@@ -545,16 +544,16 @@ export const MenuBar = ({ disable }) => {
                 style={{
                     padding: '4px 8px',
                     // border: '1px solid #ccc',
-                    borderRadius: '4px',
+                    // borderRadius: '4px',
                     // backgroundColor: '#fff',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '2px'
                 }}
-                className={editor.isActive('highlight') ? 'is-active' : ''}
+                className={`${editor.isActive('highlight') ? 'is-active' : ''} border-r border-text3`}
                 title="Background Color">
-                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="20" height="20" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 10H12L10 7L8 9L6 6L3 10Z" fill="#1F2933" />
                     <circle cx="5" cy="4" r="1.5" fill="#1F2933" />
                 </svg>
@@ -593,7 +592,7 @@ export const MenuBar = ({ disable }) => {
         <button
             type="button"
             onClick={setLink}
-            className={editor.isActive('link') ? 'is-active' : ''}
+            className={`${editor.isActive('link') ? 'is-active' : ''} border-r border-text3 mr-1`}
             disabled={disable}
         >
             <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">

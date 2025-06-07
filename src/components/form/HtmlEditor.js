@@ -33,13 +33,13 @@ export default function HtmlEditor({
     return (
         <div className={`laptop:mb-2 mb-3 w-full relative  ${containerClass}`}>
             {(label || inlineLabel) ? (inlineLabel ?
-                <label className="text-sm font-medium text-secondary capitalize">
+                <label className="text-sm font-medium text-secondary capitalize mb-1">
                     {label}{isRequired && <span className="text-danger">*</span>}
                 </label>
-                : <label className="text-sm font-medium text-secondary capitalize">
+                : <label className="text-sm font-medium text-secondary capitalize mb-1">
                     {label}{isRequired && <span className="text-danger">*</span>}
                 </label>) : ""}
-            <div className='tiptap border border-border-color rounded-[10px]'>
+            <div className='tiptap border border-border2 rounded-[10px]'>
                 <EditorProvider
                     editor={editor}
                     editable={!readOnly}
