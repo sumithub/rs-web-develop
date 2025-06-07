@@ -60,6 +60,7 @@ function ReviewAnalytics({ onSave }) {
     const [loading, setLoading] = useState(true)
     const [openEmail, setOpenEmail] = useState(false)
     const [openDownload, setOpenDownload] = useState(false)
+    const [clickSwitch, setClickSwitch] = useState(false)
 
 
     useEffect(() => {
@@ -408,7 +409,9 @@ function ReviewAnalytics({ onSave }) {
                                 <div className='p-5'>
                                     <div className="flex justify-between items-center">
                                         <h2 className='text-lg font-semibold capitalize'>Preview visibility</h2>
-                                        <Switch />
+                                        <Switch
+                                            checked={clickSwitch}
+                                            onChange={() => setClickSwitch(prev => !prev)} />
                                     </div>
                                     <div className='mt-5'>
                                         <DashboardChart title="Review Count & Average Over Time" class_="w-full object-contain mt-5 p-[15px] min-h-[426px]">
