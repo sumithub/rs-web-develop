@@ -94,6 +94,8 @@ function AddTemplate({ onClose, id }) {
 
             <div className='mt-5'>
               <HtmlEditor
+                label="Message Body"
+                isRequired={true}
                 value={body}
                 onChange={(value) => {
                   clearErrors("body")

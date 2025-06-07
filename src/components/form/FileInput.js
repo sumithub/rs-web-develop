@@ -124,7 +124,7 @@ export default function FileInput({
     return (
         <div className={class_}>
             <div className="flex justify-between items-center mb-4">
-                <div className="text-sm text-secondary font-medium">
+                <div className="text-sm text-secondary font-medium capitalize">
                     {label}
                     {isRequired ? <span className="text-danger">*</span> : ""}
                 </div>
@@ -141,10 +141,10 @@ export default function FileInput({
 
             <div
                 className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors duration-200 ${isDragOver
-                        ? 'border-primary bg-blue-50'
-                        : error
-                            ? 'border-danger'
-                            : 'border-border-color'
+                    ? 'border-primary bg-blue-50'
+                    : error
+                        ? 'border-danger'
+                        : 'border-border-color'
                     }`}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
