@@ -15,7 +15,7 @@ import PhoneForm from "../../form/PhoneForm"
 import Image from "next/image"
 import ImportCustomer from "../customers/ImportCustomer"
 
-function AddCustomer({ onClose, id }) {
+function AddCustomer({ onClose, id, onSave }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
     const [type, setType] = useState("manually")
@@ -48,7 +48,9 @@ function AddCustomer({ onClose, id }) {
             } else {
                 res = await axios.post("/api", data)
             }
-
+            if (onSave) {
+                onSave(data)
+            }
             toast.success("Customer Added Successfully")
             setSending(false)
             onClose()
