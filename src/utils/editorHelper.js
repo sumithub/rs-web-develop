@@ -324,8 +324,8 @@ export const MenuBar = ({ disable }) => {
             disabled={disable || !editor.can().chain().focus().undo().run()}>
 
             <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.84741 13.7324H11.8474C13.9174 13.7324 15.5974 12.0524 15.5974 9.98242C15.5974 7.91242 13.9174 6.23242 11.8474 6.23242H3.59741" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M5.32259 8.10758L3.40259 6.18758L5.32259 4.26758" stroke="#ADADAD" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
+                <path d="M5.84741 13.7324H11.8474C13.9174 13.7324 15.5974 12.0524 15.5974 9.98242C15.5974 7.91242 13.9174 6.23242 11.8474 6.23242H3.59741" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinejoin="round" />
+                <path d="M5.32259 8.10758L3.40259 6.18758L5.32259 4.26758" stroke="#ADADAD" strokeWidth="1.5" strokeLinejoin="round" />
             </svg>
         </button>
 
@@ -334,8 +334,8 @@ export const MenuBar = ({ disable }) => {
             onClick={() => editor.chain().focus().redo().run()}
             disabled={disable || !editor.can().chain().focus().redo().run()}>
             <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13.1526 13.7324H7.15259C5.08259 13.7324 3.40259 12.0524 3.40259 9.98242C3.40259 7.91242 5.08259 6.23242 7.15259 6.23242H15.4026" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M13.6775 8.10758L15.5975 6.18758L13.6775 4.26758" stroke="#ADADAD" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
+                <path d="M13.1526 13.7324H7.15259C5.08259 13.7324 3.40259 12.0524 3.40259 9.98242C3.40259 7.91242 5.08259 6.23242 7.15259 6.23242H15.4026" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinejoin="round" />
+                <path d="M13.6775 8.10758L15.5975 6.18758L13.6775 4.26758" stroke="#ADADAD" strokeWidth="1.5" strokeLinejoin="round" />
             </svg>
         </button>
 
@@ -356,7 +356,7 @@ export const MenuBar = ({ disable }) => {
                 }}>
                 {getCurrentFontFamily()}
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ float: 'right', marginTop: '2px' }}>
-                    <path d="M10.46 4.47469L7.20004 7.73469C6.81504 8.11969 6.18504 8.11969 5.80004 7.73469L2.54004 4.47469" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinejoin="round" stroke-linejoin="round" />
+                    <path d="M10.46 4.47469L7.20004 7.73469C6.81504 8.11969 6.18504 8.11969 5.80004 7.73469L2.54004 4.47469" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinejoin="round" />
                 </svg>
             </button>
             {showFontFamilyDropdown && (
@@ -415,7 +415,7 @@ export const MenuBar = ({ disable }) => {
                 {getCurrentFontSize()}px
 
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.46 4.47469L7.20004 7.73469C6.81504 8.11969 6.18504 8.11969 5.80004 7.73469L2.54004 4.47469" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinejoin="round" stroke-linejoin="round" />
+                    <path d="M10.46 4.47469L7.20004 7.73469C6.81504 8.11969 6.18504 8.11969 5.80004 7.73469L2.54004 4.47469" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinejoin="round" />
                 </svg>
             </button>
             {showFontSizeDropdown && (
@@ -462,8 +462,8 @@ export const MenuBar = ({ disable }) => {
             disabled={disable || !editor.can().chain().focus().toggleBold().run()}
             className={editor.isActive('bold') ? 'is-active' : ''}>
             <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.34668 2.62565C3.34668 1.98398 3.87168 1.45898 4.51335 1.45898H7.50001C9.02835 1.45898 10.2708 2.70148 10.2708 4.22982C10.2708 5.75815 9.02835 7.00065 7.50001 7.00065H3.34668V2.62565Z" stroke="#1F2933" strokeWidth="2" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M3.34668 7H8.88835C10.4167 7 11.6592 8.2425 11.6592 9.77083C11.6592 11.2992 10.4167 12.5417 8.88835 12.5417H4.51335C3.87168 12.5417 3.34668 12.0167 3.34668 11.375V7V7Z" stroke="#1F2933" strokeWidth="2" strokeLinejoin="round" stroke-linejoin="round" />
+                <path d="M3.34668 2.62565C3.34668 1.98398 3.87168 1.45898 4.51335 1.45898H7.50001C9.02835 1.45898 10.2708 2.70148 10.2708 4.22982C10.2708 5.75815 9.02835 7.00065 7.50001 7.00065H3.34668V2.62565Z" stroke="#1F2933" strokeWidth="2" strokeLinejoin="round" />
+                <path d="M3.34668 7H8.88835C10.4167 7 11.6592 8.2425 11.6592 9.77083C11.6592 11.2992 10.4167 12.5417 8.88835 12.5417H4.51335C3.87168 12.5417 3.34668 12.0167 3.34668 11.375V7V7Z" stroke="#1F2933" strokeWidth="2" strokeLinejoin="round" />
             </svg>
         </button>
 
@@ -473,9 +473,9 @@ export const MenuBar = ({ disable }) => {
             disabled={disable || !editor.can().chain().focus().toggleItalic().run()}
             className={editor.isActive('italic') ? 'is-active' : ''}>
             <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6.11157 1.75H11.5074" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M3.48657 12.25H8.88241" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M8.8125 1.75L6.1875 12.25" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
+                <path d="M6.11157 1.75H11.5074" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M3.48657 12.25H8.88241" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M8.8125 1.75L6.1875 12.25" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
             </svg>
 
         </button>
@@ -487,8 +487,8 @@ export const MenuBar = ({ disable }) => {
             disabled={disable || !editor.can().chain().focus().toggleUnderline().run()}
             className={`${editor.isActive('underline') ? 'is-active' : ''} border-r border-text3`} >
             <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.5 2V6.5C3.5 9.26 5.74 11.5 8.5 11.5C11.26 11.5 13.5 9.26 13.5 6.5V2" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M2.5 13H12.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
+                <path d="M3.5 2V6.5C3.5 9.26 5.74 11.5 8.5 11.5C11.26 11.5 13.5 9.26 13.5 6.5V2" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M2.5 13H12.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
             </svg>
         </button>
 
@@ -514,7 +514,7 @@ export const MenuBar = ({ disable }) => {
                     <path d="M0.5 11.8864H8.89915V12.7045H0.5V11.8864Z" fill={getCurrentTextColor()} />
                 </svg>
                 <svg width="15" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.46 4.47469L7.20004 7.73469C6.81504 8.11969 6.18504 8.11969 5.80004 7.73469L2.54004 4.47469" stroke="#ADADAD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M10.46 4.47469L7.20004 7.73469C6.81504 8.11969 6.18504 8.11969 5.80004 7.73469L2.54004 4.47469" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" />
                 </svg>
 
 
@@ -566,7 +566,7 @@ export const MenuBar = ({ disable }) => {
                 </svg>
 
                 <svg width="15" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.46 4.47469L7.20004 7.73469C6.81504 8.11969 6.18504 8.11969 5.80004 7.73469L2.54004 4.47469" stroke="#ADADAD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M10.46 4.47469L7.20004 7.73469C6.81504 8.11969 6.18504 8.11969 5.80004 7.73469L2.54004 4.47469" stroke="#ADADAD" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" />
                 </svg>
 
                 {/* <svg width="20" height="20" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -628,10 +628,10 @@ export const MenuBar = ({ disable }) => {
             disabled={disable}
             title="Align Left">
             <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.5 2.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M1.5 5.5H9.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M1.5 8.5H11.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M1.5 11.5H7.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
+                <path d="M1.5 2.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M1.5 5.5H9.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M1.5 8.5H11.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M1.5 11.5H7.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
             </svg>
         </button>
         <button
@@ -641,10 +641,10 @@ export const MenuBar = ({ disable }) => {
             disabled={disable}
             title="Align Center">
             <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.5 2.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M3.5 5.5H11.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M2.5 8.5H12.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M4.5 11.5H10.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
+                <path d="M1.5 2.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M3.5 5.5H11.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M2.5 8.5H12.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M4.5 11.5H10.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
             </svg>
         </button>
         <button
@@ -654,10 +654,10 @@ export const MenuBar = ({ disable }) => {
             disabled={disable}
             title="Align Right">
             <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.5 2.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M5.5 5.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M3.5 8.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M7.5 11.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
+                <path d="M1.5 2.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M5.5 5.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M3.5 8.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M7.5 11.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
             </svg>
         </button>
         <button
@@ -667,10 +667,10 @@ export const MenuBar = ({ disable }) => {
             disabled={disable}
             title="Justify">
             <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.5 2.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M1.5 5.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M1.5 8.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
-                <path d="M1.5 11.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" stroke-linejoin="round" />
+                <path d="M1.5 2.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M1.5 5.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M1.5 8.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M1.5 11.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
             </svg>
         </button>
         {/* Color Highlight Buttons */}
