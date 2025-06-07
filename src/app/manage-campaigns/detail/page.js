@@ -147,7 +147,6 @@ export default function Detail({ }) {
                 reminderEnabled,
                 sameAsFinal
             }
-            console.log(submissionData, data)
             let res = null
             if (id !== "add") {
                 res = await axios.put("/api", submissionData)
@@ -168,7 +167,6 @@ export default function Detail({ }) {
     }
 
     const handleTemplateSave = (templateData) => {
-        console.log(templateData)
         setSelectedTemplates(prev => ({
             ...prev,
             [templateSelectionMode]: templateData
