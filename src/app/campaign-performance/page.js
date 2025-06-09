@@ -302,7 +302,7 @@ function ReviewAnalytics() {
 
                         <div>
                             <h2 className='text-lg font-semibold capitalize'>Email & Scheduling options</h2>
-                            <div className='grid grid-cols-2 gap-[15px]'>
+                            <div className='grid grid-cols-2 items-end gap-[15px]'>
                                 <SelectForm
                                     defaultOption="Select Frequency"
                                     label="Frequency"

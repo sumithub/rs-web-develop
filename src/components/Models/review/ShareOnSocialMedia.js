@@ -47,7 +47,7 @@ export default function ShareOnSocialMedia({ onClose, onSave }) {
                             onClose()
                         }}
                         class_="mt-[25px]!"
-                        placeholder="https://code-with.com"
+                        placeholder=""
                         label=""
                     />
                 </div>
