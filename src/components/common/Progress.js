@@ -22,37 +22,36 @@ export default function ProgressTopBar({ stepTitle1, stepTitle2, stepTitle3, ste
         { number: 5, title: stepTitle5 }
     ].filter(s => s.title)
 
-    return (
-        <div className={`flex justify-center items-center md:mb-10 mb-6 ${class_}`}>
-            <div className="flex items-center mb-7">
-                {steps.map((stepItem, index) => {
-                    const stepStatus = getStepStatus(stepItem.number)
-                    const isLastStep = index === steps.length - 1
+    return (<div className={`flex justify-center items-center md:mb-10 mb-6 w-3/4 mx-auto ${class_}`}>
+        <div className={`grid mb-7 w-full`} style={{ gridTemplateColumns: `repeat(${steps.length - 1}, 1fr) auto` }}>
+            {steps.map((stepItem, index) => {
+                const stepStatus = getStepStatus(stepItem.number)
+                const isLastStep = index === steps.length - 1
 
-                    return (
-                        <div key={stepItem.number} className="flex items-center">
-                            <div
-                                className={`steps ${stepStatus.class}`}
-                                role="button"
-                                onClick={() => {
-                                    if (step > stepItem.number) {
-                                        // setStep(stepItem.number) - uncomment when you need navigation
-                                    }
-                                }}
-                            >
-                                <span className="step-number">{stepStatus.content}</span>
-                                <div className={`step-title ${step === stepItem.number ? "show" : "hide"}`}>
-                                    {stepItem.title}
-                                </div>
+                return (
+                    <div key={stepItem.number} className="flex items-center">
+                        <div
+                            className={`steps ${stepStatus.class}`}
+                            role="button"
+                            onClick={() => {
+                                if (step > stepItem.number) {
+                                    // setStep(stepItem.number) - uncomment when you need navigation
+                                }
+                            }}
+                        >
+                            <span className="step-number">{stepStatus.content}</span>
+                            <div className={`step-title ${step === stepItem.number ? "show" : "hide"}`}>
+                                {stepItem.title}
                             </div>
-
-                            {!isLastStep && (
-                                <span className={`line ${getLineClass(stepItem.number)}`}></span>
-                            )}
                         </div>
-                    )
-                })}
-            </div>
+
+                        {!isLastStep && (
+                            <span className={`line w-full! ${getLineClass(stepItem.number)}`}></span>
+                        )}
+                    </div>
+                )
+            })}
         </div>
+    </div>
     )
 }

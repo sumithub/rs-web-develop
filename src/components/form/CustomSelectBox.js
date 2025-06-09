@@ -129,19 +129,16 @@ export default function CustomSelectBox({
             {/* Hidden real select for form compatibility */}
             <select
                 className="sr-only"
-                value={multiSelect ? "" : value}
+                value={multiSelect ? [] : value}
                 disabled={disabled}
                 onChange={onChange}
                 multiple={multiSelect}>
                 {children}
             </select>
 
-            <button
-                type="button"
-                className={`w-full border border-border-color py-[7.7px] px-1.5 capitalize focus-visible:outline-none text-[13px] text-text3 rounded-t-md flex justify-between items-center ${!isOpen ? 'rounded-b-md' : ''} ${selectClass_}`}
-                onClick={() => !disabled && setIsOpen(!isOpen)}
-                disabled={disabled}
-            >
+            <div
+                className={`${disabled ? "pointer-events-none" : ""} w-full border border-border-color py-[7.7px] px-1.5 capitalize focus-visible:outline-none text-[13px] text-text3 rounded-t-md flex justify-between items-center ${!isOpen ? 'rounded-b-md' : ''} ${selectClass_}`}
+                onClick={() => !disabled && setIsOpen(!isOpen)}            >
                 <span className="capitalize truncate text-left flex-1">
                     {getSelectedLabel()}
                 </span>
@@ -167,7 +164,7 @@ export default function CustomSelectBox({
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
-            </button>
+            </div>
 
             {/* Dropdown options */}
             {isOpen && (
