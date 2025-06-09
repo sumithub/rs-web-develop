@@ -9,6 +9,8 @@ import { useState } from "react";
 
 export default function AssignReviewToUser({ onClose, onSave }) {
     const [openAssign, setOpenAssign] = useState(false)
+    const [search, setSearch] = useState("")
+
     return (
         <Model onClose={onClose} title="Assign Review to a user" modalClass="w-[50%]!">
             {openAssign &&
@@ -51,7 +53,12 @@ export default function AssignReviewToUser({ onClose, onSave }) {
                 </div>
 
                 <div>
-                    <Search placeholder="Search by Name or Email" mainClass="w-[80%]! ml-auto!" />
+                    <Search placeholder="Search by Name or Email"
+                        mainClass="w-[80%]! ml-auto!"
+                        onSearch={(s) => {
+                            setSearch(s)
+                        }}
+                    />
                 </div>
             </div>
 

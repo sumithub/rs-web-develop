@@ -108,7 +108,7 @@ export default function ReviewWidgets() {
                         </div>
                     </div>
                     <SecondaryButton
-                        class_="text-lg py-3! mt-5"
+                        class_="text-lg mt-5"
                         title="Carousel Review Widget"
                         onClick={() => handleOpenModal("Carousel")}
                     />
@@ -139,7 +139,7 @@ export default function ReviewWidgets() {
 
                 <CancelButton
                     title="Grid Review Widget"
-                    class_="mt-5! bg-white border-primary text-primary! py-3 rounded-[10px] hover:bg-primary! hover:text-white!"
+                    class_="mt-5! bg-white border-primary text-primary! rounded-[10px] hover:bg-primary! hover:text-white!"
                     onClick={() => handleOpenModal("GridWidget")}
                 />
             </div>
@@ -168,7 +168,7 @@ export default function ReviewWidgets() {
                 <div className="bg-border2 w-full p-10 rounded-sm mt-3.5" />
                 <CancelButton
                     title="Testimonial Card Widget"
-                    class_="mt-5! bg-white border-primary text-primary! py-3 rounded-[10px] hover:bg-primary! hover:text-white!"
+                    class_="mt-5! bg-white border-primary text-primary! rounded-[10px] hover:bg-primary! hover:text-white!"
                     onClick={() => handleOpenModal("TestimonialWidget")}
                 />
             </div>
@@ -197,7 +197,7 @@ export default function ReviewWidgets() {
 
                 <CancelButton
                     title="Floating Review"
-                    class_="mt-5! bg-white border-primary text-primary! py-3 rounded-[10px] hover:bg-primary! hover:text-white!"
+                    class_="mt-5! bg-white border-primary text-primary! rounded-[10px] hover:bg-primary! hover:text-white!"
                     onClick={() => handleOpenModal("FloatingButtonWidget")}
                 />
             </div>
@@ -304,12 +304,10 @@ export default function ReviewWidgets() {
 
                 <CancelButton
                     title="Star Rating Badge"
-                    class_="mt-5! bg-white border-primary text-primary! py-3 rounded-[10px] hover:bg-primary! hover:text-white!"
+                    class_="mt-5! bg-white border-primary text-primary! rounded-[10px] hover:bg-primary! hover:text-white!"
                     onClick={() => handleOpenModal("StarBadgeWidget")}
                 />
-
             </div>
-
         </main>
     </AdminLayout>
 

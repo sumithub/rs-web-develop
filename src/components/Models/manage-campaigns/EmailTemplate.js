@@ -55,7 +55,7 @@ export default function EmailTemplate({ onClose, onSave }) {
                         <option value="filter 2">Filter 2</option>
                     </CustomSelectBox>
                     <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
-                        onClick={onSave} />
+                        onClick={() => onSave({})} />
                 </div>
             </div>
 

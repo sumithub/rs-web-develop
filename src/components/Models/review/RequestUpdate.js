@@ -9,12 +9,12 @@ import { useForm } from "react-hook-form";
 import HtmlEditor from "../../form/HtmlEditor";
 
 export default function RequestUpdate({ onClose, onSave }) {
-    const { handleSubmit } = useForm();
+    const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async () => {
         try {
-            toast.success("Requsted Successfully")
+            toast.success("Requested Successfully")
             setSending(false)
             onClose()
         } catch (error) {
@@ -22,6 +22,7 @@ export default function RequestUpdate({ onClose, onSave }) {
             setSending(false)
         }
     }
+
     return (
         <Model onClose={onClose} title="Request Update" modalClass="w-[80%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -54,8 +55,12 @@ export default function RequestUpdate({ onClose, onSave }) {
                         </div>
 
                         <div className="pt-5">
-                            <div>Message</div>
-                            <HtmlEditor />
+                            <HtmlEditor
+                                label="Message"
+                                isRequired={true}
+                                formProps={{ ...register("from", { required: true }) }}
+                                errors={errors} clearErrors={clearErrors}
+                            />
                         </div>
                         <div className="grid grid-cols-2 gap-3 mt-50">
                             <CancelButton title="cancel" onClick={onClose} />
@@ -104,6 +109,6 @@ export default function RequestUpdate({ onClose, onSave }) {
                     </div>
                 </div>
             </form>
-        </Model >
+        </Model>
     )
 }
