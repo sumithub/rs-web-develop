@@ -12,14 +12,16 @@ import { getError } from "../../../../helper";
 import InputForm from "../../form/InputForm";
 import Image from "next/image";
 import Switch from "../../../components/form/Switch";
+import ColorInputForm from "../../form/ColorInputForm";
 
 export default function Carousel({ title, onClose, OnSave, id, onNext }) {
-    const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
+    const { register, setValue, handleSubmit, clearErrors, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
     const normalizedTitle = title?.toLowerCase();
     const [clickSwitch, setClickSwitch] = useState(false)
     const [clickSwitch1, setClickSwitch1] = useState(false)
+    const [checked, setChecked] = useState(false)
 
     const onSubmit = async (data) => {
         try {
@@ -74,8 +76,19 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                         {hasDesignSection() && (
                             <div className="p-[15px] bg-dark rounded-[15px]">
                                 <h2 className="text-lg font-semibold">Design</h2>
-                                <div className="grid grid-cols-3 gap-[15px] pt-2.5">
-                                    <InputForm
+                                <div className="grid grid-cols-3 items-center gap-[15px] pt-2.5">
+
+                                    <ColorInputForm label="Color Scheme"
+                                        isRequired={normalizedTitle.includes("carousel") ? true : false}
+                                        class_="mt-0!"
+                                        labelClass="pb-2.5! inline-block"
+                                        bgClass="border border-primary3/10 bg-white!"
+                                        formProps={{ ...register("colorScheme", { required: normalizedTitle.includes("carousel") ? true : false }) }}
+                                        errors={errors}
+                                        setValue={setValue}
+
+                                    />
+                                    {/* <InputForm
                                         label="Color Scheme"
                                         isRequired={normalizedTitle.includes("carousel") ? true : false}
                                         placeholder="Select Color"
@@ -84,7 +97,8 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                         inputClass="border border-primary3/10 p-2.5! bg-white!"
                                         labelClass="pb-2.5! inline-block"
                                         class_="mt-0!"
-                                    />
+                                    />  */}
+
                                     <SelectForm
                                         label="Font Family"
                                         isRequired={normalizedTitle.includes("carousel") ? true : false}
@@ -93,7 +107,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                         errors={errors}
                                         class_="mt-0!"
                                         labelClass="pb-2.5 inline-block mb-0!"
-                                        selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                        selectClass_="border border-primary3/10 py-3.5! px-2.5! bg-white! text-sm!"
                                         clearErrors={clearErrors} >
                                         <option value="inter">Inter</option>
                                         <option value="arial">Arial</option>
@@ -105,7 +119,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                         placeholder="Enter Border Radius"
                                         formProps={{ ...register("borderRadius", { required: normalizedTitle.includes("carousel") ? true : false }) }}
                                         errors={errors}
-                                        inputClass="border border-primary3/10 p-2.5! bg-white!"
+                                        inputClass="border border-primary3/10 py-[13.2px]! px-2.5! bg-white!"
                                         labelClass="pb-2.5! inline-block"
                                         class_="mt-0!"
                                     />
@@ -236,7 +250,10 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             <h3 className="text-base pt-2.5 font-medium">Select up to 3</h3>
                             <div className="flex gap-[15px] items-center pt-[15px]">
                                 <div className="flex gap-2.5 items-center">
-                                    <Checkbox />
+                                    <Checkbox
+                                        checked={checked}
+                                        onChange={(checked) => setChecked(checked)}
+                                    />
                                     <div>Google</div>
                                 </div>
                                 <div className="flex gap-2.5 items-center">
@@ -369,6 +386,6 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                     </div>
                 </div>
             </form>
-        </Model>
+        </Model >
     )
 }
