@@ -73,8 +73,8 @@ export default function BoostRequest({ onClose, onSave, id }) {
             }
             toast.success("Request Sent Successfully")
             setSending(false)
-            onClose()
             if (onSave) { onSave() }
+            onClose()
         } catch (error) {
             toast.error(getError(error))
             setSending(false)
