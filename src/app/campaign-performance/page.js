@@ -306,12 +306,12 @@ function ReviewAnalytics() {
                                 <SelectForm
                                     defaultOption="Select Frequency"
                                     label="Frequency"
-                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    labelClass="inline-block mb-0!"
                                     isRequired={true}
                                     formProps={{ ...register("select", { required: true }) }}
                                     errors={errors}
                                     class_="mt-0!"
-                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                    selectClass_="border border-primary3/10 py-3! px-2.5! bg-white! text-sm!"
                                     clearErrors={clearErrors}
                                 >
                                     <option value="selectFont">Select Font</option>

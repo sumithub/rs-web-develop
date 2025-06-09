@@ -139,9 +139,9 @@ function Customers() {
                             setView("history")
                         }} className={`${view === "history" ? "text-primary font-semibold underline underline-offset-4" : "text-text3 font-normal"} cursor-pointer shrink-0`}>Customer List History</div>
                     </div>
-                    {view === "customer" && <div className='flex gap-3 items-center justify-end w-full'>
+                    {view === "customer" && <div className='grid grid-cols-[1.5fr_0.8fr_0.5fr_0.8fr] gap-3 items-center justify-end'>
                         <Search
-                            mainClass='w-[38%]!'
+                            mainClass='w-full!'
                             placeholder="Search by Filter by name, email, phone"
                             onSearch={(s) => {
                                 setSearch(s)
@@ -165,7 +165,6 @@ function Customers() {
                         <button className="bg-primary border border-primary text-xs hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
                             onClick={() => { setOpen(true) }}>Add New Customer</button>
                     </div>}
-
                     {view === "history" && <div className='flex justify-between items-center gap-[15px]'>
                         <div className='w-60!'>
                             <Search
