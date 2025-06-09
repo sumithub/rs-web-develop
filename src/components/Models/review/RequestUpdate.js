@@ -17,7 +17,7 @@ export default function RequestUpdate({ onClose, onSave }) {
         try {
             setSending(true);
             await axios.post("/api");
-            toast.success("Reqested Successfully");
+            toast.success("Requested Successfully");
             onClose()
         } catch (error) {
             toast.error(getError(error));
