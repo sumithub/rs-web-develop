@@ -56,6 +56,7 @@ export default function AddManualReview({ onClose, onSave, id }) {
                     <div className="grid grid-cols-2 gap-3">
                         <InputForm label="First Name" isRequired={true}
                             formProps={{ ...register("firstName", { required: true }) }}
+                            inputClass="border-primary/10!"
                             errors={errors}
                             setValue={setValue} />
 
