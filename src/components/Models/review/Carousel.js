@@ -1,6 +1,7 @@
 "use client"
 import Model from "../Model";
 import Checkbox from "../../form/Checkbox";
+import CheckboxForm from "../../form/CheckboxForm";
 import SecondaryButton from "../../common/SecondaryButton";
 import CodePreviewBox from "./CodePreviewBox";
 import { useState } from "react";
@@ -15,13 +16,12 @@ import Switch from "../../../components/form/Switch";
 import ColorInputForm from "../../form/ColorInputForm";
 
 export default function Carousel({ title, onClose, OnSave, id, onNext }) {
-    const { register, setValue, handleSubmit, clearErrors, formState: { errors } } = useForm();
+    const { register, setValue, watch, handleSubmit, clearErrors, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
     const normalizedTitle = title?.toLowerCase();
     const [clickSwitch, setClickSwitch] = useState(false)
     const [clickSwitch1, setClickSwitch1] = useState(false)
-    const [checked, setChecked] = useState(false)
 
     const onSubmit = async (data) => {
         try {
@@ -250,18 +250,24 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             <h3 className="text-base pt-2.5 font-medium">Select up to 3</h3>
                             <div className="flex gap-[15px] items-center pt-[15px]">
                                 <div className="flex gap-2.5 items-center">
-                                    <Checkbox
-                                        checked={checked}
-                                        onChange={(checked) => setChecked(checked)}
+                                    <CheckboxForm
+                                        checked={watch("google")}
+                                        formProps={{ ...register("google") }} errors={errors}
                                     />
                                     <div>Google</div>
                                 </div>
                                 <div className="flex gap-2.5 items-center">
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        checked={watch("trustpilot")}
+                                        formProps={{ ...register("trustpilot") }} errors={errors}
+                                    />
                                     <div>Trustpilot</div>
                                 </div>
                                 <div className="flex gap-2.5 items-center">
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        checked={watch("yelp")}
+                                        formProps={{ ...register("yelp") }} errors={errors}
+                                    />
                                     <div>Yelp</div>
                                 </div>
                             </div>
