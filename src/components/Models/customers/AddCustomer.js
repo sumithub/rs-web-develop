@@ -7,7 +7,7 @@ import RadioForm from "../../form/RadioForm"
 import Radio from "../../form/Radio"
 import SelectForm from "../../form/SelectForm"
 import Model from "../Model"
-import { getError } from "../../../../helper"
+import { getError, validEmailRgx } from "../../../../helper"
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -88,7 +88,14 @@ function AddCustomer({ onClose, id, onSave }) {
                                 errors={errors} />
 
                             <InputForm label="Email" placeholder="Enter email" isRequired={true}
-                                formProps={{ ...register("email", { required: true }) }}
+                                formProps={{
+                                    ...register("email", {
+                                        required: true, pattern: {
+                                            value: validEmailRgx,
+                                            message: "Email is invalid."
+                                        },
+                                    })
+                                }}
                                 errors={errors} />
 
                             <PhoneForm label="Primary Phone"
@@ -144,7 +151,7 @@ function AddCustomer({ onClose, id, onSave }) {
 
             {type === "manually" && <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="Cancel" onClick={onClose} />
-                <SecondaryButton title=" Apply Changes" type="submit" disabled={sending} />
+                <SecondaryButton title="Apply Changes" type="submit" disabled={sending} />
             </div>}
         </form>
 

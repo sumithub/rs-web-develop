@@ -129,8 +129,8 @@ function Customers() {
             }
 
             <div>
-                <div className="flex justify-between w-full items-center mb-3">
-                    <div className='flex items-center gap-10 bg-white shadow-sm rounded-[10px] py-[15px] px-[20px] w-[42%]'>
+                <div className="flex justify-between items-center mb-3 w-full">
+                    <div className='flex items-center gap-10 bg-white shadow-sm rounded-[10px] py-[15px] px-[20px]'>
                         <div onClick={() => {
                             setView("customer")
                         }} className={`${view === "customer" ? "text-primary font-semibold underline underline-offset-4" : "text-text3 font-normal"} cursor-pointer shrink-0`}>All Customers</div>
