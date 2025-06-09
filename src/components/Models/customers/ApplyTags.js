@@ -11,6 +11,8 @@ import CustomSelectBox from '../../form/CustomSelectBox'
 function ApplyTags({ onClose }) {
     const [sending, setSending] = useState(false);
     const [type, setType] = useState([])
+    const [type1, setType1] = useState([])
+    const [type2, setType2] = useState([])
 
     const onSubmit = async () => {
         try {
@@ -54,9 +56,9 @@ function ApplyTags({ onClose }) {
                             selectClass_='border-primary3/10!'
                             class_="mt-0! w-36!"
                             multiSelect={true}
-                            value={type}
+                            value={type1}
                             onChange={(e) => {
-                                setType(e.target.value)
+                                setType1(e.target.value)
                             }}>
                             <option value="high-value">High Value</option>
                             <option value="imported-list">Imported List A</option>
@@ -72,9 +74,9 @@ function ApplyTags({ onClose }) {
                             selectClass_='border-primary3/10!'
                             class_="mt-0! w-36!"
                             multiSelect={true}
-                            value={type}
+                            value={type2}
                             onChange={(e) => {
-                                setType(e.target.value)
+                                setType2(e.target.value)
                             }}>
                             <option value="high-value">High Value</option>
                             <option value="imported-list">Imported List A</option>

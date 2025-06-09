@@ -241,8 +241,9 @@ export default function Review() {
             </div>
 
             <div className="bg-white min-h-[calc(100vh_-_85px)] rounded-[10px] mt-5 p-5">
-                <div className="flex justify-between items-center w-full gap-[15px]">
+                <div className="flex flex-wrap justify-between items-center w-full gap-[15px]">
                     <Search
+                        mainClass="w-[33%]!"
                         placeholder="Search by customer name, review content, or source."
                         onSearch={(s) => {
                             setSearch(s)
@@ -250,7 +251,7 @@ export default function Review() {
                     />
                     <div className="flex gap-3">
                         <CustomSelectBox
-                            class_="mt-0! w-32!"
+                            class_="mt-0! w-28!"
                             defaultOption="start rating"
                             value={rating}
                             onChange={(e) => {
@@ -267,7 +268,7 @@ export default function Review() {
                             onChange={(e) => { setDate(e) }} />
 
                         <CustomSelectBox
-                            class_="mt-0! w-40!"
+                            class_="mt-0! w-36!"
                             defaultOption="Review Source"
                             value={reviewSource}
                             onChange={(e) => {
@@ -279,7 +280,7 @@ export default function Review() {
                         </CustomSelectBox>
 
                         <CustomSelectBox
-                            class_="mt-0! w-[135px]!"
+                            class_="mt-0! w-[130px]!"
                             defaultOption="Review Status"
                             value={status}
                             onChange={(e) => {
