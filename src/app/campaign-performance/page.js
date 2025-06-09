@@ -3,7 +3,6 @@ import AdminLayout from '../../components/AdminLayout'
 import React, { useEffect, useState } from 'react'
 import Checkbox from '../../components/form/Checkbox'
 import Status from '../../components/Status'
-import Image from 'next/image'
 import Search from '../../components/form/Search'
 import PaginationDemo from '../../components/Pagination'
 import CustomSelectBox from '../../components/form/CustomSelectBox';
@@ -25,8 +24,9 @@ import Download from '../../components/Models/customers/Download'
 import DatePickerForm from "../../components/form/DatePickerForm";
 import InputForm from '../../components/form/InputForm'
 import { useForm } from 'react-hook-form'
+import Image from 'next/image'
 
-function ReviewAnalytics({ onSave }) {
+function ReviewAnalytics() {
     const { register, handleSubmit, setValue, clearErrors, formState: { errors }, watch } = useForm();
     const [sending, setSending] = useState(false)
     const [filterBy, setFilterBy] = useState("")
@@ -353,7 +353,7 @@ function ReviewAnalytics({ onSave }) {
                                         title="Search Users"
                                         type='button'
                                         class_="py-[15px]! px-5! text-sm! font-normal!"
-                                        onClick={onSave}
+                                        onClick={() => { }}
                                     />
                                 </div>
                             </div>
