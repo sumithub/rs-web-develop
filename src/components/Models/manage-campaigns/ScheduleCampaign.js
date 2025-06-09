@@ -89,8 +89,8 @@ function ScheduleCampaign({ onClose, id }) {
             <Checkbox label="Saturday" class_='flex flex-row-reverse gap-4' />
             <Checkbox label="Sunday" class_='flex flex-row-reverse gap-4' />
           </div>
-
         </div>
+
         <div>
           <div className="grid grid-cols-2 gap-3 mt-3">
             <CancelButton title="Cancel" onClick={onClose} />
