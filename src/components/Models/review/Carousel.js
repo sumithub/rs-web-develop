@@ -168,7 +168,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     )}
 
                                     {/* Minimum Rating */}
-                                    {normalizedTitle !== "testimonialwidget" && <SelectForm
+                                    {(normalizedTitle !== "testimonialwidget") && <SelectForm
                                         label="Minimum Rating"
                                         isRequired={true}
                                         defaultOption="Select"
@@ -203,7 +203,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     </SelectForm>
                                 </div>}
 
-                                {normalizedTitle === "testimonialwidget" && <div className="grid grid-cols-2 gap-5">
+                                {(normalizedTitle === "testimonialwidget") && <div className="grid grid-cols-2 gap-5">
                                     <SelectForm
                                         label="Sorting"
                                         isRequired={true}
@@ -219,9 +219,9 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     </SelectForm>
                                     <SelectForm
                                         label="Minimum Rating"
-                                        isRequired={true}
+                                        isRequired={false}
                                         defaultOption="Select"
-                                        formProps={{ ...register("minimumRating", { required: true }) }}
+                                        formProps={{ ...register("minimumRating", { required: false }) }}
                                         errors={errors}
                                         class_="mt-0!"
                                         labelClass="pb-2.5 inline-block mb-0!"

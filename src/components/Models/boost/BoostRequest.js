@@ -51,13 +51,11 @@ export default function BoostRequest({ onClose, onSave, id }) {
     const onSubmit = async (data) => {
         try {
             setSending(true)
-
             if (!select) {
                 toast.error("Please select how to send (Email, SMS, or Both)")
                 setSending(false)
                 return
             }
-
             const submitData = {
                 ...data,
                 sendVia: select,
@@ -258,7 +256,7 @@ export default function BoostRequest({ onClose, onSave, id }) {
                                 label="Email"
                                 class_="mt-0!"
                                 name="sendVia"
-                                mainClass="text-sm! font-mediun!"
+                                mainClass="text-sm! font-medium!"
                                 checked={select === "email"}
                                 onChange={() => { setSelect("email") }}
                             />
@@ -266,7 +264,7 @@ export default function BoostRequest({ onClose, onSave, id }) {
                                 label="SMS"
                                 class_="mt-0!"
                                 name="sendVia"
-                                mainClass="text-sm! font-mediun!"
+                                mainClass="text-sm! font-medium!"
                                 checked={select === "sms"}
                                 onChange={() => { setSelect("sms") }}
                             />
@@ -274,7 +272,7 @@ export default function BoostRequest({ onClose, onSave, id }) {
                                 label="Both"
                                 class_="mt-0!"
                                 name="sendVia"
-                                mainClass="text-sm! font-mediun!"
+                                mainClass="text-sm! font-medium!"
                                 checked={select === "both"}
                                 onChange={() => { setSelect("both") }}
                             />
