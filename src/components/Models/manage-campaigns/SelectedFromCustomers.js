@@ -58,7 +58,7 @@ function SelectedCustomers({ onClose, onSave }) {
                     <SecondaryButton type="button" title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
                         onClick={() => {
                             if (onSave) {
-                                onSave()
+                                onSave(list.filter(e => e.selected))
                             }
                         }}
                     />
