@@ -11,6 +11,7 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import { getError } from "../../../../helper"
 import { useForm } from 'react-hook-form'
+import CheckboxForm from '../../form/CheckboxForm'
 
 function ScheduleCampaign({ onClose, id }) {
   const { register, handleSubmit, formState: { errors }, } = useForm();
@@ -81,13 +82,43 @@ function ScheduleCampaign({ onClose, id }) {
         <div>
           <div className='text-lg font-medium mt-3 mb-4'>Days of the Week <span className='text-text3 font-normal'>(Optional)</span></div>
           <div className="flex items-start gap-4">
-            <Checkbox label="Monday" class_='flex flex-row-reverse gap-4' />
-            <Checkbox label="Tuesday" class_='flex flex-row-reverse gap-4' />
-            <Checkbox label="Wednesday" class_='flex flex-row-reverse gap-4' />
-            <Checkbox label="Thursday" class_='flex flex-row-reverse gap-4' />
-            <Checkbox label="Friday" class_='flex flex-row-reverse gap-4' />
-            <Checkbox label="Saturday" class_='flex flex-row-reverse gap-4' />
-            <Checkbox label="Sunday" class_='flex flex-row-reverse gap-4' />
+            <CheckboxForm
+              label="Monday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("monday") }} errors={errors} />
+
+            <CheckboxForm
+              label="Tuesday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("Tuesday") }} errors={errors}
+            />
+            <CheckboxForm
+              label="Wednesday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("wednesday") }} errors={errors}
+            />
+            <CheckboxForm
+              label="Thursday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("thursday") }} errors={errors}
+            />
+            <CheckboxForm
+              label="Friday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("friday") }} errors={errors}
+            />
+
+            <CheckboxForm
+              label="Saturday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("saturday") }} errors={errors}
+            />
+
+            <CheckboxForm
+              label="Sunday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("sunday") }} errors={errors}
+            />
           </div>
         </div>
 

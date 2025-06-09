@@ -1,6 +1,5 @@
 "use client"
 import Model from "../Model";
-import Checkbox from "../../form/Checkbox";
 import CheckboxForm from "../../form/CheckboxForm";
 import SecondaryButton from "../../common/SecondaryButton";
 import CodePreviewBox from "./CodePreviewBox";
@@ -251,21 +250,18 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             <div className="flex gap-[15px] items-center pt-[15px]">
                                 <div className="flex gap-2.5 items-center">
                                     <CheckboxForm
-                                        checked={watch("google")}
                                         formProps={{ ...register("google") }} errors={errors}
                                     />
                                     <div>Google</div>
                                 </div>
                                 <div className="flex gap-2.5 items-center">
                                     <CheckboxForm
-                                        checked={watch("trustpilot")}
                                         formProps={{ ...register("trustpilot") }} errors={errors}
                                     />
                                     <div>Trustpilot</div>
                                 </div>
                                 <div className="flex gap-2.5 items-center">
                                     <CheckboxForm
-                                        checked={watch("yelp")}
                                         formProps={{ ...register("yelp") }} errors={errors}
                                     />
                                     <div>Yelp</div>
