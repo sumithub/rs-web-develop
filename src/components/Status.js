@@ -28,8 +28,7 @@ export default function Status({ status = "" }) {
         bgClass = "bg-gray-100 text-gray-500";
     }
 
-
     return <div>
-        <button className={`${bgClass} capitalize rounded-4xl py-1.5 px-3 text-sm text-center disabled:pointer-events-none cursor-none!`}>{status.replace("_", " ")}</button>
+        <button disabled className={`${bgClass} capitalize rounded-4xl py-1.5 px-3 text-sm text-center disabled:pointer-events-none`}>{status.replace("_", " ")}</button>
     </div>
 }

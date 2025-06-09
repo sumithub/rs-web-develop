@@ -59,7 +59,7 @@ function AddCustomer({ onClose, id, onSave }) {
             setSending(false)
         }
     }
-    return <Model onClose={onClose} title={activeStep === 6 ? "Customers Imported Successfully!" : type === "import" ? "Import Customers" : (!id ? "Add new Customer" : "Edit Customers List")} modalClass="w-[50%]!">
+    return <Model onClose={onClose} title={activeStep === 6 ? "Customers Imported Successfully!" : type === "import" ? "Import Customers" : (!id ? "Add new Customer" : "Edit Customers List")} modalClass={`${type === "manually" ? "w-1/2!" : "w-[60%]!"}`}>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 {!id && activeStep !== 6 && <div className="flex gap-4 items-center">
