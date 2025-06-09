@@ -42,7 +42,7 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
                 </div>
                 <InputForm
                     label="Business Profile URL"
-                    placeholder="https//www.google.com"
+                    placeholder="Add URL"
                     hideOptional={true}
                     isRequired={true}
                     icon="/images/add-link.svg"

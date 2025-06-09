@@ -30,36 +30,37 @@ export default function HtmlEditor({
         error = errors[formProps?.name]?.message
     }
 
-    return (<div className={`laptop:mb-2 mb-3 w-full relative ${containerClass}`}>
-        {(label || inlineLabel) ? (inlineLabel ?
-            <label className="inline left-1.5 top-4 px-1 bg-white capitalize pb-1 font-medium text-xs z-1">
-                {label}{isRequired && <span className="text-danger">*</span>}
-            </label>
-            : <label className="inline left-1.5 -top-2 px-1 capitalize pb-1 font-medium text-xs z-1">
-                {label}{isRequired && <span className="text-danger">*</span>}
-            </label>) : ""}
-        <div className='tiptap'>
-            <EditorProvider
-                editor={editor}
-                editable={!readOnly}
-                onUpdate={({ editor }) => {
-                    const html = editor.getHTML();
-                    if (html && clearErrors) {
-                        clearErrors(formProps?.name)
-                    }
-                    if (onChange) {
-                        onChange(html)
-                    }
-                    if (setValue && formProps) {
-                        setValue(formProps.name, html)
-                    }
-                }}
-                slotBefore={readOnly ? undefined : <div className='mb-4'><MenuBar /></div>}
-                extensions={extensions}
-                content={value || ""}
-            />
+    return (
+        <div className={`laptop:mb-2 mb-3 w-full relative  ${containerClass}`}>
+            {(label || inlineLabel) ? (inlineLabel ?
+                <label className="text-sm font-medium text-secondary capitalize mb-1">
+                    {label}{isRequired && <span className="text-danger">*</span>}
+                </label>
+                : <label className="text-sm font-medium text-secondary capitalize mb-1">
+                    {label}{isRequired && <span className="text-danger">*</span>}
+                </label>) : ""}
+            <div className='tiptap border border-border2 rounded-[10px]'>
+                <EditorProvider
+                    editor={editor}
+                    editable={!readOnly}
+                    onUpdate={({ editor }) => {
+                        const html = editor.getHTML();
+                        if (html && clearErrors) {
+                            clearErrors(formProps?.name)
+                        }
+                        if (onChange) {
+                            onChange(html)
+                        }
+                        if (setValue && formProps) {
+                            setValue(formProps.name, html)
+                        }
+                    }}
+                    slotBefore={readOnly ? undefined : <div className=''><MenuBar /></div>}
+                    extensions={extensions}
+                    content={value || ""}
+                />
+            </div>
+            {error && <div className="capitalize text-xs font-medium text-danger mt-1">{error}</div>}
         </div>
-        {error && <div className="capitalize text-xs font-medium text-danger mt-1">{error}</div>}
-    </div>
     )
 }

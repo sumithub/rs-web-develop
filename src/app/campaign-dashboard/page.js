@@ -16,8 +16,8 @@ import DateRange from "../../components/form/DateRangePicker";
 
 export default function CampaignDashboard() {
     const [date, setDate] = useState("")
-    const [rating, setRating] = useState("")
-    const [reviewSource, setReviewSource] = useState("")
+    const [rating, setRating] = useState([])
+    const [reviewSource, setReviewSource] = useState([])
     const [loading, setLoading] = useState(true);
     const [list, setList] = useState([])
 

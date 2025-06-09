@@ -23,7 +23,7 @@ export default function ReviewResponseTemplates({ onClose }) {
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
-    const [rating, setRating] = useState("")
+    const [rating, setRating] = useState([])
 
     useEffect(() => {
         getReviewResponse()

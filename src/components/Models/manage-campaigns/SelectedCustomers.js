@@ -10,8 +10,9 @@ import { toast } from "react-toastify"
 import { getError } from "../../../../helper"
 import { selectedCustomers } from "../../../constent/constArray"
 import Loading from "../../Loading"
+import FileInput from "../../form/FileInput"
 
-function SelectedCustomers({ onClose, onSave }) {
+function SelectedCustomers({ onClose, onSave, type, action, selected = 0 }) {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
@@ -25,7 +26,15 @@ function SelectedCustomers({ onClose, onSave }) {
         try {
             setLoading(true)
             const res = await axios.get("/api")
-            setList(res.data || selectedCustomers)
+            const customers = res.data || selectedCustomers
+
+            // Add selected: true to the first 'count' number of customers
+            const updatedCustomers = customers.map((customer, index) => ({
+                ...customer,
+                selected: index < selected
+            }))
+
+            setList(updatedCustomers)
             setLoading(false)
 
         } catch (error) {
@@ -43,12 +52,23 @@ function SelectedCustomers({ onClose, onSave }) {
                             setSearch(s)
                         }}
                     />
-                    <SecondaryButton title="Add Selected" class_="text-sm! font-normal!"
-                        onClick={onSave} />
+                    <SecondaryButton title={type === "CSV" ? "Save" : (action === "details" ? "Delete" : "Add Selected")} class_="text-sm! font-normal!"
+                        onClick={() => {
+                            if (onSave)
+                                onSave(list.filter(e => e.selected).length || 5)
+                        }} />
                 </div>
             </div>
 
-            <div className="table-class">
+            {type === "CSV" ? <div>
+                <div>
+                    <FileInput
+                        accept=".csv"
+                        isRequired={true}
+                        label="Upload file"
+                    />
+                </div>
+            </div> : <div className="table-class">
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
@@ -88,7 +108,7 @@ function SelectedCustomers({ onClose, onSave }) {
                 {list?.length > 0 && <div>
                     <PaginationDemo />
                 </div>}
-            </div>
+            </div>}
         </Model>
     )
 }

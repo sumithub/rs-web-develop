@@ -16,7 +16,7 @@ import axios from "axios";
 import Loading from "../../components/Loading";
 
 export default function SentimentAnalysis() {
-    const [filterBy, setFilterBy] = useState("")
+    const [filterBy, setFilterBy] = useState([])
     const [date, setDate] = useState("")
     const [loading, setLoading] = useState(true);
     const [list, setList] = useState([])
