@@ -5,12 +5,34 @@ import Model from "../Model";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import AssignToUser from "../review/AssignToUser"
-import { useState } from "react";
+import { useMemo, useState } from "react";
+
+ const allUsers = [
+  { id: 1, name: "John Deo", email: "john@example.com" },
+  { id: 2, name: "Sarah Smith", email: "sarah@example.com" },
+  { id: 3, name: "Alex Brown", email: "alex@example.com" },
+];
 
 export default function AssignReviewToUser({ onClose, onSave }) {
     const [openAssign, setOpenAssign] = useState(false)
-    const [search, setSearch] = useState("")
+   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedUsers, setSelectedUsers] = useState({});
 
+  const handleCheck = (id, checked) => {
+    setSelectedUsers((prev) => ({
+      ...prev,
+      [id]: checked,
+    }));
+  };
+
+  const filteredUsers = useMemo(() => {
+    return allUsers.filter((user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
+
+ 
     return (
         <Model onClose={onClose} title="Assign Review to a user" modalClass="w-[50%]!">
             {openAssign &&
@@ -55,15 +77,28 @@ export default function AssignReviewToUser({ onClose, onSave }) {
                 <div>
                     <Search placeholder="Search by Name or Email"
                         mainClass="w-[80%]! ml-auto!"
-                        onSearch={(s) => {
-                            setSearch(s)
-                        }}
+                      onSearch={(s) => setSearchTerm(s)}
                     />
                 </div>
             </div>
 
-            <div className="flex flex-col gap-y-3">
-                <div className="flex items-center gap-3 mt-3">
+  <div className="flex flex-col gap-y-3 mt-3">
+        {filteredUsers.length > 0 ? (
+          filteredUsers.map((user) => (
+            <div className="flex items-center gap-3" key={user.id}>
+              <Checkbox
+                checked={selectedUsers[user.id] || false}
+                onChange={(checked) => handleCheck(user.id, checked)}
+              />
+              <div className="text-secondary text-sm capitalize">{user.name}</div>
+            </div>
+          ))
+        ) : (
+          <div className="text-sm text-text3">No users found.</div>
+        )}
+      </div>
+
+                {/* <div className="flex items-center gap-3 mt-3">
                     <Checkbox />
                     <div className="text-secondary text-sm capitalize">John Deo</div>
                 </div>
@@ -76,8 +111,8 @@ export default function AssignReviewToUser({ onClose, onSave }) {
                 <div className="flex items-center gap-3">
                     <Checkbox />
                     <div className="text-secondary text-sm capitalize">Alex Brown</div>
-                </div>
-            </div>
+                </div> */}
+         
             <div className="grid grid-cols-2 gap-5 mt-[30px]">
                 <CancelButton title="Cancel" class_="text-lg! font-medium!" onClick={onClose} />
                 <SecondaryButton title="Assign" class_="text-lg! font-medium!" onClick={() => { setOpenAssign(true) }} />
