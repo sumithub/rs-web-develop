@@ -1,7 +1,6 @@
 "use client"
 import Image from "next/image";
 import Model from "../Model";
-import Radio from "../../form/Radio";
 import SecondaryButton from "../../common/SecondaryButton";
 import CancelButton from "../../common/CancelButton";
 import { useState } from "react";
@@ -10,6 +9,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import InputForm from "../../form/InputForm";
+import RadioForm from "../../form/RadioForm";
 
 export default function ResendReportEmail({ onClose, id, onSave }) {
     const { register, handleSubmit, formState: { errors }, } = useForm();
@@ -63,8 +63,16 @@ export default function ResendReportEmail({ onClose, id, onSave }) {
                 <div className="mt-3.5">
                     <h2 className="text-sm">Resend to Existing Recipients?</h2>
                     <div className="flex gap-5 pt-5">
-                        <Radio label="Yes" class_="mt-0!" />
-                        <Radio label="No" class_="mt-0!" />
+                        <RadioForm label="Yes" class_="mt-0!"
+                            name="existingRecipients"
+                            formProps={{ ...register("existingRecipients", { required: false }) }}
+                            errors={errors}
+                        />
+                        <RadioForm label="No" class_="mt-0!"
+                            name="existingRecipients"
+                            formProps={{ ...register("existingRecipients", { required: false }) }}
+                            errors={errors}
+                        />
                     </div>
                 </div>
 

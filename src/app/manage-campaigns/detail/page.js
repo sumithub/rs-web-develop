@@ -875,7 +875,7 @@ export default function Detail({ }) {
                                 <option value="morning">morning (8 AM - 12 PM)</option>
                                 <option value="afternoon">afternoon (12 PM - 4 PM)</option>
                                 <option value="evening">evening (4 PM - 8 PM)</option>
-                                <option value="any-time">any time</option>
+                                <option value="anyTime">any time</option>
                             </SelectForm>
                         </div>
 

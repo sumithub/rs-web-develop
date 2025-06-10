@@ -1,7 +1,6 @@
 "use client"
 import AdminLayout from '../../components/AdminLayout'
 import React, { useEffect, useState } from 'react'
-import Checkbox from '../../components/form/Checkbox'
 import Status from '../../components/Status'
 import Search from '../../components/form/Search'
 import PaginationDemo from '../../components/Pagination'
@@ -25,6 +24,7 @@ import DatePickerForm from "../../components/form/DatePickerForm";
 import InputForm from '../../components/form/InputForm'
 import { useForm } from 'react-hook-form'
 import Image from 'next/image'
+import CheckboxForm from '../../components/form/CheckboxForm'
 
 function ReviewAnalytics() {
     const { register, handleSubmit, setValue, clearErrors, formState: { errors }, watch } = useForm();
@@ -211,15 +211,21 @@ function ReviewAnalytics() {
                             <h2 className='text-lg font-semibold'>Select Report Sections</h2>
                             <div className='flex gap-5 pt-[15px]'>
                                 <div className='flex gap-2.5 items-center'>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("reviews") }} errors={errors}
+                                    />
                                     <h2 className='text-sm'>Reviews</h2>
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("campaigns") }} errors={errors}
+                                    />
                                     <h2 className='text-sm'>Campaigns</h2>
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("sentiments") }} errors={errors}
+                                    />
                                     <h2 className='text-sm'>Sentiments</h2>
                                 </div>
                             </div>
@@ -236,17 +242,22 @@ function ReviewAnalytics() {
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Review Over Time</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("reviewOverTime") }} errors={errors}
+                                    />
                                 </div>
                                 <div className='flex gap-2.5 items-center my-[15px]'>
                                     <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Review Rating Distribution</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("reviewRatingDistribution") }} errors={errors}
+                                    />
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/top-sources.svg" alt='top-sources' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>top review sources</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("topReviewSources") }} errors={errors} />
                                 </div>
                             </div>
                         </div>
@@ -263,17 +274,20 @@ function ReviewAnalytics() {
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Campaign Funnel Breakdown</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("campaignFunnelBreakdown") }} errors={errors} />
                                 </div>
                                 <div className='flex gap-2.5 items-center my-[15px]'>
                                     <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Campaign Performance</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("campaignPerformance") }} errors={errors} />
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/top-sources.svg" alt='top-sources' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Campaign Engagement</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("campaignEngagement") }} errors={errors} />
                                 </div>
                             </div>
                         </div>
@@ -289,12 +303,14 @@ function ReviewAnalytics() {
                                 <div className='flex gap-2.5 items-center mb-[15px]'>
                                     <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Sentiment trends</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("sentimentTrends") }} errors={errors} />
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Sentiments Distribution</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("sentimentsDistribution") }} errors={errors} />
                                 </div>
                             </div>
                         </div>
@@ -302,16 +318,16 @@ function ReviewAnalytics() {
 
                         <div>
                             <h2 className='text-lg font-semibold capitalize'>Email & Scheduling options</h2>
-                            <div className='grid grid-cols-2 gap-[15px]'>
+                            <div className='grid grid-cols-2 items-end gap-[15px]'>
                                 <SelectForm
                                     defaultOption="Select Frequency"
                                     label="Frequency"
-                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    labelClass="inline-block mb-0!"
                                     isRequired={true}
                                     formProps={{ ...register("select", { required: true }) }}
                                     errors={errors}
                                     class_="mt-0!"
-                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                    selectClass_="border border-primary3/10 py-3! px-2.5! bg-white! text-sm!"
                                     clearErrors={clearErrors}
                                 >
                                     <option value="selectFont">Select Font</option>

@@ -4,6 +4,7 @@ import SecondaryButton from "../common/SecondaryButton";
 
 export default function ImageUpload({
     class_ = "",
+    maneClass = "",
     setValue,
     watch,
     clearErrors,  // Add clearErrors prop
@@ -79,7 +80,7 @@ export default function ImageUpload({
                 {isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}
             </label>
 
-            <div className={`mt-1 border ${error ? "border-danger" : "border-input-border"} rounded-lg py-3 px-2.5 bg-white`}>
+            <div className={`mt-1 border ${error ? "border-danger" : "border-input-border"} rounded-lg py-3 px-2.5 bg-white ${maneClass}`}>
                 {!currentValue && !uploadedFileName ? (
                     // Show upload button when no image is uploaded
 

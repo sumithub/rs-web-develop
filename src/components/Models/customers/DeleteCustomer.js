@@ -28,9 +28,9 @@ export default function Customer({ onClose, title = "Customer" }) {
 
     return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
         <form onSubmit={handleSubmit(onSubmit)} className="text-center">
-            <DeleteCustomer title={`Delete ${title}`} question="Are You Sure? You want To Delete This customers." />
+            <DeleteCustomer title={`Delete ${title}`} question="Are You Sure? You want To Delete This customer." />
 
-            <div className="grid grid-cols-2 gap-3 mt-5">
+            <div className="grid grid-cols-2 gap-3 mt-8">
                 <CancelButton title="No" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
                 />
                 <SecondaryButton title=" Yes, Delete" type="submit" disabled={sending} />
@@ -40,9 +40,9 @@ export default function Customer({ onClose, title = "Customer" }) {
 }
 
 const DeleteCustomer = ({ title, question }) => {
-    return <div className="flex flex-col items-center justify-center gap-y-4">
+    return <div className="flex flex-col items-center justify-center gap-y-3">
         <Image unoptimized={true} src="/images/b-delete.svg" alt="delete" height={60} width={60} />
-        <div className="text-xl text-danger2 font-semibold capitalize">{title}</div>
+        <div className="text-xl text-danger2 font-semibold capitalize mt-3">{title}</div>
         <div className="text-sm text-text3 capitalize text-center">{question}</div>
     </div>
 }

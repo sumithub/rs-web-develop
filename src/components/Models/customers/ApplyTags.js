@@ -11,6 +11,8 @@ import CustomSelectBox from '../../form/CustomSelectBox'
 function ApplyTags({ onClose }) {
     const [sending, setSending] = useState(false);
     const [type, setType] = useState([])
+    const [type1, setType1] = useState([])
+    const [type2, setType2] = useState([])
 
     const onSubmit = async () => {
         try {
@@ -25,38 +27,50 @@ function ApplyTags({ onClose }) {
         }
     };
 
+    const TAGEDCUSTOMER = [
+
+        { name: "John Deo" }, { name: "Jaydon Bergson" }, { name: "Wilson Dorwart" }
+    ]
+
     return (
         <Model onClose={onClose} title="Apply Tags To Multiple Customers" modalClass="w-1/2!">
             <div className='text-xl font-semibold'>Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
             <div className='my-[30px]'>
-                <div className='flex justify-between items-center'>
-                    <h2 className='text-base font-medium'>John Deo</h2>
-                    <div className='w-1/5'>
-                        <CustomSelectBox
-                            selectClass_='border-primary3/10!'
-                            class_="mt-0! w-36!"
-                            multiSelect={true}
-                            value={type}
-                            onChange={(e) => {
-                                setType(e.target.value)
-                            }}>
-                            <option value="high-value">High Value</option>
-                            <option value="imported-list">Imported List A</option>
-                            <option value="vip">Vip</option>
-                        </CustomSelectBox>
+
+                {TAGEDCUSTOMER.map((e, i) => <div key={i}>
+                    <div className='flex justify-between items-center'>
+                        <h2 className='text-base font-medium'>{e.name}</h2>
+                        <div className='w-1/5'>
+                            <CustomSelectBox
+                                selectClass_='border-primary3/10!'
+                                class_="mt-0! w-36!"
+                                multiSelect={true}
+                                value={type}
+                                onChange={(e) => {
+                                    setType(e.target.value)
+                                }}>
+                                <option value="high-value">High Value</option>
+                                <option value="imported-list">Imported List A</option>
+                                <option value="vip">Vip</option>
+                            </CustomSelectBox>
+                        </div>
                     </div>
-                </div>
-                <hr className='border-t border-border2 my-[15px]' />
-                <div className='flex justify-between items-center'>
+                    {i !== TAGEDCUSTOMER.length - 1 && (
+                        <hr className='border-t border-border2 my-[15px]' />
+                    )}
+                </div>)}
+
+
+                {/* <div className='flex justify-between items-center'>
                     <h2 className='text-base font-medium'>Jaydon Bergson</h2>
                     <div className='w-1/5'>
                         <CustomSelectBox
                             selectClass_='border-primary3/10!'
                             class_="mt-0! w-36!"
                             multiSelect={true}
-                            value={type}
+                            value={type1}
                             onChange={(e) => {
-                                setType(e.target.value)
+                                setType1(e.target.value)
                             }}>
                             <option value="high-value">High Value</option>
                             <option value="imported-list">Imported List A</option>
@@ -72,16 +86,16 @@ function ApplyTags({ onClose }) {
                             selectClass_='border-primary3/10!'
                             class_="mt-0! w-36!"
                             multiSelect={true}
-                            value={type}
+                            value={type2}
                             onChange={(e) => {
-                                setType(e.target.value)
+                                setType2(e.target.value)
                             }}>
                             <option value="high-value">High Value</option>
                             <option value="imported-list">Imported List A</option>
                             <option value="vip">Vip</option>
                         </CustomSelectBox>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="grid grid-cols-2 gap-3">
                 <CancelButton title="Cancel" onClick={onClose} />

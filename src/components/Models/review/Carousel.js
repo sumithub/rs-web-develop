@@ -1,6 +1,6 @@
 "use client"
 import Model from "../Model";
-import Checkbox from "../../form/Checkbox";
+import CheckboxForm from "../../form/CheckboxForm";
 import SecondaryButton from "../../common/SecondaryButton";
 import CodePreviewBox from "./CodePreviewBox";
 import { useState } from "react";
@@ -12,9 +12,11 @@ import { getError } from "../../../../helper";
 import InputForm from "../../form/InputForm";
 import Image from "next/image";
 import Switch from "../../../components/form/Switch";
+import ColorInputForm from "../../form/ColorInputForm";
+import Slider from "react-slick";
 
 export default function Carousel({ title, onClose, OnSave, id, onNext }) {
-    const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
+    const { register, setValue, watch, handleSubmit, clearErrors, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
     const normalizedTitle = title?.toLowerCase();
@@ -56,6 +58,14 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
         return ["carousel", "floatingbuttonwidget"].includes(normalizedTitle);
     }
 
+    var settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    };
+
     return (
         <Model onClose={onClose} title={title} modalClass="w-[80%]!" >
             {open &&
@@ -74,8 +84,19 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                         {hasDesignSection() && (
                             <div className="p-[15px] bg-dark rounded-[15px]">
                                 <h2 className="text-lg font-semibold">Design</h2>
-                                <div className="grid grid-cols-3 gap-[15px] pt-2.5">
-                                    <InputForm
+                                <div className="grid grid-cols-3 items-center gap-[15px] pt-2.5">
+
+                                    <ColorInputForm label="Color Scheme"
+                                        isRequired={normalizedTitle.includes("carousel") ? true : false}
+                                        class_="mt-0!"
+                                        labelClass="pb-2.5! inline-block"
+                                        bgClass="border border-primary3/10 bg-white!"
+                                        formProps={{ ...register("colorScheme", { required: normalizedTitle.includes("carousel") ? true : false }) }}
+                                        errors={errors}
+                                        setValue={setValue}
+
+                                    />
+                                    {/* <InputForm
                                         label="Color Scheme"
                                         isRequired={normalizedTitle.includes("carousel") ? true : false}
                                         placeholder="Select Color"
@@ -84,7 +105,8 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                         inputClass="border border-primary3/10 p-2.5! bg-white!"
                                         labelClass="pb-2.5! inline-block"
                                         class_="mt-0!"
-                                    />
+                                    />  */}
+
                                     <SelectForm
                                         label="Font Family"
                                         isRequired={normalizedTitle.includes("carousel") ? true : false}
@@ -93,7 +115,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                         errors={errors}
                                         class_="mt-0!"
                                         labelClass="pb-2.5 inline-block mb-0!"
-                                        selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                        selectClass_="border border-primary3/10 py-3.5! px-2.5! bg-white! text-sm!"
                                         clearErrors={clearErrors} >
                                         <option value="inter">Inter</option>
                                         <option value="arial">Arial</option>
@@ -105,7 +127,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                         placeholder="Enter Border Radius"
                                         formProps={{ ...register("borderRadius", { required: normalizedTitle.includes("carousel") ? true : false }) }}
                                         errors={errors}
-                                        inputClass="border border-primary3/10 p-2.5! bg-white!"
+                                        inputClass="border border-primary3/10 py-[13.2px]! px-2.5! bg-white!"
                                         labelClass="pb-2.5! inline-block"
                                         class_="mt-0!"
                                     />
@@ -154,7 +176,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     )}
 
                                     {/* Minimum Rating */}
-                                    {normalizedTitle !== "testimonialwidget" && <SelectForm
+                                    {(normalizedTitle !== "testimonialwidget") && <SelectForm
                                         label="Minimum Rating"
                                         isRequired={true}
                                         defaultOption="Select"
@@ -189,7 +211,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     </SelectForm>
                                 </div>}
 
-                                {normalizedTitle === "testimonialwidget" && <div className="grid grid-cols-2 gap-5">
+                                {(normalizedTitle === "testimonialwidget") && <div className="grid grid-cols-2 gap-5">
                                     <SelectForm
                                         label="Sorting"
                                         isRequired={true}
@@ -205,9 +227,9 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     </SelectForm>
                                     <SelectForm
                                         label="Minimum Rating"
-                                        isRequired={true}
+                                        isRequired={false}
                                         defaultOption="Select"
-                                        formProps={{ ...register("minimumRating", { required: true }) }}
+                                        formProps={{ ...register("minimumRating", { required: false }) }}
                                         errors={errors}
                                         class_="mt-0!"
                                         labelClass="pb-2.5 inline-block mb-0!"
@@ -236,15 +258,21 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             <h3 className="text-base pt-2.5 font-medium">Select up to 3</h3>
                             <div className="flex gap-[15px] items-center pt-[15px]">
                                 <div className="flex gap-2.5 items-center">
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("google") }} errors={errors}
+                                    />
                                     <div>Google</div>
                                 </div>
                                 <div className="flex gap-2.5 items-center">
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("trustpilot") }} errors={errors}
+                                    />
                                     <div>Trustpilot</div>
                                 </div>
                                 <div className="flex gap-2.5 items-center">
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("yelp") }} errors={errors}
+                                    />
                                     <div>Yelp</div>
                                 </div>
                             </div>
@@ -340,35 +368,61 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     </div>
                                 </div>
                             ) : (
-                                <div className="border border-border2 rounded-[10px] p-5">
-                                    <div className="text-center">
-                                        <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
-                                        <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
+                                <Slider {...settings}>
+                                    <div className="border border-border2 rounded-[10px] p-5">
+                                        <div className="text-center">
+                                            <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
+                                            <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
+                                        </div>
+                                        <div className="flex justify-between items-center gap-2.5">
+                                            <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
+                                            <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
+                                            <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
+                                        </div>
+                                        <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...<br />
+                                            <span className="font-medium text-primary">Read More</span></p>
+                                        <div className="my-10 flex justify-center">
+                                            <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary" type="button">
+                                                <span>
+                                                    <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
+                                                </span>
+                                                Verified On Google
+                                            </button>
+                                        </div>
+                                        <div className="">
+                                            <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
+                                        </div>
                                     </div>
-                                    <div className="flex justify-between items-center gap-2.5">
-                                        <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
-                                        <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
-                                        <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
+                                    <div className="border border-border2 rounded-[10px] p-5">
+                                        <div className="text-center">
+                                            <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
+                                            <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
+                                        </div>
+                                        <div className="flex justify-between items-center gap-2.5">
+                                            <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
+                                            <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
+                                            <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
+                                        </div>
+                                        <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...<br />
+                                            <span className="font-medium text-primary">Read More</span></p>
+                                        <div className="my-10 flex justify-center">
+                                            <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary" type="button">
+                                                <span>
+                                                    <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
+                                                </span>
+                                                Verified On Google
+                                            </button>
+                                        </div>
+                                        <div className="">
+                                            <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
+                                        </div>
                                     </div>
-                                    <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...<br />
-                                        <span className="font-medium text-primary">Read More</span></p>
-                                    <div className="my-10 flex justify-center">
-                                        <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary" type="button">
-                                            <span>
-                                                <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
-                                            </span>
-                                            Verified On Google
-                                        </button>
-                                    </div>
-                                    <div className="">
-                                        <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
-                                    </div>
-                                </div>
+                                </Slider>
                             )}
                         </div>
                     </div>
                 </div>
             </form>
-        </Model>
+        </Model >
     )
 }
