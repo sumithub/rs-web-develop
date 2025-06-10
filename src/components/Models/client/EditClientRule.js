@@ -39,6 +39,7 @@ function EditClientRule({ onClose, id }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <InputForm label="Client Rule ID" placeholder="Enter client id" isRequired={false} class_="mt-0!"
+                    inputClass="border-primary/10"
                     formProps={{ ...register("clientRuleId", { required: false }) }}
                     errors={errors}
                     setValue={setValue}
@@ -46,6 +47,7 @@ function EditClientRule({ onClose, id }) {
                 />
 
                 <InputForm label="Event Type" placeholder="Enter type" isRequired={true} errors={errors}
+                    inputClass="border-primary/10"
                     formProps={{
                         ...register("eventType", {
                             required: true,
@@ -54,6 +56,7 @@ function EditClientRule({ onClose, id }) {
                 />
 
                 <InputForm label="Condition" placeholder="Enter condition" isRequired={true} errors={errors}
+                    inputClass="border-primary/10"
                     formProps={{
                         ...register("condition", {
                             required: true,
@@ -62,7 +65,7 @@ function EditClientRule({ onClose, id }) {
                 />
 
                 <SelectForm label="Action"
-                    selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                    selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
                     formProps={{ ...register("action", { required: true }) }} errors={errors} clearErrors={clearErrors}>
                     <option value="sendNotification">Send Notification</option>
@@ -78,6 +81,7 @@ function EditClientRule({ onClose, id }) {
                 </div>
 
                 <InputForm label="Client" placeholder="Enter client name" isRequired={true} errors={errors}
+                    inputClass="border-primary/10"
                     formProps={{
                         ...register("client", {
                             required: true,
@@ -86,7 +90,7 @@ function EditClientRule({ onClose, id }) {
                 />
 
                 <SelectForm label="Location"
-                    selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                    selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
                     formProps={{ ...register("location", { required: true }) }} errors={errors} clearErrors={clearErrors}>
                     <option value="nyc">NYC</option>
@@ -98,7 +102,7 @@ function EditClientRule({ onClose, id }) {
 
             </div>
 
-            <div className="grid grid-cols-2 gap-3 mt-5">
+            <div className="grid grid-cols-2 gap-3 mt-[30px]">
                 <CancelButton title="Cancel" onClick={onClose} />
                 <SecondaryButton title="Update" type="submit" disabled={sending} />
             </div>

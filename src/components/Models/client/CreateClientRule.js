@@ -51,7 +51,7 @@ function CreateClientRule({ onClose, id }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <SelectForm label="Event Type"
-                    selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                    selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
                     formProps={{ ...register("eventType", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     onChange={(e) => {
@@ -66,6 +66,7 @@ function CreateClientRule({ onClose, id }) {
                 </SelectForm>
                 {!type && (<>
                     <InputForm label="Condition" placeholder="Enter condition" isRequired={true} errors={errors}
+                        inputClass="border-primary/10"
                         formProps={{
                             ...register("condition", {
                                 required: true,
@@ -74,7 +75,7 @@ function CreateClientRule({ onClose, id }) {
                     />
 
                     <SelectForm label="Action"
-                        selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                        selectClass_="py-3.5! px-2.5! border-primary/10!"
                         isRequired={true}
                         formProps={{ ...register("action", { required: true }) }} errors={errors} clearErrors={clearErrors}>
                         <option value="sendNotification">Send Notification</option>
@@ -90,6 +91,7 @@ function CreateClientRule({ onClose, id }) {
                     </div>
 
                     <InputForm label="Client" placeholder="Enter client name" isRequired={true} errors={errors}
+                        inputClass="border-primary/10"
                         formProps={{
                             ...register("client", {
                                 required: true,
@@ -98,7 +100,7 @@ function CreateClientRule({ onClose, id }) {
                     />
 
                     <SelectForm label="Location"
-                        selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                        selectClass_="py-3.5! px-2.5! border-primary/10!"
                         isRequired={true}
                         formProps={{ ...register("location", { required: true }) }} errors={errors} clearErrors={clearErrors}>
                         <option value="nyc">NYC</option>
@@ -144,7 +146,7 @@ function CreateClientRule({ onClose, id }) {
 
             {type === "flaggedReview" && (<div>
                 <SelectForm label="Rule Condition"
-                    selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                    selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
                     defaultOption="Select Condition"
                     formProps={{ ...register("ruleCondition", { required: true }) }} errors={errors} clearErrors={clearErrors}>
@@ -215,7 +217,7 @@ function CreateClientRule({ onClose, id }) {
 
             {(type === "positiveReview" || type === "negativeReview") && (<div>
                 <SelectForm label="Rule Condition"
-                    selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                    selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
                     defaultOption="Select Condition"
                     formProps={{ ...register("ruleCondition", { required: true }) }} errors={errors} clearErrors={clearErrors}>
@@ -268,7 +270,7 @@ function CreateClientRule({ onClose, id }) {
                     </div>
                 </div>
             </div>)}
-            <div className="grid grid-cols-2 gap-3 mt-5">
+            <div className="grid grid-cols-2 gap-3 mt-[30px]">
                 <CancelButton title="Cancel" onClick={onClose} />
                 <SecondaryButton title={type === "newReview" || type === "flaggedReview" || type === "reviewResponseReceived" || type === "reviewDeleted" || type === "positiveReview" || type === "negativeReview" ? "Save Rule" : "Save"} type="submit" disabled={sending} />
             </div>
