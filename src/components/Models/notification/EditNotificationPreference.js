@@ -48,7 +48,7 @@ function EditNotificationPreferences({ onClose, id }) {
                 />
 
                 <SelectForm label="Preference Type"
-                    selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                    selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
                     formProps={{ ...register("preferenceType", { required: true }) }} errors={errors} clearErrors={clearErrors}>
                     <option value="email">Email</option>
