@@ -33,10 +33,10 @@ export default function ShareOnSocialMedia({ onClose, onSave }) {
                         <Image unoptimized={true} src="/images/dribbble1.svg" alt="dribble" width={41} height={41} className="mx-auto" />
                         <h2 className="mt-[15px] text-sm font-medium">Dribble</h2>
                     </Link>
-                    <Link href="/" className="text-center">
+                    <button className="text-center">
                         <Image unoptimized={true} src="/images/more.svg" alt="more" width={41} height={41} className="mx-auto rounded-[9px]" />
                         <h2 className="mt-[15px] text-sm font-medium">More</h2>
-                    </Link>
+                    </button>
                 </div>
                 <div>
                     <Input

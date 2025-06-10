@@ -61,8 +61,6 @@ function ApplyTags({ onClose }) {
                 </div>)}
 
 
-
-
                 {/* <div className='flex justify-between items-center'>
                     <h2 className='text-base font-medium'>Jaydon Bergson</h2>
                     <div className='w-1/5'>
