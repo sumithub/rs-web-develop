@@ -10,10 +10,10 @@ import ChangeEmail from "../../components/Models/ChangeEmail";
 
 function VerificationEmail() {
     const { handleSubmit } = useForm();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
     const [sec, setSec] = useState(60);
-    const [isTimerActive, setIsTimerActive] = useState(false);
+    const [isTimerActive, setIsTimerActive] = useState(true);
 
     useEffect(() => {
         let interval = null;
