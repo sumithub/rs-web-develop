@@ -24,8 +24,6 @@ export default function Status({ status = "" }) {
         bgClass = "bg-[#DC35451A] text-[#DC3545]";
     } else if (s === "processing") {
         bgClass = "bg-[#FFC1071A] text-[#FFC107]";
-    } else {
-        bgClass = "bg-gray-100 text-gray-500";
     }
     else if (s === "yes") {
         bgClass = "bg-[#0396FF1A] text-primary"
@@ -50,6 +48,8 @@ export default function Status({ status = "" }) {
     }
     else if (s === "dismiss") {
         bgClass = "bg-[#DC35451A] text-danger"
+    } else {
+        bgClass = "bg-gray-100 text-gray-500";
     }
     return <div>
         <button disabled className={`${bgClass} capitalize rounded-4xl py-1.5 px-3 text-sm text-center disabled:pointer-events-none`}>{status.replace("_", " ")}</button>
