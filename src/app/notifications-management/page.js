@@ -2,13 +2,42 @@
 import AdminLayout from "../../components/AdminLayout";
 import PaginationDemo from "../../components/Pagination";
 import TableOrder from "../../components/TableOrder";
-import Image from "next/image";
 import Search from "../../components/form/Search";
 import CustomSelectBox from "../../components/form/CustomSelectBox";
 import Status from "../../components/Status"
 import Checkbox from "../../components/form/Checkbox";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { getError } from "../../../helper";
+import { useEffect, useState } from "react";
+import Loading from "../../components/Loading";
+import { templates } from "../../constent/constArray";
+import Image from "next/image";
 
-export default function NotificationsManagement() {
+export default function NotificationManagement() {
+    const [type, setType] = useState("")
+    const [list, setList] = useState([])
+    const [search, setSearch] = useState("")
+    const [loading, setLoading] = useState(true);
+    const [sortBy, setSortBy] = useState("")
+
+    useEffect(() => {
+        getTemplate()
+    }, [search, type, sortBy])
+
+    const getTemplate = async () => {
+        try {
+            setLoading(true)
+            const res = await axios.get("/api")
+            setList(res.data || templates)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
+
     const Projects = [
         { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
         { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
@@ -32,37 +61,59 @@ export default function NotificationsManagement() {
                         }}
                     />
                 </div>
-                <div className="flex gap-[15px]">
+                <div className="flex items-center gap-3">
                     <CustomSelectBox
-                        defaultOption="Filters"
-                        class_='mt-0! w-28!'
-                        selectClass_="py-2.5! px-2.5!"
-                        // value={filterBy}
+                        class_="mt-0!"
+                        defaultOption="Filter"
+                        value={type}
                         onChange={(e) => {
-                            setFilterBy(e.target.value)
-                        }}
-                    >
-                        <option value="tags">Tags</option>
-                        <option value="source: manual vs. imported">Source: Manual vs. Imported</option>
+                            setType(e.target.value)
+                        }}>
+                        <option value="pending">Pending</option>
+                        <option value="sent">Sent</option>
+                        <option value="failed">Failed</option>
                     </CustomSelectBox>
-                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
-                    // onClick={() => { setOpen(true) }}
-                    >
-                        Resend</button>
+
+                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
+                        onClick={() => { toast.success("Resended Successfully") }}>Resend</button>
                 </div>
             </div>
             <div className='table-class mt-[15px]'>
-                <table className='w-full'>
+                {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="ID" /></th>
-                            <th><TableOrder title="Client Name" /></th>
-                            <th><TableOrder title="Location" /></th>
-                            <th><TableOrder title="Medium" /></th>
-                            <th><TableOrder title="Recipient" /></th>
-                            <th><TableOrder title="Message" /></th>
-                            <th><TableOrder title="Status" /></th>
-                            <th><TableOrder title="Created Date" /></th>
+                            <th><TableOrder title="ID"
+                                setSortBy={setSortBy}
+                                sortBy={sortBy}
+                                field="id" /></th>
+                            <th><TableOrder title="Client Name"
+                                setSortBy={setSortBy}
+                                sortBy={sortBy}
+                                field="clientName" /></th>
+                            <th><TableOrder title="Location"
+                                setSortBy={setSortBy}
+                                sortBy={sortBy}
+                                field="location" /></th>
+                            <th><TableOrder title="Medium"
+                                setSortBy={setSortBy}
+                                sortBy={sortBy}
+                                field="medium" /></th>
+                            <th><TableOrder title="Recipient"
+                                setSortBy={setSortBy}
+                                sortBy={sortBy}
+                                field="recipient" /></th>
+                            <th><TableOrder title="Message"
+                                setSortBy={setSortBy}
+                                sortBy={sortBy}
+                                field="message" /></th>
+                            <th><TableOrder title="Status"
+                                setSortBy={setSortBy}
+                                sortBy={sortBy}
+                                field="status" /></th>
+                            <th><TableOrder title="Created Date"
+                                setSortBy={setSortBy}
+                                sortBy={sortBy}
+                                field="createdDate" /></th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -97,9 +148,11 @@ export default function NotificationsManagement() {
                                 </td>
                             </tr>)}
                     </tbody>
-                </table>
+                </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
-            <PaginationDemo />
+            {list?.length > 0 && <div>
+                <PaginationDemo />
+            </div>}
         </AdminLayout>
     </>)
 }
