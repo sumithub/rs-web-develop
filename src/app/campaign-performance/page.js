@@ -7,7 +7,7 @@ import PaginationDemo from '../../components/Pagination'
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { getError } from '../../../helper'
+import { formatDate, getError } from '../../../helper'
 import Loading from '../../components/Loading'
 import DateRange from '../../components/form/DateRangePicker'
 import SelectForm from '../../components/form/SelectForm'
@@ -81,6 +81,11 @@ function ReviewAnalytics() {
         { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Processing" },
         { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Failed" },
     ]
+
+    const SHAREEMAIL=[
+    {img:"/images/request.png",name:"Amelie Laurent",email:"amili@gmail.com",role:"manager"},
+    {img:"/images/request.png",name:"Amelie Laurent",email:"amili@gmail.com",role:"owner"},
+]
 
     return (
         <AdminLayout
@@ -374,28 +379,23 @@ function ReviewAnalytics() {
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between pt-[25px]">
-                                <div className="flex gap-[15px]">
-                                    <Image src="/images/request.png" alt="request" width={44} height={44} />
-                                    <div>
-                                        <div className="text-base font-medium">Amelie Laurent</div>
-                                        <div className="text-sm text-text3 pt-1">amili@gmail.com</div>
-                                    </div>
-                                </div>
-                                <div className="text-lg">owner</div>
-                            </div>
-                            <hr className="mt-[15px] border border-border2" />
-
-                            <div className="flex items-center justify-between pt-[25px]">
-                                <div className="flex gap-[15px]">
-                                    <Image src="/images/request.png" alt="request" width={44} height={44} />
-                                    <div>
-                                        <div className="text-base font-medium">Amelie Laurent</div>
-                                        <div className="text-sm text-text3 pt-1">amili@gmail.com</div>
-                                    </div>
-                                </div>
-                                <div className="text-lg">Manager</div>
-                            </div>
+                            {SHAREEMAIL.map((e,i)=><div key={i}className={i === 0 ? "mt-8" : ""}>
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex gap-[15px]">
+                                                    <Image src={e.img} alt="request" width={44} height={44} />
+                                                    <div>
+                                                        <div className="text-base font-medium">{e.name}</div>
+                                                        <div className="text-sm text-text3 pt-1">{e.email}</div>
+                                                    </div>
+                                                </div>
+                                                <div className="text-lg capitalize">{e.role}</div>
+                                            </div>
+                                            
+                                               {i !== SHAREEMAIL.length - 1 && (
+                                                    <hr className='border-t border-border2 my-5' />
+                                                )}
+                            </div>)}
+                         
                             <SecondaryButton
                                 title="Generate Report"
                                 type='submit'
@@ -495,7 +495,7 @@ function ReviewAnalytics() {
                                 <h2 className='text-base font-semibold'>ABC Corp</h2>
                                 <div className='flex justify-between items-center pt-[15px]'>
                                     <h2 className='text-text3 text-sm font-medium'>Report Date</h2>
-                                    <h2 className='text-sm font-medium'>{e.date}</h2>
+                                    <h2 className='text-sm font-medium'>{formatDate(e.date)}</h2>
                                 </div>
                                 <div className='flex justify-between items-center pt-[15px]'>
                                     <h2 className='text-text3 text-sm font-medium'>Report Type</h2>
@@ -526,8 +526,7 @@ function ReviewAnalytics() {
                     <PaginationDemo />
                 </div>}
             </>}
-
-        </AdminLayout >
+        </AdminLayout>
     )
 }
 

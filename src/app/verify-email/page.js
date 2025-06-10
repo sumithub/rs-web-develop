@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import SecondaryButton from '../../components/common/SecondaryButton';
 
 function VerifyEmail() {
     const { handleSubmit } = useForm();
@@ -73,7 +74,7 @@ function VerifyEmail() {
                         </div>
                         <h2 className='text-center pt-5 text-sm text-secondary'>A New Verification Email Has Been Sent to <span className='font-semibold'>anu@gmail.com.</span> Please <br /> Check Your Inbox Or Spam Folder.</h2>
                         <h2 className='text-center pt-2.5 text-sm text-secondary'><span className='font-semibold'>{isTimerActive ? formatTime(sec) : '00.59'}</span> Remaining</h2>
-                        <button className="text-text3 text-lg font-medium bg-dark border border-dark hover:bg-white w-full mt-5 py-3 rounded-[10px] border border-dark cursor-pointer"
+                        <SecondaryButton title="Resend Verification Email"  class_="disabled:bg-dark! disabled:text-text3! disabled:border-dark! py-3! mt-5!"
                             onClick={() => {
                                 setView("error")
                                 setTimeout(() => {
@@ -82,7 +83,7 @@ function VerifyEmail() {
                             }}
                             disabled={loading}
                             type='submit'
-                        >Resend Verification Email</button>
+                        />
                     </div>
                 </div>}
                 {view === "error" &&
