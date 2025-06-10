@@ -47,6 +47,7 @@ export default function ShareOnSocialMedia({ onClose, onSave }) {
                             onClose()
                         }}
                         class_="mt-[25px]!"
+                        inputClass="border-primary/10"
                         placeholder=""
                         label=""
                     />

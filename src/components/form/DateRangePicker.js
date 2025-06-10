@@ -66,7 +66,7 @@ function DateRange({ onChange, class_ = "" }) {
 
             {open &&
                 <div>
-                    <div className='overflow-hidden absolute top-full right-0 border border-dark rounded-lg shadow-[0px_0px_40px_rgba(0,_0,_0,_0.08)]'>
+                    <div className='overflow-hidden absolute z-50 top-full right-0 border border-dark rounded-lg shadow-[0px_0px_40px_rgba(0,_0,_0,_0.08)]'>
                         <DateRangePicker
                             dateDisplayFormat='dd/MM/yyyy'
                             showDateDisplay={false}
