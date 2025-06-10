@@ -40,6 +40,7 @@ function EditNotificationPreferences({ onClose, id }) {
             <div>
 
                 <InputForm label="Edit Notification Preference" placeholder="Enter condition" isRequired={true} errors={errors}
+                    inputClass="bg-secondary2"
                     formProps={{
                         ...register("condition", {
                             required: true,
