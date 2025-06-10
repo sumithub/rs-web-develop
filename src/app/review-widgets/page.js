@@ -11,6 +11,7 @@ import FloatingButtonWidget from "../../components/Models/review/FloatingButtonW
 import StarBadgeWidget from "../../components/Models/review/StarBadgeWidget";
 import Carousel from "../../components/Models/review/Carousel";
 import ProgressBar from "@ramonak/react-progress-bar";
+import Slider from "react-slick";
 
 export default function ReviewWidgets() {
     const [openCarousel, setOpenCarousel] = useState(false)
@@ -19,6 +20,14 @@ export default function ReviewWidgets() {
     // const [openTestimonial, setOpenTestimonial] = useState(false)
     // const [openGrid, setOpenGrid] = useState(false)
     const [modalTitle, setModalTitle] = useState("");
+
+    var settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    };
 
     const handleOpenModal = (title) => {
         setModalTitle(title);
@@ -81,41 +90,78 @@ export default function ReviewWidgets() {
                 }} />
         }
         <main className="grid grid-cols-3 gap-5">
-            <div className="border border-border-color rounded-[10px] px-2.5 pt-2.5 pb-5 flex justify-between gap-1">
-                <Image src="/images/arrow-right.svg" alt="arrow-right" width={16} height={16} className="rotate-180" />
-                <div className="w-full">
-                    <div className="bg-dark rounded-[10px] h-[170px] w-full p-3.5 flex items-end">
-                        {/* <ReviewCard /> */}
-                        <button className="flex gap-2.5 p-2.5 text-sm font-medium border border-primary rounded-lg">
-                            <Image src="/images/google.svg" alt="google.svg" width={20} height={20} unoptimized={true} />
-                            Verified On Google
-                        </button>
-                    </div>
-                    <div className="flex justify-between gap-8 items-start mt-3.5">
-                        <div className="w-2/3">
-                            <div className="bg-border2 w-full p-3 rounded-sm"></div>
-                            <div className="grid grid-cols-2 gap-2.5 mt-2.5">
-                                <div className="bg-border2 w-full rounded-sm p-2"></div>
-                                <div className="bg-border2 w-full rounded-sm p-2"></div>
+            <div>
+                <Slider {...settings}>
+                    <div className="border border-border-color rounded-[10px] px-2.5 pt-2.5 pb-5 flex! justify-between gap-1">
+                        <Image src="/images/arrow-right.svg" alt="arrow-right" width={16} height={16} className="rotate-180" />
+                        <div className="w-full">
+                            <div className="bg-dark rounded-[10px] h-[170px] w-full p-3.5 flex items-end">
+                                {/* <ReviewCard /> */}
+                                <button className="flex gap-2.5 p-2.5 text-sm font-medium border border-primary rounded-lg">
+                                    <Image src="/images/google.svg" alt="google.svg" width={20} height={20} unoptimized={true} />
+                                    Verified On Google
+                                </button>
                             </div>
+                            <div className="flex justify-between gap-8 items-start mt-3.5">
+                                <div className="w-2/3">
+                                    <div className="bg-border2 w-full p-3 rounded-sm"></div>
+                                    <div className="grid grid-cols-2 gap-2.5 mt-2.5">
+                                        <div className="bg-border2 w-full rounded-sm p-2"></div>
+                                        <div className="bg-border2 w-full rounded-sm p-2"></div>
+                                    </div>
+                                </div>
+                                <div className="flex gap-1">
+                                    <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
+                                    <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
+                                    <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
+                                    <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
+                                    <Image unoptimized={true} src="/images/star2.svg" alt="star2.svg" width={21} height={21} />
+                                </div>
+                            </div>
+                            <SecondaryButton
+                                class_="text-lg mt-5"
+                                title="Carousel Review Widget"
+                                onClick={() => handleOpenModal("Carousel")}
+                            />
                         </div>
-                        <div className="flex gap-1">
-                            <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
-                            <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
-                            <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
-                            <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
-                            <Image unoptimized={true} src="/images/star2.svg" alt="star2.svg" width={21} height={21} />
-                        </div>
+                        <Image src="/images/arrow-right.svg" alt="arrow-right" width={16} height={16} />
                     </div>
-                    <SecondaryButton
-                        class_="text-lg mt-5"
-                        title="Carousel Review Widget"
-                        onClick={() => handleOpenModal("Carousel")}
-                    />
-                </div>
-                <Image src="/images/arrow-right.svg" alt="arrow-right" width={16} height={16} />
+                    <div className="border border-border-color rounded-[10px] px-2.5 pt-2.5 pb-5 flex! justify-between gap-1">
+                        <Image src="/images/arrow-right.svg" alt="arrow-right" width={16} height={16} className="rotate-180" />
+                        <div className="w-full">
+                            <div className="bg-dark rounded-[10px] h-[170px] w-full p-3.5 flex items-end">
+                                {/* <ReviewCard /> */}
+                                <button className="flex gap-2.5 p-2.5 text-sm font-medium border border-primary rounded-lg">
+                                    <Image src="/images/google.svg" alt="google.svg" width={20} height={20} unoptimized={true} />
+                                    Verified On Google
+                                </button>
+                            </div>
+                            <div className="flex justify-between gap-8 items-start mt-3.5">
+                                <div className="w-2/3">
+                                    <div className="bg-border2 w-full p-3 rounded-sm"></div>
+                                    <div className="grid grid-cols-2 gap-2.5 mt-2.5">
+                                        <div className="bg-border2 w-full rounded-sm p-2"></div>
+                                        <div className="bg-border2 w-full rounded-sm p-2"></div>
+                                    </div>
+                                </div>
+                                <div className="flex gap-1">
+                                    <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
+                                    <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
+                                    <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
+                                    <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
+                                    <Image unoptimized={true} src="/images/star2.svg" alt="star2.svg" width={21} height={21} />
+                                </div>
+                            </div>
+                            <SecondaryButton
+                                class_="text-lg mt-5"
+                                title="Carousel Review Widget"
+                                onClick={() => handleOpenModal("Carousel")}
+                            />
+                        </div>
+                        <Image src="/images/arrow-right.svg" alt="arrow-right" width={16} height={16} />
+                    </div>
+                </Slider>
             </div>
-
             <div className="border border-border-color rounded-[10px] p-5 flex flex-col justify-between">
                 <div className="flex gap-3.5">
                     <Image unoptimized={true} src="/images/image.svg" alt="user" height={71} width={71} />
