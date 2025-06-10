@@ -35,11 +35,12 @@ export default function Users() {
     const [search, setSearch] = useState("")
     const [dates, setDates] = useState(null)
     const [openModal, setOpenModal] = useState(null)
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true)
+    const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
         getUser()
-    }, [search, status, role, dates])
+    }, [search, status, role, dates, sortBy])
 
     const getUser = async () => {
         try {
@@ -140,43 +141,47 @@ export default function Users() {
                     }} />
             }
 
-            <div className='grid grid-cols-[2.5fr_1fr_1fr_1fr_1fr] gap-3'>
-                <Search
-                    mainClass='w-full!'
-                    placeholder="Search by name, email, role."
-                    onSearch={(s) => {
-                        setSearch(s)
-                    }}
-                />
-                <CustomSelectBox
-                    class_="mt-0!"
-                    defaultOption="Status"
-                    value={status}
-                    onChange={(e) => {
-                        setStatus(e.target.value)
-                    }}>
-                    <option value="active">Active</option>
-                    <option value="suspended">Suspended</option>
-                    <option value="pendingInvite">Pending Invite</option>
-                </CustomSelectBox>
+            <div className='flex items-center justify-between w-full'>
+                <div className='flex gap-3 items-center w-full'>
+                    <Search
+                        mainClass='w-[35%]!'
+                        placeholder="Search by name, email, role."
+                        onSearch={(s) => {
+                            setSearch(s)
+                        }}
+                    />
+                    <CustomSelectBox
+                        class_="mt-0! w-36!"
+                        defaultOption="Status"
+                        value={status}
+                        onChange={(e) => {
+                            setStatus(e.target.value)
+                        }}>
+                        <option value="active">Active</option>
+                        <option value="suspended">Suspended</option>
+                        <option value="pendingInvite">Pending Invite</option>
+                    </CustomSelectBox>
 
-                <CustomSelectBox
-                    class_="mt-0!"
-                    defaultOption="role"
-                    value={role}
-                    onChange={(e) => {
-                        setRole(e.target.value)
-                    }}>
-                    <option value="owner">Owner</option>
-                    <option value="manager">manager</option>
-                    <option value="viewer">Viewer</option>
-                </CustomSelectBox>
+                    <CustomSelectBox
+                        class_="mt-0! w-36!"
+                        defaultOption="role"
+                        value={role}
+                        onChange={(e) => {
+                            setRole(e.target.value)
+                        }}>
+                        <option value="owner">Owner</option>
+                        <option value="manager">manager</option>
+                        <option value="viewer">Viewer</option>
+                    </CustomSelectBox>
 
-                <DateRange
-                    onChange={(dates) => { setDates(dates) }}
-                />
-                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-full"
+                    <DateRange
+                        onChange={(dates) => { setDates(dates) }}
+                    />
+                </div>
+
+                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-32"
                     onClick={() => { setOpenModal("new") }}>Invite New User</button>
+
             </div>
 
             <div className='my-5 flex items-center justify-between'>
@@ -209,14 +214,29 @@ export default function Users() {
             </div>
 
             <div className='table-class'>
-
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Name" /></th>
-                            <th><TableOrder title="Role" /></th>
-                            <th><TableOrder title="Status" /></th>
-                            <th><TableOrder title="Last Active" /></th>
+                            <th><TableOrder title="Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="name"
+                            /></th>
+                            <th><TableOrder title="Role"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="role"
+                            /></th>
+                            <th><TableOrder title="Status"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="status"
+                            /></th>
+                            <th><TableOrder title="Last Active"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="lastActive"
+                            /></th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -245,7 +265,7 @@ export default function Users() {
                         </tr>
                         )}
                     </tbody>
-                </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                </table> : <div className='text-center text-2xl text-danger mx-auto h-20'>No Data</div>)}
                 {list?.length > 0 && <div>
                     <PaginationDemo />
                 </div>}

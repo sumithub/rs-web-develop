@@ -4,8 +4,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import { formatDate } from '../../../helper';
 
-function DateRange({ onChange }) {
+function DateRange({ onChange, class_ = "" }) {
     const [open, setOpen] = useState(false)
     const ref = useRef(null);
     useEffect(() => {
@@ -48,27 +49,26 @@ function DateRange({ onChange }) {
 
     const handleSave = () => {
         const { startDate, endDate } = state[0];
-        const formatted = `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
+        const formatted = `${formatDate(startDate, "dd/MM/yyyy")} - ${formatDate(endDate, "dd/MM/yyyy")}`;
         setSavedRange(formatted);
         if (onChange)
             onChange({ startDate, endDate });
         setOpen(false);
     };
     return (
-        <div ref={ref} className='relative'>
+        <div ref={ref} className={`relative ${class_}`}>
             <button
                 onClick={toggleDatePicker}
-                className="cursor-pointer flex items-center gap-2 border border-border-color rounded-lg py-[7.7px]! px-2 capitalize text-[13px] text-text3 w-full focus-visible:outline-none shrink-0"        >
+                className="cursor-pointer flex items-center gap-2 border border-border-color rounded-lg py-[7.7px]! px-2 capitalize text-[13px] text-text3 w-full focus-visible:outline-none shrink-0">
                 {savedRange || "Date Range Selector"}
                 <Image src="/images/calendar1.svg" alt='calendar' height={16} width={16} unoptimized={true} />
             </button>
 
-
             {open &&
                 <div>
-
                     <div className='overflow-hidden absolute top-full right-0 border border-dark rounded-lg shadow-[0px_0px_40px_rgba(0,_0,_0,_0.08)]'>
                         <DateRangePicker
+                            dateDisplayFormat='dd/MM/yyyy'
                             showDateDisplay={false}
                             onChange={handleSelect}
                             showSelectionPreview={true}

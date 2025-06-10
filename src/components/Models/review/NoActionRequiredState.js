@@ -20,16 +20,9 @@ export default function NoActionRequiredState({ onClose, onSave }) {
                     <Select defaultOption="No Action Required" />
                 </div>
 
-
-
-
-
-                
-
-
                 <div className="grid grid-cols-3 gap-3 mt-4">
                     <CancelButton title="copy reply" />
-                    <SecondaryButton title="share"/>
+                    <SecondaryButton title="share" />
                     <SecondaryButton title="mark as responded" />
                 </div>
             </div>

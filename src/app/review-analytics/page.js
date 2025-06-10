@@ -28,7 +28,7 @@ export default function ReviewAnalytics() {
                                 Select Report Sections
                             </div>
 
-                            <div className="flex justfy-between align-center gap-2 mt-4 mb-4">
+                            <div className="flex items-center gap-2 mt-4 mb-4">
                                 <Checkbox />
                                 <div>Reviews</div>
 
@@ -47,15 +47,15 @@ export default function ReviewAnalytics() {
                             </div>
 
                             <div>
-                                <div className="flex justfy-between align-center gap-2 mt-3">
+                                <div className="flex items-center gap-2 mt-3">
                                     <div>Review Over Time</div>
                                     <Checkbox />
                                 </div>
-                                <div className="flex justfy-between align-center gap-2 mt-3">
+                                <div className="flex items-center gap-2 mt-3">
                                     <div>Review Rating Distribution</div>
                                     <Checkbox />
                                 </div>
-                                <div className="flex justfy-between align-center gap-2 mt-3">
+                                <div className="flex items-center gap-2 mt-3">
                                     <div>Top Review Sources</div>
                                     <Checkbox />
                                 </div>
@@ -69,15 +69,15 @@ export default function ReviewAnalytics() {
                             </div>
 
                             <div>
-                                <div className="flex justfy-between align-center gap-2 mt-3">
+                                <div className="flex items-center gap-2 mt-3">
                                     <div>Campaign Funnel Breakdown</div>
                                     <Checkbox />
                                 </div>
-                                <div className="flex justfy-between align-center gap-2 mt-3">
+                                <div className="flex items-center gap-2 mt-3">
                                     <div>Campaign Performance</div>
                                     <Checkbox />
                                 </div>
-                                <div className="flex justfy-between align-center gap-2 mt-3">
+                                <div className="flex items-center gap-2 mt-3">
                                     <div>Campaign Engagement</div>
                                     <Checkbox />
                                 </div>
@@ -90,7 +90,7 @@ export default function ReviewAnalytics() {
                                 Email & Scheduling Options
                             </div>
 
-                            <div className="flex justfy-between align-center gap-3">
+                            <div className="flex items-center gap-3">
                                 <Select defaultOption="Select Frequency" label="Frequency" isRequired={true} />
                                 <Input label="Time" isRequired={true} placeholder="Select Time" />
                             </div>
@@ -100,7 +100,7 @@ export default function ReviewAnalytics() {
                                     Enter E-Mail
                                 </div>
 
-                                <div className="flex justfy-between align-center gap-3 ">
+                                <div className="flex items-center gap-3">
                                     <div className="grid grid-cols-2 gap-3">
                                         <div>Richard</div>
                                         <div>Sophia</div>
@@ -174,7 +174,7 @@ export default function ReviewAnalytics() {
                                 </div>
 
                                 <div>
-                                    
+
                                 </div>
                             </div>
                         </div>

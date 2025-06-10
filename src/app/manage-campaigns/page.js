@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import AdminLayout from '../../components/AdminLayout'
 import Checkbox from '../../components/form/Checkbox'
-import DatePicker from '../../components/form/DatePicker'
 import Search from '../../components/form/Search'
 import PaginationDemo from '../../components/Pagination'
 import Status from '../../components/Status'
@@ -16,9 +15,10 @@ import { toast } from 'react-toastify'
 import { formatDate, getError } from '../../../helper'
 import { manageCampaigns } from '../../constent/constArray'
 import Loading from '../../components/Loading'
+import DateRange from '../../components/form/DateRangePicker'
 
 function ManageCampaigns() {
-    const [sortBy, setSortBy] = useState("")
+    const [sortBy1, setSortBy1] = useState("")
     const [type, setType] = useState("")
     const [status, setStatus] = useState("")
     const [changeStatus, setChangeStatus] = useState("")
@@ -27,10 +27,11 @@ function ManageCampaigns() {
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
     const [open, setOpen] = useState(false)
+    const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
         getTemplate()
-    }, [search, sortBy, type, status, changeStatus, date])
+    }, [search, sortBy1, type, status, changeStatus, date, sortBy])
 
     const getTemplate = async () => {
         try {
@@ -59,20 +60,21 @@ function ManageCampaigns() {
                 />
             }
             <div>
-                <div className="2xl:flex lg:flex-wrap justify-between items-center w-full mb-5">
+                <div className="flex justify-between items-start w-full mb-5">
                     <Search
+                        mainClass='max-w-[270px]!'
                         placeholder="Search by campaign names"
                         onSearch={(s) => {
                             setSearch(s)
                         }}
                     />
-                    <div className="grid grid-cols-5 items-start gap-3 2xl:mt-0 mt-3">
+                    <div className="flex items-start gap-3">
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-40!"
                             defaultOption="sort by"
-                            value={sortBy}
+                            value={sortBy1}
                             onChange={(e) => {
-                                setSortBy(e.target.value)
+                                setSortBy1(e.target.value)
                             }}>
                             <option value="campaign ame">Campaign Name</option>
                             <option value="date">date</option>
@@ -81,7 +83,7 @@ function ManageCampaigns() {
                         </CustomSelectBox>
 
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="select type"
                             value={type}
                             onChange={(e) => {
@@ -92,7 +94,7 @@ function ManageCampaigns() {
                         </CustomSelectBox>
 
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-32!"
                             defaultOption="Status"
                             value={status}
                             onChange={(e) => {
@@ -105,15 +107,19 @@ function ManageCampaigns() {
                             <option value="paused">Paused</option>
                         </CustomSelectBox>
 
-                        <DatePicker
+                        <DateRange class_="shrink-0!"
+                            onChange={(e) => { setDate(e) }}
+                        />
+
+                        {/* <DatePicker
                             icon={true}
                             mainClass="mt-0!"
                             value={date}
                             dateFormat="dd/MM/yyyy"
                             onChange={(e) => setDate(e)}
-                        />
-                        <Link href="/manage-campaigns/detail">
-                            <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                        /> */}
+                        <Link href="/manage-campaigns/detail" className='shrink-0'>
+                            <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0 w-full"
                             >Create campaign</button>
                         </Link>
                     </div>
@@ -131,9 +137,10 @@ function ManageCampaigns() {
                         </div>
                     </div>
 
-                    <div className='grid grid-cols-3 gap-3'>
+                    <div className='flex gap-3'>
+
                         <CustomSelectBox
-                            class_="mt-0!"
+                            class_="mt-0! w-40!"
                             defaultOption="change Status"
                             value={changeStatus}
                             onChange={(e) => {
@@ -148,7 +155,9 @@ function ManageCampaigns() {
 
                         <button className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'>Bulk Edit</button>
 
-                        <button className='border border-danger-light2 bg-danger-light2 rounded-lg p-2 text-danger text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'>Bulk Delete</button>
+                        <button
+                            onClick={() => { setOpen("delete") }}
+                            className='border border-danger-light2 bg-danger-light2 rounded-lg p-2 text-danger text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'>Bulk Delete</button>
                     </div>
                 </div>
             </div>
@@ -157,11 +166,31 @@ function ManageCampaigns() {
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
-                            <th><TableOrder title="Campaign Name" /></th>
-                            <th><TableOrder title="Created On" /></th>
-                            <th><TableOrder title="Launch Date" /></th>
-                            <th><TableOrder title="Customers" /></th>
-                            <th><TableOrder title="Status" /></th>
+                            <th><TableOrder title="Campaign Name"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="campaignName"
+                            /></th>
+                            <th><TableOrder title="Created On"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="createdOn"
+                            /></th>
+                            <th><TableOrder title="Launch Date"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="launchDate"
+                            /></th>
+                            <th><TableOrder title="Customers"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="customers"
+                            /></th>
+                            <th><TableOrder title="Status"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="status"
+                            /></th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -187,17 +216,17 @@ function ManageCampaigns() {
                                 <div className='flex items-center gap-2'>
                                     <Link href="/manage-campaigns/detail">
                                         <button className='cursor-pointer mt-2'>
-                                            <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
                                     </Link>
                                     <button className='cursor-pointer' onClick={() => {
                                         navigator.clipboard.writeText("message")
                                         toast.success("Copied")
                                     }}>
-                                        <Image src="/images/copy.svg" alt='copy' height={28} width={28} />
+                                        <Image unoptimized={true} src="/images/copy.svg" alt='copy' height={28} width={28} />
                                     </button>
                                     <button className='cursor-pointer'>
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28}
+                                        <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28}
                                             onClick={() => { setOpen(true) }} />
                                     </button>
                                 </div>

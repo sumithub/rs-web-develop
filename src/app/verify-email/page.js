@@ -35,6 +35,9 @@ function VerifyEmail() {
                     <button className="text-text3 text-lg font-medium bg-dark border border-dark hover:bg-white w-full mt-5 py-3 rounded-[10px] border border-dark cursor-pointer"
                         onClick={() => {
                             setView("error")
+                            setTimeout(() => {
+                                setView(false)
+                            }, 1000 * 60);
                         }}
                     >Resend Verification Email</button>
                 </div>
@@ -54,7 +57,7 @@ function VerifyEmail() {
 
             <div className='flex justify-center mt-8'>
                 <Link href="/login" className="flex gap-[15px]">
-                    <Image src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
+                    <Image unoptimized={true} src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
                     <h2 className='text-sm text-secondary'>Back To Login</h2>
                 </Link>
             </div>

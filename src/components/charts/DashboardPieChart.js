@@ -12,7 +12,7 @@ import {
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const labels_ = ['A', 'B', 'C', 'D'];
-const values = [40, 30, 20, 10];
+const values = [50, 20, 10, 10, 10];
 
 const max = Math.max(...values);
 const backgroundColors_ = values.map((value) =>
@@ -25,7 +25,7 @@ const options = {
     responsive: true,
     plugins: {
         legend: {
-            position: 'top',
+            display: false
         },
         // You can add title if needed
         // title: {

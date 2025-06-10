@@ -4,7 +4,7 @@ export default function ReviewCard({ img, title }) {
     return <main>
         <div>
             <div className="flex items-center gap-3">
-                <div><Image src="/images/image.svg" alt="user" height={71} width={71} /></div>
+                <div><Image unoptimized={true} src="/images/image.svg" alt="user" height={46} width={46} /></div>
                 <div>
                     <div className="text-secondary text-base">{title}</div>
                     <div className="flex items-center gap-1">
@@ -16,7 +16,6 @@ export default function ReviewCard({ img, title }) {
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 }

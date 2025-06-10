@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 
@@ -28,7 +29,7 @@ export default function Search({ mainClass = "", selected, onRemove, hideSearchT
             {selected ? <div className="bg-light-bg h-8 line-clamp-1 rounded py-1 px-2 w-full text-base focus-visible:outline-none">
                 {selected?.name}
             </div> :
-                <input type="text" className="block md:py-[7.3px] pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-dark border border-border2 rounded-lg placeholder:capitalize focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F]"
+                <input type="text" className="block md:py-[7.3px] pl-2 text-left w-full z-10 text-sm placeholder:text-text3 bg-dark border border-border2 rounded-lg placeholder:capitalize focus-visible:outline-none shadow-[0.84px_0.84px_2.52px_0px_#0000000F] placeholder:text-[13px]"
                     value={search}
                     onChange={(e) => {
                         setSearch(e.target.value)
@@ -36,8 +37,6 @@ export default function Search({ mainClass = "", selected, onRemove, hideSearchT
                             onSearch(e.target.value)
                     }}
                     placeholder={placeholder} />
-
-
             }
             <span className="absolute text-center top-1 right-0 py-2 px-2">
                 <Image src="/images/search.svg" alt="search" height={14} width={14} unoptimized={true} />

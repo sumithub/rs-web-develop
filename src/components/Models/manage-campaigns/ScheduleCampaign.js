@@ -1,7 +1,8 @@
+"use client"
 import DatePicker from '../../../components/form/DatePicker'
 import React, { useState } from 'react'
 import Model from '../Model'
-import Radio from '../../form/Radio'
+import RadioForm from '../../form/RadioForm'
 import Checkbox from '../../form/Checkbox'
 import CancelButton from "../../../components/common/CancelButton"
 import SecondaryButton from "../../../components/common/SecondaryButton";
@@ -10,7 +11,7 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import { getError } from "../../../../helper"
 import { useForm } from 'react-hook-form'
-
+import CheckboxForm from '../../form/CheckboxForm'
 
 function ScheduleCampaign({ onClose, id }) {
   const { register, handleSubmit, formState: { errors }, } = useForm();
@@ -28,7 +29,7 @@ function ScheduleCampaign({ onClose, id }) {
         res = await axios.post("/api", data)
       }
 
-      toast.success("Confirm Successfully")
+      toast.success("Schedule Successfully")
       setSending(false)
       onClose()
     } catch (error) {
@@ -37,17 +38,19 @@ function ScheduleCampaign({ onClose, id }) {
     }
   }
 
-  return (
-    <Model onClose={onClose} title="schedule campaign" modalClass="w-[60%]!">
+  return (<Model onClose={onClose} title="schedule campaign" modalClass="w-[60%]!">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <div className='grid grid-cols-2 gap-3 items-start 2xl:mt-0 mt-3'>
+        <div className='grid grid-cols-2 gap-3 items-center 2xl:mt-0 mt-3'>
           <DatePicker
+            labelClass='font-medium!'
             label='Date'
             icon={true} mainClass="mt-0!"
             value={date}
             dateFormat="dd/MM/yyyy"
             onChange={(e) => setDate(e)} />
-          <InputForm inputType='time' label='Time' inputClass='py-2!'
+
+          <InputForm inputType='time' label='Time' inputClass='py-2!' class_='mt-0!'
             formProps={{ ...register("time", { required: false }) }}
             errors={errors}
           />
@@ -55,51 +58,82 @@ function ScheduleCampaign({ onClose, id }) {
 
         <div>
           <InputForm inputType='time' label='Time Zone' inputClass='py-2!'
-            formProps={{ ...register("time-zone", { required: false }) }}
+            formProps={{ ...register("timeZone", { required: false }) }}
             errors={errors}
           />
         </div>
 
         <div>
           <div className='text-secondary text-lg font-medium my-4'>Preferred Sending Time</div>
-          <Radio label="Morning (8 AM - 12 PM)" inputClass='mb-2!' />
-          <Radio label="Afternoon (12 PM - 4 PM)" inputClass='mb-2!' />
-          <Radio label="Evening (4 PM - 8 PM)" inputClass='mb-2!' />
-          <Radio label="Any Time (Let system decide)" />
+          <RadioForm name="sendingTime" label="Morning (8 AM - 12 PM)" inputClass='mb-2!'
+            formProps={{ ...register("sendingTime", { required: true }) }}
+            errors={errors} />
+          <RadioForm name="sendingTime" label="Afternoon (12 PM - 4 PM)" inputClass='mb-2!'
+            formProps={{ ...register("sendingTime", { required: true }) }}
+            errors={errors} />
+          <RadioForm name="sendingTime" label="Evening (4 PM - 8 PM)" inputClass='mb-2!'
+            formProps={{ ...register("sendingTime", { required: true }) }}
+            errors={errors} />
+          <RadioForm name="sendingTime" label="Any Time (Let system decide)"
+            formProps={{ ...register("sendingTime", { required: true }) }}
+            errors={errors} />
         </div>
 
         <div>
-          <div className='text-lg font-medium mt-3 mb-4'>Days of the Week</div>
+          <div className='text-lg font-medium mt-3 mb-4'>Days of the Week <span className='text-text3 font-normal'>(Optional)</span></div>
           <div className="flex items-start gap-4">
-            <Checkbox />
-            <div>Monday</div>
-            <Checkbox />
-            <div>Tuesday</div>
-            <Checkbox />
-            <div>Wednesday</div>
-            <Checkbox />
-            <div>Thursday</div>
-            <Checkbox />
-            <div>Friday</div>
-            <Checkbox />
-            <div>Saturday</div>
-            <Checkbox />
-            <div>Sunday</div>
-          </div>
+            <CheckboxForm
+              label="Monday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("monday") }} errors={errors} />
 
+            <CheckboxForm
+              label="Tuesday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("Tuesday") }} errors={errors}
+            />
+            <CheckboxForm
+              label="Wednesday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("wednesday") }} errors={errors}
+            />
+            <CheckboxForm
+              label="Thursday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("thursday") }} errors={errors}
+            />
+            <CheckboxForm
+              label="Friday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("friday") }} errors={errors}
+            />
+
+            <CheckboxForm
+              label="Saturday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("saturday") }} errors={errors}
+            />
+
+            <CheckboxForm
+              label="Sunday"
+              class_='flex flex-row-reverse gap-4'
+              formProps={{ ...register("sunday") }} errors={errors}
+            />
+          </div>
         </div>
+
         <div>
           <div className="grid grid-cols-2 gap-3 mt-3">
             <CancelButton title="Cancel" onClick={onClose} />
             <SecondaryButton
               title="Confirm"
-              type="button"
-              onClick={handleSubmit(onSubmit)}
+              type="submit"
               disabled={sending} />
           </div>
         </div>
       </div>
-    </Model>
+    </form>
+  </Model>
   )
 }
 

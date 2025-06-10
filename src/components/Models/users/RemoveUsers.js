@@ -28,7 +28,7 @@ export default function RemoveUsers({ onClose }) {
         try {
             setLoading(true);
             const ids = users.map((user) => user.id);
-            await axios.post("/api", { ids }); 
+            await axios.post("/api", { ids });
             toast.success("Users removed successfully");
             onClose();
         } catch (error) {
@@ -42,7 +42,7 @@ export default function RemoveUsers({ onClose }) {
         <Model title="Remove users permanently" onClose={onClose} modalClass="w-1/2!">
             <div>
                 <div className="flex items-center gap-2">
-                    <Image src="/images/warning.svg" alt="warning" height={22} width={22} />
+                    <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                     <div className="text-danger text-lg font-semibold capitalize">This action is irreversible</div>
                 </div>
 
@@ -74,7 +74,7 @@ export default function RemoveUsers({ onClose }) {
                 <div className="grid grid-cols-2 gap-3 mt-6">
                     <CancelButton title="Cancel" onClick={onClose} />
                     <SecondaryButton
-                        title="Apply Changes"
+                        title="Remove Permanently"
                         onClick={handleRemove}
                         disabled={!confirm || loading}
                     />

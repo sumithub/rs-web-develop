@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Model from '../Model';
@@ -38,6 +39,7 @@ function ChangePassword({ onClose, id }) {
                     <div>
                         <InputForm
                             label="New Password"
+                            inputType="password"
                             isRequired={true}
                             placeholder="Enter new password"
                             class_='mt-0!'
@@ -55,6 +57,7 @@ function ChangePassword({ onClose, id }) {
 
                         <InputForm
                             label="Confirm Password"
+                            inputType="password"
                             isRequired={true}
                             placeholder="Enter confirm password"
                             formProps={{

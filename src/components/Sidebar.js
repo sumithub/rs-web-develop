@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
-export default function Sidebar() {
+export default function Sidebar({ collapse, toggleSidebar }) {
     const list = [
         { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
         {
@@ -29,18 +29,20 @@ export default function Sidebar() {
         { title: "Settings", icon: "settings", submenu: [{ title: "Users", link: "/users" }] },
     ]
 
-    return <div className="relative">
-        <div className="bg-white h-[100vh] w-72 fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px] shadow-[0px_16px_44px_0px_#00000012]">
+    return <div className="relative z-50">
+        <div className={`bg-white h-[100vh] ${collapse ? "w-20" : "w-72"} transition-all fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px] shadow-[0px_16px_44px_0px_#00000012]`}>
             <div className="relative h-full pb-10">
-
-                <div className="pt-5 text-center">
-                    <Link href="/" className="test-secondary text-xl font-semibold uppercase text-center">logo</Link>
+                <div className="pt-5 text-center relative h-12">
+                    <Link href="/" className={`test-secondary ${collapse ? "text-base" : "text-xl"}  transition-all font-semibold uppercase text-center`}>logo</Link>
+                    <button type="button" onClick={toggleSidebar} className={`absolute -right-3 z-5 ${collapse ? "rotate-180" : ""} transition-all`}>
+                        <Image src="/images/expand-collapse.svg" alt="" className="h-7 w-7" height={20} width={20} />
+                    </button>
                 </div>
                 <div className="relative h-full flex flex-col justify-between overflow-y-auto custom-scrollbar pb-10 pt-10 scrollbar-none">
                     <div>
                         <div className="px-3 mb-4">
                             <div className="flex gap-1 items-center px-4 py-3 text-sm rounded-[10px] bg-primary text-white">
-                                <Image src="/sidebar-icons/location.svg" alt="location" height={20} width={20} unoptimized={true} />
+                                <Image className="shrink-0" src="/sidebar-icons/location.svg" alt="location" height={20} width={20} unoptimized={true} />
 
                                 <div className="text-xs font-medium line-clamp-1">4517 Washington Ave. Manchester, Kentucky 39495</div>
                                 <button className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={20} width={20} unoptimized={true} /></button>
@@ -52,7 +54,7 @@ export default function Sidebar() {
                         <ul className="flex flex-col gap-y-3 px-3">
                             {list.map((e, i) => {
                                 const submenu = e?.submenu
-                                return <MenuItem key={i} e={e} i={i} submenu={submenu} />
+                                return <MenuItem key={i} e={e} i={i} submenu={submenu} collapse={collapse} toggleSidebar={toggleSidebar} />
                             })}
                         </ul>
                     </div>
@@ -66,7 +68,7 @@ export default function Sidebar() {
     </div>
 }
 
-const MenuItem = ({ i, e, submenu }) => {
+const MenuItem = ({ i, e, submenu, collapse, toggleSidebar }) => {
     let [openSubMenu, setOpenSubMenu] = useState(false)
     const pathname = usePathname()
 
@@ -78,20 +80,28 @@ const MenuItem = ({ i, e, submenu }) => {
 
     return <li key={i}>
         {submenu ? <div>
-            <div onClick={() => { setOpenSubMenu(!openSubMenu) }}
+            <div onClick={() => {
+                if (collapse) {
+                    toggleSidebar()
+                }
+                setOpenSubMenu(!openSubMenu)
+            }}
                 className={`${openSubMenu ? "bg-light" : ""} relative px-4 py-3 text-sm flex items-center justify-between cursor-pointer mb-1 z-1`}>
-                <div className={`flex items-center gap-2 ${openSubMenu ? "text-primary" : "text-text3"}`}>
-                    <Image src={`/sidebar-icons/${e.icon || "customer"}${openSubMenu ? "-active" : ""}.svg`} alt={e.title} height={20} width={20} />
-                    <span className="capitalize leading-[normal] text-sm  font-medium">{e.title}</span>
+                <div className={`flex overflow-hidden items-center gap-2 ${openSubMenu ? "text-primary" : "text-text3"}`}>
+                    <Image src={`/sidebar-icons/${e.icon || "customer"}${openSubMenu ? "-active" : ""}.svg`} alt={e.title} height={20} width={20} className="shrink-0" />
+                    <span className={`capitalize leading-[normal] text-sm  font-medium ${collapse ? "w-0" : "w-auto"}`}>{e.title}</span>
                 </div>
-                <Image src="/images/arrow-down.svg" alt="arrow" height={20} width={20} unoptimized={true} className={`transition duration-400 ease-in-out ${openSubMenu ? "rotate-180" : "rotate-0"}`} />
+                {!collapse && <Image src="/images/arrow-down.svg" alt="arrow" height={20} width={20} unoptimized={true} className={`transition duration-400 ease-in-out ${openSubMenu ? "rotate-180" : "rotate-0"}`} />}
             </div>
             {openSubMenu && <ul className="w-[90%]">
                 {submenu && submenu.map((sub, i) => {
                     const isActive = (pathname === sub.link || pathname === (sub.link + "/[id]"))
+                    if (collapse) {
+                        return <></>
+                    }
                     return <li key={i} className="ml-[44px] relative">
                         <div className={`absolute w-10 h-full bg-transparent -top-1/2 -left-3 border-l border-[#24222029] ${i === (submenu.length - 1) ? "rounded-b-md" : ""}`}>
-                            <Image src='/sidebar-icons/side-line.svg' alt="icon" height={100} width={20} className="h-full w-auto -ml-[1px]" />
+                            <Image unoptimized={true} src='/sidebar-icons/side-line.svg' alt="icon" height={100} width={20} className="h-full w-auto -ml-[1px]" />
                         </div>
                         <Link href={sub.link}
                             className={`${isActive ? "bg-primary/5 text-secondary font-semibold" : "text-text3 font-medium"} hover:bg-primary/5 hover:text-secondary hover:font-semibold relative flex items-center px-2 py-3 text-sm rounded-[10px]`}>
@@ -100,13 +110,14 @@ const MenuItem = ({ i, e, submenu }) => {
                     </li>
                 })}
             </ul>}
-        </div> :
-            <Link href={e.link} className={`${(pathname === e.link || pathname === (e.link + "/[id]")) ? "bg-dark text-primary" : "text-text3"} relative flex items-center px-4 py-3 text-sm rounded-[10px]`}>
-                <span className="flex items-center justify-center">
-                    <Image src="/sidebar-icons/dashboard.svg" alt="dashboard" height={22} width={22} unoptimized={true} />
-                </span>
-                <span className="ml-3 capitalize leading-[normal]">{e.title}</span>
+        </div> : <>
+            <Link href={e.link} className={`${(pathname === e.link || pathname === (e.link + "/[id]")) ? "bg-dark text-primary" : "text-text3"}  relative flex gap-2 items-center px-4 py-3 text-sm rounded-[10px]`}>
+                <div className="flex gap-2 overflow-hidden">
+                    <Image src="/sidebar-icons/dashboard.svg" alt="dashboard" height={20} width={20} unoptimized={true} className="shrink-0" />
+                    <span className={`capitalize leading-[normal] ${collapse ? "w-0" : "w-auto"}`}>{e.title}</span>
+                </div>
             </Link>
+        </>
         }
     </li>
 }

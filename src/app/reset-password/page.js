@@ -22,7 +22,6 @@ export default function ResetPasswordPage() {
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false)
 
-
     const onSubmit = async (data) => {
         try {
             setLoading(true);
@@ -84,7 +83,7 @@ export default function ResetPasswordPage() {
             </form>
             <div className='flex justify-center mt-5'>
                 <Link href="/login" className="flex gap-[15px]">
-                    <Image src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
+                    <Image unoptimized={true} src="/images/arrow.svg" alt='arrow.svg' width={20} height={20} />
                     <h2 className='text-sm text-secondary'>Back To Login</h2>
                 </Link>
             </div>
