@@ -13,6 +13,7 @@ import InputForm from "../../form/InputForm";
 import Image from "next/image";
 import Switch from "../../../components/form/Switch";
 import ColorInputForm from "../../form/ColorInputForm";
+import Slider from "react-slick";
 
 export default function Carousel({ title, onClose, OnSave, id, onNext }) {
     const { register, setValue, watch, handleSubmit, clearErrors, formState: { errors } } = useForm();
@@ -56,6 +57,14 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
     const hasBehaviorSection = () => {
         return ["carousel", "floatingbuttonwidget"].includes(normalizedTitle);
     }
+
+    var settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    };
 
     return (
         <Model onClose={onClose} title={title} modalClass="w-[80%]!" >
@@ -359,30 +368,56 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     </div>
                                 </div>
                             ) : (
-                                <div className="border border-border2 rounded-[10px] p-5">
-                                    <div className="text-center">
-                                        <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
-                                        <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
+                                <Slider {...settings}>
+                                    <div className="border border-border2 rounded-[10px] p-5">
+                                        <div className="text-center">
+                                            <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
+                                            <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
+                                        </div>
+                                        <div className="flex justify-between items-center gap-2.5">
+                                            <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
+                                            <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
+                                            <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
+                                        </div>
+                                        <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...<br />
+                                            <span className="font-medium text-primary">Read More</span></p>
+                                        <div className="my-10 flex justify-center">
+                                            <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary" type="button">
+                                                <span>
+                                                    <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
+                                                </span>
+                                                Verified On Google
+                                            </button>
+                                        </div>
+                                        <div className="">
+                                            <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
+                                        </div>
                                     </div>
-                                    <div className="flex justify-between items-center gap-2.5">
-                                        <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
-                                        <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
-                                        <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
+                                    <div className="border border-border2 rounded-[10px] p-5">
+                                        <div className="text-center">
+                                            <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
+                                            <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
+                                        </div>
+                                        <div className="flex justify-between items-center gap-2.5">
+                                            <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
+                                            <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
+                                            <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
+                                        </div>
+                                        <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...<br />
+                                            <span className="font-medium text-primary">Read More</span></p>
+                                        <div className="my-10 flex justify-center">
+                                            <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary" type="button">
+                                                <span>
+                                                    <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
+                                                </span>
+                                                Verified On Google
+                                            </button>
+                                        </div>
+                                        <div className="">
+                                            <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
+                                        </div>
                                     </div>
-                                    <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...<br />
-                                        <span className="font-medium text-primary">Read More</span></p>
-                                    <div className="my-10 flex justify-center">
-                                        <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary" type="button">
-                                            <span>
-                                                <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
-                                            </span>
-                                            Verified On Google
-                                        </button>
-                                    </div>
-                                    <div className="">
-                                        <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
-                                    </div>
-                                </div>
+                                </Slider>
                             )}
                         </div>
                     </div>
