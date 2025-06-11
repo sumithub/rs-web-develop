@@ -363,7 +363,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                         <h2 className="text-2xl font-bold mb-2">4.5</h2>
                                         <div className="flex justify-center mb-2">
                                             {[1, 2, 3, 4, 5].map(star => (
-                                                <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
+                                                <Image key={star} unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
                                             ))}
                                         </div>
                                         <p className="text-sm text-text3">Based on 150 reviews</p>
@@ -384,12 +384,12 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                                 </div>
                                                 <div className="flex justify-between items-center gap-2.5">
 
-                                                    <button onClick={() => sliderRef.current.slickPrev()}>
+                                                    <button type="button" onClick={() => sliderRef.current.slickPrev()}>
                                                         <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
                                                     </button>
                                                     <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
 
-                                                    <button onClick={() => sliderRef.current.slickNext()}>
+                                                    <button type="button" onClick={() => sliderRef.current.slickNext()}>
                                                         <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} />
                                                     </button>
                                                 </div>

@@ -99,7 +99,7 @@ const MenuItem = ({ i, e, submenu, collapse, toggleSidebar }) => {
                     if (collapse) {
                         return <></>
                     }
-                    return <li key={i} className="ml-[44px] relative">
+                    return <li key={sub.link || i} className="ml-[44px] relative">
                         <div className={`absolute w-10 h-full bg-transparent -top-1/2 -left-3 border-l border-[#24222029] ${i === (submenu.length - 1) ? "rounded-b-md" : ""}`}>
                             <Image unoptimized={true} src='/sidebar-icons/side-line.svg' alt="icon" height={100} width={20} className="h-full w-auto -ml-[1px]" />
                         </div>

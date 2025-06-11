@@ -107,7 +107,7 @@ export default function ReviewWidgets() {
             <div>
                 <Slider {...settings}>
                     {[1, 2].map((_, i) => (
-                        <div key={i} className="border border-border-color rounded-[10px] p-8 pb-5">
+                        <div key={i} className="border border-border-color rounded-[10px] p-5 pb-5">
                             <div className="w-full">
                                 <div className="bg-dark rounded-[10px] h-[170px] w-full p-3.5 flex items-end">
                                     <button className="flex gap-2.5 p-2.5 text-sm font-medium border border-primary rounded-lg">
@@ -340,16 +340,16 @@ export default function ReviewWidgets() {
 
 function CustomNextArrow({ onClick }) {
     return (
-        <div onClick={onClick} className="absolute right-4 top-36 -translate-y-1/2 z-10 cursor-pointer">
+        <button type="button" onClick={onClick} className="absolute right-1 top-36 -translate-y-1/2 z-10 cursor-pointer">
             <Image src="/images/arrow-right.svg" alt="Next" width={18} height={18} />
-        </div>
+        </button>
     );
 }
 
 function CustomPrevArrow({ onClick }) {
     return (
-        <div onClick={onClick} className="absolute left-4 top-36 -translate-y-1/2 z-10 cursor-pointer">
+        <button type="button" onClick={onClick} className="absolute left-1 top-36 -translate-y-1/2 z-10 cursor-pointer">
             <Image src="/images/arrow-right.svg" alt="Prev" width={18} height={18} className="rotate-180" />
-        </div>
+        </button>
     );
 }

@@ -20,7 +20,7 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
                 <span className="cursor-pointer" title="More information">
                     {typeof infoIcon === "string" ? (
                         <Image
-                            unoptimized
+                            unoptimized={true}
                             src={infoIcon}
                             alt="info"
                             width={14}
