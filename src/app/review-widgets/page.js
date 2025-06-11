@@ -29,6 +29,20 @@ export default function ReviewWidgets() {
         slidesToScroll: 1,
     };
 
+// const settings = {
+//   dots: false,
+//   infinite: true,
+//   speed: 500,
+//   slidesToShow: 1,
+//   slidesToScroll: 1,
+//   arrows: true,
+//   swipe: false,          // disable swiping
+//   draggable: false,      // disable dragging with mouse
+//   autoplay: false,       // disable auto-play
+//   nextArrow: <CustomNextArrow />,
+//   prevArrow: <CustomPrevArrow />
+// };
+
     const handleOpenModal = (title) => {
         setModalTitle(title);
         setOpenCarousel(true);
@@ -359,3 +373,21 @@ export default function ReviewWidgets() {
 
     )
 }
+
+// function CustomNextArrow(props) {
+//   const { onClick } = props;
+//   return (
+//     <div onClick={onClick}>
+//       <Image src="/images/arrow-right.svg" alt="Next" width={16} height={16} />
+//     </div>
+//   );
+// }
+
+// function CustomPrevArrow(props) {
+//   const { onClick } = props;
+//   return (
+//     <div onClick={onClick}>
+//       <Image src="/images/arrow-right.svg" alt="Prev" width={16} height={16} className="rotate-180" />
+//     </div>
+//   );
+// }
