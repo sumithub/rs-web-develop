@@ -100,9 +100,17 @@ function AddTemplate({ onClose, id }) {
                 onChange={(value) => {
                   clearErrors("body")
                   setValue("body", value)
-                }} />
+                }}
+
+              // formProps={{ ...register("message", { required: true }) }}
+              // errors={errors}
+              // clearErrors={clearErrors}
+              />
             </div>
             {/* <HtmlEditor label="Email Body"
+               formProps={{ ...register("message", { required: false }) }}
+                                    errors={errors}
+                                    clearErrors={clearErrors}
               
             >
 

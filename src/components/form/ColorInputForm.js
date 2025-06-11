@@ -43,7 +43,7 @@ export default function ColorInputForm({
                     <button
                         type="button"
                         onClick={handleClear}
-                        className="absolute right-2 top-3 text-xs text-gray-500 underline"
+                        className="absolute right-2 top-3 text-xs text-text3 underline"
                     >
                         Clear
                     </button>
@@ -55,7 +55,7 @@ export default function ColorInputForm({
                         placeholder={placeholder}
                         {...formProps}
                         disabled={disabled}
-                        className={`h-9 w-9 rounded-[14px] mt-1 border-none! ${inputClass}`}
+                        className={`h-9 w-9 rounded-[14px] mt-1 focus:outline-0 focus-visible:outline-0  ${inputClass}`}
                     />
                 </div>
             </div>

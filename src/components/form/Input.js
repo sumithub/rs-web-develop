@@ -34,7 +34,7 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
             <div className="relative">
                 {(inputType !== "password" && icon) && (
                     <img
-                        unoptimized
+                        unoptimized={true}
                         src={icon}
                         alt=""
                         width={16}
@@ -44,7 +44,7 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
                 )}
                 {(inputType === "password") && (
                     <img
-                        unoptimized
+                        unoptimized={true}
                         src={type !== "password" ? "/images/eyes.svg" : "/images/open-eye.svg"}
                         alt=""
                         width={16}

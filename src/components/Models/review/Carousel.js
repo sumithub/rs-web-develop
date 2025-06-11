@@ -3,7 +3,7 @@ import Model from "../Model";
 import CheckboxForm from "../../form/CheckboxForm";
 import SecondaryButton from "../../common/SecondaryButton";
 import CodePreviewBox from "./CodePreviewBox";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SelectForm from "../../form/SelectForm";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -22,6 +22,10 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
     const normalizedTitle = title?.toLowerCase();
     const [clickSwitch, setClickSwitch] = useState(false)
     const [clickSwitch1, setClickSwitch1] = useState(false)
+
+    useEffect(() => {
+        setValue("colorScheme", "#0396FF");
+    }, [setValue]);
 
     const onSubmit = async (data) => {
         try {
@@ -67,9 +71,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
         arrows: false
     };
 
-
     const sliderRef = useRef(null)
-
 
     return (
         <Model onClose={onClose} title={title} modalClass="w-[80%]!" >
