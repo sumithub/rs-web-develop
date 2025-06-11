@@ -22,6 +22,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
     const normalizedTitle = title?.toLowerCase();
     const [clickSwitch, setClickSwitch] = useState(false)
     const [clickSwitch1, setClickSwitch1] = useState(false)
+    const [show, setShow] = useState(false)
 
     useEffect(() => {
         setValue("colorScheme", "#0396FF");
@@ -395,10 +396,13 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                                         <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} />
                                                     </button>
                                                 </div>
-                                                <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...<br />
-                                                    <span className="font-medium text-primary">Read More</span></p>
+                                                <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s<br /> {show && <>
+                                                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                                    Read More
+                                                </>}
+                                                    <span onClick={() => { setShow(!show) }} className="cursor-pointer font-medium text-primary"> Read {show ? "Less" : "More"}</span></p>
                                                 <div className="my-10 flex justify-center">
-                                                    <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary" type="button">
+                                                    <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary bg-dark" type="button">
                                                         <span>
                                                             <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
                                                         </span>

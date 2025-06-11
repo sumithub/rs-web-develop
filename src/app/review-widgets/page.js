@@ -1,14 +1,9 @@
 "use client"
 import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
-import ReviewCard from "../../components/ReviewCard"
-import GridWidget from "../../components/Models/review/GridWidget";
 import CancelButton from "../../components/common/CancelButton";
 import { useState } from "react";
 import SecondaryButton from "../../components/common/SecondaryButton";
-import TestimonialWidget from "../../components/Models/review/TestimonialWidget";
-import FloatingButtonWidget from "../../components/Models/review/FloatingButtonWidget";
-import StarBadgeWidget from "../../components/Models/review/StarBadgeWidget";
 import Carousel from "../../components/Models/review/Carousel";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Slider from "react-slick";
@@ -157,7 +152,7 @@ export default function ReviewWidgets() {
                     </div>
                 </div>
                 <div className="bg-border2 w-full p-7 rounded-sm mt-5" />
-                <button className="flex gap-2.5 border border-primary text-sm font-medium rounded-lg mt-3.5 px-2.5 py-3.5">
+                <button className="flex gap-2.5 border border-primary bg-dark text-sm font-medium rounded-lg mt-3.5 p-2.5">
                     <Image src="/images/google.svg" alt="google.svg" width={20} height={20.47} unoptimized={true} />
                     Verified On Google
                 </button>
@@ -185,7 +180,7 @@ export default function ReviewWidgets() {
                         <Image unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
                         <Image unoptimized={true} src="/images/star2.svg" alt="star2.svg" width={21} height={21} />
                     </div>
-                    <button className="flex items-center gap-2.5 border border-primary text-xs font-medium rounded-lg px-2.5 py-2">
+                    <button className="flex items-center gap-2.5 border border-primary bg-dark text-xs font-medium rounded-lg px-2.5 py-2">
                         <Image src="/images/google.svg" alt="google.svg" width={18} height={18} unoptimized={true} />
                         Verified On Google
                     </button>
@@ -201,7 +196,7 @@ export default function ReviewWidgets() {
             <div className="border border-border-color rounded-[10px] p-5 flex flex-col justify-end">
                 <div className="shadow-[0px_0px_22px_0px_#0000000F] p-3.5 rounded-[10px] w-4/5">
                     <div className="flex items-start gap-3.5">
-                        <Image unoptimized={true} src="/images/image.svg" alt="user" height={50} width={50} />
+                        <Image unoptimized={true} src="/images/user-review.svg" alt="user" height={50} width={50} />
                         <div className="w-full">
                             <div className="bg-border2 w-[90%] p-2 rounded-sm" />
                             <div className="flex gap-1 mt-2.5">
@@ -212,13 +207,10 @@ export default function ReviewWidgets() {
                                 <Image unoptimized={true} src="/images/star2.svg" alt="star2.svg" width={21} height={21} />
                             </div>
                         </div>
-                        <button className="border border-primary rounded-lg px-1.5 py-1.5">
-                            <Image src="/images/google.svg" alt="google.svg" width={20} height={20} unoptimized={true} />
-                        </button>
+                        <Image src="/images/google-review.svg" alt="google.svg" width={23} height={23} unoptimized={true} />
                     </div>
                     <div className="bg-border2 w-full p-6 rounded-sm mt-2.5" />
                 </div>
-
 
                 <CancelButton
                     title="Floating Review"
