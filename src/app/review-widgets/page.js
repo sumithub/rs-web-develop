@@ -140,7 +140,6 @@ export default function ReviewWidgets() {
                         </div>
                     ))}
                 </Slider>
-
             </div>
             <div className="border border-border-color rounded-[10px] p-5 flex flex-col justify-between">
                 <div className="flex gap-3.5">

@@ -390,7 +390,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                                     <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
 
                                                     <button onClick={() => sliderRef.current.slickNext()}>
-                                                        <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
+                                                        <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} />
                                                     </button>
                                                 </div>
                                                 <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...<br />
@@ -407,7 +407,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                                     <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
                                                 </div>
                                             </div>
-                                            <div className="border border-border2 rounded-[10px] p-5">
+                                            {/* <div className="border border-border2 rounded-[10px] p-5">
                                                 <div className="text-center">
                                                     <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
                                                     <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
@@ -430,7 +430,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                                 <div className="">
                                                     <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>))}
                                 </Slider>
                             )}
