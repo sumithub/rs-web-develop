@@ -20,6 +20,7 @@ import AddTemplate from "../../../components/Models/templates/AddTemplate"
 import Preview from "../../../components/Models/manage-campaigns/Preview"
 import { useRouter } from "next/navigation"
 import SelectedCustomers from "../../../components/Models/manage-campaigns/SelectedCustomers"
+import ImportCustomerDetail from "../../../components/Models/manage-campaigns/ImportCustomerDetail"
 import RadioForm from "../../../components/form/RadioForm"
 
 export default function Detail({ }) {
@@ -28,6 +29,7 @@ export default function Detail({ }) {
     const [sending, setSending] = useState(false)
     const [openSchedule, setOpenSchedule] = useState(false)
     const [openCustomer, setOpenCustomer] = useState(false)
+    const [openCustomerDetail, setOpenCustomerDetail] = useState(false)
     const [openModal, setOpenModal] = useState(false)
     const [openEmail, setOpenEmail] = useState(false)
     const [expandAll, setExpandAll] = useState(undefined)
@@ -484,6 +486,18 @@ export default function Detail({ }) {
             />
         }
 
+        {openCustomerDetail &&
+            <ImportCustomerDetail
+                onClose={() => {
+                    setOpenCustomerDetail(false)
+                }}
+                onSave={() => {
+                    setOpenSchedule(false)
+                }}
+
+            />
+        }
+
         {openEmail &&
             <EmailTemplate
                 mode={templateSelectionMode}
@@ -527,12 +541,16 @@ export default function Detail({ }) {
                         title="Campaign Details"
                         status={getCardStatus('campaignDetails')}>
                         <div className="grid grid-cols-2 gap-3">
-                            <InputForm label="Campaign Name" placeholder="Enter Name" isRequired={true} inputClass="bg-white!"
+                            <InputForm
+                                label="Campaign Name"
+                                placeholder="Enter Name"
+                                isRequired={true}
+                                inputClass="bg-white! border-primary/10! focus:border-primary/60!"
                                 formProps={{ ...register("campaignName", { required: true }) }}
                                 errors={errors}
                             />
 
-                            <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white!"
+                            <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white! border-primary/10! focus:border-primary/60!"
                                 formProps={{ ...register("description", { required: false }) }}
                                 errors={errors}
                             />
@@ -545,9 +563,9 @@ export default function Detail({ }) {
                         title="Targeting"
                         status={getCardStatus('targeting')}>
                         <div className="my-4">
-                            <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
-                            <div className="flex items-center justify-between">
-                                <div>
+                            <div className="text-secondary text-sm font-medium capitalize">Select Customer Source</div>
+                            <div>
+                                <div className="flex items-center justify-between">
                                     <RadioForm
                                         checked={watch("customerSource") === "existing"}
                                         name="customerSource"
@@ -556,6 +574,13 @@ export default function Detail({ }) {
                                         formProps={{ ...register("customerSource", { required: true }) }}
                                         errors={errors}
                                     />
+                                    {watch("customerSource") === "existing" && <SecondaryButton title="select from list" class_="text-sm! font-normal!"
+                                        type="button"
+                                        onClick={() => { setOpenCustomer(true) }} />}
+                                </div>
+
+                                <div className="flex items-center justify-between">
+
                                     <RadioForm
                                         checked={watch("customerSource") === "CSV"}
                                         name="customerSource"
@@ -564,27 +589,45 @@ export default function Detail({ }) {
                                         formProps={{ ...register("customerSource", { required: true }) }}
                                         errors={errors}
                                     />
+                                    {watch("customerSource") === "CSV" && <SecondaryButton title="Choose File" class_="text-sm! font-normal!"
+                                        type="button"
+                                        onClick={() => { setOpenCustomerDetail(true) }} />}
                                 </div>
-                                <SecondaryButton title={watch("customerSource") === "CSV" ? "Choose File" : "Add Customers"} class_="text-sm! font-normal!"
+                                {/* <SecondaryButton title={watch("customerSource") === "CSV" ? "Choose File" : "Add Customers"} class_="text-sm! font-normal!"
                                     type="button"
-                                    onClick={() => { setOpenCustomer(true) }} />
+                                    onClick={() => { setOpenCustomer(true) }} /> */}
+
+                                {/* <SecondaryButton
+                                    title={watch("customerSource") === "CSV" ? "Choose File" : "Select from list"}
+                                    class_="text-sm! font-normal!"
+                                    type="button"
+                                    onClick={() => {
+                                        if (watch("customerSource") === "CSV") {
+                                            setOpenCustomerDetail(true);
+                                        } else {
+                                            setOpenCustomer(true);
+                                        }
+                                    }}
+                                /> */}
                             </div>
                         </div>
                         <div>
-                            <div className="flex items-center justify-between">
+                            <div className="flex justify-between">
                                 <div>
-                                    {customersSelected && <div className="flex items-center gap-2 my-5">
-                                        <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
-                                        <div className="text-danger text-lg font-semibold capitalize">{customersSelected || 5} customers are already in an active campaign.</div>
+                                    {customersSelected && <div className="flex items-center gap-5 mb-4">
+                                        <div className="flex items-center gap-2">
+                                            <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
+                                            <div className="text-danger text-lg font-semibold capitalize">{customersSelected || 5} customers are already in an active campaign?</div>
+                                        </div>
                                         <SecondaryButton title="View Details" class_="text-sm! font-normal!"
                                             type="button"
                                             onClick={() => { setOpenCustomer("details") }} />
                                     </div>}
                                 </div>
-
+                                <CancelButton type="button" title="proceed anyway" class_="bg-white! border-border-color! font-normal! text-sm!" />
                             </div>
                             <div className="grid grid-cols-[3fr_1fr] items-start gap-3">
-                                <SelectForm label="Cooldown Period" isRequired={true} defaultOption="-" selectClass_="bg-white! py-3! focus:border-primary/60!"
+                                <SelectForm label="Cooldown Period" isRequired={true} defaultOption="-" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                                     formProps={{ ...register("cooldownPeriod", { required: true }) }} errors={errors} clearErrors={clearErrors}>
                                     <option value="7">7 Days</option>
                                     <option value="14">14 Days</option>
@@ -592,7 +635,7 @@ export default function Detail({ }) {
                                 </SelectForm>
                                 {watch("customerSource") && <SelectForm
                                     class_="mt-10"
-                                    defaultOption="" selectClass_="bg-white! py-3!"
+                                    defaultOption="" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                                     formProps={{ ...register("excludeDuplicates", { required: false }) }}
                                     errors={errors}>
                                     <option value="Exclude Duplicates">Exclude Duplicates</option>
@@ -629,29 +672,38 @@ export default function Detail({ }) {
                             </div>
                         </div>
 
+                        {/* <div>
+                            <div className="flex gap-3 my-4">
+                                <div className="text-secondary text-sm">Reminder SMS Template<span className="text-danger">*</span></div>
+                                <Radio label="Custom reminder SMS" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
+
+                                <Radio label="Same as primary" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
+
+                            </div>
+                        </div> */}
                         {/* Tabs for Both Campaign Type */}
                         {campaignType === "both" && (
                             <div className="mb-4">
                                 <div className="flex border-b border-gray-200">
                                     <button
-                                        className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'email'
-                                            ? 'border-primary text-primary bg-primary/5'
-                                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                        className={`px-4 py-2 w-1/2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'email'
+                                            ? 'border-primary/70 text-primary'
+                                            : 'border-transparent text-text3 hover:text-gray-400 hover:border-gray-300'
                                             }`}
                                         type="button"
                                         onClick={() => setActiveTab('email')}
                                     >
-                                        Email Templates
+                                        Email
                                     </button>
                                     <button
-                                        className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'sms'
-                                            ? 'border-primary text-primary bg-primary/5'
-                                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                        className={`px-4 py-2 w-1/2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'sms'
+                                            ? 'border-primary/70 text-primary'
+                                            : 'border-transparent text-text3 hover:text-gray-400 hover:border-gray-300'
                                             }`}
                                         type="button"
                                         onClick={() => setActiveTab('sms')}
                                     >
-                                        SMS Templates
+                                        SMS
                                     </button>
                                 </div>
                             </div>
@@ -675,6 +727,15 @@ export default function Detail({ }) {
 
                                         {reminderEnabled && (
                                             <>
+                                                {/* <div>
+                                                    <div className="flex gap-3 my-4">
+                                                        <div className="text-secondary text-sm">Final Reminder Email Template<span className="text-danger">*</span></div>
+                                                        <Radio label="Custom final reminder email" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
+
+                                                        <Radio label="Same as reminder" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
+
+                                                    </div>
+                                                </div> */}
                                                 {/* Reminder Template Section */}
                                                 <div className="mb-4">
                                                     {sameAsReminder && <div className="text-secondary text-sm font-medium mb-4">Reminder Email Template</div>}
@@ -698,26 +759,28 @@ export default function Detail({ }) {
                                                 )}
 
                                                 {/* Frequency Selection */}
-                                                <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
-                                                    selectClass_="bg-white! py-3! focus:border-primary/60!"
-                                                    formProps={{ ...register("frequency", { required: reminderEnabled }) }}
-                                                    errors={errors} >
-                                                    <option value="daily">Daily</option>
-                                                    <option value="weekly">Weekly</option>
-                                                    <option value="monthly">Monthly</option>
-                                                </SelectForm>
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
+                                                        selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                                                        formProps={{ ...register("frequency", { required: reminderEnabled }) }}
+                                                        errors={errors} >
+                                                        <option value="daily">Daily</option>
+                                                        <option value="weekly">Weekly</option>
+                                                        <option value="monthly">Monthly</option>
+                                                    </SelectForm>
 
-                                                {/* Number of Reminders */}
-                                                <InputForm label="Number of Reminders"
-                                                    isRequired={true}
-                                                    inputClass="bg-white! py-3! focus:border-primary/60!"
-                                                    formProps={{
-                                                        ...register("reminderNo", {
-                                                            required: reminderEnabled,
-                                                            valueAsNumber: true
-                                                        })
-                                                    }} inputType="number"
-                                                    errors={errors} />
+                                                    {/* Number of Reminders */}
+                                                    <InputForm label="Number of Reminders"
+                                                        isRequired={true}
+                                                        inputClass="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                                                        formProps={{
+                                                            ...register("reminderNo", {
+                                                                required: reminderEnabled,
+                                                                valueAsNumber: true
+                                                            })
+                                                        }} inputType="number"
+                                                        errors={errors} />
+                                                </div>
                                             </>
                                         )}
                                     </div>
@@ -765,7 +828,7 @@ export default function Detail({ }) {
 
                                                         {/* Email Frequency Selection */}
                                                         <SelectForm label="Email Frequency" defaultOption="Select Frequency" isRequired={true}
-                                                            selectClass_="bg-white! py-3! focus:border-primary/60!"
+                                                            selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
                                                             formProps={{ ...register("emailFrequency", { required: emailReminderEnabled }) }}
                                                             errors={errors} >
                                                             <option value="daily">Daily</option>
@@ -776,7 +839,7 @@ export default function Detail({ }) {
                                                         {/* Email Number of Reminders */}
                                                         <InputForm label="Number of Email Reminders"
                                                             isRequired={true}
-                                                            inputClass="bg-white! py-3! focus:border-primary/60!"
+                                                            inputClass="bg-white! py-3! focus:border-primary/60! border-primary/10!"
                                                             formProps={{
                                                                 ...register("emailReminderNo", {
                                                                     required: emailReminderEnabled,
@@ -830,7 +893,7 @@ export default function Detail({ }) {
 
                                                         {/* SMS Frequency Selection */}
                                                         <SelectForm label="SMS Frequency" defaultOption="Select Frequency" isRequired={true}
-                                                            selectClass_="bg-white! py-3! focus:border-primary/60!"
+                                                            selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
                                                             formProps={{ ...register("smsFrequency", { required: smsReminderEnabled }) }}
                                                             errors={errors} >
                                                             <option value="daily">Daily</option>
@@ -841,7 +904,7 @@ export default function Detail({ }) {
                                                         {/* SMS Number of Reminders */}
                                                         <InputForm label="Number of SMS Reminders"
                                                             isRequired={true}
-                                                            inputClass="bg-white! py-3! focus:border-primary/60!"
+                                                            inputClass="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                                                             formProps={{
                                                                 ...register("smsReminderNo", {
                                                                     required: smsReminderEnabled,
@@ -865,11 +928,11 @@ export default function Detail({ }) {
                         title="Scheduling & Launch"
                         status={getCardStatus('scheduling')}>
                         <div className="grid grid-cols-2 gap-3">
-                            <InputForm label="Time Zone" isRequired={true} inputType="time" inputClass="bg-white!"
+                            <InputForm label="Time Zone" isRequired={true} inputType="time" inputClass="bg-white! border-primary/10! focus:border-primary/60!"
                                 formProps={{ ...register("timeZone", { required: true }) }}
                                 errors={errors}
                             />
-                            <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-3! focus:border-primary/60!"
+                            <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-[13.6px]! focus:border-primary/60! border-primary/10!"
                                 formProps={{ ...register("sendTime", { required: true }) }}
                                 errors={errors}>
                                 <option value="morning">morning (8 AM - 12 PM)</option>
@@ -879,7 +942,7 @@ export default function Detail({ }) {
                             </SelectForm>
                         </div>
 
-                        <SelectForm label="Weekend Delivery" defaultOption="Restrict" selectClass_="bg-white! py-3! focus:border-primary/60!"
+                        <SelectForm label="Weekend Delivery" defaultOption="Restrict" selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
                             formProps={{ ...register("weekendDelivery", { required: false }) }}
                             errors={errors}
                         />

@@ -10,13 +10,15 @@ import { toast } from "react-toastify"
 import { getError } from "../../../../helper"
 import { selectedCustomers } from "../../../constent/constArray"
 import Loading from "../../Loading"
-import FileInput from "../../form/FileInput"
+import ImportCustomer from "../customers/ImportCustomer"
 
 function SelectedCustomers({ onClose, onSave, type, action, selected = 0 }) {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
     const [sortBy, setSortBy] = useState("")
+    const [activeStep, setActiveStep] = useState(1);
+
 
     useEffect(() => {
         getCustomer()
@@ -44,29 +46,38 @@ function SelectedCustomers({ onClose, onSave, type, action, selected = 0 }) {
     }
 
     return (
-        <Model onClose={onClose} title="Selected Customers" modalClass="w-1/2!">
+        <Model onClose={onClose} title={
+            type !== "CSV"
+                ? "Selected Customers"
+                : activeStep === 6
+                    ? "Customers Imported Successfully!"
+                    : "Import Customer"
+        } modalClass={`${type === "CSV" ? "w-[60%]!" : "w-1/2!"}`} >
             <div>
-                <div className="flex items-center justify-between mb-3">
+                {type !== "CSV" && <div className="flex items-center justify-between mb-3">
                     <Search placeholder="Search by Filter by name, email, phone" mainClass="w-1/2!"
                         onSearch={(s) => {
                             setSearch(s)
                         }}
                     />
-                    <SecondaryButton title={type === "CSV" ? "Save" : (action === "details" ? "Delete" : "Add Selected")} class_="text-sm! font-normal!"
+                    <SecondaryButton title={type === "CSV" ? "Save" : (action === "details" ? "Remove Selected" : "Add Selected")} class_="text-sm! font-normal!"
                         onClick={() => {
                             if (onSave)
                                 onSave(list.filter(e => e.selected).length || 5)
                         }} />
-                </div>
+                </div>}
             </div>
 
             {type === "CSV" ? <div>
                 <div>
-                    <FileInput
+                    <ImportCustomer icon={true} activeStep={activeStep}
+                        setActiveStep={setActiveStep}
+                        onClose={onClose} />
+                    {/* <FileInput
                         accept=".csv"
                         isRequired={true}
                         label="Upload file"
-                    />
+                    /> */}
                 </div>
             </div> : <div className="table-class">
                 {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
@@ -108,8 +119,9 @@ function SelectedCustomers({ onClose, onSave, type, action, selected = 0 }) {
                 {list?.length > 0 && <div>
                     <PaginationDemo />
                 </div>}
-            </div>}
-        </Model>
+            </div>
+            }
+        </Model >
     )
 }
 
