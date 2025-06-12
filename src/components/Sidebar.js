@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
+
 export default function Sidebar({ collapse, toggleSidebar }) {
     const list = [
         { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
@@ -22,7 +23,7 @@ export default function Sidebar({ collapse, toggleSidebar }) {
         },
         {
             title: "Reports", link: "", icon: "report",
-            submenu: [{ title: "Review Analytics", link: "/review-analytics" }, { title: "Campaign Performance", link: "/campaign-performance" }, { title: "Sentiment Analysis", link: "/sentiment-analysis" }]
+            submenu: [{ title: "Review Analytics", link: "/review-analytics" }, { title: "Report Templates", link: "/report-templates" }, { title: "Schedule & Delivery", link: "/schedule-delivery" }, { title: "Report History", link: "/report-history" }, { title: "Sentiment Analysis", link: "/sentiment-analysis" }]
         },
         // { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
 
