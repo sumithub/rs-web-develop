@@ -11,11 +11,13 @@ import { useState } from 'react'
 import { getError, validEmailRgx } from '../../../../helper'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import CustomSelectBox from '../../form/CustomSelectBox'
 
 function AddTemplate({ onClose, id }) {
   const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm();
   const [sending, setSending] = useState(false)
   const [isEmail, setIsEmail] = useState(false)
+  const [dynamicFields, setDynamicFields] = useState(false)
 
   const handleClick = () => {
     toast.success("Cloned Successfully")
@@ -51,7 +53,7 @@ function AddTemplate({ onClose, id }) {
 
             <div className='grid grid-cols-2 gap-3'>
               <SelectForm label="Template Type" isRequired={true} class_='mt-2!'
-                selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                selectClass_="py-[13.2px]! px-2.5! border-primary/10! focus:border-primary/60!"
                 formProps={{ ...register("type", { required: true }) }}
                 errors={errors} clearErrors={clearErrors}
                 onChange={(e) => {
@@ -62,23 +64,40 @@ function AddTemplate({ onClose, id }) {
                 <option value="sms">SMS</option>
                 <option value="both">Both</option>
               </SelectForm>
-              <InputForm label="Template Name" isRequired={true} class_='mt-2!' placeholder="Enter Name"
+              <InputForm
+                inputClass='border-primary/10! focus:border-primary/60!'
+                label="Template Name"
+                isRequired={true}
+                class_='mt-2!'
+                placeholder="Enter Name"
                 formProps={{ ...register("name", { required: true }) }}
                 errors={errors}
               />
             </div>
 
-            {isEmail && <InputForm label="Subject Line" isRequired={true} placeholder="Enter Line"
+            {isEmail && <InputForm
+              inputClass='border-primary/10! focus:border-primary/60!'
+              label="Subject Line"
+              isRequired={true}
+              placeholder="Enter Line"
               formProps={{ ...register("subject", { required: true }) }}
               errors={errors}
             />}
 
             {isEmail && <div className='grid grid-cols-2 gap-3'>
-              <InputForm label="Sender Name" isRequired={true} placeholder="Enter Sender Name"
+              <InputForm
+                inputClass='border-primary/10! focus:border-primary/60!'
+                label="Sender Name"
+                isRequired={true}
+                placeholder="Enter Sender Name"
                 formProps={{ ...register("senderName", { required: true }) }}
                 errors={errors}
               />
-              <InputForm label="Sender Email" isRequired={true} placeholder="Enter Sender Email"
+              <InputForm
+                inputClass='border-primary/10! focus:border-primary/60!'
+                label="Sender Email"
+                isRequired={true}
+                placeholder="Enter Sender Email"
                 errors={errors}
                 formProps={{
                   ...register("senderEmail", {
@@ -94,15 +113,39 @@ function AddTemplate({ onClose, id }) {
 
             <div className='mt-5'>
               <HtmlEditor
-                label="Message Body"
+
+                label="Email Body"
                 isRequired={true}
                 value={body}
                 onChange={(value) => {
                   clearErrors("body")
                   setValue("body", value)
-                }} />
+                }}
+
+              // formProps={{ ...register("message", { required: true }) }}
+              // errors={errors}
+              // clearErrors={clearErrors}
+              >
+                <CustomSelectBox
+                  class_='mt-5!'
+                  defaultOption="Insert Dynamic Fields"
+                  value={dynamicFields}
+                  onChange={(e) => {
+                    setDynamicFields(e.target.value)
+                  }}
+                >
+                  <option value="full name">Customer Full Name</option>
+                  <option value="first name">Customer First Name</option>
+                  <option value="business name">Business Name</option>
+                  <option value="direct feedback">Direct Feedback</option>
+                </CustomSelectBox>
+
+              </HtmlEditor>
             </div>
             {/* <HtmlEditor label="Email Body"
+               formProps={{ ...register("message", { required: false }) }}
+                                    errors={errors}
+                                    clearErrors={clearErrors}
               
             >
 

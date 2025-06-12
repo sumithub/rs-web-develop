@@ -20,7 +20,7 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
                 <span className="cursor-pointer" title="More information">
                     {typeof infoIcon === "string" ? (
                         <Image
-                            unoptimized
+                            unoptimized={true}
                             src={infoIcon}
                             alt="info"
                             width={14}
@@ -34,7 +34,6 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
             <div className="relative">
                 {(inputType !== "password" && icon) && (
                     <img
-                        unoptimized
                         src={icon}
                         alt=""
                         width={16}
@@ -44,7 +43,6 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
                 )}
                 {(inputType === "password") && (
                     <img
-                        unoptimized
                         src={type !== "password" ? "/images/eyes.svg" : "/images/open-eye.svg"}
                         alt=""
                         width={16}

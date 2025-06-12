@@ -291,9 +291,9 @@ export default function Review() {
                             <option value="flagged">Flagged</option>
                         </CustomSelectBox>
 
-                        {/* <button className="cursor-pointer disabled:pointer-events-none shrink-0">
+                        <button className="cursor-pointer disabled:pointer-events-none shrink-0">
                             <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
-                        </button> */}
+                        </button>
 
                         <div className="shrink-0!">
                             <SecondaryButton title="Create Manual Review" class_="text-xs! py-2.5!" onClick={() => { setOpen(true) }} />

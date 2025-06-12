@@ -19,7 +19,6 @@ export default function ResendReportEmail({ onClose, id, onSave }) {
         try {
             setSending(true)
             let res = null
-
             if (id !== "add") {
                 res = await axios.put("/api", data)
             } else {

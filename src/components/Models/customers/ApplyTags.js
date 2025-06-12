@@ -10,9 +10,14 @@ import CustomSelectBox from '../../form/CustomSelectBox'
 
 function ApplyTags({ onClose }) {
     const [sending, setSending] = useState(false);
-    const [type, setType] = useState([])
-    const [type1, setType1] = useState([])
-    const [type2, setType2] = useState([])
+    const [selectedTypes, setSelectedTypes] = useState({});
+
+    const handleSelectChange = (index, value) => {
+        setSelectedTypes((prev) => ({
+            ...prev,
+            [index]: value,
+        }));
+    };
 
     const onSubmit = async () => {
         try {
@@ -33,7 +38,7 @@ function ApplyTags({ onClose }) {
     ]
 
     return (
-        <Model onClose={onClose} title="Apply Tags To Multiple Customers" modalClass="w-1/2!">
+        <Model onClose={onClose} title="Apply Tags To Multiple Customers" modalClass="w-[55%]!">
             <div className='text-xl font-semibold'>Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
             <div className='my-[30px]'>
 
@@ -41,14 +46,14 @@ function ApplyTags({ onClose }) {
                     <div className='flex justify-between items-center'>
                         <h2 className='text-base font-medium'>{e.name}</h2>
                         <div className='w-1/5'>
+
                             <CustomSelectBox
                                 selectClass_='border-primary3/10!'
-                                class_="mt-0! w-36!"
+                                class_="mt-0! w-40!"
                                 multiSelect={true}
-                                value={type}
-                                onChange={(e) => {
-                                    setType(e.target.value)
-                                }}>
+                                value={selectedTypes[i] || []}
+                                onChange={(e) => handleSelectChange(i, e.target.value)}
+                            >
                                 <option value="high-value">High Value</option>
                                 <option value="imported-list">Imported List A</option>
                                 <option value="vip">Vip</option>

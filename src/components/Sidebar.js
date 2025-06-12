@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
+
 export default function Sidebar({ collapse, toggleSidebar }) {
     const list = [
         { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
@@ -22,7 +23,7 @@ export default function Sidebar({ collapse, toggleSidebar }) {
         },
         {
             title: "Reports", link: "", icon: "report",
-            submenu: [{ title: "Review Analytics", link: "/review-analytics" }, { title: "Campaign Performance", link: "/campaign-performance" }, { title: "Sentiment Analysis", link: "/sentiment-analysis" }]
+            submenu: [{ title: "Review Analytics", link: "/review-analytics" }, { title: "Report Templates", link: "/report-templates" }, { title: "Schedule & Delivery", link: "/schedule-delivery" }, { title: "Report History", link: "/report-history" }, { title: "Sentiment Analysis", link: "/sentiment-analysis" }]
         },
         // { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
 
@@ -99,7 +100,7 @@ const MenuItem = ({ i, e, submenu, collapse, toggleSidebar }) => {
                     if (collapse) {
                         return <></>
                     }
-                    return <li key={i} className="ml-[44px] relative">
+                    return <li key={sub.link || i} className="ml-[44px] relative">
                         <div className={`absolute w-10 h-full bg-transparent -top-1/2 -left-3 border-l border-[#24222029] ${i === (submenu.length - 1) ? "rounded-b-md" : ""}`}>
                             <Image unoptimized={true} src='/sidebar-icons/side-line.svg' alt="icon" height={100} width={20} className="h-full w-auto -ml-[1px]" />
                         </div>
