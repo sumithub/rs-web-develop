@@ -40,17 +40,17 @@ export default function ReportTemplates() {
                     <h2 className='text-lg font-semibold'>Date Range</h2>
                     {/* <DateRange class_='mt-5!' /> */}
                     <DateRangeForm
-                    class_="mt-5!"
-                   label="Select Date"
-                   isRequired={true}
-                    watch={watch}
-                    setValue={setValue}
-                    clearError={clearErrors}
-                    formProps={{ ...register("date", { required: true })}}
-                    errors={errors}
-                    inputClass='py-3! border-primary/10!'
-                     labelClass="block mb-1"
-/>
+                        class_="mt-3.5!"
+                        label="Select Date"
+                        isRequired={true}
+                        watch={watch}
+                        setValue={setValue}
+                        clearError={clearErrors}
+                        formProps={{ ...register("date", { required: true }) }}
+                        errors={errors}
+                        inputClass='py-3! border-primary/10!'
+                        labelClass="block mb-1"
+                    />
                     <div className='mt-5'>
                         <h2 className='text-lg font-semibold'>Select Report Sections</h2>
                         <div className='flex gap-5 pt-[15px]'>
@@ -77,7 +77,6 @@ export default function ReportTemplates() {
                     <hr className='border-t border-border2 my-5' />
                     <div>
                         <h2 className='text-lg font-semibold'>Review Report Settings</h2>
-
                         <div className='mt-5'>
                             <div className='flex gap-2.5 items-center'>
                                 <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
@@ -102,10 +101,8 @@ export default function ReportTemplates() {
                         </div>
                     </div>
                     <hr className='border-t border-border2 my-5' />
-
                     <div>
                         <h2 className='text-lg font-semibold'>Campaign Report Settings</h2>
-
                         <div className='mt-5'>
                             <div className='flex gap-2.5 items-center'>
                                 <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
@@ -128,10 +125,8 @@ export default function ReportTemplates() {
                         </div>
                     </div>
                     <hr className='border-t border-border2 my-5' />
-
                     <div>
                         <h2 className='text-lg font-semibold'>Sentiment Report Settings</h2>
-
                         <div className='mt-5'>
                             <div className='flex gap-2.5 items-center mb-[15px]'>
                                 <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />

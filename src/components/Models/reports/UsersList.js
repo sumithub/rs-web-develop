@@ -81,7 +81,7 @@ export default function UsersList({ onClose }) {
             />
         </div>
 
-        <div className='my-5 flex items-center justify-between'>
+        <div className='my-3.5 flex items-center justify-between'>
             <div className="border border-border-color px-2 py-1 rounded-lg w-28 cursor-pointer">
                 <div className="flex items-start justify-center gap-2 mt-1">
                     <Checkbox
@@ -94,7 +94,7 @@ export default function UsersList({ onClose }) {
                     <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
                 </div>
             </div>
-            <SecondaryButton title="Add Selected" onClick={onClose}/>
+            <SecondaryButton title="Add Selected" onClick={onClose} class_="text-xs! font-normal! py-2.5! px-2.5" />
         </div>
 
         <div className='table-class'>
