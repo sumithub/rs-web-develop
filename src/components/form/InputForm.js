@@ -52,7 +52,7 @@ export default function InputForm({ class_ = "", watch, setValue, clearValue = f
                         onClick={handleClick} />
                 )}
                 {isTextArea ? <textarea rows={rows}
-                    className={`border ${error ? "border-danger" : "border-input-border"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
+                    className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
                     placeholder={placeholder || label}
                     {...formProps}
                     disabled={disabled}
@@ -61,7 +61,7 @@ export default function InputForm({ class_ = "", watch, setValue, clearValue = f
                         placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
                         {...formProps}
                         disabled={disabled}
-                        className={`border ${error ? "border-danger" : "border-input-border"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
+                        className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
                     />}
             </div>
             {error && <p className="text-xs pt-[3px] capitalize text-danger">{error}</p>}

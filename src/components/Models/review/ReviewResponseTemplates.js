@@ -104,7 +104,7 @@ export default function ReviewResponseTemplates({ onClose }) {
                             <option value="4 star">4 Star</option>
                             <option value="5 star">5 Star</option>
                         </CustomSelectBox>
-                        <SecondaryButton title="Create New Template" class_="text-xs! px-2.5! py-2.5!" onClick={() => { setOpen(true) }} type="button" />
+                        <SecondaryButton title="Create New Template" class_="text-xs! px-2.5! py-2.5!" isLink={true} link="/create-email-template" type="button" />
                     </div>
                 </div>
 
@@ -145,7 +145,7 @@ export default function ReviewResponseTemplates({ onClose }) {
                                 </td>
                                 <td>{formatDate(e.lastUpdate)}</td>
                                 <td>
-                                    <div className='flex items-center gap-2' >
+                                    <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer' onClick={() => { setOpen(true) }} type="button">
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>

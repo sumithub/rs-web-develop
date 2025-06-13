@@ -106,6 +106,7 @@ export default function Review() {
         }
 
         <div className="bg-light min-h-[calc(100dvh_-_85px)] mt-[85px]">
+            {loading ? <Loading /> : <>
             <div className="grid grid-cols-3 gap-4">
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
@@ -291,9 +292,9 @@ export default function Review() {
                             <option value="flagged">Flagged</option>
                         </CustomSelectBox>
 
-                        {/* <button className="cursor-pointer disabled:pointer-events-none shrink-0">
+                        <button className="cursor-pointer disabled:pointer-events-none shrink-0">
                             <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
-                        </button> */}
+                        </button>
 
                         <div className="shrink-0!">
                             <SecondaryButton title="Create Manual Review" class_="text-xs! py-2.5!" onClick={() => { setOpen(true) }} />
@@ -389,6 +390,7 @@ export default function Review() {
                     </div>}
                 </div>
             </div>
+             </>}
         </div>
 
         {/* <ReviewNoData /> */}

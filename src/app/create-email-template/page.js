@@ -1,19 +1,19 @@
 "use client"
-import CancelButton from '../../common/CancelButton'
-import SecondaryButton from '../../common/SecondaryButton'
-import Model from '../Model'
+import CancelButton from "../../components/common/CancelButton" 
+import SecondaryButton from "../../components/common/SecondaryButton"
 import Image from 'next/image'
-import HtmlEditor from "../../form/HtmlEditor"
-import InputForm from '../../form/InputForm'
-import SelectForm from '../../form/SelectForm'
+import HtmlEditor from "../../components/form/HtmlEditor"
+import InputForm from "../../components/form/InputForm"
+import SelectForm from "../../components/form/SelectForm"
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import { getError, validEmailRgx } from '../../../../helper'
+import { getError, validEmailRgx } from '../../../helper'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import CustomSelectBox from '../../form/CustomSelectBox'
+import CustomSelectBox from "../../components/form/CustomSelectBox"
+import AdminLayout from "../../components/AdminLayout"
 
-function AddTemplate({ onClose, id }) {
+function AddTemplate({  id }) {
   const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm();
   const [sending, setSending] = useState(false)
   const [isEmail, setIsEmail] = useState(false)
@@ -21,7 +21,7 @@ function AddTemplate({ onClose, id }) {
 
   const handleClick = () => {
     toast.success("Cloned Successfully")
-    onClose()
+   
   }
 
   const onSubmit = async (data) => {
@@ -45,7 +45,7 @@ function AddTemplate({ onClose, id }) {
   }
 
   let body = watch("body") || []
-  return <Model onClose={onClose} title="Create Email Template" modalBodyClass='max-h-[85vh]'>
+  return <AdminLayout>
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className='flex items-start gap-4'>
         <div className='w-[60%]'>
@@ -208,7 +208,7 @@ function AddTemplate({ onClose, id }) {
         </div>
       </div>
     </form>
-  </Model>
+  </AdminLayout>
 }
 
 export default AddTemplate

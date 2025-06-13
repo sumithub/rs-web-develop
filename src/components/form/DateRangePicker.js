@@ -61,12 +61,12 @@ function DateRange({ onChange, class_ = "" }) {
                 onClick={toggleDatePicker}
                 className="cursor-pointer flex items-center gap-2 border border-border-color rounded-lg py-[7.7px]! px-2 capitalize text-[13px] text-text3 w-full focus-visible:outline-none shrink-0">
                 {savedRange || "Date Range Selector"}
-                <Image src="/images/calendar1.svg" alt='calendar' height={16} width={16} unoptimized={true} />
+                <Image src="/images/calendar1.svg" alt='calendar' height={16} width={16} unoptimized={true} className='ml-auto' />
             </button>
 
             {open &&
                 <div>
-                    <div className='overflow-hidden absolute top-full right-0 border border-dark rounded-lg shadow-[0px_0px_40px_rgba(0,_0,_0,_0.08)]'>
+                    <div className='overflow-hidden absolute z-50 top-full right-0 border border-dark rounded-lg shadow-[0px_0px_40px_rgba(0,_0,_0,_0.08)]'>
                         <DateRangePicker
                             dateDisplayFormat='dd/MM/yyyy'
                             showDateDisplay={false}

@@ -43,6 +43,13 @@ export default function ShareViaEmail({ onClose, onSave }) {
             setSending(false)
         }
     }
+
+const SHAREEMAIL=[
+    {img:"/images/request.png",name:"Amelie Laurent",email:"amili@gmail.com",role:"owner"},
+    {img:"/images/request.png",name:"Amelie Laurent",email:"amili@gmail.com",role:"manager"},
+    {img:"/images/request.png",name:"Amelie Laurent",email:"amili@gmail.com",role:"owner"},
+]
+
     return (
         <Model onClose={onClose} title="Share via email" modalClass="w-[50%]!" modalBodyClass="max-h-[90vh]!">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -73,48 +80,31 @@ export default function ShareViaEmail({ onClose, onSave }) {
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-[25px]">
-                    <div className="flex gap-[15px]">
-                        <Image src="/images/request.png" alt="request" width={44} height={44} />
-                        <div>
-                            <div className="text-base font-medium">Amelie Laurent</div>
-                            <div className="text-sm text-text3 pt-1">amili@gmail.com</div>
-                        </div>
-                    </div>
-                    <div className="text-lg">owner</div>
-                </div>
-                <hr className="mt-[15px] border border-border2" />
 
-                <div className="flex items-center justify-between pt-[25px]">
+{SHAREEMAIL.map((e,i)=><div key={i}className={i === 0 ? "mt-8" : ""}>
+                <div className="flex items-center justify-between">
                     <div className="flex gap-[15px]">
-                        <Image src="/images/request.png" alt="request" width={44} height={44} />
+                        <Image src={e.img} alt="request" width={44} height={44} />
                         <div>
-                            <div className="text-base font-medium">Amelie Laurent</div>
-                            <div className="text-sm text-text3 pt-1">amili@gmail.com</div>
+                            <div className="text-base font-medium">{e.name}</div>
+                            <div className="text-sm text-text3 pt-1">{e.email}</div>
                         </div>
                     </div>
-                    <div className="text-lg">Manager</div>
+                    <div className="text-lg capitalize">{e.role}</div>
                 </div>
-                <hr className="mt-[15px] border border-border2" />
-
-                <div className="flex items-center justify-between pt-[25px]">
-                    <div className="flex gap-[15px]">
-                        <Image src="/images/request.png" alt="request" width={44} height={44} className="" />
-                        <div>
-                            <div className="text-base font-medium">Amelie Laurent</div>
-                            <div className="text-sm text-text3 pt-1">amili@gmail.com</div>
-                        </div>
-                    </div>
-                    <div className="text-lg">owner</div>
-                </div>
+                
+                   {i !== SHAREEMAIL.length - 1 && (
+                        <hr className='border-t border-border2 my-5' />
+                    )}
+</div>)}
 
                 <div className="flex justify-between gap-3 mt-[25px]">
                     <div className="flex gap-[15px]">
-                        <button className="border border-primary text-xs font-medium flex items-center gap-2 py-[13px] px-2.5 rounded-lg text-primary" onClick={Copy}>
+                        <button className="border border-primary text-xs font-medium flex items-center gap-2 py-1 px-2.5 rounded-lg text-primary" onClick={Copy}>
                             <Image src="/images/copy3.svg" alt="copy3" unoptimized={true} width={16} height={16} />
                             Copy Link
                         </button>
-                        <button className="border border-primary text-xs font-medium flex items-center gap-2 py-[13px] px-2.5 rounded-lg text-primary" onClick={Code}>
+                        <button className="border border-primary text-xs font-medium flex items-center gap-2 px-2.5 py-1 rounded-lg text-primary" onClick={Code}>
                             <Image src="/images/arrow-3.svg" alt="arrow-3" unoptimized={true} width={16} height={16} />
                             Embed Code
                         </button>
