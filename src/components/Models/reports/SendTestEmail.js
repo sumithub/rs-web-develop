@@ -54,7 +54,7 @@ export default function SendTestEmail({ onClose }) {
             </div>
             <hr className="border-t border-secondary/5 my-3.5" />
             <div>
-                <h2 className='text-sm font-medium capitalize pb-2.5'>enter e-mail<span className='text-danger'>*</span></h2>
+                <h2 className='text-sm font-medium capitalize pb-2.5'>Send test Email To</h2>
                 <div className="flex gap-[15px]">
                     <div className="w-full border border-primary/10 rounded-lg p-2.5 flex justify-between items-center">
                         <div className="flex gap-[15px]">
@@ -92,13 +92,13 @@ export default function SendTestEmail({ onClose }) {
                     <div className=''>
                         <div className="flex items-center gap-2">
                             <h2 className="text-xs">Subject:</h2>
-                            <h3 className="text-xs font-medium">Your weekly review report - the coffee spot</h3>
+                            <h3 className="text-xs font-medium capitalize">Your weekly review report - the coffee spot</h3>
                         </div>
                         <div className='py-4 text-xs'>Hi (John Deo)</div>
                         <div className='capitalize text-xs'>Here&#39;s your weekly performance update:</div>
                     </div>
 
-                    <div className='text-base'>
+                    <div className='pt-4'>
                         <div className='flex items-center gap-2'>
                             <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                             <div className='text-sm'>Review Over Time: 42 New Reviews</div>
