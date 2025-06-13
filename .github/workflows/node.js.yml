@@ -27,4 +27,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: NEXT_DISABLE_LINTING=true SKIP_ENV_VALIDATION=true next build
+    - run: NEXT_DISABLE_LINTING=true SKIP_ENV_VALIDATION=true npm run build
