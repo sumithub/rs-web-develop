@@ -46,7 +46,7 @@ export default function ReviewDetail({ onClose, onSave, id }) {
         }
     }
     return (
-        <Model onClose={onClose} title={status === "noActionRequired" ? "No Action Required" : "Review Detail"} modalClass="w-[60%]!">
+        <Model onClose={onClose} title={status === "noActionRequired" ? "No Action Required" : "Review Detail"} modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     {status === "noActionRequired" && <div>
