@@ -26,7 +26,7 @@ export default function CancelSubscription({ onClose, id }) {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Upgraded Successfully")
+            toast.success("Kept Successfully")
             setSending(false)
             onClose()
         } catch (error) {
