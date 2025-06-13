@@ -29,16 +29,7 @@ export default function BoostRequest({ onClose, onSave, id }) {
     const [emailTemplate, setEmailTemplate] = useState({ name: "Nature Template", preview: "Lorem Ipsum.." })
     const [smsTemplate, setSmsTemplate] = useState({ name: "Nature Template", preview: "Lorem Ipsum.." })
     const [showDetails, setShowDetails] = useState(false)
-
-    const {
-        register,
-        setValue,
-        watch,
-        clearErrors,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
-
+    const { register,setValue,watch,clearErrors,handleSubmit,formState: { errors },} = useForm();
     const [sending, setSending] = useState(false)
     const [openTemplate, setOpenTemplate] = useState(false)
     const [openPreview, setOpenPreview] = useState(false)
@@ -373,8 +364,7 @@ export default function BoostRequest({ onClose, onSave, id }) {
                             <h2 className="text-lg font-semibold">Customer Selection Summary</h2>
                             <button
                                 type="button"
-                                onClick={() => setShowDetails(!showDetails)}
-                            >
+                                onClick={() => setShowDetails(!showDetails)}>
                                 <Image
                                     unoptimized={true}
                                     src="/images/open-eye.svg"

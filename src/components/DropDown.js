@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { USER_ACTIONS } from '../constent/constArray';
 import Link from 'next/link';
 
@@ -93,7 +93,6 @@ const Dropdown = ({ options = USER_ACTIONS, onClickOption, class_ = "", editLink
                             </button>
                         </li>
                     })}
-
                 </ul>
             </div>
         )}

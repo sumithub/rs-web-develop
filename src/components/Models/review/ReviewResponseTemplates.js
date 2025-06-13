@@ -145,7 +145,7 @@ export default function ReviewResponseTemplates({ onClose }) {
                                 </td>
                                 <td>{formatDate(e.lastUpdate)}</td>
                                 <td>
-                                    <div className='flex items-center gap-2' >
+                                    <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer' onClick={() => { setOpen(true) }} type="button">
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
