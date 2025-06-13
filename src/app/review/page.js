@@ -106,6 +106,7 @@ export default function Review() {
         }
 
         <div className="bg-light min-h-[calc(100dvh_-_85px)] mt-[85px]">
+            {loading ? <Loading /> : <>
             <div className="grid grid-cols-3 gap-4">
                 <div className="bg-white rounded-2xl shadow-[0px_0px_22px_0px_#0000000F] py-3 px-4">
                     <div>
@@ -389,6 +390,7 @@ export default function Review() {
                     </div>}
                 </div>
             </div>
+             </>}
         </div>
 
         {/* <ReviewNoData /> */}

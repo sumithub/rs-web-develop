@@ -20,7 +20,7 @@ export default function SendTestEmail({ onClose }) {
             />
         }
 
-        <SecondaryButton title="Add Selected" onClick={() => { setOpenUser(true) }} />
+        <SecondaryButton title="Add" onClick={() => { setOpenUser(true) }} />
 
     </Model>
 }

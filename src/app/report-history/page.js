@@ -13,6 +13,7 @@ import { formatDate, getError } from '../../../helper'
 import Status from '../../components/Status'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { title } from 'process'
 
 export default function ReportHistory() {
     const [openEmail, setOpenEmail] = useState(false)
@@ -43,15 +44,15 @@ export default function ReportHistory() {
     }
 
     const ReportHistory = [
-        { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Sent" },
-        { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Failed" },
-        { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Processing" },
-        { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Failed" },
-        { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Sent" },
-        { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Processing" },
-        { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Sent" },
-        { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Processing" },
-        { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Failed" },
+        { title: "ABC Corp", date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Sent" },
+        { title: "ABC Corp", date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Failed" },
+        { title: "LMN Pty Ltd", date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Processing" },
+        { title: "ABC Corp", date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Failed" },
+        { title: "ABC Corp", date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Sent" },
+        { title: "LMN Pty Ltd", date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Processing" },
+        { title: "ABC Corp", date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Sent" },
+        { title: "LMN Pty Ltd", date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Processing" },
+        { title: "ABC Corp", date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Failed" },
     ]
 
     return <AdminLayout>
@@ -139,7 +140,7 @@ export default function ReportHistory() {
                     <div className='grid grid-cols-3 gap-5'>
                         {ReportHistory.map((e, i) =>
                             <div key={i} className='border border-border2 gap-[15px] rounded-[10px] p-[15px]'>
-                                <h2 className='text-base font-semibold'>ABC Corp</h2>
+                                <h2 className='text-base font-semibold'>{e.title}</h2>
                                 <div className='flex justify-between items-center pt-[15px]'>
                                     <h2 className='text-text3 text-sm font-medium'>Report Date</h2>
                                     <h2 className='text-sm font-medium'>{formatDate(e.date)}</h2>

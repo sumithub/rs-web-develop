@@ -1,6 +1,5 @@
 "use client"
 import AdminLayout from '../../components/AdminLayout'
-import DateRange from '../../components/form/DateRangePicker'
 import SecondaryButton from '../../components/common/SecondaryButton'
 import Switch from '../../components/form/Switch'
 import DashboardBarChart from '../../components/charts/DashboardBarChart'
@@ -15,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { getError } from "../../../helper";
 import CheckboxForm from '../../components/form/CheckboxForm'
-
+import DateRangeForm from "../../components/form/DateRangeForm"
 export default function ReportTemplates() {
     const [clickSwitch, setClickSwitch] = useState(false)
     const [sending, setSending] = useState(false)
@@ -39,7 +38,19 @@ export default function ReportTemplates() {
             <div className="grid grid-cols-2 gap-5">
                 <div className='shadow-[0px_0px_22px_0px_#0000000F] p-5 rounded-[10px] bg-white'>
                     <h2 className='text-lg font-semibold'>Date Range</h2>
-                    <DateRange class_='mt-5!' />
+                    {/* <DateRange class_='mt-5!' /> */}
+                    <DateRangeForm
+                    class_="mt-5!"
+                   label="Select Date"
+                   isRequired={true}
+                    watch={watch}
+                    setValue={setValue}
+                    clearError={clearErrors}
+                    formProps={{ ...register("date", { required: true })}}
+                    errors={errors}
+                    inputClass='py-3! border-primary/10!'
+                     labelClass="block mb-1"
+/>
                     <div className='mt-5'>
                         <h2 className='text-lg font-semibold'>Select Report Sections</h2>
                         <div className='flex gap-5 pt-[15px]'>
@@ -140,10 +151,8 @@ export default function ReportTemplates() {
                         title="Generate Report"
                         type='submit'
                         disabled={sending}
-                        class_="py-[15px]! text-lg! font-medium! px-5! text-sm! font-normal! mt-[30px]!"
+                        class_="py-[15px]! text-lg! font-medium! mt-[30px]!"
                     />
-
-
                 </div>
                 <div className='shadow-[0px_0px_22px_0px_#0000000F] rounded-[10px] p-5 bg-white'>
                     <div className='shadow-[0px_0px_22px_0px_#0000000F] rounded-[10px]'>
