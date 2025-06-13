@@ -13,7 +13,9 @@ export default function Setting() {
                     <Link href="/setting/my-subscription-details" className="inline-block">
                         <h2 className="text-sm py-3 px-5 rounded-[10px]">My Subscription Details</h2>
                     </Link>
-                    <h2 className="text-sm py-3 px-5 rounded-[10px]">My Usage Summary</h2>
+                    <Link href="/setting/my-usage-summary" className="inline-block">
+                        <h2 className="text-sm py-3 px-5 rounded-[10px]">My Usage Summary</h2>
+                    </Link>
                     <h2 className="text-sm py-3 px-5 rounded-[10px]">Payment & Invoices</h2>
                 </div>
                 <hr className="border border-border2 h-auto" />
