@@ -161,18 +161,15 @@ function CampaignsTemplates() {
                             <td>{e.name}</td>
                             <td>{e.type}</td>
                             <td><div className='line-clamp-1'>{e.subject}</div></td>
-                            {/* <td>Jun 18,2025|10:00Am</td> */}
                             <td>{formatDateTime(e.lastUpdated)}</td>
                             <td><Dropdown 
-    options={TEMPLATE_ACTIONS}
-    editLink="/create-email-template"
-    // editLink={`/edit-template/${template.id}`}
-    onClickOption={(action) => {
-        if (action !== 'edit') {
-            setOpenModal(action);
-        }
-    }}
-/></td>
+                            options={TEMPLATE_ACTIONS}
+                            editLink="/create-email-template"
+                             // editLink={`/edit-email-template/${template.id}`}
+                             onClickOption={(action) => {
+                           if (action !== 'edit') {
+                           setOpenModal(action);
+                               }}}/></td>
                         </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
