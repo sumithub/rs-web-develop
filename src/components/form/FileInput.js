@@ -123,7 +123,7 @@ export default function FileInput({
 
     return (
         <div className={class_}>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-3">
                 <div className="text-sm text-secondary font-medium capitalize">
                     {label}
                     {isRequired ? <span className="text-danger">*</span> : ""}
@@ -190,7 +190,7 @@ export default function FileInput({
 
             {/* Error message */}
             {error && (
-                <div className="mt-2 text-sm text-danger">
+                <div className="mt-2 text-sm text-danger capitalize">
                     {error}
                 </div>
             )}

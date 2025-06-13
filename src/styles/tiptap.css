@@ -142,7 +142,7 @@
         width: 100% !important;
     }
 
-    .button-group button {
+    .button-group button:not(.custom-button) {
         padding: 2px 4px;
         background-color: #f8fafc;
         /* border: 1px solid #cbd5e1; */

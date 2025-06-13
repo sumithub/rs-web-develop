@@ -17,7 +17,7 @@ export const users = [
 ];
 
 export const TEMPLATE_ACTIONS = [
-    { label: "Edit", value: "edit", icon: "/dropdown/edit.svg", hoverIcon: "/dropdown/edit-active.svg" },
+    { label: "Edit", value: "edit", icon: "/dropdown/edit.svg", hoverIcon: "/dropdown/edit-active.svg"  },
     { label: "Preview", value: "preview", icon: "/dropdown/eye.svg", hoverIcon: "/dropdown/eye-active.svg" },
     { label: "Clone", value: "clone", icon: "/dropdown/clone.svg", hoverIcon: "/dropdown/clone-active.svg" },
     { label: "Delete", value: "delete", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },

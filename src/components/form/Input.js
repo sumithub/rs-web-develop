@@ -20,7 +20,7 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
                 <span className="cursor-pointer" title="More information">
                     {typeof infoIcon === "string" ? (
                         <Image
-                            unoptimized
+                            unoptimized={true}
                             src={infoIcon}
                             alt="info"
                             width={14}
@@ -34,7 +34,6 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
             <div className="relative">
                 {(inputType !== "password" && icon) && (
                     <img
-                        unoptimized
                         src={icon}
                         alt=""
                         width={16}
@@ -44,7 +43,6 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
                 )}
                 {(inputType === "password") && (
                     <img
-                        unoptimized
                         src={type !== "password" ? "/images/eyes.svg" : "/images/open-eye.svg"}
                         alt=""
                         width={16}
@@ -54,11 +52,11 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
                 )}
                 {isTextArea ? <textarea rows={rows}
                     placeholder={placeholder} disabled={disabled}
-                    className={`border ${error ? "border-danger" : "border-input-border"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
+                    className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
                 /> : <input
                     placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
                     disabled={disabled}
-                    className={`border ${error ? "border-danger" : "border-input-border"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
+                    className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
                 />}
             </div>
             {error && <p className="text-xs pt-[5px] capitalize text-danger">{error}</p>}

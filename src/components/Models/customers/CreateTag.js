@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import InputForm from "../../form/InputForm";
@@ -9,17 +9,19 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { getError } from "../../../../helper";
-import Image from "next/image";
 
 export default function CreateTag({ onClose, id }) {
     const { register, setValue, handleSubmit, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
 
+    useEffect(() => {
+        setValue("colorPicker", "#0396FF");
+    }, [setValue]);
+
     const onSubmit = async (data) => {
         try {
             setSending(true)
             let res = null
-
             if (id !== "add") {
                 res = await axios.put("/api", data)
             } else {

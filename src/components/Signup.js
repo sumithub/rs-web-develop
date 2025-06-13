@@ -125,7 +125,7 @@ export default function Signup() {
                         I Agree To The{" "}
                         <Link href="/" className="text-primary">Privacy Policy</Link> and{" "}
                         <Link href="/" className="text-secondary">
-                            <span className="text-primary"> Terms </span> of use wherever it&#39;s displayed.
+                            <span className="text-primary"> Terms </span> of use.
                         </Link>
                     </div>}
                 />

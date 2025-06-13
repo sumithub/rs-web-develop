@@ -46,7 +46,7 @@ export default function ReviewDetail({ onClose, onSave, id }) {
         }
     }
     return (
-        <Model onClose={onClose} title={status === "noActionRequired" ? "No Action Required" : "Review Detail"} modalClass="w-[60%]!">
+        <Model onClose={onClose} title={status === "noActionRequired" ? "No Action Required" : "Review Detail"} modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     {status === "noActionRequired" && <div>
@@ -54,7 +54,7 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                             <ReviewCard title="Zain Levin" />
                         </div>
 
-                        <div className="mt-3 ps-[10vw] capitalize">
+                        <div className="mt-3 ps-[10vw] capitalize text-xs leading-normal">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the .
                         </div>
                     </div>}
@@ -82,7 +82,7 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                                 </div>
                             </div>
                         </div>
-                        <h2 className="w-4/5 ml-auto capitalize mt-[15px] text-xs">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the .</h2>
+                        <h2 className="w-4/5 ml-auto capitalize mt-[15px] text-xs leading-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the .</h2>
                     </>)}
                     <div>
                         <div className="w-[20%] mt-3.5 mb-5">
@@ -120,19 +120,19 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                     <div className={`grid ${status === "noActionRequired" ? "grid-cols-3" : "grid-cols-2"} gap-3 mt-[30px] justify-between"`}>
                         <CancelButton
                             title="copy reply"
-                            class_="text-lg! font-medium! py-3"
+                            class_="text-lg! font-medium!"
                             onClick={copy}
                         />
                         {status === "noActionRequired" && <SecondaryButton
                             title="Share"
-                            class_="text-lg! font-medium! py-3"
+                            class_="text-lg! font-medium!"
                             onClick={() => {
                                 toast.success("Shared Successfully")
                                 onClose()
                             }} />}
                         <SecondaryButton
                             title="mark as responded"
-                            class_="text-lg! font-medium! py-3 "
+                            class_="text-lg! font-medium!"
                             type="submit"
                             disabled={sending}
                         />

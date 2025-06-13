@@ -2,7 +2,6 @@
 import { useState } from "react";
 import AdminLayout from "../../components/AdminLayout";
 import ReviewResponseTemplates from "../../components/Models/review/ReviewResponseTemplates";
-import ResendReportEmail from "../../components/Models/reports/ResendReportEmail";
 import ReportTemplate from "../../components/Models/reports/ReportTemplate";
 
 export default function Test() {

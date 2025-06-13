@@ -25,6 +25,7 @@
   --custom-purple-light: #9787FF;
   --custom-yellow: #FFC246;
   --custom-yellow-dark: #FF9C23;
+  --custom-yellow-light: #FFC107;
 
 }
 
@@ -54,6 +55,7 @@
   --color-custom-purple-light: var(--custom-purple-light);
   --color-custom-yellow: var(--custom-yellow);
   --color-custom-yellow-dark: var(--custom-yellow-dark);
+  --color-custom-yellow-light: var(--custom-yellow-light);
 }
 
 body {

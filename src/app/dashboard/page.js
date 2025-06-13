@@ -1,7 +1,6 @@
 "use client"
 import DashboardCard from "../../components/DashboardCard";
 import DashboardChart from "../../components/DashboardChart"
-import Image from "next/image";
 import AdminLayout from "../../components/AdminLayout";
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import DateRange from "../../components/form/DateRangePicker";
@@ -16,6 +15,7 @@ import { getError } from "../../../helper";
 import { reviews } from "../../constent/constArray";
 import Loading from "../../components/Loading";
 import BoostRequest from "../../components/Models/boost/BoostRequest"
+import Image from "next/image";
 
 export default function Dashboard() {
     const [rating, setRating] = useState([])

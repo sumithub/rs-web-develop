@@ -6,12 +6,562 @@ import { useCurrentEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Highlight from '@tiptap/extension-highlight'
 import Link from '@tiptap/extension-link'
-import Image from '@tiptap/extension-image'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
-import { Extension } from '@tiptap/core'
-import { useCallback, useEffect, useState } from 'react'
+import { Extension, Node } from '@tiptap/core'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { FontFamily } from '@tiptap/extension-font-family'
+import Model from '../components/Models/Model'
+import CancelButton from '../components/common/CancelButton'
+import SecondaryButton from '../components/common/SecondaryButton'
+
+const ImageEditorModal = ({ isOpen, onClose, imageSrc, onImageComplete }) => {
+    const canvasRef = useRef(null);
+    const imageRef = useRef(null);
+    const [cropArea, setCropArea] = useState({ x: 0, y: 0, width: 200, height: 200 });
+    const [isDragging, setIsDragging] = useState(false);
+    const [isResizing, setIsResizing] = useState(false);
+    const [resizeHandle, setResizeHandle] = useState('');
+    const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+    const [imageData, setImageData] = useState({ width: 0, height: 0, naturalWidth: 0, naturalHeight: 0 });
+    const [activeTab, setActiveTab] = useState('crop'); // 'crop' or 'resize'
+
+    // Resize states
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+    const [originalDimensions, setOriginalDimensions] = useState({ width: 0, height: 0 });
+    const [maintainAspectRatio, setMaintainAspectRatio] = useState(true);
+    const [processedImageSrc, setProcessedImageSrc] = useState('');
+
+    useEffect(() => {
+        if (isOpen && imageSrc) {
+            const img = document.createElement('img');
+            img.onload = () => {
+                const canvas = canvasRef.current;
+                if (canvas) {
+                    const ctx = canvas.getContext('2d');
+                    const maxWidth = 500;
+                    const maxHeight = 400;
+
+                    let { width, height } = img;
+                    if (width > maxWidth || height > maxHeight) {
+                        const ratio = Math.min(maxWidth / width, maxHeight / height);
+                        width *= ratio;
+                        height *= ratio;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    setImageData({
+                        width,
+                        height,
+                        naturalWidth: img.naturalWidth,
+                        naturalHeight: img.naturalHeight
+                    });
+
+                    setCropArea({
+                        x: 0,
+                        y: 0,
+                        width: Math.min(200, width),
+                        height: Math.min(200, height)
+                    });
+
+                    // Set resize dimensions
+                    setDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+                    setOriginalDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+
+                    ctx.drawImage(img, 0, 0, width, height);
+                    setProcessedImageSrc(imageSrc);
+                }
+            };
+            img.src = imageSrc;
+        }
+    }, [isOpen, imageSrc]);
+
+    const drawCropOverlay = useCallback(() => {
+        const canvas = canvasRef.current;
+        if (!canvas || activeTab !== 'crop') return;
+
+        const ctx = canvas.getContext('2d');
+        const img = imageRef.current;
+
+        if (img && img.complete) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, imageData.width, imageData.height);
+
+            // Draw overlay
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Clear crop area
+            ctx.clearRect(cropArea.x, cropArea.y, cropArea.width, cropArea.height);
+            ctx.drawImage(img,
+                (cropArea.x / imageData.width) * img.naturalWidth,
+                (cropArea.y / imageData.height) * img.naturalHeight,
+                (cropArea.width / imageData.width) * img.naturalWidth,
+                (cropArea.height / imageData.height) * img.naturalHeight,
+                cropArea.x, cropArea.y, cropArea.width, cropArea.height
+            );
+
+            // Draw crop border
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(cropArea.x, cropArea.y, cropArea.width, cropArea.height);
+
+            // Draw resize handles
+            const handleSize = 8;
+            ctx.fillStyle = '#fff';
+            const handles = [
+                { x: cropArea.x - handleSize / 2, y: cropArea.y - handleSize / 2 },
+                { x: cropArea.x + cropArea.width - handleSize / 2, y: cropArea.y - handleSize / 2 },
+                { x: cropArea.x - handleSize / 2, y: cropArea.y + cropArea.height - handleSize / 2 },
+                { x: cropArea.x + cropArea.width - handleSize / 2, y: cropArea.y + cropArea.height - handleSize / 2 },
+            ];
+
+            handles.forEach(handle => {
+                ctx.fillRect(handle.x, handle.y, handleSize, handleSize);
+            });
+        }
+    }, [cropArea, imageData, activeTab]);
+
+    const drawResizePreview = useCallback(() => {
+        const canvas = canvasRef.current;
+        if (!canvas || activeTab !== 'resize') return;
+
+        const ctx = canvas.getContext('2d');
+        const img = imageRef.current;
+
+        if (img && img.complete) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Calculate preview dimensions
+            const maxWidth = 500;
+            const maxHeight = 400;
+            let previewWidth = dimensions.width;
+            let previewHeight = dimensions.height;
+
+            if (previewWidth > maxWidth || previewHeight > maxHeight) {
+                const ratio = Math.min(maxWidth / previewWidth, maxHeight / previewHeight);
+                previewWidth *= ratio;
+                previewHeight *= ratio;
+            }
+
+            // Center the preview
+            const x = (canvas.width - previewWidth) / 2;
+            const y = (canvas.height - previewHeight) / 2;
+
+            ctx.drawImage(img, x, y, previewWidth, previewHeight);
+
+            // Draw border
+            ctx.strokeStyle = '#3b82f6';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x, y, previewWidth, previewHeight);
+        }
+    }, [dimensions, activeTab]);
+
+    useEffect(() => {
+        if (imageRef.current && imageRef.current.complete) {
+            if (activeTab === 'crop') {
+                drawCropOverlay();
+            } else {
+                drawResizePreview();
+            }
+        }
+    }, [drawCropOverlay, drawResizePreview, activeTab]);
+
+    const handleMouseDown = (e) => {
+        if (activeTab !== 'crop') return;
+
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Check if clicking on resize handles
+        const handleSize = 8;
+        const handles = [
+            { x: cropArea.x - handleSize / 2, y: cropArea.y - handleSize / 2, type: 'nw' },
+            { x: cropArea.x + cropArea.width - handleSize / 2, y: cropArea.y - handleSize / 2, type: 'ne' },
+            { x: cropArea.x - handleSize / 2, y: cropArea.y + cropArea.height - handleSize / 2, type: 'sw' },
+            { x: cropArea.x + cropArea.width - handleSize / 2, y: cropArea.y + cropArea.height - handleSize / 2, type: 'se' },
+        ];
+
+        for (const handle of handles) {
+            if (x >= handle.x && x <= handle.x + handleSize && y >= handle.y && y <= handle.y + handleSize) {
+                setIsResizing(true);
+                setResizeHandle(handle.type);
+                setDragStart({ x, y });
+                return;
+            }
+        }
+
+        // Check if clicking inside crop area for dragging
+        if (x >= cropArea.x && x <= cropArea.x + cropArea.width &&
+            y >= cropArea.y && y <= cropArea.y + cropArea.height) {
+            setIsDragging(true);
+            setDragStart({ x: x - cropArea.x, y: y - cropArea.y });
+        }
+    };
+
+    const handleMouseMove = (e) => {
+        if (activeTab !== 'crop') return;
+
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        if (isDragging) {
+            const newX = Math.max(0, Math.min(x - dragStart.x, imageData.width - cropArea.width));
+            const newY = Math.max(0, Math.min(y - dragStart.y, imageData.height - cropArea.height));
+            setCropArea(prev => ({ ...prev, x: newX, y: newY }));
+        } else if (isResizing) {
+            const deltaX = x - dragStart.x;
+            const deltaY = y - dragStart.y;
+
+            setCropArea(prev => {
+                let newCrop = { ...prev };
+
+                switch (resizeHandle) {
+                    case 'nw':
+                        newCrop.x = Math.max(0, prev.x + deltaX);
+                        newCrop.y = Math.max(0, prev.y + deltaY);
+                        newCrop.width = Math.max(20, prev.width - deltaX);
+                        newCrop.height = Math.max(20, prev.height - deltaY);
+                        break;
+                    case 'ne':
+                        newCrop.y = Math.max(0, prev.y + deltaY);
+                        newCrop.width = Math.max(20, Math.min(prev.width + deltaX, imageData.width - prev.x));
+                        newCrop.height = Math.max(20, prev.height - deltaY);
+                        break;
+                    case 'sw':
+                        newCrop.x = Math.max(0, prev.x + deltaX);
+                        newCrop.width = Math.max(20, prev.width - deltaX);
+                        newCrop.height = Math.max(20, Math.min(prev.height + deltaY, imageData.height - prev.y));
+                        break;
+                    case 'se':
+                        newCrop.width = Math.max(20, Math.min(prev.width + deltaX, imageData.width - prev.x));
+                        newCrop.height = Math.max(20, Math.min(prev.height + deltaY, imageData.height - prev.y));
+                        break;
+                }
+
+                return newCrop;
+            });
+
+            setDragStart({ x, y });
+        }
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+        setIsResizing(false);
+        setResizeHandle('');
+    };
+
+    const handleWidthChange = (width) => {
+        setDimensions(prev => {
+            if (maintainAspectRatio) {
+                const ratio = originalDimensions.height / originalDimensions.width;
+                return { width, height: Math.round(width * ratio) };
+            }
+            return { ...prev, width };
+        });
+    };
+
+    const handleHeightChange = (height) => {
+        setDimensions(prev => {
+            if (maintainAspectRatio) {
+                const ratio = originalDimensions.width / originalDimensions.height;
+                return { height, width: Math.round(height * ratio) };
+            }
+            return { ...prev, height };
+        });
+    };
+
+    const applyCrop = () => {
+        return new Promise((resolve) => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = imageRef.current;
+
+            if (!img) {
+                resolve(processedImageSrc);
+                return;
+            }
+
+            canvas.width = cropArea.width;
+            canvas.height = cropArea.height;
+
+            const scaleX = img.naturalWidth / imageData.width;
+            const scaleY = img.naturalHeight / imageData.height;
+
+            ctx.drawImage(
+                img,
+                cropArea.x * scaleX,
+                cropArea.y * scaleY,
+                cropArea.width * scaleX,
+                cropArea.height * scaleY,
+                0, 0,
+                cropArea.width,
+                cropArea.height
+            );
+
+            canvas.toBlob((blob) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    resolve(reader.result);
+                };
+                reader.readAsDataURL(blob);
+            });
+        });
+    };
+
+    const applyResize = (imageSrc) => {
+        return new Promise((resolve) => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = document.createElement('img');
+
+            img.onload = () => {
+                canvas.width = dimensions.width;
+                canvas.height = dimensions.height;
+
+                ctx.drawImage(img, 0, 0, dimensions.width, dimensions.height);
+
+                canvas.toBlob((blob) => {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        resolve(reader.result);
+                    };
+                    reader.readAsDataURL(blob);
+                });
+            };
+
+            img.src = imageSrc;
+        });
+    };
+
+    const handleComplete = async () => {
+        let finalImageSrc = processedImageSrc;
+
+        // Apply crop first
+        finalImageSrc = await applyCrop();
+
+        // Then apply resize
+        finalImageSrc = await applyResize(finalImageSrc);
+
+        onImageComplete(finalImageSrc);
+        onClose();
+    };
+
+    const resetToOriginal = () => {
+        setActiveTab('crop');
+        setCropArea({
+            x: 0,
+            y: 0,
+            width: Math.min(200, imageData.width),
+            height: Math.min(200, imageData.height)
+        });
+        setDimensions({ width: originalDimensions.width, height: originalDimensions.height });
+    };
+
+    if (!isOpen) return null;
+
+    return (<Model onClose={onClose} title="Edit Image" modalClass='!w-[800px]' >
+        <div>
+            {/* Tab Navigation */}
+            <div className=" space-x-1 mb-4 bg-gray-100 rounded-lg p-1 hidden">
+                <button
+                    onClick={() => setActiveTab('crop')}
+                    className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'crop'
+                        ? 'bg-white text-blue-600 shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
+                        }`}
+                >
+                    Crop
+                </button>
+                <button
+                    onClick={() => setActiveTab('resize')}
+                    className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'resize'
+                        ? 'bg-white text-blue-600 shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
+                        }`}
+                >
+                    Resize
+                </button>
+            </div>
+
+            <div className="flex gap-6">
+                {/* Canvas Preview */}
+                <div className="flex-1">
+                    <canvas
+                        ref={canvasRef}
+                        onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}
+                        onMouseUp={handleMouseUp}
+                        onMouseLeave={handleMouseUp}
+                        className="border border-gray-300 cursor-move max-w-full"
+                    />
+                    <img
+                        ref={imageRef}
+                        src={imageSrc}
+                        onLoad={() => {
+                            if (activeTab === 'crop') {
+                                drawCropOverlay();
+                            } else {
+                                drawResizePreview();
+                            }
+                        }}
+                        className="hidden"
+                        alt="Source"
+                    />
+                </div>
+
+                {/* Controls Panel */}
+                <div className="w-80">
+                    {activeTab === 'crop' && (
+                        <div className="space-y-4">
+                            <h4 className="font-medium text-gray-900">Crop Settings</h4>
+                            <div className="text-sm text-gray-600">
+                                <p>• Drag the crop area to reposition</p>
+                                <p>• Drag corner handles to resize</p>
+                                {/* <p>• Switch to resize tab to change dimensions</p> */}
+                            </div>
+                            <div className="grid grid-cols-2 gap-3 text-sm">
+                                <div>
+                                    <label className="block text-gray-600">X Position</label>
+                                    <div className="text-gray-900">{Math.round(cropArea.x)}px</div>
+                                </div>
+                                <div>
+                                    <label className="block text-gray-600">Y Position</label>
+                                    <div className="text-gray-900">{Math.round(cropArea.y)}px</div>
+                                </div>
+                                <div>
+                                    <label className="block text-gray-600">Width</label>
+                                    <div className="text-gray-900">{Math.round(cropArea.width)}px</div>
+                                </div>
+                                <div>
+                                    <label className="block text-gray-600">Height</label>
+                                    <div className="text-gray-900">{Math.round(cropArea.height)}px</div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'resize' && (
+                        <div className="space-y-4">
+                            <h4 className="font-medium text-gray-900">Resize Settings</h4>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Width (px)</label>
+                                <input
+                                    type="number"
+                                    value={dimensions.width}
+                                    onChange={(e) => handleWidthChange(Number(e.target.value))}
+                                    className="w-full border border-gray-300 rounded px-3 py-2"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Height (px)</label>
+                                <input
+                                    type="number"
+                                    value={dimensions.height}
+                                    onChange={(e) => handleHeightChange(Number(e.target.value))}
+                                    className="w-full border border-gray-300 rounded px-3 py-2"
+                                />
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <input
+                                    type="checkbox"
+                                    id="aspectRatio"
+                                    checked={maintainAspectRatio}
+                                    onChange={(e) => setMaintainAspectRatio(e.target.checked)}
+                                    className="rounded"
+                                />
+                                <label htmlFor="aspectRatio" className="text-sm">Maintain aspect ratio</label>
+                            </div>
+                            <div className="text-sm text-gray-600">
+                                Original: {originalDimensions.width} × {originalDimensions.height}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="grid grid-cols-3 gap-3 mt-5">
+                <CancelButton title="Reset to Original" onClick={resetToOriginal} class_='custom-button' />
+                <SecondaryButton title="Cancel" class_='bg-white! text-primary! hover:text-white! hover:bg-primary! custom-button' onClick={onClose} />
+                <SecondaryButton title="Insert Image" onClick={handleComplete} class_='custom-button' />
+            </div>
+        </div>
+    </Model>
+    );
+};
+
+// Simple Image Node (no toolbar buttons)
+const SimpleImage = Node.create({
+    name: 'simpleImage',
+
+    group: 'block',
+
+    atom: true,
+
+    addAttributes() {
+        return {
+            src: {
+                default: null,
+            },
+            alt: {
+                default: null,
+            },
+            title: {
+                default: null,
+            },
+            width: {
+                default: null,
+            },
+            height: {
+                default: null,
+            },
+        }
+    },
+
+    parseHTML() {
+        return [
+            {
+                tag: 'img[src]',
+                getAttrs: element => {
+                    return {
+                        src: element.getAttribute('src'),
+                        alt: element.getAttribute('alt'),
+                        title: element.getAttribute('title'),
+                        width: element.getAttribute('width'),
+                        height: element.getAttribute('height'),
+                    }
+                },
+            },
+        ]
+    },
+
+    renderHTML({ HTMLAttributes }) {
+        return ['img', HTMLAttributes]
+    },
+
+    addCommands() {
+        return {
+            setImage: (options) => ({ commands }) => {
+                return commands.insertContent({
+                    type: this.name,
+                    attrs: options,
+                })
+            },
+        }
+    },
+});
 
 // Custom FontSize extension
 const FontSize = Extension.create({
@@ -68,7 +618,8 @@ export const MenuBar = ({ disable }) => {
     const [showFontFamilyDropdown, setShowFontFamilyDropdown] = useState(false)
     const [showTextColorDropdown, setShowTextColorDropdown] = useState(false)
     const [showBackgroundColorDropdown, setShowBackgroundColorDropdown] = useState(false)
-
+    const [showImageEditor, setShowImageEditor] = useState(false)
+    const [currentImageSrc, setCurrentImageSrc] = useState('')
     const fontSizes = [8, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48, 56, 60]
 
     const fontFamilies = [
@@ -171,11 +722,18 @@ export const MenuBar = ({ disable }) => {
         if (file && file.type.startsWith('image/')) {
             const reader = new FileReader()
             reader.onload = (e) => {
-                editor.chain().focus().setImage({ src: e.target.result }).run()
+                setCurrentImageSrc(e.target.result);
+                setShowImageEditor(true);
             }
             reader.readAsDataURL(file)
         }
     }, [editor])
+
+    const handleImageComplete = (finalImageSrc) => {
+        editor.chain().focus().setImage({ src: finalImageSrc }).run();
+        setShowImageEditor(false);
+        setCurrentImageSrc('');
+    };
 
     const addImageFromFile = useCallback(() => {
         const input = document.createElement('input')
@@ -673,53 +1231,15 @@ export const MenuBar = ({ disable }) => {
                 <path d="M1.5 11.5H13.5" stroke="#1F2933" strokeWidth="1.5" strokeLinejoin="round" />
             </svg>
         </button>
-        {/* Color Highlight Buttons */}
-        {/* <button
-            type="button"
-            onClick={() => {
-                editor.chain().focus().setColor('#171717').run()
-                editor.chain().focus().toggleHighlight({ color: '#FFFFFF' }).run()
+        <ImageEditorModal
+            isOpen={showImageEditor}
+            onClose={() => {
+                setShowImageEditor(false);
+                setCurrentImageSrc('');
             }}
-            className={`${editor.isActive('highlight', { color: '#FFFFFF' }) ? 'is-active' : ''}`}
-            disabled={disable}>
-            A
-        </button>
-        <button
-            type="button"
-            onClick={() => {
-                applyColoredHighlight(editor.isActive('highlight', { color: '#dcfce7' }) ? "#171717" : " #008236", "#dcfce7")
-            }}
-            className={`bg-green-100! text-success! ${editor.isActive('highlight', { color: '#dcfce7' }) ? 'is-active' : ''}`}
-            disabled={disable}>
-            A
-        </button>
-        <button
-            type="button"
-            onClick={() => {
-                applyColoredHighlight(editor.isActive('highlight', { color: '#ffe2e2' }) ? "#171717" : "#c10007", "#ffe2e2")
-            }}
-            className={`bg-red-100! text-danger! ${editor.isActive('highlight', { color: '#ffe2e2' }) ? 'is-active' : ''}`}
-            disabled={disable}>
-            A
-        </button>
-        <button
-            type="button"
-            onClick={() => {
-                applyColoredHighlight(editor.isActive('highlight', { color: '#dff2fe' }) ? "#171717" : "#0069a8", "#dff2fe")
-            }}
-            className={`bg-sky-100! text-sky-700! ${editor.isActive('highlight', { color: '#dff2fe' }) ? 'is-active' : ''}`}
-            disabled={disable}>
-            A
-        </button>
-        <button
-            type="button"
-            onClick={() => {
-                applyColoredHighlight(editor.isActive('highlight', { color: '#fef9c2' }) ? "#171717" : "#a65f00", "#fef9c2")
-            }}
-            className={`bg-yellow-100! text-yellow-700! ${editor.isActive('highlight', { color: '#fef9c2' }) ? 'is-active' : ''}`}
-            disabled={disable}>
-            A
-        </button> */}
+            imageSrc={currentImageSrc}
+            onImageComplete={handleImageComplete}
+        />
     </div >
     )
 }
@@ -740,13 +1260,7 @@ export const extensions = [
             class: 'custom-link',
         },
     }),
-    Image.configure({
-        inline: true,
-        allowBase64: true,
-        HTMLAttributes: {
-            class: 'custom-image',
-        },
-    }),
+    SimpleImage,
     TextAlign.configure({
         types: ['heading', 'paragraph'],
         alignments: ['left', 'center', 'right', 'justify'],
@@ -771,3 +1285,5 @@ export const extensions = [
         },
     }),
 ]
+
+

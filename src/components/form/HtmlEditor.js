@@ -15,7 +15,8 @@ export default function HtmlEditor({
     formProps,
     errors,
     clearErrors,
-    containerClass = ""
+    containerClass = "",
+    children
 }) {
 
     const editor = useEditor({
@@ -39,6 +40,8 @@ export default function HtmlEditor({
                 : <label className="text-sm font-medium text-secondary capitalize mb-1">
                     {label}{isRequired && <span className="text-danger">*</span>}
                 </label>) : ""}
+
+
             <div className='tiptap border border-border2 rounded-[10px]'>
                 <EditorProvider
                     editor={editor}
@@ -55,9 +58,20 @@ export default function HtmlEditor({
                             setValue(formProps.name, html)
                         }
                     }}
-                    slotBefore={readOnly ? undefined : <div className=''><MenuBar /></div>}
+
+                    slotBefore={
+                        readOnly ? undefined : (
+                            <div>
+                                <MenuBar editor={editor} />
+                                {children && <div className="ml-4 flex items-center justify-center">{children}</div>}
+                            </div>
+                        )
+                    }
                     extensions={extensions}
                     content={value || ""}
+                // slotBefore={readOnly ? undefined : <div className=''><MenuBar /></div>}
+                // extensions={extensions}
+                // content={value || ""}
                 />
             </div>
             {error && <div className="capitalize text-xs font-medium text-danger mt-1">{error}</div>}

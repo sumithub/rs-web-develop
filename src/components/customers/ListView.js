@@ -9,8 +9,7 @@ import { customerHistory } from "../../constent/constArray"
 import { toast } from "react-toastify"
 import Loading from "../Loading"
 import { formatDateTime } from "../../../helper"
-import DeleteList from "../Models/customers/DeleteList"
-import RenameList from "../Models/customers/RenameList"
+import DeleteCustomer from "../../components/Models/customers/DeleteCustomer"
 import Download from "../Models/customers/Download"
 import AddCustomer from "../Models/customers/AddCustomer"
 
@@ -41,17 +40,18 @@ export default function ListView(date, search) {
     }
 
     return (<>
-        {openDelete &&
-            <DeleteList
-                onClose={() => {
-                    setOpenDelete(false)
-                }}
-
-                onSave={() => {
-                    setOpenDelete(true)
-                }}
-            />
-        }
+       
+           {openDelete === "deleteCustomer" &&
+                           <DeleteCustomer
+                               onClose={() => {
+                                   setOpenDelete(false)
+                               }}
+           
+                               onSave={() => {
+                                   setOpenDelete(true)
+                               }}
+                           />
+                       }
 
         {open &&
             <AddCustomer
@@ -125,7 +125,7 @@ export default function ListView(date, search) {
                                     <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                 </button>
 
-                                <button className='cursor-pointer' onClick={() => { setOpenDelete(true) }}>
+                                <button className='cursor-pointer' onClick={() => { setOpenDelete("deleteCustomer") }}>
                                     <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
                                 </button>
                                 <button className='cursor-pointer' onClick={() => { setOpenDownload(true) }}>

@@ -31,8 +31,10 @@ export default function CodePreviewBox({ onClose, onSave }) {
                         <h2 className="text-sm text-primary pl-5">async&#62;&#60;/script&#62;</h2>
                     </div>
                     <div className="mt-[30px] flex justify-center bg-primary gap-2.5 py-3 rounded-[10px]">
-                        <Image unoptimized={true} src="/images/copy1.svg" alt="copy1" width={16} height={16} />
-                        <SecondaryButton title="Copy Code" type="submit" disabled={sending} class_="px-0! py-0!" />
+                        <button className="disabled:pointer-events-none">
+                            <Image unoptimized={true} src="/images/copy1.svg" alt="copy1" width={16} height={16} />
+                        </button>
+                        <SecondaryButton title="Copy Code" type="submit" disabled={sending} class_="px-0! hover:bg-primary! hover:text-white! py-0!" />
                     </div>
 
                     <div className="mt-5">

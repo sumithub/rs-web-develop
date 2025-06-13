@@ -1,15 +1,13 @@
 "use client"
 import AdminLayout from '../../components/AdminLayout'
 import React, { useEffect, useState } from 'react'
-import Checkbox from '../../components/form/Checkbox'
 import Status from '../../components/Status'
-import Image from 'next/image'
 import Search from '../../components/form/Search'
 import PaginationDemo from '../../components/Pagination'
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { getError } from '../../../helper'
+import { formatDate, getError } from '../../../helper'
 import Loading from '../../components/Loading'
 import DateRange from '../../components/form/DateRangePicker'
 import SelectForm from '../../components/form/SelectForm'
@@ -25,8 +23,10 @@ import Download from '../../components/Models/customers/Download'
 import DatePickerForm from "../../components/form/DatePickerForm";
 import InputForm from '../../components/form/InputForm'
 import { useForm } from 'react-hook-form'
+import Image from 'next/image'
+import CheckboxForm from '../../components/form/CheckboxForm'
 
-function ReviewAnalytics({ onSave }) {
+function ReviewAnalytics() {
     const { register, handleSubmit, setValue, clearErrors, formState: { errors }, watch } = useForm();
     const [sending, setSending] = useState(false)
     const [filterBy, setFilterBy] = useState("")
@@ -81,6 +81,11 @@ function ReviewAnalytics({ onSave }) {
         { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Processing" },
         { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Failed" },
     ]
+
+    const SHAREEMAIL=[
+    {img:"/images/request.png",name:"Amelie Laurent",email:"amili@gmail.com",role:"manager"},
+    {img:"/images/request.png",name:"Amelie Laurent",email:"amili@gmail.com",role:"owner"},
+]
 
     return (
         <AdminLayout
@@ -211,15 +216,21 @@ function ReviewAnalytics({ onSave }) {
                             <h2 className='text-lg font-semibold'>Select Report Sections</h2>
                             <div className='flex gap-5 pt-[15px]'>
                                 <div className='flex gap-2.5 items-center'>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("reviews") }} errors={errors}
+                                    />
                                     <h2 className='text-sm'>Reviews</h2>
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("campaigns") }} errors={errors}
+                                    />
                                     <h2 className='text-sm'>Campaigns</h2>
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("sentiments") }} errors={errors}
+                                    />
                                     <h2 className='text-sm'>Sentiments</h2>
                                 </div>
                             </div>
@@ -236,17 +247,22 @@ function ReviewAnalytics({ onSave }) {
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Review Over Time</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("reviewOverTime") }} errors={errors}
+                                    />
                                 </div>
                                 <div className='flex gap-2.5 items-center my-[15px]'>
                                     <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Review Rating Distribution</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("reviewRatingDistribution") }} errors={errors}
+                                    />
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/top-sources.svg" alt='top-sources' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>top review sources</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("topReviewSources") }} errors={errors} />
                                 </div>
                             </div>
                         </div>
@@ -263,17 +279,20 @@ function ReviewAnalytics({ onSave }) {
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Campaign Funnel Breakdown</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("campaignFunnelBreakdown") }} errors={errors} />
                                 </div>
                                 <div className='flex gap-2.5 items-center my-[15px]'>
                                     <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Campaign Performance</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("campaignPerformance") }} errors={errors} />
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/top-sources.svg" alt='top-sources' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Campaign Engagement</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("campaignEngagement") }} errors={errors} />
                                 </div>
                             </div>
                         </div>
@@ -289,12 +308,14 @@ function ReviewAnalytics({ onSave }) {
                                 <div className='flex gap-2.5 items-center mb-[15px]'>
                                     <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Sentiment trends</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("sentimentTrends") }} errors={errors} />
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Sentiments Distribution</h2>
-                                    <Checkbox />
+                                    <CheckboxForm
+                                        formProps={{ ...register("sentimentsDistribution") }} errors={errors} />
                                 </div>
                             </div>
                         </div>
@@ -302,16 +323,16 @@ function ReviewAnalytics({ onSave }) {
 
                         <div>
                             <h2 className='text-lg font-semibold capitalize'>Email & Scheduling options</h2>
-                            <div className='grid grid-cols-2 gap-[15px]'>
+                            <div className='grid grid-cols-2 items-end gap-[15px]'>
                                 <SelectForm
                                     defaultOption="Select Frequency"
                                     label="Frequency"
-                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    labelClass="inline-block mb-0!"
                                     isRequired={true}
                                     formProps={{ ...register("select", { required: true }) }}
                                     errors={errors}
                                     class_="mt-0!"
-                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                    selectClass_="border border-primary3/10 py-3! px-2.5! bg-white! text-sm!"
                                     clearErrors={clearErrors}
                                 >
                                     <option value="selectFont">Select Font</option>
@@ -353,33 +374,28 @@ function ReviewAnalytics({ onSave }) {
                                         title="Search Users"
                                         type='button'
                                         class_="py-[15px]! px-5! text-sm! font-normal!"
-                                        onClick={onSave}
+                                        onClick={() => { }}
                                     />
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between pt-[25px]">
-                                <div className="flex gap-[15px]">
-                                    <Image src="/images/request.png" alt="request" width={44} height={44} />
-                                    <div>
-                                        <div className="text-base font-medium">Amelie Laurent</div>
-                                        <div className="text-sm text-text3 pt-1">amili@gmail.com</div>
-                                    </div>
-                                </div>
-                                <div className="text-lg">owner</div>
-                            </div>
-                            <hr className="mt-[15px] border border-border2" />
-
-                            <div className="flex items-center justify-between pt-[25px]">
-                                <div className="flex gap-[15px]">
-                                    <Image src="/images/request.png" alt="request" width={44} height={44} />
-                                    <div>
-                                        <div className="text-base font-medium">Amelie Laurent</div>
-                                        <div className="text-sm text-text3 pt-1">amili@gmail.com</div>
-                                    </div>
-                                </div>
-                                <div className="text-lg">Manager</div>
-                            </div>
+                            {SHAREEMAIL.map((e,i)=><div key={i}className={i === 0 ? "mt-8" : ""}>
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex gap-[15px]">
+                                                    <Image src={e.img} alt="request" width={44} height={44} />
+                                                    <div>
+                                                        <div className="text-base font-medium">{e.name}</div>
+                                                        <div className="text-sm text-text3 pt-1">{e.email}</div>
+                                                    </div>
+                                                </div>
+                                                <div className="text-lg capitalize">{e.role}</div>
+                                            </div>
+                                            
+                                               {i !== SHAREEMAIL.length - 1 && (
+                                                    <hr className='border-t border-border2 my-5' />
+                                                )}
+                            </div>)}
+                         
                             <SecondaryButton
                                 title="Generate Report"
                                 type='submit'
@@ -479,7 +495,7 @@ function ReviewAnalytics({ onSave }) {
                                 <h2 className='text-base font-semibold'>ABC Corp</h2>
                                 <div className='flex justify-between items-center pt-[15px]'>
                                     <h2 className='text-text3 text-sm font-medium'>Report Date</h2>
-                                    <h2 className='text-sm font-medium'>{e.date}</h2>
+                                    <h2 className='text-sm font-medium'>{formatDate(e.date)}</h2>
                                 </div>
                                 <div className='flex justify-between items-center pt-[15px]'>
                                     <h2 className='text-text3 text-sm font-medium'>Report Type</h2>
@@ -510,8 +526,7 @@ function ReviewAnalytics({ onSave }) {
                     <PaginationDemo />
                 </div>}
             </>}
-
-        </AdminLayout >
+        </AdminLayout>
     )
 }
 

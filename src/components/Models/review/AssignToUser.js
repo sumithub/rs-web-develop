@@ -6,7 +6,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 
-export default function Download({ onClose }) {
+export default function AssignToUser({ onClose }) {
     const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false)
 

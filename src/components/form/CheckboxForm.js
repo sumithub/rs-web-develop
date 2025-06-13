@@ -20,6 +20,6 @@ export default function CheckboxForm({ errors, id, label, name, checked, formPro
             <input id={id || label} disabled={disabled} type="checkbox" className={`h-4 w-5 ml-auto mt-1 ${inputClass}`}
                 {...formProps}
                 checked={checked} />
-        </label>     {error && <p className="text-xs pt-[5px] capitalize text-danger">{error}</p>}
+        </label>  {error && <p className="text-xs pt-[5px] capitalize text-danger">{error}</p>}
     </div>
 }

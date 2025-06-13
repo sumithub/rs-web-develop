@@ -16,7 +16,7 @@ import RadioForm from "../../form/RadioForm";
 import Image from "next/image";
 import FileInput from "../../form/FileInput";
 
-export default function ImportCustomer({ onBack, activeStep, setActiveStep, onClose }) {
+export default function ImportCustomer({ onBack, activeStep, setActiveStep, onClose, icon = false }) {
     const [sortBy, setSortBy] = useState("");
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -183,7 +183,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         }
     };
 
-
     const handleViewDetail = (detailType, title) => {
         switch (detailType) {
             case 'invalid_entries':
@@ -202,6 +201,12 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
 
     return (
         <main>
+
+            {icon && activeStep !== 6 && <div className="flex gap-4 items-center">
+                <button type="button" onClick={handleBack}><Image src="/images/arrow-box.svg" alt="arrow" height={30} width={30} unoptimized={true} /></button>
+                <div className="text-sm">Import</div>
+            </div>}
+
             <form onSubmit={handleSubmit(() => { })}>
                 <div>
                     {!importDone && (
