@@ -86,6 +86,7 @@ export default function ScheduleDelivery() {
                         <SelectForm
                             defaultOption="Select option"
                             label="send on"
+                            infoIcon="/images/url.svg"
                             labelClass="inline-block mb-0!"
                             isRequired={true}
                             formProps={{ ...register("select", { required: true }) }}
@@ -186,7 +187,7 @@ export default function ScheduleDelivery() {
             </div>
 
             <div className='shadow-[0px_0px_22px_0px_#0000000F] rounded-[10px] p-5'>
-                <div className='shadow-[0px_0px_22px_0px_#0000000F] rounded-[10px]'>
+                <div className='shadow-[0px_0px_22px_0px_#0000000F] rounded-[10px] min-h-[100vh]'>
                     <div className='bg-primary/10 px-5 py-[18px] flex gap-2.5 rounded-t-[10px]'>
                         <Image unoptimized={true} src="/images/eye1.svg" alt='eye1' width={22} height={22} />
                         <h2 className='text-lg font-semibold'>Email Preview</h2>
@@ -215,7 +216,7 @@ export default function ScheduleDelivery() {
                             </div>
                         </div>
 
-                        <SecondaryButton title="View Full Report" type='button' class_='text-sm! w-auto! px-2.5! py-2.5! font-normal! my-5!' />
+                        <SecondaryButton title="View Full Report" type='button' class_='text-sm! w-auto! font-normal! my-5!' />
                         <div className='text-sm capitalize'>
                             <div className='text-xs'><span className="font-black text-2xl leading-0">.</span> The coffee Spot Team</div>
                             <div className='text-xs'>[Unsubscribe]</div>
@@ -224,6 +225,5 @@ export default function ScheduleDelivery() {
                 </div>
             </div>
         </div>
-
     </AdminLayout>
 }

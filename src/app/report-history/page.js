@@ -98,7 +98,7 @@ export default function ReportHistory() {
                     />
                     <CustomSelectBox
                         defaultOption="Status"
-                        class_='mt-0! w-24!'
+                        class_='mt-0! w-32!'
                         value={filterBy}
                         onChange={(e) => {
                             setFilterBy(e.target.value)
@@ -111,7 +111,7 @@ export default function ReportHistory() {
 
                     <CustomSelectBox
                         defaultOption="Report Type"
-                        class_='mt-0! w-32!'
+                        class_='mt-0! w-40!'
                         value={filterBy}
                         onChange={(e) => {
                             setFilterBy(e.target.value)
@@ -123,7 +123,7 @@ export default function ReportHistory() {
 
                     <CustomSelectBox
                         defaultOption="Client"
-                        class_='mt-0! w-28!'
+                        class_='mt-0! w-32!'
                         value={filterBy}
                         onChange={(e) => {
                             setFilterBy(e.target.value)
@@ -141,21 +141,21 @@ export default function ReportHistory() {
                         {ReportHistory.map((e, i) =>
                             <div key={i} className='border border-border2 gap-[15px] rounded-[10px] p-[15px]'>
                                 <h2 className='text-base font-semibold'>{e.title}</h2>
-                                <div className='flex justify-between items-center pt-[15px]'>
+                                <div className='flex justify-between items-center pt-2'>
                                     <h2 className='text-text3 text-sm font-medium'>Report Date</h2>
                                     <h2 className='text-sm font-medium'>{formatDate(e.date)}</h2>
                                 </div>
-                                <div className='flex justify-between items-center pt-[15px]'>
+                                <div className='flex justify-between items-center pt-2'>
                                     <h2 className='text-text3 text-sm font-medium'>Report Type</h2>
                                     <h2 className='text-sm font-medium'>{e.type}</h2>
                                 </div>
-                                <div className='flex justify-between items-center pt-[15px]'>
+                                <div className='flex justify-between items-center pt-2'>
                                     <h2 className='text-text3 text-sm font-medium'>Sent To</h2>
                                     <h2 className='text-sm font-medium flex justify-end items-center gap-2'>{e.sent}
                                         <span><Image unoptimized={true} src="/images/info.svg" alt='info' width={16} height={16} /></span>
                                     </h2>
                                 </div>
-                                <div className='flex justify-between items-center pt-[15px]'>
+                                <div className='flex justify-between items-center pt-2'>
                                     <h2 className='text-text3 text-sm font-medium'>Status</h2>
                                     <Status status={e.status} />
                                 </div>
