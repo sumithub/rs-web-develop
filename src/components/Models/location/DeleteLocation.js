@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import { useState } from "react";
 
-export default function DeleteClient({ onClose, title = "Client ID" }) {
+export default function DeleteLocation({ onClose, title = "Confirm Location" }) {
     const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false);
 
@@ -17,7 +17,7 @@ export default function DeleteClient({ onClose, title = "Client ID" }) {
         try {
             setSending(true);
             await axios.put("/api");
-            toast.success("Client Deleted Successfully");
+            toast.success("Location Deleted Successfully");
             onClose();
         } catch (error) {
             toast.error(getError(error));
@@ -28,7 +28,7 @@ export default function DeleteClient({ onClose, title = "Client ID" }) {
 
     return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
         <form onSubmit={handleSubmit(onSubmit)} className="text-center">
-            <DeleteTag title={`Delete ${title}`} question="Confirmation prompt before deletion." />
+            <DeleteTag title={`${title} Deletion`} question="Are You Sure You Want To Delete The Location Main Office ?" />
 
             <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="No" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
