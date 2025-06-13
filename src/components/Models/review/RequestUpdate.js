@@ -67,7 +67,7 @@ export default function RequestUpdate({ onClose, onSave }) {
                                     clearErrors={clearErrors}
                                 />
                             </div>
-                            <div className="grid grid-cols-2 gap-3 mt-50">
+                            <div className="grid grid-cols-2 gap-3 mt-10">
                                 <CancelButton title="cancel" onClick={onClose} />
                                 <SecondaryButton
                                     title="Request update"
@@ -78,7 +78,6 @@ export default function RequestUpdate({ onClose, onSave }) {
                         </form>
                     </>
                 </div>
-
 
                 <div className="bg-white rounded-[15px] shadow-sm">
                     <div className='bg-primary/10 py-[18px] px-5 rounded-t-[15px] '>

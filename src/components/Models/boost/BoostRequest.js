@@ -18,6 +18,7 @@ import InputForm from "../../form/InputForm";
 import Preview from "../manage-campaigns/Preview"
 import AddTemplate from "../templates/AddTemplate"
 import SelectForm from "../../form/SelectForm";
+import Link from "next/link";
 
 export default function BoostRequest({ onClose, onSave, id }) {
     const [select, setSelect] = useState("")
@@ -28,16 +29,7 @@ export default function BoostRequest({ onClose, onSave, id }) {
     const [emailTemplate, setEmailTemplate] = useState({ name: "Nature Template", preview: "Lorem Ipsum.." })
     const [smsTemplate, setSmsTemplate] = useState({ name: "Nature Template", preview: "Lorem Ipsum.." })
     const [showDetails, setShowDetails] = useState(false)
-
-    const {
-        register,
-        setValue,
-        watch,
-        clearErrors,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
-
+    const { register,setValue,watch,clearErrors,handleSubmit,formState: { errors },} = useForm();
     const [sending, setSending] = useState(false)
     const [openTemplate, setOpenTemplate] = useState(false)
     const [openPreview, setOpenPreview] = useState(false)
@@ -317,11 +309,12 @@ export default function BoostRequest({ onClose, onSave, id }) {
                                             <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={12} height={12} />
                                             Preview
                                         </button>
-                                        <button
-                                            onClick={() => setOpenEdit(true)} className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
+                                        <Link href="/create-email-template"
+                                            // onClick={() => setOpenEdit(true)}
+                                             className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
                                             <Image unoptimized={true} src="/images/edit2.svg" alt="edit2" width={12} height={12} />
                                             Edit
-                                        </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -347,11 +340,12 @@ export default function BoostRequest({ onClose, onSave, id }) {
                                             <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={12} height={12} />
                                             Preview
                                         </button>
-                                        <button
-                                            onClick={() => setOpenEdit(true)} className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
+                                        <Link href="/create-email-template"
+                                            // onClick={() => setOpenEdit(true)} 
+                                            className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
                                             <Image unoptimized={true} src="/images/edit2.svg" alt="edit2" width={12} height={12} />
                                             Edit
-                                        </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -370,8 +364,7 @@ export default function BoostRequest({ onClose, onSave, id }) {
                             <h2 className="text-lg font-semibold">Customer Selection Summary</h2>
                             <button
                                 type="button"
-                                onClick={() => setShowDetails(!showDetails)}
-                            >
+                                onClick={() => setShowDetails(!showDetails)}>
                                 <Image
                                     unoptimized={true}
                                     src="/images/open-eye.svg"
