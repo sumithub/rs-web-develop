@@ -94,7 +94,7 @@ export default function UsersList({ onClose }) {
                     <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
                 </div>
             </div>
-            <SecondaryButton title="Add Selected" />
+            <SecondaryButton title="Add Selected" onClick={onClose}/>
         </div>
 
         <div className='table-class'>
