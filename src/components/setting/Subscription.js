@@ -6,19 +6,25 @@ import SecondaryButton from "../common/SecondaryButton"
 import CancelButton from "../common/CancelButton"
 import { useState } from "react"
 import UpgradePlan from '../setting/UpgradePlan'
+import CancelSubscription from "./CancelSubscription"
 
 export default function Subscription() {
     const [open, setOpen] = useState(false)
+    const [openCancel, setOpenCancel] = useState(false)
     return (<>
         {open &&
             <UpgradePlan
                 onClose={() => { setOpen(false) }} />
         }
+        {openCancel &&
+            <CancelSubscription
+                onClose={() => { setOpenCancel(false) }} />
+        }
         <div className="flex justify-between">
             <h2 className="text-lg font-semibold py-[11px]">My Subscription Details</h2>
             <div className="flex gap-[10px]">
-                <CancelButton title="Cancel Subscription" class_="text-danger" />
-                <button className="py-[13.5px] px-5 text-sm border border-primary hover:bg-primary hover:text-white text-primary rounded-[10px] disabled:pointer-events-none disabled:opacity-50">View Usage Details</button>
+                <CancelButton title="Cancel Subscription" class_="text-danger" onClick={() => { setOpenCancel(true) }} />
+                <SecondaryButton title="View Usage Details" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
                 <SecondaryButton title="Upgrade Plan" onClick={() => { setOpen(true) }} />
             </div>
         </div>
