@@ -161,7 +161,6 @@ function LocationScreen() {
                                 </td>
                             </tr>)}
                     </tbody>
-
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                 {list?.length > 0 && <div>
                     <PaginationDemo />
