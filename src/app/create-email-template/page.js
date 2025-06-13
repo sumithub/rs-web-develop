@@ -1,5 +1,5 @@
 "use client"
-import CancelButton from "../../components/common/CancelButton" 
+import CancelButton from "../../components/common/CancelButton"
 import SecondaryButton from "../../components/common/SecondaryButton"
 import Image from 'next/image'
 import HtmlEditor from "../../components/form/HtmlEditor"
@@ -13,7 +13,8 @@ import axios from 'axios'
 import CustomSelectBox from "../../components/form/CustomSelectBox"
 import AdminLayout from "../../components/AdminLayout"
 
-function AddTemplate({  id }) {
+function AddTemplate() {
+  const id = ""
   const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm();
   const [sending, setSending] = useState(false)
   const [isEmail, setIsEmail] = useState(false)
@@ -21,7 +22,7 @@ function AddTemplate({  id }) {
 
   const handleClick = () => {
     toast.success("Cloned Successfully")
-   
+
   }
 
   const onSubmit = async (data) => {
