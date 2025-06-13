@@ -7,13 +7,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import ChangeEmail from "../../components/Models/ChangeEmail";
+import SecondaryButton from "../../components/common/SecondaryButton";
 
 function VerificationEmail() {
     const { handleSubmit } = useForm();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
     const [sec, setSec] = useState(60);
-    const [isTimerActive, setIsTimerActive] = useState(false);
+    const [isTimerActive, setIsTimerActive] = useState(true);
 
     useEffect(() => {
         let interval = null;
@@ -70,7 +71,7 @@ function VerificationEmail() {
 
                     <div className='flex items-center justify-between mt-8'>
                         <div className='text-[15px] text-text3 capitalize'>A verification email has been sent to your email address: </div>
-                        <div className='text-[15px] text-secondary font-medium'>anu@gmail.com</div>
+                        <div className='text-[15px] text-secondary font-medium disabled'>anu@gmail.com</div>
                     </div>
 
                     <div className='mt-5'>
@@ -85,11 +86,11 @@ function VerificationEmail() {
                         </div>
                     </div>
 
-                    <button className="text-lg font-medium bg-dark hover:bg-white text-text3 w-full mt-5 py-3 rounded-[10px] border border-dark hover:border-border-color cursor-pointer"
+                    <SecondaryButton title="Resend Verification Email"
                         disabled={loading}
-                        type="submit">
-                        Resend
-                    </button>
+                        type="submit"
+                        class_="disabled:bg-dark! disabled:text-text3! disabled:border-dark! py-3! mt-5!"/>
+                   
 
                     <div className='flex items-center justify-between mt-5'>
                         <Link href="#" onClick={() => { setOpen(true) }} className='text-sm text-primary font-medium underline underline-offset-4'>Change Email</Link>

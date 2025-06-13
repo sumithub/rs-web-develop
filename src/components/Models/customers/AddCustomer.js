@@ -7,7 +7,7 @@ import RadioForm from "../../form/RadioForm"
 import Radio from "../../form/Radio"
 import SelectForm from "../../form/SelectForm"
 import Model from "../Model"
-import { getError } from "../../../../helper"
+import { getError, validEmailRgx } from "../../../../helper"
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -59,7 +59,7 @@ function AddCustomer({ onClose, id, onSave }) {
             setSending(false)
         }
     }
-    return <Model onClose={onClose} title={activeStep === 6 ? "Customers Imported Successfully!" : type === "import" ? "Import Customers" : (!id ? "Add new Customer" : "Edit Customers List")} modalClass="w-[65%]!">
+    return <Model onClose={onClose} title={activeStep === 6 ? "Customers Imported Successfully!" : type === "import" ? "Import Customers" : (!id ? "Add new Customer" : "Edit Customers List")} modalClass={`${type === "manually" ? "w-1/2!" : "w-[60%]!"}`}>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 {!id && activeStep !== 6 && <div className="flex gap-4 items-center">
@@ -88,7 +88,14 @@ function AddCustomer({ onClose, id, onSave }) {
                                 errors={errors} />
 
                             <InputForm label="Email" placeholder="Enter email" isRequired={true}
-                                formProps={{ ...register("email", { required: true }) }}
+                                formProps={{
+                                    ...register("email", {
+                                        required: true, pattern: {
+                                            value: validEmailRgx,
+                                            message: "Email is invalid."
+                                        },
+                                    })
+                                }}
                                 errors={errors} />
 
                             <PhoneForm label="Primary Phone"
@@ -144,7 +151,7 @@ function AddCustomer({ onClose, id, onSave }) {
 
             {type === "manually" && <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="Cancel" onClick={onClose} />
-                <SecondaryButton title=" Apply Changes" type="submit" disabled={sending} />
+                <SecondaryButton title="Apply Changes" type="submit" disabled={sending} />
             </div>}
         </form>
 

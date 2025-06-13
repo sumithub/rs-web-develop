@@ -10,9 +10,10 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Checkbox from "../../form/Checkbox";
 import Image from "next/image";
+import CheckboxForm from "../../form/CheckboxForm";
 
 export default function ReportTemplate({ onClose, id, onSave }) {
-    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -53,8 +54,9 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                         class_="mt-0!"
                         selectClass_="py-2.5! px-2.5!"
                         isRequired={true}
-                        formProps={{ ...register("select", { required: true }) }}
-                        errors={errors}>
+                        formProps={{ ...register("templateName", { required: true }) }}
+                        errors={errors} clearErrors={clearErrors}>
+
                         <option value="naturalTemplate">Natural Template</option>
                     </SelectForm>
                 </div>
@@ -64,14 +66,20 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                         Select Report Sections
                     </div>
 
-                    <div className="flex justfy-between align-center gap-5 mt-3.5">
-                        <Checkbox />
+                    <div className="flex items-center gap-5 mt-3.5">
+                        <CheckboxForm
+                            formProps={{ ...register("reviewsOverview") }} errors={errors}
+                        />
                         <div>Reviews Overview</div>
 
-                        <Checkbox />
+                        <CheckboxForm
+                            formProps={{ ...register("sentimentAnalysis") }} errors={errors}
+                        />
                         <div>Sentiment Analysis</div>
 
-                        <Checkbox />
+                        <CheckboxForm
+                            formProps={{ ...register("campaignPerformance") }} errors={errors}
+                        />
                         <div>Campaign Performance</div>
                     </div>
                 </div>
@@ -93,19 +101,24 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                         <div className="flex gap-2.5">
                             <Image src="/images/Frame.png" alt="frame" width={25} height={10} />
                             <h2 className="text-sm">Review Over Time</h2>
-                            <Checkbox />
+                            <CheckboxForm
+                                formProps={{ ...register("reviewOverTime") }} errors={errors}
+                            />
                         </div>
 
                         <div className="flex gap-2.5 mt-3.5">
                             <Image src="/images/Frame1.png" alt="frame1" width={25} height={10} />
                             <h2 className="text-sm">Review Rating Distribution</h2>
-                            <Checkbox />
+                            <CheckboxForm
+                                formProps={{ ...register("reviewRatingDistribution") }} errors={errors} />
                         </div>
 
                         <div className="flex gap-2.5 mt-3.5">
                             <Image src="/images/Frame2.png" alt="frame2" width={25} height={10} />
                             <h2 className="text-sm">Top Review Sources</h2>
-                            <Checkbox />
+                            <CheckboxForm
+                                formProps={{ ...register("topReviewSources") }} errors={errors}
+                            />
                         </div>
                     </div>
                 </div>
@@ -118,8 +131,8 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                         selectClass_="py-2.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("select", { required: true }) }}
-                        errors={errors}>
-                        <option value="naturalTemplate">Weekly</option>
+                        errors={errors} clearErrors={clearErrors}>
+                        <option value="weekly">Weekly</option>
                     </SelectForm>
                 </div>
 
