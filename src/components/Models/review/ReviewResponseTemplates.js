@@ -104,7 +104,7 @@ export default function ReviewResponseTemplates({ onClose }) {
                             <option value="4 star">4 Star</option>
                             <option value="5 star">5 Star</option>
                         </CustomSelectBox>
-                        <SecondaryButton title="Create New Template" class_="text-xs! px-2.5! py-2.5!" onClick={() => { setOpen(true) }} type="button" />
+                        <SecondaryButton title="Create New Template" class_="text-xs! px-2.5! py-2.5!" isLink={true} link="/create-email-template" type="button" />
                     </div>
                 </div>
 

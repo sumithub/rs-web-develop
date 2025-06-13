@@ -5,12 +5,10 @@ import TableOrder from '../../components/TableOrder'
 import PaginationDemo from '../../components/Pagination'
 import AdminLayout from '../../components/AdminLayout'
 import Search from '../../components/form/Search'
-import DatePicker from '../../components/form/DatePicker'
 import AddTemplate from '../../components/Models/templates/AddTemplate'
 import { TEMPLATE_ACTIONS, templates } from '../../constent/constArray'
 import Clone from '../../components/Models/templates/Clone'
 import CustomSelectBox from '../../components/form/CustomSelectBox';
-import Edit from '../../components/Models/templates/Edit'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { formatDateTime, getError } from '../../../helper'
@@ -18,6 +16,7 @@ import Loading from '../../components/Loading'
 import Preview from '../../components/Models/manage-campaigns/Preview'
 import DeleteTemplate from "../../components/Models/templates/DeleteTemplate"
 import DateRange from '../../components/form/DateRangePicker'
+import SecondaryButton from '../../components/common/SecondaryButton'
 
 function CampaignsTemplates() {
     const [search, setSearch] = useState("")
@@ -126,8 +125,11 @@ function CampaignsTemplates() {
                         /> */}
                     </div>
 
-                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
-                        onClick={() => { setOpen(true) }}>Create New Template</button>
+                    {/* <SecondaryButton title="Create New Template" class_='text-xs!'
+                        onClick={() => { setOpen(true) }}/>   */}
+
+                    <SecondaryButton title="Create New Template" class_='text-xs!'
+                       isLink={true} link='/create-email-template'/>
                 </div>
             </div>
 
@@ -161,11 +163,16 @@ function CampaignsTemplates() {
                             <td><div className='line-clamp-1'>{e.subject}</div></td>
                             {/* <td>Jun 18,2025|10:00Am</td> */}
                             <td>{formatDateTime(e.lastUpdated)}</td>
-                            <td><Dropdown
-                                options={TEMPLATE_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
-                                }} /></td>
+                            <td><Dropdown 
+    options={TEMPLATE_ACTIONS}
+    editLink="/create-email-template"
+    // editLink={`/edit-template/${template.id}`}
+    onClickOption={(action) => {
+        if (action !== 'edit') {
+            setOpenModal(action);
+        }
+    }}
+/></td>
                         </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}

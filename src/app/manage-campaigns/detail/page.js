@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation"
 import SelectedCustomers from "../../../components/Models/manage-campaigns/SelectedCustomers"
 import ImportCustomerDetail from "../../../components/Models/manage-campaigns/ImportCustomerDetail"
 import RadioForm from "../../../components/form/RadioForm"
+import Link from "next/link"
 
 export default function Detail({ }) {
     const id = ""
@@ -425,15 +426,15 @@ export default function Detail({ }) {
                                     Preview
                                 </button>
 
-                                <button
-                                    className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                                    onClick={() => setOpenModal(true)}
+                                <Link href="/create-email-template"
+                                    className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:opacity-50 disabled:cursor-not-allowed"
+                                    // onClick={() => setOpenModal(true)}
                                     type="button"
                                     disabled={!hasTemplate}
                                 >
                                     <Image src="/images/edit2.svg" alt='edit' height={14} width={14} unoptimized={true} />
                                     Edit
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

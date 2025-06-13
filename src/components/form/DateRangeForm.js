@@ -129,7 +129,7 @@ function DateRangeForm({
             )}
             
             <div ref={ref} className="relative">
-                <button
+                <button type='button'
                     onClick={toggleDatePicker}
                     disabled={disabled}
                     className={`${inputClass} cursor-pointer flex items-center gap-2 border ${
@@ -163,7 +163,7 @@ function DateRangeForm({
                                 direction="horizontal"
                             />
                             <div className='absolute left-14 bottom-5 w-[12%]'>
-                                <button 
+                                <button type='button'
                                     onClick={handleSave}
                                     className="text-white text-lg font-medium bg-primary hover:bg-white hover:text-primary w-full py-1 rounded-lg border border-primary cursor-pointer text-center"
                                 >
