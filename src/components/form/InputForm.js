@@ -13,9 +13,10 @@ export default function InputForm({ class_ = "", watch, setValue, clearValue = f
         } else {
             error = "This field is required";
         }
-    } else if (errors[formProps?.name]?.type) {
-        error = errors[formProps?.name]?.message || "This field is required";
+    } else if (formProps?.name && errors?.[formProps.name]?.type) {
+        error = errors[formProps.name]?.message || "This field is required";
     }
+
 
     const handleClick = () => {
         if (inputType === "password") {

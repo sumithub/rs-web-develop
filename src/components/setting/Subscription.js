@@ -2,15 +2,24 @@
 
 import Image from "next/image"
 import Status from "../Status"
+import SecondaryButton from "../common/SecondaryButton"
+import CancelButton from "../common/CancelButton"
+import { useState } from "react"
+import UpgradePlan from '../setting/UpgradePlan'
 
 export default function Subscription() {
+    const [open, setOpen] = useState(false)
     return (<>
+        {open &&
+            <UpgradePlan
+                onClose={() => { setOpen(false) }} />
+        }
         <div className="flex justify-between">
             <h2 className="text-lg font-semibold py-[11px]">My Subscription Details</h2>
             <div className="flex gap-[10px]">
-                <button className="py-[13.5px] px-5 text-sm bg-danger/10 border border-danger/10 text-danger rounded-[10px] disabled:pointer-events-none disabled:opacity-50">Cancel Subscription</button>
+                <CancelButton title="Cancel Subscription" class_="text-danger" />
                 <button className="py-[13.5px] px-5 text-sm border border-primary hover:bg-primary hover:text-white text-primary rounded-[10px] disabled:pointer-events-none disabled:opacity-50">View Usage Details</button>
-                <button className="py-[13.5px] px-5 text-sm bg-primary hover:bg-white hover:text-primary border border-primary text-white rounded-[10px] disabled:pointer-events-none disabled:opacity-50">Upgrade Plan</button>
+                <SecondaryButton title="Upgrade Plan" onClick={() => { setOpen(true) }} />
             </div>
         </div>
         <hr className="border border-border2 my-5" />
