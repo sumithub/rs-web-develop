@@ -23,8 +23,14 @@ export default function Sidebar({ collapse, toggleSidebar }) {
         },
         {
             title: "Reports", link: "", icon: "report",
-            submenu: [{ title: "Review Analytics", link: "/review-analytics" }, { title: "Report Templates", link: "/report-templates" }, { title: "Schedule & Delivery", link: "/schedule-delivery" }, { title: "Report History", link: "/report-history" }, { title: "Sentiment Analysis", link: "/sentiment-analysis" }]
-        },
+            submenu: [ { title: "Report Templates", link: "/report-templates" }, { title: "Schedule & Delivery", link: "/schedule-delivery" }, { title: "Report History", link: "/report-history" }]
+        },   
+
+        //    {
+        //     title: "Reports", link: "", icon: "report",
+        //     submenu: [{ title: "Review Analytics", link: "/review-analytics" }, { title: "Report Templates", link: "/report-templates" }, { title: "Schedule & Delivery", link: "/schedule-delivery" }, { title: "Report History", link: "/report-history" }, { title: "Sentiment Analysis", link: "/sentiment-analysis" }]
+        //   },
+
         // { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
 
         { title: "Settings", icon: "settings", submenu: [{ title: "Users", link: "/users" }] },

@@ -4,6 +4,7 @@ import SecondaryButton from "../../common/SecondaryButton";
 import Model from "../Model";
 import UsersList from "../reports/UsersList"
 import { useState } from "react";
+import CancelButton from "../../common/CancelButton"
 
 export default function SendTestEmail({ onClose }) {
     const [openUser, setOpenUser] = useState(false)
@@ -124,7 +125,7 @@ export default function SendTestEmail({ onClose }) {
             </div>
             <div className='grid grid-cols-2 gap-5 mt-[30px]'>
                 <SecondaryButton title="Send Test Email" type='submit' />
-                <SecondaryButton title="Cancel" type='button' class_='bg-dark! border-dark! text-text3!' />
+                <CancelButton title="Cancel" onClick={onClose}/>
             </div>
         </div>
     </Model>
