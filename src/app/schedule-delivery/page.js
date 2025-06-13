@@ -140,7 +140,7 @@ export default function ScheduleDelivery() {
                         </div>
                     </div>
 
-                    {SHAREEMAIL.map((e, i) => <div key={i} className={i === 0 ? "mt-8" : ""}>
+                    {SHAREEMAIL.map((e, i) => <div key={i} className={i === 0 ? "mt-6" : ""}>
                         <div className="flex items-center justify-between">
                             <div className="flex gap-[15px]">
                                 <Image src={e.img} alt="request" width={44} height={44} />
@@ -153,7 +153,7 @@ export default function ScheduleDelivery() {
                         </div>
 
                         {i !== SHAREEMAIL.length - 1 && (
-                            <hr className='border-t border-border2 my-5' />
+                            <hr className='border-t border-border2 my-3.5' />
                         )}
                     </div>)}
 
@@ -178,7 +178,7 @@ export default function ScheduleDelivery() {
                         rows={1}
 
                     />
-                    <div className='grid grid-cols-2 gap-3 mt-5'>
+                    <div className='grid grid-cols-2 gap-5 mt-[30px]'>
                         <SecondaryButton onClick={() => { setOpen(true) }} title="send test email" type='button' class_='bg-white! text-primary!' />
                         <SecondaryButton title="Save Settings" disabled={sending} type='submit' />
                     </div>
@@ -187,38 +187,38 @@ export default function ScheduleDelivery() {
 
             <div className='shadow-[0px_0px_22px_0px_#0000000F] rounded-[10px] p-5'>
                 <div className='shadow-[0px_0px_22px_0px_#0000000F] rounded-[10px]'>
-                    <div className='bg-primary/10 p-5 flex gap-2.5 rounded-t-[10px]'>
+                    <div className='bg-primary/10 px-5 py-[18px] flex gap-2.5 rounded-t-[10px]'>
                         <Image unoptimized={true} src="/images/eye1.svg" alt='eye1' width={22} height={22} />
                         <h2 className='text-lg font-semibold'>Email Preview</h2>
                     </div>
-                    <div className='p-6'>
+                    <div className='p-5'>
                         <div className='text-sm mb-3'>
-                            <div className='capitalize'>Subject: <span className='font-medium'>Your weekly review report - the coffee spot</span></div>
-                            <div className='py-5'>Hi (John Deo)</div>
-                            <div className='capitalize'>Here’s your weekly performance update:</div>
+                            <div className='capitalize text-xs'>Subject: <span className='font-medium'>Your weekly review report - the coffee spot</span></div>
+                            <div className='py-4 text-xs'>Hi (John Deo)</div>
+                            <div className='capitalize text-xs'>Here&#39;s your weekly performance update:</div>
                         </div>
 
                         <div className='text-base'>
                             <div className='flex items-center gap-2'>
                                 <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
-                                <div>Review Over Time: 42 New Reviews</div>
+                                <div className='text-sm'>Review Over Time: 42 New Reviews</div>
                             </div>
 
                             <div className='flex items-center gap-2 py-3.5'>
                                 <Image unoptimized={true} src="/images/star.svg" alt='review-time' width={20} height={20} />
-                                <div>Avg Rating: 4.5</div>
+                                <div className='text-sm'>Avg Rating: 4.5</div>
                             </div>
 
                             <div className='flex items-center gap-2'>
                                 <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
-                                <div>Top Source: Google (28 reviews)</div>
+                                <div className='text-sm'>Top Source: Google (28 reviews)</div>
                             </div>
                         </div>
 
-                        <SecondaryButton title="View Full Report" type='button' class_='text-sm! w-36! font-normal! my-5!' />
+                        <SecondaryButton title="View Full Report" type='button' class_='text-sm! w-auto! px-2.5! py-2.5! font-normal! my-5!' />
                         <div className='text-sm capitalize'>
-                            <div>The coffee Spot Team</div>
-                            <div>[Unsubscribe]</div>
+                            <div className='text-xs'><span className="font-black text-2xl leading-0">.</span> The coffee Spot Team</div>
+                            <div className='text-xs'>[Unsubscribe]</div>
                         </div>
                     </div>
                 </div>
