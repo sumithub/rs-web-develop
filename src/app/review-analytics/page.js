@@ -9,6 +9,11 @@ import DashboardChart from "../../components/DashboardChart";
 import Image from "next/image";
 
 export default function ReviewAnalytics() {
+
+    const SHAREEMAIL = [
+        { img: "/images/request.png", name: "Amelie Laurent", email: "amili@gmail.com", role: "manager" },
+        { img: "/images/request.png", name: "Amelie Laurent", email: "amili@gmail.com", role: "owner" },
+    ]
     return (
         <div>
             <AdminLayout>
@@ -19,8 +24,8 @@ export default function ReviewAnalytics() {
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                            <DatePicker label="From" isRequired={true} icon={true} />
-                            <DatePicker label="To" isRequired={true} icon={true} />
+                            <DatePicker label="From" isRequired={true} icon={true} class_="border-primary/10!" />
+                            <DatePicker label="To" isRequired={true} icon={true} class_="border-primary/10!" />
                         </div>
 
                         <div className="mt-4" >
@@ -90,24 +95,65 @@ export default function ReviewAnalytics() {
                                 Email & Scheduling Options
                             </div>
 
-                            <div className="flex items-center gap-3">
-                                <Select defaultOption="Select Frequency" label="Frequency" isRequired={true} />
-                                <Input label="Time" isRequired={true} placeholder="Select Time" />
+                            <div className="flex items-center gap-3 mt-3.5">
+                                <Select defaultOption="Select Frequency" label="Frequency" isRequired={true} class_="mt-0!" selectClass_="py-3! px-2.5!" />
+                                <Input label="Time" isRequired={true} placeholder="Select Time" class_="mt-0!" />
                             </div>
 
                             <div>
-                                <div>
-                                    Enter E-Mail
+                                <h2 className='text-sm font-medium capitalize py-[15px]'>enter e-mail<span className='text-danger'>*</span></h2>
+                                <div className="flex gap-[15px]">
+                                    <div className="w-full border border-primary/10 rounded-lg p-2.5 flex justify-between items-center">
+                                        <div className="flex gap-[15px]">
+                                            <div className="flex gap-[7px] border border-primary/10 rounded-lg p-[5px] items-center">
+                                                <Image src="/images/request.png" alt="request" width={17} height={17} />
+                                                <h2 className="text-sm">Richard</h2>
+                                                <Image unoptimized={true} src="/images/close-square.svg" alt="close-square" width={14} height={14} />
+                                            </div>
+                                            <div className="flex gap-[7px] border border-primary/10 rounded-lg p-[5px] items-center">
+                                                <Image src="/images/request.png" alt="request" width={17} height={17} />
+                                                <h2 className="text-sm">Sophia</h2>
+                                                <Image unoptimized={true} src="/images/close-square.svg" alt="close-square" width={14} height={14} />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <Image unoptimized={true} src="/images/copy2.svg" alt="copy2" width={20} height={20} />
+                                        </div>
+                                    </div>
+                                    <div className="w-[30%] shrink-0">
+                                        <SecondaryButton
+                                            title="Search Users"
+                                            type='button'
+                                            class_="py-[15px]! px-5! text-sm! font-normal!"
+                                            onClick={() => { }}
+                                        />
+                                    </div>
                                 </div>
 
-                                <div className="flex items-center gap-3">
-                                    <div className="grid grid-cols-2 gap-3">
-                                        <div>Richard</div>
-                                        <div>Sophia</div>
+                                {SHAREEMAIL.map((e, i) => <div key={i} className={i === 0 ? "mt-6" : ""}>
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex gap-[15px]">
+                                            <Image src={e.img} alt="request" width={44} height={44} />
+                                            <div>
+                                                <div className="text-base font-medium">{e.name}</div>
+                                                <div className="text-sm text-text3 pt-1">{e.email}</div>
+                                            </div>
+                                        </div>
+                                        <div className="text-lg capitalize">{e.role}</div>
                                     </div>
-                                    <SecondaryButton title="Search Users" />
-                                </div>
+
+                                    {i !== SHAREEMAIL.length - 1 && (
+                                        <hr className='border-t border-border2 my-3.5' />
+                                    )}
+                                </div>)}
                             </div>
+                            <SecondaryButton
+                                mainClass="mt-[152px]"
+                                title="Generate Report"
+                                type='button'
+                                class_="py-3! px-5! text-lg! font-medium!"
+                            // onClick={() => { }}
+                            />
                         </div>
                     </div>
 

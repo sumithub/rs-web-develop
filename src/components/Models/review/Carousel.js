@@ -358,7 +358,7 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                             <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={22} height={22} />
                             <h2 className="text-lg font-semibold">Widget Preview</h2>
                         </div>
-                        <div className="p-5">
+                        <div className="p-5 h-[90%]">
                             {/* Different preview content based on widget type */}
                             {normalizedTitle === "starbadgewidget" ? (
                                 <div className="border border-border2 rounded-[10px] p-5">
@@ -376,69 +376,48 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                     </div>
                                 </div>
                             ) : (
+                                <div className="border border-border2 rounded-[10px] p-5 flex flex-col justify-between h-full">
+                                    <div>
+                                        <Slider {...settings} ref={sliderRef}>
+                                            {[1, 2].map((_, i) => (
+                                                <div key={i}>
+                                                    <div>
+                                                        <div className="text-center">
+                                                            <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
+                                                            <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
+                                                        </div>
+                                                        <div className="flex justify-between items-center gap-2.5">
 
-                                <Slider {...settings} ref={sliderRef}>
-                                    {[1, 2].map((_, i) => (
-                                        <div key={i}>
-                                            <div className="border border-border2 rounded-[10px] p-5">
-                                                <div className="text-center">
-                                                    <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
-                                                    <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
-                                                </div>
-                                                <div className="flex justify-between items-center gap-2.5">
+                                                            <button type="button" onClick={() => sliderRef.current.slickPrev()}>
+                                                                <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
+                                                            </button>
+                                                            <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
 
-                                                    <button type="button" onClick={() => sliderRef.current.slickPrev()}>
-                                                        <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
-                                                    </button>
-                                                    <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
-
-                                                    <button type="button" onClick={() => sliderRef.current.slickNext()}>
-                                                        <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} />
-                                                    </button>
-                                                </div>
-                                                <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s<br /> {show && <>
-                                                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                    Read More
-                                                </>}
-                                                    <span onClick={() => { setShow(!show) }} className="cursor-pointer font-medium text-primary"> Read {show ? "Less" : "More"}</span></p>
-                                                <div className="my-10 flex justify-center">
-                                                    <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary bg-dark" type="button">
-                                                        <span>
-                                                            <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
-                                                        </span>
-                                                        Verified On Google
-                                                    </button>
-                                                </div>
-                                                <div className="">
-                                                    <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
-                                                </div>
-                                            </div>
-                                            {/* <div className="border border-border2 rounded-[10px] p-5">
-                                                <div className="text-center">
-                                                    <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
-                                                    <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
-                                                </div>
-                                                <div className="flex justify-between items-center gap-2.5">
-                                                    <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
-                                                    <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
-                                                    <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} className="" />
-                                                </div>
-                                                <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...<br />
-                                                    <span className="font-medium text-primary">Read More</span></p>
-                                                <div className="my-10 flex justify-center">
-                                                    <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary" type="button">
-                                                        <span>
-                                                            <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
-                                                        </span>
-                                                        Verified On Google
-                                                    </button>
-                                                </div>
-                                                <div className="">
-                                                    <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
-                                                </div>
-                                            </div> */}
-                                        </div>))}
-                                </Slider>
+                                                            <button type="button" onClick={() => sliderRef.current.slickNext()}>
+                                                                <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} />
+                                                            </button>
+                                                        </div>
+                                                        <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s<br /> {show && <>
+                                                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                                            Read More
+                                                        </>}
+                                                            <span onClick={() => { setShow(!show) }} className="cursor-pointer font-medium text-primary"> Read {show ? "Less" : "More"}</span></p>
+                                                        <div className="my-10 flex justify-center">
+                                                            <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary bg-dark" type="button">
+                                                                <span>
+                                                                    <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
+                                                                </span>
+                                                                Verified On Google
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>))}
+                                        </Slider>
+                                    </div>
+                                    <div className="">
+                                        <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
+                                    </div>
+                                </div>
                             )}
                         </div>
                     </div>
