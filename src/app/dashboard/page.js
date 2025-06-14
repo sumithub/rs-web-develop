@@ -25,7 +25,6 @@ export default function Dashboard() {
     const [list, setList] = useState([])
     const [open, setOpen] = useState(false)
 
-
     useEffect(() => {
         getReview()
     }, [date, rating, reviewSource])

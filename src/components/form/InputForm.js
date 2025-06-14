@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function InputForm({ class_ = "", watch, setValue, clearValue = false, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "", isTextArea, rows }) {
+export default function InputForm({infoIcon, class_ = "", watch, setValue, clearValue = false, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "", isTextArea, rows }) {
     const [type, setType] = useState("password")
     let error = "";
 
@@ -28,7 +28,21 @@ export default function InputForm({ class_ = "", watch, setValue, clearValue = f
 
     return (
         <div className={`mt-[15px] ${class_}`}>
-            <label className={`text-sm font-medium text-secondary capitalize ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}</label>
+            <label className={`text-sm font-medium text-secondary inline-flex items-center gap-[5px] capitalize ${labelClass}`}> {infoIcon && (
+                            <span className="cursor-pointer" title="More information">
+                                {typeof infoIcon === "string" ? (
+                                    <Image
+                                        unoptimized={true}
+                                        src={infoIcon}
+                                        alt="info"
+                                        width={14}
+                                        height={14}
+                                    />
+                                ) : (
+                                    infoIcon
+                                )}
+                            </span>
+                        )} {label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}</label>
 
             <div className="relative">
                 {(clearValue && inputType !== "password" && icon && watch(formProps?.name)) && (

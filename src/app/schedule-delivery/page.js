@@ -5,15 +5,17 @@ import InputForm from '../../components/form/InputForm'
 import SecondaryButton from '../../components/common/SecondaryButton'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import RadioForm from '../../components/form/RadioForm'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { getError } from '../../../helper'
 import SendTestEmail from '../../components/Models/reports/SendTestEmail'
+import Loading from '../../components/Loading'
 
 export default function ScheduleDelivery() {
     const { register, handleSubmit, setValue, clearErrors, formState: { errors } } = useForm();
+    const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
 
@@ -22,6 +24,10 @@ export default function ScheduleDelivery() {
         { img: "/images/request.png", name: "Amelie Laurent", email: "amili@gmail.com", role: "owner" },
     ]
 
+       useEffect(() => {
+        setTimeout(() => setLoading(false), 1500);
+      }, []);
+    
     const onSubmit = async (data) => {
         try {
             setSending(true);
@@ -45,6 +51,9 @@ export default function ScheduleDelivery() {
                 setOpen(true)
             }}
         />}
+ {loading ? (
+       <Loading/>
+      ) : (
         <div className="grid grid-cols-2 gap-5">
             <div className='shadow-[0px_0px_22px_0px_#0000000F] p-5 rounded-[10px] bg-white'>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -224,6 +233,6 @@ export default function ScheduleDelivery() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>)}
     </AdminLayout>
 }

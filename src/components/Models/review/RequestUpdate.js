@@ -46,12 +46,12 @@ export default function RequestUpdate({ onClose, onSave }) {
                                             <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
                                             <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
                                             <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
-                                            <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
+                                            <Image src="/images/rating-star.svg" alt="rating" height={18} width={18} unoptimized={true} />
                                         </div>
                                         <h2 className="text-sm">Jun 11,2024</h2>
                                     </div>
                                 </div>
-                                <h2 className="text-xs pt-[15px] capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the .</h2>
+                                <h2 className="text-xs pt-[15px] capitalize leading-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the .</h2>
                             </div>
                         </div>
                     </div>
