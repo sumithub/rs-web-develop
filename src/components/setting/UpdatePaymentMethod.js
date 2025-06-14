@@ -97,8 +97,8 @@ export default function UpdatePaymentMethod({ onClose, id, ids }) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mt-6">
-                    <CancelButton title="Cancel" onClick={onClose} class_="text-red-100" />
-                    <SecondaryButton title="Save Payment Method" type="submit" disabled={sending} />
+                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
+                    <SecondaryButton title="Save Payment Method" type="submit" class_="text-lg!" disabled={sending} />
                 </div>
             </form>
         </Model >
