@@ -3,12 +3,10 @@
 import { useState } from "react"
 import AdminLayout from "../../../../components/AdminLayout"
 import Search from "../../../../components/form/Search"
-import DateRange from "../../../../components/form/DateRangePicker"
 import CustomSelectBox from "../../../../components/form/CustomSelectBox"
 import SecondaryButton from "../../../../components/common/SecondaryButton"
 import TableOrder from "../../../../components/TableOrder"
 import Checkbox from "../../../../components/form/Checkbox"
-import Status from "../../../../components/Status"
 import Image from "next/image"
 import PaginationDemo from "../../../../components/Pagination"
 
@@ -17,46 +15,36 @@ export default function LocationsManagement() {
     const [sortBy, setSortBy] = useState(false)
 
     const Business = [
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
+        { name: "Location-1", address: "123 Main St.", client: "Xyz..", count: "50" },
+        { name: "Location-2", address: "123 Main St.", client: "Xyz..", count: "100" },
+        { name: "Location-3", address: "123 Main St.", client: "Xyz..", count: "30" },
+        { name: "Location-4", address: "123 Main St.", client: "Xyz..", count: "35" },
+        { name: "Location-5", address: "123 Main St.", client: "Xyz..", count: "50" },
+        { name: "Location-6", address: "123 Main St.", client: "Xyz..", count: "20" },
+        { name: "Location-7", address: "123 Main St.", client: "Xyz..", count: "80" },
+        { name: "Location-8", address: "123 Main St.", client: "Xyz..", count: "100" },
+        { name: "Location-9", address: "123 Main St.", client: "Xyz..", count: "50" },
+        { name: "Location-10", address: "123 Main St.", client: "Xyz..", count: "30" },
     ]
     return (
         <AdminLayout>
             <div className='flex items-center justify-between'>
                 <Search
-                    placeholder="Search by Client Name, Industry"
+                    placeholder="Search by Location Name, Address"
                     onSearch={(s) => {
                         setSearch(s)
                     }}
                 />
-                <div className='flex items-center gap-3'>
-                    <DateRange
-                        onChange={(e) => { setDate(e) }}
-                    />
-                    <CustomSelectBox
-                        defaultOption="Status"
-                        class_='mt-0! w-32!'
-                    >
-                        <option value="suspend">Suspend</option>
-                        <option value="active">Active</option>
-                    </CustomSelectBox>
-
+                <div className='flex items-center gap-3.5'>
                     <CustomSelectBox
                         defaultOption="Filter By"
                         class_='mt-0! w-32!'
                     >
-                        <option value="subscription-plan">Subscription Plan</option>
-                        <option value="status">Status</option>
+                        <option value="subscription-plan">Client</option>
+                        <option value="status">Region</option>
                     </CustomSelectBox>
                     <SecondaryButton
-                        title="Add New Client"
+                        title="Add New Location"
                         type='submit'
                         class_="text-xs! font-normal!"
                     />
@@ -66,13 +54,17 @@ export default function LocationsManagement() {
                 <table className="w-full">
                     <thead>
                         <tr>
-                            <th><TableOrder title="Client Name"
+                            <th><TableOrder title="Location Name"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="clientName" /></th>
-                            <th><TableOrder title="Industry" /></th>
-                            <th><TableOrder title="Subscription Plan" /></th>
-                            <th><TableOrder title="Status" /></th>
+                                field="LocationName" /></th>
+                            <th><TableOrder title="Address" /></th>
+                            <th><TableOrder title="Assigned Client" /></th>
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Reviews Count" />
+                                </div>
+                            </th>
                             <th className="text-center!">Action</th>
                         </tr>
                     </thead>
@@ -85,9 +77,9 @@ export default function LocationsManagement() {
                                         <h2>{e.name}</h2>
                                     </div>
                                 </td>
-                                <td>{e.industry}</td>
-                                <td>{e.plan}</td>
-                                <td><Status status={e.status} /></td>
+                                <td>{e.address}</td>
+                                <td>{e.client}</td>
+                                <td className="text-center!">{e.count}</td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
                                         <button className='cursor-pointer'>
