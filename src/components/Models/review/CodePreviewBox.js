@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Image from "next/image";
 
-export default function CodePreviewBox({ onClose, onSave }) {
+export default function CodePreviewBox({ onClose, onSave, code }) {
     const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false)
 
@@ -26,9 +26,7 @@ export default function CodePreviewBox({ onClose, onSave }) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <div className="p-[15px] bg-dark rounded-[15px]">
-                        <h2 className="text-sm text-primary">&#60;script src="https://your-domain.com/widget.js"</h2>
-                        <h2 className="text-sm text-primary pl-5">data-widget-id="XYZ"</h2>
-                        <h2 className="text-sm text-primary pl-5">async&#62;&#60;/script&#62;</h2>
+                        {code}
                     </div>
                     <div className="mt-[30px] flex justify-center bg-primary gap-2.5 py-3 rounded-[10px]">
                         <button className="disabled:pointer-events-none">
