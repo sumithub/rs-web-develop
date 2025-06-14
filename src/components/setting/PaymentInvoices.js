@@ -13,6 +13,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import PaginationDemo from "../Pagination";
 import CancelUpcomingPayment from './CancelUpcomingPayment'
+import UpdatePaymentMethod from './UpdatePaymentMethod'
 
 export default function PaymentInvoices() {
     const [date, setDate] = useState("")
@@ -22,6 +23,7 @@ export default function PaymentInvoices() {
     const [sortBy, setSortBy] = useState("")
     const [type, setType] = useState("")
     const [open, setOpen] = useState(false)
+    const [openUpdate, setOpenUpdate] = useState(false)
 
     useEffect(() => {
         getTemplate()
@@ -52,6 +54,11 @@ export default function PaymentInvoices() {
             {open &&
                 <CancelUpcomingPayment
                     onClose={() => { setOpen(false) }}
+                />}
+
+            {openUpdate &&
+                <UpdatePaymentMethod id="update"
+                    onClose={() => { setOpenUpdate(false) }}
                 />}
             <div className="flex justify-between items-center gap-11">
                 <div className="w-1/2">
@@ -126,7 +133,7 @@ export default function PaymentInvoices() {
 
             <div className="grid grid-cols-2 gap-4 mt-4">
                 <CancelButton title="Cancel upcoming payment" onClick={() => { setOpen(true) }} />
-                <SecondaryButton title="update payment method" />
+                <SecondaryButton title="update payment method" onClick={() => { setOpenUpdate(true) }} />
             </div>
 
             <div className="font-semibold text-lg capitalize mt-4">
