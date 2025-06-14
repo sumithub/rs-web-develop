@@ -46,17 +46,41 @@ export default function ReviewDetail({ onClose, onSave, id }) {
         }
     }
     return (
-        <Model onClose={onClose} title={status === "noActionRequired" ? "No Action Required" : "Review Detail"} modalClass="w-[50%]!">
+        <Model onClose={onClose} title={status === "noActionRequired" ? "No Action Required State" : "Review Detail"} modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     {status === "noActionRequired" && <div>
-                        <div>
+                         <div className="flex pt-1 items-center justify-between w-4/5">
+                            <div className="flex items-start w-full gap-[15px]">
+                                <Image src="/images/request.png" alt="request" width={46} height={46} />
+                                <div className="w-full">
+                                    <div className="flex justify-between">
+                                        <div className="">
+                                            <h2 className="text-base font-semibold">Zain Levin</h2>
+                                            <h3 className="text-sm text-text3 pt-1.5">ZainLevin@gmail.com</h3>
+                                        </div>
+                                        <div className="flex items-center gap-[15px]">
+                                            <div className="flex items-center gap-3">
+                                                <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
+                                                <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
+                                                <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
+                                                <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
+                                                <Image src="/images/rating-star.svg" alt="rating" height={18} width={18} unoptimized={true} />
+                                            </div>
+                                            <h2 className="text-sm">Jun 11,2024</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2 className="w-4/5 ml-auto capitalize mt-[15px] text-xs leading-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the .</h2>
+                        {/* <div>
                             <ReviewCard title="Zain Levin" />
                         </div>
 
-                        <div className="mt-3 ps-[10vw] capitalize text-xs leading-normal">
+                        <div className="mt-3 w-4/5 ml-auto capitalize mt-[15px] text-xs leading-normal">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the .
-                        </div>
+                        </div> */}
                     </div>}
                     {status !== "noActionRequired" && (<>
                         <div className="flex pt-1 items-center justify-between w-4/5">
@@ -74,7 +98,7 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                                                 <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
                                                 <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
                                                 <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
-                                                <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
+                                                <Image src="/images/rating-star.svg" alt="rating" height={18} width={18} unoptimized={true} />
                                             </div>
                                             <h2 className="text-sm">Jun 11,2024</h2>
                                         </div>
@@ -87,7 +111,7 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                     <div>
                         <div className="w-[20%] mt-3.5 mb-5">
                             <SelectForm
-                                selectClass_="rounded-full! py-2! px-2.5!"
+                                selectClass_="rounded-full! py-2! px-2.5! border-input-border!"
                                 defaultOption="select"
                                 formProps={{ ...register("status", { required: false }) }}
                                 errors={errors}
@@ -104,7 +128,7 @@ export default function ReviewDetail({ onClose, onSave, id }) {
                         <HtmlEditor />
                     </div>
 
-                    {status !== "noActionRequired" && (<div>
+                    {status === "draft" && (<div>
                         <h2 className="text-lg font-medium pt-[15px]">Additional Sharing Options:</h2>
                         <div className="flex gap-[18px] pt-2.5">
                             <Link href="https://www.google.com/" target="_blank" className="px-5">

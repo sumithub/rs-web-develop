@@ -73,9 +73,9 @@ export default function CreateTag({ onClose, id }) {
                     <button type="button" className="absolute right-3 top-4 disabled:pointer-events-none"><Image src="/images/close-square.svg" alt="close" height={18} width={18} unoptimized={true} /></button>
                 </div>} */}
 
-                <div className="grid grid-cols-2 gap-3 mt-7">
-                    <CancelButton title="Cancel" onClick={onClose} />
-                    <SecondaryButton title="save" type="submit" disabled={sending} />
+                <div className="grid grid-cols-2 gap-3 mt-[30px]">
+                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
+                    <SecondaryButton title="save" type="submit" disabled={sending} class_="text-lg!" />
                 </div>
             </form>
         </Model>
