@@ -47,8 +47,7 @@ export default function Usage() {
                         </tr>
                     </tbody>
                 </table>
-
-                <SecondaryButton title="View Detailed Report" class_="sm:w-1/5 m-4" />
+                <SecondaryButton title="View Detailed Report" class_="sm:w-1/5 m-4" mainClass="text-end" />
             </div>
         </>
     )
