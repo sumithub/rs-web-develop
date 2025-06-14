@@ -14,15 +14,16 @@ import Image from "next/image";
 import Switch from "../../../components/form/Switch";
 import ColorInputForm from "../../form/ColorInputForm";
 import Slider from "react-slick";
+import ProgressBar from "@ramonak/react-progress-bar";
 
-export default function Carousel({ title, onClose, OnSave, id, onNext }) {
+export default function AddReview({ heading = "", onClose, OnSave, id, onNext }) {
     const { register, setValue, handleSubmit, clearErrors, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
-    const normalizedTitle = title?.toLowerCase();
     const [clickSwitch, setClickSwitch] = useState(false)
     const [clickSwitch1, setClickSwitch1] = useState(false)
-    const [show, setShow] = useState(false)
+    const title = heading.replaceAll("_", "")
+    const normalizedTitle = title?.toLowerCase();
 
     useEffect(() => {
         setValue("colorScheme", "#0396FF");
@@ -63,48 +64,38 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
         return ["carousel", "floatingbuttonwidget"].includes(normalizedTitle);
     }
 
-    var settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false
-    };
 
-    const sliderRef = useRef(null)
 
-    return (
-        <Model onClose={onClose} title={title} modalClass="w-[80%]!" >
-            {open &&
-                <CodePreviewBox
-                    onClose={() => {
-                        setOpen(false)
-                    }}
-                    onSave={() => {
-                        setOpen(true)
-                    }} />
-            }
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid grid-cols-2 gap-5">
-                    <div>
-                        {/* Design Section */}
-                        {hasDesignSection() && (
-                            <div className="p-[15px] bg-dark rounded-[15px]">
-                                <h2 className="text-lg font-semibold">Design</h2>
-                                <div className="grid grid-cols-3 items-center gap-[15px] pt-2.5">
+    return (<Model onClose={onClose} title={heading.replaceAll("_", " ")} modalClass="w-[80%]!" >
+        {open &&
+            <CodePreviewBox
+                onClose={() => {
+                    setOpen(false)
+                }}
+                onSave={() => {
+                    setOpen(true)
+                }} />
+        }
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid grid-cols-2 gap-5">
+                <div>
+                    {/* Design Section */}
+                    {hasDesignSection() && (
+                        <div className="p-[15px] bg-dark rounded-[15px]">
+                            <h2 className="text-lg font-semibold">Design</h2>
+                            <div className="grid grid-cols-3 items-center gap-[15px] pt-2.5">
 
-                                    <ColorInputForm label="Color Scheme"
-                                        isRequired={normalizedTitle.includes("carousel") ? true : false}
-                                        class_="mt-0!"
-                                        labelClass="pb-2.5! inline-block"
-                                        bgClass="border border-primary3/10 bg-white!"
-                                        formProps={{ ...register("colorScheme", { required: normalizedTitle.includes("carousel") ? true : false }) }}
-                                        errors={errors}
-                                        setValue={setValue}
+                                <ColorInputForm label="Color Scheme"
+                                    isRequired={normalizedTitle.includes("carousel") ? true : false}
+                                    class_="mt-0!"
+                                    labelClass="pb-2.5! inline-block"
+                                    bgClass="border border-primary3/10 bg-white!"
+                                    formProps={{ ...register("colorScheme", { required: normalizedTitle.includes("carousel") ? true : false }) }}
+                                    errors={errors}
+                                    setValue={setValue}
 
-                                    />
-                                    {/* <InputForm
+                                />
+                                {/* <InputForm
                                         label="Color Scheme"
                                         isRequired={normalizedTitle.includes("carousel") ? true : false}
                                         placeholder="Select Color"
@@ -115,315 +106,459 @@ export default function Carousel({ title, onClose, OnSave, id, onNext }) {
                                         class_="mt-0!"
                                     />  */}
 
-                                    <SelectForm
-                                        label="Font Family"
-                                        isRequired={normalizedTitle.includes("carousel") ? true : false}
-                                        defaultOption="Select"
-                                        formProps={{ ...register("fontFamily", { required: normalizedTitle.includes("carousel") ? true : false }) }}
-                                        errors={errors}
-                                        class_="mt-0!"
-                                        labelClass="pb-2.5 inline-block mb-0!"
-                                        selectClass_="border border-primary3/10 py-3.5! px-2.5! bg-white! text-sm!"
-                                        clearErrors={clearErrors} >
-                                        <option value="inter">Inter</option>
-                                        <option value="arial">Arial</option>
-                                        <option value="helvetica">Helvetica</option>
-                                    </SelectForm>
+                                <SelectForm
+                                    label="Font Family"
+                                    isRequired={normalizedTitle.includes("carousel") ? true : false}
+                                    defaultOption="Select"
+                                    formProps={{ ...register("fontFamily", { required: normalizedTitle.includes("carousel") ? true : false }) }}
+                                    errors={errors}
+                                    class_="mt-0!"
+                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    selectClass_="border border-primary3/10 py-3.5! px-2.5! bg-white! text-sm!"
+                                    clearErrors={clearErrors} >
+                                    <option value="inter">Inter</option>
+                                    <option value="arial">Arial</option>
+                                    <option value="helvetica">Helvetica</option>
+                                </SelectForm>
+                                <InputForm
+                                    label="Border Radius"
+                                    isRequired={normalizedTitle.includes("carousel") ? true : false}
+                                    placeholder="Enter Border Radius"
+                                    formProps={{ ...register("borderRadius", { required: normalizedTitle.includes("carousel") ? true : false }) }}
+                                    errors={errors}
+                                    inputClass="border border-primary3/10 py-[13.2px]! px-2.5! bg-white!"
+                                    labelClass="pb-2.5! inline-block"
+                                    class_="mt-0!"
+                                />
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Content Section */}
+                    {hasContentSection() && (
+                        <div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                            <h2 className="text-lg font-semibold">Content</h2>
+                            <div className="grid grid-cols-2 gap-5">
+                                {/* Number of Reviews - for carousel and gridwidget */}
+                                {(normalizedTitle === "carousel" || normalizedTitle === "gridwidget") && (
                                     <InputForm
-                                        label="Border Radius"
-                                        isRequired={normalizedTitle.includes("carousel") ? true : false}
-                                        placeholder="Enter Border Radius"
-                                        formProps={{ ...register("borderRadius", { required: normalizedTitle.includes("carousel") ? true : false }) }}
+                                        label="Number of Reviews"
+                                        isRequired={true}
+                                        placeholder="Enter review count"
+                                        formProps={{
+                                            ...register("numberOfReviews", {
+                                                required: true,
+                                                min: { value: 1, message: "Must be at least 1" },
+                                                max: { value: 100, message: "Cannot exceed 100" }
+                                            })
+                                        }}
                                         errors={errors}
-                                        inputClass="border border-primary3/10 py-[13.2px]! px-2.5! bg-white!"
+                                        inputClass="border border-primary3/10 p-2.5! bg-white!"
+                                        labelClass="pb-2.5! inline-block"
+                                        class_="mt-0!"
+                                        type="number"
+                                    />
+                                )}
+
+                                {/* Button Label - for floating button widget */}
+                                {normalizedTitle === "floatingbuttonwidget" && (
+                                    <InputForm
+                                        label="Button Label"
+                                        isRequired={true}
+                                        placeholder="Enter button text"
+                                        formProps={{ ...register("buttonLabel", { required: true }) }}
+                                        errors={errors}
+                                        inputClass="border border-primary3/10 p-2.5! bg-white!"
                                         labelClass="pb-2.5! inline-block"
                                         class_="mt-0!"
                                     />
-                                </div>
+                                )}
+
+                                {/* Minimum Rating */}
+                                {(normalizedTitle !== "testimonialwidget") && <SelectForm
+                                    label="Minimum Rating"
+                                    isRequired={true}
+                                    defaultOption="Select"
+                                    formProps={{ ...register("minimumRating", { required: true }) }}
+                                    errors={errors}
+                                    class_="mt-0!"
+                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                    clearErrors={clearErrors} >
+                                    <option value="1">Rating 1</option>
+                                    <option value="2">Rating 2</option>
+                                    <option value="3">Rating 3</option>
+                                    <option value="4">Rating 4</option>
+                                    <option value="5">Rating 5</option>
+                                </SelectForm>}
                             </div>
-                        )}
 
-                        {/* Content Section */}
-                        {hasContentSection() && (
-                            <div className="p-[15px] bg-dark rounded-[15px] mt-5">
-                                <h2 className="text-lg font-semibold">Content</h2>
-                                <div className="grid grid-cols-2 gap-5">
-                                    {/* Number of Reviews - for carousel and gridwidget */}
-                                    {(normalizedTitle === "carousel" || normalizedTitle === "gridwidget") && (
-                                        <InputForm
-                                            label="Number of Reviews"
-                                            isRequired={true}
-                                            placeholder="Enter review count"
-                                            formProps={{
-                                                ...register("numberOfReviews", {
-                                                    required: true,
-                                                    min: { value: 1, message: "Must be at least 1" },
-                                                    max: { value: 100, message: "Cannot exceed 100" }
-                                                })
-                                            }}
-                                            errors={errors}
-                                            inputClass="border border-primary3/10 p-2.5! bg-white!"
-                                            labelClass="pb-2.5! inline-block"
-                                            class_="mt-0!"
-                                            type="number"
-                                        />
-                                    )}
+                            {/* Sorting */}
+                            {normalizedTitle !== "testimonialwidget" && <div className="mt-2.5">
+                                <SelectForm
+                                    label="Sorting"
+                                    isRequired={true}
+                                    defaultOption="Select"
+                                    formProps={{ ...register("sorting", { required: true }) }}
+                                    errors={errors}
+                                    class_="mt-0!"
+                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                    clearErrors={clearErrors} >
+                                    <option value="latest">Latest</option>
+                                    <option value="highest-rated">Highest Rated</option>
+                                </SelectForm>
+                            </div>}
 
-                                    {/* Button Label - for floating button widget */}
-                                    {normalizedTitle === "floatingbuttonwidget" && (
-                                        <InputForm
-                                            label="Button Label"
-                                            isRequired={true}
-                                            placeholder="Enter button text"
-                                            formProps={{ ...register("buttonLabel", { required: true }) }}
-                                            errors={errors}
-                                            inputClass="border border-primary3/10 p-2.5! bg-white!"
-                                            labelClass="pb-2.5! inline-block"
-                                            class_="mt-0!"
-                                        />
-                                    )}
-
-                                    {/* Minimum Rating */}
-                                    {(normalizedTitle !== "testimonialwidget") && <SelectForm
-                                        label="Minimum Rating"
-                                        isRequired={true}
-                                        defaultOption="Select"
-                                        formProps={{ ...register("minimumRating", { required: true }) }}
-                                        errors={errors}
-                                        class_="mt-0!"
-                                        labelClass="pb-2.5 inline-block mb-0!"
-                                        selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
-                                        clearErrors={clearErrors} >
-                                        <option value="1">Rating 1</option>
-                                        <option value="2">Rating 2</option>
-                                        <option value="3">Rating 3</option>
-                                        <option value="4">Rating 4</option>
-                                        <option value="5">Rating 5</option>
-                                    </SelectForm>}
-                                </div>
-
-                                {/* Sorting */}
-                                {normalizedTitle !== "testimonialwidget" && <div className="mt-2.5">
-                                    <SelectForm
-                                        label="Sorting"
-                                        isRequired={true}
-                                        defaultOption="Select"
-                                        formProps={{ ...register("sorting", { required: true }) }}
-                                        errors={errors}
-                                        class_="mt-0!"
-                                        labelClass="pb-2.5 inline-block mb-0!"
-                                        selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
-                                        clearErrors={clearErrors} >
-                                        <option value="latest">Latest</option>
-                                        <option value="highest-rated">Highest Rated</option>
-                                    </SelectForm>
-                                </div>}
-
-                                {(normalizedTitle === "testimonialwidget") && <div className="grid grid-cols-2 gap-5">
-                                    <SelectForm
-                                        label="Sorting"
-                                        isRequired={true}
-                                        defaultOption="Select"
-                                        formProps={{ ...register("sorting", { required: true }) }}
-                                        errors={errors}
-                                        class_="mt-0!"
-                                        labelClass="pb-2.5 inline-block mb-0!"
-                                        selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
-                                        clearErrors={clearErrors} >
-                                        <option value="latest">Latest</option>
-                                        <option value="highest-rated">Highest Rated</option>
-                                    </SelectForm>
-                                    <SelectForm
-                                        label="Minimum Rating"
-                                        isRequired={false}
-                                        defaultOption="Select"
-                                        formProps={{ ...register("minimumRating", { required: false }) }}
-                                        errors={errors}
-                                        class_="mt-0!"
-                                        labelClass="pb-2.5 inline-block mb-0!"
-                                        selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
-                                        clearErrors={clearErrors} >
-                                        <option value="1">Rating 1</option>
-                                        <option value="2">Rating 2</option>
-                                        <option value="3">Rating 3</option>
-                                        <option value="4">Rating 4</option>
-                                        <option value="5">Rating 5</option>
-                                    </SelectForm>
-                                </div>}
-                                {/* Show Reviewer Details */}
-                                <div className="pt-2.5 flex gap-[15px] items-center">
-                                    <h2 className="text-base font-medium">Show Reviewer Details</h2>
-                                    <Switch
-                                        checked={clickSwitch1}
-                                        onChange={() => setClickSwitch1(prev => !prev)}
-                                    />
-                                </div>
-                            </div>
-                        )}
-
-                        <div className="p-[15px] bg-dark rounded-[15px] mt-5">
-                            <h2 className="text-lg font-semibold">Review Sources</h2>
-                            <h3 className="text-base pt-2.5 font-medium">Select up to 3</h3>
-                            <div className="flex gap-[15px] items-center pt-[15px]">
-                                <div className="flex gap-2.5 items-center">
-                                    <CheckboxForm
-                                        formProps={{ ...register("google") }} errors={errors}
-                                    />
-                                    <div>Google</div>
-                                </div>
-                                <div className="flex gap-2.5 items-center">
-                                    <CheckboxForm
-                                        formProps={{ ...register("trustpilot") }} errors={errors}
-                                    />
-                                    <div>Trustpilot</div>
-                                </div>
-                                <div className="flex gap-2.5 items-center">
-                                    <CheckboxForm
-                                        formProps={{ ...register("yelp") }} errors={errors}
-                                    />
-                                    <div>Yelp</div>
-                                </div>
+                            {(normalizedTitle === "testimonialwidget") && <div className="grid grid-cols-2 gap-5">
+                                <SelectForm
+                                    label="Sorting"
+                                    isRequired={true}
+                                    defaultOption="Select"
+                                    formProps={{ ...register("sorting", { required: true }) }}
+                                    errors={errors}
+                                    class_="mt-0!"
+                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                    clearErrors={clearErrors} >
+                                    <option value="latest">Latest</option>
+                                    <option value="highest-rated">Highest Rated</option>
+                                </SelectForm>
+                                <SelectForm
+                                    label="Minimum Rating"
+                                    isRequired={false}
+                                    defaultOption="Select"
+                                    formProps={{ ...register("minimumRating", { required: false }) }}
+                                    errors={errors}
+                                    class_="mt-0!"
+                                    labelClass="pb-2.5 inline-block mb-0!"
+                                    selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                    clearErrors={clearErrors} >
+                                    <option value="1">Rating 1</option>
+                                    <option value="2">Rating 2</option>
+                                    <option value="3">Rating 3</option>
+                                    <option value="4">Rating 4</option>
+                                    <option value="5">Rating 5</option>
+                                </SelectForm>
+                            </div>}
+                            {/* Show Reviewer Details */}
+                            <div className="pt-2.5 flex gap-[15px] items-center">
+                                <h2 className="text-base font-medium">Show Reviewer Details</h2>
+                                <Switch
+                                    checked={clickSwitch1}
+                                    onChange={() => setClickSwitch1(prev => !prev)}
+                                />
                             </div>
                         </div>
+                    )}
 
-                        {/* Behavior Section */}
-                        {hasBehaviorSection() && (
-                            <div className="p-[15px] bg-dark rounded-[15px] mt-5">
-                                <h2 className="text-lg font-semibold">Behavior</h2>
-                                <div className="">
-                                    {normalizedTitle === "carousel" && (
-                                        <SelectForm
-                                            label="Transition Effect"
-                                            isRequired={true}
-                                            defaultOption="Select"
-                                            formProps={{ ...register("transitionEffect", { required: true }) }}
-                                            errors={errors}
-                                            class_="mt-0!"
-                                            labelClass="pb-2.5 inline-block mb-0!"
-                                            selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
-                                            clearErrors={clearErrors} >
-                                            <option value="slide">Slide</option>
-                                            <option value="fade">Fade</option>
-                                        </SelectForm>
-                                    )}
-
-                                    {normalizedTitle === "floatingbuttonwidget" && (
-                                        <SelectForm
-                                            label="Popup Delay"
-                                            isRequired={true}
-                                            defaultOption="Select"
-                                            formProps={{ ...register("popupDelay", { required: true }) }}
-                                            errors={errors}
-                                            class_="mt-0!"
-                                            labelClass="pb-2.5 inline-block mb-0!"
-                                            selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
-                                            clearErrors={clearErrors} >
-                                            <option value="0">Immediate</option>
-                                            <option value="1000">1 Second</option>
-                                            <option value="3000">3 Seconds</option>
-                                            <option value="5000">5 Seconds</option>
-                                        </SelectForm>
-                                    )}
-                                </div>
-                                <div className="flex gap-[15px] items-center mt-2.5">
-                                    <h2 className="text-base font-medium">
-                                        {normalizedTitle === "carousel" ? "Auto-Scroll" : "Auto-Trigger Popup"}
-                                    </h2>
-                                    <Switch
-                                        checked={clickSwitch}
-                                        onChange={() => setClickSwitch(prev => !prev)} />
-                                </div>
+                    <div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                        <h2 className="text-lg font-semibold">Review Sources</h2>
+                        <h3 className="text-base pt-2.5 font-medium">Select up to 3</h3>
+                        <div className="flex gap-[15px] items-center pt-[15px]">
+                            <div className="flex gap-2.5 items-center">
+                                <CheckboxForm
+                                    formProps={{ ...register("google") }} errors={errors}
+                                />
+                                <div>Google</div>
                             </div>
-                        )}
-
-                        {/* Action Buttons */}
-                        <div className="mt-[30px] grid grid-cols-2 gap-5">
-                            <SecondaryButton
-                                title="Save"
-                                type="submit"
-                                disabled={sending}
-                                class_="bg-white! text-primary!"
-                            />
-                            <SecondaryButton
-                                title="Next"
-                                onClick={() => onNext?.(title)}
-                                type="button"
-                            />
+                            <div className="flex gap-2.5 items-center">
+                                <CheckboxForm
+                                    formProps={{ ...register("trustpilot") }} errors={errors}
+                                />
+                                <div>Trustpilot</div>
+                            </div>
+                            <div className="flex gap-2.5 items-center">
+                                <CheckboxForm
+                                    formProps={{ ...register("yelp") }} errors={errors}
+                                />
+                                <div>Yelp</div>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Widget Preview Section */}
-                    <div className="shadow-sm rounded-[15px]">
-                        <div className="bg-primary/10 rounded-t-[15px] px-5 py-[18px] flex gap-2.5 items-center">
-                            <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={22} height={22} />
-                            <h2 className="text-lg font-semibold">Widget Preview</h2>
-                        </div>
-                        <div className="p-5 h-[90%]">
-                            {/* Different preview content based on widget type */}
-                            {normalizedTitle === "starbadgewidget" ? (
-                                <div className="border border-border2 rounded-[10px] p-5">
-                                    <div className="text-center">
-                                        <h2 className="text-2xl font-bold mb-2">4.5</h2>
-                                        <div className="flex justify-center mb-2">
-                                            {[1, 2, 3, 4, 5].map(star => (
-                                                <Image key={star} unoptimized={true} src="/images/star.svg" alt="star.svg" width={21} height={21} />
-                                            ))}
-                                        </div>
-                                        <p className="text-sm text-text3">Based on 150 reviews</p>
-                                    </div>
-                                    <div className="mt-5">
-                                        <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className="border border-border2 rounded-[10px] p-5 flex flex-col justify-between h-full">
-                                    <div>
-                                        <Slider {...settings} ref={sliderRef}>
-                                            {[1, 2].map((_, i) => (
-                                                <div key={i}>
-                                                    <div>
-                                                        <div className="text-center">
-                                                            <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
-                                                            <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
-                                                        </div>
-                                                        <div className="flex justify-between items-center gap-2.5">
+                    {/* Behavior Section */}
+                    {hasBehaviorSection() && (
+                        <div className="p-[15px] bg-dark rounded-[15px] mt-5">
+                            <h2 className="text-lg font-semibold">Behavior</h2>
+                            <div className="">
+                                {normalizedTitle === "carousel" && (
+                                    <SelectForm
+                                        label="Transition Effect"
+                                        isRequired={true}
+                                        defaultOption="Select"
+                                        formProps={{ ...register("transitionEffect", { required: true }) }}
+                                        errors={errors}
+                                        class_="mt-0!"
+                                        labelClass="pb-2.5 inline-block mb-0!"
+                                        selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                        clearErrors={clearErrors} >
+                                        <option value="slide">Slide</option>
+                                        <option value="fade">Fade</option>
+                                    </SelectForm>
+                                )}
 
-                                                            <button type="button" onClick={() => sliderRef.current.slickPrev()}>
-                                                                <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
-                                                            </button>
-                                                            <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
-
-                                                            <button type="button" onClick={() => sliderRef.current.slickNext()}>
-                                                                <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} />
-                                                            </button>
-                                                        </div>
-                                                        <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s<br /> {show && <>
-                                                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                            Read More
-                                                        </>}
-                                                            <span onClick={() => { setShow(!show) }} className="cursor-pointer font-medium text-primary"> Read {show ? "Less" : "More"}</span></p>
-                                                        <div className="my-10 flex justify-center">
-                                                            <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary bg-dark" type="button">
-                                                                <span>
-                                                                    <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
-                                                                </span>
-                                                                Verified On Google
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>))}
-                                        </Slider>
-                                    </div>
-                                    <div className="">
-                                        <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
-                                    </div>
-                                </div>
-                            )}
+                                {normalizedTitle === "floatingbuttonwidget" && (
+                                    <SelectForm
+                                        label="Popup Delay"
+                                        isRequired={true}
+                                        defaultOption="Select"
+                                        formProps={{ ...register("popupDelay", { required: true }) }}
+                                        errors={errors}
+                                        class_="mt-0!"
+                                        labelClass="pb-2.5 inline-block mb-0!"
+                                        selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
+                                        clearErrors={clearErrors} >
+                                        <option value="0">Immediate</option>
+                                        <option value="1000">1 Second</option>
+                                        <option value="3000">3 Seconds</option>
+                                        <option value="5000">5 Seconds</option>
+                                    </SelectForm>
+                                )}
+                            </div>
+                            <div className="flex gap-[15px] items-center mt-2.5">
+                                <h2 className="text-base font-medium">
+                                    {normalizedTitle === "carousel" ? "Auto-Scroll" : "Auto-Trigger Popup"}
+                                </h2>
+                                <Switch
+                                    checked={clickSwitch}
+                                    onChange={() => setClickSwitch(prev => !prev)} />
+                            </div>
                         </div>
+                    )}
+
+                    {/* Action Buttons */}
+                    <div className="mt-[30px] grid grid-cols-2 gap-5">
+                        <SecondaryButton
+                            title="Save"
+                            type="submit"
+                            disabled={sending}
+                            class_="bg-white! text-primary!"
+                        />
+                        <SecondaryButton
+                            title="Next"
+                            onClick={() => onNext?.(title)}
+                            type="button"
+                        />
                     </div>
                 </div>
-            </form>
-        </Model>
+
+                {/* Widget Preview Section */}
+                <div className="shadow-sm rounded-[15px]">
+                    <div className="bg-primary/10 rounded-t-[15px] px-5 py-[18px] flex gap-2.5 items-center">
+                        <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={22} height={22} />
+                        <h2 className="text-lg font-semibold">Widget Preview</h2>
+                    </div>
+                    <div className="p-5 h-[90%]">
+                        {normalizedTitle === "carousel" ? <Carousel setOpen={setOpen} /> : (
+                            normalizedTitle === "starbadgewidget" ? <StarBadgeWidget setOpen={setOpen} /> : <FloatingButtonWidget setOpen={setOpen} />
+                        )}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </Model>
     )
 }
 
+
+
+const FloatingButtonWidget = ({ setOpen }) => {
+    return <div className="border border-border2 rounded-[10px] p-5">
+        <div className="flex justify-between items-start">
+            <div className="flex gap-[15px]">
+                <Image src="/images/john-die2.png" alt="john-die2" width={71} height={71} className="" />
+                <div>
+                    <h2 className="text-xl font-medium">John Die</h2>
+                    <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
+                    <div className="flex gap-[5px]">
+                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={21} height={21} />
+                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={21} height={21} />
+                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={21} height={21} />
+                        <Image unoptimized={true} src="/images/star.svg" alt="star" width={21} height={21} />
+                        <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={21} height={21} />
+                    </div>
+                </div>
+            </div>
+            <button className="border border-primary p-2.5 rounded-lg bg-dark">
+                <span>
+                    <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
+                </span>
+            </button>
+        </div>
+        <p className="text-xs pt-[15px] capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br />
+            <span className="font-medium text-primary">Read More</span></p>
+        <div className="mt-20">
+            <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
+        </div>
+    </div>
+}
+
+const StarBadgeWidget = ({ setOpen }) => {
+    return <div className="border border-border2 rounded-[10px] p-5">
+        <div className="">
+            <div>
+                <div className="text-secondary text-xl font-medium mb-[15px]">Star Rating Badge</div>
+                <div className="grid grid-cols-[0.8fr_auto_2fr] gap-5">
+                    <div className="text-end">
+                        {/* <div className="text-xs font-semibold">Total</div> */}
+                        <div className="text-[46px] text-end font-semibold">4.5</div>
+                        <div className="flex gap-2.5 pt-[5px] justify-end">
+                            <div className="flex items-center gap-1">
+                                <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                <Image src="/images/star.svg" alt="star" height={14} width={14} unoptimized={true} />
+                                <Image src="/images/star2.svg" alt="star2" height={14} width={14} unoptimized={true} />
+                            </div>
+                            <h2 className="text-sm text-primary font-semibold">&#40;200&#41;</h2>
+                        </div>
+                        <div className="pt-[5px]">
+                            <h2 className="text-text3 text-sm">Food 4.5</h2>
+                            <h2 className="text-text3 text-sm py-[5px]">Ambience 3.7</h2>
+                            <h2 className="text-text3 text-sm">Service 4.2</h2>
+                        </div>
+                    </div>
+                    <hr className="border border-border2 h-full" />
+                    <div>
+                        <div className="flex gap-10 items-center justify-between">
+                            <div className="flex gap-[5px]">
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                            </div>
+                            <div className="grid grid-cols-[0.9fr_auto] gap-2 w-full items-center justify-between">
+                                <ProgressBar completed={50} bgColor="#FFC107" height="8px" width="180px"
+                                    isLabelVisible={false} borderRadius="12px"
+                                />
+                                <div className="text-xs font-semibold">250</div>
+                            </div>
+                        </div>
+                        <div className="flex gap-10 items-center justify-between mt-5">
+                            <div className="flex gap-[5px]">
+                                <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                            </div>
+                            <div className="grid grid-cols-[0.9fr_auto] gap-2 w-full items-center justify-between">
+                                <ProgressBar completed={40} bgColor="#FFC107" height="8px" width="180px"
+                                    isLabelVisible={false} borderRadius="12px"
+                                />
+                                <div className="text-xs font-semibold">200</div>
+                            </div>
+                        </div>
+                        <div className="flex gap-10 items-center justify-between mt-5">
+                            <div className="flex gap-[5px]">
+                                <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                            </div>
+                            <div className="grid grid-cols-[0.9fr_auto] gap-2 w-full items-center justify-between">
+                                <ProgressBar completed={60} bgColor="#FFC107" height="8px" width="180px"
+                                    isLabelVisible={false} borderRadius="12px"
+                                />
+                                <div className="text-xs font-semibold">500</div>
+                            </div>
+                        </div>
+                        <div className="flex gap-10 items-center justify-between mt-5">
+                            <div className="flex gap-[5px]">
+                                <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                            </div>
+                            <div className="grid grid-cols-[0.9fr_auto] gap-2 w-full items-center justify-between">
+                                <ProgressBar completed={15} bgColor="#FFC107" height="8px" width="180px"
+                                    isLabelVisible={false} borderRadius="12px"
+                                />
+                                <div className="text-xs font-semibold">10</div>
+                            </div>
+                        </div>
+                        <div className="flex gap-10 items-center justify-between mt-5">
+                            <div className="flex gap-[5px]">
+                                <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star2.svg" alt="star2" width={14} height={14} />
+                                <Image unoptimized={true} src="/images/star.svg" alt="star" width={14} height={14} />
+                            </div>
+                            <div className="grid grid-cols-[0.9fr_auto] gap-2 w-full items-center justify-between">
+                                <ProgressBar completed={5} bgColor="#FFC107" height="8px" width="180px"
+                                    isLabelVisible={false} borderRadius="12px"
+                                />
+                                <div className="text-xs font-semibold">05</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="mt-[30px]">
+            <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
+        </div>
+    </div>
+}
+
+const Carousel = ({ setOpen }) => {
+    const [show, setShow] = useState(false)
+    var settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false
+    };
+
+    const sliderRef = useRef(null)
+    return (<div className="border border-border2 rounded-[10px] p-5 flex flex-col justify-between h-full">
+        <div>
+            <Slider {...settings} ref={sliderRef}>
+                {[1, 2].map((_, i) => (
+                    <div key={i}>
+                        <div>
+                            <div className="text-center">
+                                <Image src="/images/john-die.png" alt="john-die" width={46} height={46} className="mx-auto" />
+                                <h2 className="pt-[15px] pb-2.5 text-base font-medium">John Die</h2>
+                            </div>
+                            <div className="flex justify-between items-center gap-2.5">
+
+                                <button type="button" onClick={() => sliderRef.current.slickPrev()}>
+                                    <Image unoptimized={true} src="/images/arrow-left.svg" alt="arrow-left" width={24} height={24} className="" />
+                                </button>
+                                <h3 className="text-text3 text-xs font-medium">Aug 25, 2025</h3>
+
+                                <button type="button" onClick={() => sliderRef.current.slickNext()}>
+                                    <Image unoptimized={true} src="/images/arrow-right2.svg" alt="arrow-right2" width={24} height={24} />
+                                </button>
+                            </div>
+                            <p className="text-center text-xs capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s<br /> {show && <>
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                Read More
+                            </>}
+                                <span onClick={() => { setShow(!show) }} className="cursor-pointer font-medium text-primary"> Read {show ? "Less" : "More"}</span></p>
+                            <div className="my-10 flex justify-center">
+                                <button className="text-xs font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-primary bg-dark" type="button">
+                                    <span>
+                                        <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
+                                    </span>
+                                    Verified On Google
+                                </button>
+                            </div>
+                        </div>
+                    </div>))}
+            </Slider>
+        </div>
+        <div className="">
+            <SecondaryButton title="Get Code" onClick={() => { setOpen(true) }} type="button" />
+        </div>
+    </div>
+    )
+}
