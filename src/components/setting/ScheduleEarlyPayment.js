@@ -77,11 +77,11 @@ export default function ScheduleEarlyPayment({ onClose, id }) {
                     placeholder="" />
 
                 <div className="grid grid-cols-2 gap-4 mt-4">
-                    <CancelButton title="schedule for later" onClick={() => {
+                    <CancelButton title="schedule for later" class_="text-lg!" onClick={() => {
                         toast.success("Scheduled Successfully")
                         onClose()
                     }} />
-                    <SecondaryButton title="pay now" type="submit" disabled={sending} />
+                    <SecondaryButton title="pay now" type="submit" class_="text-lg!" disabled={sending} />
                 </div>
             </form>
         </Model >

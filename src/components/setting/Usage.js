@@ -79,7 +79,7 @@ export default function Usage() {
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
-            <SecondaryButton title="View Detailed Report" class_="sm:w-1/5 text-xs! mt-5" mainClass="text-end" />
+            <SecondaryButton title="View Detailed Report" class_="sm:w-1/5 text-xs! py-2.5! mt-5" mainClass="text-end" />
         </>
     )
 }
