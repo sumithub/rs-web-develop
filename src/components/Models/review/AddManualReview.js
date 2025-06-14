@@ -103,8 +103,8 @@ export default function AddManualReview({ onClose, onSave, id }) {
                     </div>
 
                     <div className="grid grid-cols-2 gap-3 mt-5">
-                        <CancelButton title="Cancel" onClick={onClose} />
-                        <SecondaryButton title="Add Review" type="submit" disabled={sending} />
+                        <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
+                        <SecondaryButton title="Add Review" type="submit" disabled={sending} class_="text-lg!" />
                     </div>
                 </div>
             </form>

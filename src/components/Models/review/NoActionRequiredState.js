@@ -21,9 +21,9 @@ export default function NoActionRequiredState({ onClose, onSave }) {
                 </div>
 
                 <div className="grid grid-cols-3 gap-3 mt-4">
-                    <CancelButton title="copy reply" />
-                    <SecondaryButton title="share" />
-                    <SecondaryButton title="mark as responded" />
+                    <CancelButton title="copy reply" class_="text-lg!" />
+                    <SecondaryButton title="share" class_="text-lg!" />
+                    <SecondaryButton title="mark as responded" class_="text-lg!" />
                 </div>
             </div>
         </Model>

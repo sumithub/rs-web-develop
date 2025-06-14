@@ -68,9 +68,10 @@ export default function RequestUpdate({ onClose, onSave }) {
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-3 mt-10">
-                                <CancelButton title="cancel" onClick={onClose} />
+                                <CancelButton title="cancel" onClick={onClose} class_="text-lg!" />
                                 <SecondaryButton
                                     title="Request update"
+                                    class_="text-lg!"
                                     type="submit"
                                     disabled={sending}
                                 />
