@@ -1,6 +1,6 @@
 "use client"
 import AdminLayout from "../../../components/AdminLayout";
-import Usage from '../../../components/setting/Usage'
+import PaymentInvoices from '../../../components/setting/PaymentInvoices'
 import Link from "next/link";
 
 export default function MyUsageSummary() {
@@ -15,15 +15,15 @@ export default function MyUsageSummary() {
                         <h2 className="text-sm py-3 px-5 rounded-[10px]">My Subscription Details</h2>
                     </Link>
                     <Link href="/setting/my-usage-summary" className="inline-block">
-                        <h2 className="text-sm font-semibold bg-primary text-white py-3 px-5 rounded-[10px]">My Usage Summary</h2>
+                        <h2 className="text-sm py-3 px-5 rounded-[10px]">My Usage Summary</h2>
                     </Link>
                     <Link href="/setting/payment-invoices" className="inline-block">
-                        <h2 className="text-sm py-3 px-5 rounded-[10px]">Payment & Invoices</h2>
+                        <h2 className="text-sm font-semibold bg-primary text-white py-3 px-5 rounded-[10px]">Payment & Invoices</h2>
                     </Link>
                 </div>
                 <hr className="border border-border2 h-auto" />
                 <div>
-                    <Usage />
+                    <PaymentInvoices />
                 </div>
             </div>
         </AdminLayout>
