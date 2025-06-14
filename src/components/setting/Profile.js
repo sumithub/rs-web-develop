@@ -107,9 +107,9 @@ export default function Profile({ id }) {
                                 setValue={setValue}
                             />
                         </div>
-                        <div className="grid grid-cols-2 gap-5 pt-[25px]">
-                            <CancelButton title=" Cancel Changes" />
-                            <SecondaryButton title="Save Changes" type="submit" disabled={sending} />
+                        <div className="grid grid-cols-2 gap-5 pt-6">
+                            <CancelButton title=" Cancel Changes" class_="text-lg!" />
+                            <SecondaryButton title="Save Changes" type="submit" disabled={sending} class_="text-lg!" />
                         </div>
                     </div>
                 </form>
@@ -173,9 +173,10 @@ export default function Profile({ id }) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-5 pt-[25px] pb-8">
-                    <CancelButton title="Delete Account" />
+                    <CancelButton title="Delete Account" class_="text-lg!" />
                     <SecondaryButton
                         title="Update Password"
+                        class_="text-lg!"
                         type="submit"
                         disabled={sending}
                     />

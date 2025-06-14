@@ -31,9 +31,9 @@ export default function DeleteNotification({ onClose, title = "Notification" }) 
             <DeleteTag title={`Delete ${title}`} question="Confirmation prompt before deletion." />
 
             <div className="grid grid-cols-2 gap-3 mt-5">
-                <CancelButton title="No" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
+                <CancelButton title="No" class_="border-danger2! text-lg! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
                 />
-                <SecondaryButton title=" Yes, Delete" type="submit" disabled={sending} />
+                <SecondaryButton title=" Yes, Delete" type="submit" disabled={sending} class_="text-lg!" />
             </div>
         </form>
     </Model >

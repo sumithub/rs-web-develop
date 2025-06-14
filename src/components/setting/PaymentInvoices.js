@@ -124,9 +124,9 @@ export default function PaymentInvoices() {
                 <div className="font-semibold">Visa **** 1234</div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mt-4">
-                <CancelButton title="Cancel upcoming payment" onClick={() => { setOpen(true) }} />
-                <SecondaryButton title="update payment method" />
+            <div className="grid grid-cols-2 gap-4 mt-5">
+                <CancelButton title="Cancel upcoming payment" class_="text-lg! bg-danger/10! text-danger!" onClick={() => { setOpen(true) }} />
+                <SecondaryButton title="update payment method" class_="text-lg!" />
             </div>
 
             <div className="font-semibold text-lg capitalize mt-4">

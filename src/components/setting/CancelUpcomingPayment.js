@@ -71,8 +71,8 @@ export default function CancelUpcomingPayment({ onClose, id }) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mt-4">
-                    <CancelButton title="Cancel payment" onClick={onClose} />
-                    <SecondaryButton title="keep payment" type="submit" disabled={sending} />
+                    <CancelButton title="Cancel payment" onClick={onClose} class_="text-lg!" />
+                    <SecondaryButton title="keep payment" type="submit" disabled={sending} class_="text-lg!" />
                 </div>
             </form>
         </Model >

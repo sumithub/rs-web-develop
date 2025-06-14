@@ -273,8 +273,8 @@ function CreateClientRule({ onClose, id }) {
                 </div>
             </div>)}
             <div className="grid grid-cols-2 gap-3 mt-[30px]">
-                <CancelButton title="Cancel" onClick={onClose} />
-                <SecondaryButton title={type === "newReview" || type === "flaggedReview" || type === "reviewResponseReceived" || type === "reviewDeleted" || type === "positiveReview" || type === "negativeReview" ? "Save Rule" : "Save"} type="submit" disabled={sending} />
+                <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
+                <SecondaryButton title={type === "newReview" || type === "flaggedReview" || type === "reviewResponseReceived" || type === "reviewDeleted" || type === "positiveReview" || type === "negativeReview" ? "Save Rule" : "Save"} type="submit" disabled={sending} class_="text-lg!" />
             </div>
         </form>
     </Model >

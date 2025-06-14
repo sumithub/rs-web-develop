@@ -85,8 +85,8 @@ export default function UpgradePlan({ onClose, id }) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mt-6">
-                    <CancelButton title="Cancel" onClick={onClose} />
-                    <SecondaryButton title="Upgrade Now" type="submit" disabled={sending} />
+                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
+                    <SecondaryButton title="Upgrade Now" type="submit" disabled={sending} class_="text-lg!" />
                 </div>
             </form>
         </Model>

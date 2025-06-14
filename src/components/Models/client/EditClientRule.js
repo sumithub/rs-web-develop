@@ -103,8 +103,8 @@ function EditClientRule({ onClose, id }) {
             </div>
 
             <div className="grid grid-cols-2 gap-3 mt-[30px]">
-                <CancelButton title="Cancel" onClick={onClose} />
-                <SecondaryButton title="Update" type="submit" disabled={sending} />
+                <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
+                <SecondaryButton title="Update" type="submit" disabled={sending} class_="text-lg!" />
             </div>
         </form>
     </Model>
