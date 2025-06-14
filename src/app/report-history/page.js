@@ -160,11 +160,11 @@ export default function ReportHistory() {
                                     <Status status={e.status} />
                                 </div>
                                 <div className='grid grid-cols-2 gap-[15px] mt-5'>
-                                    <button onClick={() => { setOpenDownload(true) }} className='text-primary text-base py-2.5 font-medium bg-primary/10 rounded-lg flex justify-center items-center gap-2'>
+                                    <button onClick={() => { setOpenDownload(true) }} className='text-primary text-base py-2 font-medium bg-primary/10 rounded-lg flex justify-center items-center gap-2'>
                                         <Image unoptimized={true} src="/images/download2.svg" alt='download2' width={16} height={16} />
                                         Download
                                     </button>
-                                    <button onClick={() => { setOpenEmail(true) }} className='text-danger text-base py-2.5 font-medium bg-danger/10 rounded-lg flex justify-center items-center gap-2'>
+                                    <button onClick={() => { setOpenEmail(true) }} className='text-danger text-base py-2 font-medium bg-danger/10 rounded-lg flex justify-center items-center gap-2'>
                                         <Image unoptimized={true} src="/images/refresh2.svg" alt='refresh2' width={16} height={16} />
                                         Resend E-mail
                                     </button>

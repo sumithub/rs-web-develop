@@ -951,12 +951,12 @@ export default function Detail({ }) {
                 </div>
 
                 <div className="grid grid-cols-3 gap-3 mt-7">
-                    {isAllPending ? <CancelButton title="Cancel" type="button"
+                    {isAllPending ? <CancelButton title="Cancel" class_="text-lg!" type="button"
                         onClick={() => { router.push("/manage-campaigns") }}
-                        disabled={sending} /> : <SecondaryButton title="Save as Draft" type="submit"
+                        disabled={sending} /> : <SecondaryButton title="Save as Draft" class_="text-lg!" type="submit"
                             disabled={sending} />}
-                    <SecondaryButton disabled={isAllPending} title="Schedule for Later" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => { setOpenSchedule(true) }} type="button" />
-                    <CancelButton title="Launch Now" disabled={sending || isAllPending} type="submit" />
+                    <SecondaryButton disabled={isAllPending} title="Schedule for Later" class_="bg-white! hover:bg-primary! text-primary! text-lg! hover:text-white!" onClick={() => { setOpenSchedule(true) }} type="button" />
+                    <CancelButton title="Launch Now" disabled={sending || isAllPending} type="submit" class_="text-lg!" />
                 </div>
             </form>
         </div>
