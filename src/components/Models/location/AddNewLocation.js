@@ -79,8 +79,8 @@ function AddNewLocation({ onClose, id, onSave, type = "addNewLocation" }) {
             </div>
 
             <div className="grid grid-cols-2 gap-3 mt-5">
-                <CancelButton title="Cancel" onClick={onClose} />
-                <SecondaryButton title={type === "addNewLocation" ? "Save Location" : "Update Location"} type="submit" disabled={sending} />
+                <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
+                <SecondaryButton title={type === "addNewLocation" ? "Save Location" : "Update Location"} type="submit" disabled={sending} class_="text-lg!" />
             </div>
         </form>
 

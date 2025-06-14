@@ -20,8 +20,8 @@ export default function SubscriptionCancelled({ onClose }) {
                     toast.success("Downloaded Successfully")
                     onClose()
                 }}
-                    class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
-                <SecondaryButton title="back to dashboard" onClick={onClose} />
+                    class_="bg-white! hover:bg-primary! text-lg! text-primary! hover:text-white!" />
+                <SecondaryButton title="back to dashboard" class_="text-lg!" onClick={onClose} />
             </div>
         </Model >
     )

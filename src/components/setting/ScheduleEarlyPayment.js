@@ -7,9 +7,10 @@ import axios from "axios";
 import { getError } from "../../../helper";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import InputForm from "../form/InputForm";
 
-export default function CancelUpcomingPayment({ onClose, id }) {
-    const { handleSubmit } = useForm();
+export default function ScheduleEarlyPayment({ onClose, id }) {
+    const { handleSubmit, register, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
 
 
@@ -24,7 +25,7 @@ export default function CancelUpcomingPayment({ onClose, id }) {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Kept Successfully")
+            toast.success("Paid Successfully")
             setSending(false)
             onClose()
         } catch (error) {
@@ -34,11 +35,11 @@ export default function CancelUpcomingPayment({ onClose, id }) {
     }
 
     return (
-        <Model onClose={onClose} title="Cancel Upcoming Payment" modalClass="w-[50%]!">
+        <Model onClose={onClose} title="Schedule Early Payment" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mt-4 flex gap-2.5 items-center">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
-                    <h2 className="text-sm font-medium capitalize">Are you sure you want to cancel the upcoming payment for your subscription?</h2>
+                    <h2 className="text-sm font-medium capitalize"> pay now to avoid automatic charge</h2>
                 </div>
 
                 <div className="flex justify-between mt-3">
@@ -49,7 +50,7 @@ export default function CancelUpcomingPayment({ onClose, id }) {
                 <hr className="border border-border2 my-3" />
 
                 <div className="flex justify-between">
-                    <div className="text-text3 capitalize text-base">due date</div>
+                    <div className="text-text3 capitalize text-base">scheduled date</div>
                     <div className="font-semibold">Apr 1, 2025</div>
                 </div>
 
@@ -60,19 +61,27 @@ export default function CancelUpcomingPayment({ onClose, id }) {
                     <div className="font-semibold">Visa **** 1234</div>
                 </div>
 
-                <div className="mt-4 flex gap-2.5 items-center">
-                    <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
-                    <h2 className="text-sm font-medium capitalize">This Will Not Cancel Your Subscription.</h2>
+                <hr className="border border-border2 my-3" />
+
+                <div className="flex justify-between">
+                    <div className="text-text3 capitalize text-base">cardholder name</div>
+                    <div className="font-semibold">John Deo</div>
                 </div>
 
-                <div className="mt-4 flex gap-2.5 items-center">
-                    <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
-                    <h2 className="text-sm font-medium capitalize">You May lose Access If Payment Is Missed.</h2>
-                </div>
+                <InputForm
+                    label="Choose New Payment Date"
+                    isRequired={true}
+                    inputType="date"
+                    formProps={{ ...register("date", { required: true }) }}
+                    errors={errors}
+                    placeholder="" />
 
                 <div className="grid grid-cols-2 gap-4 mt-4">
-                    <CancelButton title="Cancel payment" onClick={onClose} class_="text-lg!" />
-                    <SecondaryButton title="keep payment" type="submit" disabled={sending} class_="text-lg!" />
+                    <CancelButton title="schedule for later" onClick={() => {
+                        toast.success("Scheduled Successfully")
+                        onClose()
+                    }} />
+                    <SecondaryButton title="pay now" type="submit" disabled={sending} />
                 </div>
             </form>
         </Model >

@@ -95,10 +95,10 @@ export default function CancelSubscription({ onClose, id }) {
                 </div>
 
                 <div className="grid grid-cols-4 gap-4 mt-6">
-                    <CancelButton title="Cancel Subscription" onClick={onClose} class_="text-red-100" />
-                    <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
-                    <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
-                    <SecondaryButton title="keep subscription" type="submit" disabled={sending} />
+                    <CancelButton title="Cancel Subscription" onClick={onClose} class_="text-red-100 text-lg!" />
+                    <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-lg! text-primary! hover:text-white!" />
+                    <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-lg! text-primary! hover:text-white!" />
+                    <SecondaryButton title="keep subscription" type="submit" disabled={sending} class_="text-lg!" />
                 </div>
             </form>
         </Model >

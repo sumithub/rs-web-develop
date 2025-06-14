@@ -68,8 +68,8 @@ export default function AuditLogDetails({ onClose }) {
                 </div>
             </div>
 
-            <div className="mt-6">
-                <SecondaryButton title="Back To List" onClick={onClose} />
+            <div className="mt-[30px]">
+                <SecondaryButton title="Back To List" onClick={onClose} class_="text-lg!" />
             </div>
         </Model>
     )
