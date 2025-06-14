@@ -53,7 +53,7 @@ export default function Status({ status = "" }) {
     else if (s === "no") {
         bgClass = "bg-[#DC35451A] text-danger"
     }
-    else if (s === "dismiss") {
+    else if (s === "dismiss" || s === "suspend") {
         bgClass = "bg-[#DC35451A] text-danger"
     } else {
         bgClass = "bg-gray-100 text-gray-500";
