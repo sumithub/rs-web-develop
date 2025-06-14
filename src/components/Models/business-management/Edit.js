@@ -1,25 +1,24 @@
 "use client"
 import { useEffect, useState } from "react"
-import AdminLayout from "../../../../components/AdminLayout"
-import Search from "../../../../components/form/Search"
-import DateRange from "../../../../components/form/DateRangePicker"
-import CustomSelectBox from "../../../../components/form/CustomSelectBox"
-import SecondaryButton from "../../../../components/common/SecondaryButton"
-import TableOrder from "../../../../components/TableOrder"
-import Checkbox from "../../../../components/form/Checkbox"
-import Status from "../../../../components/Status"
 import Image from "next/image"
-import PaginationDemo from "../../../../components/Pagination"
-import SuspendUser from "../../../../components/Models/business-management/SuspendUser"
-import AddNewClient from "../../../../components/Models/business-management/AddNewClient"
-import Edit from "../../../../components/Models/business-management/Edit"
 import axios from "axios"
 import { toast } from "react-toastify"
-import { getError } from "../../../../../helper"
-import Loading from "../../../../components/Loading"
-import { customerTagging } from "../../../../constent/constArray"
+import { customerTagging } from "../../../constent/constArray"
+import { getError } from "../../../../helper"
+import SuspendUser from "./SuspendUser"
+import AddNewClient from "./AddNewClient"
+import Search from "../../form/Search"
+import DateRange from "../../form/DateRangePicker"
+import CustomSelectBox from "../../form/CustomSelectBox"
+import TableOrder from "../../TableOrder"
+import SecondaryButton from "../../common/SecondaryButton"
+import Checkbox from "../../form/Checkbox"
+import Status from "../../Status"
+import PaginationDemo from "../../Pagination"
+import Loading from "../../Loading"
+import Model from "../Model"
 
-export default function ClientsManagement() {
+export default function Edit({ onClose }) {
     const [sortBy, setSortBy] = useState(false)
     const [openUser, setOpenUser] = useState(false)
     const [openClient, setOpenClient] = useState(false)
@@ -29,7 +28,6 @@ export default function ClientsManagement() {
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
-    const [openEdit, setOpenEdit] = useState(false)
 
     useEffect(() => {
         getCustomerTag()
@@ -60,7 +58,7 @@ export default function ClientsManagement() {
         { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
     ]
     return (
-        <AdminLayout>
+        <Model onClose={onClose} title="Edit" modalClass="w-[80%]!">
             {openUser &&
                 <SuspendUser
                     onClose={() => {
@@ -80,17 +78,6 @@ export default function ClientsManagement() {
 
                     onSave={() => {
                         setOpenClient(true)
-                    }} />
-            }
-
-            {openEdit &&
-                <Edit
-                    onClose={() => {
-                        setOpenEdit(false)
-                    }}
-
-                    onSave={() => {
-                        setOpenEdit(true)
                     }} />
             }
             <div className='flex items-center justify-between'>
@@ -181,7 +168,7 @@ export default function ClientsManagement() {
                                         <button className='cursor-pointer'>
                                             <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
                                         </button>
-                                        <button className='cursor-pointer' onClick={() => { setOpenEdit(true) }}>
+                                        <button className='cursor-pointer'>
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
                                     </div>
@@ -193,6 +180,6 @@ export default function ClientsManagement() {
                     <PaginationDemo />
                 </div>}
             </div>
-        </AdminLayout>
+        </Model>
     )
 }
