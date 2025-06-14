@@ -7,13 +7,22 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import InputForm from "../../form/InputForm";
 import SelectForm from "../../form/SelectForm";
+import axios from "axios";
 
-export default function AddNewClient({ onClose }) {
+export default function AddNewClient({ onClose, id }) {
     const { handleSubmit, register, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
 
-    const onSubmit = async () => {
+    const onSubmit = async (data) => {
         try {
+            setSending(true)
+            let res = null
+
+            if (id !== "add") {
+                res = await axios.put("/api", data)
+            } else {
+                res = await axios.post("/api", data)
+            }
             toast.success("Saved Successfully")
             setSending(false)
             onClose()
