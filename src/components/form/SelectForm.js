@@ -16,8 +16,8 @@ export default function SelectForm({infoIcon, isRequired, label, children, formP
                                   unoptimized={true}
                                   src={infoIcon}
                                   alt="info"
-                                  width={14}
-                                  height={14}
+                                  width={12}
+                                  height={12}
                               /></button>}</label>}
      
         <div className="relative">
