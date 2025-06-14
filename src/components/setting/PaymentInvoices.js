@@ -13,6 +13,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import PaginationDemo from "../Pagination";
 import CancelUpcomingPayment from './CancelUpcomingPayment'
+import UpdatePaymentMethod from './UpdatePaymentMethod'
 
 export default function PaymentInvoices() {
     const [date, setDate] = useState("")
@@ -22,6 +23,7 @@ export default function PaymentInvoices() {
     const [sortBy, setSortBy] = useState("")
     const [type, setType] = useState("")
     const [open, setOpen] = useState(false)
+    const [openUpdate, setOpenUpdate] = useState(false)
 
     useEffect(() => {
         getTemplate()
@@ -52,6 +54,11 @@ export default function PaymentInvoices() {
             {open &&
                 <CancelUpcomingPayment
                     onClose={() => { setOpen(false) }}
+                />}
+
+            {openUpdate &&
+                <UpdatePaymentMethod id="update"
+                    onClose={() => { setOpenUpdate(false) }}
                 />}
             <div className="flex justify-between items-center gap-11">
                 <div className="w-1/2">
@@ -172,13 +179,12 @@ export default function PaymentInvoices() {
                             <td><Status status={e.status} /></td>
                             <td>
                                 <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'
-                                        onClick={() => { setOpenEdit("edit") }}>
+                                    <button className='cursor-pointer'>
                                         <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
                                     </button>
 
                                     <button className='cursor-pointer'
-                                        onClick={() => { setOpenDelete("delete") }}>
+                                        onClick={() => { toast.success("Downloaded") }}>
                                         <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
                                     </button>
                                 </div>
