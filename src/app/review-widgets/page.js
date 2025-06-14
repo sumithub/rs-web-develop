@@ -7,6 +7,7 @@ import SecondaryButton from "../../components/common/SecondaryButton";
 import Carousel from "../../components/Models/review/Carousel";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Slider from "react-slick";
+import Loading from "../../components/Loading";
 
 export default function ReviewWidgets() {
     const [openCarousel, setOpenCarousel] = useState(false)
@@ -15,6 +16,8 @@ export default function ReviewWidgets() {
     // const [openTestimonial, setOpenTestimonial] = useState(false)
     // const [openGrid, setOpenGrid] = useState(false)
     const [modalTitle, setModalTitle] = useState("");
+    const [loading, setLoading] = useState(false)
+
 
     // var settings = {
     //     dots: false,
@@ -99,6 +102,7 @@ export default function ReviewWidgets() {
                 }} />
         }
         <main className="grid grid-cols-3 gap-5">
+            {loading ? <Loading /> : <>
             <div>
                 <Slider {...settings}>
                     {[1, 2].map((_, i) => (
@@ -325,6 +329,7 @@ export default function ReviewWidgets() {
                     onClick={() => handleOpenModal("StarBadgeWidget")}
                 />
             </div>
+              </>}
         </main>
     </AdminLayout>
     )

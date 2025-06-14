@@ -61,7 +61,7 @@ export default function ReviewDetails({ onClose, onSave }) {
                                         <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
                                         <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
                                         <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
-                                        <Image src="/images/star.svg" alt="rating" height={18} width={18} unoptimized={true} />
+                                        <Image src="/images/rating-star.svg" alt="rating" height={18} width={18} unoptimized={true} />
                                     </div>
                                     <h2 className="text-sm">Jun 11,2024</h2>
                                 </div>

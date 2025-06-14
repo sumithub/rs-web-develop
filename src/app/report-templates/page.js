@@ -9,31 +9,41 @@ import StackedReviewChart from '../../components/charts/StackedReviewChart'
 import DashboardLineChart from '../../components/charts/DashboardLineChart'
 import axios from "axios";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { getError } from "../../../helper";
 import CheckboxForm from '../../components/form/CheckboxForm'
 import DateRangeForm from "../../components/form/DateRangeForm"
+import Loading from '../../components/Loading'
+
 export default function ReportTemplates() {
     const [clickSwitch, setClickSwitch] = useState(false)
     const [sending, setSending] = useState(false)
-
+    const [loading, setLoading] = useState(true)
     const { register, handleSubmit, setValue, clearErrors, formState: { errors }, watch } = useForm();
 
-    const onSubmit = async (data) => {
-        try {
-            setSending(true);
-            await axios.post("/api", data);
-            toast.success("Report Generated Successfully");
-        } catch (error) {
-            toast.error(getError(error));
-        } finally {
-            setSending(false);
-        }
-    };
+     useEffect(() => {
+    setTimeout(() => setLoading(false), 1500);
+  }, []);
+
+   const onSubmit = async (data) => {
+    try {
+        setSending(true);
+        await axios.post("/api", data);
+        toast.success("Report Generated Successfully");
+    } catch (error) {
+        toast.error(getError(error));
+    } finally {
+        setSending(false);
+    }
+};
+
 
     return <AdminLayout noCard={true}>
+ {loading ? (
+       <Loading/>
+      ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-2 gap-5">
                 <div className='shadow-[0px_0px_22px_0px_#0000000F] p-5 rounded-[10px] bg-white'>
@@ -230,5 +240,6 @@ export default function ReportTemplates() {
                 </div>
             </div>
         </form>
+      )}
     </AdminLayout>
 }
