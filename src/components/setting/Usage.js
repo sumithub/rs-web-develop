@@ -1,9 +1,34 @@
 "use client"
-
+import { useEffect, useState } from "react"
 import SecondaryButton from "../common/SecondaryButton"
 import TableOrder from "../TableOrder"
+import Loading from "../Loading"
+import axios from "axios"
+import { templates } from "../../constent/constArray"
+import { toast } from "react-toastify"
+import { getError } from "../../../helper"
 
 export default function Usage() {
+    const [sortBy, setSortBy] = useState("")
+    const [loading, setLoading] = useState(true);
+    const [list, setList] = useState([])
+
+    useEffect(() => {
+        getTemplate()
+    }, [sortBy])
+
+    const getTemplate = async () => {
+        try {
+            setLoading(true)
+            const res = await axios.get("/api")
+            setList(res.data || templates)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
 
     return (
         <>
@@ -21,11 +46,17 @@ export default function Usage() {
             </div>
 
             <div className='table-class mt-[15px]'>
-                <table className="w-full">
+                {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
                     <thead>
                         <tr>
-                            <th><TableOrder title="Features" /></th>
-                            <th><TableOrder title="Used" /></th>
+                            <th><TableOrder title="Features"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="features" /></th>
+                            <th><TableOrder title="Used"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="used" /></th>
                             <th>Limit</th>
                         </tr>
                     </thead>
@@ -46,7 +77,7 @@ export default function Usage() {
                             <td>100</td>
                         </tr>
                     </tbody>
-                </table>
+                </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                 <SecondaryButton title="View Detailed Report" class_="sm:w-1/5 m-4" mainClass="text-end" />
             </div>
         </>

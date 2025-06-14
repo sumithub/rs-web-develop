@@ -5,7 +5,14 @@ export default function Status({ status = "" }) {
     let s = status.toLowerCase()
     let bgClass = ""
 
-    if (s === "new" || s === "completed" || s === "active" || s === "vip" || s === "connected" || s === "sent") {
+    if (
+        s === "new" ||
+        s === "completed" ||
+        s === "active" ||
+        s === "vip" ||
+        s === "connected" ||
+        s === "sent" ||
+        s === "paid") {
         bgClass = "bg-[#28A7451A] text-success";
     } else if (s === "responded" || s === "draft" || s === "priority") {
         bgClass = "bg-[#0396FF1A] text-primary";
