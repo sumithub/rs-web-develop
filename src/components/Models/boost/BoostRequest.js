@@ -29,7 +29,7 @@ export default function BoostRequest({ onClose, onSave, id }) {
     const [emailTemplate, setEmailTemplate] = useState({ name: "Nature Template", preview: "Lorem Ipsum.." })
     const [smsTemplate, setSmsTemplate] = useState({ name: "Nature Template", preview: "Lorem Ipsum.." })
     const [showDetails, setShowDetails] = useState(false)
-    const { register,setValue,watch,clearErrors,handleSubmit,formState: { errors },} = useForm();
+    const { register, setValue, watch, clearErrors, handleSubmit, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
     const [openTemplate, setOpenTemplate] = useState(false)
     const [openPreview, setOpenPreview] = useState(false)
@@ -311,7 +311,7 @@ export default function BoostRequest({ onClose, onSave, id }) {
                                         </button>
                                         <Link href="/create-email-template"
                                             // onClick={() => setOpenEdit(true)}
-                                             className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
+                                            className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
                                             <Image unoptimized={true} src="/images/edit2.svg" alt="edit2" width={12} height={12} />
                                             Edit
                                         </Link>
@@ -455,7 +455,7 @@ export default function BoostRequest({ onClose, onSave, id }) {
                         )}
 
                         <button
-                            className="border border-primary bg-primary py-3 mt-[30px] hover:text-primary hover:bg-white w-full rounded-[10px] text-lg font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="border border-primary bg-primary mt-[30px] hover:text-primary hover:bg-white w-full rounded-[10px] text-lg! py-2 font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed"
                             type="submit"
                             disabled={sending || !select || validCustomers === 0}
                         >
