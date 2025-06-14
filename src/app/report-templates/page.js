@@ -146,7 +146,7 @@ export default function ReportTemplates() {
                         title="Generate Report"
                         type='submit'
                         disabled={sending}
-                        class_="py-[15px]! text-lg! font-medium! mt-[30px]!"
+                        class_="text-lg! font-medium! mt-[30px]!"
                     />
                 </div>
                 <div className='shadow-[0px_0px_22px_0px_#0000000F] rounded-[10px] p-5 bg-white'>

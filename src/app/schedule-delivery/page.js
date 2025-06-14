@@ -135,7 +135,7 @@ export default function ScheduleDelivery() {
                             <SecondaryButton
                                 title="Search Users"
                                 type='button'
-                                class_="py-[15px]! px-5! text-sm! font-normal!"
+                                class_="py-3.5! px-5! font-normal!"
                                 onClick={() => { }}
                             />
                         </div>
@@ -180,8 +180,8 @@ export default function ScheduleDelivery() {
 
                     />
                     <div className='grid grid-cols-2 gap-5 mt-[30px]'>
-                        <SecondaryButton onClick={() => { setOpen(true) }} title="send test email" type='button' class_='bg-white! text-primary!' />
-                        <SecondaryButton title="Save Settings" disabled={sending} type='submit' />
+                        <SecondaryButton onClick={() => { setOpen(true) }} title="send test email" type='button' class_='bg-white! text-primary! text-lg!' />
+                        <SecondaryButton title="Save Settings" disabled={sending} type='submit' class_='text-lg!' />
                     </div>
                 </form>
             </div>
@@ -216,7 +216,7 @@ export default function ScheduleDelivery() {
                             </div>
                         </div>
 
-                        <SecondaryButton title="View Full Report" type='button' class_='text-sm! w-auto! font-normal! my-5!' />
+                        <SecondaryButton title="View Full Report" type='button' class_='text-xs! w-auto! font-normal! my-5!' />
                         <div className='text-sm capitalize'>
                             <div className='text-xs'><span className="font-black text-2xl leading-0">.</span> The coffee Spot Team</div>
                             <div className='text-xs'>[Unsubscribe]</div>

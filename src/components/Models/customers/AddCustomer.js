@@ -150,8 +150,8 @@ function AddCustomer({ onClose, id, onSave }) {
             </div>
 
             {type === "manually" && <div className="grid grid-cols-2 gap-3 mt-5">
-                <CancelButton title="Cancel" onClick={onClose} />
-                <SecondaryButton title="Apply Changes" type="submit" disabled={sending} />
+                <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
+                <SecondaryButton title="Apply Changes" type="submit" disabled={sending} class_="text-lg!" />
             </div>}
         </form>
 

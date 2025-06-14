@@ -128,8 +128,8 @@ function CampaignsTemplates() {
                     {/* <SecondaryButton title="Create New Template" class_='text-xs!'
                         onClick={() => { setOpen(true) }}/>   */}
 
-                    <SecondaryButton title="Create New Template" class_='text-xs!'
-                       isLink={true} link='/create-email-template'/>
+                    <SecondaryButton title="Create New Template" class_='text-xs! py-2.5!'
+                        isLink={true} link='/create-email-template' />
                 </div>
             </div>
 
@@ -162,14 +162,15 @@ function CampaignsTemplates() {
                             <td>{e.type}</td>
                             <td><div className='line-clamp-1'>{e.subject}</div></td>
                             <td>{formatDateTime(e.lastUpdated)}</td>
-                            <td><Dropdown 
-                            options={TEMPLATE_ACTIONS}
-                            editLink="/create-email-template"
-                             // editLink={`/edit-email-template/${template.id}`}
-                             onClickOption={(action) => {
-                           if (action !== 'edit') {
-                           setOpenModal(action);
-                               }}}/></td>
+                            <td><Dropdown
+                                options={TEMPLATE_ACTIONS}
+                                editLink="/create-email-template"
+                                // editLink={`/edit-email-template/${template.id}`}
+                                onClickOption={(action) => {
+                                    if (action !== 'edit') {
+                                        setOpenModal(action);
+                                    }
+                                }} /></td>
                         </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}

@@ -16,7 +16,9 @@ export default function MySubscriptionDetails() {
                     <Link href="/setting/my-usage-summary" className="inline-block">
                         <h2 className="text-sm py-3 px-5 rounded-[10px]">My Usage Summary</h2>
                     </Link>
-                    <h2 className="text-sm py-3 px-5 rounded-[10px]">Payment & Invoices</h2>
+                    <Link href="/setting/payment-invoices" className="inline-block">
+                        <h2 className="text-sm py-3 px-5 rounded-[10px]">Payment & Invoices</h2>
+                    </Link>
                 </div>
                 <hr className="border border-border2 h-auto" />
                 <div>
