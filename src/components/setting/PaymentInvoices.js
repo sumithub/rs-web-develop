@@ -12,6 +12,7 @@ import { templates } from "../../constent/constArray";
 import axios from "axios";
 import { toast } from "react-toastify";
 import PaginationDemo from "../Pagination";
+import CancelUpcomingPayment from './CancelUpcomingPayment'
 
 export default function PaymentInvoices() {
     const [date, setDate] = useState("")
@@ -20,6 +21,7 @@ export default function PaymentInvoices() {
     const [loading, setLoading] = useState(true);
     const [sortBy, setSortBy] = useState("")
     const [type, setType] = useState("")
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         getTemplate()
@@ -47,6 +49,10 @@ export default function PaymentInvoices() {
     ]
     return (
         <>
+            {open &&
+                <CancelUpcomingPayment
+                    onClose={() => { setOpen(false) }}
+                />}
             <div className="flex justify-between items-center gap-11">
                 <div className="w-1/2">
                     <Search
@@ -119,7 +125,7 @@ export default function PaymentInvoices() {
             </div>
 
             <div className="grid grid-cols-2 gap-4 mt-4">
-                <CancelButton title="Cancel upcoming payment" />
+                <CancelButton title="Cancel upcoming payment" onClick={() => { setOpen(true) }} />
                 <SecondaryButton title="update payment method" />
             </div>
 

@@ -12,7 +12,7 @@ import Image from "next/image";
 
 
 export default function CancelSubscription({ onClose, id }) {
-    const { register, setValue, handleSubmit, clearErrors, formState: { errors }, watch } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
