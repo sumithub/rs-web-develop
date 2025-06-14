@@ -130,27 +130,27 @@ function Customers() {
 
             <div>
                 <div className="flex justify-between items-center mb-3 w-full">
-                 <div className='bg-white shadow-sm rounded-[10px] overflow-hidden'>
-    <div className='flex items-center gap-10 px-[20px]'>                         
-        <div 
-            onClick={() => {
-                setView("customer")
-            }} 
-            className={`${view === "customer" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
-        >
-            All Customers
-        </div>                          
+                    <div className='bg-white shadow-sm rounded-[10px] overflow-hidden'>
+                        <div className='flex items-center gap-10 px-[20px]'>
+                            <div
+                                onClick={() => {
+                                    setView("customer")
+                                }}
+                                className={`${view === "customer" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                            >
+                                All Customers
+                            </div>
 
-        <div 
-            onClick={() => {
-                setView("history")
-            }} 
-            className={`${view === "history" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
-        >
-            Customer List History
-        </div>                     
-    </div>
-</div>
+                            <div
+                                onClick={() => {
+                                    setView("history")
+                                }}
+                                className={`${view === "history" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                            >
+                                Customer List History
+                            </div>
+                        </div>
+                    </div>
                     {view === "customer" && <div className='grid grid-cols-[1.5fr_0.8fr_0.5fr_0.8fr] gap-3 items-center justify-end'>
                         <Search
                             mainClass='w-full!'
