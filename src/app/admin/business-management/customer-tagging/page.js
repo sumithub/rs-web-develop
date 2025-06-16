@@ -33,23 +33,25 @@ export default function CustomerTagging() {
     ]
     return (
         <AdminLayout>
-            <div className='flex items-center justify-between gap-10 px-5 bg-white shadow-sm rounded-[10px] w-[23%]'>
-                <div
-                    onClick={() => {
-                        setView("manage")
-                    }}
-                    className={`${view === "manage" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
-                >
-                    Manage Tags
-                </div>
+            <div className="inline-block">
+                <div className='flex items-center gap-10 px-5 bg-white shadow-sm rounded-[10px]'>
+                    <div
+                        onClick={() => {
+                            setView("manage")
+                        }}
+                        className={`${view === "manage" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                    >
+                        Manage Tags
+                    </div>
 
-                <div
-                    onClick={() => {
-                        setView("analytics")
-                    }}
-                    className={`${view === "analytics" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
-                >
-                    Analytics
+                    <div
+                        onClick={() => {
+                            setView("analytics")
+                        }}
+                        className={`${view === "analytics" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                    >
+                        Analytics
+                    </div>
                 </div>
             </div>
             {view === "manage" && <div>
