@@ -14,7 +14,7 @@ export default function Status({ status = "" }) {
         s === "sent" ||
         s === "paid") {
         bgClass = "bg-[#28A7451A] text-success";
-    } else if (s === "responded" || s === "draft" || s === "priority") {
+    } else if (s === "responded" || s === "draft" || s === "priority" || s === "activate") {
         bgClass = "bg-[#0396FF1A] text-primary";
     } else if (
         s === "pending invite" ||
