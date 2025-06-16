@@ -5,13 +5,12 @@ import TableOrder from "../../components/TableOrder";
 import Search from "../../components/form/Search";
 import CustomSelectBox from "../../components/form/CustomSelectBox";
 import Status from "../../components/Status"
-import Checkbox from "../../components/form/Checkbox";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { getError } from "../../../helper";
+import { formatDate, getError } from "../../../helper";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
-import { templates } from "../../constent/constArray";
+import { notificationPreferences} from "../../constent/constArray";
 import Image from "next/image";
 import EditNotificationPreferences from "../../components/Models/notification/EditNotificationPreference";
 import DeleteNotification from "../../components/Models/notification/DeleteNotification";
@@ -33,7 +32,7 @@ export default function NotificationManagement() {
         try {
             setLoading(true)
             const res = await axios.get("/api")
-            setList(res.data || templates)
+            setList(res.data || notificationPreferences)
             setLoading(false)
 
         } catch (error) {
@@ -41,18 +40,7 @@ export default function NotificationManagement() {
             setLoading(false)
         }
     }
-
-    const Projects = [
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "NO", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "No", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-        { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-    ]
+   
     return (<>
         <AdminLayout>
             {(openEdit === "edit") &&
@@ -82,7 +70,7 @@ export default function NotificationManagement() {
                 </div>
                 <div className="flex items-center gap-3">
                     <CustomSelectBox
-                        class_="mt-0!"
+                        class_="mt-0! w-32!"
                         defaultOption="Filter"
                         value={type}
                         onChange={(e) => {
@@ -98,7 +86,7 @@ export default function NotificationManagement() {
                 </div>
             </div>
             <div className='table-class mt-[15px]'>
-                {loading ? <Loading /> : (list?.length > 0 ? < table className='w-full' >
+                {loading ? <Loading /> : (list?.length > 0 ? < table className='w-full'>
                     <thead>
                         <tr>
                             <th><TableOrder title="ID"
@@ -129,7 +117,7 @@ export default function NotificationManagement() {
                         </tr>
                     </thead>
                     <tbody>
-                        {Projects.map((e, i) =>
+                        {list.map((e, i) =>
                             <tr key={i}>
                                 <td>{e.id}</td>
                                 <td>{e.name}</td>
@@ -138,7 +126,7 @@ export default function NotificationManagement() {
                                 <td>
                                     <Status status={e.enabled} />
                                 </td>
-                                <td>{e.date}</td>
+                                <td>{formatDate(e.date)}</td>
                                 <td>
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer'

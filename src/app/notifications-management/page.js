@@ -63,7 +63,7 @@ export default function NotificationManagement() {
                 </div>
                 <div className="flex items-center gap-3">
                     <CustomSelectBox
-                        class_="mt-0!"
+                        class_="mt-0! w-32!"
                         defaultOption="Filter"
                         value={type}
                         onChange={(e) => {

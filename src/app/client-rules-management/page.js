@@ -4,17 +4,18 @@ import TableOrder from '../../components/TableOrder'
 import PaginationDemo from '../../components/Pagination'
 import AdminLayout from '../../components/AdminLayout'
 import Search from '../../components/form/Search'
-import { templates } from '../../constent/constArray'
+import { clientRules } from '../../constent/constArray'
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { getError } from '../../../helper'
+import { formatDate, getError } from '../../../helper'
 import Loading from '../../components/Loading'
 import Status from '../../components/Status'
 import Image from 'next/image'
 import EditClientRule from "../../components/Models/client/EditClientRule"
 import DeleteClient from "../../components/Models/client/DeleteClient"
 import CreateClientRule from "../../components/Models/client/CreateClientRule"
+import SecondaryButton from '../../components/common/SecondaryButton'
 
 function ClientRulesManagement() {
     const [search, setSearch] = useState("")
@@ -34,7 +35,7 @@ function ClientRulesManagement() {
         try {
             setLoading(true)
             const res = await axios.get("/api")
-            setList(res.data || templates)
+            setList(res.data || clientRules)
             setLoading(false)
 
         } catch (error) {
@@ -42,18 +43,6 @@ function ClientRulesManagement() {
             setLoading(false)
         }
     }
-
-    const Projects = [
-        { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "inactive", date: "Mar 03, 2024", },
-        { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Alert", status: "Active", date: "Mar 03, 2024", },
-        { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "Active", date: "Mar 03, 2024", },
-        { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "inactive", date: "Mar 03, 2024", },
-        { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "Active", date: "Mar 03, 2024", },
-        { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Alert", status: "Active", date: "Mar 03, 2024", },
-        { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "inactive", date: "Mar 03, 2024", },
-        { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "Active", date: "Mar 03, 2024", },
-        { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "Active", date: "Mar 03, 2024", },
-    ]
 
     return (
         <AdminLayout >
@@ -90,7 +79,7 @@ function ClientRulesManagement() {
 
                 <div className="flex items-center gap-3">
                     <CustomSelectBox
-                        class_="mt-0!"
+                        class_="mt-0! w-32!"
                         defaultOption="Filter"
                         value={type}
                         onChange={(e) => {
@@ -100,8 +89,8 @@ function ClientRulesManagement() {
                         <option value="inactive">Inactive</option>
                     </CustomSelectBox>
 
-                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
-                        onClick={() => { setOpen(true) }}>Add New Role</button>
+                    <SecondaryButton title="Add New Role" class_='text-xs! font-normal!'
+                        onClick={() => { setOpen(true) }}/>
                 </div>
             </div>
 
@@ -141,8 +130,9 @@ function ClientRulesManagement() {
                             <th>Actions</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        {Projects.map((e, i) =>
+                        {list.map((e, i) =>
                             <tr key={i}>
                                 <td>{e.id}</td>
                                 <td>{e.name}</td>
@@ -155,7 +145,7 @@ function ClientRulesManagement() {
                                 <td>
                                     <Status status={e.status} />
                                 </td>
-                                <td>{e.date}</td>
+                                <td>{formatDate(e.date)}</td>
                                 <td>
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer'
@@ -172,10 +162,11 @@ function ClientRulesManagement() {
                             </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                {list?.length > 0 && <div>
+            </div>
+            
+              {list?.length > 0 && <div className='mt-8'>
                     <PaginationDemo />
                 </div>}
-            </div>
         </AdminLayout>
     )
 }
