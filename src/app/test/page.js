@@ -4,7 +4,6 @@ import AdminLayout from "../../components/AdminLayout";
 import ReviewResponseTemplates from "../../components/Models/review/ReviewResponseTemplates";
 import ReportTemplate from "../../components/Models/reports/ReportTemplate";
 import ScheduleEarlyPayment from "../../components/setting/ScheduleEarlyPayment";
-import 'react-range-slider-input/dist/style.css';
 
 export default function Test() {
     const [openResponse, setOpenResponse] = useState(false)

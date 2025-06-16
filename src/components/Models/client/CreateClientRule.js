@@ -15,7 +15,7 @@ import Image from "next/image"
 import StarRangeSlider from "../../StartRatingSlider"
 
 function CreateClientRule({ onClose, id }) {
-    const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
+    const { register, handleSubmit, clearErrors,setValue, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [type, setType] = useState("")
 
@@ -61,6 +61,14 @@ if (type === "positiveReview") {
     return <Model onClose={onClose} title={title} modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
+           {id && <InputForm label="Client Rule ID" placeholder="Enter client id" isRequired={false} class_="mt-0!"
+                    inputClass="border-primary/10"
+                    formProps={{ ...register("clientRuleId", { required: false }) }}
+                    errors={errors}
+                    setValue={setValue}
+
+                />}
+
                 <SelectForm label="Event Type"
                     selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
