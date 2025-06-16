@@ -39,15 +39,25 @@ function CreateClientRule({ onClose, id }) {
         }
     }
 
-    let title = "Create Client Rule"
+let title = !id ? "Create Client Rule" : "Edit Client Rule"
 
-    if (type === "positiveReview") {
-        title = "Positive Review"
-    } else if (type === "reviewResponseReceived") {
-        title = "Review Response Received"
-    } else if (type === "reviewDeleted") {
-        title = "Review Deleted"
-    }
+if (type === "positiveReview") {
+    title = !id ? "Create Positive Review" : "Edit Positive Review"
+} else if (type === "reviewResponseReceived") {
+    title = !id ? "Create Review Response" : "Edit Review Response"
+} else if (type === "reviewDeleted") {
+    title = !id ? "Create Review Deletion" : "Edit Review Deletion"
+}
+
+    // let title = "Create Client Rule"
+
+    // if (type === "positiveReview") {
+    //     title = "Positive Review"
+    // } else if (type === "reviewResponseReceived") {
+    //     title = "Review Response Received"
+    // } else if (type === "reviewDeleted") {
+    //     title = "Review Deleted"
+    // }
     return <Model onClose={onClose} title={title} modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
@@ -67,6 +77,7 @@ function CreateClientRule({ onClose, id }) {
                     <option value="reviewResponseReceived">Review Response Received</option>
                     <option value="reviewDeleted">Review Deleted</option>
                 </SelectForm>
+                
                 {!type && (<>
                     <InputForm label="Condition" placeholder="Enter condition" isRequired={true} errors={errors}
                         inputClass="border-primary/10"

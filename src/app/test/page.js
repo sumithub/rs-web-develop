@@ -4,9 +4,8 @@ import AdminLayout from "../../components/AdminLayout";
 import ReviewResponseTemplates from "../../components/Models/review/ReviewResponseTemplates";
 import ReportTemplate from "../../components/Models/reports/ReportTemplate";
 import ScheduleEarlyPayment from "../../components/setting/ScheduleEarlyPayment";
-import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';
-import StarRtaingSlider from "../../components/StartRatingSlider"
+
 export default function Test() {
     const [openResponse, setOpenResponse] = useState(false)
     const [openSave, setOpenSave] = useState(false)
@@ -47,9 +46,6 @@ export default function Test() {
         }
 
         <div className="flex flex-col gap-y-3">
-{/* <RangeSlider className="bg-[#F6F8FB] rounded" /> */}
-<StarRtaingSlider/>
-
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenResponse(true) }}>Review Response Templates
             </div>
 
