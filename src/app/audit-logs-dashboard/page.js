@@ -11,9 +11,10 @@ import axios from "axios";
 import { getError } from "../../../helper";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
-import { auditLogs, templates } from "../../constent/constArray";
-import DatePicker from "../../components/form/DatePicker";
+import { auditLogs } from "../../constent/constArray";
 import AuditLogDetails from '../../components/Models/audit/AuditLogDetails'
+import DateRange from "../../components/form/DateRangePicker";
+import SecondaryButton from "../../components/common/SecondaryButton";
 
 export default function AuditLogsDashboard() {
     const [date, setDate] = useState("")
@@ -60,16 +61,18 @@ export default function AuditLogsDashboard() {
                 </div>
                 <div className="flex gap-[15px]">
 
-                    <DatePicker
+<DateRange   onChange={(e) => { setDate(e) }}/>
+
+                    {/* <DatePicker
                         icon={true}
                         mainClass="mt-0!"
                         value={date}
                         dateFormat="dd/MM/yyyy"
                         onChange={(e) => setDate(e)}
-                    />
+                    /> */}
 
                     <CustomSelectBox
-                        class_="mt-0!"
+                        class_="mt-0! w-40!"
                         defaultOption="Select"
                         value={type}
                         onChange={(e) => {
@@ -93,8 +96,7 @@ export default function AuditLogsDashboard() {
                         <option value="action">Action</option>
                     </CustomSelectBox>
 
-                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50">
-                        Reset</button>
+<SecondaryButton title="Reset" class_="text-xs font-normal!"/>
                 </div>
             </div>
             <div className='table-class mt-[15px]'>
@@ -129,11 +131,17 @@ export default function AuditLogsDashboard() {
                         </tr>
                     </thead>
                     <tbody>
-                        {list.map((e, i) =>
-                            <tr key={i}>
+                        {list.map((e, index) =>
+                            <tr key={index}>
                                 <td>
                                     <div className="flex gap-2.5 items-center">
-                                        <Checkbox />
+                                        <Checkbox 
+                                          checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                        
+                                        />
                                         {e.id}
                                     </div>
                                 </td>
