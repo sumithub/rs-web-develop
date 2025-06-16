@@ -45,7 +45,6 @@ export default function Test() {
         }
 
         <div className="flex flex-col gap-y-3">
-
             <div className="text-primary text-xl cursor-pointer" onClick={() => { setOpenResponse(true) }}>Review Response Templates
             </div>
 

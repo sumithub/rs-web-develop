@@ -149,7 +149,7 @@ function ClientRulesManagement() {
                                 <td>
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer'
-                                            onClick={() => { setOpenEdit("edit") }}>
+                                            onClick={() => { setOpen (true) }}>
                                             <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
 
@@ -164,6 +164,7 @@ function ClientRulesManagement() {
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
             
+
               {list?.length > 0 && <div className='mt-8'>
                     <PaginationDemo />
                 </div>}

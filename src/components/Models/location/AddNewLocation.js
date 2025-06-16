@@ -38,8 +38,6 @@ function AddNewLocation({ onClose, id, onSave, type = "addNewLocation" }) {
     return <Model onClose={onClose} title={type === "addNewLocation" ? "Add New Location (Client)" : "Edit Location (Client)"} modalClass="w-1/2!" >
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <div>
-                    <div>
                         <div>
                             <InputForm label="Name" placeholder="Enter your name" isRequired={true}
                                 formProps={{ ...register("name", { required: true }) }}
@@ -74,16 +72,13 @@ function AddNewLocation({ onClose, id, onSave, type = "addNewLocation" }) {
                                 setValue={setValue}
                                 watch={watch} />
                         </div>
-                    </div>
-                </div>
             </div>
-
+                
             <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
                 <SecondaryButton title={type === "addNewLocation" ? "Save Location" : "Update Location"} type="submit" disabled={sending} class_="text-lg!" />
             </div>
         </form>
-
     </Model>
 }
 

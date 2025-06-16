@@ -14,7 +14,7 @@ const auditLogsDetail=[
 
     return (
         <Model onClose={onClose} title="Audit Log Details" modalClass="w-1/2!">
-         {auditLogsDetail.map((e, i) => (   <>
+         {auditLogsDetail.map((e, i) => (<div key={i}>
             <div className="flex justify-between">
                 <div className="text-text3 capitalize">{e.name}</div>
                 <div className="font-medium capitalize">{e.detail}</div>
@@ -23,7 +23,7 @@ const auditLogsDetail=[
               {i !== auditLogsDetail.length - 1 && (
              <hr className="my-4 border-t border-border-color" />
                 )}
-        </>))}
+        </div>))}
 
             <div className="mt-[30px]">
                 <SecondaryButton title="Back To List" onClick={onClose} class_="text-lg!" />

@@ -23,7 +23,6 @@ import ReviewDetails from "../../components/Models/review/ReviewDetails";
 import DeleteTemplate from "../../components/Models/review/DeleteTemplate";
 import DateRange from "../../components/form/DateRangePicker";
 import PaginationDemo from "../../components/Pagination";
-import ReviewNoData from "../../components/ReviewNoData"
 import SecondaryButton from "../../components/common/SecondaryButton";
 
 export default function Review() {

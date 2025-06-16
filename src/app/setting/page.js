@@ -7,7 +7,7 @@ export default function Setting() {
         <AdminLayout>
             <div className="grid grid-cols-[1.1fr_0fr_5fr] gap-[18px]">
                 <div className="flex flex-col gap-2.5">
-                    <Link href="/" className="inline-block">
+                    <Link href="/setting" className="inline-block">
                         <h2 className="text-sm font-semibold bg-primary text-white py-3 px-5 rounded-[10px]">My Profile</h2>
                     </Link>
                     <Link href="/setting/my-subscription-details" className="inline-block">
