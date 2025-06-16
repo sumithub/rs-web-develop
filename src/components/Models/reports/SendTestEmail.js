@@ -8,7 +8,7 @@ import CancelButton from "../../common/CancelButton"
 
 export default function SendTestEmail({ onClose }) {
     const [openUser, setOpenUser] = useState(false)
-    return <Model onClose={onClose} title="Send Test Email" modalClass="w-1/2!">
+    return <Model onClose={onClose} title="Send Test Email" modalClass="w-[40%]!">
 
         {openUser &&
             <UsersList
@@ -116,7 +116,7 @@ export default function SendTestEmail({ onClose }) {
                         </div>
                     </div>
 
-                    <SecondaryButton title="View Full Report" type='button' class_='text-sm! w-auto! px-2.5! py-2.5! font-normal! my-5!' />
+                    <SecondaryButton title="View Full Report" type='button' class_='text-xs! w-auto! font-normal! my-5!' />
                     <div className='text-sm capitalize'>
                         <div className='text-xs'><span className="font-black text-2xl leading-0">.</span> The coffee Spot Team</div>
                         <div className='text-xs'>[Unsubscribe]</div>
@@ -124,8 +124,8 @@ export default function SendTestEmail({ onClose }) {
                 </div>
             </div>
             <div className='grid grid-cols-2 gap-5 mt-[30px]'>
-                <SecondaryButton title="Send Test Email" type='submit' />
-                <CancelButton title="Cancel" onClick={onClose}/>
+                <SecondaryButton title="Send Test Email" type='submit' class_="text-lg!" />
+                <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
             </div>
         </div>
     </Model>

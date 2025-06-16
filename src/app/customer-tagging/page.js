@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { getError } from "../../../helper";
 import Loading from "../../components/Loading";
 import { customerTagging } from "../../constent/constArray";
+import PaginationDemo from "../../components/Pagination";
 
 export default function CustomerTagging() {
     const [filterBy, setFilterBy] = useState("")
@@ -160,6 +161,9 @@ export default function CustomerTagging() {
                         </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                  {list?.length> 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>
         </AdminLayout>
     )

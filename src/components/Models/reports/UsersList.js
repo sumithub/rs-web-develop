@@ -42,9 +42,9 @@ export default function UsersList({ onClose }) {
             setLoading(false)
         }
     }
-    return <Model onClose={onClose} title="Users List">
+    return <Model onClose={onClose} title="Users List" modalClass="w-[60%]!">
 
-        <div className='flex gap-3 items-center w-full'>
+        <div className='flex gap-4 items-center w-full'>
             <Search
                 mainClass='w-[35%]!'
                 placeholder="Search by name, email, role."
@@ -97,7 +97,7 @@ export default function UsersList({ onClose }) {
             <SecondaryButton title="Add Selected" onClick={onClose} class_="text-xs! font-normal! py-2.5! px-2.5" />
         </div>
 
-        <div className='table-class'>
+        <div className='w-full border border-border-color overflow-hidden rounded-tr-[20px] rounded-tl-[20px]'>
             {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                 <thead>
                     <tr>
@@ -124,7 +124,7 @@ export default function UsersList({ onClose }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {list?.map((e, index) => <tr key={index}>
+                    {list?.map((e, index) => <tr key={index}  className={`${index === list.length - 1 ? '' : 'border-b'}`}>
                         <td>
                             <div className="flex items-start gap-2">
                                 <Checkbox
@@ -143,10 +143,10 @@ export default function UsersList({ onClose }) {
                     )}
                 </tbody>
             </table> : <div className='text-center text-2xl text-danger mx-auto h-20'>No Data</div>)}
-            {list?.length > 0 && <div>
+           
+        </div>
+ {list?.length > 0 && <div>
                 <PaginationDemo />
             </div>}
-        </div>
-
     </Model>
 }

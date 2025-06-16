@@ -10,7 +10,7 @@ import axios from "axios";
 import { getError, validEmailRgx, validPasswordRgx } from "../../../helper";
 import { toast } from "react-toastify";
 import PhoneForm from "../form/PhoneForm";
-import Input from "../form/Input";
+
 export default function Profile({ id }) {
     const { register, setValue, handleSubmit, clearErrors, formState: { errors }, watch } = useForm();
     // const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ export default function Profile({ id }) {
         }
     }
     return (
-        <>
+        <div>
             <>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div>
@@ -50,7 +50,6 @@ export default function Profile({ id }) {
                         <div className="grid grid-cols-2 gap-5 pt-[25px]">
                             <InputForm
                                 label="Full Name"
-                                labelClass=""
                                 placeholder="Enter name"
                                 inputClass="border-primary/10"
                                 class_="mt-0!"
@@ -61,7 +60,6 @@ export default function Profile({ id }) {
                             />
                             <InputForm
                                 label="E-Mail"
-                                labelClass=""
                                 placeholder="Enter email"
                                 inputClass="border-primary/10"
                                 class_="mt-0!"
@@ -107,13 +105,14 @@ export default function Profile({ id }) {
                                 setValue={setValue}
                             />
                         </div>
-                        <div className="grid grid-cols-2 gap-5 pt-[25px]">
-                            <CancelButton title=" Cancel Changes" />
-                            <SecondaryButton title="Save Changes" type="submit" disabled={sending} />
+                        <div className="grid grid-cols-2 gap-5 pt-6">
+                            <CancelButton title=" Cancel Changes" class_="text-lg!" />
+                            <SecondaryButton title="Save Changes" type="submit" disabled={sending} class_="text-lg!" />
                         </div>
                     </div>
                 </form>
             </>
+
             <div className="pt-[25px]">
                 <h2 className="text-lg font-semibold">Change Password</h2>
                 <div className="grid grid-cols-2 gap-5 pt-[25px]">
@@ -127,7 +126,7 @@ export default function Profile({ id }) {
                         isRequired={true}
                         formProps={{
                             ...register("password", {
-                                required: "Password is required.",
+                                required: true,
                                 pattern: {
                                     value: validPasswordRgx,
                                     message:
@@ -150,7 +149,7 @@ export default function Profile({ id }) {
                         isRequired={true}
                         formProps={{
                             ...register("newPassword", {
-                                required: "New password is required.",
+                                required: true,
                                 pattern: {
                                     value: validPasswordRgx,
                                     message:
@@ -173,14 +172,15 @@ export default function Profile({ id }) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-5 pt-[25px] pb-8">
-                    <CancelButton title="Delete Account" />
+                    <CancelButton title="Delete Account" class_="text-lg!" />
                     <SecondaryButton
                         title="Update Password"
+                        class_="text-lg!"
                         type="submit"
                         disabled={sending}
                     />
                 </div>
             </div>
-        </>
+        </div>
     )
 }

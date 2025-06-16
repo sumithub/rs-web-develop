@@ -5,9 +5,16 @@ export default function Status({ status = "" }) {
     let s = status.toLowerCase()
     let bgClass = ""
 
-    if (s === "new" || s === "completed" || s === "active" || s === "vip" || s === "connected" || s === "sent") {
+    if (
+        s === "new" ||
+        s === "completed" ||
+        s === "active" ||
+        s === "vip" ||
+        s === "connected" ||
+        s === "sent" ||
+        s === "paid") {
         bgClass = "bg-[#28A7451A] text-success";
-    } else if (s === "responded" || s === "draft" || s === "priority") {
+    } else if (s === "responded" || s === "draft" || s === "priority" || s === "activate") {
         bgClass = "bg-[#0396FF1A] text-primary";
     } else if (
         s === "pending invite" ||
@@ -46,7 +53,7 @@ export default function Status({ status = "" }) {
     else if (s === "no") {
         bgClass = "bg-[#DC35451A] text-danger"
     }
-    else if (s === "dismiss") {
+    else if (s === "dismiss" || s === "suspend") {
         bgClass = "bg-[#DC35451A] text-danger"
     } else {
         bgClass = "bg-gray-100 text-gray-500";

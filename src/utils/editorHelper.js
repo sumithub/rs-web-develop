@@ -1176,8 +1176,6 @@ export const MenuBar = ({ disable }) => {
             </svg>
         </button>
 
-
-
         {/* Alignment Buttons */}
         <button
             type="button"

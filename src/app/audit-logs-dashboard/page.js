@@ -8,12 +8,13 @@ import CustomSelectBox from "../../components/form/CustomSelectBox";
 import Checkbox from "../../components/form/Checkbox";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getError } from "../../../helper";
+import { formatDateTime, getError } from "../../../helper";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
-import { templates } from "../../constent/constArray";
-import DatePicker from "../../components/form/DatePicker";
+import { auditLogs } from "../../constent/constArray";
 import AuditLogDetails from '../../components/Models/audit/AuditLogDetails'
+import DateRange from "../../components/form/DateRangePicker";
+import SecondaryButton from "../../components/common/SecondaryButton";
 
 export default function AuditLogsDashboard() {
     const [date, setDate] = useState("")
@@ -33,7 +34,7 @@ export default function AuditLogsDashboard() {
         try {
             setLoading(true)
             const res = await axios.get("/api")
-            setList(res.data || templates)
+            setList(res.data || auditLogs)
             setLoading(false)
 
         } catch (error) {
@@ -41,18 +42,7 @@ export default function AuditLogsDashboard() {
             setLoading(false)
         }
     }
-    const Projects = [
-        { id: "AL-001", subscription: "SUB-101", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: "Jun 18,2024 | 10:00AM", },
-        { id: "AL-002", subscription: "SUB-102", action: "Customer Created", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-003", subscription: "SUB-103", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-004", subscription: "SUB-104", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Jun 18,2024 | 10:00AM", },
-        { id: "AL-005", subscription: "SUB-105", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-006", subscription: "SUB-106", action: "Customer updated", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-007", subscription: "SUB-107", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
-    ]
+    
     return (<>
         <AdminLayout>
             {open &&
@@ -71,17 +61,19 @@ export default function AuditLogsDashboard() {
                 </div>
                 <div className="flex gap-[15px]">
 
-                    <DatePicker
+              <DateRange  onChange={(e) => { setDate(e) }}/>
+
+                    {/* <DatePicker
                         icon={true}
                         mainClass="mt-0!"
                         value={date}
                         dateFormat="dd/MM/yyyy"
                         onChange={(e) => setDate(e)}
-                    />
+                    /> */}
 
                     <CustomSelectBox
-                        class_="mt-0!"
-                        defaultOption="Select"
+                        class_="mt-0! w-40!"
+                        defaultOption="Filter"
                         value={type}
                         onChange={(e) => {
                             setType(e.target.value)
@@ -104,8 +96,7 @@ export default function AuditLogsDashboard() {
                         <option value="action">Action</option>
                     </CustomSelectBox>
 
-                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50">
-                        Reset</button>
+                   <SecondaryButton title="Reset" class_="text-xs font-normal!"/>
                 </div>
             </div>
             <div className='table-class mt-[15px]'>
@@ -136,15 +127,21 @@ export default function AuditLogsDashboard() {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="timestamp" /></th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {Projects.map((e, i) =>
-                            <tr key={i}>
+                        {list.map((e, index) =>
+                            <tr key={index}>
                                 <td>
                                     <div className="flex gap-2.5 items-center">
-                                        <Checkbox />
+                                        <Checkbox 
+                                          checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                        
+                                        />
                                         {e.id}
                                     </div>
                                 </td>
@@ -152,7 +149,7 @@ export default function AuditLogsDashboard() {
                                 <td className="capitalize">{e.action}</td>
                                 <td className="capitalize">{e.details}</td>
                                 <td className="capitalize">{e.performed}</td>
-                                <td>{e.timestamp}</td>
+                                <td>{formatDateTime(e.timestamp)}</td>
                                 <td>
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer'

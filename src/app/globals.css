@@ -282,7 +282,6 @@ td {
   background-color: white;
 }
 
-
 .slick-list,
 .slick-track,
 .slick-slide,
@@ -411,4 +410,8 @@ td {
   border-color: var(--light);
   color: var(--text);
   opacity: 0.7;
+}
+
+.range-slider .range-slider__thumb {
+  background-color: white!;
 }

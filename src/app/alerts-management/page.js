@@ -8,10 +8,10 @@ import Status from "../../components/Status"
 import Checkbox from "../../components/form/Checkbox";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { getError } from "../../../helper";
+import { formatDate, getError } from "../../../helper";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
-import { templates } from "../../constent/constArray";
+import { alertsManagement} from "../../constent/constArray";
 
 export default function AlertsManagement() {
     const [type, setType] = useState("")
@@ -28,7 +28,7 @@ export default function AlertsManagement() {
         try {
             setLoading(true)
             const res = await axios.get("/api")
-            setList(res.data || templates)
+            setList(res.data || alertsManagement)
             setLoading(false)
 
         } catch (error) {
@@ -38,15 +38,7 @@ export default function AlertsManagement() {
     }
 
     const Projects = [
-        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024", action: "Dismiss" },
-        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024", action: "Dismiss" },
-        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-        { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
+       
     ]
     return (<>
         <AdminLayout>
@@ -62,7 +54,7 @@ export default function AlertsManagement() {
                 </div>
                 <div className="flex items-center gap-3">
                     <CustomSelectBox
-                        class_="mt-0!"
+                        class_="mt-0! w-32!"
                         defaultOption="Filter"
                         value={type}
                         onChange={(e) => {
@@ -112,11 +104,16 @@ export default function AlertsManagement() {
                         </tr>
                     </thead>
                     <tbody>
-                        {Projects.map((e, i) =>
-                            <tr key={i}>
+                        {list.map((e, index) =>
+                            <tr key={index}>
                                 <td>
                                     <div className="flex gap-2.5 items-center">
-                                        <Checkbox />
+                                        <Checkbox 
+                           checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                        />
                                         {e.id}
                                     </div>
                                 </td>
@@ -127,7 +124,7 @@ export default function AlertsManagement() {
                                 <td>
                                     <Status status={e.status} />
                                 </td>
-                                <td>{e.date}</td>
+                                <td>{formatDate(e.date)}</td>
                                 <td>
                                     <Status status={e.action} />
                                 </td>
