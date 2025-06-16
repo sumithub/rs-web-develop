@@ -12,7 +12,7 @@ import { getError } from "../../../../helper"
 import CheckboxForm from "../../form/CheckboxForm"
 
 function EditNotificationPreferences({ onClose, id }) {
-    const { register, setValue, handleSubmit, clearErrors, formState: { errors } } = useForm();
+    const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -39,8 +39,7 @@ function EditNotificationPreferences({ onClose, id }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
 
-                <InputForm label="Edit Notification Preference" placeholder="Enter condition" isRequired={true} errors={errors}
-                    inputClass="bg-secondary2"
+                <InputForm label="Edit Notification Preference" isRequired={true} errors={errors}
                     formProps={{
                         ...register("condition", {
                             required: true,
@@ -64,7 +63,6 @@ function EditNotificationPreferences({ onClose, id }) {
                         Enabled
                     </div>
                 </div>
-
             </div>
 
             <div className="grid grid-cols-2 gap-3 mt-5">
