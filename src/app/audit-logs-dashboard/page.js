@@ -8,7 +8,7 @@ import CustomSelectBox from "../../components/form/CustomSelectBox";
 import Checkbox from "../../components/form/Checkbox";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getError } from "../../../helper";
+import { formatDateTime, getError } from "../../../helper";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 import { auditLogs } from "../../constent/constArray";
@@ -61,7 +61,7 @@ export default function AuditLogsDashboard() {
                 </div>
                 <div className="flex gap-[15px]">
 
-<DateRange   onChange={(e) => { setDate(e) }}/>
+              <DateRange  onChange={(e) => { setDate(e) }}/>
 
                     {/* <DatePicker
                         icon={true}
@@ -73,7 +73,7 @@ export default function AuditLogsDashboard() {
 
                     <CustomSelectBox
                         class_="mt-0! w-40!"
-                        defaultOption="Select"
+                        defaultOption="Filter"
                         value={type}
                         onChange={(e) => {
                             setType(e.target.value)
@@ -96,7 +96,7 @@ export default function AuditLogsDashboard() {
                         <option value="action">Action</option>
                     </CustomSelectBox>
 
-<SecondaryButton title="Reset" class_="text-xs font-normal!"/>
+                   <SecondaryButton title="Reset" class_="text-xs font-normal!"/>
                 </div>
             </div>
             <div className='table-class mt-[15px]'>
@@ -127,7 +127,7 @@ export default function AuditLogsDashboard() {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="timestamp" /></th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,7 +149,7 @@ export default function AuditLogsDashboard() {
                                 <td className="capitalize">{e.action}</td>
                                 <td className="capitalize">{e.details}</td>
                                 <td className="capitalize">{e.performed}</td>
-                                <td>{e.timestamp}</td>
+                                <td>{formatDateTime(e.timestamp)}</td>
                                 <td>
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer'

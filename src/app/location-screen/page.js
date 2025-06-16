@@ -10,11 +10,11 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { getError } from '../../../helper'
 import Loading from '../../components/Loading'
-import { templates } from '../../constent/constArray'
+import { locationScreen} from '../../constent/constArray'
 import AddNewLocation from '../../components/Models/location/AddNewLocation'
 import DeleteLocation from '../../components/Models/location/DeleteLocation'
 
-function LocationScreen() {
+function Location() {
     const [list, setList] = useState([])
     const [open, setOpen] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
@@ -31,7 +31,7 @@ function LocationScreen() {
         try {
             setLoading(true)
             const res = await axios.get("/api")
-            setList(res.data || templates)
+            setList(res.data || locationScreen)
             setLoading(false)
 
         } catch (error) {
@@ -40,15 +40,7 @@ function LocationScreen() {
         }
     }
     const Projects = [
-        { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-        { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-        { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-        { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-        { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-        { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-        { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-        { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-        { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
+       
     ]
 
     return (
@@ -134,11 +126,16 @@ function LocationScreen() {
                     </thead>
 
                     <tbody>
-                        {Projects.map((e, i) =>
+                        {list.map((e, i) =>
                             <tr key={i}>
                                 <td>
                                     <div className="flex gap-2.5 items-center">
-                                        <Checkbox />
+                                        <Checkbox 
+                                          checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                        />
                                         {e.name}
                                     </div>
                                 </td>
@@ -162,12 +159,12 @@ function LocationScreen() {
                             </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                {list?.length > 0 && <div>
+            </div>
+               {list?.length > 0 && <div>
                     <PaginationDemo />
                 </div>}
-            </div>
         </AdminLayout>
     )
 }
 
-export default LocationScreen
+export default Location

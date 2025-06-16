@@ -12,6 +12,7 @@ import { getError } from "../../../../helper"
 import CheckboxForm from "../../form/CheckboxForm"
 import RadioForm from "../../form/RadioForm"
 import Image from "next/image"
+import StarRangeSlider from "../../StartRatingSlider"
 
 function CreateClientRule({ onClose, id }) {
     const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
@@ -66,7 +67,6 @@ function CreateClientRule({ onClose, id }) {
                     <option value="reviewResponseReceived">Review Response Received</option>
                     <option value="reviewDeleted">Review Deleted</option>
                 </SelectForm>
-
                 {!type && (<>
                     <InputForm label="Condition" placeholder="Enter condition" isRequired={true} errors={errors}
                         inputClass="border-primary/10"
@@ -193,8 +193,7 @@ function CreateClientRule({ onClose, id }) {
             </div>)}
 
             {type === "reviewDeleted" && (<div>
-
-                <div className="mt-4 flex gap-2.5 items-center bg-custom-yellow-light/7 p-3 rounded-lg">
+                <div className="mt-4 flex gap-2.5 items-center  bg-custom-yellow-light/7 p-3 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize">This rule triggers automatically upon deletion.</h2>
                 </div>
@@ -229,8 +228,9 @@ function CreateClientRule({ onClose, id }) {
                     <option value="sendAlert">Send Alert</option>
                 </SelectForm>
 
-                <div className="mt-3">
-                    Threshold Rating
+                <div className="mt-3 flex  justify-between">
+                  <div>  Threshold Rating</div>
+                  <StarRangeSlider/>
                 </div>
                 {type !== "negativeReview" && (<>
                     <div className="mt-4 font-semibold text-xl">
@@ -279,7 +279,7 @@ function CreateClientRule({ onClose, id }) {
                 <SecondaryButton title={type === "newReview" || type === "flaggedReview" || type === "reviewResponseReceived" || type === "reviewDeleted" || type === "positiveReview" || type === "negativeReview" ? "Save Rule" : "Save"} type="submit" disabled={sending} class_="text-lg!" />
             </div>
         </form>
-    </Model>
+    </Model >
 
 }
 
