@@ -394,10 +394,10 @@ export default function Detail({ }) {
                 <div className="flex items-center justify-between mb-2">
                     <div className="text-sm text-secondary">
                         {label}
-                        {isRequired && <span className="text-danger">*</span>}
+                        {isRequired ? <span className="text-danger">*</span> : <span className="text-text3"> (Optional)</span>}
                     </div>
                     <SecondaryButton
-                        title="Select Template"
+                        title="Template selection"
                         type="button"
                         class_="text-sm! font-normal!"
                         onClick={() => openTemplateSelector(templateType)}
@@ -541,16 +541,17 @@ export default function Detail({ }) {
                         expandAll={expandAll} setExpandAll={setExpandAll}
                         title="Campaign Details"
                         status={getCardStatus('campaignDetails')}>
-                        <div className="grid grid-cols-2 gap-3">
-                            <InputForm
-                                label="Campaign Name"
-                                placeholder="Enter Name"
-                                isRequired={true}
-                                inputClass="bg-white! border-primary/10! focus:border-primary/60!"
-                                formProps={{ ...register("campaignName", { required: true }) }}
-                                errors={errors}
-                            />
-
+                        <div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <InputForm
+                                    label="Campaign Name"
+                                    placeholder="Enter Name"
+                                    isRequired={true}
+                                    inputClass="bg-white! border-primary/10! focus:border-primary/60!"
+                                    formProps={{ ...register("campaignName", { required: true }) }}
+                                    errors={errors}
+                                />
+                            </div>
                             <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white! border-primary/10! focus:border-primary/60!"
                                 formProps={{ ...register("description", { required: false }) }}
                                 errors={errors}
@@ -612,10 +613,10 @@ export default function Detail({ }) {
                                 /> */}
                             </div>
                         </div>
-                        <div>
+                        {customersSelected && <div>
                             <div className="flex justify-between">
                                 <div>
-                                    {customersSelected && <div className="flex items-center gap-5 mb-4">
+                                    <div className="flex items-center gap-5 mb-4">
                                         <div className="flex items-center gap-2">
                                             <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                                             <div className="text-danger text-lg font-semibold capitalize">{customersSelected || 5} customers are already in an active campaign?</div>
@@ -623,7 +624,7 @@ export default function Detail({ }) {
                                         <SecondaryButton title="View Details" class_="text-sm! font-normal!"
                                             type="button"
                                             onClick={() => { setOpenCustomer("details") }} />
-                                    </div>}
+                                    </div>
                                 </div>
                                 <CancelButton type="button" title="proceed anyway" class_="bg-white! border-border-color! font-normal! text-sm!" />
                             </div>
@@ -644,14 +645,14 @@ export default function Detail({ }) {
                                 </SelectForm>}
                             </div>
 
-                            {customersSelected && <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
+                            <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
                                 <div>Total Selected Customers</div>
                                 <div className="flex items-center gap-2">
                                     <div>{customersSelected ? '250 Customers' : '0 Customers'}</div>
                                     <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />
                                 </div>
-                            </div>}
-                        </div>
+                            </div>
+                        </div>}
                     </CampaignCard>
                 </div>
 
@@ -758,32 +759,30 @@ export default function Detail({ }) {
                                                         </div>
                                                     </div>
                                                 )}
-
-                                                {/* Frequency Selection */}
-                                                <div className="grid grid-cols-2 gap-4">
-                                                    <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
-                                                        selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
-                                                        formProps={{ ...register("frequency", { required: reminderEnabled }) }}
-                                                        errors={errors} >
-                                                        <option value="daily">Daily</option>
-                                                        <option value="weekly">Weekly</option>
-                                                        <option value="monthly">Monthly</option>
-                                                    </SelectForm>
-
-                                                    {/* Number of Reminders */}
-                                                    <InputForm label="Number of Reminders"
-                                                        isRequired={true}
-                                                        inputClass="bg-white! py-3! border-primary/10! focus:border-primary/60!"
-                                                        formProps={{
-                                                            ...register("reminderNo", {
-                                                                required: reminderEnabled,
-                                                                valueAsNumber: true
-                                                            })
-                                                        }} inputType="number"
-                                                        errors={errors} />
-                                                </div>
                                             </>
                                         )}
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
+                                                selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                                                formProps={{ ...register("frequency", { required: reminderEnabled }) }}
+                                                errors={errors} >
+                                                <option value="daily">Daily</option>
+                                                <option value="weekly">Weekly</option>
+                                                <option value="monthly">Monthly</option>
+                                            </SelectForm>
+
+                                            {/* Number of Reminders */}
+                                            <InputForm label="Number of Reminders"
+                                                isRequired={true}
+                                                inputClass="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                                                formProps={{
+                                                    ...register("reminderNo", {
+                                                        required: reminderEnabled,
+                                                        valueAsNumber: true
+                                                    })
+                                                }} inputType="number"
+                                                errors={errors} />
+                                        </div>
                                     </div>
                                 )}
                             </>
@@ -827,29 +826,30 @@ export default function Detail({ }) {
                                                             </div>
                                                         )}
 
-                                                        {/* Email Frequency Selection */}
-                                                        <SelectForm label="Email Frequency" defaultOption="Select Frequency" isRequired={true}
-                                                            selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
-                                                            formProps={{ ...register("emailFrequency", { required: emailReminderEnabled }) }}
-                                                            errors={errors} >
-                                                            <option value="daily">Daily</option>
-                                                            <option value="weekly">Weekly</option>
-                                                            <option value="monthly">Monthly</option>
-                                                        </SelectForm>
 
-                                                        {/* Email Number of Reminders */}
-                                                        <InputForm label="Number of Email Reminders"
-                                                            isRequired={true}
-                                                            inputClass="bg-white! py-3! focus:border-primary/60! border-primary/10!"
-                                                            formProps={{
-                                                                ...register("emailReminderNo", {
-                                                                    required: emailReminderEnabled,
-                                                                    valueAsNumber: true
-                                                                })
-                                                            }} inputType="number"
-                                                            errors={errors} />
                                                     </>
                                                 )}
+                                                {/* Email Frequency Selection */}
+                                                <SelectForm label="Email Frequency" defaultOption="Select Frequency" isRequired={true}
+                                                    selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
+                                                    formProps={{ ...register("emailFrequency", { required: emailReminderEnabled }) }}
+                                                    errors={errors} >
+                                                    <option value="daily">Daily</option>
+                                                    <option value="weekly">Weekly</option>
+                                                    <option value="monthly">Monthly</option>
+                                                </SelectForm>
+
+                                                {/* Email Number of Reminders */}
+                                                <InputForm label="Number of Email Reminders"
+                                                    isRequired={true}
+                                                    inputClass="bg-white! py-3! focus:border-primary/60! border-primary/10!"
+                                                    formProps={{
+                                                        ...register("emailReminderNo", {
+                                                            required: emailReminderEnabled,
+                                                            valueAsNumber: true
+                                                        })
+                                                    }} inputType="number"
+                                                    errors={errors} />
                                             </div>
                                         )}
                                     </div>
@@ -892,29 +892,30 @@ export default function Detail({ }) {
                                                             </div>
                                                         )}
 
-                                                        {/* SMS Frequency Selection */}
-                                                        <SelectForm label="SMS Frequency" defaultOption="Select Frequency" isRequired={true}
-                                                            selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
-                                                            formProps={{ ...register("smsFrequency", { required: smsReminderEnabled }) }}
-                                                            errors={errors} >
-                                                            <option value="daily">Daily</option>
-                                                            <option value="weekly">Weekly</option>
-                                                            <option value="monthly">Monthly</option>
-                                                        </SelectForm>
 
-                                                        {/* SMS Number of Reminders */}
-                                                        <InputForm label="Number of SMS Reminders"
-                                                            isRequired={true}
-                                                            inputClass="bg-white! py-3! border-primary/10! focus:border-primary/60!"
-                                                            formProps={{
-                                                                ...register("smsReminderNo", {
-                                                                    required: smsReminderEnabled,
-                                                                    valueAsNumber: true
-                                                                })
-                                                            }} inputType="number"
-                                                            errors={errors} />
                                                     </>
                                                 )}
+                                                {/* SMS Frequency Selection */}
+                                                <SelectForm label="SMS Frequency" defaultOption="Select Frequency" isRequired={true}
+                                                    selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
+                                                    formProps={{ ...register("smsFrequency", { required: smsReminderEnabled }) }}
+                                                    errors={errors} >
+                                                    <option value="daily">Daily</option>
+                                                    <option value="weekly">Weekly</option>
+                                                    <option value="monthly">Monthly</option>
+                                                </SelectForm>
+
+                                                {/* SMS Number of Reminders */}
+                                                <InputForm label="Number of SMS Reminders"
+                                                    isRequired={true}
+                                                    inputClass="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                                                    formProps={{
+                                                        ...register("smsReminderNo", {
+                                                            required: smsReminderEnabled,
+                                                            valueAsNumber: true
+                                                        })
+                                                    }} inputType="number"
+                                                    errors={errors} />
                                             </div>
                                         )}
                                     </div>
