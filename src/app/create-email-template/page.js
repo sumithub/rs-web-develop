@@ -38,7 +38,7 @@ function AddTemplate() {
 
       toast.success("Template Created Successfully")
       setSending(false)
-      onClose()
+      // onClose()
     } catch (error) {
       toast.error(getError(error))
       setSending(false)
