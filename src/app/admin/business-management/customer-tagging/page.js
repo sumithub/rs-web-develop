@@ -1,38 +1,101 @@
 "use client"
+import Image from 'next/image'
+import AdminLayout from '../../../../components/AdminLayout'
+import Checkbox from '../../../../components/form/Checkbox'
+import Search from '../../../../components/form/Search'
+import PaginationDemo from '../../../../components/Pagination'
+import TableOrder from '../../../../components/TableOrder'
+import React, { useEffect, useState } from 'react'
+import CustomSelectBox from '../../../../components/form/CustomSelectBox';
+import CreateCustomersTag from '../../../../components/Models/business-management/CreateCustomersTag'
+import BulkAssign from '../../../../components/Models/business-management/BulkAssign'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import { getError } from '../../../../../helper'
+import { manageTags } from '../../../../constent/constArray'
+import Loading from '../../../../components/Loading'
+import DateRange from '../../../../components/form/DateRangePicker'
+import DashboardChart from '../../../../components/DashboardChart'
+import DashboardPieChart from '../../../../components/charts/DashboardPieChart'
+import DashboardLineChart from '../../../../components/charts/DashboardLineChart'
 
-import { useState } from "react"
-import AdminLayout from "../../../../components/AdminLayout"
-import Search from "../../../../components/form/Search"
-import CustomSelectBox from "../../../../components/form/CustomSelectBox"
-import SecondaryButton from "../../../../components/common/SecondaryButton"
-import TableOrder from "../../../../components/TableOrder"
-import Checkbox from "../../../../components/form/Checkbox"
-import Image from "next/image"
-import PaginationDemo from "../../../../components/Pagination"
-import DateRange from "../../../../components/form/DateRangePicker"
-import DashboardChart from "../../../../components/DashboardChart"
-import DashboardPieChart from "../../../../components/charts/DashboardPieChart"
-import DashboardLineChart from "../../../../components/charts/DashboardLineChart"
-
-
-export default function CustomerTagging() {
-    const [sortBy, setSortBy] = useState(false)
+function CustomerTagging() {
+    const [type, setType] = useState("")
+    const [list, setList] = useState([])
+    const [loading, setLoading] = useState(true)
     const [view, setView] = useState("manage")
+    const [search, setSearch] = useState("")
+    const [open, setOpen] = useState(false)
+    const [open1, setOpen1] = useState(false)
+    const [openBulk, setOpenBulk] = useState(false)
+    const [sortBy, setSortBy] = useState("")
+    const [date, setDate] = useState("")
 
-    const Business = [
-        { name: "VIP", description: "High-value customers", customers: "120", created: "Client A" },
-        { name: "Negative", description: "Customers with issues", customers: "45", created: "Client A" },
-        { name: "Needs Follow-up", description: "Pending response", customers: "30", created: "Client B" },
-        { name: "VIP", description: "High-value customers", customers: "50", created: "Client C" },
-        { name: "Negative", description: "Customers with issues", customers: "30", created: "Client D" },
-        { name: "Needs Follow-up", description: "Pending response", customers: "100", created: "Client E" },
-        { name: "Needs Follow-up", description: "Pending response", customers: "100", created: "Client E" },
-        { name: "VIP", description: "High-value customers", customers: "140", created: "Client F" },
-        { name: "Negative", description: "Customers with issues", customers: "20", created: "Client F" },
+    useEffect(() => {
+        getData()
+    }, [search, date, type, sortBy])
 
-    ]
+    const getData = async () => {
+        try {
+            setLoading(true)
+            const res = await axios.get("/api")
+            setList(res.data || manageTags)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
+
     return (
-        <AdminLayout>
+        <AdminLayout
+            noCard={false}
+            headerChild={
+                <Search
+                    mainClass='w-76!'
+                    placeholder="Search"
+                    onSearch={(s) => {
+                        setSearch(s)
+                    }}
+                />}>
+            {open &&
+                <CreateCustomersTag
+                    type="create"
+                    onClose={() => {
+                        setOpen(false)
+                    }}
+
+                    onSave={() => {
+                        setOpen(true)
+                    }}
+                />
+            }
+
+            {open1 &&
+                <CreateCustomersTag
+                    type="edit"
+                    onClose={() => {
+                        setOpen1(false)
+                    }}
+
+                    onSave={() => {
+                        setOpen1(true)
+                    }}
+                />
+            }
+
+            {openBulk &&
+                <BulkAssign
+                    onClose={() => {
+                        setOpenBulk(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenBulk(true)
+                    }}
+                />
+            }
             <div className="inline-block">
                 <div className='flex items-center gap-10 px-5 bg-white shadow-sm rounded-[10px]'>
                     <div
@@ -55,89 +118,114 @@ export default function CustomerTagging() {
                 </div>
             </div>
             {view === "manage" && <div>
-                <div className='flex items-center justify-between mt-3.5'>
-                    <Search
-                        placeholder="Search by Tags"
-                        onSearch={(s) => {
-                            setSearch(s)
-                        }}
-                    />
-                    <div className='flex items-center gap-3.5'>
-                        <div className="border border-border-color px-2 py-1 rounded-lg w-28 cursor-pointer">
-                            <div className="flex items-start justify-center gap-2 mt-1">
-                                <Checkbox
-                                // checked={list?.length > 0 && list.every(e => e.selected)}
-                                // onChange={(checked) => {
-                                //     setList(list => list.map(e => ({ ...e, selected: checked })))
-                                // }}
-                                />
-                                <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
+                <div>
+                    <div className="flex justify-between items-start w-full mb-5 mt-3.5">
+                        <Search
+                            mainClass='max-w-[270px]!'
+                            placeholder="Search by Tags"
+                            onSearch={(s) => {
+                                setSearch(s)
+                            }}
+                        />
+                        <div className="flex items-start gap-3">
+                            <div className="border border-border-color px-2 py-1 rounded-lg w-28">
+                                <div className="flex items-start justify-center gap-2 mt-1">
+                                    <Checkbox
+                                        checked={list?.length > 0 && list.every(e => e.selected)}
+                                        onChange={(checked) => {
+                                            setList(list => list.map(e => ({ ...e, selected: checked })))
+                                        }} />
+                                    <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
+                                </div>
+                            </div>
+
+                            <button
+                                className='border border-border-color rounded-lg p-2 text-text3 text-sm text-center flex items-center justify-center gap-2 capitalize cursor-pointer'
+                                onClick={() => { setOpenBulk(true) }}
+                            >Bulk Change Tags</button>
+
+                            <CustomSelectBox
+                                class_="mt-0! w-32!"
+                                defaultOption="Select"
+                                value={type}
+                                onChange={(e) => {
+                                    setType(e.target.value)
+                                }}>
+                                <option value="client">Client</option>
+                                <option value="region">Region</option>
+                            </CustomSelectBox>
+
+                            <div className='shrink-0'>
+                                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0 w-full"
+                                    onClick={() => { setOpen(true) }} >Create Customer Tag</button>
                             </div>
                         </div>
-                        <button className="border border-border2 text-text3 p-2.5 text-xs rounded-lg">Bulk Change Tags</button>
-                        <CustomSelectBox
-                            defaultOption="Client"
-                            class_='mt-0! w-32!'
-                        >
-                            <option value="subscription-plan">Client</option>
-                            <option value="status">Region</option>
-                        </CustomSelectBox>
-                        <SecondaryButton
-                            title="Create Customer Tag"
-                            type='submit'
-                            class_="text-xs! font-normal!"
-                        />
                     </div>
                 </div>
-                <div className="table-class mt-3.5">
-                    <table className="w-full">
+
+                <div className='table-class'>
+                    {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                         <thead>
                             <tr>
                                 <th><TableOrder title="Tag Name"
                                     sortBy={sortBy}
                                     setSortBy={setSortBy}
-                                    field="TagName" /></th>
-                                <th><TableOrder title="Description" /></th>
-                                <th>
-                                    <div className="flex justify-center">
-                                        <TableOrder title="Tagged Customers" />
-                                    </div>
-                                </th>
-                                <th>
-                                    <div className="flex justify-center">
-                                        <TableOrder title="Created By" />
-                                    </div>
-                                </th>
-                                <th className="text-center!">Action</th>
+                                    field="name"
+                                /></th>
+                                <th><TableOrder title="Description"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="description"
+                                /></th>
+                                <th><TableOrder title="Tagged Customers"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="tagged"
+                                /></th>
+                                <th><TableOrder title="Created By"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="created"
+                                /></th>
+                                <th>Action</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            {Business.map((e, i) =>
-                                <tr key={i}>
-                                    <td>
-                                        <div className="flex items-center gap-2.5">
-                                            <Checkbox />
-                                            <h2>{e.name}</h2>
-                                        </div>
-                                    </td>
-                                    <td>{e.description}</td>
-                                    <td className="text-center! text-primary! underline underline-offset-2">{e.customers}</td>
-                                    <td className="text-center!">{e.created}</td>
-                                    <td>
-                                        <div className='flex w-auto items-center gap-2.5 justify-center'>
-                                            <button className='cursor-pointer'>
-                                                <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                            </button>
-                                            <button className='cursor-pointer'>
-                                                <Image unoptimized={true} src="/images/delete1.svg" alt='delete1' height={28} width={28} />
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>)}
+                            {list?.map((e, index) => <tr key={index}>
+                                <td>
+                                    <div className="flex items-start gap-2">
+                                        <Checkbox
+                                            checked={e.selected}
+                                            onChange={(checked) => {
+                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                            }}
+                                        />
+                                        <div>{e.name}</div>
+                                    </div>
+                                </td>
+                                <td>{e.description}</td>
+                                <td className='text-primary! underline underline-offset-4'>{e.customers}</td>
+                                <td>{e.created}</td>
+                                <td>
+                                    <div className='flex items-center gap-2'>
+                                        <button className='cursor-pointer' onClick={() => { setOpen1(true) }}>
+                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                        </button>
+
+                                        <button className='cursor-pointer'>
+                                            <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>)}
                         </tbody>
-                    </table>
+
+                    </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                    {list?.length > 0 && <div>
+                        <PaginationDemo />
+                    </div>}
                 </div>
-                <PaginationDemo />
             </div>}
             {view === "analytics" && <div className="mt-3.5">
                 <div className="flex justify-between">
@@ -147,15 +235,19 @@ export default function CustomerTagging() {
                             onChange={(e) => { setDate(e) }}
                         />
                         <CustomSelectBox
-                            defaultOption="Client"
-                            class_='mt-0! w-28!'
+                            class_="mt-0! w-32!"
+                            defaultOption="Select"
+                            value={type}
+                            onChange={(e) => {
+                                setType(e.target.value)
+                            }}
                         >
                             <option value="subscription-plan">Client 1</option>
                             <option value="status">Client 2</option>
                         </CustomSelectBox>
                     </div>
                 </div>
-                <div className="mt-5">
+                {loading ? <Loading /> : <div className="mt-5">
                     <div className="grid grid-cols-2 gap-5">
                         <DashboardChart title="Dummy Chart 1">
                             <div className="flex items-start">
@@ -208,8 +300,10 @@ export default function CustomerTagging() {
                             <DashboardLineChart />
                         </DashboardChart>
                     </div>
-                </div>
+                </div>}
             </div>}
         </AdminLayout>
     )
 }
+
+export default CustomerTagging
