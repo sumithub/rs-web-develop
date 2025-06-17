@@ -231,3 +231,38 @@ export const locationCampaign = [
     { name: "John Deo", status: "Active", responses: "150" },
     { name: "John Deo", status: "Completed", responses: "150" },
 ]
+
+
+export const clientCampaign = [
+    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
+    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
+    { name: "John Deo", status: "Completed", locations: "3 Locations", responses: "150" },
+    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
+    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
+    { name: "John Deo", status: "Completed", locations: "3 Locations", responses: "150" },
+]
+
+
+export const clientLocation = [
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+]
+
+
+export const clientSubscription = [
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Overdue" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Overdue" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Overdue" },
+]
