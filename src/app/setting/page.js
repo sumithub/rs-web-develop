@@ -1,7 +1,6 @@
 "use client"
 import Link from "next/link";
 import AdminLayout from "../../components/AdminLayout";
-import Profile from "../../components/setting/Profile";
 import UserProfileManagement from "../../components/setting/UserProfileManagement"
 
 export default function Setting() {
