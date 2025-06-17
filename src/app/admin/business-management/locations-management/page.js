@@ -56,11 +56,11 @@ function Location() {
 
     return (
         <AdminLayout
-            noCard={true}
+            noCard={false}
             headerChild={
                 <Search
-                    mainClass='w-full'
-                    placeholder="Search by Location Name, Address"
+                    mainClass='w-76!'
+                    placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
                     }}
@@ -141,12 +141,12 @@ function Location() {
                                 setSortBy={setSortBy}
                                 field="client"
                             /></th>
-                            <th><TableOrder title="Reviews Count"
+                            <th className='flex justify-center'><TableOrder title="Reviews Count"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="count"
                             /></th>
-                            <th>Action</th>
+                            <th className='text-center!'>Action</th>
                         </tr>
                     </thead>
 
@@ -166,8 +166,8 @@ function Location() {
                                 </td>
                                 <td>{e.address}</td>
                                 <td>{e.client}</td>
-                                <td>{e.count}</td>
-                                <td>
+                                <td className='text-center!'>{e.count}</td>
+                                <td className="flex justify-center">
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer'>
                                             <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />

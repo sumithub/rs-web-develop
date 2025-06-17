@@ -12,9 +12,8 @@ export default function Header({ headerChild, headerSearch, mainHeading = "Hello
                 </div>
             </div>
             {headerSearch && <>{headerSearch}</>}
-
+            {headerChild && <div>{headerChild}</div>}
             <div className="flex items-center gap-4">
-                {headerChild && <div>{headerChild}</div>}
                 <div className="relative">
                     <span className="absolute z-20 -right-1/12 text-xs -top-1/28 bg-danger text-white h-3.5 w-3.5 flex items-center justify-center p-1 rounded-md">
                         <span className="text-[10px]">4</span>
