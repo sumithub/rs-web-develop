@@ -210,3 +210,24 @@ export const manageTags = [
     { name: "Negative", description: "Customers with issues", customers: "20", created: "Client F" },
 
 ]
+
+
+export const locationReviews = [
+    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "Gustavo Torff", review: "Wait time was long.", date: "11 Mar 2025", status: "Replied" },
+    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Pending" },
+    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+]
+
+
+export const locationCampaign = [
+    { name: "John Deo", status: "Active", responses: "150" },
+    { name: "John Deo", status: "Active", responses: "150" },
+    { name: "John Deo", status: "Completed", responses: "150" },
+    { name: "John Deo", status: "Active", responses: "150" },
+    { name: "John Deo", status: "Active", responses: "150" },
+    { name: "John Deo", status: "Completed", responses: "150" },
+]
