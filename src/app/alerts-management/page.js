@@ -11,7 +11,7 @@ import axios from "axios";
 import { formatDate, getError } from "../../../helper";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
-import { alertsManagement} from "../../constent/constArray";
+import { alertsManagement } from "../../constent/constArray";
 
 export default function AlertsManagement() {
     const [type, setType] = useState("")
@@ -38,7 +38,7 @@ export default function AlertsManagement() {
     }
 
     const Projects = [
-       
+
     ]
     return (<>
         <AdminLayout>
@@ -60,6 +60,7 @@ export default function AlertsManagement() {
                         onChange={(e) => {
                             setType(e.target.value)
                         }}>
+                        <option value="new">New</option>
                         <option value="read">Read</option>
                         <option value="dismissed">Dismissed</option>
                     </CustomSelectBox>
@@ -108,11 +109,11 @@ export default function AlertsManagement() {
                             <tr key={index}>
                                 <td>
                                     <div className="flex gap-2.5 items-center">
-                                        <Checkbox 
-                           checked={e.selected}
-                                        onChange={(checked) => {
-                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                        }}
+                                        <Checkbox
+                                            checked={e.selected}
+                                            onChange={(checked) => {
+                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                            }}
                                         />
                                         {e.id}
                                     </div>
