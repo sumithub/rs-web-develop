@@ -2,6 +2,8 @@
 import Link from "next/link";
 import AdminLayout from "../../components/AdminLayout";
 import Profile from "../../components/setting/Profile";
+import UserProfileManagement from "../../components/setting/UserProfileManagement"
+
 export default function Setting() {
     return (<>
         <AdminLayout>
@@ -22,7 +24,8 @@ export default function Setting() {
                 </div>
                 <hr className="border border-border2 h-auto" />
                 <div>
-                    <Profile />
+                    {/* <Profile /> */}
+                    <UserProfileManagement/>
                 </div>
             </div>
         </AdminLayout>

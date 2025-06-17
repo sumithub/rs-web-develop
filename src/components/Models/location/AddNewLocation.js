@@ -10,7 +10,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import PhoneForm from "../../form/PhoneForm"
 
-function AddNewLocation({ onClose, id, onSave, type = "addNewLocation" }) {
+function AddNewLocation({ onClose, id, isClient, onSave, type = "addNewLocation", }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
 
@@ -35,46 +35,50 @@ function AddNewLocation({ onClose, id, onSave, type = "addNewLocation" }) {
             setSending(false)
         }
     }
-    return <Model onClose={onClose} title={type === "addNewLocation" ? "Add New Location (Client)" : "Edit Location (Client)"} modalClass="w-1/2!" >
+    return <Model onClose={onClose} title={(type === "addNewLocation" ? "Add New Location" : "Edit Location") + (isClient ? " (Client)" : "")} modalClass="w-1/2!" >
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-                        <div>
-                            <InputForm label="Name" placeholder="Enter your name" isRequired={true}
-                                formProps={{ ...register("name", { required: true }) }}
-                                errors={errors} />
+                <div>
+                    {!isClient && <InputForm label="Client" placeholder="Enter your name" isRequired={true}
+                        formProps={{ ...register("client", { required: true }) }}
+                        errors={errors} />}
 
-                            <InputForm label="Address" placeholder="Enter your address" isRequired={false}
-                                formProps={{ ...register("address", { required: false, }) }}
-                                errors={errors} />
+                    <InputForm label="Name" placeholder="Enter your name" isRequired={true}
+                        formProps={{ ...register("name", { required: true }) }}
+                        errors={errors} />
 
-                            <InputForm label="City" placeholder="Enter your city" isRequired={false}
-                                formProps={{ ...register("city", { required: false, }) }}
-                                errors={errors} />
+                    <InputForm label="Address" placeholder="Enter your address" isRequired={false}
+                        formProps={{ ...register("address", { required: false, }) }}
+                        errors={errors} />
 
-                            <InputForm label="State" placeholder="Enter your state" isRequired={false}
-                                formProps={{ ...register("state", { required: false, }) }}
-                                errors={errors} />
+                    <InputForm label="City" placeholder="Enter your city" isRequired={false}
+                        formProps={{ ...register("city", { required: false, }) }}
+                        errors={errors} />
 
-                            <InputForm label="Country" placeholder="Enter your country name" isRequired={false}
-                                formProps={{ ...register("country", { required: false, }) }}
-                                errors={errors} />
+                    <InputForm label="State" placeholder="Enter your state" isRequired={false}
+                        formProps={{ ...register("state", { required: false, }) }}
+                        errors={errors} />
 
-                            <InputForm label="Postal Code" placeholder="" isRequired={false}
-                                formProps={{ ...register("postalCode", { required: false, }) }}
-                                errors={errors} />
+                    <InputForm label="Country" placeholder="Enter your country name" isRequired={false}
+                        formProps={{ ...register("country", { required: false, }) }}
+                        errors={errors} />
 
-                            <PhoneForm label="Phone Number"
-                                placeholder="Enter phone number"
-                                isRequired={false}
-                                formProps={{ ...register("phoneNumber", { required: false }) }}
-                                errors={errors}
-                                clearErrors={clearErrors}
-                                setValue={setValue}
-                                watch={watch} />
-                        </div>
+                    <InputForm label="Postal Code" placeholder="" isRequired={false}
+                        formProps={{ ...register("postalCode", { required: false, }) }}
+                        errors={errors} />
+
+                    <PhoneForm label="Phone Number"
+                        placeholder="Enter phone number"
+                        isRequired={false}
+                        formProps={{ ...register("phoneNumber", { required: false }) }}
+                        errors={errors}
+                        clearErrors={clearErrors}
+                        setValue={setValue}
+                        watch={watch} />
+                </div>
             </div>
-                
-            <div className="grid grid-cols-2 gap-3 mt-5">
+
+            <div className="grid grid-cols-2 gap-5 mt-[30px]">
                 <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
                 <SecondaryButton title={type === "addNewLocation" ? "Save Location" : "Update Location"} type="submit" disabled={sending} class_="text-lg!" />
             </div>

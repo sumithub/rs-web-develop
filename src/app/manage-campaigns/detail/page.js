@@ -44,21 +44,20 @@ export default function Detail({ }) {
     })
     const [activeStep, setActiveStep] = useState(1)
     const [customersSelected, setCustomersSelected] = useState(false)
-
     const [templateSelectionMode, setTemplateSelectionMode] = useState('primary') // 'primary', 'reminder', 'final'
+    const [campaignType, setCampaignType] = useState('email');
+    const [activeTab, setActiveTab] = useState('email');
 
-    const [campaignType, setCampaignType] = useState('email')
-    const [reminderEnabled, setReminderEnabled] = useState(false)
-    const [sameAsFinal, setSameAsFinal] = useState(false)
-    const [sameAsReminder, setSameAsReminder] = useState(false)
+    const [reminderEnabled, setReminderEnabled] = useState(false);
+    const [sameAsFinal, setSameAsFinal] = useState('customFinalReminderEmail');
 
-    const [activeTab, setActiveTab] = useState('email')
-    const [emailReminderEnabled, setEmailReminderEnabled] = useState(false)
-    const [sameAsEmailReminder, setSameAsEmailReminder] = useState(false)
-    const [sameAsEmailFinal, setSameAsEmailFinal] = useState(false)
-    const [smsReminderEnabled, setSmsReminderEnabled] = useState(false)
-    const [sameAsSmsReminder, setSameAsSmsReminder] = useState(false)
-    const [sameAsSmsFinal, setSameAsSmsFinal] = useState(false)
+    const [emailReminderEnabled, setEmailReminderEnabled] = useState(false);
+    const [sameAsEmailFinal, setSameAsEmailFinal] = useState(false);
+
+    const [smsReminderEnabled, setSmsReminderEnabled] = useState(false);
+    const [sameAsSmsFinal, setSameAsSmsFinal] = useState(false);
+
+    // State for selected templates
     const [selectedTemplates, setSelectedTemplates] = useState({
         primary: null,
         reminder: null,
@@ -68,8 +67,46 @@ export default function Detail({ }) {
         emailFinal: null,
         smsPrimary: null,
         smsReminder: null,
-        smsFinal: null,
-    })
+        smsFinal: null
+    });
+
+    const handleCampaignTypeChange = (type) => {
+        setSelectedTemplates({
+            primary: null,
+            reminder: null,
+            final: null,
+            emailPrimary: null,
+            emailReminder: null,
+            emailFinal: null,
+            smsPrimary: null,
+            smsReminder: null,
+            smsFinal: null
+        })
+        setCampaignType(type);
+        if (type === 'both') {
+            setActiveTab('email');
+        }
+        setReminderEnabled(false)
+        setSameAsFinal(false)
+        setEmailReminderEnabled(false)
+        setSameAsEmailFinal(false)
+        setSmsReminderEnabled(false)
+        setSameAsSmsFinal(false)
+    };
+
+    const handleReminderToggle = (value) => {
+        if (value === 'customReminderEmail') {
+            setReminderEnabled(false);
+        } else if (value === 'sameAsPrimary') {
+            setReminderEnabled(true);
+        }
+    };
+
+    const handleEmailReminderToggle = (value) => {
+        setEmailReminderEnabled(value === 'sameAsPrimary');
+    };
+
+
 
     const watchedFields = watch()
 
@@ -105,51 +142,31 @@ export default function Detail({ }) {
         }
 
         // Check Template Selection completion based on campaign type
-        let templateComplete = false
+        let templateComplete = false;
 
         if (targetingComplete && campaignType) {
             if (campaignType === "email") {
                 // Single Email Campaign
-                templateComplete = selectedTemplates.primary &&
-                    (!reminderEnabled || (
-                        (sameAsReminder || selectedTemplates.reminder) &&
-                        watchedFields['frequency'] &&
-                        watchedFields['reminderNo']
-                    ))
+                templateComplete = selectedTemplates.primary && (watchedFields['emailFrequency'] || watchedFields['smsFrequency']);
             } else if (campaignType === "sms") {
-                // Single SMS Campaign
-                templateComplete = selectedTemplates.primary &&
-                    (!reminderEnabled || (
-                        (sameAsReminder || selectedTemplates.reminder) &&
-                        watchedFields['frequency'] &&
-                        watchedFields['reminderNo']
-                    ))
+                // Single SMS Campaign  
+                templateComplete = selectedTemplates.primary && (watchedFields['emailFrequency'] || watchedFields['smsFrequency'])
             } else if (campaignType === "both") {
                 // Both Email and SMS Campaign
-                const emailTemplateComplete = selectedTemplates.emailPrimary &&
-                    (!emailReminderEnabled || (
-                        (sameAsEmailReminder || selectedTemplates.emailReminder) &&
-                        watchedFields['emailFrequency'] &&
-                        watchedFields['emailReminderNo']
-                    ))
+                const emailTemplateComplete = selectedTemplates.emailPrimary && watchedFields['emailFrequency'] && watchedFields['emailReminderNo']
 
-                const smsTemplateComplete = selectedTemplates.smsPrimary &&
-                    (!smsReminderEnabled || (
-                        (sameAsSmsReminder || selectedTemplates.smsReminder) &&
-                        watchedFields['smsFrequency'] &&
-                        watchedFields['smsReminderNo']
-                    ))
+                const smsTemplateComplete = selectedTemplates.smsPrimary && watchedFields['smsFrequency'] && watchedFields['smsReminderNo']
 
-                templateComplete = emailTemplateComplete && smsTemplateComplete
+                templateComplete = emailTemplateComplete && smsTemplateComplete;
             }
         }
 
-        let templateSelectionStatus = 'pending'
+        let templateSelectionStatus = 'pending';
         if (templateComplete) {
-            templateSelectionStatus = 'completed'
-            newActiveStep = 4
+            templateSelectionStatus = 'completed';
+            newActiveStep = 4;
         } else if (targetingComplete) {
-            templateSelectionStatus = activeStep === 3 ? 'in_progress' : 'pending'
+            templateSelectionStatus = 'in_progress';
         }
 
         // Check Scheduling completion
@@ -218,123 +235,12 @@ export default function Detail({ }) {
         setOpenCustomer(false)
     }
 
-    const handleCampaignTypeChange = (type) => {
-        setCampaignType(type)
-        setSelectedTemplates({
-            primary: null,
-            reminder: null,
-            final: null,
-            emailPrimary: null,
-            emailReminder: null,
-            emailFinal: null,
-            smsPrimary: null,
-            smsReminder: null,
-            smsFinal: null,
-        })
-        setReminderEnabled(false)
-        setSameAsReminder(false)
-        setSameAsFinal(false)
-        setEmailReminderEnabled(false)
-        setSameAsEmailReminder(false)
-        setSameAsEmailFinal(false)
-        setSmsReminderEnabled(false)
-        setSameAsSmsReminder(false)
-        setSameAsSmsFinal(false)
-        if (type === 'both') {
-            setActiveTab('email')
-        }
-    }
 
     const openTemplateSelector = (mode) => {
         setTemplateSelectionMode(mode)
         setOpenEmail(true)
     }
 
-    const handleReminderToggle = (checked) => {
-        setReminderEnabled(checked)
-        if (!checked) {
-            setSelectedTemplates(prev => ({
-                ...prev,
-                reminder: null,
-                final: null
-            }))
-            setSameAsReminder(false)
-            setSameAsFinal(false)
-        }
-    }
-
-    const handleSameAsReminderToggle = (checked) => {
-        setSameAsReminder(checked)
-        if (checked) {
-            setSelectedTemplates(prev => ({
-                ...prev,
-                reminder: prev.primary
-            }))
-        } else {
-            setSelectedTemplates(prev => ({
-                ...prev,
-                reminder: null
-            }))
-        }
-    }
-
-    const handleSameAsFinalToggle = (checked) => {
-        setSameAsFinal(checked)
-        if (checked) {
-            setSelectedTemplates(prev => ({
-                ...prev,
-                final: prev.primary
-            }))
-        } else {
-            setSelectedTemplates(prev => ({
-                ...prev,
-                final: null
-            }))
-        }
-    }
-
-    const handleEmailReminderToggle = (checked) => {
-        setEmailReminderEnabled(checked)
-        if (!checked) {
-            setSelectedTemplates(prev => ({
-                ...prev,
-                emailReminder: null,
-                emailFinal: null
-            }))
-            setSameAsEmailReminder(false)
-            setSameAsEmailFinal(false)
-        }
-    }
-
-    const handleSameAsEmailReminderToggle = (checked) => {
-        setSameAsEmailReminder(checked)
-        if (checked) {
-            setSelectedTemplates(prev => ({
-                ...prev,
-                emailReminder: prev.emailPrimary
-            }))
-        } else {
-            setSelectedTemplates(prev => ({
-                ...prev,
-                emailReminder: null
-            }))
-        }
-    }
-
-    const handleSameAsEmailFinalToggle = (checked) => {
-        setSameAsEmailFinal(checked)
-        if (checked) {
-            setSelectedTemplates(prev => ({
-                ...prev,
-                emailFinal: prev.emailPrimary
-            }))
-        } else {
-            setSelectedTemplates(prev => ({
-                ...prev,
-                emailFinal: null
-            }))
-        }
-    }
 
     const handleTemplateSave = (templateData) => {
         setSelectedTemplates(prev => ({
@@ -342,19 +248,6 @@ export default function Detail({ }) {
             [templateSelectionMode]: templateData
         }))
         setOpenEmail(false)
-    }
-
-    const handleSmsReminderToggle = (checked) => {
-        setSmsReminderEnabled(checked)
-        if (!checked) {
-            setSelectedTemplates(prev => ({
-                ...prev,
-                smsReminder: null,
-                smsFinal: null
-            }))
-            setSameAsSmsReminder(false)
-            setSameAsSmsFinal(false)
-        }
     }
 
     const handleSameAsSmsReminderToggle = (checked) => {
@@ -394,10 +287,10 @@ export default function Detail({ }) {
                 <div className="flex items-center justify-between mb-2">
                     <div className="text-sm text-secondary">
                         {label}
-                        {isRequired && <span className="text-danger">*</span>}
+                        {isRequired ? <span className="text-danger">*</span> : <span className="text-text3"> (Optional)</span>}
                     </div>
                     <SecondaryButton
-                        title="Select Template"
+                        title="Template selection"
                         type="button"
                         class_="text-sm! font-normal!"
                         onClick={() => openTemplateSelector(templateType)}
@@ -541,16 +434,17 @@ export default function Detail({ }) {
                         expandAll={expandAll} setExpandAll={setExpandAll}
                         title="Campaign Details"
                         status={getCardStatus('campaignDetails')}>
-                        <div className="grid grid-cols-2 gap-3">
-                            <InputForm
-                                label="Campaign Name"
-                                placeholder="Enter Name"
-                                isRequired={true}
-                                inputClass="bg-white! border-primary/10! focus:border-primary/60!"
-                                formProps={{ ...register("campaignName", { required: true }) }}
-                                errors={errors}
-                            />
-
+                        <div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <InputForm
+                                    label="Campaign Name"
+                                    placeholder="Enter Name"
+                                    isRequired={true}
+                                    inputClass="bg-white! border-primary/10! focus:border-primary/60!"
+                                    formProps={{ ...register("campaignName", { required: true }) }}
+                                    errors={errors}
+                                />
+                            </div>
                             <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white! border-primary/10! focus:border-primary/60!"
                                 formProps={{ ...register("description", { required: false }) }}
                                 errors={errors}
@@ -612,10 +506,10 @@ export default function Detail({ }) {
                                 /> */}
                             </div>
                         </div>
-                        <div>
+                        {customersSelected && <div>
                             <div className="flex justify-between">
                                 <div>
-                                    {customersSelected && <div className="flex items-center gap-5 mb-4">
+                                    <div className="flex items-center gap-5 mb-4">
                                         <div className="flex items-center gap-2">
                                             <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                                             <div className="text-danger text-lg font-semibold capitalize">{customersSelected || 5} customers are already in an active campaign?</div>
@@ -623,7 +517,7 @@ export default function Detail({ }) {
                                         <SecondaryButton title="View Details" class_="text-sm! font-normal!"
                                             type="button"
                                             onClick={() => { setOpenCustomer("details") }} />
-                                    </div>}
+                                    </div>
                                 </div>
                                 <CancelButton type="button" title="proceed anyway" class_="bg-white! border-border-color! font-normal! text-sm!" />
                             </div>
@@ -644,14 +538,14 @@ export default function Detail({ }) {
                                 </SelectForm>}
                             </div>
 
-                            {customersSelected && <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
+                            <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
                                 <div>Total Selected Customers</div>
                                 <div className="flex items-center gap-2">
                                     <div>{customersSelected ? '250 Customers' : '0 Customers'}</div>
                                     <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />
                                 </div>
-                            </div>}
-                        </div>
+                            </div>
+                        </div>}
                     </CampaignCard>
                 </div>
 
@@ -672,17 +566,6 @@ export default function Detail({ }) {
                                     checked={campaignType === "both"} onChange={() => handleCampaignTypeChange('both')} />
                             </div>
                         </div>
-
-                        {/* <div>
-                            <div className="flex gap-3 my-4">
-                                <div className="text-secondary text-sm">Reminder SMS Template<span className="text-danger">*</span></div>
-                                <Radio label="Custom reminder SMS" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
-
-                                <Radio label="Same as primary" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
-
-                            </div>
-                        </div> */}
-                        {/* Tabs for Both Campaign Type */}
                         {campaignType === "both" && (
                             <div className="mb-4">
                                 <div className="flex border-b border-gray-200">
@@ -710,73 +593,223 @@ export default function Detail({ }) {
                             </div>
                         )}
 
-                        {/* Template Content Based on Campaign Type */}
-                        {campaignType !== "both" ? (
-                            // Single Campaign Type (Email or SMS)
-                            <>
-                                {renderTemplateCard('primary', selectedTemplates.primary, `Primary ${campaignType === 'email' ? 'Email' : 'SMS'} Template`, true)}
 
-                                {/* Reminder Section for Email and SMS */}
+                        {(campaignType === "email" || (campaignType === "both" && activeTab === 'email')) && (
+                            <div>
+                                {/* Primary Email Template */}
+                                {renderTemplateCard(
+                                    'primary',
+                                    selectedTemplates.primary,
+                                    'Primary Email Template',
+                                    true
+                                )}
+
+                                {/* Reminder Email Template Options */}
                                 {selectedTemplates.primary && (
                                     <div className="mt-4">
                                         <div className="flex items-start gap-2 mt-1 mb-4">
-                                            <Checkbox onChange={handleReminderToggle} checked={reminderEnabled} />
-                                            <div className="text-secondary text-sm capitalize mt-[2px] font-medium">
-                                                Enable Reminder {campaignType === 'email' ? 'Email' : campaignType === 'sms' ? 'SMS' : 'Email'}
+                                            <div className="text-gray-600 text-sm font-medium">Reminder Email Template</div>
+                                            <div className="flex items-start gap-2">
+                                                <Radio
+                                                    name={campaignType === 'both' ? 'emailReminder' : 'reminderEmail'}
+                                                    label="Custom reminder email"
+                                                    checked={campaignType === 'both' ? !emailReminderEnabled : !reminderEnabled}
+                                                    onChange={() => campaignType === 'both' ? handleEmailReminderToggle('customReminderEmail') : handleReminderToggle('customReminderEmail')}
+                                                />
+                                                <Radio
+                                                    name={campaignType === 'both' ? 'emailReminder' : 'reminderEmail'}
+                                                    label="Same as primary"
+                                                    checked={campaignType === 'both' ? emailReminderEnabled : reminderEnabled}
+                                                    onChange={() => campaignType === 'both' ? handleEmailReminderToggle('sameAsPrimary') : handleReminderToggle('sameAsPrimary')}
+                                                />
                                             </div>
                                         </div>
 
-                                        {reminderEnabled && (
-                                            <>
-                                                {/* <div>
-                                                    <div className="flex gap-3 my-4">
-                                                        <div className="text-secondary text-sm">Final Reminder Email Template<span className="text-danger">*</span></div>
-                                                        <Radio label="Custom final reminder email" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
+                                        {/* Show Reminder Email Template selection only if Custom is selected */}
+                                        {(campaignType === 'both' ? !emailReminderEnabled : !reminderEnabled) && (
+                                            <div className="mb-4">
+                                                {renderTemplateCard(
+                                                    'reminder',
+                                                    selectedTemplates.reminder,
+                                                    'Reminder Email Template',
+                                                    false
+                                                )}
+                                            </div>
+                                        )}
 
-                                                        <Radio label="Same as reminder" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!" />
-
-                                                    </div>
-                                                </div> */}
-                                                {/* Reminder Template Section */}
-                                                <div className="mb-4">
-                                                    {sameAsReminder && <div className="text-secondary text-sm font-medium mb-4">Reminder Email Template</div>}
-                                                    {!sameAsReminder && renderTemplateCard('reminder', selectedTemplates.reminder, 'Reminder Email Template', false)}
+                                        {/* Final Reminder Email Template Options */}
+                                        {((campaignType === 'both' ? emailReminderEnabled : reminderEnabled) ||
+                                            (campaignType === 'both' ? !emailReminderEnabled && selectedTemplates.reminder : !reminderEnabled && selectedTemplates.reminder)) && (
+                                                <>
                                                     <div className="flex items-start gap-2 mt-1 mb-4">
-                                                        <Checkbox onChange={handleSameAsReminderToggle} checked={sameAsReminder} />
-                                                        <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Use same as primary</div>
+                                                        <div className="text-gray-600 text-sm font-medium">Final Reminder Email Template<span className="text-red-500">*</span></div>
+                                                        <div className="flex items-start gap-2">
+                                                            <Radio
+                                                                name="final"
+                                                                label="Custom final reminder email"
+                                                                checked={campaignType === 'both' ? !sameAsEmailFinal : sameAsFinal === "customFinalReminderEmail"}
+                                                                onChange={() => {
+                                                                    if (campaignType === 'both') {
+                                                                        setSameAsEmailFinal(false);
+                                                                    } else {
+                                                                        setSameAsFinal('customFinalReminderEmail');
+                                                                        setSelectedTemplates((prev) => ({ ...prev, final: null }));
+                                                                    }
+                                                                }}
+                                                            />
+                                                            <Radio
+                                                                name="final"
+                                                                label="Same as reminder"
+                                                                checked={campaignType === 'both' ? sameAsEmailFinal : sameAsFinal === "sameAsPrimary"}
+                                                                onChange={() => {
+                                                                    if (campaignType === 'both') {
+                                                                        setSameAsEmailFinal(true);
+                                                                    } else {
+                                                                        setSameAsFinal('sameAsPrimary');
+                                                                        setSelectedTemplates((prev) => ({ ...prev, final: prev.reminder }));
+                                                                    }
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Show Final Reminder Template selection only if Custom is selected */}
+                                                    {(campaignType === 'both' ? !sameAsEmailFinal : sameAsFinal === "customFinalReminderEmail") && (
+                                                        <div className="mb-4">
+                                                            {renderTemplateCard(
+                                                                'final',
+                                                                selectedTemplates.final,
+                                                                'Final Reminder Email Template',
+                                                                false
+                                                            )}
+                                                        </div>
+                                                    )}
+
+
+                                                </>
+                                            )}
+                                    </div>
+                                )}
+
+                                {/* Frequency and Number of Reminders */}
+                                {(campaignType !== "both" && selectedTemplates.primary) && <div className="grid grid-cols-2 gap-4 mt-6">
+                                    <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
+                                        selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
+                                        formProps={{ ...register("emailFrequency", { required: emailReminderEnabled }) }}
+                                        errors={errors} >
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                    </SelectForm>
+                                    <InputForm label="Number of Reminders"
+                                        isRequired={true}
+                                        inputClass="bg-white! py-3! focus:border-primary/60! border-primary/10!"
+                                        formProps={{
+                                            ...register("emailReminderNo", {
+                                                required: emailReminderEnabled,
+                                                valueAsNumber: true
+                                            })
+                                        }} inputType="number"
+                                        errors={errors} />
+                                </div>}
+                            </div>
+                        )}
+
+                        {/* SMS Campaign or SMS Tab Content */}
+                        {(campaignType === "sms" || (campaignType === "both" && activeTab === 'sms')) && (
+                            <div>
+                                {/* Primary SMS Template */}
+                                {renderTemplateCard(
+                                    'smsPrimary',
+                                    selectedTemplates.smsPrimary,
+                                    'Primary SMS Template',
+                                    true
+                                )}
+
+                                {/* SMS Reminder Section - follows same pattern as email */}
+                                {selectedTemplates.smsPrimary && (
+                                    <div className="mt-4">
+                                        <div className="flex items-start gap-2 mt-1 mb-4">
+                                            <div className="text-gray-600 text-sm font-medium">Reminder SMS Template</div>
+                                            <div className="flex items-start gap-2">
+                                                <Radio
+                                                    name="smsReminder"
+                                                    label="Custom reminder SMS"
+                                                    checked={!smsReminderEnabled}
+                                                    onChange={() => setSmsReminderEnabled(false)}
+                                                />
+                                                <Radio
+                                                    name="smsReminder"
+                                                    label="Same as primary"
+                                                    checked={smsReminderEnabled}
+                                                    onChange={() => setSmsReminderEnabled(true)}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Show Reminder SMS Template selection only if Custom is selected */}
+                                        {!smsReminderEnabled && (
+                                            <div className="mb-4">
+                                                {renderTemplateCard(
+                                                    'smsReminder',
+                                                    selectedTemplates.smsReminder,
+                                                    'Reminder SMS Template',
+                                                    false
+                                                )}
+                                            </div>
+                                        )}
+
+                                        {/* Final Reminder SMS Template Options */}
+                                        {selectedTemplates.smsPrimary && (
+                                            <>
+                                                <div className="flex items-start gap-2 mt-1 mb-4">
+                                                    <div className="text-gray-600 text-sm font-medium">Final Reminder SMS Template<span className="text-red-500">*</span></div>
+                                                    <div className="flex items-start gap-2">
+                                                        <Radio
+                                                            name="smsFinal"
+                                                            label="Custom final reminder SMS"
+                                                            checked={!sameAsSmsFinal}
+                                                            onChange={() => setSameAsSmsFinal(false)}
+                                                        />
+                                                        <Radio
+                                                            name="smsFinal"
+                                                            label="Same as reminder"
+                                                            checked={sameAsSmsFinal}
+                                                            onChange={() => setSameAsSmsFinal(true)}
+                                                        />
                                                     </div>
                                                 </div>
 
-                                                {/* Final Reminder Section */}
-                                                {(sameAsReminder || selectedTemplates.reminder) && (
-                                                    <div className="mt-6">
-                                                        <div className="text-secondary text-sm font-medium mb-4">Final Reminder</div>
-                                                        {!sameAsFinal && renderTemplateCard('final', selectedTemplates.final, 'Final Reminder Template', false)}
-                                                        <div className="flex items-start gap-2 mt-1 mb-4">
-                                                            <Checkbox onChange={handleSameAsFinalToggle} checked={sameAsFinal} />
-                                                            <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Use same as primary</div>
-                                                        </div>
+                                                {/* Show Final Reminder SMS Template selection only if Custom is selected */}
+                                                {!sameAsSmsFinal && (
+                                                    <div className="mb-4">
+                                                        {renderTemplateCard(
+                                                            'smsFinal',
+                                                            selectedTemplates.smsFinal,
+                                                            'Final Reminder SMS Template',
+                                                            false
+                                                        )}
                                                     </div>
                                                 )}
 
-                                                {/* Frequency Selection */}
-                                                <div className="grid grid-cols-2 gap-4">
+                                                {/* SMS Frequency and Number of Reminders */}
+                                                <div className="grid grid-cols-2 gap-4 mt-6">
                                                     <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
-                                                        selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
-                                                        formProps={{ ...register("frequency", { required: reminderEnabled }) }}
+                                                        selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
+                                                        formProps={{ ...register("smsFrequency", { required: smsReminderEnabled }) }}
                                                         errors={errors} >
                                                         <option value="daily">Daily</option>
                                                         <option value="weekly">Weekly</option>
                                                         <option value="monthly">Monthly</option>
                                                     </SelectForm>
 
-                                                    {/* Number of Reminders */}
+                                                    {/* SMS Number of Reminders */}
                                                     <InputForm label="Number of Reminders"
                                                         isRequired={true}
                                                         inputClass="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                                                         formProps={{
-                                                            ...register("reminderNo", {
-                                                                required: reminderEnabled,
+                                                            ...register("smsReminderNo", {
+                                                                required: smsReminderEnabled,
                                                                 valueAsNumber: true
                                                             })
                                                         }} inputType="number"
@@ -786,140 +819,7 @@ export default function Detail({ }) {
                                         )}
                                     </div>
                                 )}
-                            </>
-                        ) : (
-                            // Both Campaign Type with Tabs
-                            <>
-                                {/* Email Tab Content */}
-                                {activeTab === 'email' && (
-                                    <div>
-                                        {renderTemplateCard('emailPrimary', selectedTemplates.emailPrimary, 'Primary Email Template', true)}
-
-                                        {/* Email Reminder Section */}
-                                        {selectedTemplates.emailPrimary && (
-                                            <div className="mt-4">
-                                                <div className="flex items-start gap-2 mt-1 mb-4">
-                                                    <Checkbox onChange={handleEmailReminderToggle} checked={emailReminderEnabled} />
-                                                    <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Enable Reminder Email</div>
-                                                </div>
-
-                                                {emailReminderEnabled && (
-                                                    <>
-                                                        {/* Email Reminder Template Section */}
-                                                        <div className="mb-4">
-                                                            {sameAsEmailReminder && <div className="text-secondary text-sm font-medium mb-4">Reminder Email Template</div>}
-                                                            {!sameAsEmailReminder && renderTemplateCard('emailReminder', selectedTemplates.emailReminder, 'Reminder Email Template', false)}
-                                                            <div className="flex items-start gap-2 mt-1 mb-4">
-                                                                <Checkbox onChange={handleSameAsEmailReminderToggle} checked={sameAsEmailReminder} />
-                                                                <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Use same as primary</div>
-                                                            </div>
-                                                        </div>
-
-                                                        {/* Email Final Reminder Section */}
-                                                        {(sameAsEmailReminder || selectedTemplates.emailReminder) && (
-                                                            <div className="mt-6">
-                                                                <div className="text-secondary text-sm font-medium mb-4">Final Reminder</div>
-                                                                {!sameAsEmailFinal && renderTemplateCard('emailFinal', selectedTemplates.emailFinal, 'Final Reminder Template', false)}
-                                                                <div className="flex items-start gap-2 mt-1 mb-4">
-                                                                    <Checkbox onChange={handleSameAsEmailFinalToggle} checked={sameAsEmailFinal} />
-                                                                    <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Use same as primary</div>
-                                                                </div>
-                                                            </div>
-                                                        )}
-
-                                                        {/* Email Frequency Selection */}
-                                                        <SelectForm label="Email Frequency" defaultOption="Select Frequency" isRequired={true}
-                                                            selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
-                                                            formProps={{ ...register("emailFrequency", { required: emailReminderEnabled }) }}
-                                                            errors={errors} >
-                                                            <option value="daily">Daily</option>
-                                                            <option value="weekly">Weekly</option>
-                                                            <option value="monthly">Monthly</option>
-                                                        </SelectForm>
-
-                                                        {/* Email Number of Reminders */}
-                                                        <InputForm label="Number of Email Reminders"
-                                                            isRequired={true}
-                                                            inputClass="bg-white! py-3! focus:border-primary/60! border-primary/10!"
-                                                            formProps={{
-                                                                ...register("emailReminderNo", {
-                                                                    required: emailReminderEnabled,
-                                                                    valueAsNumber: true
-                                                                })
-                                                            }} inputType="number"
-                                                            errors={errors} />
-                                                    </>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-
-                                {/* SMS Tab Content */}
-                                {activeTab === 'sms' && (
-                                    <div>
-                                        {renderTemplateCard('smsPrimary', selectedTemplates.smsPrimary, 'Primary SMS Template', true)}
-
-                                        {/* SMS Reminder Section */}
-                                        {selectedTemplates.smsPrimary && (
-                                            <div className="mt-4">
-                                                <div className="flex items-start gap-2 mt-1 mb-4">
-                                                    <Checkbox onChange={handleSmsReminderToggle} checked={smsReminderEnabled} />
-                                                    <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Enable Reminder SMS</div>
-                                                </div>
-
-                                                {smsReminderEnabled && (
-                                                    <>
-                                                        {/* SMS Reminder Template Section */}
-                                                        <div className="mb-4">
-                                                            {sameAsSmsReminder && <div className="text-secondary text-sm font-medium mb-4">Reminder SMS Template</div>}
-                                                            {!sameAsSmsReminder && renderTemplateCard('smsReminder', selectedTemplates.smsReminder, 'Reminder SMS Template', false)}
-                                                            <div className="flex items-start gap-2 mt-1 mb-4">
-                                                                <Checkbox onChange={handleSameAsSmsReminderToggle} checked={sameAsSmsReminder} />
-                                                                <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Use same as primary</div>
-                                                            </div>
-                                                        </div>
-
-                                                        {/* SMS Final Reminder Section */}
-                                                        {(sameAsSmsReminder || selectedTemplates.smsReminder) && (
-                                                            <div className="mt-6">
-                                                                <div className="text-secondary text-sm font-medium mb-4">Final Reminder</div>
-                                                                {!sameAsSmsFinal && renderTemplateCard('smsFinal', selectedTemplates.smsFinal, 'Final Reminder SMS Template', false)}
-                                                                <div className="flex items-start gap-2 mt-1 mb-4">
-                                                                    <Checkbox onChange={handleSameAsSmsFinalToggle} checked={sameAsSmsFinal} />
-                                                                    <div className="text-secondary text-sm capitalize mt-[2px] font-medium">Use same as primary</div>
-                                                                </div>
-                                                            </div>
-                                                        )}
-
-                                                        {/* SMS Frequency Selection */}
-                                                        <SelectForm label="SMS Frequency" defaultOption="Select Frequency" isRequired={true}
-                                                            selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
-                                                            formProps={{ ...register("smsFrequency", { required: smsReminderEnabled }) }}
-                                                            errors={errors} >
-                                                            <option value="daily">Daily</option>
-                                                            <option value="weekly">Weekly</option>
-                                                            <option value="monthly">Monthly</option>
-                                                        </SelectForm>
-
-                                                        {/* SMS Number of Reminders */}
-                                                        <InputForm label="Number of SMS Reminders"
-                                                            isRequired={true}
-                                                            inputClass="bg-white! py-3! border-primary/10! focus:border-primary/60!"
-                                                            formProps={{
-                                                                ...register("smsReminderNo", {
-                                                                    required: smsReminderEnabled,
-                                                                    valueAsNumber: true
-                                                                })
-                                                            }} inputType="number"
-                                                            errors={errors} />
-                                                    </>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-                            </>
+                            </div>
                         )}
                     </CampaignCard>
                 </div>

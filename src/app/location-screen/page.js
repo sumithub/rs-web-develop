@@ -10,7 +10,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { getError } from '../../../helper'
 import Loading from '../../components/Loading'
-import { locationScreen} from '../../constent/constArray'
+import { locationScreen } from '../../constent/constArray'
 import AddNewLocation from '../../components/Models/location/AddNewLocation'
 import DeleteLocation from '../../components/Models/location/DeleteLocation'
 
@@ -40,13 +40,14 @@ function Location() {
         }
     }
     const Projects = [
-       
+
     ]
 
     return (
         <AdminLayout>
             {open &&
                 <AddNewLocation
+                    isClient={true}
                     type='addNewLocation'
                     onClose={() => {
                         setOpen(false)
@@ -56,6 +57,7 @@ function Location() {
 
             {openEdit &&
                 <AddNewLocation
+                    isClient={true}
                     type='edit'
                     onClose={() => {
                         setOpenEdit(false)
@@ -126,15 +128,15 @@ function Location() {
                     </thead>
 
                     <tbody>
-                        {list.map((e, i) =>
-                            <tr key={i}>
+                        {list.map((e, index) =>
+                            <tr key={index}>
                                 <td>
                                     <div className="flex gap-2.5 items-center">
-                                        <Checkbox 
-                                          checked={e.selected}
-                                        onChange={(checked) => {
-                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                        }}
+                                        <Checkbox
+                                            checked={e.selected}
+                                            onChange={(checked) => {
+                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                            }}
                                         />
                                         {e.name}
                                     </div>
@@ -146,7 +148,7 @@ function Location() {
                                 <td>{e.phoneNumber}</td>
                                 <td>
                                     <div className='flex items-center gap-2'>
-                                        <button className='cursor-pointer mt-2'
+                                        <button className='cursor-pointer'
                                             onClick={() => { setOpenEdit(true) }}>
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
@@ -160,9 +162,9 @@ function Location() {
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
-               {list?.length > 0 && <div>
-                    <PaginationDemo />
-                </div>}
+            {list?.length > 0 && <div>
+                <PaginationDemo />
+            </div>}
         </AdminLayout>
     )
 }

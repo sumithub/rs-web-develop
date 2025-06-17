@@ -27,6 +27,7 @@ import axios from 'axios';
 import { formatDate, getError } from '../../../helper';
 import { toast } from 'react-toastify';
 import Loading from "../../components/Loading"
+import SecondaryButton from '../../components/common/SecondaryButton';
 
 export default function Users() {
     const [list, setList] = useState([])
@@ -175,12 +176,11 @@ export default function Users() {
                     </CustomSelectBox>
 
                     <DateRange
-                        onChange={(dates) => { setDates(dates) }}
+                        value={dates}
+                        onChange={(e) => { setDates(e) }}
                     />
                 </div>
-
-                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 w-32"
-                    onClick={() => { setOpenModal("new") }}>Invite New User</button>
+              <SecondaryButton title="Invite New User" onClick={() => { setOpenModal("new") }} class_='text-xs! w-32!'/>
 
             </div>
 
