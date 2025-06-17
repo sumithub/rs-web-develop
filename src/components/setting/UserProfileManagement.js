@@ -32,7 +32,7 @@ export default function Profile({ id }) {
     const loadProfileData = async () => {
         try {
             setLoading(true);
-            const res = await axios.get(`/api/profile/${id}`);
+            const res = await axios.get(`/api}`);
             const data = res.data;
             
             // Set profile form values
@@ -56,9 +56,9 @@ export default function Profile({ id }) {
             let res = null;
 
             if (id !== "add") {
-                res = await axios.put(`/api/profile/${id}`, data);
+                res = await axios.put(`/api`, data);
             } else {
-                res = await axios.post("/api/profile", data);
+                res = await axios.post("/api", data);
             }
 
             toast.success("Profile updated successfully");
@@ -79,7 +79,7 @@ export default function Profile({ id }) {
                 newPassword: data.newPassword
             };
 
-            await axios.put(`/api/profile/${id}/password`, passwordData);
+            await axios.put(`/api`, passwordData);
             
             toast.success("Password updated successfully");
             passwordForm.reset();
@@ -99,7 +99,7 @@ export default function Profile({ id }) {
         formData.append('profilePicture', file);
 
         try {
-            const res = await axios.post(`/api/profile/${id}/picture`, formData, {
+            const res = await axios.post(`/api`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -114,7 +114,7 @@ export default function Profile({ id }) {
     const handleDeleteAccount = async () => {
         if (window.confirm("Are you sure you want to delete your account? This action is irreversible!")) {
             try {
-                await axios.delete(`/api/profile/${id}`);
+                await axios.delete(`/api`);
                 toast.success("Account deleted successfully");
                 // Redirect or handle post-deletion logic here
             } catch (error) {
@@ -207,6 +207,7 @@ export default function Profile({ id }) {
                         <div className="pt-5">
                             <InputForm
                                 label="Company"
+                                labelClass=""
                                 placeholder="Enter company name"
                                 inputClass="border-primary/10"
                                 class_="mt-0!"
