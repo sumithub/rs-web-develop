@@ -39,34 +39,24 @@ function CreateClientRule({ onClose, id }) {
         }
     }
 
-let title = !id ? "Create Client Rule" : "Edit Client Rule"
+    let title = !id ? "Create Client Rule" : "Edit Client Rule"
 
-if (type === "positiveReview") {
-    title = !id ? "Create Positive Review" : "Edit Positive Review"
-} else if (type === "reviewResponseReceived") {
-    title = !id ? "Create Review Response" : "Edit Review Response"
-} else if (type === "reviewDeleted") {
-    title = !id ? "Create Review Deletion" : "Edit Review Deletion"
-}
+    if (type === "positiveReview") {
+        title = "Positive Review"
+    } else if (type === "reviewResponseReceived") {
+        title = "Review Response Received"
+    } else if (type === "reviewDeleted") {
+        title = "Review Deleted"
+    }
 
-    // let title = "Create Client Rule"
-
-    // if (type === "positiveReview") {
-    //     title = "Positive Review"
-    // } else if (type === "reviewResponseReceived") {
-    //     title = "Review Response Received"
-    // } else if (type === "reviewDeleted") {
-    //     title = "Review Deleted"
-    // }
     return <Model onClose={onClose} title={title} modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-           {id && <InputForm label="Client Rule ID" placeholder="Enter client id" isRequired={false} class_="mt-0!"
+                {id && <InputForm label="Client Rule ID" placeholder="Enter client id" isRequired={false} class_="mt-0!"
                     inputClass="border-primary/10"
                     formProps={{ ...register("clientRuleId", { required: false }) }}
                     errors={errors}
                     setValue={setValue}
-
                 />}
 
                 <SelectForm label="Event Type"
@@ -131,8 +121,31 @@ if (type === "positiveReview") {
                         <option value="ghnFtgvVftttt">GHN FTGV VFTTTT</option>
                     </SelectForm>
                 </>)}
-
             </div>
+
+            {(type === "flaggedReview" || type === "positiveReview" || type === "negativeReview") && (
+                <SelectForm label="Rule Condition"
+                    selectClass_="py-3.5! px-2.5! border-primary/10!"
+                    isRequired={true}
+                    defaultOption="Select Condition"
+                    formProps={{ ...register("ruleCondition", { required: true }) }} 
+                    errors={errors} 
+                    clearErrors={clearErrors}>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                   
+                </SelectForm>
+            )}
+
+            {(type === "positiveReview" || type === "negativeReview") && (
+                <div className="mt-3 flex justify-between">
+                    <div>Threshold Rating</div>
+                    <StarRangeSlider/>
+                </div>
+            )}
 
             {(type === "newReview") && (<div>
                 <div className="mt-6 font-semibold text-xl">
@@ -148,7 +161,7 @@ if (type === "positiveReview") {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        formProps={{ ...register("sendNotificationToSupportTeam") }} errors={errors} />
+                        formProps={{ ...register("supportTeam") }} errors={errors} />
                     <div>
                         Send Notification To Support Team
                     </div>
@@ -159,7 +172,7 @@ if (type === "positiveReview") {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        formProps={{ ...register("triggerWelcomeEmailToReviewer") }} errors={errors} />
+                        formProps={{ ...register("emailToReviewer") }} errors={errors} />
                     <div>
                         Trigger Welcome Email To Reviewer
                     </div>
@@ -167,31 +180,27 @@ if (type === "positiveReview") {
             </div>)}
 
             {type === "flaggedReview" && (<div>
-                <SelectForm label="Rule Condition"
-                    selectClass_="py-3.5! px-2.5! border-primary/10!"
-                    isRequired={true}
-                    defaultOption="Select Condition"
-                    formProps={{ ...register("ruleCondition", { required: true }) }} errors={errors} clearErrors={clearErrors}>
-                    <option value="sendNotification">Send Notification</option>
-                    <option value="sendAlert">Send Alert</option>
-                </SelectForm>
-
-
                 <div className="mt-6 font-semibold text-xl">
                     Additional Action
                 </div>
 
                 <RadioForm
                     label="Auto-Hide Review"
-                    formProps={{ ...register("autoHideReview") }} errors={errors} />
+                    name="additionalAction"
+                     formProps={{ ...register("additionalAction", { required: false }) }}
+                    errors={errors}/>
 
                 <RadioForm
                     label="Notify Moderator Immediately"
-                    formProps={{ ...register("notifyModeratorImmediately") }} errors={errors} />
+                    name="additionalAction"
+                      formProps={{ ...register("additionalAction", { required: false }) }}
+                    errors={errors} />
 
                 <RadioForm
                     label="Mark For Review"
-                    formProps={{ ...register("markForReview") }} errors={errors} />
+                    name="additionalAction"
+                     formProps={{ ...register("additionalAction", { required: false }) }}
+                    errors={errors} />
             </div>)}
 
             {type === "reviewResponseReceived" && (<div>
@@ -204,7 +213,7 @@ if (type === "positiveReview") {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        formProps={{ ...register("logResponseTimeForPerformanceMetrics") }} errors={errors} />
+                        formProps={{ ...register("performanceMetrics") }} errors={errors} />
                     <div>
                         Log Response Time For Performance Metrics
                     </div>
@@ -223,54 +232,39 @@ if (type === "positiveReview") {
 
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        formProps={{ ...register("logDeletionEventForAuditPurposes") }} errors={errors} />
+                        formProps={{ ...register("auditPurposes") }} errors={errors} />
                     <div>
                         Log Deletion Event For Audit Purposes
                     </div>
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        formProps={{ ...register("notifyComplianceTeam") }} errors={errors} />
+                        formProps={{ ...register("complianceTeam") }} errors={errors} />
                     <div>
                         Notify Compliance Team
                     </div>
                 </div>
             </div>)}
 
-            {(type === "positiveReview" || type === "negativeReview") && (<div>
-                <SelectForm label="Rule Condition"
-                    selectClass_="py-3.5! px-2.5! border-primary/10!"
-                    isRequired={true}
-                    defaultOption="Select Condition"
-                    formProps={{ ...register("ruleCondition", { required: true }) }} errors={errors} clearErrors={clearErrors}>
-                    <option value="sendNotification">Send Notification</option>
-                    <option value="sendAlert">Send Alert</option>
-                </SelectForm>
-
-                <div className="mt-3 flex  justify-between">
-                  <div>  Threshold Rating</div>
-                  <StarRangeSlider/>
+            {type === "positiveReview" && (<div>
+                <div className="mt-4 font-semibold text-xl">
+                    Action
                 </div>
-                {type !== "negativeReview" && (<>
-                    <div className="mt-4 font-semibold text-xl">
-                        Action
-                    </div>
 
-                    <div className='flex gap-2.5 items-center mt-4'>
-                        <CheckboxForm
-                            formProps={{ ...register("autoPromoteReviewToTestimonials") }} errors={errors} />
-                        <div>
-                            Auto-Promote Review To Testimonials
-                        </div>
+                <div className='flex gap-2.5 items-center mt-4'>
+                    <CheckboxForm
+                        formProps={{ ...register("reviewToTestimonials") }} errors={errors} />
+                    <div>
+                        Auto-Promote Review To Testimonials
                     </div>
-                    <div className='flex gap-2.5 items-center mt-4'>
-                        <CheckboxForm
-                            formProps={{ ...register("markReviewAsFeatured") }} errors={errors} />
-                        <div>
-                            Mark Review As Featured
-                        </div>
+                </div>
+                <div className='flex gap-2.5 items-center mt-4'>
+                    <CheckboxForm
+                        formProps={{ ...register("markReviewAsFeatured") }} errors={errors} />
+                    <div>
+                        Mark Review As Featured
                     </div>
-                </>)}
+                </div>
             </div>)}
 
             {type === "negativeReview" && (<div>
@@ -287,19 +281,19 @@ if (type === "positiveReview") {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        formProps={{ ...register("escalateAlertToManager") }} errors={errors} />
+                        formProps={{ ...register("escalateAlert") }} errors={errors} />
                     <div>
                         Escalate Alert To Manager
                     </div>
                 </div>
             </div>)}
+
             <div className="grid grid-cols-2 gap-3 mt-[30px]">
                 <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
                 <SecondaryButton title={type === "newReview" || type === "flaggedReview" || type === "reviewResponseReceived" || type === "reviewDeleted" || type === "positiveReview" || type === "negativeReview" ? "Save Rule" : "Save"} type="submit" disabled={sending} class_="text-lg!" />
             </div>
         </form>
-    </Model >
-
+    </Model>
 }
 
 export default CreateClientRule
