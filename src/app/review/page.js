@@ -21,7 +21,7 @@ import RequestUpdate from "../../components/Models/review/RequestUpdate";
 import AssignReviewToUser from "../../components/Models/review/AssignReviewToUser";
 import ReviewDetails from "../../components/Models/review/ReviewDetails";
 import DeleteTemplate from "../../components/Models/review/DeleteTemplate";
-import DateRange from "../../components/form/DateRangePicker";
+import DateRange from '../../components/form/DateRangePicker'
 import PaginationDemo from "../../components/Pagination";
 import SecondaryButton from "../../components/common/SecondaryButton";
 
@@ -31,7 +31,8 @@ export default function Review() {
     const [status, setStatus] = useState("")
     const [date, setDate] = useState("")
     const [list, setList] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
+    const [loading2, setLoading2] = useState(true)
     const [search, setSearch] = useState("")
     const [open, setOpen] = useState(false)
     const [sortBy, setSortBy] = useState("")
@@ -43,15 +44,17 @@ export default function Review() {
 
     const getReview = async () => {
         try {
-            setLoading(true)
+            setLoading2(true)
             setList([])
             const res = await axios.get("/api")
             setList(res.data || manageReview)
             setLoading(false)
+            setLoading2(false)
 
         } catch (error) {
             toast.error(getError(error))
             setLoading(false)
+            setLoading2(false)
         }
     }
 
@@ -265,7 +268,8 @@ export default function Review() {
                         </CustomSelectBox>
 
                         <DateRange class_="shrink-0!"
-                            onChange={(e) => { setDate(e) }} />
+                        value={date}
+                             onChange={(e) => { setDate(e) }} />
 
                         <CustomSelectBox
                             class_="mt-0! w-36!"
@@ -313,7 +317,7 @@ export default function Review() {
 
                 <div className="w-full overflow-x-auto mt-5 border border-border-color rounded-[20px]">
 
-                    {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+                    {loading2 ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
 
                         <thead>
                             <tr className="text-secondary text-sm font-semibold bg-dark border-b border-border-color text-left">
