@@ -622,7 +622,7 @@ export default function AddReview({ heading = "", onClose, OnSave, id, onNext })
                             <span className="text-xs">{isFormValid ? 'Valid' : 'Invalid'}</span>
                         </div>
                     </div>
-                    <div className="p-5 h-[90%]">
+                    <div className="p-5">
                         {normalizedTitle === "carousel" ? (
                             <Carousel setOpen={setOpen} previewData={previewData} />
                         ) : normalizedTitle === "starbadgewidget" ? (
@@ -874,7 +874,7 @@ const Carousel = ({ setOpen, previewData = {} }) => {
 
     return (
         <div
-            className="border border-border2 rounded-[10px] p-5 flex flex-col justify-between h-full"
+            className="border border-border2 rounded-[10px] p-5 flex flex-col justify-between"
             style={{ fontFamily, borderRadius: `${borderRadius}px` }}
         >
             <div>
