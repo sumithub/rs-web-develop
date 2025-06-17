@@ -60,7 +60,16 @@ export default function ClientsManagement() {
         { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
     ]
     return (
-        <AdminLayout>
+        <AdminLayout
+            noCard={false}
+            headerChild={
+                <Search
+                    mainClass='w-76!'
+                    placeholder="Search"
+                    onSearch={(s) => {
+                        setSearch(s)
+                    }}
+                />}>
             {openUser &&
                 <SuspendUser
                     onClose={() => {

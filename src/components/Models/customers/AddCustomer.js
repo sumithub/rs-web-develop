@@ -29,15 +29,6 @@ function AddCustomer({ onClose, id, onSave }) {
         setType("manually");
     };
 
-    //  const handleBackClick = () => {
-    //     if (type === "import") {
-
-    //         setType("manually");
-    //     } else {
-    //         onClose();
-    //     }
-    // };
-
     const onSubmit = async (data) => {
         try {
             setSending(true)
@@ -51,7 +42,7 @@ function AddCustomer({ onClose, id, onSave }) {
             if (onSave) {
                 onSave(data)
             }
-            toast.success("Customer Added Successfully")
+            toast.success(!id ? "Customer Added Successfully" : "Customer Updated Successfully")
             setSending(false)
             onClose()
         } catch (error) {
@@ -59,9 +50,11 @@ function AddCustomer({ onClose, id, onSave }) {
             setSending(false)
         }
     }
-    return <Model onClose={onClose} title={activeStep === 6 ? "Customers Imported Successfully!" : type === "import" ? "Import Customers" : (!id ? "Add new Customer" : "Edit Customers List")} modalClass={`${type === "manually" ? "w-1/2!" : "w-[60%]!"}`}>
+
+    return <Model onClose={onClose} title={activeStep === 6 ? "Customers Imported Successfully!" : type === "import" ? "Import Customers" : (!id ? "Add New Customer" : "Edit Customer")} modalClass={`${type === "manually" ? "w-1/2!" : "w-[60%]!"}`}>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
+                {/* Only show radio buttons when adding a new customer and not on success step */}
                 {!id && activeStep !== 6 && <div className="flex gap-4 items-center">
                     <button type="button" onClick={handleBackClick}><Image src="/images/arrow-box.svg" alt="arrow" height={30} width={30} unoptimized={true} /></button>
 
@@ -82,6 +75,7 @@ function AddCustomer({ onClose, id, onSave }) {
 
                 {type === "manually" && <div>
                     <div>
+                        {/* Show customer details form when adding new customer */}
                         {!id && <div>
                             <InputForm label="Customer Name" placeholder="Enter your name" isRequired={true}
                                 formProps={{ ...register("customerName", { required: true }) }}
@@ -107,6 +101,8 @@ function AddCustomer({ onClose, id, onSave }) {
                                 setValue={setValue}
                                 watch={watch} />
                         </div>}
+                        
+                        {/* Show list name form when editing customer */}
                         {id && <InputForm label="List Name" placeholder="Enter List Name" isRequired={true}
                             formProps={{ ...register("listName", { required: true }) }}
                             errors={errors} />}
@@ -119,6 +115,7 @@ function AddCustomer({ onClose, id, onSave }) {
                         </SelectForm>
                     </div>
 
+                    {/* Show duplicate handling options when editing customer */}
                     {id && <div>
                         <div className="mt-4">
                             <div className="text-sm text-secondary font-medium">Duplicate Handling<span className="text-danger">*</span></div>
@@ -155,7 +152,8 @@ function AddCustomer({ onClose, id, onSave }) {
             </div>}
         </form>
 
-        {type === "import" && <div>
+        {/* Only show import functionality when adding new customer */}
+        {type === "import" && !id && <div>
             <ImportCustomer
                 activeStep={activeStep}
                 setActiveStep={setActiveStep}

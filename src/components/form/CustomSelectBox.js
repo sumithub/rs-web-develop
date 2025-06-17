@@ -14,9 +14,24 @@ export default function CustomSelectBox({
     labelClass = "",
     paddingClass = "",
     multiSelect = false,
-    placeholder = "Select options..."
+    placeholder = "Select options...",
+    errors,
+    formProps
 }) {
     const [isOpen, setIsOpen] = useState(false);
+
+    let error = "";
+
+    if (formProps?.name && errors?.[formProps.name]) {
+        const fieldError = errors[formProps.name];
+        if (fieldError.type === "pattern" || fieldError.type === "validate" || fieldError.type === "minLength") {
+            error = fieldError.message;
+        } else {
+            error = "This field is required";
+        }
+    } else if (formProps?.name && errors?.[formProps.name]?.type) {
+        error = errors[formProps.name]?.message || "This field is required";
+    }
 
     // Extract options from children for display
     const options = [];
@@ -194,6 +209,7 @@ export default function CustomSelectBox({
                 </div>
             )}
         </div>
+        {error && <p className="text-xs pt-[3px] capitalize text-danger">{error}</p>}
     </div>
     );
 }

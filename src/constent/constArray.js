@@ -10,10 +10,10 @@ export const USER_ACTIONS = [
 ]
 
 export const users = [
-    { name: "Jaydon George", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
 ];
 
 export const TEMPLATE_ACTIONS = [
@@ -230,4 +230,52 @@ export const locationCampaign = [
     { name: "John Deo", status: "Active", responses: "150" },
     { name: "John Deo", status: "Active", responses: "150" },
     { name: "John Deo", status: "Completed", responses: "150" },
+]
+
+
+export const clientCampaign = [
+    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
+    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
+    { name: "John Deo", status: "Completed", locations: "3 Locations", responses: "150" },
+    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
+    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
+    { name: "John Deo", status: "Completed", locations: "3 Locations", responses: "150" },
+]
+
+
+export const clientLocation = [
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+]
+
+
+export const clientSubscription = [
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Overdue" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Overdue" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
+    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Overdue" },
+]
+
+export const userManagement = [
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
 ]
