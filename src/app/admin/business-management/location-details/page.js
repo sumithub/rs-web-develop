@@ -1,13 +1,56 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AdminLayout from "../../../../components/AdminLayout"
 import DashboardCard from "../../../../components/DashboardCard"
+import { locationCampaign, locationReviews } from "../../../../constent/constArray"
+import { toast } from "react-toastify"
+import { getError } from "../../../../../helper"
+import axios from "axios"
+import Search from "../../../../components/form/Search"
+import Loading from "../../../../components/Loading"
+import TableOrder from "../../../../components/TableOrder"
+import Checkbox from "../../../../components/form/Checkbox"
+import Status from "../../../../components/Status"
+import PaginationDemo from "../../../../components/Pagination"
+import Image from "next/image"
 
 export default function LocationDetails() {
     const [sortBy, setSortBy] = useState(false)
     const [view, setView] = useState("overview")
+    const [search, setSearch] = useState("")
+    const [list, setList] = useState([])
+    const [list1, setList1] = useState([])
+    const [loading, setLoading] = useState(true)
+
+
+    useEffect(() => {
+        getData()
+    }, [search, sortBy])
+
+    const getData = async () => {
+        try {
+            setLoading(true)
+            const res = await axios.get("/api")
+            setList(res.data || locationReviews)
+            setList1(res.data || locationCampaign)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
     return (
-        <AdminLayout>
+        <AdminLayout
+            noCard={false}
+            headerChild={
+                <Search
+                    mainClass='w-76!'
+                    placeholder="Search"
+                    onSearch={(s) => {
+                        setSearch(s)
+                    }}
+                />}>
             <div className="inline-block">
                 <div className='flex items-center gap-10 px-5 bg-white shadow-sm rounded-[10px]'>
                     <div
@@ -16,7 +59,7 @@ export default function LocationDetails() {
                         }}
                         className={`${view === "overview" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
                     >
-                        overview
+                        Overview
                     </div>
 
                     <div
@@ -78,6 +121,127 @@ export default function LocationDetails() {
                     </div>
                 </div>}
             </div>
+            {view === "reviews" && <div>
+                <div className="bg-secondary2 rounded-[15px] p-5 mt-3.5 flex justify-between items-center">
+                    <div>
+                        <h2 className="text-base">Location Name</h2>
+                        <h2 className="text-lg font-medium pt-1.5">Melbourne CBD</h2>
+                    </div>
+                    <hr className="border border-border-color w-16 h-full rotate-90" />
+                    <div>
+                        <h2 className="text-base">Client Name</h2>
+                        <h2 className="text-lg font-medium pt-1.5">Client A</h2>
+                    </div>
+                </div>
+
+                <div className="table-class mt-3.5">
+                    {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
+                        <thead>
+                            <tr>
+                                <th><TableOrder title="Customer"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="customer" /></th>
+                                <th><TableOrder title="Rating"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="rating" /></th>
+                                <th><TableOrder title="Review"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="review" /></th>
+                                <th><TableOrder title="Date"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="date" /></th>
+                                <th >Response Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {list?.map((e, index) =>
+                                <tr key={index}>
+                                    <td>
+                                        <div className="flex items-center gap-2.5">
+                                            <Checkbox
+                                                checked={e.selected}
+                                                onChange={(checked) => {
+                                                    setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                                }} />
+                                            <div>{e.customer}</div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                    <td>{e.review}</td>
+                                    <td>{e.date}</td>
+                                    <td><Status status={e.status} /></td>
+                                </tr>)}
+                        </tbody>
+                    </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                    {list?.length > 0 && <div>
+                        <PaginationDemo />
+                    </div>}
+                </div>
+            </div>}
+            {view === "campaign" && <div>
+                <div className="bg-secondary2 rounded-[15px] p-5 mt-3.5 flex justify-between items-center">
+                    <div>
+                        <h2 className="text-base">Location Name</h2>
+                        <h2 className="text-lg font-medium pt-1.5">Melbourne CBD</h2>
+                    </div>
+                    <hr className="border border-border-color w-16 h-full rotate-90" />
+                    <div>
+                        <h2 className="text-base">Client Name</h2>
+                        <h2 className="text-lg font-medium pt-1.5">Client A</h2>
+                    </div>
+                </div>
+
+                <div className="table-class mt-3.5">
+                    {loading ? <Loading /> : (list1?.length > 0 ? <table className="w-full">
+                        <thead>
+                            <tr>
+                                <th><TableOrder title="Campaign Name"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="name" /></th>
+                                <th><TableOrder title="Status"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="status" /></th>
+                                <th><TableOrder title="Responses"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="responses" /></th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {list1?.map((e, index) =>
+                                <tr key={index}>
+                                    <td>
+                                        <div className="flex items-center gap-2.5">
+                                            <Checkbox
+                                                checked={e.selected}
+                                                onChange={(checked) => {
+                                                    setList1(list1 => list1.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                                }} />
+                                            <div>{e.name}</div>
+                                        </div>
+                                    </td>
+                                    <td><Status status={e.status} /></td>
+                                    <td>{e.responses}</td>
+                                    <td>
+                                        <button className='cursor-pointer'>
+                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                        </button>
+                                    </td>
+                                </tr>)}
+                        </tbody>
+                    </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                    {list1?.length > 0 && <div>
+                        <PaginationDemo />
+                    </div>}
+                </div>
+            </div>}
         </AdminLayout>
     )
 }

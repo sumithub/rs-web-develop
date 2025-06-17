@@ -18,6 +18,7 @@ export default function Status({ status = "" }) {
         bgClass = "bg-[#0396FF1A] text-primary";
     } else if (
         s === "pending invite" ||
+        s === "pending" ||
         s === "in_progress" ||
         s === "flagged" ||
         s === "dp"
@@ -32,7 +33,7 @@ export default function Status({ status = "" }) {
     } else if (s === "processing") {
         bgClass = "bg-[#FFC1071A] text-[#FFC107]";
     }
-    else if (s === "yes") {
+    else if (s === "yes" || s === "replied") {
         bgClass = "bg-[#0396FF1A] text-primary"
     }
     else if (s === "notify") {
