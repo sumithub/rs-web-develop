@@ -62,7 +62,6 @@ function AddTemplate({ onClose, id }) {
               >
                 <option value="email">Email</option>
                 <option value="sms">SMS</option>
-                <option value="both">Both</option>
               </SelectForm>
               <InputForm
                 inputClass='border-primary/10! focus:border-primary/60!'

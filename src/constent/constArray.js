@@ -10,10 +10,10 @@ export const USER_ACTIONS = [
 ]
 
 export const users = [
-    { name: "Jaydon George", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
 ];
 
 export const TEMPLATE_ACTIONS = [
