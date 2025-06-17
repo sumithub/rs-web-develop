@@ -125,7 +125,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                     tag: formData.tag,
                     duplicateHandling: formData.duplicateHandling
                 }));
-                toast.success("List Details Added Successfully");
+                // toast.success("List Details Added Successfully");
             }
 
             setTab(tab + 1);
@@ -293,8 +293,8 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                             selectClass_="border-primary3/10"
                                                             class_="mt-0!"
                                                             onChange={(e) => handleFieldMappingChange(index, e.target.value)}
+                                                            defaultOption="Select mapping"
                                                         >
-                                                            <option value="">Select mapping</option>
                                                             <option value="fullName">Full Name</option>
                                                             <option value="phoneNumber">Phone Number</option>
                                                             <option value="email">Email</option>

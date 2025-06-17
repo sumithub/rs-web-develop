@@ -171,7 +171,8 @@ function Customers() {
                             <option value="source: manual vs. imported">Source: Manual vs. Imported</option>
                         </CustomSelectBox>
 
-                        <button className="flex items-center text-xs justify-center gap-2 bg-primary border border-primary py-[10.5px] px-3 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0" onClick={() => { setOpenBoost(true) }}>
+                        <button className="flex items-center text-xs justify-center gap-2 bg-primary border border-primary py-[10.5px] px-3 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
+                         onClick={() => { setOpenBoost(true) }}>
                             <Image unoptimized={true} src="/images/flash.svg" alt="flash" height={16} width={16} />Boost</button>
 
                         <button className="bg-primary border border-primary text-xs hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
@@ -298,8 +299,8 @@ function Customers() {
                             <td><Status status={e.status} /></td>
                             <td>{e.source}</td>
                             <td>
-                                <button>
-                                    <Image unoptimized={true} src="/images/boost.svg" alt='edit' height={28} width={28} />
+                                <button  onClick={() => { setOpenBoost(true) }}>
+                                    <Image unoptimized={true} src="/images/boost.svg" alt='boost' height={28} width={28} />
                                 </button>
                             </td>
                             <td>{formatDate(e.date)}</td>

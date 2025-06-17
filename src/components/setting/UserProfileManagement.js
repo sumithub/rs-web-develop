@@ -6,8 +6,7 @@ import SecondaryButton from "../common/SecondaryButton";
 import CancelButton from "../common/CancelButton";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { getError, validEmailRgx, validPasswordRgx } from "../../../helper";
+import { validEmailRgx, validPasswordRgx } from "../../../helper";
 import { toast } from "react-toastify";
 import PhoneForm from "../form/PhoneForm";
 import Loading from "../Loading";
@@ -21,30 +20,48 @@ export default function Profile({ id }) {
     const [sending, setSending] = useState(false);
     const [updatingPassword, setUpdatingPassword] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [profileImage, setProfileImage] = useState("/images/profile-pic.png"); // Default image
 
     // Load profile data on component mount
     useEffect(() => {
         if (id && id !== "add") {
             loadProfileData();
         }
+        // Load saved profile image from localStorage
+        loadSavedProfileImage();
     }, [id]);
+
+    const loadSavedProfileImage = () => {
+        try {
+            const savedImage = localStorage.getItem(`profileImage_${id}`);
+            if (savedImage) {
+                setProfileImage(savedImage);
+            }
+        } catch (error) {
+            console.error("Error loading saved profile image:", error);
+        }
+    };
 
     const loadProfileData = async () => {
         try {
             setLoading(true);
-            const res = await axios.get(`/api}`);
-            const data = res.data;
+            // Since you don't have API, you can load from localStorage or set default values
+            const savedProfile = localStorage.getItem(`profile_${id}`);
             
-            // Set profile form values
-            profileForm.setValue("name", data.name || "");
-            profileForm.setValue("email", data.email || "");
-            profileForm.setValue("phone", data.phone || "");
-            profileForm.setValue("timeZone", data.timeZone || "");
-            profileForm.setValue("company", data.company || "");
+            if (savedProfile) {
+                const data = JSON.parse(savedProfile);
+                
+                // Set profile form values
+                profileForm.setValue("name", data.name || "");
+                profileForm.setValue("email", data.email || "");
+                profileForm.setValue("phone", data.phone || "");
+                profileForm.setValue("timeZone", data.timeZone || "");
+                profileForm.setValue("company", data.company || "");
+            }
             
             setLoading(false);
         } catch (error) {
-            toast.error(getError(error));
+            console.error("Error loading profile data:", error);
             setLoading(false);
         }
     };
@@ -53,18 +70,14 @@ export default function Profile({ id }) {
     const onProfileSubmit = async (data) => {
         try {
             setSending(true);
-            let res = null;
-
-            if (id !== "add") {
-                res = await axios.put(`/api`, data);
-            } else {
-                res = await axios.post("/api", data);
-            }
-
+            
+            // Save to localStorage since no API is available
+            localStorage.setItem(`profile_${id}`, JSON.stringify(data));
+            
             toast.success("Profile updated successfully");
             setSending(false);
         } catch (error) {
-            toast.error(getError(error));
+            toast.error("Error updating profile");
             setSending(false);
         }
     };
@@ -74,39 +87,63 @@ export default function Profile({ id }) {
         try {
             setUpdatingPassword(true);
             
-            const passwordData = {
-                currentPassword: data.password,
-                newPassword: data.newPassword
-            };
-
-            await axios.put(`/api`, passwordData);
+            // In a real app, you'd validate current password against stored hash
+            // For demo purposes, we'll just simulate success
+            setTimeout(() => {
+                toast.success("Password updated successfully");
+                passwordForm.reset();
+                setUpdatingPassword(false);
+            }, 1000);
             
-            toast.success("Password updated successfully");
-            passwordForm.reset();
-            setUpdatingPassword(false);
         } catch (error) {
-            toast.error(getError(error));
+            toast.error("Error updating password");
             setUpdatingPassword(false);
         }
     };
 
-    // Handle profile picture upload
+    // Handle profile picture upload - Updated to work without API
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
         if (!file) return;
 
-        const formData = new FormData();
-        formData.append('profilePicture', file);
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+            toast.error("Please select a valid image file");
+            return;
+        }
+
+        // Validate file size (e.g., max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            toast.error("Image size should be less than 5MB");
+            return;
+        }
 
         try {
-            const res = await axios.post(`/api`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            toast.success("Profile picture updated successfully");
+            // Create a FileReader to convert image to base64
+            const reader = new FileReader();
+            
+            reader.onload = (e) => {
+                const base64Image = e.target.result;
+                
+                // Update the profile image state
+                setProfileImage(base64Image);
+                
+                // Save to localStorage
+                localStorage.setItem(`profileImage_${id}`, base64Image);
+                
+                toast.success("Profile picture updated successfully");
+            };
+            
+            reader.onerror = () => {
+                toast.error("Error reading the image file");
+            };
+            
+            // Read the file as data URL (base64)
+            reader.readAsDataURL(file);
+            
         } catch (error) {
-            toast.error(getError(error));
+            console.error("Error uploading image:", error);
+            toast.error("Error uploading profile picture");
         }
     };
 
@@ -114,13 +151,25 @@ export default function Profile({ id }) {
     const handleDeleteAccount = async () => {
         if (window.confirm("Are you sure you want to delete your account? This action is irreversible!")) {
             try {
-                await axios.delete(`/api`);
+                // Clear all stored data for this user
+                localStorage.removeItem(`profile_${id}`);
+                localStorage.removeItem(`profileImage_${id}`);
+                
                 toast.success("Account deleted successfully");
-                // Redirect or handle post-deletion logic here
+                // Reset form and image
+                profileForm.reset();
+                setProfileImage("/images/profile-pic.png");
             } catch (error) {
-                toast.error(getError(error));
+                toast.error("Error deleting account");
             }
         }
+    };
+
+    // Reset profile image to default
+    const handleResetImage = () => {
+        setProfileImage("/images/profile-pic.png");
+        localStorage.removeItem(`profileImage_${id}`);
+        toast.success("Profile picture reset to default");
     };
 
     if (loading) {
@@ -134,10 +183,30 @@ export default function Profile({ id }) {
                     <div>
                         <h2 className="text-lg font-semibold py-[11px]">My Profile</h2>
                         <div className="flex items-center pt-[15px] gap-[15px]">
-                            <Image src="/images/profile-pic.png" alt="profile-pic" width={70} height={70} />
-                            <label htmlFor="profile-upload" className="bg-primary/5 text-primary p-2.5 text-sm rounded-[10px] cursor-pointer">
-                                Upload New Picture
-                            </label>
+                            <div className="relative">
+                                <Image 
+                                    src={profileImage} 
+                                    alt="profile-pic" 
+                                    width={70} 
+                                    height={70}
+                                    className="rounded-full object-cover"
+                                    style={{ width: '70px', height: '70px' }}
+                                />
+                                {/* {profileImage !== "/images/profile-pic.png" && (
+                                    <button
+                                        type="button"
+                                        onClick={handleResetImage}
+                                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600"
+                                        title="Reset to default"
+                                    >
+                                        ×
+                                    </button>
+                                )} */}
+                            </div>
+                                <label htmlFor="profile-upload" className="bg-primary/5 text-primary p-2.5 text-sm rounded-[10px] cursor-pointer hover:bg-primary/10 transition-colors">
+                                    Upload New Picture
+                                </label>
+                             
                             <input 
                                 id="profile-upload" 
                                 type="file" 
@@ -221,7 +290,10 @@ export default function Profile({ id }) {
                             <CancelButton 
                                 title="Cancel Changes" 
                                 class_="text-lg!" 
-                                onClick={() => profileForm.reset()}
+                                onClick={() => {
+                                    profileForm.reset();
+                                    loadProfileData(); // Reload saved data
+                                }}
                                 type="button"
                             />
                             <SecondaryButton 
@@ -241,6 +313,7 @@ export default function Profile({ id }) {
                     <div className="grid grid-cols-2 gap-5 pt-[25px]">
                         <InputForm
                             label="Current Password"
+                            labelClass=""
                             placeholder="Enter Current Password"
                             inputType="password"
                             inputClass="border-primary/10"

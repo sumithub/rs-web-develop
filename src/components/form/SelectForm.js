@@ -31,7 +31,8 @@ export default function SelectForm({infoIcon, isRequired, label, children, formP
                         onChange(e)
                     }
                 }}>
-                <option value="">{defaultOption || `Select`}</option>
+                {/* <option value="">{defaultOption || `Select`}</option> */}
+                <option value="">{defaultOption}</option>
                 {children}
             </select>
         </div>
