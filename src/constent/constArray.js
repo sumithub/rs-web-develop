@@ -266,3 +266,16 @@ export const clientSubscription = [
     { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
     { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Overdue" },
 ]
+
+export const userManagement = [
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+]

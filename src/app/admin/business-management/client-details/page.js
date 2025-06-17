@@ -17,7 +17,7 @@ import CancelButton from "../../../../components/common/CancelButton"
 import SecondaryButton from "../../../../components/common/SecondaryButton"
 import AddNewLocation from "../../../../components/Models/location/AddNewLocation"
 
-export default function LocationDetails() {
+export default function ClientDetails() {
     const [open, setOpen] = useState(false)
     const [sortBy, setSortBy] = useState(false)
     const [view, setView] = useState("overview")
