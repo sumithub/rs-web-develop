@@ -169,7 +169,9 @@ export default function ScheduleDelivery() {
         {open && <SendTestEmail
             onClose={() => setOpen(false)}
             onSave={handleSendTestEmail}
-            currentSettings={watchedValues}
+            currentData={watchedValues}
+            selectedUsers={selectedUsers}
+            setSelectedUsers={setSelectedUsers}
         />}
 
         {loading ? (

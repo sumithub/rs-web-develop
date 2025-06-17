@@ -16,7 +16,7 @@ import PaginationDemo from "../../Pagination";
 import { users } from "../../../constent/constArray";
 import Image from "next/image";
 
-export default function UsersList({ onClose }) {
+export default function UsersList({ onClose, onSave }) {
     const [list, setList] = useState([])
     const [role, setRole] = useState("")
     const [status, setStatus] = useState("")
@@ -94,7 +94,13 @@ export default function UsersList({ onClose }) {
                     <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
                 </div>
             </div>
-            <SecondaryButton title="Add Selected" onClick={onClose} class_="text-xs! font-normal! py-2.5! px-2.5" />
+            <SecondaryButton title="Add Selected"
+                onClick={() => {
+                    onClose()
+                    if (onSave) {
+                        onSave(list.filter(e => e.selected))
+                    }
+                }} class_="text-xs! font-normal! py-2.5! px-2.5" />
         </div>
 
         <div className='w-full border border-border-color overflow-hidden rounded-tr-[20px] rounded-tl-[20px]'>
@@ -124,7 +130,7 @@ export default function UsersList({ onClose }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {list?.map((e, index) => <tr key={index}  className={`${index === list.length - 1 ? '' : 'border-b'}`}>
+                    {list?.map((e, index) => <tr key={index} className={`${index === list.length - 1 ? '' : 'border-b'}`}>
                         <td>
                             <div className="flex items-start gap-2">
                                 <Checkbox
@@ -143,10 +149,10 @@ export default function UsersList({ onClose }) {
                     )}
                 </tbody>
             </table> : <div className='text-center text-2xl text-danger mx-auto h-20'>No Data</div>)}
-           
+
         </div>
- {list?.length > 0 && <div>
-                <PaginationDemo />
-            </div>}
+        {list?.length > 0 && <div>
+            <PaginationDemo />
+        </div>}
     </Model>
 }

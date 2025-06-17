@@ -53,18 +53,25 @@ function AddTemplate() {
           <div className='shadow-sm rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
 
             <div className='grid grid-cols-2 gap-3'>
-              <SelectForm label="Template Type" isRequired={true} class_='mt-2!'
+              <CustomSelectBox label="Template Type" isRequired={true} class_='mt-2! w-full!'
+                defaultOption='Template Type'
                 selectClass_="py-[13.2px]! px-2.5! border-primary/10! focus:border-primary/60!"
                 formProps={{ ...register("type", { required: true }) }}
                 errors={errors} clearErrors={clearErrors}
+                value={watch("type")}
                 onChange={(e) => {
-                  setIsEmail(e.target.value === "email" || e.target.value === "both")
-                }}
-              >
+                  const v = e.target.value
+                  if (v === "email") {
+                    setIsEmail(true)
+                  } else {
+                    setIsEmail(false)
+                  }
+                  setValue("type", e.target.value)
+                }}>
                 <option value="email">Email</option>
                 <option value="sms">SMS</option>
-                <option value="both">Both</option>
-              </SelectForm>
+              </CustomSelectBox>
+
               <InputForm
                 inputClass='border-primary/10! focus:border-primary/60!'
                 label="Template Name"
