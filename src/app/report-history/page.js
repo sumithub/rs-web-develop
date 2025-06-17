@@ -94,6 +94,7 @@ export default function ReportHistory() {
                 <div className='flex items-center gap-3'>
 
                     <DateRange
+                    value={date}
                         onChange={(e) => { setDate(e) }}
                     />
                     <CustomSelectBox
