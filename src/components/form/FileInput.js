@@ -2,11 +2,6 @@ import React, { useState } from 'react';
 import SecondaryButton from '../common/SecondaryButton';
 import Image from 'next/image';
 
-// Updated ImportCustomer component changes needed:
-// 1. Add form submission handler for step 1
-// 2. Update file upload registration
-// 3. Add proper validation
-
 export default function FileInput({
     formProps,
     errors,
@@ -63,17 +58,24 @@ export default function FileInput({
         if (file && file.type === 'text/csv') {
             setSelectedFile(file);
 
-            // Create a synthetic event for react-hook-form
-            const syntheticEvent = {
-                target: {
-                    name: formProps?.name,
-                    files: [file],
-                    value: file
-                }
-            };
+            // Get the actual file input element
+            const fileInput = document.getElementById('csv-file-input');
+            if (fileInput) {
+                // Create a new FileList with the dropped file
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files;
 
-            if (formProps?.onChange) {
-                formProps.onChange(syntheticEvent);
+                // Create a proper synthetic event that matches the file input structure
+                const syntheticEvent = {
+                    target: fileInput,
+                    currentTarget: fileInput
+                };
+
+                // Trigger the onChange handler
+                if (formProps?.onChange) {
+                    formProps.onChange(syntheticEvent);
+                }
             }
         } else {
             alert('Please select a CSV file');
@@ -94,11 +96,8 @@ export default function FileInput({
 
             // Create synthetic event to clear the form value
             const syntheticEvent = {
-                target: {
-                    name: formProps?.name,
-                    files: [],
-                    value: null
-                }
+                target: fileInput,
+                currentTarget: fileInput
             };
 
             if (formProps?.onChange) {
