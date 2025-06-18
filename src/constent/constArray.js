@@ -132,3 +132,15 @@ export const reviewResponse = [
     { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
     { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
 ]
+
+export const notificationManagement = [
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+]

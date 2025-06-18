@@ -11,7 +11,7 @@ import axios from "axios";
 import { getError } from "../../../helper";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
-import { templates } from "../../constent/constArray";
+import { notificationManagement, templates } from "../../constent/constArray";
 import Image from "next/image";
 
 export default function NotificationManagement() {
@@ -22,14 +22,14 @@ export default function NotificationManagement() {
     const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
-        getTemplate()
+        getData()
     }, [search, type, sortBy])
 
-    const getTemplate = async () => {
+    const getData = async () => {
         try {
             setLoading(true)
             const res = await axios.get("/api")
-            setList(res.data || templates)
+            setList(res.data || notificationManagement)
             setLoading(false)
 
         } catch (error) {
@@ -38,17 +38,6 @@ export default function NotificationManagement() {
         }
     }
 
-    const Projects = [
-        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
-        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
-        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
-        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
-        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
-        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
-        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
-        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
-        { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
-    ]
     return (<>
         <AdminLayout>
             <div className="flex justify-between items-center gap-11">
@@ -118,35 +107,39 @@ export default function NotificationManagement() {
                         </tr>
                     </thead>
                     <tbody>
-                        {Projects.map((e, i) =>
-                            <tr key={i}>
-                                <td>
-                                    <div className="flex gap-2.5 items-center">
-                                        <Checkbox />
-                                        {e.id}
-                                    </div>
-                                </td>
-                                <td>{e.name}</td>
-                                <td>{e.location}</td>
-                                <td>{e.medium}</td>
-                                <td>{e.recipient}</td>
-                                <td>{e.message}</td>
-                                <td>
-                                    <Status status={e.status} />
-                                </td>
-                                <td>{e.date}</td>
-                                <td>
-                                    <div className='flex items-center gap-2'>
-                                        <button className='cursor-pointer'>
-                                            <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
-                                        </button>
+                        {list?.map((e, index) => <tr key={index}>
+                            <td>
+                                <div className="flex items-start gap-2">
+                                    <Checkbox
+                                        checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                    />
+                                    <div>{e.id}</div>
+                                </div>
+                            </td>
+                            <td>{e.name}</td>
+                            <td>{e.location}</td>
+                            <td>{e.medium}</td>
+                            <td>{e.recipient}</td>
+                            <td>{e.message}</td>
+                            <td>
+                                <Status status={e.status} />
+                            </td>
+                            <td>{e.date}</td>
+                            <td>
+                                <div className='flex items-center gap-2'>
+                                    <button className='cursor-pointer'>
+                                        <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
+                                    </button>
 
-                                        <button className='cursor-pointer'>
-                                            <Image src="/images/refresh1.svg" alt='refresh1' height={28} width={28} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>)}
+                                    <button className='cursor-pointer'>
+                                        <Image src="/images/refresh1.svg" alt='refresh1' height={28} width={28} />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
