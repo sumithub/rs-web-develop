@@ -11,7 +11,7 @@ import axios from "axios";
 import { getError } from "../../../helper";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
-import { templates } from "../../constent/constArray";
+import { auditLogsDashboard } from "../../constent/constArray";
 import DatePicker from "../../components/form/DatePicker";
 import AuditLogDetails from '../../components/Models/audit/AuditLogDetails'
 
@@ -26,14 +26,14 @@ export default function AuditLogsDashboard() {
     const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
-        getTemplate()
+        getData()
     }, [search, type, type1, sortBy, date])
 
-    const getTemplate = async () => {
+    const getData = async () => {
         try {
             setLoading(true)
             const res = await axios.get("/api")
-            setList(res.data || templates)
+            setList(res.data || auditLogsDashboard)
             setLoading(false)
 
         } catch (error) {
@@ -41,18 +41,14 @@ export default function AuditLogsDashboard() {
             setLoading(false)
         }
     }
-    const Projects = [
-        { id: "AL-001", subscription: "SUB-101", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: "Jun 18,2024 | 10:00AM", },
-        { id: "AL-002", subscription: "SUB-102", action: "Customer Created", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-003", subscription: "SUB-103", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-004", subscription: "SUB-104", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Jun 18,2024 | 10:00AM", },
-        { id: "AL-005", subscription: "SUB-105", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-006", subscription: "SUB-106", action: "Customer updated", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-007", subscription: "SUB-107", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
-        { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
-    ]
+
+    const handleClick = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    };
+
     return (<>
         <AdminLayout>
             {open &&
@@ -104,7 +100,10 @@ export default function AuditLogsDashboard() {
                         <option value="action">Action</option>
                     </CustomSelectBox>
 
-                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50">
+                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                        onClick={handleClick}
+                        disabled={loading}
+                    >
                         Reset</button>
                 </div>
             </div>
@@ -136,32 +135,36 @@ export default function AuditLogsDashboard() {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="timestamp" /></th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {Projects.map((e, i) =>
-                            <tr key={i}>
-                                <td>
-                                    <div className="flex gap-2.5 items-center">
-                                        <Checkbox />
-                                        {e.id}
-                                    </div>
-                                </td>
-                                <td>{e.subscription}</td>
-                                <td className="capitalize">{e.action}</td>
-                                <td className="capitalize">{e.details}</td>
-                                <td className="capitalize">{e.performed}</td>
-                                <td>{e.timestamp}</td>
-                                <td>
-                                    <div className='flex items-center gap-2'>
-                                        <button className='cursor-pointer'
-                                            onClick={() => { setOpen(true) }}>
-                                            <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>)}
+                        {list?.map((e, index) => <tr key={index}>
+                            <td>
+                                <div className="flex items-start gap-2">
+                                    <Checkbox
+                                        checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                    />
+                                    <div>{e.id}</div>
+                                </div>
+                            </td>
+                            <td>{e.subscription}</td>
+                            <td className="capitalize">{e.action}</td>
+                            <td className="capitalize">{e.details}</td>
+                            <td className="capitalize">{e.performed}</td>
+                            <td>{e.timestamp}</td>
+                            <td>
+                                <div className='flex items-center gap-2'>
+                                    <button className='cursor-pointer'
+                                        onClick={() => { setOpen(true) }}>
+                                        <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>

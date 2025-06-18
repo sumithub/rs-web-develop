@@ -11,7 +11,7 @@ import axios from "axios";
 import { getError } from "../../../helper";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
-import { notificationManagement, templates } from "../../constent/constArray";
+import { notificationManagement } from "../../constent/constArray";
 import Image from "next/image";
 
 export default function NotificationManagement() {
