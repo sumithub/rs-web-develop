@@ -11,7 +11,8 @@ import axios from "axios";
 import { formatDateTime, getError } from "../../../helper";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
-import { auditLogs } from "../../constent/constArray";
+import { auditLogsDashboard } from "../../constent/constArray";
+import DatePicker from "../../components/form/DatePicker";
 import AuditLogDetails from '../../components/Models/audit/AuditLogDetails'
 import DateRange from "../../components/form/DateRangePicker";
 import SecondaryButton from "../../components/common/SecondaryButton";
@@ -27,14 +28,14 @@ export default function AuditLogsDashboard() {
     const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
-        getTemplate()
+        getData()
     }, [search, type, type1, sortBy, date])
 
-    const getTemplate = async () => {
+    const getData = async () => {
         try {
             setLoading(true)
             const res = await axios.get("/api")
-            setList(res.data || auditLogs)
+            setList(res.data || auditLogsDashboard)
             setLoading(false)
 
         } catch (error) {
@@ -42,7 +43,14 @@ export default function AuditLogsDashboard() {
             setLoading(false)
         }
     }
-    
+
+    const handleClick = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    };
+
     return (<>
         <AdminLayout>
             {open &&
@@ -96,7 +104,11 @@ export default function AuditLogsDashboard() {
                         <option value="action">Action</option>
                     </CustomSelectBox>
 
-                   <SecondaryButton title="Reset" class_="text-xs font-normal!"/>
+                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                        onClick={handleClick}
+                        disabled={loading}
+                    >
+                        Reset</button>
                 </div>
             </div>
             <div className='table-class mt-[15px]'>
@@ -131,34 +143,32 @@ export default function AuditLogsDashboard() {
                         </tr>
                     </thead>
                     <tbody>
-                        {list.map((e, index) =>
-                            <tr key={index}>
-                                <td>
-                                    <div className="flex gap-2.5 items-center">
-                                        <Checkbox 
-                                          checked={e.selected}
+                        {list?.map((e, index) => <tr key={index}>
+                            <td>
+                                <div className="flex items-start gap-2">
+                                    <Checkbox
+                                        checked={e.selected}
                                         onChange={(checked) => {
                                             setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
                                         }}
-                                        
-                                        />
-                                        {e.id}
-                                    </div>
-                                </td>
-                                <td>{e.subscription}</td>
-                                <td className="capitalize">{e.action}</td>
-                                <td className="capitalize">{e.details}</td>
-                                <td className="capitalize">{e.performed}</td>
-                                <td>{formatDateTime(e.timestamp)}</td>
-                                <td>
-                                    <div className='flex items-center gap-2'>
-                                        <button className='cursor-pointer'
-                                            onClick={() => { setOpen(true) }}>
-                                            <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>)}
+                                    />
+                                    <div>{e.id}</div>
+                                </div>
+                            </td>
+                            <td>{e.subscription}</td>
+                            <td className="capitalize">{e.action}</td>
+                            <td className="capitalize">{e.details}</td>
+                            <td className="capitalize">{e.performed}</td>
+                            <td>{e.timestamp}</td>
+                            <td>
+                                <div className='flex items-center gap-2'>
+                                    <button className='cursor-pointer'
+                                        onClick={() => { setOpen(true) }}>
+                                        <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>

@@ -22,6 +22,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     const [loading, setLoading] = useState(false);
     const [tab, setTab] = useState(1);
     const [importDone, setImportDone] = useState(false);
+    const [mappingErrors, setMappingErrors] = useState({}); // Add state for mapping validation errors
 
     const [importData, setImportData] = useState({
         fileName: "",
@@ -59,7 +60,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         { title: "Assigned Tag", summary: "VIP Customers" }
     ];
 
-
     const IMPORTSUMMARY1 = [
         { title: "imported customers ", summary: 245 },
         { title: "customer list", summary: "new leads-march 2025" },
@@ -95,6 +95,32 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
             ...prev,
             fieldMappings: updatedMappings
         }));
+
+        // Clear mapping error for this field when user selects a value
+        if (value && mappingErrors[index]) {
+            setMappingErrors(prev => {
+                const newErrors = { ...prev };
+                delete newErrors[index];
+                return newErrors;
+            });
+        }
+    };
+
+    // Add validation function for field mappings
+    const validateFieldMappings = () => {
+        const errors = {};
+        let hasErrors = false;
+
+        list.forEach((item, index) => {
+            const mapping = importData.fieldMappings[index];
+            if (!mapping || !mapping.mappedTo) {
+                errors[index] = "Please select a mapping for this field";
+                hasErrors = true;
+            }
+        });
+
+        setMappingErrors(errors);
+        return !hasErrors;
     };
 
     const validateCurrentStep = async () => {
@@ -103,6 +129,13 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         switch (tab) {
             case 1:
                 isValid = await trigger('csvFile');
+                break;
+            case 2:
+                // Add validation for field mappings
+                isValid = validateFieldMappings();
+                if (!isValid) {
+                    toast.error("Please select mapping for all fields before proceeding");
+                }
                 break;
             case 3:
                 isValid = await trigger(['listName', 'duplicateHandling']);
@@ -160,16 +193,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
             setLoading(false);
         }
     };
-
-    // const handleBack = () => {
-    //     if (tab > 1) {
-    //         setTab(tab - 1);
-    //         setActiveStep(activeStep - 1);
-    //     } else if (onBack) {
-    //         onBack();
-    //     }
-    // };
-
 
     const handleBack = () => {
         if (tab > 1) {
@@ -289,16 +312,24 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                     <td>{e.header}</td>
                                                     <td>{e.firstRow}</td>
                                                     <td>
-                                                        <SelectForm
-                                                            selectClass_="border-primary3/10"
-                                                            class_="mt-0!"
-                                                            onChange={(e) => handleFieldMappingChange(index, e.target.value)}
-                                                            defaultOption="Select mapping"
-                                                        >
-                                                            <option value="fullName">Full Name</option>
-                                                            <option value="phoneNumber">Phone Number</option>
-                                                            <option value="email">Email</option>
-                                                        </SelectForm>
+                                                        <div>
+                                                            <SelectForm
+                                                                selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
+                                                                class_="mt-0!"
+                                                                onChange={(e) => handleFieldMappingChange(index, e.target.value)}
+                                                                defaultOption="Select mapping"
+                                                                value={importData.fieldMappings[index]?.mappedTo || ''}
+                                                            >
+                                                                <option value="fullName">Full Name</option>
+                                                                <option value="phoneNumber">Phone Number</option>
+                                                                <option value="email">Email</option>
+                                                            </SelectForm>
+                                                            {mappingErrors[index] && (
+                                                                <div className="text-red-500 text-xs mt-1">
+                                                                    {mappingErrors[index]}
+                                                                </div>
+                                                            )}
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             ))}
@@ -499,24 +530,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                     )}
                                 </div>
                             ))}
-
-                            {/* {IMPORTSUMMARY.map((d, i) => (
-                                <div key={i}>
-                                    <div className="flex justify-between text-base">
-                                        <div className="text-text3 capitalize">{d.title}</div>
-                                        <div className="text-secondary font-medium capitalize">{d.summary}</div>
-                                    </div>
-
-                                    <div className="flex justify-between text-base">
-                                        <div className="text-text3 capitalize">invalid entries</div>
-                                        <div className="text-secondary font-medium capitalize border-border-color">02<span className="border-r border-border-color pr-2"></span><span className="text-primary underline pl-2">view detail</span></div>
-                                    </div>
-
-                                    {i !== IMPORTSUMMARY.length - 1 && (
-                                        <hr className="my-4 border-t border-border-color" />
-                                    )}
-                                </div>
-                            ))} */}
                         </>
                     )}
 

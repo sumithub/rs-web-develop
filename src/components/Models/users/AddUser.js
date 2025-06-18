@@ -10,11 +10,13 @@ import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
 import axios from "axios"
 import { getError, validEmailRgx } from "../../../../helper"
+import SendInvite from "./SendInvite"
 
-function AddUser({ onClose, id }) {
+function AddUser({ onClose, id, isInvite }) {
     const { register, setValue, handleSubmit, clearErrors, formState: { errors }, watch } = useForm();
     // const [loading, setLoading] = useState(false);
     const [sending, setSending] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
 
     const onSubmit = async (data) => {
         try {
@@ -27,7 +29,7 @@ function AddUser({ onClose, id }) {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Invite New User Successfully")
+            { !isInvite && toast.success("Changes Saved Successfully") }
             setSending(false)
             onClose()
         } catch (error) {
@@ -76,7 +78,13 @@ function AddUser({ onClose, id }) {
     //     }
     // };
 
-    return <Model onClose={onClose} title={`${!id ? "Invite New" : "Edit"} User`} modalClass="w-1/2!">
+    return <Model onClose={onClose} title={isInvite ? "Invite New User" : "Edit User Details"} modalClass="w-1/2!">
+        {openModal &&
+            <SendInvite
+                onClose={() => {
+                    setOpenModal(false)
+                }} />
+        }
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <InputForm label="Full Name" placeholder="Enter your name" isRequired={true} class_="mt-0!"
@@ -126,7 +134,8 @@ function AddUser({ onClose, id }) {
 
             <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="Cancel" onClick={onClose} />
-                <SecondaryButton title="Send Invite" type="submit" disabled={sending} />
+                {isInvite && <SecondaryButton title="Send Invite" type="submit" disabled={sending} onClick={() => { setOpenModal(true) }} />}
+                {!isInvite && <SecondaryButton title="Save changes" type="submit" disabled={sending} />}
             </div>
         </form>
     </Model>

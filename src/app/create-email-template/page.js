@@ -4,7 +4,7 @@ import SecondaryButton from "../../components/common/SecondaryButton"
 import Image from 'next/image'
 import HtmlEditor from "../../components/form/HtmlEditor"
 import InputForm from "../../components/form/InputForm"
-import SelectForm from "../../components/form/SelectForm"
+// import SelectForm from "../../components/form/SelectForm"
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { getError, validEmailRgx } from '../../../helper'
@@ -18,7 +18,7 @@ function AddTemplate() {
   const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm();
   const [sending, setSending] = useState(false)
   const [isEmail, setIsEmail] = useState(false)
-  const [dynamicFields, setDynamicFields] = useState(false)
+  // const [dynamicFields, setDynamicFields] = useState(false)
 
   const handleClick = () => {
     toast.success("Cloned Successfully")
@@ -121,7 +121,6 @@ function AddTemplate() {
 
             <div className='mt-5'>
               <HtmlEditor
-
                 label="Email Body"
                 isRequired={true}
                 value={body}
@@ -129,12 +128,13 @@ function AddTemplate() {
                   clearErrors("body")
                   setValue("body", value)
                 }}
+                dynamicFields={true}
 
               // formProps={{ ...register("message", { required: true }) }}
               // errors={errors}
               // clearErrors={clearErrors}
               >
-                <CustomSelectBox
+                {/* <CustomSelectBox
                   class_='mt-5!'
                   defaultOption="Insert Dynamic Fields"
                   value={dynamicFields}
@@ -146,7 +146,7 @@ function AddTemplate() {
                   <option value="first name">Customer First Name</option>
                   <option value="business name">Business Name</option>
                   <option value="direct feedback">Direct Feedback</option>
-                </CustomSelectBox>
+                </CustomSelectBox> */}
 
               </HtmlEditor>
             </div>
