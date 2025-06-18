@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import RadioForm from "../../form/RadioForm";
 import Image from "next/image";
 import FileInput from "../../form/FileInput";
+import CustomSelectBox from "../../form/CustomSelectBox";
 
 export default function ImportCustomer({ onBack, activeStep, setActiveStep, onClose, icon = false }) {
     const [sortBy, setSortBy] = useState("");
@@ -275,7 +276,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                 First Row reflect what's in your CSV file. Use the Mapping dropdown
                                 to select which attribute the column is associated with.
                             </div>
-                            <div className="table-class mt-8">
+                            <div className="table-class mt-8 relative z-50 ">
                                 {loading ? (
                                     <Loading />
                                 ) : list?.length > 0 ? (
@@ -314,14 +315,32 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                     <td>{e.header}</td>
                                                     <td>{e.firstRow}</td>
                                                     <td>
-                                                        <div>
-                                                            <SelectForm
+                                                        <CustomSelectBox selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
+                                                            class_="mt-0! w-full!"
+                                                            positionClass="sticky!"
+                                                            onChange={(e) => handleFieldMappingChange(index, e.target.value)}
+                                                            defaultOption="Select mapping"
+                                                            value={importData.fieldMappings[index]?.mappedTo || ''}>
+
+                                                            <option value="fullName">Full Name</option>
+                                                            <option value="phoneNumber">Phone Number</option>
+                                                            <option value="email">Email</option>
+
+                                                        </CustomSelectBox>
+
+                                                        {mappingErrors[index] && (
+                                                            <div className="text-red-500 text-xs mt-1">
+                                                                {mappingErrors[index]}
+                                                            </div>
+                                                        )}
+                                                        {/* <SelectForm
                                                                 selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
                                                                 class_="mt-0!"
                                                                 onChange={(e) => handleFieldMappingChange(index, e.target.value)}
                                                                 defaultOption="Select mapping"
                                                                 value={importData.fieldMappings[index]?.mappedTo || ''}
                                                             >
+                                                              
                                                                 <option value="fullName">Full Name</option>
                                                                 <option value="phoneNumber">Phone Number</option>
                                                                 <option value="email">Email</option>
@@ -330,8 +349,8 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                                 <div className="text-red-500 text-xs mt-1">
                                                                     {mappingErrors[index]}
                                                                 </div>
-                                                            )}
-                                                        </div>
+                                                            )} */}
+
                                                     </td>
                                                 </tr>
                                             ))}

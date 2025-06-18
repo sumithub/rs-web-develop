@@ -51,7 +51,7 @@ function AddCustomer({ onClose, id, onSave }) {
         }
     }
 
-    return <Model onClose={onClose} title={activeStep === 6 ? "Customers Imported Successfully!" : type === "import" ? "Import Customers" : (!id ? "Add New Customer" : "Edit Customer")} modalClass={`${type === "manually" ? "w-1/2!" : "w-[60%]!"}`}>
+    return <Model onClose={onClose} title={activeStep === 6 ? "Customers Imported Successfully!" : type === "import" ? "Import Customers" : (!id ? "Add New Customer" : "Edit Customer List")} modalClass={`${type === "manually" ? "w-1/2!" : "w-[60%]!"}`}>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 {/* Only show radio buttons when adding a new customer and not on success step */}
@@ -101,7 +101,7 @@ function AddCustomer({ onClose, id, onSave }) {
                                 setValue={setValue}
                                 watch={watch} />
                         </div>}
-                        
+
                         {/* Show list name form when editing customer */}
                         {id && <InputForm label="List Name" placeholder="Enter List Name" isRequired={true}
                             formProps={{ ...register("listName", { required: true }) }}

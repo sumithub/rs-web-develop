@@ -37,7 +37,6 @@ export default function ResendInvitation({ onClose, user }) {
                 <div className="text-secondary text-xl font-semibold capitalize">
                     Are you sure you want to resend the invite to
                 </div>
-
                 <InputForm
                     label={user?.name || "user"}
                     placeholder="Enter Email"

@@ -39,6 +39,7 @@ function Customers() {
     const [sortBy, setSortBy] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
+    const [selId, setSelId] = useState("")
 
 
     useEffect(() => {
@@ -63,11 +64,14 @@ function Customers() {
         <AdminLayout>
             {open &&
                 <AddCustomer
+                    id={selId}
                     onClose={() => {
+                        setSelId("")
                         setOpen(false)
                     }}
 
                     onSave={() => {
+                        getCustomer()
                         setOpen(true)
                     }}
                 />
@@ -172,7 +176,7 @@ function Customers() {
                         </CustomSelectBox>
 
                         <button className="flex items-center text-xs justify-center gap-2 bg-primary border border-primary py-[10.5px] px-3 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
-                         onClick={() => { setOpenBoost(true) }}>
+                            onClick={() => { setOpenBoost(true) }}>
                             <Image unoptimized={true} src="/images/flash.svg" alt="flash" height={16} width={16} />Boost</button>
 
                         <button className="bg-primary border border-primary text-xs hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
@@ -246,86 +250,93 @@ function Customers() {
                 </div>}
             </div>
 
-            {view === "customer" && <div className='table-class'>
-                {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
-                    <thead>
-                        <tr>
-                            <th><TableOrder title="Customer Name"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="customerName" /></th>
-                            <th><TableOrder title="Email"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="email" /></th>
-                            <th><TableOrder title="Phone"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="phone" /></th>
-                            <th><TableOrder title="Tags"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="tags" /></th>
-                            <th><TableOrder title="Source"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="source" /></th>
-                            <th><TableOrder title="Boost"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="boost" /></th>
-                            <th><TableOrder title="Date Added"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="dateAdded" /></th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {list?.map((e, index) => <tr key={index}>
-                            <td>
-                                <div className="flex items-start gap-2">
-                                    <Checkbox
-                                        checked={e.selected}
-                                        onChange={(checked) => {
-                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                        }}
-                                    />
-                                    <div>{e.customerName}</div>
-                                </div>
-                            </td>
-                            <td>{e.email}</td>
-                            <td>{e.phone}</td>
-                            <td><Status status={e.status} /></td>
-                            <td>{e.source}</td>
-                            <td>
-                                <button  onClick={() => { setOpenBoost(true) }}>
-                                    <Image unoptimized={true} src="/images/boost.svg" alt='boost' height={28} width={28} />
-                                </button>
-                            </td>
-                            <td>{formatDate(e.date)}</td>
-                            <td>
-                                <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'
-                                        onClick={() => { setOpen(true) }}
-                                    >
-                                        <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
+            {view === "customer" && <>
+                <div className='table-class'>
+                    {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+                        <thead>
+                            <tr>
+                                <th><TableOrder title="Customer Name"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="customerName" /></th>
+                                <th><TableOrder title="Email"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="email" /></th>
+                                <th><TableOrder title="Phone"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="phone" /></th>
+                                <th><TableOrder title="Tags"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="tags" /></th>
+                                <th><TableOrder title="Source"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="source" /></th>
+                                <th><TableOrder title="Boost"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="boost" /></th>
+                                <th><TableOrder title="Date Added"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="dateAdded" /></th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {list?.map((e, index) => <tr key={index}>
+                                <td>
+                                    <div className="flex items-start gap-2">
+                                        <Checkbox
+                                            checked={e.selected}
+                                            onChange={(checked) => {
+                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                            }}
+                                        />
+                                        <div>{e.customerName}</div>
+                                    </div>
+                                </td>
+                                <td>{e.email}</td>
+                                <td>{e.phone}</td>
+                                <td><Status status={e.status} /></td>
+                                <td>{e.source}</td>
+                                <td>
+                                    <button onClick={() => { setOpenBoost(true) }}>
+                                        <Image unoptimized={true} src="/images/boost.svg" alt='boost' height={28} width={28} />
                                     </button>
+                                </td>
+                                <td>{formatDate(e.date)}</td>
+                                <td>
+                                    <div className='flex items-center gap-2'>
+                                        <button className='cursor-pointer'
 
-                                    <button className='cursor-pointer'
-                                        onClick={() => { setOpenDelete("deleteCustomer") }}
-                                    >
-                                        <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>)}
-                    </tbody>
-                </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                                            onClick={() => {
+                                                setSelId("e.id")
+                                                setOpen(true)
+                                            }}
+                                        >
+                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                        </button>
+
+                                        <button className='cursor-pointer'
+                                            onClick={() => { setOpenDelete("deleteCustomer") }}
+                                        >
+                                            <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>)}
+                        </tbody>
+                    </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+
+                </div>
                 {list?.length > 0 && <div>
                     <PaginationDemo />
                 </div>}
-            </div>}
+            </>}
 
             {view === "history" && <div className=''>
                 {tab === "list" && <ListView />}
