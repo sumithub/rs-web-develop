@@ -24,7 +24,7 @@ export default function DeleteModal({ onClose, title = "user" }) {
             setSending(false);
         }
     };
-    return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
+    return <Model onClose={onClose} modalClass="w-[33%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
         <form onSubmit={handleSubmit(onSubmit)} className="text-center">
             <DeleteUser title={`Remove ${title}`} question={`Are You Sure you want to Remove this ${title} permanently?`} />
 
@@ -32,8 +32,8 @@ export default function DeleteModal({ onClose, title = "user" }) {
 
 
             <div className="grid grid-cols-2 gap-3 mt-5">
-                <CancelButton title="Cancel" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose} />
-                <SecondaryButton title="Remove Permanently" type="submit" disabled={sending} />
+                <CancelButton title="Cancel" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! text-lg! hover:text-white!" onClick={onClose} />
+                <SecondaryButton title="Remove Permanently" type="submit" disabled={sending} class_="text-lg! px-1!" />
             </div>
         </form>
     </Model>
