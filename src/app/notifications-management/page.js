@@ -125,7 +125,7 @@ export default function NotificationManagement() {
                             <td>{e.recipient}</td>
                             <td>{e.message}</td>
                             <td>
-                                <Status status={e.status} />
+                                <Status status={e.status} context="notify" />
                             </td>
                             <td>{e.date}</td>
                             <td>
