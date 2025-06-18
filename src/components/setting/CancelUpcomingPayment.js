@@ -36,7 +36,7 @@ export default function CancelUpcomingPayment({ onClose, id }) {
     return (
         <Model onClose={onClose} title="Cancel Upcoming Payment" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mt-4 flex gap-2.5 items-center">
+                <div className="mt-4 flex gap-2.5 items-center bg-custom-yellow-light/10 p-2.5 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize">Are you sure you want to cancel the upcoming payment for your subscription?</h2>
                 </div>
@@ -60,12 +60,12 @@ export default function CancelUpcomingPayment({ onClose, id }) {
                     <div className="font-semibold">Visa **** 1234</div>
                 </div>
 
-                <div className="mt-4 flex gap-2.5 items-center">
+                <div className="mt-4 flex gap-2.5 items-center bg-custom-yellow-light/10 p-2.5 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize">This Will Not Cancel Your Subscription.</h2>
                 </div>
 
-                <div className="mt-4 flex gap-2.5 items-center">
+                <div className="mt-4 flex gap-2.5 items-center bg-custom-yellow-light/10 p-2.5 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize">You May lose Access If Payment Is Missed.</h2>
                 </div>

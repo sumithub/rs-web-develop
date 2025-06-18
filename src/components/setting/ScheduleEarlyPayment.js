@@ -37,7 +37,7 @@ export default function ScheduleEarlyPayment({ onClose, id }) {
     return (
         <Model onClose={onClose} title="Schedule Early Payment" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mt-4 flex gap-2.5 items-center">
+                <div className="mt-4 flex gap-2.5 items-center bg-custom-yellow-light/10 p-2.5 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize"> pay now to avoid automatic charge</h2>
                 </div>

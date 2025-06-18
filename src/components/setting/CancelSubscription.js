@@ -44,30 +44,30 @@ export default function CancelSubscription({ onClose, id }) {
                     onClose={() => { setOpenCancelled(false) }} />
             }
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mt-4 flex gap-2.5 items-center">
+                <div className="mt-4 flex gap-2.5 p-2.5 items-center bg-custom-yellow-light/10 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize">Are you sure you want to cancel your subscription? You will still have access until the end of the current billing period. </h2>
                 </div>
 
-                <div className="mt-3">
+                <div className="mt-5">
 
                     <div className="flex justify-between mt-3">
-                        <div>Current Plan</div>
-                        <div className="font-semibold">Growth Plan ($99.00/Mo)</div>
+                        <div className="text-text3">Current Plan</div>
+                        <div className="font-medium">Growth Plan ($99.00/Mo)</div>
                     </div>
 
                     <hr className="border border-border2 my-3" />
 
                     <div className="flex justify-between">
-                        <div>Nect Renewal Date</div>
-                        <div className="font-semibold">Jan 25, 2025</div>
+                        <div className="text-text3">Nect Renewal Date</div>
+                        <div className="font-medium">Jan 25, 2025</div>
                     </div>
 
                     <hr className="border border-border2 my-3" />
 
                     <div className="flex justify-between">
-                        <div>Auto Renew</div>
-                        <div className="font-semibold">Enabled</div>
+                        <div className="text-text3">Auto Renew</div>
+                        <div className="font-medium">Enabled</div>
                     </div>
 
                 </div>
@@ -101,8 +101,8 @@ export default function CancelSubscription({ onClose, id }) {
                     Wait! Get 20% Off For 3 Months Instead Of Canceling, Enjoy A 20% Discount For The Next 3 Billing Cycles.
                 </div>
 
-                <div className="grid grid-cols-4 gap-4 mt-6">
-                    <CancelButton title="Cancel Subscription" onClick={() => { setOpenCancelled(true) }} class_="text-red-500!" />
+                <div className="grid grid-cols-4 gap-5 mt-7">
+                    <CancelButton title="Cancel Subscription" onClick={() => { setOpenCancelled(true) }} class_="text-danger! bg-danger/10!" />
                     <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
                     <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
                     <SecondaryButton title="keep subscription" type="submit" disabled={sending} />
