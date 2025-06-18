@@ -9,11 +9,13 @@ import SecondaryButton from "../common/SecondaryButton";
 import { getError } from "../../../helper";
 import axios from "axios";
 import Image from "next/image";
+import SubscriptionCancelled from "./SubscriptionCancelled";
 
 
 export default function CancelSubscription({ onClose, id }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
+    const [openCancelled, setOpenCancelled] = useState(false)
 
     const onSubmit = async (data) => {
         try {
@@ -35,7 +37,12 @@ export default function CancelSubscription({ onClose, id }) {
         }
     }
     return (
-        <Model onClose={onClose} title="Upgrade Plan" modalClass="w-[70%]!">
+        <Model onClose={onClose} title="Cancel Subscription" modalClass="w-[70%]!">
+
+            {openCancelled &&
+                <SubscriptionCancelled
+                    onClose={() => { setOpenCancelled(false) }} />
+            }
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mt-4 flex gap-2.5 items-center">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
@@ -95,10 +102,10 @@ export default function CancelSubscription({ onClose, id }) {
                 </div>
 
                 <div className="grid grid-cols-4 gap-4 mt-6">
-                    <CancelButton title="Cancel Subscription" onClick={onClose} class_="text-red-100 text-lg!" />
-                    <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-lg! text-primary! hover:text-white!" />
-                    <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-lg! text-primary! hover:text-white!" />
-                    <SecondaryButton title="keep subscription" type="submit" disabled={sending} class_="text-lg!" />
+                    <CancelButton title="Cancel Subscription" onClick={() => { setOpenCancelled(true) }} class_="text-red-500!" />
+                    <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
+                    <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
+                    <SecondaryButton title="keep subscription" type="submit" disabled={sending} />
                 </div>
             </form>
         </Model >

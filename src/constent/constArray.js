@@ -4,8 +4,6 @@ export const USER_ACTIONS = [
     { label: "Change Role", value: "role", icon: "/dropdown/role.svg", hoverIcon: "/dropdown/role-active.svg" },
     { label: "Change Password", value: "change-password", icon: "/dropdown/key.svg", hoverIcon: "/dropdown/key-active.svg" },
     { label: "Resend Invite", value: "resend-invite", icon: "/dropdown/user.svg", hoverIcon: "/dropdown/user-active.svg" },
-    { label: "Send Invite", value: "send-invite", icon: "/dropdown/user.svg", hoverIcon: "/dropdown/user-active.svg" },
-    { label: "Setup Password", value: "setup-password", icon: "/dropdown/key.svg", hoverIcon: "/dropdown/key-active.svg" },
     { label: "Remove User", value: "remove-user", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },
 ]
 
@@ -135,147 +133,27 @@ export const reviewResponse = [
     { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
 ]
 
-
-export const clientRules = [
-    { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "inactive", date: "Mar 03, 2024", },
-    { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Alert", status: "Active", date: "Mar 03, 2024", },
-    { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "Active", date: "Mar 03, 2024", },
-    { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "inactive", date: "Mar 03, 2024", },
-    { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "Active", date: "Mar 03, 2024", },
-    { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Alert", status: "Active", date: "Mar 03, 2024", },
-    { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "inactive", date: "Mar 03, 2024", },
-    { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "Active", date: "Mar 03, 2024", },
-    { id: "CR-001", name: "Acme Corp", location: "NYC", type: "New_review", condition: "Rating <3", action: "Notify", status: "Active", date: "Mar 03, 2024", },
+export const notificationManagement = [
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
+    { id: "NT-001", name: "Acme Corp", location: "NYC", medium: "Email", recipient: "User@example.com", message: "Welcome Email", status: "Sent", date: "Mar 03, 2024", },
 ]
 
-export const notificationPreferences = [
-    { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "yes", date: "Mar 03, 2024", },
-    { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "yes", date: "Mar 03, 2024", },
-    { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "NO", date: "Mar 03, 2024", },
-    { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-    { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-    { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-    { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "No", date: "Mar 03, 2024", },
-    { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-    { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
-]
-
-export const alertsManagement = [
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-]
-
-export const auditLogs = [
-    { id: "AL-001", subscription: "SUB-101", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: new Date('2024-06-18T10:00:00'), },
-    { id: "AL-002", subscription: "SUB-102", action: "Customer Created", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: new Date('2024-06-18T10:00:00'), },
-    { id: "AL-003", subscription: "SUB-103", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: new Date('2024-06-18T10:00:00'), },
-    { id: "AL-004", subscription: "SUB-104", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: new Date('2024-06-18T10:00:00') },
-    { id: "AL-005", subscription: "SUB-105", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: new Date('2024-06-18T10:00:00'), },
-    { id: "AL-006", subscription: "SUB-106", action: "Customer updated", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: new Date('2024-06-18T10:00:00'), },
-    { id: "AL-007", subscription: "SUB-107", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: new Date('2024-06-18T10:00:00'), },
-    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: new Date('2024-06-18T10:00:00'), },
-    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: new Date('2024-06-18T10:00:00'), },
-    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: new Date('2024-06-18T10:00:00'), },
-]
-
-export const locationScreen = [
-    { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-    { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-    { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-    { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-    { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-    { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-    { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-    { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-    { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
-]
-
-
-export const manageTags = [
-    { name: "VIP", description: "High-value customers", customers: "120", created: "Client A" },
-    { name: "Negative", description: "Customers with issues", customers: "45", created: "Client A" },
-    { name: "Needs Follow-up", description: "Pending response", customers: "30", created: "Client B" },
-    { name: "VIP", description: "High-value customers", customers: "50", created: "Client C" },
-    { name: "Negative", description: "Customers with issues", customers: "30", created: "Client D" },
-    { name: "Needs Follow-up", description: "Pending response", customers: "100", created: "Client E" },
-    { name: "Needs Follow-up", description: "Pending response", customers: "100", created: "Client E" },
-    { name: "VIP", description: "High-value customers", customers: "140", created: "Client F" },
-    { name: "Negative", description: "Customers with issues", customers: "20", created: "Client F" },
-
-]
-
-
-export const locationReviews = [
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "Gustavo Torff", review: "Wait time was long.", date: "11 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Pending" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-]
-
-
-export const locationCampaign = [
-    { name: "John Deo", status: "Active", responses: "150" },
-    { name: "John Deo", status: "Active", responses: "150" },
-    { name: "John Deo", status: "Completed", responses: "150" },
-    { name: "John Deo", status: "Active", responses: "150" },
-    { name: "John Deo", status: "Active", responses: "150" },
-    { name: "John Deo", status: "Completed", responses: "150" },
-]
-
-
-export const clientCampaign = [
-    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
-    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
-    { name: "John Deo", status: "Completed", locations: "3 Locations", responses: "150" },
-    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
-    { name: "John Deo", status: "Active", locations: "3 Locations", responses: "150" },
-    { name: "John Deo", status: "Completed", locations: "3 Locations", responses: "150" },
-]
-
-
-export const clientLocation = [
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-]
-
-
-export const clientSubscription = [
-    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
-    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
-    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
-    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Overdue" },
-    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
-    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
-    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Overdue" },
-    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
-    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Paid" },
-    { id: "INV-001", date: "Feb 01, 2025", amount: "$99.00", status: "Overdue" },
-]
-
-export const userManagement = [
-    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
-    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
-    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
-    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
-    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
-    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
-    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
-    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
-    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
-    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", client: "Xyz...", status: "activate" },
+export const auditLogsDashboard = [
+    { id: "AL-001", subscription: "SUB-101", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: "Jun 18,2024 | 10:00AM", },
+    { id: "AL-002", subscription: "SUB-102", action: "Customer Created", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: "Aug 18,2024 | 10:00AM", },
+    { id: "AL-003", subscription: "SUB-103", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
+    { id: "AL-004", subscription: "SUB-104", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Jun 18,2024 | 10:00AM", },
+    { id: "AL-005", subscription: "SUB-105", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
+    { id: "AL-006", subscription: "SUB-106", action: "Customer updated", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: "Aug 18,2024 | 10:00AM", },
+    { id: "AL-007", subscription: "SUB-107", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
+    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
+    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
+    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
 ]

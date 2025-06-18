@@ -45,7 +45,7 @@ export default function Dashboard() {
 
     return <AdminLayout
         noCard={true}
-        headerChild={<div className="flex gap-3 justify-end items-center">
+        headerChild={<div className="flex gap-4 justify-end items-center">
             <CustomSelectBox
                 class_="mt-0! w-52!"
                 defaultOption="Review Source"
