@@ -14,7 +14,15 @@ export default function Status({ status = "" }) {
         s === "sent" ||
         s === "paid") {
         bgClass = "bg-[#28A7451A] text-success";
-    } else if (s === "responded" || s === "draft" || s === "priority" || s === "activate") {
+    } else if (
+        s === "responded" ||
+        s === "draft" ||
+        s === "priority" ||
+        s === "activate" ||
+        s === "yes" ||
+        s === "replied" ||
+        s === "notify" ||
+        s === "sent") {
         bgClass = "bg-[#0396FF1A] text-primary";
     } else if (
         s === "pending invite" ||
@@ -32,15 +40,6 @@ export default function Status({ status = "" }) {
         bgClass = "bg-[#DC35451A] text-[#DC3545]";
     } else if (s === "processing") {
         bgClass = "bg-[#FFC1071A] text-[#FFC107]";
-    }
-    else if (s === "yes" || s === "replied") {
-        bgClass = "bg-[#0396FF1A] text-primary"
-    }
-    else if (s === "notify") {
-        bgClass = "bg-[#0396FF1A] text-primary"
-    }
-    else if (s === "sent") {
-        bgClass = "bg-[#0396FF1A] text-primary"
     }
     else if (s === "inactive") {
         bgClass = "bg-[#FFC1071A] text-custom-yellow-light"

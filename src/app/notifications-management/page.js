@@ -103,7 +103,7 @@ export default function NotificationManagement() {
                                 setSortBy={setSortBy}
                                 sortBy={sortBy}
                                 field="createdDate" /></th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
