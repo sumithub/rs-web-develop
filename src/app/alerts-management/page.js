@@ -21,10 +21,10 @@ export default function AlertsManagement() {
     const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
-        getTemplate()
+        getData()
     }, [search, type, sortBy])
 
-    const getTemplate = async () => {
+    const getData = async () => {
         try {
             setLoading(true)
             const res = await axios.get("/api")
@@ -37,9 +37,6 @@ export default function AlertsManagement() {
         }
     }
 
-    const Projects = [
-
-    ]
     return (<>
         <AdminLayout>
             <div className="flex justify-between items-center gap-11">

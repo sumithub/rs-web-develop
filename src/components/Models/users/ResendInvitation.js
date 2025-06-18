@@ -37,15 +37,13 @@ export default function ResendInvitation({ onClose, user }) {
                 <div className="text-secondary text-xl font-semibold capitalize">
                     Are you sure you want to resend the invite to
                 </div>
-
                 <InputForm
-                    label={user?.name || "John Deo"}
-                    placeholder="john@example.com"
-                    isRequired={true}
+                    label={user?.name || "user"}
+                    placeholder="Enter Email"
                     class_="mt-4!"
                     formProps={{
                         ...register("email", {
-                            required: true,
+                            required: false,
                             pattern: {
                                 value: validEmailRgx,
                                 message: "Email is invalid."

@@ -10,7 +10,7 @@ import axios from "axios";
 import { formatDate, getError } from "../../../helper";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
-import { notificationPreferences} from "../../constent/constArray";
+import { notificationPreferences } from "../../constent/constArray";
 import Image from "next/image";
 import EditNotificationPreferences from "../../components/Models/notification/EditNotificationPreference";
 import DeleteNotification from "../../components/Models/notification/DeleteNotification";
@@ -25,10 +25,10 @@ export default function NotificationManagement() {
     const [openDelete, setOpenDelete] = useState(false)
 
     useEffect(() => {
-        getTemplate()
+        getData()
     }, [search, type, sortBy])
 
-    const getTemplate = async () => {
+    const getData = async () => {
         try {
             setLoading(true)
             const res = await axios.get("/api")
@@ -40,7 +40,7 @@ export default function NotificationManagement() {
             setLoading(false)
         }
     }
-   
+
     return (<>
         <AdminLayout>
             {(openEdit === "edit") &&

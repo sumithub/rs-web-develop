@@ -103,7 +103,7 @@ export default function NotificationManagement() {
                                 setSortBy={setSortBy}
                                 sortBy={sortBy}
                                 field="createdDate" /></th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -125,7 +125,7 @@ export default function NotificationManagement() {
                             <td>{e.recipient}</td>
                             <td>{e.message}</td>
                             <td>
-                                <Status status={e.status} />
+                                <Status status={e.status} context="notify" />
                             </td>
                             <td>{e.date}</td>
                             <td>

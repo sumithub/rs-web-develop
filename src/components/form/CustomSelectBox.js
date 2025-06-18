@@ -16,7 +16,8 @@ export default function CustomSelectBox({
     multiSelect = false,
     placeholder = "Select options...",
     errors,
-    formProps
+    formProps,
+    positionClass = "",
 }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -183,7 +184,7 @@ export default function CustomSelectBox({
 
             {/* Dropdown options */}
             {isOpen && (
-                <div className="absolute w-full bg-white rounded-b-md border border-t-0 border-border-color z-10 max-h-60 overflow-y-auto">
+                <div className={`absolute w-full bg-white rounded-b-md border border-t-0 border-border-color z-10 max-h-60 overflow-y-auto ${positionClass}`}>
                     {/* Default option for single select */}
                     {!multiSelect && defaultOption !== "" && (
                         <div

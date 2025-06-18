@@ -40,18 +40,18 @@ export default function ListView(date, search) {
     }
 
     return (<>
-       
-           {openDelete === "deleteCustomer" &&
-                           <DeleteCustomer
-                               onClose={() => {
-                                   setOpenDelete(false)
-                               }}
-           
-                               onSave={() => {
-                                   setOpenDelete(true)
-                               }}
-                           />
-                       }
+
+        {openDelete === "deleteCustomer" &&
+            <DeleteCustomer
+                onClose={() => {
+                    setOpenDelete(false)
+                }}
+
+                onSave={() => {
+                    setOpenDelete(true)
+                }}
+            />
+        }
 
         {open &&
             <AddCustomer
@@ -136,9 +136,10 @@ export default function ListView(date, search) {
                     </tr>)}
                 </tbody>
             </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-            {list?.length > 0 && <div>
-                <PaginationDemo />
-            </div>}
+
         </div>
+        {list?.length > 0 && <div>
+            <PaginationDemo />
+        </div>}
     </>)
 }

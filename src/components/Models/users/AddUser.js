@@ -13,12 +13,26 @@ import { getError, validEmailRgx } from "../../../../helper"
 import SendInvite from "./SendInvite"
 
 function AddUser({ onClose, id, isInvite }) {
-    const { register, setValue, handleSubmit, clearErrors, formState: { errors }, watch } = useForm();
-    // const [loading, setLoading] = useState(false);
+    const { register, setValue, handleSubmit, clearErrors, formState: { errors }, watch, trigger, getValues } = useForm({
+        mode: 'onChange',
+        defaultValues: {
+            name: '',
+            email: '',
+            phone: '',
+            status: '',
+            role: ''
+        }
+    });
     const [sending, setSending] = useState(false)
     const [openModal, setOpenModal] = useState(false)
 
     const onSubmit = async (data) => {
+        if (isInvite) {
+            // For invite, just open the modal after validation
+            setOpenModal(true)
+            return
+        }
+
         try {
             setSending(true)
             let res = null
@@ -29,7 +43,7 @@ function AddUser({ onClose, id, isInvite }) {
                 res = await axios.post("/api", data)
             }
 
-            { !isInvite && toast.success("Changes Saved Successfully") }
+            toast.success("Changes Saved Successfully")
             setSending(false)
             onClose()
         } catch (error) {
@@ -38,47 +52,47 @@ function AddUser({ onClose, id, isInvite }) {
         }
     }
 
-    //    const onSubmit = async (data) => {
-    //     try {
-    //         setSending(true)
-    //         let res = null
+    const handleInviteClick = async (e) => {
+        e.preventDefault()
 
-    //         if (id !== "add") {
-    //             res = await axios.put("/api/users/" + id, data)
-    //         } else {
-    //             res = await axios.post("/api/users", data)
-    //         }
-    //         if (res.status === 200) {
-    //             toast.success("Updated Successfully")
-    //             setSending(false)
+        // Get current form values
+        const values = getValues()
 
-    //         } else {
-    //             toast.error("Something went wrong")
-    //             setSending(false)
-    //         }
-    //     } catch (error) {
-    //         toast.error(error)
-    //         setSending(false)
-    //     }
-    // }
-    //     try {
-    //         setLoading(true);
-    //         let res = await axios.post("/", data);
-    //         if (res.status === 200) {
-    //             toast.success("Submitted Successfully");
-    //             {
-    //                 setSending(false);
-    //                 setValue("")
-    //             };
-    //         }
+        // Manual validation check
+        let hasErrors = false
+        const newErrors = {}
 
-    //     } catch (error) {
-    //         setSending(false);
-    //         toast.error("Something went wrong");
-    //     }
-    // };
+        if (!values.name || values.name.trim() === '') {
+            hasErrors = true
+        }
 
-    return <Model onClose={onClose} title={isInvite ? "Invite New User" : "Edit User Details"} modalClass="w-1/2!">
+        if (!values.email || values.email.trim() === '') {
+            hasErrors = true
+        } else if (!validEmailRgx.test(values.email)) {
+            hasErrors = true
+        }
+
+        if (!values.status || values.status === '') {
+            hasErrors = true
+        }
+
+        if (!values.role || values.role === '') {
+            hasErrors = true
+        }
+
+        if (hasErrors) {
+            // Trigger validation to show errors
+            await trigger(['name', 'email', 'status', 'role'])
+            toast.error("Please fill all required fields correctly")
+            return
+        }
+
+        // All fields are valid, clear errors and open modal
+        clearErrors()
+        setOpenModal(true)
+    }
+
+    return <Model onClose={onClose} title={(!id ? "Invite New User" : "Edit User Details")} modalClass="w-1/2!">
         {openModal &&
             <SendInvite
                 onClose={() => {
@@ -88,10 +102,17 @@ function AddUser({ onClose, id, isInvite }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <InputForm label="Full Name" placeholder="Enter your name" isRequired={true} class_="mt-0!"
-                    formProps={{ ...register("name", { required: true }) }}
+                    formProps={{
+                        ...register("name", {
+                            required: "Full name is required",
+                            onChange: () => {
+                                if (errors.name) clearErrors('name')
+                            }
+                        })
+                    }}
                     errors={errors}
                     setValue={setValue}
-
+                    clearErrors={clearErrors}
                 />
 
                 <InputForm label="Email Address" placeholder="Enter email" isRequired={true} errors={errors}
@@ -102,9 +123,13 @@ function AddUser({ onClose, id, isInvite }) {
                                 value: validEmailRgx,
                                 message: "Email is invalid."
                             },
-
+                            onChange: () => {
+                                if (errors.email) clearErrors('email')
+                            }
                         })
                     }}
+                    clearErrors={clearErrors}
+                    setValue={setValue}
                 />
 
                 <PhoneForm label="Primary Phone"
@@ -118,14 +143,33 @@ function AddUser({ onClose, id, isInvite }) {
                 <SelectForm label="Status"
                     selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                     isRequired={true}
-                    formProps={{ ...register("status", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                    formProps={{
+                        ...register("status", {
+                            required: "Status is required",
+                            onChange: () => {
+                                if (errors.status) clearErrors('status')
+                            }
+                        })
+                    }}
+                    errors={errors}
+                    clearErrors={clearErrors} defaultOption="Select Status">
                     <option value="active">Active</option>
                     <option value="suspended">Suspended</option>
                     <option value="pending invite">Pending Invite</option>
                 </SelectForm>
 
                 <SelectForm label="Role" isRequired={true} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
-                    formProps={{ ...register("role", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                    formProps={{
+                        ...register("role", {
+                            required: "Role is required",
+                            onChange: () => {
+                                if (errors.role) clearErrors('role')
+                            }
+                        })
+                    }}
+                    errors={errors}
+                    clearErrors={clearErrors}
+                    defaultOption="Select Role">
                     <option value="owner">Owner</option>
                     <option value="manager">Manager</option>
                     <option value="viewer">Viewer</option>
@@ -134,12 +178,18 @@ function AddUser({ onClose, id, isInvite }) {
 
             <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="Cancel" onClick={onClose} />
-                {isInvite && <SecondaryButton title="Send Invite" type="submit" disabled={sending} onClick={() => { setOpenModal(true) }} />}
+                {isInvite && (
+                    <SecondaryButton
+                        title="Send Invite"
+                        type="button"
+                        disabled={sending}
+                        onClick={handleInviteClick}
+                    />
+                )}
                 {!isInvite && <SecondaryButton title="Save changes" type="submit" disabled={sending} />}
             </div>
         </form>
     </Model>
-
 }
 
 export default AddUser

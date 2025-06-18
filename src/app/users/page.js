@@ -34,8 +34,11 @@ export default function Users() {
     const [search, setSearch] = useState("")
     const [dates, setDates] = useState(null)
     const [openModal, setOpenModal] = useState(null)
+    const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const [sortBy, setSortBy] = useState("")
+    const [selId, setSelId] = useState("")
+
 
     useEffect(() => {
         getUser()
@@ -89,6 +92,7 @@ export default function Users() {
             }
             {openModal === "resend-invite" &&
                 <ResendInvitation
+                    user={user}
                     onClose={() => {
                         setOpenModal(false)
                     }} />
@@ -174,7 +178,7 @@ export default function Users() {
                         onChange={(e) => { setDates(e) }}
                     />
                 </div>
-              <SecondaryButton title="Invite New User" onClick={() => { setOpenModal("new") }} class_='text-xs! w-32!'/>
+                <SecondaryButton title="Invite New User" onClick={() => { setOpenModal("new") }} class_='text-xs! w-32!' />
 
             </div>
 
@@ -252,8 +256,9 @@ export default function Users() {
                             <td>{formatDate(e.lastActive)}</td>
                             <td><Dropdown
                                 options={USER_ACTIONS}
-                                onClickOption={(e) => {
-                                    setOpenModal(e)
+                                onClickOption={(el) => {
+                                    setUser(e)
+                                    setOpenModal(el)
                                 }}
                             /></td>
                         </tr>
