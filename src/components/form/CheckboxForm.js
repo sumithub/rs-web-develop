@@ -1,5 +1,5 @@
 "use client"
-export default function CheckboxForm({ errors, id, label, name, checked, formProps, disabled, class_ = "", labelClass = "", inputClass = "" }) {
+export default function CheckboxForm({ errors, id, label, name, checked, formProps, disabled, class_ = "", labelClass = "", inputClass = "", onChange }) {
 
     let error = "";
 
@@ -19,7 +19,10 @@ export default function CheckboxForm({ errors, id, label, name, checked, formPro
             </div>
             <input id={id || label} disabled={disabled} type="checkbox" className={`h-4 w-5 ml-auto mt-1 ${inputClass}`}
                 {...formProps}
-                checked={checked} />
+                onChange={(e) => {
+                    if (onChange) onChange(e);
+                }}
+                checked={checked || false} />
         </label>  {error && <p className="text-xs pt-[5px] capitalize text-danger">{error}</p>}
     </div>
 }
