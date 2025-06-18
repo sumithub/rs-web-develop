@@ -24,6 +24,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     const [importDone, setImportDone] = useState(false);
     const [mappingErrors, setMappingErrors] = useState({}); // Add state for mapping validation errors
 
+    const [file, setFile] = useState(null)
     const [importData, setImportData] = useState({
         fileName: "",
         fieldMappings: [],
@@ -128,7 +129,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
 
         switch (tab) {
             case 1:
-                isValid = await trigger('csvFile');
+                isValid = !file ? await trigger('csvFile') : true
                 break;
             case 2:
                 // Add validation for field mappings
@@ -148,7 +149,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
 
     const handleNext = async () => {
         const isValid = await validateCurrentStep();
-
+        console.log(isValid, tab)
         if (isValid && tab < 6) {
             if (tab === 3) {
                 const formData = getValues();
@@ -259,6 +260,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                         }
                                     })
                                 }}
+                                setFile={setFile}
                                 errors={errors}
                                 isRequired={true}
                                 label="Upload file"
