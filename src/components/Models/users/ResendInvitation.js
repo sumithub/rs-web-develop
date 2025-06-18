@@ -39,8 +39,8 @@ export default function ResendInvitation({ onClose, user }) {
                 </div>
 
                 <InputForm
-                    label={user?.name || "User"}
-                    placeholder="Enter email"
+                    label={user?.name || "John Deo"}
+                    placeholder="john@example.com"
                     isRequired={true}
                     class_="mt-4!"
                     formProps={{

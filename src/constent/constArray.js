@@ -4,8 +4,6 @@ export const USER_ACTIONS = [
     { label: "Change Role", value: "role", icon: "/dropdown/role.svg", hoverIcon: "/dropdown/role-active.svg" },
     { label: "Change Password", value: "change-password", icon: "/dropdown/key.svg", hoverIcon: "/dropdown/key-active.svg" },
     { label: "Resend Invite", value: "resend-invite", icon: "/dropdown/user.svg", hoverIcon: "/dropdown/user-active.svg" },
-    { label: "Send Invite", value: "send-invite", icon: "/dropdown/user.svg", hoverIcon: "/dropdown/user-active.svg" },
-    { label: "Setup Password", value: "setup-password", icon: "/dropdown/key.svg", hoverIcon: "/dropdown/key-active.svg" },
     { label: "Remove User", value: "remove-user", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },
 ]
 
@@ -17,7 +15,7 @@ export const users = [
 ];
 
 export const TEMPLATE_ACTIONS = [
-    { label: "Edit", value: "edit", icon: "/dropdown/edit.svg", hoverIcon: "/dropdown/edit-active.svg"  },
+    { label: "Edit", value: "edit", icon: "/dropdown/edit.svg", hoverIcon: "/dropdown/edit-active.svg" },
     { label: "Preview", value: "preview", icon: "/dropdown/eye.svg", hoverIcon: "/dropdown/eye-active.svg" },
     { label: "Clone", value: "clone", icon: "/dropdown/clone.svg", hoverIcon: "/dropdown/clone-active.svg" },
     { label: "Delete", value: "delete", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },

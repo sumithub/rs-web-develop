@@ -18,9 +18,7 @@ import SuspendUser from '../../components/Models/users/SuspendUser';
 import SuspendUsers from '../../components/Models/users/SuspendUsers';
 import ChangeUserRole from '../../components/Models/users/ChangeUserRole';
 import DeleteModal from '../../components/Models/DeleteModal';
-import SendInvite from '../../components/Models/users/SendInvite';
 import ChangePassword from '../../components/Models/users/ChangePassword';
-import SetupPassword from '../../components/Models/users/SetupPassword';
 import DateRange from '../../components/form/DateRangePicker';
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import axios from 'axios';
@@ -58,7 +56,16 @@ export default function Users() {
 
     return (
         <AdminLayout>
-            {(openModal === "edit" || openModal === "new") &&
+            {(openModal === "new") &&
+                <AddUser
+                    isInvite={true}
+                    onClose={() => {
+                        setOpenModal(false)
+                    }}
+                />
+            }
+
+            {(openModal === "edit") &&
                 <AddUser
                     onClose={() => {
                         setOpenModal(false)
@@ -81,12 +88,6 @@ export default function Users() {
             }
             {openModal === "resend-invite" &&
                 <ResendInvitation
-                    onClose={() => {
-                        setOpenModal(false)
-                    }} />
-            }
-            {openModal === "send-invite" &&
-                <SendInvite
                     onClose={() => {
                         setOpenModal(false)
                     }} />
@@ -129,13 +130,6 @@ export default function Users() {
 
             {openModal === "change-password" &&
                 <ChangePassword
-                    onClose={() => {
-                        setOpenModal(false)
-                    }} />
-            }
-
-            {openModal === "setup-password" &&
-                <SetupPassword
                     onClose={() => {
                         setOpenModal(false)
                     }} />
