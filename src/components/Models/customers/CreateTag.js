@@ -16,7 +16,13 @@ export default function CreateTag({ onClose, id }) {
 
     useEffect(() => {
         setValue("colorPicker", "#0396FF");
-    }, [setValue]);
+        if (id) {
+            setValue("tagName", "Demo Tag");
+            setValue("colorPicker", "#0396FF");
+            setValue("description", "Yeh ek demo tag hai");
+            setValue("taggedCustomers", 150);
+        }
+    }, [setValue, id]);
 
     const onSubmit = async (data) => {
         try {
@@ -38,7 +44,7 @@ export default function CreateTag({ onClose, id }) {
     }
 
     return (
-        <Model onClose={onClose} title={`${!id ? "Create New Tag" : "Edit"}`} modalClass="w-1/2!">
+        <Model onClose={onClose} title={`${!id ? "Create New Tag" : "Update"}`} modalClass="w-1/2!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <InputForm
@@ -58,13 +64,11 @@ export default function CreateTag({ onClose, id }) {
                         formProps={{ ...register("description", { required: false }) }}
                         errors={errors}
                     />
-                    {!id && <InputForm
-                        class_="mt-2!"
-                        label="Tagged Customers"
-                        type="number"
-                        formProps={{ ...register("taggedCustomers", { required: false }) }}
-                        errors={errors}
-                    />}
+                    {id && (
+                        <div className="mt-2! font-medium text-base">
+                            Tagged Customers 150
+                        </div>
+                    )}
                 </div>
 
                 {/* {!id && <div className="relative mt-4">
