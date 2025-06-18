@@ -14,7 +14,7 @@ import { locationScreen } from '../../constent/constArray'
 import AddNewLocation from '../../components/Models/location/AddNewLocation'
 import DeleteLocation from '../../components/Models/location/DeleteLocation'
 
-function Location() {
+function LocationScreen() {
     const [list, setList] = useState([])
     const [open, setOpen] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
@@ -24,10 +24,10 @@ function Location() {
     const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
-        getTemplate()
+        getData()
     }, [search, sortBy])
 
-    const getTemplate = async () => {
+    const getData = async () => {
         try {
             setLoading(true)
             const res = await axios.get("/api")
@@ -39,9 +39,6 @@ function Location() {
             setLoading(false)
         }
     }
-    const Projects = [
-
-    ]
 
     return (
         <AdminLayout>
@@ -128,7 +125,7 @@ function Location() {
                     </thead>
 
                     <tbody>
-                        {list.map((e, index) =>
+                        {list?.map((e, index) =>
                             <tr key={index}>
                                 <td>
                                     <div className="flex gap-2.5 items-center">
@@ -169,4 +166,4 @@ function Location() {
     )
 }
 
-export default Location
+export default LocationScreen

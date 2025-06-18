@@ -8,14 +8,12 @@ import CustomSelectBox from "../../components/form/CustomSelectBox";
 import Checkbox from "../../components/form/Checkbox";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { formatDateTime, getError } from "../../../helper";
+import { getError } from "../../../helper";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 import { auditLogsDashboard } from "../../constent/constArray";
-import DatePicker from "../../components/form/DatePicker";
 import AuditLogDetails from '../../components/Models/audit/AuditLogDetails'
 import DateRange from "../../components/form/DateRangePicker";
-import SecondaryButton from "../../components/common/SecondaryButton";
 
 export default function AuditLogsDashboard() {
     const [date, setDate] = useState("")
@@ -69,7 +67,7 @@ export default function AuditLogsDashboard() {
                 </div>
                 <div className="flex gap-[15px]">
 
-              <DateRange  onChange={(e) => { setDate(e) }}/>
+                    <DateRange onChange={(e) => { setDate(e) }} />
 
                     {/* <DatePicker
                         icon={true}
