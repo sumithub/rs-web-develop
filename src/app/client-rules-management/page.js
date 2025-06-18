@@ -26,6 +26,7 @@ function ClientRulesManagement() {
     const [openEdit, setOpenEdit] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
     const [open, setOpen] = useState(false)
+    const [openCreate, setOpenCreate] = useState(false)
 
     useEffect(() => {
         getData()
@@ -62,6 +63,15 @@ function ClientRulesManagement() {
                 />
             }
 
+            {openCreate &&
+                <CreateClientRule
+                    isCreate={true}
+                    onClose={() => {
+                        setOpenCreate(false)
+                    }}
+                />
+            }
+
             {(openDelete === "delete") &&
                 <DeleteClient
                     onClose={() => {
@@ -90,7 +100,7 @@ function ClientRulesManagement() {
                     </CustomSelectBox>
 
                     <SecondaryButton title="Add New Role" class_='text-xs! font-normal!'
-                        onClick={() => { setOpen(true) }} />
+                        onClick={() => { setOpenCreate(true) }} />
                 </div>
             </div>
 
