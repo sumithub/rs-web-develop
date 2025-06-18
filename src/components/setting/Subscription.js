@@ -7,11 +7,9 @@ import CancelButton from "../common/CancelButton"
 import { useState } from "react"
 import UpgradePlan from '../setting/UpgradePlan'
 import CancelSubscription from "./CancelSubscription"
-import SubscriptionCancelled from "./SubscriptionCancelled"
 export default function Subscription() {
     const [open, setOpen] = useState(false)
     const [openCancel, setOpenCancel] = useState(false)
-    const [openCancelled, setOpenCancelled] = useState(false)
     return (<>
         {open &&
             <UpgradePlan
@@ -23,15 +21,11 @@ export default function Subscription() {
                 onClose={() => { setOpenCancel(false) }} />
         }
 
-        {openCancelled &&
-            <SubscriptionCancelled
-                onClose={() => { setOpenCancelled(false) }} />
-        }
         <div className="flex justify-between">
             <h2 className="text-lg font-semibold py-[11px]">My Subscription Details</h2>
             <div className="flex gap-[10px]">
-                <CancelButton title="Cancel Subscription" class_="text-red" onClick={() => { setOpenCancel(true) }} />
-                <SecondaryButton title="View Usage Details" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => { setOpenCancelled(true) }} />
+                <CancelButton title="Cancel Subscription" class_="text-red-500!" onClick={() => { setOpenCancel(true) }} />
+                <SecondaryButton title="View Usage Details" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
                 <SecondaryButton title="Upgrade Plan" onClick={() => { setOpen(true) }} />
             </div>
         </div>

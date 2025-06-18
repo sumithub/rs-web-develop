@@ -10,7 +10,6 @@ import axios from "axios";
 import { getError, validEmailRgx, validPasswordRgx } from "../../../helper";
 import { toast } from "react-toastify";
 import PhoneForm from "../form/PhoneForm";
-import Input from "../form/Input";
 export default function Profile({ id }) {
     const { register, setValue, handleSubmit, clearErrors, formState: { errors }, watch } = useForm();
     // const [loading, setLoading] = useState(false);
@@ -42,7 +41,7 @@ export default function Profile({ id }) {
                         <h2 className="text-lg font-semibold py-[11px]">My Profile</h2>
                         <div className="flex items-center pt-[15px] gap-[15px]">
                             <Image src="/images/profile-pic.png" alt="profile-pic" width={70} height={70} />
-                            <button type="button" className="bg-primary/5 text-primary p-2.5 text-sm rounded-[10px]">Upload New Picture</button>
+                            <CancelButton title="Upload New Picture" class_="bg-primary/5! text-primary! p-2.5 text-sm rounded-[10px]" />
                         </div>
                     </div>
                     <div className="pt-[25px]">
