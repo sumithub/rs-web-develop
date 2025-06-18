@@ -14,8 +14,8 @@ import RadioForm from "../../form/RadioForm"
 import Image from "next/image"
 import StarRangeSlider from "../../StartRatingSlider"
 
-function CreateClientRule({ onClose, id }) {
-    const { register, handleSubmit, clearErrors,setValue, formState: { errors } } = useForm();
+function CreateClientRule({ onClose, id, isCreate }) {
+    const { register, handleSubmit, clearErrors, setValue, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [type, setType] = useState("")
 
@@ -39,7 +39,7 @@ function CreateClientRule({ onClose, id }) {
         }
     }
 
-    let title = !id ? "Create Client Rule" : "Edit Client Rule"
+    let title = isCreate ? "Create Client Rule" : "Edit Client Rule"
 
     if (type === "positiveReview") {
         title = "Positive Review"
@@ -52,9 +52,9 @@ function CreateClientRule({ onClose, id }) {
     return <Model onClose={onClose} title={title} modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-                {id && <InputForm label="Client Rule ID" placeholder="Enter client id" isRequired={false} class_="mt-0!"
+                {!isCreate && <InputForm label="Client Rule ID" placeholder="Enter client id" isRequired={true} class_="mt-0!"
                     inputClass="border-primary/10"
-                    formProps={{ ...register("clientRuleId", { required: false }) }}
+                    formProps={{ ...register("clientRuleId", { required: true }) }}
                     errors={errors}
                     setValue={setValue}
                 />}
@@ -75,8 +75,8 @@ function CreateClientRule({ onClose, id }) {
                     <option value="reviewResponseReceived">Review Response Received</option>
                     <option value="reviewDeleted">Review Deleted</option>
                 </SelectForm>
-                
-                {!type && (<>
+
+                {(!type || !isCreate) && (<>
                     <InputForm label="Condition" placeholder="Enter condition" isRequired={true} errors={errors}
                         inputClass="border-primary/10"
                         formProps={{
@@ -123,31 +123,31 @@ function CreateClientRule({ onClose, id }) {
                 </>)}
             </div>
 
-            {(type === "flaggedReview" || type === "positiveReview" || type === "negativeReview") && (
+            {(type === "flaggedReview" || type === "positiveReview" || type === "negativeReview" && isCreate) && (
                 <SelectForm label="Rule Condition"
                     selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
                     defaultOption="Select Condition"
-                    formProps={{ ...register("ruleCondition", { required: true }) }} 
-                    errors={errors} 
+                    formProps={{ ...register("ruleCondition", { required: true }) }}
+                    errors={errors}
                     clearErrors={clearErrors}>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                   
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+
                 </SelectForm>
             )}
 
-            {(type === "positiveReview" || type === "negativeReview") && (
+            {(type === "positiveReview" || type === "negativeReview" || isCreate) && (
                 <div className="mt-3 flex justify-between">
                     <div>Threshold Rating</div>
-                    <StarRangeSlider/>
+                    <StarRangeSlider />
                 </div>
             )}
 
-            {(type === "newReview") && (<div>
+            {(type === "newReview" && isCreate) && (<div>
                 <div className="mt-6 font-semibold text-xl">
                     Rule Condition
                 </div>
@@ -179,7 +179,7 @@ function CreateClientRule({ onClose, id }) {
                 </div>
             </div>)}
 
-            {type === "flaggedReview" && (<div>
+            {(type === "flaggedReview" && isCreate) && (<div>
                 <div className="mt-6 font-semibold text-xl">
                     Additional Action
                 </div>
@@ -187,23 +187,23 @@ function CreateClientRule({ onClose, id }) {
                 <RadioForm
                     label="Auto-Hide Review"
                     name="additionalAction"
-                     formProps={{ ...register("additionalAction", { required: false }) }}
-                    errors={errors}/>
+                    formProps={{ ...register("additionalAction", { required: false }) }}
+                    errors={errors} />
 
                 <RadioForm
                     label="Notify Moderator Immediately"
                     name="additionalAction"
-                      formProps={{ ...register("additionalAction", { required: false }) }}
+                    formProps={{ ...register("additionalAction", { required: false }) }}
                     errors={errors} />
 
                 <RadioForm
                     label="Mark For Review"
                     name="additionalAction"
-                     formProps={{ ...register("additionalAction", { required: false }) }}
+                    formProps={{ ...register("additionalAction", { required: false }) }}
                     errors={errors} />
             </div>)}
 
-            {type === "reviewResponseReceived" && (<div>
+            {(type === "reviewResponseReceived" && isCreate) && (<div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
                         formProps={{ ...register("notifyAccountManager") }} errors={errors} />
@@ -220,7 +220,7 @@ function CreateClientRule({ onClose, id }) {
                 </div>
             </div>)}
 
-            {type === "reviewDeleted" && (<div>
+            {(type === "reviewDeleted" && isCreate) && (<div>
                 <div className="mt-4 flex gap-2.5 items-center  bg-custom-yellow-light/7 p-3 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize">This rule triggers automatically upon deletion.</h2>
@@ -246,7 +246,7 @@ function CreateClientRule({ onClose, id }) {
                 </div>
             </div>)}
 
-            {type === "positiveReview" && (<div>
+            {(type === "positiveReview" && isCreate) && (<div>
                 <div className="mt-4 font-semibold text-xl">
                     Action
                 </div>
@@ -267,7 +267,7 @@ function CreateClientRule({ onClose, id }) {
                 </div>
             </div>)}
 
-            {type === "negativeReview" && (<div>
+            {(type === "negativeReview" && isCreate) && (<div>
                 <div className="mt-4 font-semibold text-xl">
                     Additional Action
                 </div>
