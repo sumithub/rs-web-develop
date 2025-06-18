@@ -1,8 +1,9 @@
 'use client'
 import { useEditor } from '@tiptap/react'
 import { EditorProvider } from '@tiptap/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { extensions, MenuBar } from '../../utils/editorHelper'
+import CustomSelectBox from './CustomSelectBox'
 
 export default function HtmlEditor({
     isRequired = false,
@@ -16,13 +17,15 @@ export default function HtmlEditor({
     errors,
     clearErrors,
     containerClass = "",
-    children
+    children,
+    dynamicFields = false, // For dynamic fields, we can pass the formProps to setValue
 }) {
+    const [editor, setEditor] = useState(null);
 
-    const editor = useEditor({
-        extensions: extensions, // Use the full extensions array instead of just StarterKit
-        content: value || ""
-    })
+    // const editor = useEditor({
+    //     extensions: extensions, // Use the full extensions array instead of just StarterKit
+    //     content: value || ""
+    // })
 
     let error = ""
     if (errors)
@@ -44,9 +47,13 @@ export default function HtmlEditor({
 
             <div className='tiptap border border-border2 rounded-[10px]'>
                 <EditorProvider
-                    editor={editor}
+                    // editor={editor}
                     editable={!readOnly}
+                    onCreate={({ editor }) => {
+                        setEditor(editor)
+                    }}
                     onUpdate={({ editor }) => {
+                        console.log("Editor content updated:", editor.getHTML());
                         const html = editor.getHTML();
                         if (html && clearErrors) {
                             clearErrors(formProps?.name)
@@ -64,6 +71,32 @@ export default function HtmlEditor({
                             <div>
                                 <MenuBar editor={editor} />
                                 {children && <div className="ml-4 flex items-center justify-center">{children}</div>}
+                                {dynamicFields && <div className="ml-4 flex items-center justify-center">
+                                    <CustomSelectBox
+                                        class_='mt-5!'
+                                        defaultOption="Insert Dynamic Fields"
+                                        value={""}
+                                        onChange={(e) => {
+                                            const selectedValue = e.target.value;
+                                            console.log("Selected Value:", selectedValue, editor
+                                                .chain()
+                                                .focus());
+                                            if (!selectedValue || !editor) return;
+
+                                            // Insert `{{selectedValue}}` at current cursor position
+                                            editor
+                                                .chain()
+                                                .focus()
+                                                .insertContent(`{{${selectedValue}}}`)
+                                                .run();
+                                        }}
+                                    >
+                                        <option value="full_name">Customer Full Name</option>
+                                        <option value="first_name">Customer First Name</option>
+                                        <option value="business_name">Business Name</option>
+                                        <option value="direct_feedback">Direct Feedback</option>
+                                    </CustomSelectBox>
+                                </div>}
                             </div>
                         )
                     }
