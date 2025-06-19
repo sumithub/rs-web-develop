@@ -42,7 +42,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Created Successfully")
+            toast.success("Saved Successfully")
             setSending(false)
             onClose()
         } catch (error) {
@@ -64,9 +64,14 @@ function CreateClientRule({ onClose, id, isCreate }) {
     return <Model onClose={onClose} title={title} modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-                {!isCreate && <InputForm label="Client Rule ID" placeholder="Enter client id" isRequired={true} class_="mt-0!"
+                {!isCreate && <InputForm
+                    label="Client Rule ID"
+                    disabled="clientRuleId"
+                    placeholder="CR-001"
+                    isRequired={false}
+                    class_="mt-0!"
                     inputClass="border-primary/10"
-                    formProps={{ ...register("clientRuleId", { required: true }) }}
+                    formProps={{ ...register("clientRuleId", { required: false }) }}
                     errors={errors}
                     setValue={setValue}
                 />}
@@ -88,7 +93,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     <option value="reviewDeleted">Review Deleted</option>
                 </SelectForm>
 
-                {(!type || !isCreate) && (<>
+                {(!type) && (<>
                     <InputForm label="Condition" placeholder="Enter condition" isRequired={true} errors={errors}
                         inputClass="border-primary/10"
                         formProps={{
@@ -137,7 +142,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </>)}
             </div>
 
-            {(type === "flaggedReview" || type === "positiveReview" || type === "negativeReview" && isCreate) && (
+            {(type === "flaggedReview" || type === "positiveReview" || type === "negativeReview") && (
                 <SelectForm label="Rule Condition"
                     selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
@@ -161,7 +166,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
             )}
 
-            {(type === "newReview" && isCreate) && (<div>
+            {(type === "newReview") && (<div>
                 <div className="mt-6 font-semibold text-xl">
                     Rule Condition
                 </div>
@@ -199,7 +204,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
             </div>)}
 
-            {(type === "flaggedReview" && isCreate) && (<div>
+            {(type === "flaggedReview") && (<div>
                 <div className="mt-6 font-semibold text-xl">
                     Additional Action
                 </div>
@@ -223,7 +228,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     errors={errors} />
             </div>)}
 
-            {(type === "reviewResponseReceived" && isCreate) && (<div>
+            {(type === "reviewResponseReceived") && (<div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
                         checked={notify}
@@ -244,7 +249,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
             </div>)}
 
-            {(type === "reviewDeleted" && isCreate) && (<div>
+            {(type === "reviewDeleted") && (<div>
                 <div className="mt-4 flex gap-2.5 items-center  bg-custom-yellow-light/7 p-3 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize">This rule triggers automatically upon deletion.</h2>
@@ -274,7 +279,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
             </div>)}
 
-            {(type === "positiveReview" && isCreate) && (<div>
+            {(type === "positiveReview") && (<div>
                 <div className="mt-4 font-semibold text-xl">
                     Action
                 </div>
@@ -299,7 +304,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
             </div>)}
 
-            {(type === "negativeReview" && isCreate) && (<div>
+            {(type === "negativeReview") && (<div>
                 <div className="mt-4 font-semibold text-xl">
                     Additional Action
                 </div>
