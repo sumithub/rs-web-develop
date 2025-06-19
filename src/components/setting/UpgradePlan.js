@@ -50,7 +50,9 @@ export default function UpgradePlan({ onClose, id }) {
                     selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                     isRequired={true}
                     defaultOption="select"
-                    formProps={{ ...register("timeZone", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                    formProps={{ ...register("timeZone", { required: true }) }}
+                    errors={errors}
+                    clearErrors={clearErrors} setValue={setValue} watch={watch}>
                     <option value="plan">Enterprise Plan</option>
                 </SelectForm>
 

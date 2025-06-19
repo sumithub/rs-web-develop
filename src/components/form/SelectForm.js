@@ -16,7 +16,8 @@ export default function SelectForm({
     class_,
     labelClass,
     setValue,
-    watch
+    watch,
+    onChange
 }) {
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownDirection, setDropdownDirection] = useState('down');
@@ -55,12 +56,19 @@ export default function SelectForm({
     });
 
     const getCurrentValue = () => {
-        return watch(formProps.name) || "";
+        const v = options.find(e => e.value === watch(formProps?.name)) || {}
+        return v?.label || ""
     };
 
     const handleSelect = (optionValue) => {
         setIsOpen(false);
-
+        if (onChange) {
+            onChange({
+                target: {
+                    value: optionValue
+                }
+            })
+        }
         if (optionValue && clearErrors && formProps?.name) {
             clearErrors(formProps.name);
         }
@@ -130,7 +138,7 @@ export default function SelectForm({
                     onClick={() => !disabled && setIsOpen(!isOpen)}
                 >
                     <span className="capitalize truncate text-left flex-1 px-1">
-                        {watch(formProps.name) || label}
+                        {getCurrentValue() || label}
                     </span>
                     <div className="flex items-center gap-1 ml-2 pr-1">
                         <svg
@@ -164,7 +172,7 @@ export default function SelectForm({
                         {options.map((option, index) => (
                             <div
                                 key={index}
-                                className={`px-3 py-2 text-[13px] cursor-pointer capitalize flex items-center gap-2 ${option.value === getCurrentValue()
+                                className={`px-3 py-2 text-[13px] cursor-pointer capitalize flex items-center gap-2 ${option.label === getCurrentValue()
                                     ? 'bg-primary text-white'
                                     : 'hover:bg-gray-50 text-text3'
                                     }`}

@@ -15,7 +15,7 @@ import Switch from "../../form/Switch";
 import Image from "next/image";
 
 export default function TestimonialWidget({ onClose, OnSave, id }) {
-    const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
+    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
 
@@ -76,7 +76,7 @@ export default function TestimonialWidget({ onClose, OnSave, id }) {
                                     errors={errors}
                                     class_="mt-0!"
                                     selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
-                                    clearErrors={clearErrors} >
+                                    clearErrors={clearErrors} setValue={setValue} watch={watch}>
                                     <option value="selectFont">Select Font</option>
                                 </SelectForm>
                                 <InputForm
@@ -114,7 +114,7 @@ export default function TestimonialWidget({ onClose, OnSave, id }) {
                                     errors={errors}
                                     class_="mt-0!"
                                     selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
-                                    clearErrors={clearErrors} >
+                                    clearErrors={clearErrors} setValue={setValue} watch={watch}>
                                     <option value="selectFont">Select Font</option>
                                 </SelectForm>
                             </div>

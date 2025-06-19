@@ -16,7 +16,7 @@ export default function Profile({ id }) {
     const profileForm = useForm();
     // Password form
     const passwordForm = useForm();
-    
+
     const [sending, setSending] = useState(false);
     const [updatingPassword, setUpdatingPassword] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -47,10 +47,10 @@ export default function Profile({ id }) {
             setLoading(true);
             // Since you don't have API, you can load from localStorage or set default values
             const savedProfile = localStorage.getItem(`profile_${id}`);
-            
+
             if (savedProfile) {
                 const data = JSON.parse(savedProfile);
-                
+
                 // Set profile form values
                 profileForm.setValue("name", data.name || "");
                 profileForm.setValue("email", data.email || "");
@@ -58,7 +58,7 @@ export default function Profile({ id }) {
                 profileForm.setValue("timeZone", data.timeZone || "");
                 profileForm.setValue("company", data.company || "");
             }
-            
+
             setLoading(false);
         } catch (error) {
             console.error("Error loading profile data:", error);
@@ -70,10 +70,10 @@ export default function Profile({ id }) {
     const onProfileSubmit = async (data) => {
         try {
             setSending(true);
-            
+
             // Save to localStorage since no API is available
             localStorage.setItem(`profile_${id}`, JSON.stringify(data));
-            
+
             toast.success("Profile updated successfully");
             setSending(false);
         } catch (error) {
@@ -86,7 +86,7 @@ export default function Profile({ id }) {
     const onPasswordSubmit = async (data) => {
         try {
             setUpdatingPassword(true);
-            
+
             // In a real app, you'd validate current password against stored hash
             // For demo purposes, we'll just simulate success
             setTimeout(() => {
@@ -94,7 +94,7 @@ export default function Profile({ id }) {
                 passwordForm.reset();
                 setUpdatingPassword(false);
             }, 1000);
-            
+
         } catch (error) {
             toast.error("Error updating password");
             setUpdatingPassword(false);
@@ -121,26 +121,26 @@ export default function Profile({ id }) {
         try {
             // Create a FileReader to convert image to base64
             const reader = new FileReader();
-            
+
             reader.onload = (e) => {
                 const base64Image = e.target.result;
-                
+
                 // Update the profile image state
                 setProfileImage(base64Image);
-                
+
                 // Save to localStorage
                 localStorage.setItem(`profileImage_${id}`, base64Image);
-                
+
                 toast.success("Profile picture updated successfully");
             };
-            
+
             reader.onerror = () => {
                 toast.error("Error reading the image file");
             };
-            
+
             // Read the file as data URL (base64)
             reader.readAsDataURL(file);
-            
+
         } catch (error) {
             console.error("Error uploading image:", error);
             toast.error("Error uploading profile picture");
@@ -154,7 +154,7 @@ export default function Profile({ id }) {
                 // Clear all stored data for this user
                 localStorage.removeItem(`profile_${id}`);
                 localStorage.removeItem(`profileImage_${id}`);
-                
+
                 toast.success("Account deleted successfully");
                 // Reset form and image
                 profileForm.reset();
@@ -173,7 +173,7 @@ export default function Profile({ id }) {
     };
 
     if (loading) {
-        return <div className="flex justify-center items-center h-40"><Loading/></div>;
+        return <div className="flex justify-center items-center h-40"><Loading /></div>;
     }
 
     return (
@@ -184,10 +184,10 @@ export default function Profile({ id }) {
                         <h2 className="text-lg font-semibold py-[11px]">My Profile</h2>
                         <div className="flex items-center pt-[15px] gap-[15px]">
                             <div className="relative">
-                                <Image 
-                                    src={profileImage} 
-                                    alt="profile-pic" 
-                                    width={70} 
+                                <Image
+                                    src={profileImage}
+                                    alt="profile-pic"
+                                    width={70}
                                     height={70}
                                     className="rounded-full object-cover"
                                     style={{ width: '70px', height: '70px' }}
@@ -203,15 +203,15 @@ export default function Profile({ id }) {
                                     </button>
                                 )} */}
                             </div>
-                                <label htmlFor="profile-upload" className="bg-primary/5 text-primary p-2.5 text-sm rounded-[10px] cursor-pointer hover:bg-primary/10 transition-colors">
-                                    Upload New Picture
-                                </label>
-                             
-                            <input 
-                                id="profile-upload" 
-                                type="file" 
-                                accept="image/*" 
-                                className="hidden" 
+                            <label htmlFor="profile-upload" className="bg-primary/5 text-primary p-2.5 text-sm rounded-[10px] cursor-pointer hover:bg-primary/10 transition-colors">
+                                Upload New Picture
+                            </label>
+
+                            <input
+                                id="profile-upload"
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
                                 onChange={handleImageUpload}
                             />
                         </div>
@@ -256,16 +256,16 @@ export default function Profile({ id }) {
                                 errors={profileForm.formState.errors}
                                 clearErrors={profileForm.clearErrors}
                                 setValue={profileForm.setValue}
-                                watch={profileForm.watch} 
+                                watch={profileForm.watch}
                             />
-                            <SelectForm 
+                            <SelectForm
                                 label="Time Zone"
                                 selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                                 isRequired={false}
                                 defaultOption="select"
-                                formProps={{ ...profileForm.register("timeZone", { required: false }) }} 
-                                errors={profileForm.formState.errors} 
-                                clearErrors={profileForm.clearErrors}
+                                formProps={{ ...profileForm.register("timeZone", { required: false }) }}
+                                errors={profileForm.formState.errors}
+                                clearErrors={profileForm.clearErrors} setValue={profileForm.setValue} watch={profileForm.watch}
                             >
                                 <option value="GMT+10:00">(GMT+10:00) Sydney</option>
                                 <option value="GMT+00:00">(GMT+00:00) London</option>
@@ -287,20 +287,20 @@ export default function Profile({ id }) {
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-5 pt-6">
-                            <CancelButton 
-                                title="Cancel Changes" 
-                                class_="text-lg!" 
+                            <CancelButton
+                                title="Cancel Changes"
+                                class_="text-lg!"
                                 onClick={() => {
                                     profileForm.reset();
                                     loadProfileData(); // Reload saved data
                                 }}
                                 type="button"
                             />
-                            <SecondaryButton 
-                                title="Save Changes" 
-                                type="submit" 
-                                disabled={sending} 
-                                class_="text-lg!" 
+                            <SecondaryButton
+                                title="Save Changes"
+                                type="submit"
+                                disabled={sending}
+                                class_="text-lg!"
                             />
                         </div>
                     </div>
@@ -367,9 +367,9 @@ export default function Profile({ id }) {
                     </div>
 
                     <div className="grid grid-cols-2 gap-5 pt-[25px] pb-8">
-                        <CancelButton 
-                            title="Delete Account" 
-                            class_="text-lg!" 
+                        <CancelButton
+                            title="Delete Account"
+                            class_="text-lg!"
                             onClick={handleDeleteAccount}
                             type="button"
                         />

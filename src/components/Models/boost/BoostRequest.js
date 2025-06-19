@@ -225,16 +225,33 @@ export default function BoostRequest({ onClose, onSave, id }) {
 
                     <div>
                         <SelectForm
+                            label="Choose Campaign"
+                            labelClass="mb-2.5!"
+                            selectClass_="py-2.5! px-2.5!"
+                            formProps={{
+                                ...register("campaign")
+                            }}
+                            setValue={setValue}
+                            watch={watch}
+                            clearErrors={clearErrors}
+                        >
+                            <option value="campaign1">Campaign 1</option>
+                            <option value="campaign2">Campaign 2</option>
+                        </SelectForm>
+
+                        {/* <SelectForm
                             defaultOption="Default Campaign"
                             label="Choose Campaign"
                             labelClass="mb-2.5!"
                             selectClass_="py-2.5! px-2.5!"
                             value={selectedCampaign}
                             onChange={(e) => setSelectedCampaign(e.target.value)}
-                        >
+                            setValue={setValue}
+                            watch={watch}>
                             <option value="campaign1">Campaign 1</option>
                             <option value="campaign2">Campaign 2</option>
-                        </SelectForm>
+                        </SelectForm> */}
+
                         <div className="mt-2.5 flex gap-2.5 items-center">
                             <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                             <h2 className="text-sm font-medium capitalize">customer will be added to this campaign for automated follow-ups</h2>
@@ -464,6 +481,6 @@ export default function BoostRequest({ onClose, onSave, id }) {
                     </div>
                 </div>
             </form>
-        </Model>
+        </Model >
     )
 }

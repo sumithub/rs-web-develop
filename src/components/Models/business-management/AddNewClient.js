@@ -10,7 +10,7 @@ import SelectForm from "../../form/SelectForm";
 import axios from "axios";
 
 export default function AddNewClient({ onClose, id }) {
-    const { handleSubmit, register, formState: { errors } } = useForm();
+    const { handleSubmit, register, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -52,6 +52,8 @@ export default function AddNewClient({ onClose, id }) {
                     defaultOption="select"
                     formProps={{ ...register("plan", { required: true }) }}
                     errors={errors}
+                    setValue={setValue}
+                    watch={watch}
                 >
                     <option value="plan">Professional Plan</option>
                 </SelectForm>
@@ -62,6 +64,8 @@ export default function AddNewClient({ onClose, id }) {
                     defaultOption="select"
                     formProps={{ ...register("status", { required: true }) }}
                     errors={errors}
+                    setValue={setValue}
+                    watch={watch}
                 >
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>

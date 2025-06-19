@@ -287,6 +287,8 @@ export default function AddReview({ heading = "", onClose, OnSave, id, onNext })
                                             required: normalizedTitle.includes("carousel")
                                         })
                                     }}
+                                    setValue={setValue}
+                                    watch={watch}
                                     errors={errors}
                                     class_="mt-0!"
                                     labelClass="pb-2.5 inline-block mb-0!"
@@ -379,6 +381,8 @@ export default function AddReview({ heading = "", onClose, OnSave, id, onNext })
                                                 required: "Minimum rating is required"
                                             })
                                         }}
+                                        setValue={setValue}
+                                        watch={watch}
                                         errors={errors}
                                         class_="mt-0!"
                                         labelClass="pb-2.5 inline-block mb-0!"
@@ -406,6 +410,8 @@ export default function AddReview({ heading = "", onClose, OnSave, id, onNext })
                                                 required: "Sorting option is required"
                                             })
                                         }}
+                                        setValue={setValue}
+                                        watch={watch}
                                         errors={errors}
                                         class_="mt-0!"
                                         labelClass="pb-2.5 inline-block mb-0!"
@@ -429,6 +435,8 @@ export default function AddReview({ heading = "", onClose, OnSave, id, onNext })
                                                 required: "Sorting option is required"
                                             })
                                         }}
+                                        setValue={setValue}
+                                        watch={watch}
                                         errors={errors}
                                         class_="mt-0!"
                                         labelClass="pb-2.5 inline-block mb-0!"
@@ -445,6 +453,8 @@ export default function AddReview({ heading = "", onClose, OnSave, id, onNext })
                                         formProps={{
                                             ...register("minimumRating", { required: false })
                                         }}
+                                        setValue={setValue}
+                                        watch={watch}
                                         errors={errors}
                                         class_="mt-0!"
                                         labelClass="pb-2.5 inline-block mb-0!"
@@ -533,6 +543,8 @@ export default function AddReview({ heading = "", onClose, OnSave, id, onNext })
                                                 required: "Transition effect is required"
                                             })
                                         }}
+                                        setValue={setValue}
+                                        watch={watch}
                                         errors={errors}
                                         class_="mt-0!"
                                         labelClass="pb-2.5 inline-block mb-0!"
@@ -554,6 +566,8 @@ export default function AddReview({ heading = "", onClose, OnSave, id, onNext })
                                                 required: "Popup delay is required"
                                             })
                                         }}
+                                        setValue={setValue}
+                                        watch={watch}
                                         errors={errors}
                                         class_="mt-0!"
                                         labelClass="pb-2.5 inline-block mb-0!"

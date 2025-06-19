@@ -2,7 +2,6 @@
 import { useState } from "react";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
-import InputForm from "../../form/InputForm";
 import Model from "../Model";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -11,9 +10,8 @@ import { getError } from "../../../../helper";
 import SelectForm from "../../form/SelectForm";
 
 export default function BulkAssign({ onClose, id }) {
-    const { register, handleSubmit, formState: { errors }, clearErrors } = useForm();
+    const { register, handleSubmit, setValue, watch, formState: { errors }, clearErrors } = useForm();
     const [sending, setSending] = useState(false)
-
 
     const onSubmit = async (data) => {
         try {
@@ -46,6 +44,8 @@ export default function BulkAssign({ onClose, id }) {
                         isRequired={true}
                         formProps={{ ...register("filterByClients", { required: true }) }}
                         errors={errors} clearErrors={clearErrors}
+                        setValue={setValue}
+                        watch={watch}
                     >
                         <option value="clientA">Client A</option>
                         <option value="clientB">Client B</option>
@@ -58,7 +58,10 @@ export default function BulkAssign({ onClose, id }) {
 
                     <div className="mt-3">
                         <div className="font-semibold">Available Tags</div>
-                        <SelectForm class_="w-[10%]! text-primary" defaultOption="select">
+                        <SelectForm class_="w-[10%]! text-primary" defaultOption="select"
+                            setValue={setValue}
+                            watch={watch}
+                        >
                             <option value="vip1">VIP (01)</option>
                             <option value="vip2">VIP (02)</option>
                             <option value="vip3">VIP (03)</option>

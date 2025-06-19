@@ -13,7 +13,7 @@ import SubscriptionCancelled from "./SubscriptionCancelled";
 
 
 export default function CancelSubscription({ onClose, id }) {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [openCancelled, setOpenCancelled] = useState(false)
 
@@ -77,9 +77,10 @@ export default function CancelSubscription({ onClose, id }) {
                 </div>
 
                 <SelectForm label=""
+                    setValue={setValue} watch={watch}
                     selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                     isRequired=""
-                    defaultOption="select" >
+                    defaultOption="select">
                     <option value="tooExpensive">Too Expensive</option>
                     <option value="noLongerNeeded">No Longer Needed</option>
                     <option value="switchingToAnotherProvider">Switching to Another Provider</option>

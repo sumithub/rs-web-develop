@@ -12,7 +12,7 @@ import { getError } from "../../../../helper"
 import CheckboxForm from "../../form/CheckboxForm"
 
 function EditNotificationPreferences({ onClose, id }) {
-    const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
+    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -50,7 +50,9 @@ function EditNotificationPreferences({ onClose, id }) {
                 <SelectForm label="Preference Type"
                     selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
-                    formProps={{ ...register("preferenceType", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                    formProps={{ ...register("preferenceType", { required: true }) }}
+                    errors={errors}
+                    clearErrors={clearErrors} setValue={setValue} watch={watch}>
                     <option value="email">Email</option>
                     <option value="sms">SMS</option>
                     <option value="alert">Alert</option>

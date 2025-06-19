@@ -15,7 +15,6 @@ import { useForm } from "react-hook-form";
 import RadioForm from "../../form/RadioForm";
 import Image from "next/image";
 import FileInput from "../../form/FileInput";
-import CustomSelectBox from "../../form/CustomSelectBox";
 
 export default function ImportCustomer({ onBack, activeStep, setActiveStep, onClose, icon = false }) {
     const [sortBy, setSortBy] = useState("");
@@ -43,6 +42,8 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         clearErrors,
         getValues,
         trigger,
+        setValue,
+        watch,
         formState: { errors },
     } = useForm({
         mode: 'onChange'
@@ -86,12 +87,15 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     };
 
     const handleFieldMappingChange = (index, value) => {
+        console.log(index, value)
         const updatedMappings = [...importData.fieldMappings];
+        console.log(updatedMappings)
         updatedMappings[index] = {
             header: list[index]?.header,
             firstRow: list[index]?.firstRow,
             mappedTo: value
         };
+        console.log(updatedMappings)
 
         setImportData(prev => ({
             ...prev,
@@ -315,7 +319,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                     <td>{e.header}</td>
                                                     <td>{e.firstRow}</td>
                                                     <td>
-                                                        <CustomSelectBox selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
+                                                        {/* <CustomSelectBox selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
                                                             class_="mt-0! w-full!"
                                                             positionClass=""
                                                             onChange={(e) => handleFieldMappingChange(index, e.target.value)}
@@ -331,24 +335,27 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                             <div className="text-red-500 text-xs mt-1">
                                                                 {mappingErrors[index]}
                                                             </div>
+                                                        )} */}
+                                                        <SelectForm key={index}
+                                                            selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
+                                                            class_="mt-0!"
+                                                            formProps={{ ...register("mapping" + index, { required: true }) }}
+                                                            errors={errors}
+                                                            clearErrors={clearErrors} setValue={setValue} watch={watch}
+                                                            onChange={(e) => handleFieldMappingChange(index, e.target.value)}
+                                                            defaultOption="Select mapping"
+                                                            value={importData.fieldMappings[index]?.mappedTo || ''}
+                                                        >
+
+                                                            <option value="fullName">Full Name</option>
+                                                            <option value="phoneNumber">Phone Number</option>
+                                                            <option value="email">Email</option>
+                                                        </SelectForm>
+                                                        {mappingErrors[index] && (
+                                                            <div className="text-red-500 text-xs mt-1">
+                                                                {mappingErrors[index]}
+                                                            </div>
                                                         )}
-                                                        {/* <SelectForm
-                                                                selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
-                                                                class_="mt-0!"
-                                                                onChange={(e) => handleFieldMappingChange(index, e.target.value)}
-                                                                defaultOption="Select mapping"
-                                                                value={importData.fieldMappings[index]?.mappedTo || ''}
-                                                            >
-                                                              
-                                                                <option value="fullName">Full Name</option>
-                                                                <option value="phoneNumber">Phone Number</option>
-                                                                <option value="email">Email</option>
-                                                            </SelectForm>
-                                                            {mappingErrors[index] && (
-                                                                <div className="text-red-500 text-xs mt-1">
-                                                                    {mappingErrors[index]}
-                                                                </div>
-                                                            )} */}
 
                                                     </td>
                                                 </tr>
@@ -378,7 +385,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                 selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                                 formProps={{ ...register("tag", { required: false }) }}
                                 errors={errors}
-                                clearErrors={clearErrors}
+                                clearErrors={clearErrors} setValue={setValue} watch={watch}
                             >
                                 <option value="">Select tag</option>
                                 <option value="high value">High Value</option>

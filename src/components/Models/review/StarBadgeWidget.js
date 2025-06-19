@@ -1,6 +1,4 @@
 "use client"
-import Input from "../../form/Input";
-import Select from "../../form/Select";
 import Model from "../Model";
 import Checkbox from "../../form/Checkbox";
 import SecondaryButton from "../../common/SecondaryButton";
@@ -14,11 +12,10 @@ import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import axios from "axios";
 import Image from "next/image";
-import Switch from "../../form/Switch";
 import ProgressBar from "@ramonak/react-progress-bar";
 
 export default function StarBadgeWidget({ onClose, OnSave, id }) {
-    const { register, handleSubmit, clearErrors, formState: { errors } } = useForm();
+    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
 
@@ -79,7 +76,7 @@ export default function StarBadgeWidget({ onClose, OnSave, id }) {
                                     errors={errors}
                                     class_="mt-0!"
                                     selectClass_="border border-primary3/10 py-2.5! px-2.5! bg-white! text-sm!"
-                                    clearErrors={clearErrors} >
+                                    clearErrors={clearErrors} setValue={setValue} watch={watch}>
                                     <option value="selectFont">Select Font</option>
                                 </SelectForm>
                                 <InputForm

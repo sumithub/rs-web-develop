@@ -15,7 +15,7 @@ import Image from "next/image"
 import StarRangeSlider from "../../StartRatingSlider"
 
 function CreateClientRule({ onClose, id, isCreate }) {
-    const { register, handleSubmit, clearErrors, setValue, formState: { errors } } = useForm();
+    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [enabled, setEnabled] = useState(false)
     const [auto, setAuto] = useState(false)
@@ -77,6 +77,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     formProps={{ ...register("eventType", { required: true }) }}
                     errors={errors}
                     clearErrors={clearErrors}
+                    watch={watch}
+                    setValue={setValue}
                     onChange={(e) => {
                         setType(e.target.value)
                     }}>
@@ -101,7 +103,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     <SelectForm label="Action"
                         selectClass_="py-3.5! px-2.5! border-primary/10!"
                         isRequired={true}
-                        formProps={{ ...register("action", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                        formProps={{ ...register("action", { required: true }) }}
+                        errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}>
                         <option value="sendNotification">Send Notification</option>
                         <option value="sendAlert">Send Alert</option>
                     </SelectForm>
@@ -128,7 +131,13 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     <SelectForm label="Location"
                         selectClass_="py-3.5! px-2.5! border-primary/10!"
                         isRequired={true}
-                        formProps={{ ...register("location", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                        formProps={{ ...register("location", { required: true }) }}
+                        errors={errors}
+                        clearErrors={clearErrors}
+                        setValue={setValue}
+                        watch={watch}
+                    >
+
                         <option value="nyc">NYC</option>
                         <option value="la">LA</option>
                         <option value="mgBhu">MG BHU</option>
@@ -144,7 +153,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     defaultOption="Select Condition"
                     formProps={{ ...register("ruleCondition", { required: true }) }}
                     errors={errors}
-                    clearErrors={clearErrors}>
+                    clearErrors={clearErrors} setValue={setValue} watch={watch}>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>

@@ -227,6 +227,8 @@ export default function ScheduleDelivery() {
                                 class_="mt-0!"
                                 selectClass_="border border-primary3/10 py-3.5! px-2.5! bg-white! text-sm!"
                                 clearErrors={clearErrors}
+                                setValue={setValue}
+                                watch={watch}
                             >
                                 {getSendOnOptions().map(option => (
                                     <option key={option.value} value={option.value}>
@@ -245,6 +247,8 @@ export default function ScheduleDelivery() {
                                 class_="mt-0!"
                                 selectClass_="border border-primary3/10 py-3.5! px-2.5! bg-white! text-sm!"
                                 clearErrors={clearErrors}
+                                setValue={setValue}
+                                watch={watch}
                             >
                                 {getTimeOptions().map(option => (
                                     <option key={option.value} value={option.value}>

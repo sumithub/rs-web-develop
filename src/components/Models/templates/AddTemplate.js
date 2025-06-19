@@ -55,7 +55,7 @@ function AddTemplate({ onClose, id }) {
               <SelectForm label="Template Type" isRequired={true} class_='mt-2!'
                 selectClass_="py-[13.2px]! px-2.5! border-primary/10! focus:border-primary/60!"
                 formProps={{ ...register("type", { required: true }) }}
-                errors={errors} clearErrors={clearErrors}
+                errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}
                 onChange={(e) => {
                   setIsEmail(e.target.value === "email" || e.target.value === "both")
                 }}

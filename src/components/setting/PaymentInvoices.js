@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import PaginationDemo from "../Pagination";
 import CancelUpcomingPayment from './CancelUpcomingPayment'
 import UpdatePaymentMethod from './UpdatePaymentMethod'
+import { useForm } from "react-hook-form";
 
 export default function PaymentInvoices() {
     const [date, setDate] = useState("")
@@ -24,6 +25,7 @@ export default function PaymentInvoices() {
     const [type, setType] = useState("")
     const [open, setOpen] = useState(false)
     const [openUpdate, setOpenUpdate] = useState(false)
+    const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm();
 
     useEffect(() => {
         getTemplate()
@@ -74,6 +76,7 @@ export default function PaymentInvoices() {
 
                 <div className="grid grid-cols-4 gap-3">
                     <SelectForm defaultOption='Apply' class_="mt-0!"
+                        setValue={setValue} watch={watch}
                         onChange={(e) => {
                             setType(e.target.value)
                         }} />
@@ -81,13 +84,14 @@ export default function PaymentInvoices() {
                     <SelectForm defaultOption="Status" class_="mt-0!"
                         onChange={(e) => {
                             setType(e.target.value)
-                        }}>
+                        }} setValue={setValue} watch={watch}>
                         <option value="all">All</option>
                         <option value="paid">Paid</option>
                         <option value="unpaid">Unpaid</option>
                     </SelectForm>
 
                     <SelectForm defaultOption="Filter" class_="mt-0!"
+                        setValue={setValue} watch={watch}
                         onChange={(e) => {
                             setType(e.target.value)
                         }} />

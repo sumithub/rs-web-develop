@@ -8,12 +8,11 @@ import SecondaryButton from "../../common/SecondaryButton";
 import SelectForm from "../../form/SelectForm";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import Checkbox from "../../form/Checkbox";
 import Image from "next/image";
 import CheckboxForm from "../../form/CheckboxForm";
 
 export default function ReportTemplate({ onClose, id, onSave }) {
-    const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
+    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -55,7 +54,7 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                         selectClass_="py-2.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("templateName", { required: true }) }}
-                        errors={errors} clearErrors={clearErrors}>
+                        errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}>
 
                         <option value="naturalTemplate">Natural Template</option>
                     </SelectForm>
@@ -131,7 +130,7 @@ export default function ReportTemplate({ onClose, id, onSave }) {
                         selectClass_="py-2.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("select", { required: true }) }}
-                        errors={errors} clearErrors={clearErrors}>
+                        errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}>
                         <option value="weekly">Weekly</option>
                     </SelectForm>
                 </div>

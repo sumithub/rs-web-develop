@@ -25,7 +25,7 @@ import Link from "next/link"
 
 export default function Detail({ }) {
     const id = ""
-    const { register, handleSubmit, clearErrors, formState: { errors }, watch } = useForm({ defaultValues: { customerSource: "existing" } });
+    const { register, handleSubmit, clearErrors, formState: { errors }, setValue, watch } = useForm({ defaultValues: { customerSource: "existing" } });
     const [sending, setSending] = useState(false)
     const [openSchedule, setOpenSchedule] = useState(false)
     const [openCustomer, setOpenCustomer] = useState(false)
@@ -521,17 +521,25 @@ export default function Detail({ }) {
                                 <CancelButton type="button" title="proceed anyway" class_="bg-white! border-border-color! font-normal! text-sm!" />
                             </div>
                             <div className="grid grid-cols-[3fr_1fr] items-start gap-3">
-                                <SelectForm label="Cooldown Period" isRequired={true} defaultOption="-" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
-                                    formProps={{ ...register("cooldownPeriod", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                                <SelectForm
+                                    label="Cooldown Period"
+                                    isRequired={true}
+                                    defaultOption="-"
+                                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                                    formProps={{ ...register("cooldownPeriod", { required: true }) }} errors={errors} clearErrors={clearErrors}
+                                    setValue={setValue}
+                                    watch={watch}
+                                >
                                     <option value="7">7 Days</option>
                                     <option value="14">14 Days</option>
                                     <option value="21">21 Days</option>
                                 </SelectForm>
                                 {watch("customerSource") && <SelectForm
                                     class_="mt-10"
-                                    defaultOption="" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                                    defaultOption="select" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                                     formProps={{ ...register("excludeDuplicates", { required: false }) }}
-                                    errors={errors}>
+                                    errors={errors} setValue={setValue}
+                                    watch={watch}>
                                     <option value="Exclude Duplicates">Exclude Duplicates</option>
                                     <option value="Proceed Anyway">Proceed Anyway</option>
                                 </SelectForm>}
@@ -710,7 +718,8 @@ export default function Detail({ }) {
                                     <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
                                         selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
                                         formProps={{ ...register("emailFrequency", { required: emailReminderEnabled }) }}
-                                        errors={errors} >
+                                        errors={errors} setValue={setValue}
+                                        watch={watch}>
                                         <option value="daily">Daily</option>
                                         <option value="weekly">Weekly</option>
                                         <option value="monthly">Monthly</option>
@@ -827,7 +836,8 @@ export default function Detail({ }) {
                                                     <SelectForm label="Frequency" defaultOption="Select Frequency" isRequired={true}
                                                         selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
                                                         formProps={{ ...register("smsFrequency", { required: smsReminderEnabled }) }}
-                                                        errors={errors} >
+                                                        errors={errors} setValue={setValue}
+                                                        watch={watch}>
                                                         <option value="daily">Daily</option>
                                                         <option value="weekly">Weekly</option>
                                                         <option value="monthly">Monthly</option>
@@ -867,7 +877,8 @@ export default function Detail({ }) {
 
                             <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-[13.6px]! focus:border-primary/60! border-primary/10!"
                                 formProps={{ ...register("sendTime", { required: true }) }}
-                                errors={errors}>
+                                errors={errors} setValue={setValue}
+                                watch={watch}>
                                 <option value="morning">morning (8 AM - 12 PM)</option>
                                 <option value="afternoon">afternoon (12 PM - 4 PM)</option>
                                 <option value="evening">evening (4 PM - 8 PM)</option>
@@ -877,7 +888,8 @@ export default function Detail({ }) {
 
                         <SelectForm label="Weekend Delivery" defaultOption="Restrict" selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
                             formProps={{ ...register("weekendDelivery", { required: false }) }}
-                            errors={errors}
+                            errors={errors} setValue={setValue}
+                            watch={watch}
                         />
                     </CampaignCard>
                 </div>

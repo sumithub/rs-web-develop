@@ -13,9 +13,8 @@ import SelectedCustomers from "../manage-campaigns/SelectedFromCustomers";
 
 export default function CreateCustomersTag({ onClose, id, type = "create" }) {
     const [open, setOpen] = useState(false)
-    const { register, handleSubmit, formState: { errors }, clearErrors } = useForm();
+    const { register, handleSubmit, setValue, watch, formState: { errors }, clearErrors } = useForm();
     const [sending, setSending] = useState(false)
-
 
     const onSubmit = async (data) => {
         try {
@@ -59,6 +58,8 @@ export default function CreateCustomersTag({ onClose, id, type = "create" }) {
                         isRequired={false}
                         formProps={{ ...register("linkClients", { required: false }) }}
                         errors={errors} clearErrors={clearErrors}
+                        setValue={setValue}
+                        watch={watch}
                     >
                         <option value="client1">Client 1</option>
                         <option value="client2">Client 2</option>

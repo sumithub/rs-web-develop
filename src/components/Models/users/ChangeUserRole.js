@@ -12,7 +12,7 @@ import SelectForm from "../../form/SelectForm";
 
 export default function ChangeUserRole({ onClose, id, user = {} }) {
   const {
-    register,
+    register, setValue, watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -62,7 +62,7 @@ export default function ChangeUserRole({ onClose, id, user = {} }) {
             selectClass_="py-2.5! px-2.5! focus:border-primary/60!"
             formProps={{
               ...register("role", { required: true }),
-            }}
+            }} setValue={setValue} watch={watch}
           >
             <option value="owner">Owner</option>
             <option value="manager">Manager</option>

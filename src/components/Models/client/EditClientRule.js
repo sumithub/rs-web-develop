@@ -12,7 +12,7 @@ import { getError } from "../../../../helper"
 import CheckboxForm from "../../form/CheckboxForm"
 
 function EditClientRule({ onClose, id }) {
-    const { register, setValue, handleSubmit, clearErrors, formState: { errors } } = useForm();
+    const { register, setValue, handleSubmit, clearErrors, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -67,7 +67,9 @@ function EditClientRule({ onClose, id }) {
                 <SelectForm label="Action"
                     selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
-                    formProps={{ ...register("action", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                    formProps={{ ...register("action", { required: true }) }}
+                    errors={errors}
+                    clearErrors={clearErrors} setValue={setValue} watch={watch}>
                     <option value="sendNotification">Send Notification</option>
                     <option value="sendAlert">Send Alert</option>
                 </SelectForm>
@@ -92,7 +94,12 @@ function EditClientRule({ onClose, id }) {
                 <SelectForm label="Location"
                     selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
-                    formProps={{ ...register("location", { required: true }) }} errors={errors} clearErrors={clearErrors}>
+                    formProps={{ ...register("location", { required: true }) }}
+                    errors={errors}
+                    clearErrors={clearErrors}
+                    setValue={setValue}
+                    watch={watch}
+                >
                     <option value="nyc">NYC</option>
                     <option value="la">LA</option>
                     <option value="mgBhu">MG BHU</option>

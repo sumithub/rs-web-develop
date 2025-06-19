@@ -14,7 +14,7 @@ export default function ChangeUserRoles({ onClose }) {
     const [sortBy, setSortBy] = useState("")
 
     const {
-        register,
+        register, setValue, watch,
         handleSubmit,
         formState: { errors },
     } = useForm();
@@ -108,6 +108,8 @@ export default function ChangeUserRoles({ onClose }) {
                         selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                         formProps={{ ...register("role", { required: true }) }}
                         errors={errors}
+                        setValue={setValue}
+                        watch={watch}
                     >
                         <option value="owner">Owner</option>
                         <option value="manager">Manager</option>
