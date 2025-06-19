@@ -173,7 +173,7 @@ export default function LocationDetails() {
                                     <td></td>
                                     <td>{e.review}</td>
                                     <td>{e.date}</td>
-                                    <td><Status status={e.status} /></td>
+                                    <td><Status status={e.status} context="left" /></td>
                                 </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}

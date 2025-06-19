@@ -63,6 +63,7 @@ export default function Users() {
 
             {(openModal === "new" || openModal === "edit") &&
                 <AddUser
+                    isInvite={true}
                     id={selId}
                     onClose={() => {
                         setOpenModal(false);
