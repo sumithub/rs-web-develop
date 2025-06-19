@@ -27,6 +27,7 @@ function SelectedCustomers({ onClose, onSave, type, action, selected = 0 }) {
     const getCustomer = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             const customers = res.data || selectedCustomers
 

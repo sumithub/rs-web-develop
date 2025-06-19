@@ -20,6 +20,7 @@ export default function Usage() {
     const getTemplate = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || templates)
             setLoading(false)

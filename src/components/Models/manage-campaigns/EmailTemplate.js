@@ -26,6 +26,7 @@ export default function EmailTemplate({ onClose, onSave }) {
     const getTemplate = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || emailTemplates)
             setLoading(false)
