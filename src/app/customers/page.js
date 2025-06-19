@@ -312,7 +312,6 @@ function Customers() {
                                 <td>
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer'
-
                                             onClick={() => {
                                                 setSelId("e.id")
                                                 setOpen(true)

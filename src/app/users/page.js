@@ -34,7 +34,7 @@ export default function Users() {
     const [search, setSearch] = useState("")
     const [dates, setDates] = useState(null)
     const [openModal, setOpenModal] = useState(null)
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState([])
     const [loading, setLoading] = useState(true)
     const [sortBy, setSortBy] = useState("")
     const [selId, setSelId] = useState("")
@@ -60,22 +60,44 @@ export default function Users() {
 
     return (
         <AdminLayout>
-            {(openModal === "new") &&
+
+            {(openModal === "new" || openModal === "edit") &&
                 <AddUser
-                    isInvite={true}
+                    id={selId}
                     onClose={() => {
-                        setOpenModal(false)
+                        setOpenModal(false);
+                        setSelId("");
+                    }}
+                    onSave={() => {
+                        getUser();
+                        setOpenModal(false);
+                        setSelId("");
                     }}
                 />
             }
+            {/* {(openModal === "new" || openModal === "edit") &&
+                <AddUser
+                    isInvite={true}
+                    id={selId}
 
+                    onClose={() => {
+                        setOpenModal(false)
+                    }}
+
+                    onSave={() => {
+                        getUser()
+                        setOpenModal(true)
+                    }}
+                />
+            } */}
+            {/* 
             {(openModal === "edit") &&
                 <AddUser
                     onClose={() => {
                         setOpenModal(false)
                     }}
                 />
-            }
+            } */}
 
             {openModal === "delete" &&
                 <DeleteUsers
@@ -257,6 +279,7 @@ export default function Users() {
                             <td><Dropdown
                                 options={USER_ACTIONS}
                                 onClickOption={(el) => {
+                                    setSelId("e.id")
                                     setUser(e)
                                     setOpenModal(el)
                                 }}
