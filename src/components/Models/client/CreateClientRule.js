@@ -140,7 +140,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </SelectForm>
             )}
 
-            {(type === "positiveReview" || type === "negativeReview" || isCreate) && (
+            {(type === "positiveReview" || type === "negativeReview") && (
                 <div className="mt-3 flex justify-between">
                     <div>Threshold Rating</div>
                     <StarRangeSlider />
