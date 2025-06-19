@@ -148,12 +148,11 @@ function AddUser({ onClose, id }) {
                     isRequired={true}
                     formProps={{
                         ...register("status", {
-                            required: "Status is required",
-                            onChange: () => {
-                                if (errors.status) clearErrors('status')
-                            }
+                            required: "Status is required"
                         })
                     }}
+                    setValue={setValue}
+                    watch={watch}
                     errors={errors}
                     clearErrors={clearErrors} defaultOption="Select Status">
                     <option value="active">Active</option>
@@ -164,12 +163,11 @@ function AddUser({ onClose, id }) {
                 <SelectForm label="Role" isRequired={true} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                     formProps={{
                         ...register("role", {
-                            required: "Role is required",
-                            onChange: () => {
-                                if (errors.role) clearErrors('role')
-                            }
+                            required: "Role is required"
                         })
                     }}
+                    setValue={setValue}
+                    watch={watch}
                     errors={errors}
                     clearErrors={clearErrors}
                     defaultOption="Select Role">
