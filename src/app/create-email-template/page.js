@@ -17,7 +17,7 @@ function AddTemplate() {
   const id = ""
   const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm();
   const [sending, setSending] = useState(false)
-  const [isEmail, setIsEmail] = useState(false)
+  const [type, setType] = useState("")
   // const [dynamicFields, setDynamicFields] = useState(false)
 
   const handleClick = () => {
@@ -46,6 +46,9 @@ function AddTemplate() {
   }
 
   let body = watch("body") || []
+  const isEmail = type === "email"
+  const isSMS = type === "sms"
+
   return <AdminLayout>
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className='flex items-start gap-4'>
@@ -61,12 +64,8 @@ function AddTemplate() {
                 value={watch("type")}
                 onChange={(e) => {
                   const v = e.target.value
-                  if (v === "email") {
-                    setIsEmail(true)
-                  } else {
-                    setIsEmail(false)
-                  }
-                  setValue("type", e.target.value)
+                  setType(v)
+                  setValue("type", v)
                 }}>
                 <option value="email">Email</option>
                 <option value="sms">SMS</option>
@@ -128,27 +127,10 @@ function AddTemplate() {
                   clearErrors("body")
                   setValue("body", value)
                 }}
+                shoeMenu={isEmail}
                 dynamicFields={true}
+              />
 
-              // formProps={{ ...register("message", { required: true }) }}
-              // errors={errors}
-              // clearErrors={clearErrors}
-              >
-                {/* <CustomSelectBox
-                  class_='mt-5!'
-                  defaultOption="Insert Dynamic Fields"
-                  value={dynamicFields}
-                  onChange={(e) => {
-                    setDynamicFields(e.target.value)
-                  }}
-                >
-                  <option value="full name">Customer Full Name</option>
-                  <option value="first name">Customer First Name</option>
-                  <option value="business name">Business Name</option>
-                  <option value="direct feedback">Direct Feedback</option>
-                </CustomSelectBox> */}
-
-              </HtmlEditor>
             </div>
             {/* <HtmlEditor label="Email Body"
                formProps={{ ...register("message", { required: false }) }}
