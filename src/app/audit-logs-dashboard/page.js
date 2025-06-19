@@ -43,13 +43,6 @@ export default function AuditLogsDashboard() {
         }
     }
 
-    const handleClick = () => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-    };
-
     return (<>
         <AdminLayout>
             {open &&
@@ -104,8 +97,8 @@ export default function AuditLogsDashboard() {
                     </CustomSelectBox>
 
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
-                        onClick={handleClick}
                         disabled={loading}
+                        onClick={getData}
                     >
                         Reset</button>
                 </div>
