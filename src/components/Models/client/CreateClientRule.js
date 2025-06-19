@@ -67,10 +67,10 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 {!isCreate && <InputForm
                     label="Client Rule ID"
                     disabled="clientRuleId"
-                    placeholder="CR-001"
+                    placeholder="Enter Rule Id"
                     isRequired={false}
                     class_="mt-0!"
-                    inputClass="border-primary/10"
+                    inputClass="border-primary/10 disabled:bg-dark! disabled:border-input-border!"
                     formProps={{ ...register("clientRuleId", { required: false }) }}
                     errors={errors}
                     setValue={setValue}
