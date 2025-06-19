@@ -25,7 +25,6 @@ export default function Status({ status = "", context = "" }) {
         bgClass = "bg-[#0396FF1A] text-primary";
     } else if (
         s === "pending invite" ||
-        s === "pending" ||
         s === "in_progress" ||
         s === "flagged" ||
         s === "dp"
@@ -33,7 +32,7 @@ export default function Status({ status = "", context = "" }) {
         bgClass = "bg-[#FFC1071A] text-[#FFC107]";
     } else if (s === "suspended" || s === "at risk") {
         bgClass = "bg-[#ff00001A] text-[#ff0000]";
-    } else if (s === "pending" || s === "not_connected") {
+    } else if (s === "not_connected") {
         bgClass = "bg-[#A9A9A91A] text-[#A9A9A9]";
     } else if (s === "failed") {
         bgClass = "bg-[#DC35451A] text-[#DC3545]";
@@ -60,6 +59,12 @@ export default function Status({ status = "", context = "" }) {
             bgClass = "bg-[#0396FF1A] text-primary";
         } else {
             bgClass = "bg-[#28A7451A] text-success"
+        }
+    } else if (s === "pending") {
+        if (c === "left") {
+            bgClass = "bg-[#FFC1071A] text-[#FFC107]";
+        } else {
+            bgClass = "bg-[#A9A9A91A] text-[#A9A9A9]";
         }
     } else {
         bgClass = "bg-gray-100 text-gray-500";
