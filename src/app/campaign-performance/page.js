@@ -82,10 +82,10 @@ function ReviewAnalytics() {
         { date: "Jun 18,2024", type: "Monthly Review", sent: "John, Lisa", status: "Failed" },
     ]
 
-    const SHAREEMAIL=[
-    {img:"/images/request.png",name:"Amelie Laurent",email:"amili@gmail.com",role:"manager"},
-    {img:"/images/request.png",name:"Amelie Laurent",email:"amili@gmail.com",role:"owner"},
-]
+    const SHAREEMAIL = [
+        { img: "/images/request.png", name: "Amelie Laurent", email: "amili@gmail.com", role: "manager" },
+        { img: "/images/request.png", name: "Amelie Laurent", email: "amili@gmail.com", role: "owner" },
+    ]
 
     return (
         <AdminLayout
@@ -314,8 +314,7 @@ function ReviewAnalytics() {
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Sentiments Distribution</h2>
-                                    <CheckboxForm
-                                        formProps={{ ...register("sentimentsDistribution") }} errors={errors} />
+                                    <CheckboxForm formProps={{ ...register("sentimentsDistribution") }} errors={errors} />
                                 </div>
                             </div>
                         </div>
@@ -379,23 +378,23 @@ function ReviewAnalytics() {
                                 </div>
                             </div>
 
-                            {SHAREEMAIL.map((e,i)=><div key={i}className={i === 0 ? "mt-8" : ""}>
-                                            <div className="flex items-center justify-between">
-                                                <div className="flex gap-[15px]">
-                                                    <Image src={e.img} alt="request" width={44} height={44} />
-                                                    <div>
-                                                        <div className="text-base font-medium">{e.name}</div>
-                                                        <div className="text-sm text-text3 pt-1">{e.email}</div>
-                                                    </div>
-                                                </div>
-                                                <div className="text-lg capitalize">{e.role}</div>
-                                            </div>
-                                            
-                                               {i !== SHAREEMAIL.length - 1 && (
-                                                    <hr className='border-t border-border2 my-5' />
-                                                )}
+                            {SHAREEMAIL.map((e, i) => <div key={i} className={i === 0 ? "mt-8" : ""}>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex gap-[15px]">
+                                        <Image src={e.img} alt="request" width={44} height={44} />
+                                        <div>
+                                            <div className="text-base font-medium">{e.name}</div>
+                                            <div className="text-sm text-text3 pt-1">{e.email}</div>
+                                        </div>
+                                    </div>
+                                    <div className="text-lg capitalize">{e.role}</div>
+                                </div>
+
+                                {i !== SHAREEMAIL.length - 1 && (
+                                    <hr className='border-t border-border2 my-5' />
+                                )}
                             </div>)}
-                         
+
                             <SecondaryButton
                                 title="Generate Report"
                                 type='submit'
