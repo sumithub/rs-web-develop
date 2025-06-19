@@ -178,7 +178,7 @@ function AddUser({ onClose, id, isInvite }) {
 
             <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="Cancel" onClick={onClose} />
-                {isInvite && (
+                {!id && (
                     <SecondaryButton
                         title="Send Invite"
                         type="button"
@@ -186,7 +186,7 @@ function AddUser({ onClose, id, isInvite }) {
                         onClick={handleInviteClick}
                     />
                 )}
-                {!isInvite && <SecondaryButton title="Save changes" type="submit" disabled={sending} />}
+                {id && <SecondaryButton title="Save changes" type="submit" disabled={sending} />}
             </div>
         </form>
     </Model>
