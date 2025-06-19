@@ -34,6 +34,7 @@ export default function CustomerTagging() {
     const getCustomerTag = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || customerTagging)
             setLoading(false)
@@ -147,7 +148,7 @@ export default function CustomerTagging() {
                         </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                  {list?.length> 0 && <div>
+                {list?.length > 0 && <div>
                     <PaginationDemo />
                 </div>}
             </div>
