@@ -29,7 +29,13 @@ export default function Sidebar({ collapse, toggleSidebar }) {
 
         {
             title: "Notifications and Alerts", link: "", icon: "notification",
-            submenu: [{ title: "Alerts", link: "/alerts-management" }, { title: "Notification Log", link: "/audit-logs-dashboard" }]
+            submenu:
+                [
+                    { title: "Notifications", link: "/notifications-management" },
+                    { title: "Notification Preferences", link: "/notification-preferences-management" },
+                    { title: "Alerts", link: "/alerts-management" },
+                    { title: "Notification Log", link: "/audit-logs-dashboard" },
+                ]
         },
 
         {
