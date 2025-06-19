@@ -32,6 +32,7 @@ function Location() {
     const getTemplate = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || locationScreen)
             setLoading(false)

@@ -38,6 +38,7 @@ export default function UserManagement() {
     const getCustomerTag = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || userManagement)
             setLoading(false)

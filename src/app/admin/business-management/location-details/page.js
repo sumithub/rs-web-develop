@@ -30,6 +30,7 @@ export default function LocationDetails() {
     const getData = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || locationReviews)
             setList1(res.data || locationCampaign)

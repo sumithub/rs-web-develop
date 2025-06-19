@@ -36,6 +36,7 @@ export default function Edit({ onClose }) {
     const getCustomerTag = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || customerTagging)
             setLoading(false)

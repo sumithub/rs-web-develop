@@ -25,6 +25,7 @@ function TemplateList({ onClose, onSave }) {
     const getTemplate = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || templateList)
             setLoading(false)
