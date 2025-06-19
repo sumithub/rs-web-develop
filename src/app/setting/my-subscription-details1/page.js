@@ -8,7 +8,7 @@ import { useState } from "react";
 import Checkbox from "../../../components/form/Checkbox";
 
 export default function MySubscriptionDetails1() {
-    const [tab, setTab] = useState("")
+    const [tab, setTab] = useState("monthly")
     return (
         <AdminLayout>
             <div className="flex justify-between items-center">
