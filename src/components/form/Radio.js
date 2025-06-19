@@ -14,8 +14,6 @@ export default function Radio({
     showTooltip = false,
     tooltipContent = "",
     tooltipPosition = "top",
-    icon = false
-
 }) {
     return (
         <div className={`text-sm mt-4 ${class_}`}>
@@ -37,9 +35,6 @@ export default function Radio({
                     <div className={`${labelClass} font-medium text-sm capitalize ml-[2px] whitespace-pre`}>
                         {label}
                     </div>
-                    {icon &&
-                        <Image src="/images/url.svg" alt="info" height={16} width={16} unoptimized={true} />
-                    }
 
                     {showTooltip && tooltipContent && (
                         <Tooltip content={tooltipContent} position={tooltipPosition}>

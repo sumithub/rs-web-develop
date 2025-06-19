@@ -5,7 +5,6 @@ import CancelButton from "../../../components/common/CancelButton"
 import SecondaryButton from "../../../components/common/SecondaryButton"
 import CampaignCard from "../../../components/CampaignCard"
 import Radio from "../../../components/form/Radio"
-import Checkbox from "../../../components/form/Checkbox"
 import ScheduleCampaign from "../../../components/Models/manage-campaigns/ScheduleCampaign"
 import EmailTemplate from "../../../components/Models/manage-campaigns/EmailTemplate"
 import Image from "next/image"
@@ -623,7 +622,7 @@ export default function Detail({ }) {
                                                 />
                                                 <Radio
                                                     showTooltip={true}
-                                                    tooltipContent="This will reuse your primary email template."
+                                                    tooltipContent="This will reuse your primary email template." tooltipPosition="bottom"
                                                     class_="mt-0!"
                                                     name={campaignType === 'both' ? 'emailReminder' : 'reminderEmail'}
                                                     label="Same as primary"
@@ -749,7 +748,6 @@ export default function Detail({ }) {
                                             <div className="flex items-start gap-4">
                                                 <Radio
                                                     class_="mt-0!"
-
                                                     name="smsReminder"
                                                     label="Custom reminder SMS"
                                                     checked={!smsReminderEnabled}
@@ -760,7 +758,6 @@ export default function Detail({ }) {
                                                 />
                                                 <Radio
                                                     class_="mt-0!"
-
                                                     name="smsReminder"
                                                     label="Same as primary"
                                                     checked={smsReminderEnabled}
@@ -862,10 +859,12 @@ export default function Detail({ }) {
                         title="Scheduling & Launch"
                         status={getCardStatus('scheduling')}>
                         <div className="grid grid-cols-2 gap-3">
+
                             <InputForm label="Time Zone" isRequired={true} inputType="time" inputClass="bg-white! border-primary/10! focus:border-primary/60!"
                                 formProps={{ ...register("timeZone", { required: true }) }}
                                 errors={errors}
                             />
+
                             <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-[13.6px]! focus:border-primary/60! border-primary/10!"
                                 formProps={{ ...register("sendTime", { required: true }) }}
                                 errors={errors}>
