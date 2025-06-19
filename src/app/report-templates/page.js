@@ -20,10 +20,12 @@ export default function ReportTemplates() {
     const [showReport, setShowReport] = useState(false)
     const [showCampaign, setShowCampaign] = useState(false)
     const [showSentiment, setShowSentiment] = useState(false)
-    const [isChecked, setIsChecked] = useState([])
     const [sending, setSending] = useState(false)
     const [loading, setLoading] = useState(true)
     const { register, handleSubmit, setValue, clearErrors, formState: { errors }, watch } = useForm();
+    const reviewOverTime = watch("reviewOverTime");
+    const reviewRatingDistribution = watch("reviewRatingDistribution");
+    const sentimentTrends = watch("sentimentTrends");
 
     useEffect(() => {
         setTimeout(() => setLoading(false), 1500);
@@ -55,11 +57,6 @@ export default function ReportTemplates() {
     const handleCheckboxChange2 = (e) => {
         setShowSentiment(e.target.checked);
     };
-
-    const handleIsChecked = (e) => {
-        setIsChecked(e.target.checked)
-    }
-
 
     return <AdminLayout noCard={true}>
         {loading ? (
@@ -119,6 +116,9 @@ export default function ReportTemplates() {
                                     <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Review Over Time</h2>
                                     <CheckboxForm
+                                        id="time"
+                                        checked={watch("reviewOverTime")}
+                                        onChange={(e) => setValue("reviewOverTime", e.target.checked)}
                                         formProps={{ ...register("reviewOverTime") }} errors={errors}
                                     />
                                 </div>
@@ -126,8 +126,9 @@ export default function ReportTemplates() {
                                     <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Review Rating Distribution</h2>
                                     <CheckboxForm
-                                        checked={isChecked}
-                                        onChange={handleIsChecked}
+                                        id="rating"
+                                        checked={watch("reviewRatingDistribution")}
+                                        onChange={(e) => setValue("reviewRatingDistribution", e.target.checked)}
                                         formProps={{ ...register("reviewRatingDistribution") }} errors={errors}
                                     />
                                 </div>
@@ -135,6 +136,9 @@ export default function ReportTemplates() {
                                     <Image unoptimized={true} src="/images/top-sources.svg" alt='top-sources' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>top review sources</h2>
                                     <CheckboxForm
+                                        id="sources"
+                                        checked={watch("topReviewSources")}
+                                        onChange={(e) => setValue("topReviewSources", e.target.checked)}
                                         formProps={{ ...register("topReviewSources") }} errors={errors} />
                                 </div>
                             </div>
@@ -176,6 +180,8 @@ export default function ReportTemplates() {
                                         <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
                                         <h2 className='text-sm capitalize'>Sentiment trends</h2>
                                         <CheckboxForm
+                                            id="trends"
+                                            onChange={ }
                                             formProps={{ ...register("sentimentTrends") }} errors={errors} />
                                     </div>
                                     <div className='flex gap-2.5 items-center'>
@@ -201,12 +207,12 @@ export default function ReportTemplates() {
                                 <h2 className='text-lg font-semibold'>Review Report Preview</h2>
                             </div>
                             {loading ? <Loading /> : <div className='p-5'>
-                                <div className='mt-5'>
+                                {reviewOverTime && <div className='mt-5'>
                                     <DashboardChart title="Review Count & Average Over Time" class_="w-full object-contain mt-5 p-[15px] min-h-[426px]">
                                         <DashboardBarChart />
                                     </DashboardChart>
-                                </div>
-                                {isChecked && <div className='mt-5'>
+                                </div>}
+                                {reviewRatingDistribution && <div className='mt-5'>
                                     <DashboardChart title="Review Rating Distribution">
                                         <div className="flex items-start">
                                             <div className="w-[60%]">
@@ -259,11 +265,11 @@ export default function ReportTemplates() {
                                         <StackedReviewChart />
                                     </DashboardChart>
                                 </div>
-                                <div className='mt-5'>
+                                {sentimentTrends && <div className='mt-5'>
                                     <DashboardChart title="Sentiment Trend" height={366} width={656} class_="w-full">
                                         <DashboardLineChart />
                                     </DashboardChart>
-                                </div>
+                                </div>}
                             </div>}
                         </div>
                     </div>
