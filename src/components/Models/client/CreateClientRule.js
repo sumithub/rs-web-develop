@@ -17,6 +17,18 @@ import StarRangeSlider from "../../StartRatingSlider"
 function CreateClientRule({ onClose, id, isCreate }) {
     const { register, handleSubmit, clearErrors, setValue, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
+    const [enabled, setEnabled] = useState(false)
+    const [auto, setAuto] = useState(false)
+    const [support, setSupport] = useState(false)
+    const [notify, setNotify] = useState(false)
+    const [emailTo, setEmailTo] = useState(false)
+    const [performance, setPerformance] = useState(false)
+    const [sendNotification, setSendNotification] = useState(false)
+    const [escalate, setEscalate] = useState(false)
+    const [audit, setAudit] = useState(false)
+    const [reviewTo, setReviewTo] = useState(false)
+    const [markReview, setMarkReview] = useState(false)
+    const [compliance, setCompliance] = useState(false)
     const [type, setType] = useState("")
 
     const onSubmit = async (data) => {
@@ -96,6 +108,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
                     <div className='flex gap-2.5 items-center mt-4'>
                         <CheckboxForm
+                            checked={enabled}
+                            onChange={(e) => setEnabled(e.target.checked)}
                             formProps={{ ...register("enabled") }} errors={errors} />
                         <div>
                             Enabled
@@ -154,6 +168,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
+                        checked={auto}
+                        onChange={(e) => setAuto(e.target.checked)}
                         formProps={{ ...register("autoApproveReview") }} errors={errors} />
                     <div>
                         Auto-Approve Review
@@ -161,6 +177,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
+                        checked={support}
+                        onChange={(e) => setSupport(e.target.checked)}
                         formProps={{ ...register("supportTeam") }} errors={errors} />
                     <div>
                         Send Notification To Support Team
@@ -172,6 +190,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
+                        checked={emailTo}
+                        onChange={(e) => setEmailTo(e.target.checked)}
                         formProps={{ ...register("emailToReviewer") }} errors={errors} />
                     <div>
                         Trigger Welcome Email To Reviewer
@@ -206,6 +226,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
             {(type === "reviewResponseReceived" && isCreate) && (<div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
+                        checked={notify}
+                        onChange={(e) => setNotify(e.target.checked)}
                         formProps={{ ...register("notifyAccountManager") }} errors={errors} />
                     <div>
                         Notify Account Manager
@@ -213,6 +235,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
+                        checked={performance}
+                        onChange={(e) => setPerformance(e.target.checked)}
                         formProps={{ ...register("performanceMetrics") }} errors={errors} />
                     <div>
                         Log Response Time For Performance Metrics
@@ -232,6 +256,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
+                        checked={audit}
+                        onChange={(e) => setAudit(e.target.checked)}
                         formProps={{ ...register("auditPurposes") }} errors={errors} />
                     <div>
                         Log Deletion Event For Audit Purposes
@@ -239,6 +265,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
+                        checked={compliance}
+                        onChange={(e) => setCompliance(e.target.checked)}
                         formProps={{ ...register("complianceTeam") }} errors={errors} />
                     <div>
                         Notify Compliance Team
@@ -253,6 +281,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
+                        checked={reviewTo}
+                        onChange={(e) => setReviewTo(e.target.checked)}
                         formProps={{ ...register("reviewToTestimonials") }} errors={errors} />
                     <div>
                         Auto-Promote Review To Testimonials
@@ -260,6 +290,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
+                        checked={markReview}
+                        onChange={(e) => setMarkReview(e.target.checked)}
                         formProps={{ ...register("markReviewAsFeatured") }} errors={errors} />
                     <div>
                         Mark Review As Featured
@@ -274,6 +306,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
+                        checked={sendNotification}
+                        onChange={(e) => setSendNotification(e.target.checked)}
                         formProps={{ ...register("sendNotificationToSupportTeam") }} errors={errors} />
                     <div>
                         Send Notification To Support Team
@@ -281,6 +315,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
+                        checked={escalate}
+                        onChange={(e) => setEscalate(e.target.checked)}
                         formProps={{ ...register("escalateAlert") }} errors={errors} />
                     <div>
                         Escalate Alert To Manager
