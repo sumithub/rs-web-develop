@@ -557,7 +557,7 @@ export default function Detail({ }) {
                         {/* Campaign Type Selection */}
                         <div className="flex gap-3 my-4">
                             <div className="text-sm text-secondary">Campaign Type<span className="text-danger">*</span></div>
-                            <div className="flex">
+                            <div className="flex gap-3">
                                 <Radio name="type" label="Email" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
                                     checked={campaignType === "email"} onChange={() => handleCampaignTypeChange('email')} />
                                 <Radio name="type" label="SMS" inputClass="mb-0!" labelClass="font-normal!" class_="mt-0!"
@@ -607,16 +607,24 @@ export default function Detail({ }) {
                                 {/* Reminder Email Template Options */}
                                 {selectedTemplates.primary && (
                                     <div className="mt-4">
-                                        <div className="flex items-start gap-2 mt-1 mb-4">
+                                        <div className="flex items-start gap-4 mt-1 mb-4">
                                             <div className="text-gray-600 text-sm font-medium">Reminder Email Template</div>
-                                            <div className="flex items-start gap-2">
+                                            <div className="flex items-start gap-5">
                                                 <Radio
+                                                    class_="mt-0!"
                                                     name={campaignType === 'both' ? 'emailReminder' : 'reminderEmail'}
                                                     label="Custom reminder email"
                                                     checked={campaignType === 'both' ? !emailReminderEnabled : !reminderEnabled}
                                                     onChange={() => campaignType === 'both' ? handleEmailReminderToggle('customReminderEmail') : handleReminderToggle('customReminderEmail')}
+                                                    tooltipContent="Select a unique template for your reminder email."
+                                                    tooltipPosition="bottom"
+                                                    showTooltip={true}
+
                                                 />
                                                 <Radio
+                                                    showTooltip={true}
+                                                    tooltipContent="This will reuse your primary email template."
+                                                    class_="mt-0!"
                                                     name={campaignType === 'both' ? 'emailReminder' : 'reminderEmail'}
                                                     label="Same as primary"
                                                     checked={campaignType === 'both' ? emailReminderEnabled : reminderEnabled}
@@ -641,7 +649,7 @@ export default function Detail({ }) {
                                         {((campaignType === 'both' ? emailReminderEnabled : reminderEnabled) ||
                                             (campaignType === 'both' ? !emailReminderEnabled && selectedTemplates.reminder : !reminderEnabled && selectedTemplates.reminder)) && (
                                                 <>
-                                                    <div className="flex items-start gap-2 mt-1 mb-4">
+                                                    <div className="flex items-start gap-4 mt-1 mb-4">
                                                         <div className="text-gray-600 text-sm font-medium">Final Reminder Email Template<span className="text-red-500">*</span></div>
                                                         <div className="flex items-start gap-2">
                                                             <Radio
@@ -656,6 +664,9 @@ export default function Detail({ }) {
                                                                         setSelectedTemplates((prev) => ({ ...prev, final: null }));
                                                                     }
                                                                 }}
+                                                                tooltipContent="Select a separate template for the final reminder email."
+                                                                tooltipPosition="bottom"
+                                                                showTooltip={true}
                                                             />
                                                             <Radio
                                                                 name="final"
@@ -669,6 +680,10 @@ export default function Detail({ }) {
                                                                         setSelectedTemplates((prev) => ({ ...prev, final: prev.reminder }));
                                                                     }
                                                                 }}
+
+                                                                tooltipContent="This will reuse your reminder email template."
+                                                                tooltipPosition="bottom"
+                                                                showTooltip={true}
                                                             />
                                                         </div>
                                                     </div>
@@ -729,20 +744,30 @@ export default function Detail({ }) {
                                 {/* SMS Reminder Section - follows same pattern as email */}
                                 {selectedTemplates.smsPrimary && (
                                     <div className="mt-4">
-                                        <div className="flex items-start gap-2 mt-1 mb-4">
+                                        <div className="flex items-start gap-4 mt-1 mb-4">
                                             <div className="text-gray-600 text-sm font-medium">Reminder SMS Template</div>
-                                            <div className="flex items-start gap-2">
+                                            <div className="flex items-start gap-4">
                                                 <Radio
+                                                    class_="mt-0!"
+
                                                     name="smsReminder"
                                                     label="Custom reminder SMS"
                                                     checked={!smsReminderEnabled}
                                                     onChange={() => setSmsReminderEnabled(false)}
+                                                    tooltipContent="Select a unique template for your reminder SMS."
+                                                    tooltipPosition="bottom"
+                                                    showTooltip={true}
                                                 />
                                                 <Radio
+                                                    class_="mt-0!"
+
                                                     name="smsReminder"
                                                     label="Same as primary"
                                                     checked={smsReminderEnabled}
                                                     onChange={() => setSmsReminderEnabled(true)}
+                                                    tooltipContent="This will reuse your primary SMS template."
+                                                    tooltipPosition="bottom"
+                                                    showTooltip={true}
                                                 />
                                             </div>
                                         </div>
@@ -762,20 +787,28 @@ export default function Detail({ }) {
                                         {/* Final Reminder SMS Template Options */}
                                         {selectedTemplates.smsPrimary && (
                                             <>
-                                                <div className="flex items-start gap-2 mt-1 mb-4">
+                                                <div className="flex items-start gap-4 mt-1 mb-4">
                                                     <div className="text-gray-600 text-sm font-medium">Final Reminder SMS Template<span className="text-red-500">*</span></div>
-                                                    <div className="flex items-start gap-2">
+                                                    <div className="flex items-start gap-4">
                                                         <Radio
+                                                            class_="mt-0!"
                                                             name="smsFinal"
                                                             label="Custom final reminder SMS"
                                                             checked={!sameAsSmsFinal}
                                                             onChange={() => setSameAsSmsFinal(false)}
+                                                            tooltipContent="Select a separate template for the final reminder SMS."
+                                                            tooltipPosition="bottom"
+                                                            showTooltip={true}
                                                         />
                                                         <Radio
+                                                            class_="mt-0!"
                                                             name="smsFinal"
                                                             label="Same as reminder"
                                                             checked={sameAsSmsFinal}
                                                             onChange={() => setSameAsSmsFinal(true)}
+                                                            tooltipContent="This will reuse your reminder SMS template."
+                                                            tooltipPosition="bottom"
+                                                            showTooltip={true}
                                                         />
                                                     </div>
                                                 </div>
