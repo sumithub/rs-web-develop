@@ -12,7 +12,7 @@ import axios from "axios"
 import { getError, validEmailRgx } from "../../../../helper"
 import SendInvite from "./SendInvite"
 
-function AddUser({ onClose, id, isInvite }) {
+function AddUser({ onClose, id }) {
     const { register, setValue, handleSubmit, clearErrors, formState: { errors }, watch, trigger, getValues } = useForm({
         mode: 'onChange',
         defaultValues: {
@@ -26,12 +26,13 @@ function AddUser({ onClose, id, isInvite }) {
     const [sending, setSending] = useState(false)
     const [openModal, setOpenModal] = useState(false)
 
+
     const onSubmit = async (data) => {
-        if (isInvite) {
-            // For invite, just open the modal after validation
-            setOpenModal(true)
-            return
-        }
+        // if (isInvite) {
+        //     // For invite, just open the modal after validation
+        //     setOpenModal(true)
+        //     return
+        // }
 
         try {
             setSending(true)
@@ -83,7 +84,7 @@ function AddUser({ onClose, id, isInvite }) {
         if (hasErrors) {
             // Trigger validation to show errors
             await trigger(['name', 'email', 'status', 'role'])
-            toast.error("Please fill all required fields correctly")
+            // toast.error("Please fill all required fields correctly")
             return
         }
 
@@ -91,12 +92,14 @@ function AddUser({ onClose, id, isInvite }) {
         clearErrors()
         setOpenModal(true)
     }
-
+    console.log(errors)
     return <Model onClose={onClose} title={(!id ? "Invite New User" : "Edit User Details")} modalClass="w-1/2!">
-        {openModal &&
+        {/* Only show SendInvite modal when adding new user AND openModal is true */}
+        {openModal && !id &&
             <SendInvite
                 onClose={() => {
                     setOpenModal(false)
+                    onClose()
                 }} />
         }
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -178,6 +181,7 @@ function AddUser({ onClose, id, isInvite }) {
 
             <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="Cancel" onClick={onClose} />
+                {/* Only show Send Invite button when adding new user */}
                 {!id && (
                     <SecondaryButton
                         title="Send Invite"
@@ -186,6 +190,7 @@ function AddUser({ onClose, id, isInvite }) {
                         onClick={handleInviteClick}
                     />
                 )}
+                {/* Only show Save changes button when editing */}
                 {id && <SecondaryButton title="Save changes" type="submit" disabled={sending} />}
             </div>
         </form>
