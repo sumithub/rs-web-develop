@@ -35,6 +35,7 @@ function ClientRulesManagement() {
     const getData = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || clientRules)
             setLoading(false)

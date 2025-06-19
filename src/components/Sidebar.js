@@ -21,9 +21,21 @@ export default function Sidebar({ collapse, toggleSidebar }) {
             title: "Campaigns", link: "/campaigns", icon: "campaign",
             submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }]
         },
+
         {
             title: "Reports", link: "", icon: "report",
             submenu: [{ title: "Report Templates", link: "/report-templates" }, { title: "Schedule & Delivery", link: "/schedule-delivery" }, { title: "Report History", link: "/report-history" }]
+        },
+
+        {
+            title: "Notifications and Alerts", link: "", icon: "notification",
+            submenu:
+                [
+                    { title: "Notifications", link: "/notifications-management" },
+                    { title: "Notification Preferences", link: "/notification-preferences-management" },
+                    { title: "Alerts", link: "/alerts-management" },
+                    { title: "Notification Log", link: "/audit-logs-dashboard" },
+                ]
         },
 
         {
@@ -33,7 +45,10 @@ export default function Sidebar({ collapse, toggleSidebar }) {
 
         // { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
 
-        { title: "Settings", icon: "settings", submenu: [{ title: "Users", link: "/users" }] },
+        {
+            title: "Settings", icon: "settings",
+            submenu: [{ title: "Users", link: "/users" }, { title: "Locations", link: "/location-screen" }]
+        },
     ]
 
     return <div className="relative z-50">

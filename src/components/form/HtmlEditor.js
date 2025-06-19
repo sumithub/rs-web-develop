@@ -1,11 +1,12 @@
 'use client'
-import { useEditor } from '@tiptap/react'
 import { EditorProvider } from '@tiptap/react'
 import React, { useState } from 'react'
-import { extensions, MenuBar } from '../../utils/editorHelper'
+import { extensions, getTextLength, MenuBar } from '../../utils/editorHelper'
 import CustomSelectBox from './CustomSelectBox'
 
 export default function HtmlEditor({
+    type,
+    editorClass,
     isRequired = false,
     readOnly = false,
     inlineLabel = false,
@@ -19,6 +20,8 @@ export default function HtmlEditor({
     containerClass = "",
     children,
     dynamicFields = false, // For dynamic fields, we can pass the formProps to setValue
+    shoeMenu = true,
+    limit
 }) {
     const [editor, setEditor] = useState(null);
 
@@ -34,6 +37,15 @@ export default function HtmlEditor({
         error = errors[formProps?.name]?.message
     }
 
+    const options = [
+        { value: "full_name", label: "Customer Name", type: "sms" },
+        { value: "business_phone", label: "Business Phone", type: "sms" },
+        { value: "full_name", label: "Customer Full Name", type: "email" },
+        { value: "first_name", label: "Customer First Name", type: "email" },
+        { value: "business_name", label: "Business Name", type: "email" },
+        { value: "direct_feedback", label: "Direct Feedback", type: "email" }
+    ];
+
     return (
         <div className={`laptop:mb-2 mb-3 w-full relative  ${containerClass}`}>
             {(label || inlineLabel) ? (inlineLabel ?
@@ -45,7 +57,7 @@ export default function HtmlEditor({
                 </label>) : ""}
 
 
-            <div className='tiptap border border-border2 rounded-[10px]'>
+            <div className={`tiptap border border-border2 rounded-[10px] ${editorClass}`}>
                 <EditorProvider
                     // editor={editor}
                     editable={!readOnly}
@@ -69,7 +81,7 @@ export default function HtmlEditor({
                     slotBefore={
                         readOnly ? undefined : (
                             <div>
-                                <MenuBar editor={editor} />
+                                {shoeMenu && <MenuBar editor={editor} />}
                                 {children && <div className="ml-4 flex items-center justify-center">{children}</div>}
                                 {dynamicFields && <div className="ml-4 flex items-center justify-center">
                                     <CustomSelectBox
@@ -91,16 +103,19 @@ export default function HtmlEditor({
                                                 .run();
                                         }}
                                     >
-                                        <option value="full_name">Customer Full Name</option>
-                                        <option value="first_name">Customer First Name</option>
-                                        <option value="business_name">Business Name</option>
-                                        <option value="direct_feedback">Direct Feedback</option>
+                                        {options.filter(e => e.type === type).map(option => (
+                                            <option key={option.value} value={option.value}>
+                                                {option.label}
+                                            </option>
+                                        ))}
                                     </CustomSelectBox>
                                 </div>}
                             </div>
                         )
                     }
-                    extensions={extensions}
+
+                    slotAfter={!limit ? undefined : <div className="text-[12px] text-right text-secondary mt-1 p-4">{getTextLength(editor.getHTML())}/{limit}</div>}
+                    extensions={[...extensions,]}
                     content={value || ""}
                 // slotBefore={readOnly ? undefined : <div className=''><MenuBar /></div>}
                 // extensions={extensions}

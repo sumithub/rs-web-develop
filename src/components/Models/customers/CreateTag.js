@@ -44,7 +44,7 @@ export default function CreateTag({ onClose, id }) {
     }
 
     return (
-        <Model onClose={onClose} title={`${!id ? "Create New Tag" : "Update"}`} modalClass="w-1/2!">
+        <Model onClose={onClose} title={`${!id ? "Create New Tag" : "Edit"}`} modalClass="w-1/2!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <InputForm
