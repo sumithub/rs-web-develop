@@ -6,7 +6,6 @@ import TableOrder from "../../components/TableOrder";
 import Checkbox from "../../components/form/Checkbox";
 import Status from "../../components/Status";
 import CreateTag from "../../components/Models/customers/CreateTag"
-import Edit from "../../components/Models/customers/Edit"
 import Image from "next/image";
 import DeleteTag from "../../components/Models/customers/DeleteTag";
 import CustomSelectBox from "../../components/form/CustomSelectBox";
@@ -26,6 +25,7 @@ export default function CustomerTagging() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
+    const [selectedTagId, setSelectedTagId] = useState(null)
 
     useEffect(() => {
         getCustomerTag()
@@ -50,23 +50,9 @@ export default function CustomerTagging() {
                 <CreateTag
                     onClose={() => {
                         setOpen(false)
+                        setSelectedTagId(null)
                     }}
-
-                    onSave={() => {
-                        setOpen(true)
-                    }}
-                />
-            }
-
-            {openEdit &&
-                <Edit
-                    onClose={() => {
-                        setOpenEdit(false)
-                    }}
-
-                    onSave={() => {
-                        setOpenEdit(true)
-                    }}
+                    id={selectedTagId}
                 />
             }
 
@@ -149,7 +135,7 @@ export default function CustomerTagging() {
                                 <div className='flex items-center gap-2'>
                                     <button className='cursor-pointer'>
                                         <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28}
-                                            onClick={() => { setOpen(true) }} />
+                                            onClick={() => { setOpen(true); setSelectedTagId('demo-id'); }} />
                                     </button>
 
                                     <button className='cursor-pointer'>
