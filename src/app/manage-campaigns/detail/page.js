@@ -408,7 +408,7 @@ export default function Detail({ }) {
             <ProgressBar
                 currentStep={activeStep}
                 stepTitle1="Campaign Details"
-                stepTitle2="Customer Selection"
+                stepTitle2="Targeting"
                 stepTitle3="Template Selection"
                 stepTitle4="Scheduling & Launch"
             />
@@ -839,7 +839,7 @@ export default function Detail({ }) {
                                 <option value="morning">morning (8 AM - 12 PM)</option>
                                 <option value="afternoon">afternoon (12 PM - 4 PM)</option>
                                 <option value="evening">evening (4 PM - 8 PM)</option>
-                                <option value="anyTime">any time</option>
+                                <option value="anyTime">Any Time (System Decides Optimal Time)</option>
                             </SelectForm>
                         </div>
 
