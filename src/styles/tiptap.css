@@ -101,14 +101,18 @@
     }
 
     .ProseMirror {
-        min-height: 250px;
-        max-height: 350px;
+        min-height: 42vh;
+        max-height: 500px;
         font-size: 14px;
         color: var(--color-text3);
         border-radius: 0.5rem;
         overflow-y: auto;
         /* border: 1px solid #D9D9D9; */
         padding: 10px 14px;
+    }
+
+    p {
+        min-height: 21px;
     }
 
     .ProseMirror.ProseMirror-focused {
@@ -196,20 +200,6 @@
         color: darkblue;
         text-decoration: underline;
     }
-}
-
-.document-editor .tiptap .ProseMirror {
-    background-color: white;
-    max-height: 85dvh;
-    min-height: 85dvh;
-    overflow-y: auto;
-}
-
-.document-editor1 .tiptap .ProseMirror {
-    background-color: white;
-    overflow-y: auto;
-    max-height: 65dvh;
-    min-height: 65dvh;
 }
 
 .ProseMirror.drag-over {

@@ -12,12 +12,14 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import CustomSelectBox from "../../components/form/CustomSelectBox"
 import AdminLayout from "../../components/AdminLayout"
-
+import { getTextLength } from "../../utils/editorHelper"
+import SmsPreview from "../../components/Models/templates/SmsPreview"
 function AddTemplate() {
   const id = ""
-  const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm();
+  const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm({ defaultValues: { type: "email" } });
   const [sending, setSending] = useState(false)
-  const [type, setType] = useState("")
+  const [type, setType] = useState("email")
+  const [openPreview, setOpenPreview] = useState(false)
   // const [dynamicFields, setDynamicFields] = useState(false)
 
   const handleClick = () => {
@@ -27,6 +29,9 @@ function AddTemplate() {
 
   const onSubmit = async (data) => {
     try {
+      if (getTextLength(data.body) > 160) {
+        toast.error('Message must be 160 characters or less')
+      }
       setSending(true)
       let res = null
 
@@ -50,6 +55,8 @@ function AddTemplate() {
   const isSMS = type === "sms"
 
   return <AdminLayout>
+    {openPreview && <SmsPreview type={type}
+      onClose={() => { setOpenPreview(false) }} />}
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className='flex items-start gap-4'>
         <div className='w-[60%]'>
@@ -120,6 +127,7 @@ function AddTemplate() {
 
             <div className='mt-5'>
               <HtmlEditor
+                limit={type === 'sms' ? 160 : ""}
                 label="Email Body"
                 isRequired={true}
                 value={body}
@@ -127,6 +135,7 @@ function AddTemplate() {
                   clearErrors("body")
                   setValue("body", value)
                 }}
+                type={type}
                 shoeMenu={isEmail}
                 dynamicFields={true}
               />
@@ -184,7 +193,7 @@ function AddTemplate() {
             <div className='bg-[#0396FF1a] px-5 py-4 rounded-tl-[10px] rounded-tr-[10px]'>
               <div className='flex items-center gap-3'>
                 <Image src="/images/eye1.svg" alt='eye' height={22} width={22} unoptimized={true} />
-                <div className='text-secondary text-lg font-semibold'>Email Preview</div>
+                <div className='text-secondary text-lg font-semibold capitalize'>{type} Preview</div>
               </div>
             </div>
             <div className='p-5'>
@@ -193,6 +202,8 @@ function AddTemplate() {
                   dangerouslySetInnerHTML={{ __html: body }}
                 />
               </div>
+              <SecondaryButton title="Test Send" type="button" disabled={sending} class_="text-lg!"
+                onClick={() => setOpenPreview(true)} />
             </div>
           </div>
         </div>

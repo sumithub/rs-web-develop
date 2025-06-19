@@ -809,3 +809,11 @@ export const extensions = [
 ]
 
 
+
+export const getTextLength = (html) => {
+    if (!html) return 0;
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    const text = div.textContent || div.innerText || '';
+    return text.replace(/\s+/g, ' ').trim().length;
+};
