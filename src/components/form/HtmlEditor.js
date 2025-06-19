@@ -1,5 +1,4 @@
 'use client'
-import { useEditor } from '@tiptap/react'
 import { EditorProvider } from '@tiptap/react'
 import React, { useState } from 'react'
 import { extensions, MenuBar } from '../../utils/editorHelper'
@@ -19,6 +18,8 @@ export default function HtmlEditor({
     containerClass = "",
     children,
     dynamicFields = false, // For dynamic fields, we can pass the formProps to setValue
+    shoeMenu = true,
+    limit
 }) {
     const [editor, setEditor] = useState(null);
 
@@ -69,7 +70,7 @@ export default function HtmlEditor({
                     slotBefore={
                         readOnly ? undefined : (
                             <div>
-                                <MenuBar editor={editor} />
+                                {shoeMenu && <MenuBar editor={editor} />}
                                 {children && <div className="ml-4 flex items-center justify-center">{children}</div>}
                                 {dynamicFields && <div className="ml-4 flex items-center justify-center">
                                     <CustomSelectBox
@@ -100,7 +101,9 @@ export default function HtmlEditor({
                             </div>
                         )
                     }
-                    extensions={extensions}
+
+                    slotAfter={!limit ? undefined : <div className="text-[12px] text-right text-secondary mt-1 p-4">{(editor.getHTML()?.length || 0)}/{limit}</div>}
+                    extensions={[...extensions,]}
                     content={value || ""}
                 // slotBefore={readOnly ? undefined : <div className=''><MenuBar /></div>}
                 // extensions={extensions}
