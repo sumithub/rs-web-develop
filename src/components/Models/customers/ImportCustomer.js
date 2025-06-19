@@ -136,7 +136,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                 // Add validation for field mappings
                 isValid = validateFieldMappings();
                 if (!isValid) {
-                    toast.error("Please select mapping for all fields before proceeding");
+                    // toast.error("Please select mapping for all fields before proceeding");
                 }
                 break;
             case 3:
@@ -276,13 +276,13 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                 First Row reflect what's in your CSV file. Use the Mapping dropdown
                                 to select which attribute the column is associated with.
                             </div>
-                            <div className="table-class mt-8 relative z-50 ">
+                            <div className="w-full border border-border-color mt-8">
                                 {loading ? (
                                     <Loading />
                                 ) : list?.length > 0 ? (
                                     <table className="w-full">
                                         <thead>
-                                            <tr>
+                                            <tr className="rounded-[20px]!">
                                                 <th>
                                                     <TableOrder
                                                         title="Header Row"
@@ -317,7 +317,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                     <td>
                                                         <CustomSelectBox selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
                                                             class_="mt-0! w-full!"
-                                                            positionClass="sticky!"
+                                                            positionClass=""
                                                             onChange={(e) => handleFieldMappingChange(index, e.target.value)}
                                                             defaultOption="Select mapping"
                                                             value={importData.fieldMappings[index]?.mappedTo || ''}>
@@ -325,7 +325,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                             <option value="fullName">Full Name</option>
                                                             <option value="phoneNumber">Phone Number</option>
                                                             <option value="email">Email</option>
-
                                                         </CustomSelectBox>
 
                                                         {mappingErrors[index] && (
