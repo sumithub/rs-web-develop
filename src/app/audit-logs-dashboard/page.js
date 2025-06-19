@@ -32,6 +32,7 @@ export default function AuditLogsDashboard() {
     const getData = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || auditLogsDashboard)
             setLoading(false)
