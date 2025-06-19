@@ -19,13 +19,30 @@ export default function SelectForm({
     watch
 }) {
     const [isOpen, setIsOpen] = useState(false);
-
+    const [dropdownDirection, setDropdownDirection] = useState('down');
     let error = ""
     if (errors)
         error = errors[formProps?.name]?.type
     if (error === "pattern") {
         error = errors[formProps?.name]?.message
     }
+    const ref = useRef(null);
+
+    useEffect(() => {
+        calculateDirection()
+    }, [])
+    const calculateDirection = () => {
+        if (ref.current) {
+            const rect = ref.current.getBoundingClientRect();
+            const spaceBelow = window.innerHeight - rect.bottom;
+            const spaceAbove = rect.top;
+            if (spaceBelow < 100 && spaceAbove > 100) {
+                setDropdownDirection('up');
+            } else {
+                setDropdownDirection('down');
+            }
+        }
+    };
 
     const options = [];
     React.Children.forEach(children, child => {
@@ -53,7 +70,6 @@ export default function SelectForm({
         }
     };
 
-    const ref = useRef(null);
     useEffect(() => {
         const handleKeydown = (event) => {
             if (event.key === 'Escape') {
@@ -131,8 +147,10 @@ export default function SelectForm({
 
                 {/* Dropdown options */}
                 {isOpen && (
-                    <div className="absolute w-full bg-white rounded-b-lg border border-t-0 border-primary/10 z-10 max-h-60 overflow-y-auto">
-                        {/* Default option */}
+                    <div className={`absolute w-full bg-white rounded-lg border border-primary/10 z-[10001]  overflow-y-auto ${dropdownDirection === 'up'
+                        ? 'bottom-full  rounded-t-lg rounded-b-none'
+                        : 'top-full  rounded-b-lg rounded-t-none'
+                        }`}>                        {/* Default option */}
                         {defaultOption && (
                             <div
                                 className={`px-3 py-2 text-[13px] cursor-pointer capitalize ${getCurrentValue() === "" ? 'bg-primary text-white' : 'hover:bg-gray-50 text-text3'}`}

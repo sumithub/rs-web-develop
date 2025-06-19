@@ -20,6 +20,7 @@ export default function CustomSelectBox({
     positionClass = "",
 }) {
     const [isOpen, setIsOpen] = useState(false);
+    const [dropdownDirection, setDropdownDirection] = useState('down');
 
     let error = "";
 
@@ -106,6 +107,21 @@ export default function CustomSelectBox({
 
     const ref = useRef(null);
     useEffect(() => {
+        calculateDirection()
+    }, [])
+    const calculateDirection = () => {
+        if (ref.current) {
+            const rect = ref.current.getBoundingClientRect();
+            const spaceBelow = window.innerHeight - rect.bottom;
+            const spaceAbove = rect.top;
+            if (spaceBelow < 100 && spaceAbove > 100) {
+                setDropdownDirection('up');
+            } else {
+                setDropdownDirection('down');
+            }
+        }
+    };
+    useEffect(() => {
         const handleKeydown = (event) => {
             if (event.key === 'Escape') {
                 setIsOpen(false);
@@ -184,7 +200,10 @@ export default function CustomSelectBox({
 
             {/* Dropdown options */}
             {isOpen && (
-                <div className={`absolute w-full bg-white rounded-b-md border border-t-0 border-border-color z-10 max-h-60 overflow-y-auto ${positionClass}`}>
+                <div className={`absolute w-full bg-white rounded-b-md border border-t-0 border-border-color z-10 max-h-60 overflow-y-auto   ${dropdownDirection === 'up'
+                    ? 'bottom-full  rounded-t-lg rounded-b-none'
+                    : 'top-full  rounded-b-lg rounded-t-none'
+                    } ${positionClass}`}>
                     {/* Default option for single select */}
                     {!multiSelect && defaultOption !== "" && (
                         <div

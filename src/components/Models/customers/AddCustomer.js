@@ -109,6 +109,8 @@ function AddCustomer({ onClose, id, onSave }) {
                             errors={errors} />}
 
                         <SelectForm label={(!id ? "tag" : "tags")}
+                            setValue={setValue}
+                            watch={watch}
                             isRequired={false} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                             formProps={{ ...register("tag", { required: false }) }}
                             errors={errors} clearErrors={clearErrors}>
