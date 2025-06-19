@@ -28,6 +28,7 @@ export default function NotificationManagement() {
     const getData = async () => {
         try {
             setLoading(true)
+            setList([])
             const res = await axios.get("/api")
             setList(res.data || notificationManagement)
             setLoading(false)
