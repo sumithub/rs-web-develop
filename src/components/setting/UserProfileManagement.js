@@ -41,11 +41,6 @@ export default function UserProfileManagement({ id = "user1" }) {
                 }
             }
 
-            const savedImage = localStorage.getItem(`profileImage_${id}`);
-            if (savedImage) {
-                setProfileImage(savedImage);
-            }
-
             setLoading(false);
         };
         loadSavedProfileImage();

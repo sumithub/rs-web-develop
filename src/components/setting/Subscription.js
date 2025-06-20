@@ -16,11 +16,9 @@ export default function Subscription() {
 
     useEffect(() => {
         setLoading(true);
-        const timeout = setTimeout(() => {
+        setTimeout(() => {
             setLoading(false);
         }, 2000);
-
-        return () => clearTimeout(timeout);
     }, []);
 
 
