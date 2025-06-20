@@ -55,7 +55,7 @@ export default function MySubscriptionDetails1() {
                     <div className="px-5 pb-5 pt-10">
                         <CancelButton
                             title="Downgrade"
-                            class_="bg-white! border-danger/40! hover:bg-primary! text-lg! text-danger! hover:text-white!" />
+                            class_="bg-white! border-danger/40! hover:bg-danger! text-lg! text-danger! hover:text-white!" />
                     </div>
                     <hr className="border border-border2" />
                     <Card />

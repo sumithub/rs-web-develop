@@ -13,7 +13,7 @@ import SubscriptionCancelled from "./SubscriptionCancelled";
 
 
 export default function CancelSubscription({ onClose, id }) {
-    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, setValue, watch, formState: { errors }, clearErrors } = useForm();
     const [sending, setSending] = useState(false)
     const [openCancelled, setOpenCancelled] = useState(false)
 
@@ -77,10 +77,14 @@ export default function CancelSubscription({ onClose, id }) {
                 </div>
 
                 <SelectForm label=""
-                    setValue={setValue} watch={watch}
                     selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
-                    isRequired=""
-                    defaultOption="select">
+                    defaultOption="select"
+                    formProps={{ ...register("select", { required: true }) }}
+                    errors={errors}
+                    clearErrors={clearErrors}
+                    setValue={setValue}
+                    watch={watch}
+                >
                     <option value="tooExpensive">Too Expensive</option>
                     <option value="noLongerNeeded">No Longer Needed</option>
                     <option value="switchingToAnotherProvider">Switching to Another Provider</option>
@@ -104,8 +108,8 @@ export default function CancelSubscription({ onClose, id }) {
 
                 <div className="grid grid-cols-4 gap-5 mt-7">
                     <CancelButton title="Cancel Subscription" onClick={() => { setOpenCancelled(true) }} class_="text-danger! bg-danger/10!" />
-                    <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
-                    <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
+                    <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => toast.success("Switched Sccessfully")} />
+                    <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => toast.success("Applied Sccessfully")} />
                     <SecondaryButton title="keep subscription" type="submit" disabled={sending} />
                 </div>
             </form>

@@ -47,7 +47,12 @@ export default function Sidebar({ collapse, toggleSidebar }) {
 
         {
             title: "Settings", icon: "settings",
-            submenu: [{ title: "Users", link: "/users" }, { title: "Locations", link: "/location-screen" }]
+            submenu:
+                [
+                    { title: "Users", link: "/users" },
+                    { title: "Locations", link: "/location-screen" },
+                    { title: "Business Profile", link: "/setting" }
+                ]
         },
     ]
 
