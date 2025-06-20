@@ -55,14 +55,14 @@ export default function UpdatePaymentMethod({ onClose, id }) {
 
                         <div className="flex gap-2">
                             <RadioForm label="Credit Card" inputClass='mb-2!'
-                                name="duplicateHandling"
+                                name="paymentMethod"
                                 value="credit"
-                                formProps={{ ...register("duplicateHandling", { required: true }) }}
+                                formProps={{ ...register("paymentMethod", { required: false }) }}
                                 errors={errors} />
                             <RadioForm label="Bank Transfer" inputClass='mb-2!'
-                                name="duplicateHandling"
+                                name="paymentMethod"
                                 value="bank"
-                                formProps={{ ...register("duplicateHandling", { required: true }) }}
+                                formProps={{ ...register("paymentMethod", { required: false }) }}
                                 errors={errors} />
                         </div>
                     </div>

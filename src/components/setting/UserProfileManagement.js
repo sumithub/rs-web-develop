@@ -11,12 +11,12 @@ import { toast } from "react-toastify";
 import PhoneForm from "../form/PhoneForm";
 import Loading from "../Loading";
 
-export default function Profile({ id }) {
+export default function UserProfileManagement({ id }) {
+
     // Profile form
     const profileForm = useForm();
     // Password form
     const passwordForm = useForm();
-
     const [sending, setSending] = useState(false);
     const [updatingPassword, setUpdatingPassword] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -165,12 +165,11 @@ export default function Profile({ id }) {
         }
     };
 
-    // Reset profile image to default
-    const handleResetImage = () => {
-        setProfileImage("/images/profile-pic.png");
-        localStorage.removeItem(`profileImage_${id}`);
-        toast.success("Profile picture reset to default");
-    };
+    // const handleResetImage = () => {
+    //     setProfileImage("/images/profile-pic.png");
+    //     localStorage.removeItem(`profileImage_${id}`);
+    //     toast.success("Profile picture reset to default");
+    // };
 
     if (loading) {
         return <div className="flex justify-center items-center h-40"><Loading /></div>;

@@ -1,3 +1,5 @@
+import { features } from "process";
+
 export const USER_ACTIONS = [
     { label: "Edit User", value: "edit", icon: "/dropdown/edit.svg", hoverIcon: "/dropdown/edit-active.svg" },
     { label: "Suspend/Reactivate", value: "suspend/reactivate", icon: "/dropdown/pause.svg", hoverIcon: "/dropdown/pause-active.svg" },
@@ -300,4 +302,18 @@ export const auditLogsDashboard = [
     { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
     { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
     { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
+]
+
+export const subscriptionSummary = [
+    { feature: "Review Requests	", used: "3, 200", limit: "5,000" },
+    { feature: "Email Invitations	", used: 150, limit: 200 },
+    { feature: "SMS Invitations	", used: 90, limit: 100 },
+]
+
+export const paymentInvoice = [
+    { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Paid" },
+    { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Paid" },
+    { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Overdue" },
+    { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Overdue" },
+    { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Paid" },
 ]

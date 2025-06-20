@@ -8,7 +8,7 @@ import TableOrder from "../TableOrder";
 import Status from "../Status";
 import Image from "next/image";
 import Loading from "../Loading";
-import { templates } from "../../constent/constArray";
+import { paymentInvoice } from "../../constent/constArray";
 import axios from "axios";
 import { toast } from "react-toastify";
 import PaginationDemo from "../Pagination";
@@ -17,7 +17,6 @@ import UpdatePaymentMethod from './UpdatePaymentMethod'
 import { useForm } from "react-hook-form";
 import ScheduleEarlyPayment from "./ScheduleEarlyPayment";
 import { formatDate } from "../../../helper";
-
 
 export default function PaymentInvoices() {
     const [date, setDate] = useState("")
@@ -40,7 +39,7 @@ export default function PaymentInvoices() {
             setLoading(true)
             setList([])
             const res = await axios.get("/api")
-            setList(res.data || templates)
+            setList(res.data || paymentInvoice)
             setLoading(false)
 
         } catch (error) {
@@ -49,13 +48,6 @@ export default function PaymentInvoices() {
         }
     }
 
-    const Projects = [
-        { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Paid" },
-        { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Paid" },
-        { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Overdue" },
-        { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Overdue" },
-        { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Paid" },
-    ]
     return (
         <>
             {openSchedule &&
@@ -154,7 +146,7 @@ export default function PaymentInvoices() {
             </div>
 
             <div className="grid grid-cols-2 gap-4 mt-5">
-                <CancelButton title="Cancel upcoming payment" class_="text-lg! bg-danger/10! text-danger!" onClick={() => { setOpen(true) }} />
+                <CancelButton title="Cancel upcoming payment" class_="text-lg! bg-danger/10! border-danger/10! hover:border-danger/10!  text-danger!" onClick={() => { setOpen(true) }} />
                 <SecondaryButton title="update payment method" class_="text-lg!" onClick={() => { setOpenUpdate(true) }} />
             </div>
 
@@ -192,27 +184,28 @@ export default function PaymentInvoices() {
                                 field="action" /></th>
                         </tr>
                     </thead>
-                    <tbody>{Projects.map((e, i) =>
-                        <tr key={i}>
-                            <td>{e.invoiceNumber}</td>
-                            <td>{e.planName}</td>
-                            <td>{e.amount}</td>
-                            <td>{formatDate(e.date)}</td>
-                            <td><Status status={e.status} /></td>
-                            <td>
-                                <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer' onClick={() => { setOpenSchedule(true) }}>
-                                        <Image src="/images/open-eye2.svg" alt="open-eye2" height={28} width={28} />
-                                    </button>
+                    <tbody>
+                        {list.map((e, i) =>
+                            <tr key={i}>
+                                <td>{e.invoiceNumber}</td>
+                                <td>{e.planName}</td>
+                                <td>{e.amount}</td>
+                                <td>{formatDate(e.date)}</td>
+                                <td><Status status={e.status} /></td>
+                                <td>
+                                    <div className='flex items-center gap-2'>
+                                        <button className='cursor-pointer' onClick={() => { setOpenSchedule(true) }}>
+                                            <Image src="/images/open-eye2.svg" alt="open-eye2" height={28} width={28} />
+                                        </button>
 
-                                    <button className='cursor-pointer'
-                                        onClick={() => { toast.success("Downloaded") }}>
-                                        <Image src="/images/download.svg" alt='download' height={28} width={28} />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    )}</tbody>
+                                        <button className='cursor-pointer'
+                                            onClick={() => { toast.success("Downloaded") }}>
+                                            <Image src="/images/download.svg" alt='download' height={28} width={28} />
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        )}</tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                 {list?.length > 0 && <div>
                     <PaginationDemo />

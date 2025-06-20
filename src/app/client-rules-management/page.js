@@ -24,6 +24,7 @@ function ClientRulesManagement() {
     const [sortBy, setSortBy] = useState("")
     const [openDelete, setOpenDelete] = useState(false)
     const [open, setOpen] = useState(false)
+    const [selId, setSelId] = useState("")
 
     useEffect(() => {
         getData()
@@ -47,8 +48,10 @@ function ClientRulesManagement() {
         <AdminLayout >
             {open &&
                 <CreateClientRule
+                    id={selId}
                     onClose={() => {
-                        setOpen(false)
+                        setOpen(false);
+                        setSelId("");
                     }}
                 />
             }
@@ -140,7 +143,10 @@ function ClientRulesManagement() {
                                 <td>
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer'
-                                            onClick={() => { setOpen(true) }}>
+                                            onClick={() => {
+                                                setSelId("e.id")
+                                                setOpen(true)
+                                            }}>
                                             <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
 

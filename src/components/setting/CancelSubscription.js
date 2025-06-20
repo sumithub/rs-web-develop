@@ -50,7 +50,6 @@ export default function CancelSubscription({ onClose, id }) {
                 </div>
 
                 <div className="mt-5">
-
                     <div className="flex justify-between mt-3">
                         <div className="text-text3">Current Plan</div>
                         <div className="font-medium">Growth Plan ($99.00/Mo)</div>
@@ -69,14 +68,14 @@ export default function CancelSubscription({ onClose, id }) {
                         <div className="text-text3">Auto Renew</div>
                         <div className="font-medium">Enabled</div>
                     </div>
-
                 </div>
 
-                <div className="font-semibold text-xl mt-3">
+                <div className="font-semibold text-xl mt-4">
                     Select A Reason
                 </div>
 
                 <SelectForm label=""
+                    class_="mt-1!"
                     selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                     defaultOption="select"
                     formProps={{ ...register("select", { required: true }) }}
