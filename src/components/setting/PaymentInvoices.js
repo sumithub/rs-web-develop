@@ -15,6 +15,8 @@ import PaginationDemo from "../Pagination";
 import CancelUpcomingPayment from './CancelUpcomingPayment'
 import UpdatePaymentMethod from './UpdatePaymentMethod'
 import { useForm } from "react-hook-form";
+import ScheduleEarlyPayment from "./ScheduleEarlyPayment";
+
 
 export default function PaymentInvoices() {
     const [date, setDate] = useState("")
@@ -24,8 +26,9 @@ export default function PaymentInvoices() {
     const [sortBy, setSortBy] = useState("")
     const [type, setType] = useState("")
     const [open, setOpen] = useState(false)
+    const [openSchedule, setOpenSchedule] = useState(false)
     const [openUpdate, setOpenUpdate] = useState(false)
-    const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm();
+    const { register, watch, setValue } = useForm();
 
     useEffect(() => {
         getTemplate()
@@ -54,6 +57,17 @@ export default function PaymentInvoices() {
     ]
     return (
         <>
+            {openSchedule &&
+                <ScheduleEarlyPayment
+                    onClose={() => {
+                        setOpenSchedule(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenSchedule(true)
+                    }} />
+            }
+
             {open &&
                 <CancelUpcomingPayment
                     onClose={() => { setOpen(false) }}
@@ -81,10 +95,12 @@ export default function PaymentInvoices() {
                             setType(e.target.value)
                         }} />
 
-                    <SelectForm defaultOption="Status" class_="mt-0!"
-                        onChange={(e) => {
-                            setType(e.target.value)
-                        }} setValue={setValue} watch={watch}>
+                    <SelectForm label=""
+                        defaultOption="Status"
+                        class_="mt-0!"
+                        formProps={{ ...register("status", { required: false }) }}
+                        setValue={setValue}
+                        watch={watch}>
                         <option value="all">All</option>
                         <option value="paid">Paid</option>
                         <option value="unpaid">Unpaid</option>
@@ -184,13 +200,13 @@ export default function PaymentInvoices() {
                             <td><Status status={e.status} /></td>
                             <td>
                                 <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'>
-                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    <button className='cursor-pointer' onClick={() => { setOpenSchedule(true) }}>
+                                        <Image src="/images/open-eye2.svg" alt="open-eye2" height={28} width={28} />
                                     </button>
 
                                     <button className='cursor-pointer'
                                         onClick={() => { toast.success("Downloaded") }}>
-                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                        <Image src="/images/download.svg" alt='download' height={28} width={28} />
                                     </button>
                                 </div>
                             </td>
