@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SecondaryButton from "../../common/SecondaryButton";
 import Checkbox from "../../form/Checkbox";
 import Radio from "../../form/Radio";
@@ -20,7 +20,7 @@ import AddTemplate from "../templates/AddTemplate"
 import SelectForm from "../../form/SelectForm";
 import Link from "next/link";
 
-export default function BoostRequest({ onClose, onSave, id }) {
+export default function BoostRequest({ onClose, onSave, id, customer }) {
     const [select, setSelect] = useState("")
     const [overrideTemplates, setOverrideTemplates] = useState(false)
     const [selectedCustomers, setSelectedCustomers] = useState([])
@@ -36,9 +36,32 @@ export default function BoostRequest({ onClose, onSave, id }) {
     const [openEdit, setOpenEdit] = useState(false)
     const [openSelect, setOpenSelect] = useState(false)
     const [open, setOpen] = useState(false)
+    const [showCustomerFields, setShowCustomerFields] = useState(false);
+    const [addedCustomer, setAddedCustomer] = useState(null);
 
     // Watch form values for real-time updates
     const formData = watch();
+    
+
+    useEffect(() => {
+        if (Array.isArray(customer)) {
+            setSelectedCustomers(customer);
+            // Do not pre-fill form fields
+            setValue("name", "");
+            setValue("email", "");
+            setValue("phone", "");
+        } else if (customer) {
+            setSelectedCustomers([]);
+            setValue("name", customer.customerName || customer.name || "");
+            setValue("email", customer.email || "");
+            setValue("phone", customer.phone || "");
+        } else {
+            setSelectedCustomers([]);
+            setValue("name", "");
+            setValue("email", "");
+            setValue("phone", "");
+        }
+    }, [customer, setValue]);
 
     const onSubmit = async (data) => {
         try {
@@ -83,8 +106,13 @@ export default function BoostRequest({ onClose, onSave, id }) {
     }
 
     const handleCustomerSelection = (customers) => {
-        setSelectedCustomers(customers)
-        setOpenSelect(false)
+        // If multiple customers were passed as initial selection, merge them with new ones
+        setSelectedCustomers(prev => {
+            // Merge and avoid duplicates by email (or id if available)
+            const all = [...prev, ...customers];            
+            return all;
+        });
+        setOpenSelect(false);
     }
 
     const handleNewCustomer = (customer) => {
@@ -146,7 +174,11 @@ export default function BoostRequest({ onClose, onSave, id }) {
                     onClose={() => {
                         setOpen(false)
                     }}
-                    onSave={handleNewCustomer}
+                    onSave={(customer) => {
+                        handleNewCustomer(customer);
+                        setAddedCustomer(customer);
+                        setShowCustomerFields(true);
+                    }}
                 />
             }
 
@@ -170,45 +202,45 @@ export default function BoostRequest({ onClose, onSave, id }) {
                         />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3">
-                        <InputForm
-                            label="Name"
-                            isRequired={true}
-                            formProps={{ ...register("name", { required: true }) }}
-                            errors={errors}
-                            clearErrors={clearErrors}
-                        />
-                        <InputForm
-                            label="Email"
-                            isRequired={true}
-                            formProps={{
-                                ...register("email", {
-                                    required: true,
-                                    pattern: {
-                                        value: validEmailRgx,
-                                        message: "Please enter a valid email address"
-                                    }
-                                })
-                            }}
-                            errors={errors}
-                            clearErrors={clearErrors}
-                        />
-                    </div>
-
-                    <div>
-                        <PhoneForm
-                            label="Phone Number"
-                            isRequired={true}
-                            placeholder="Enter phone number"
-                            formProps={{
-                                ...register("phone", {
-                                    required: "Phone number is required",
-                                })
-                            }}
-                            errors={errors}
-                            setValue={setValue}
-                        />
-                    </div>
+                    {showCustomerFields && (
+                        <div className="grid grid-cols-2 gap-3 mt-4">
+                            <InputForm
+                                label="Name"
+                                isRequired={true}
+                                formProps={{ ...register("name", { required: true }) }}
+                                errors={errors}
+                                clearErrors={clearErrors}
+                            />
+                            <InputForm
+                                label="Email"
+                                isRequired={true}
+                                formProps={{
+                                    ...register("email", {
+                                        required: true,
+                                        pattern: {
+                                            value: validEmailRgx,
+                                            message: "Please enter a valid email address"
+                                        }
+                                    })
+                                }}
+                                errors={errors}
+                                clearErrors={clearErrors}
+                            />
+                            <PhoneForm
+                                label="Phone Number"
+                                isRequired={true}
+                                placeholder="Enter phone number"
+                                formProps={{
+                                    ...register("phone", {
+                                        required: "Phone number is required",
+                                    })
+                                }}
+                                errors={errors}
+                                setValue={setValue}
+                                watch={watch}
+                            />
+                        </div>
+                    )}
 
                     <div className="flex items-center justify-between mt-4">
                         <div className="text-lg font-semibold">
@@ -375,6 +407,23 @@ export default function BoostRequest({ onClose, onSave, id }) {
                             <h2 className="text-sm font-medium">Campaign's default templates will apply.</h2>
                         </div>
                     )}
+
+                    <div className="mt-5">
+                        <SelectForm
+                            label="Duplicate Handling"
+                            labelClass="mb-2.5!"
+                            selectClass_="py-2.5! px-2.5!"
+                            formProps={{
+                                ...register("duplicateHandling")
+                            }}
+                            setValue={setValue}
+                            watch={watch}
+                            clearErrors={clearErrors}
+                        >
+                            <option value="exclude" selected>Exclude Duplicates</option>
+                            <option value="proceed">Proceed Anyway</option>
+                        </SelectForm>
+                    </div>
 
                     <div className="mt-3.5">
                         <div className="flex justify-between items-center">
