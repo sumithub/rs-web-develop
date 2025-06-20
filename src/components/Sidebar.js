@@ -24,7 +24,13 @@ export default function Sidebar({ collapse, toggleSidebar }) {
 
         {
             title: "Reports", link: "", icon: "report",
-            submenu: [{ title: "Report Templates", link: "/report-templates" }, { title: "Schedule & Delivery", link: "/schedule-delivery" }, { title: "Report History", link: "/report-history" }]
+            submenu:
+                [
+                    { title: "Report Templates", link: "/report-templates" },
+                    { title: "Schedule & Delivery", link: "/schedule-delivery" },
+                    { title: "Report History", link: "/report-history" },
+                    { title: "Sentiment Analysis", link: "/sentiment-analysis" }
+                ]
         },
 
         {
