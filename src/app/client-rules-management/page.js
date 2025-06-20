@@ -12,7 +12,6 @@ import { formatDate, getError } from '../../../helper'
 import Loading from '../../components/Loading'
 import Status from '../../components/Status'
 import Image from 'next/image'
-import EditClientRule from "../../components/Models/client/EditClientRule"
 import DeleteClient from "../../components/Models/client/DeleteClient"
 import CreateClientRule from "../../components/Models/client/CreateClientRule"
 import SecondaryButton from '../../components/common/SecondaryButton'
@@ -23,7 +22,6 @@ function ClientRulesManagement() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true);
     const [sortBy, setSortBy] = useState("")
-    const [openEdit, setOpenEdit] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
     const [open, setOpen] = useState(false)
     const [openCreate, setOpenCreate] = useState(false)
@@ -48,14 +46,6 @@ function ClientRulesManagement() {
 
     return (
         <AdminLayout >
-            {(openEdit === "edit") &&
-                <EditClientRule
-                    onClose={() => {
-                        setOpenEdit(false)
-                    }}
-                />
-            }
-
             {open &&
                 <CreateClientRule
                     onClose={() => {

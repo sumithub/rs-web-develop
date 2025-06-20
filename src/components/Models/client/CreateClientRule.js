@@ -78,7 +78,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
                 <SelectForm label="Event Type"
                     selectClass_="py-3.5! px-2.5! border-primary/10!"
-                    isRequired={!type && true}
+                    isRequired={(!type || type === "negativeReview") && true}
                     formProps={{ ...register("eventType", { required: true }) }}
                     errors={errors}
                     clearErrors={clearErrors}
