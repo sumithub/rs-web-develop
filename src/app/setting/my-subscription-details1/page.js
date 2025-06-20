@@ -147,7 +147,7 @@ const Card = () => {
                 {/* <Image src="/images/tickSquare.png" alt="tick" width={15} height={15} /> */}
                 <Checkbox
                     checked={isChecked}
-                    onChange={e => setIsChecked(e.target.checked)} />
+                    onChange={e => setIsChecked(e)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
@@ -156,7 +156,7 @@ const Card = () => {
                 <div className="text-sm">E2EE Link Sharing</div>
                 <Checkbox
                     checked={isChecked1}
-                    onChange={e => setIsChecked1(e.target.checked)} />
+                    onChange={e => setIsChecked1(e)} />
                 {/* <Image src="/images/tickSquare.png" alt="tick" width={15} height={15} />
                              */}
             </div>
@@ -168,7 +168,7 @@ const Card = () => {
                 {/* <Image src="/images/close-square.png" alt="close" width={15} height={15} /> */}
                 <Checkbox
                     checked={isChecked2}
-                    onChange={e => setIsChecked2(e.target.checked)} />
+                    onChange={e => setIsChecked2(e)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
@@ -181,7 +181,7 @@ const Card = () => {
                 {/* <Image src="/images/close-square.png" alt="close" width={15} height={15} /> */}
                 <Checkbox
                     checked={isChecked3}
-                    onChange={e => setIsChecked3(e.target.checked)} />
+                    onChange={e => setIsChecked3(e)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
@@ -192,7 +192,7 @@ const Card = () => {
                         */}
                 <Checkbox
                     checked={isChecked4}
-                    onChange={e => setIsChecked4(e.target.checked)} />
+                    onChange={e => setIsChecked4(e)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
