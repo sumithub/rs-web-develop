@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import PhoneForm from "../form/PhoneForm";
 import Loading from "../Loading";
 
-export default function UserProfileManagement({ id }) {
+export default function UserProfileManagement({ id = "user1" }) {
 
     // Profile form
     const profileForm = useForm();
@@ -19,17 +19,34 @@ export default function UserProfileManagement({ id }) {
     const passwordForm = useForm();
     const [sending, setSending] = useState(false);
     const [updatingPassword, setUpdatingPassword] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [profileImage, setProfileImage] = useState("/images/profile-pic.png"); // Default image
 
     // Load profile data on component mount
     useEffect(() => {
-        if (id && id !== "add") {
-            loadProfileData();
-        }
-        // Load saved profile image from localStorage
+        const loadData = async () => {
+            setLoading(true);
+
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            if (id && id !== "add") {
+                const savedProfile = localStorage.getItem(`profile_${id}`);
+                if (savedProfile) {
+                    const data = JSON.parse(savedProfile);
+                    profileForm.setValue("name", data.name || "");
+                    profileForm.setValue("email", data.email || "");
+                    profileForm.setValue("phone", data.phone || "");
+                    profileForm.setValue("timeZone", data.timeZone || "");
+                    profileForm.setValue("company", data.company || "");
+                }
+            }
+
+            setLoading(false);
+        };
         loadSavedProfileImage();
+        loadData();
     }, [id]);
+
 
     const loadSavedProfileImage = () => {
         try {
