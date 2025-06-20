@@ -16,6 +16,7 @@ import CancelUpcomingPayment from './CancelUpcomingPayment'
 import UpdatePaymentMethod from './UpdatePaymentMethod'
 import { useForm } from "react-hook-form";
 import ScheduleEarlyPayment from "./ScheduleEarlyPayment";
+import { formatDate } from "../../../helper";
 
 
 export default function PaymentInvoices() {
@@ -196,7 +197,7 @@ export default function PaymentInvoices() {
                             <td>{e.invoiceNumber}</td>
                             <td>{e.planName}</td>
                             <td>{e.amount}</td>
-                            <td>{e.date}</td>
+                            <td>{formatDate(e.date)}</td>
                             <td><Status status={e.status} /></td>
                             <td>
                                 <div className='flex items-center gap-2'>
