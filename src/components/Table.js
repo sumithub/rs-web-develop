@@ -25,7 +25,7 @@ export default function Table() {
                     height={17}
                     unoptimized={true}
                   />
-                  Google -Xaxis
+                  Google
                 </div>
               </td>
               <td>500</td>
