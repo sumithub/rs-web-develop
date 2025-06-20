@@ -7,6 +7,7 @@ import CancelButton from "../common/CancelButton"
 import { useState } from "react"
 import UpgradePlan from '../setting/UpgradePlan'
 import CancelSubscription from "./CancelSubscription"
+import Link from "next/link"
 export default function Subscription() {
     const [open, setOpen] = useState(false)
     const [openCancel, setOpenCancel] = useState(false)
@@ -25,7 +26,9 @@ export default function Subscription() {
             <h2 className="text-lg font-semibold py-[11px]">My Subscription Details</h2>
             <div className="flex gap-[10px]">
                 <CancelButton title="Cancel Subscription" class_="text-danger!  fonr-normal! bg-danger/10!" onClick={() => { setOpenCancel(true) }} />
-                <SecondaryButton title="View Usage Details" class_="bg-white! hover:bg-primary! font-normal! text-primary! hover:text-white!" />
+                <Link href="/setting/my-subscription-details1">
+                    <SecondaryButton title="View Usage Details" class_="bg-white! hover:bg-primary! font-normal! text-primary! hover:text-white!" />
+                </Link>
                 <SecondaryButton title="Upgrade Plan" class_="font-normal!" onClick={() => { setOpen(true) }} />
             </div>
         </div>
