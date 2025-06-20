@@ -119,6 +119,11 @@ export default function MySubscriptionDetails1() {
 }
 
 const Card = () => {
+    const [isChecked, setIsChecked] = useState(false)
+    const [isChecked1, setIsChecked1] = useState(false)
+    const [isChecked2, setIsChecked2] = useState(false)
+    const [isChecked3, setIsChecked3] = useState(false)
+    const [isChecked4, setIsChecked4] = useState(false)
     return <div>
         <div className="p-5">
             <div className="font-bold text-base">Drive</div>
@@ -140,14 +145,18 @@ const Card = () => {
             <div className="flex justify-between items-center">
                 <div className="text-sm">E2EE File Storage</div>
                 {/* <Image src="/images/tickSquare.png" alt="tick" width={15} height={15} /> */}
-                <Checkbox />
+                <Checkbox
+                    checked={isChecked}
+                    onChange={e => setIsChecked(e.target.checked)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
 
             <div className="flex justify-between items-center">
                 <div className="text-sm">E2EE Link Sharing</div>
-                <Checkbox />
+                <Checkbox
+                    checked={isChecked1}
+                    onChange={e => setIsChecked1(e.target.checked)} />
                 {/* <Image src="/images/tickSquare.png" alt="tick" width={15} height={15} />
                              */}
             </div>
@@ -157,7 +166,9 @@ const Card = () => {
             <div className="flex justify-between items-center">
                 <div className="text-sm">Optional Decentralized Storage</div>
                 {/* <Image src="/images/close-square.png" alt="close" width={15} height={15} /> */}
-                <Checkbox />
+                <Checkbox
+                    checked={isChecked2}
+                    onChange={e => setIsChecked2(e.target.checked)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
@@ -168,7 +179,9 @@ const Card = () => {
             <div className="flex justify-between items-center">
                 <div className="text-sm">Short Address</div>
                 {/* <Image src="/images/close-square.png" alt="close" width={15} height={15} /> */}
-                <Checkbox />
+                <Checkbox
+                    checked={isChecked3}
+                    onChange={e => setIsChecked3(e.target.checked)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
@@ -177,7 +190,9 @@ const Card = () => {
                 <div className="text-sm">Quick Alias Reply</div>
                 {/* <Image src="/images/close-square.png" alt="close" width={15} height={15} />
                         */}
-                <Checkbox />
+                <Checkbox
+                    checked={isChecked4}
+                    onChange={e => setIsChecked4(e.target.checked)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
