@@ -66,8 +66,8 @@ function CreateClientRule({ onClose, id, isCreate }) {
             <div>
                 {!isCreate && <InputForm
                     label="Client Rule ID"
-                    disabled="clientRuleId"
-                    placeholder="Enter Rule Id"
+                    disabled={true}
+                    placeholder="CR-001"
                     isRequired={false}
                     class_="mt-0!"
                     inputClass="border-primary/10 disabled:bg-dark! disabled:border-input-border!"
