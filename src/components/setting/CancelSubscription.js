@@ -13,7 +13,7 @@ import SubscriptionCancelled from "./SubscriptionCancelled";
 
 
 export default function CancelSubscription({ onClose, id }) {
-    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, setValue, watch, formState: { errors }, clearErrors } = useForm();
     const [sending, setSending] = useState(false)
     const [openCancelled, setOpenCancelled] = useState(false)
 
@@ -50,7 +50,6 @@ export default function CancelSubscription({ onClose, id }) {
                 </div>
 
                 <div className="mt-5">
-
                     <div className="flex justify-between mt-3">
                         <div className="text-text3">Current Plan</div>
                         <div className="font-medium">Growth Plan ($99.00/Mo)</div>
@@ -69,18 +68,22 @@ export default function CancelSubscription({ onClose, id }) {
                         <div className="text-text3">Auto Renew</div>
                         <div className="font-medium">Enabled</div>
                     </div>
-
                 </div>
 
-                <div className="font-semibold text-xl mt-3">
+                <div className="font-semibold text-xl mt-4">
                     Select A Reason
                 </div>
 
                 <SelectForm label=""
-                    setValue={setValue} watch={watch}
+                    class_="mt-1!"
                     selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
-                    isRequired=""
-                    defaultOption="select">
+                    defaultOption="select"
+                    formProps={{ ...register("select", { required: true }) }}
+                    errors={errors}
+                    clearErrors={clearErrors}
+                    setValue={setValue}
+                    watch={watch}
+                >
                     <option value="tooExpensive">Too Expensive</option>
                     <option value="noLongerNeeded">No Longer Needed</option>
                     <option value="switchingToAnotherProvider">Switching to Another Provider</option>
@@ -104,8 +107,8 @@ export default function CancelSubscription({ onClose, id }) {
 
                 <div className="grid grid-cols-4 gap-5 mt-7">
                     <CancelButton title="Cancel Subscription" onClick={() => { setOpenCancelled(true) }} class_="text-danger! bg-danger/10!" />
-                    <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
-                    <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
+                    <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => toast.success("Switched Sccessfully")} />
+                    <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => toast.success("Applied Sccessfully")} />
                     <SecondaryButton title="keep subscription" type="submit" disabled={sending} />
                 </div>
             </form>

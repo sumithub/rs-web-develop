@@ -33,7 +33,6 @@ export default function ReportTemplates() {
     const [sentimentTrends, setSentimentTrends] = useState(false);
     const [sentimentDistribution, setSentimentDistribution] = useState(false);
 
-
     useEffect(() => {
         setTimeout(() => setLoading(false), 1500);
     }, []);

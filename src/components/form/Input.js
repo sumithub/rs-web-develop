@@ -16,7 +16,7 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
 
     return (
         <div className={`${class_} mt-[15px]`}>
-            <label className={`text-sm font-medium inline-flex items-center gap-[5px] text-secondary ${labelClass}`}>{infoIcon && (
+            <label className={`text-sm font-medium inline-flex items-center gap-[5px] text-secondary mb-1 ${labelClass}`}>{infoIcon && (
                 <span className="cursor-pointer" title="More information">
                     {typeof infoIcon === "string" ? (
                         <Image
@@ -52,11 +52,11 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
                 )}
                 {isTextArea ? <textarea rows={rows}
                     placeholder={placeholder} disabled={disabled}
-                    className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
+                    className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary disabled:bg-dark disabled:border-input-border ${inputClass}`}
                 /> : <input
                     placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
                     disabled={disabled}
-                    className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
+                    className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary disabled:bg-dark disabled:border-input-border ${inputClass}`}
                 />}
             </div>
             {error && <p className="text-xs pt-[5px] capitalize text-danger">{error}</p>}

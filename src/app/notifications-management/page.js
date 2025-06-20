@@ -8,11 +8,12 @@ import Status from "../../components/Status"
 import Checkbox from "../../components/form/Checkbox";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { getError } from "../../../helper";
+import { formatDate, getError } from "../../../helper";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import { notificationManagement } from "../../constent/constArray";
 import Image from "next/image";
+import SecondaryButton from "../../components/common/SecondaryButton";
 
 export default function NotificationManagement() {
     const [type, setType] = useState("")
@@ -63,9 +64,10 @@ export default function NotificationManagement() {
                         <option value="sent">Sent</option>
                         <option value="failed">Failed</option>
                     </CustomSelectBox>
-
+                    <SecondaryButton title="Resend" onClick={() => { toast.success("Resented Successfully") }} class_="text-xs! py-[9.4px]! font-normal!" />
+                    {/* 
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
-                        onClick={() => { toast.success("Resended Successfully") }}>Resend</button>
+                        onClick={() => { toast.success("Resented Successfully") }}>Resend</button> */}
                 </div>
             </div>
             <div className='table-class mt-[15px]'>
@@ -128,7 +130,7 @@ export default function NotificationManagement() {
                             <td>
                                 <Status status={e.status} context="notify" />
                             </td>
-                            <td>{e.date}</td>
+                            <td>{formatDate(e.date)}</td>
                             <td>
                                 <div className='flex items-center gap-2'>
                                     <button className='cursor-pointer'>

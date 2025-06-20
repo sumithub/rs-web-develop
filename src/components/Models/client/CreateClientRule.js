@@ -14,7 +14,7 @@ import RadioForm from "../../form/RadioForm"
 import Image from "next/image"
 import StarRangeSlider from "../../StartRatingSlider"
 
-function CreateClientRule({ onClose, id, isCreate }) {
+function CreateClientRule({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [enabled, setEnabled] = useState(false)
@@ -51,7 +51,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
         }
     }
 
-    let title = isCreate ? "Create Client Rule" : "Edit Client Rule"
+    let title = !id ? "Create Client Rule" : "Edit Client Rule"
 
     if (type === "positiveReview") {
         title = "Positive Review"
@@ -64,21 +64,22 @@ function CreateClientRule({ onClose, id, isCreate }) {
     return <Model onClose={onClose} title={title} modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-                {!isCreate && <InputForm
+                {id && <InputForm
                     label="Client Rule ID"
-                    disabled="clientRuleId"
+                    disabled={true}
                     placeholder="CR-001"
                     isRequired={false}
                     class_="mt-0!"
-                    inputClass="border-primary/10"
+                    inputClass="border-primary/10 disabled:bg-dark! disabled:border-input-border! py-3.5!"
                     formProps={{ ...register("clientRuleId", { required: false }) }}
                     errors={errors}
                     setValue={setValue}
                 />}
 
                 <SelectForm label="Event Type"
+                    class_={`${id ? "" : "mt-0!"}`}
                     selectClass_="py-3.5! px-2.5! border-primary/10!"
-                    isRequired={true}
+                    isRequired={(!type || type === "negativeReview") && true}
                     formProps={{ ...register("eventType", { required: true }) }}
                     errors={errors}
                     clearErrors={clearErrors}
@@ -97,7 +98,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
                 {(!type) && (<>
                     <InputForm label="Condition" placeholder="Enter condition" isRequired={true} errors={errors}
-                        inputClass="border-primary/10"
+                        inputClass="border-primary/10 py-3.5!"
                         formProps={{
                             ...register("condition", {
                                 required: true,
@@ -125,7 +126,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     </div>
 
                     <InputForm label="Client" placeholder="Enter client name" isRequired={true} errors={errors}
-                        inputClass="border-primary/10"
+                        inputClass="border-primary/10 py-3.5!"
                         formProps={{
                             ...register("client", {
                                 required: true,
@@ -140,8 +141,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                         errors={errors}
                         clearErrors={clearErrors}
                         setValue={setValue}
-                        watch={watch}
-                    >
+                        watch={watch}>
 
                         <option value="nyc">NYC</option>
                         <option value="la">LA</option>
@@ -158,7 +158,9 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     defaultOption="Select Condition"
                     formProps={{ ...register("ruleCondition", { required: true }) }}
                     errors={errors}
-                    clearErrors={clearErrors} setValue={setValue} watch={watch}>
+                    clearErrors={clearErrors}
+                    setValue={setValue}
+                    watch={watch}>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -170,13 +172,13 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
             {(type === "positiveReview" || type === "negativeReview") && (
                 <div className="mt-3 flex justify-between">
-                    <div>Threshold Rating</div>
+                    <div className="text-sm font-medium">Threshold Rating</div>
                     <StarRangeSlider />
                 </div>
             )}
 
             {(type === "newReview") && (<div>
-                <div className="mt-6 font-semibold text-xl">
+                <div className="mt-6 font-semibold text-lg">
                     Rule Condition
                 </div>
 
@@ -199,7 +201,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     </div>
                 </div>
 
-                <div className="mt-6 font-semibold text-xl">
+                <div className="mt-6 font-semibold text-lg">
                     Additional Action
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
@@ -214,7 +216,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
             </div>)}
 
             {(type === "flaggedReview") && (<div>
-                <div className="mt-6 font-semibold text-xl">
+                <div className="mt-6 font-semibold text-lg">
                     Additional Action
                 </div>
 
@@ -264,7 +266,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     <h2 className="text-sm font-medium capitalize">This rule triggers automatically upon deletion.</h2>
                 </div>
 
-                <div className="mt-4 font-semibold text-xl">
+                <div className="mt-4 font-semibold text-lg">
                     Additional Action
                 </div>
 

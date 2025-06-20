@@ -12,7 +12,6 @@ import { formatDate, getError } from '../../../helper'
 import Loading from '../../components/Loading'
 import Status from '../../components/Status'
 import Image from 'next/image'
-import EditClientRule from "../../components/Models/client/EditClientRule"
 import DeleteClient from "../../components/Models/client/DeleteClient"
 import CreateClientRule from "../../components/Models/client/CreateClientRule"
 import SecondaryButton from '../../components/common/SecondaryButton'
@@ -23,10 +22,9 @@ function ClientRulesManagement() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true);
     const [sortBy, setSortBy] = useState("")
-    const [openEdit, setOpenEdit] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
     const [open, setOpen] = useState(false)
-    const [openCreate, setOpenCreate] = useState(false)
+    const [selId, setSelId] = useState("")
 
     useEffect(() => {
         getData()
@@ -48,27 +46,12 @@ function ClientRulesManagement() {
 
     return (
         <AdminLayout >
-            {(openEdit === "edit") &&
-                <EditClientRule
-                    onClose={() => {
-                        setOpenEdit(false)
-                    }}
-                />
-            }
-
             {open &&
                 <CreateClientRule
+                    id={selId}
                     onClose={() => {
-                        setOpen(false)
-                    }}
-                />
-            }
-
-            {openCreate &&
-                <CreateClientRule
-                    isCreate={true}
-                    onClose={() => {
-                        setOpenCreate(false)
+                        setOpen(false);
+                        setSelId("");
                     }}
                 />
             }
@@ -101,7 +84,7 @@ function ClientRulesManagement() {
                     </CustomSelectBox>
 
                     <SecondaryButton title="Add New Role" class_='text-xs! font-normal!'
-                        onClick={() => { setOpenCreate(true) }} />
+                        onClick={() => { setOpen(true) }} />
                 </div>
             </div>
 
@@ -160,7 +143,10 @@ function ClientRulesManagement() {
                                 <td>
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer'
-                                            onClick={() => { setOpen(true) }}>
+                                            onClick={() => {
+                                                setSelId("e.id")
+                                                setOpen(true)
+                                            }}>
                                             <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
 
@@ -174,7 +160,6 @@ function ClientRulesManagement() {
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
-
 
             {list?.length > 0 && <div className='mt-8'>
                 <PaginationDemo />

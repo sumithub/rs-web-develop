@@ -4,7 +4,7 @@ import SecondaryButton from "../common/SecondaryButton"
 import TableOrder from "../TableOrder"
 import Loading from "../Loading"
 import axios from "axios"
-import { templates } from "../../constent/constArray"
+import { subscriptionSummary } from "../../constent/constArray"
 import { toast } from "react-toastify"
 import { getError } from "../../../helper"
 
@@ -22,7 +22,7 @@ export default function Usage() {
             setLoading(true)
             setList([])
             const res = await axios.get("/api")
-            setList(res.data || templates)
+            setList(res.data || subscriptionSummary)
             setLoading(false)
 
         } catch (error) {
@@ -61,26 +61,18 @@ export default function Usage() {
                             <th>Limit</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        <tr>
-                            <td>Review Requests</td>
-                            <td>3,200</td>
-                            <td>5,000</td>
-                        </tr>
-                        <tr>
-                            <td>Email Invitations</td>
-                            <td>150</td>
-                            <td>200</td>
-                        </tr>
-                        <tr>
-                            <td>SMS Invitations</td>
-                            <td>90</td>
-                            <td>100</td>
-                        </tr>
+                        {list.map((e, i) => <tr key={i}>
+                            <td>{e.feature}</td>
+                            <td>{e.used}</td>
+                            <td>{e.limit}</td>
+                        </tr>)}
+
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
-            <SecondaryButton title="View Detailed Report" class_="sm:w-1/5 text-xs! py-2.5! mt-5" mainClass="text-end" />
+            <SecondaryButton title="View Detailed Report" class_="w-40! text-xs! py-2.5! mt-5 font-normal!" mainClass="text-end" />
         </>
     )
 }

@@ -7,12 +7,11 @@ import axios from "axios";
 import { getError } from "../../../helper";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import InputForm from "../form/InputForm";
+import DatePickerForm from "../form/DatePickerForm";
 
 export default function ScheduleEarlyPayment({ onClose, id }) {
-    const { handleSubmit, register, formState: { errors } } = useForm();
+    const { handleSubmit, register, clearErrors, watch, setValue, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
-
 
     const onSubmit = async (data) => {
         try {
@@ -68,13 +67,11 @@ export default function ScheduleEarlyPayment({ onClose, id }) {
                     <div className="font-semibold">John Deo</div>
                 </div>
 
-                <InputForm
-                    label="Choose New Payment Date"
-                    isRequired={true}
-                    inputType="date"
+                <DatePickerForm label="Choose New Payment Date" isRequired={true} icon={true}
                     formProps={{ ...register("date", { required: true }) }}
-                    errors={errors}
-                    placeholder="" />
+                    mainClass="border-primary/10!"
+                    errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}
+                />
 
                 <div className="grid grid-cols-2 gap-4 mt-4">
                     <CancelButton title="schedule for later" class_="text-lg!" onClick={() => {
@@ -84,6 +81,6 @@ export default function ScheduleEarlyPayment({ onClose, id }) {
                     <SecondaryButton title="pay now" type="submit" class_="text-lg!" disabled={sending} />
                 </div>
             </form>
-        </Model >
+        </Model>
     )
 }

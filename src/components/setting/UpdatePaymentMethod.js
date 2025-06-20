@@ -8,9 +8,8 @@ import SecondaryButton from "../common/SecondaryButton";
 import { getError } from "../../../helper";
 import axios from "axios";
 import RadioForm from "../form/RadioForm";
-import { type } from "os";
 
-export default function UpdatePaymentMethod({ onClose, id, ids }) {
+export default function UpdatePaymentMethod({ onClose, id }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
 
@@ -55,8 +54,16 @@ export default function UpdatePaymentMethod({ onClose, id, ids }) {
                         </div>
 
                         <div className="flex gap-2">
-                            <RadioForm label="Credit Card" class_="font-medium" />
-                            <RadioForm label="Bank Transfer" class_="font-medium" />
+                            <RadioForm label="Credit Card" inputClass='mb-2!'
+                                name="paymentMethod"
+                                value="credit"
+                                formProps={{ ...register("paymentMethod", { required: false }) }}
+                                errors={errors} />
+                            <RadioForm label="Bank Transfer" inputClass='mb-2!'
+                                name="paymentMethod"
+                                value="bank"
+                                formProps={{ ...register("paymentMethod", { required: false }) }}
+                                errors={errors} />
                         </div>
                     </div>
 
