@@ -172,13 +172,13 @@ function CreateClientRule({ onClose, id }) {
 
             {(type === "positiveReview" || type === "negativeReview") && (
                 <div className="mt-3 flex justify-between">
-                    <div>Threshold Rating</div>
+                    <div className="text-sm font-medium">Threshold Rating</div>
                     <StarRangeSlider />
                 </div>
             )}
 
             {(type === "newReview") && (<div>
-                <div className="mt-6 font-semibold text-xl">
+                <div className="mt-6 font-semibold text-lg">
                     Rule Condition
                 </div>
 
@@ -201,7 +201,7 @@ function CreateClientRule({ onClose, id }) {
                     </div>
                 </div>
 
-                <div className="mt-6 font-semibold text-xl">
+                <div className="mt-6 font-semibold text-lg">
                     Additional Action
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
@@ -216,7 +216,7 @@ function CreateClientRule({ onClose, id }) {
             </div>)}
 
             {(type === "flaggedReview") && (<div>
-                <div className="mt-6 font-semibold text-xl">
+                <div className="mt-6 font-semibold text-lg">
                     Additional Action
                 </div>
 
@@ -266,7 +266,7 @@ function CreateClientRule({ onClose, id }) {
                     <h2 className="text-sm font-medium capitalize">This rule triggers automatically upon deletion.</h2>
                 </div>
 
-                <div className="mt-4 font-semibold text-xl">
+                <div className="mt-4 font-semibold text-lg">
                     Additional Action
                 </div>
 
