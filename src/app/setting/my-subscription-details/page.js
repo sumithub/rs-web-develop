@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image";
 import AdminLayout from "../../../components/AdminLayout";
 import CancelButton from "../../../components/common/CancelButton";
 import Status from "../../../components/Status";
@@ -8,7 +9,6 @@ import Checkbox from "../../../components/form/Checkbox";
 
 export default function MySubscriptionDetails() {
     const [tab, setTab] = useState("monthly")
-
     return (
         <AdminLayout>
             <div className="flex justify-between items-center">
@@ -22,14 +22,18 @@ export default function MySubscriptionDetails() {
                             onClick={() => {
                                 setTab("monthly")
                             }}
-                            className={`${tab === "monthly" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}>Monthly
+                            className={`${tab === "monthly" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                        >
+                            Monthly
                         </div>
 
                         <div
                             onClick={() => {
                                 setTab("annually")
                             }}
-                            className={`${tab === "annually" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}> Annually
+                            className={`${tab === "annually" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                        >
+                            Annually
                         </div>
                     </div>
                 </div>
@@ -105,7 +109,9 @@ export default function MySubscriptionDetails() {
                     </div>
 
                     <hr className="border border-border2 my-3" />
+
                     <Card />
+
                 </div>
             </div>
         </AdminLayout>
@@ -113,8 +119,6 @@ export default function MySubscriptionDetails() {
 }
 
 const Card = () => {
-    const [showMore, setShowMore] = useState(false);
-
     const [isChecked, setIsChecked] = useState(false)
     const [isChecked1, setIsChecked1] = useState(false)
     const [isChecked2, setIsChecked2] = useState(false)
@@ -143,7 +147,7 @@ const Card = () => {
                 {/* <Image src="/images/tickSquare.png" alt="tick" width={15} height={15} /> */}
                 <Checkbox
                     checked={isChecked}
-                    onChange={e => setIsChecked(e.target.checked)} />
+                    onChange={e => setIsChecked(e)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
@@ -152,7 +156,7 @@ const Card = () => {
                 <div className="text-sm">E2EE Link Sharing</div>
                 <Checkbox
                     checked={isChecked1}
-                    onChange={e => setIsChecked1(e.target.checked)} />
+                    onChange={e => setIsChecked1(e)} />
                 {/* <Image src="/images/tickSquare.png" alt="tick" width={15} height={15} />
                              */}
             </div>
@@ -164,19 +168,20 @@ const Card = () => {
                 {/* <Image src="/images/close-square.png" alt="close" width={15} height={15} /> */}
                 <Checkbox
                     checked={isChecked2}
-                    onChange={e => setIsChecked2(e.target.checked)} />
+                    onChange={e => setIsChecked2(e)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
 
-            <div className="font-semibold text-lg mt-5 pb-3.5">Mail</div>
+            <div className="font-semibold text-lg mt-5 pb-3.5
+                        ">Mail</div>
 
             <div className="flex justify-between items-center">
                 <div className="text-sm">Short Address</div>
                 {/* <Image src="/images/close-square.png" alt="close" width={15} height={15} /> */}
                 <Checkbox
                     checked={isChecked3}
-                    onChange={e => setIsChecked3(e.target.checked)} />
+                    onChange={e => setIsChecked3(e)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
@@ -187,7 +192,7 @@ const Card = () => {
                         */}
                 <Checkbox
                     checked={isChecked4}
-                    onChange={e => setIsChecked4(e.target.checked)} />
+                    onChange={e => setIsChecked4(e)} />
             </div>
 
             <hr className="border border-border2 my-3.5" />
