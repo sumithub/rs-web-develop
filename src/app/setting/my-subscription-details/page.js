@@ -1,5 +1,5 @@
 "use client"
-import Image from "next/image";
+
 import AdminLayout from "../../../components/AdminLayout";
 import CancelButton from "../../../components/common/CancelButton";
 import Status from "../../../components/Status";
@@ -124,6 +124,7 @@ const Card = () => {
     const [isChecked2, setIsChecked2] = useState(false)
     const [isChecked3, setIsChecked3] = useState(false)
     const [isChecked4, setIsChecked4] = useState(false)
+    const [showMore, setShowMore] = useState(false);
     return <div>
         <div className="p-5">
             <div className="font-bold text-base">Drive</div>
