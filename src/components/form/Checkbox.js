@@ -9,7 +9,7 @@ export default function Checkbox({ label, name, checked, onChange, class_ = "", 
 
             onChange={(e) => {
                 if (onChange)
-                    onChange(e)
+                    onChange(e.target.checked)
             }}
             checked={checked || false} />
     </label>
