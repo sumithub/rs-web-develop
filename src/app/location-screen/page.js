@@ -18,10 +18,10 @@ function LocationScreen() {
     const [list, setList] = useState([])
     const [open, setOpen] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
-    const [openEdit, setOpenEdit] = useState(false)
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
     const [sortBy, setSortBy] = useState("")
+    const [selId, setSelId] = useState("")
 
     useEffect(() => {
         getData()
@@ -45,20 +45,11 @@ function LocationScreen() {
         <AdminLayout>
             {open &&
                 <AddNewLocation
-                    isClient={true}
+                    id={selId}
                     type='addNewLocation'
                     onClose={() => {
+                        setSelId("");
                         setOpen(false)
-                    }}
-                />
-            }
-
-            {openEdit &&
-                <AddNewLocation
-                    isClient={true}
-                    type='edit'
-                    onClose={() => {
-                        setOpenEdit(false)
                     }}
                 />
             }
@@ -147,7 +138,10 @@ function LocationScreen() {
                                 <td>
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer'
-                                            onClick={() => { setOpenEdit(true) }}>
+                                            onClick={() => {
+                                                setSelId("e.id")
+                                                setOpen(true)
+                                            }}>
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
                                         <button className='cursor-pointer'

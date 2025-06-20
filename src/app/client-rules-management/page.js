@@ -175,7 +175,6 @@ function ClientRulesManagement() {
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
 
-
             {list?.length > 0 && <div className='mt-8'>
                 <PaginationDemo />
             </div>}
