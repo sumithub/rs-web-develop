@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import axios from "axios"
 import { toast } from "react-toastify"
-import { customerTagging } from "../../../constent/constArray"
+import { clientsManagement } from "../../../constent/constArray"
 import { getError } from "../../../../helper"
 import SuspendUser from "./SuspendUser"
 import AddNewClient from "./AddNewClient"
@@ -38,7 +38,7 @@ export default function Edit({ onClose }) {
             setLoading(true)
             setList([])
             const res = await axios.get("/api")
-            setList(res.data || customerTagging)
+            setList(res.data || clientsManagement)
             setLoading(false)
 
         } catch (error) {
@@ -47,17 +47,6 @@ export default function Edit({ onClose }) {
         }
     }
 
-    const Business = [
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-    ]
     return (
         <Model onClose={onClose} title="Edit" modalClass="w-[80%]!">
             {openUser &&
@@ -146,7 +135,7 @@ export default function Edit({ onClose }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {Business.map((e, index) =>
+                        {list.map((e, index) =>
                             <tr key={index}>
                                 <td>
                                     <div className="flex items-center gap-2.5">

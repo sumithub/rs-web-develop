@@ -31,6 +31,7 @@ export default function LocationDetails() {
         try {
             setLoading(true)
             setList([])
+            setList1([])
             const res = await axios.get("/api")
             setList(res.data || locationReviews)
             setList1(res.data || locationCampaign)
@@ -123,7 +124,7 @@ export default function LocationDetails() {
                 </div>}
             </div>
             {view === "reviews" && <div>
-                <div className="bg-secondary2 rounded-[15px] p-5 mt-3.5 flex justify-between items-center">
+                <div className="bg-secondary2 rounded-[15px] p-5 mt-3.5 flex items-center">
                     <div>
                         <h2 className="text-base">Location Name</h2>
                         <h2 className="text-lg font-medium pt-1.5">Melbourne CBD</h2>
@@ -184,7 +185,7 @@ export default function LocationDetails() {
                 </div>
             </div>}
             {view === "campaign" && <div>
-                <div className="bg-secondary2 rounded-[15px] p-5 mt-3.5 flex justify-between items-center">
+                <div className="bg-secondary2 rounded-[15px] p-5 mt-3.5 flex items-center">
                     <div>
                         <h2 className="text-base">Location Name</h2>
                         <h2 className="text-lg font-medium pt-1.5">Melbourne CBD</h2>
@@ -228,7 +229,7 @@ export default function LocationDetails() {
                                             <div>{e.name}</div>
                                         </div>
                                     </td>
-                                    <td><Status status={e.status} /></td>
+                                    <td><Status status={e.status} context="notify" /></td>
                                     <td>{e.responses}</td>
                                     <td>
                                         <button className='cursor-pointer'>

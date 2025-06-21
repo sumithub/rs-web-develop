@@ -11,7 +11,7 @@ import { getError } from "../../../../helper";
 import SelectForm from "../../form/SelectForm";
 import SelectedCustomers from "../manage-campaigns/SelectedFromCustomers";
 
-export default function CreateCustomersTag({ onClose, id, type = "create" }) {
+export default function CreateCustomersTag({ onClose, id }) {
     const [open, setOpen] = useState(false)
     const { register, handleSubmit, setValue, watch, formState: { errors }, clearErrors } = useForm();
     const [sending, setSending] = useState(false)
@@ -36,7 +36,7 @@ export default function CreateCustomersTag({ onClose, id, type = "create" }) {
     }
 
     return (
-        <Model onClose={onClose} title={type === "create" ? "Create Customer Tag" : "Edit Customer Tag"} modalClass="w-1/2!">
+        <Model onClose={onClose} title={!id ? "Create Customer Tag" : "Edit Customer Tag"} modalClass="w-1/2!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 {open &&
                     <SelectedCustomers

@@ -9,7 +9,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { getError } from '../../../../../helper'
 import Loading from '../../../../components/Loading'
-import { locationScreen } from '../../../../constent/constArray'
+import { locationScreen, locationsManagement } from '../../../../constent/constArray'
 import AddNewLocation from '../../../../components/Models/location/AddNewLocation'
 import DeleteLocation from '../../../../components/Models/location/DeleteLocation'
 import AdminLayout from '../../../../components/AdminLayout'
@@ -20,7 +20,6 @@ function Location() {
     const [filterBy, setFilterBy] = useState("")
     const [open, setOpen] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
-    const [openEdit, setOpenEdit] = useState(false)
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
     const [sortBy, setSortBy] = useState("")
@@ -34,7 +33,7 @@ function Location() {
             setLoading(true)
             setList([])
             const res = await axios.get("/api")
-            setList(res.data || locationScreen)
+            setList(res.data || locationsManagement)
             setLoading(false)
 
         } catch (error) {
@@ -42,18 +41,6 @@ function Location() {
             setLoading(false)
         }
     }
-    const Business = [
-        { name: "Location-1", address: "123 Main St.", client: "Xyz..", count: "50" },
-        { name: "Location-2", address: "123 Main St.", client: "Xyz..", count: "100" },
-        { name: "Location-3", address: "123 Main St.", client: "Xyz..", count: "30" },
-        { name: "Location-4", address: "123 Main St.", client: "Xyz..", count: "35" },
-        { name: "Location-5", address: "123 Main St.", client: "Xyz..", count: "50" },
-        { name: "Location-6", address: "123 Main St.", client: "Xyz..", count: "20" },
-        { name: "Location-7", address: "123 Main St.", client: "Xyz..", count: "80" },
-        { name: "Location-8", address: "123 Main St.", client: "Xyz..", count: "100" },
-        { name: "Location-9", address: "123 Main St.", client: "Xyz..", count: "50" },
-        { name: "Location-10", address: "123 Main St.", client: "Xyz..", count: "30" },
-    ]
 
     return (
         <AdminLayout
@@ -68,18 +55,9 @@ function Location() {
                 />}>
             {open &&
                 <AddNewLocation
-                    type='addNewLocation'
+                    type={true}
                     onClose={() => {
                         setOpen(false)
-                    }}
-                />
-            }
-
-            {openEdit &&
-                <AddNewLocation
-                    type='edit'
-                    onClose={() => {
-                        setOpenEdit(false)
                     }}
                 />
             }
@@ -152,7 +130,7 @@ function Location() {
                     </thead>
 
                     <tbody>
-                        {Business.map((e, index) =>
+                        {list.map((e, index) =>
                             <tr key={index}>
                                 <td>
                                     <div className="flex gap-2.5 items-center">
@@ -174,7 +152,7 @@ function Location() {
                                             <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
                                         </button>
                                         <button className='cursor-pointer'
-                                            onClick={() => { setOpenEdit(true) }}>
+                                            onClick={() => { setOpen(true) }}>
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
                                         <button className='cursor-pointer'

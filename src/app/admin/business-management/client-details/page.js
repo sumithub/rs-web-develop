@@ -148,7 +148,7 @@ export default function ClientDetails() {
                             <DashboardCard title="Average Rating" count="4.2" img="/images/tick-sms.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/average2.png')]" />
                             <DashboardCard title="Total Reviews" count="5,200" img="/images/star1.svg" bgClass="bg-success-light" textColor="text-success-light" bgImage="bg-[url('/images/total2.png')]" />
                             <DashboardCard title="Total Location" count="05" img="/images/location2.svg" bgClass="bg-custom-purple" textColor="text-custom-purple" bgImage="bg-[url('/images/active2.png')]" />
-                            <DashboardCard title="Active Campaigns" count="04" img="/images/active2.png" bgClass="bg-custom-yellow" textColor="text-custom-purple" bgImage="bg-[url('/images/active2.png')]" />
+                            <DashboardCard title="Active Campaigns" count="04" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-purple" bgImage="bg-[url('/images/active2.png')]" />
                             <DashboardCard title="Positive Sentiment" count="75%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
                             <DashboardCard title="Negative Sentiment" count="12%" img="/images/chart-2.svg" bgClass="bg-danger" textColor="text-danger" bgImage="bg-[url('/images/negative.png')]" />
                         </div>
@@ -230,7 +230,7 @@ export default function ClientDetails() {
                                     sortBy={sortBy}
                                     setSortBy={setSortBy}
                                     field="responses" /></th>
-                                <th>Action</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -246,7 +246,7 @@ export default function ClientDetails() {
                                             <div>{e.name}</div>
                                         </div>
                                     </td>
-                                    <td><Status status={e.status} /></td>
+                                    <td><Status status={e.status} context="notify" /></td>
                                     <td>{e.locations}</td>
                                     <td>{e.responses}</td>
                                     <td>

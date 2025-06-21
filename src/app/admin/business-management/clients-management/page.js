@@ -17,7 +17,7 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import { getError } from "../../../../../helper"
 import Loading from "../../../../components/Loading"
-import { customerTagging } from "../../../../constent/constArray"
+import { clientsManagement } from "../../../../constent/constArray"
 
 export default function ClientsManagement() {
     const [sortBy, setSortBy] = useState(false)
@@ -40,7 +40,7 @@ export default function ClientsManagement() {
             setLoading(true)
             setList([])
             const res = await axios.get("/api")
-            setList(res.data || customerTagging)
+            setList(res.data || clientsManagement)
             setLoading(false)
 
         } catch (error) {
@@ -49,17 +49,6 @@ export default function ClientsManagement() {
         }
     }
 
-    const Business = [
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-    ]
     return (
         <AdminLayout
             noCard={false}
@@ -164,11 +153,11 @@ export default function ClientsManagement() {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="status" /></th>
-                            <th className="text-center!">Action</th>
+                            <th className="text-center!">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {Business.map((e, index) =>
+                        {list.map((e, index) =>
                             <tr key={index}>
                                 <td>
                                     <div className="flex items-center gap-2.5">
