@@ -256,7 +256,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                 accept=".csv"
                                 formProps={{
                                     ...register('csvFile', {
-                                        required: 'Please select a CSV file',
+                                        required: true,
                                         validate: (value) => {
                                             if (!value || (value instanceof FileList && value.length === 0)) {
                                                 return 'Please select a CSV file';
