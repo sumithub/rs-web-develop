@@ -269,6 +269,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                 errors={errors}
                                 isRequired={true}
                                 label="Upload file"
+                                showToast={toast.error}
                             />
                         </div>
                     )}
@@ -336,17 +337,19 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                                 {mappingErrors[index]}
                                                             </div>
                                                         )} */}
-                                                        <SelectForm key={index}
+                                                        <SelectForm
+                                                            key={index}
                                                             selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
                                                             class_="mt-0!"
                                                             formProps={{ ...register("mapping" + index, { required: true }) }}
                                                             errors={errors}
-                                                            clearErrors={clearErrors} setValue={setValue} watch={watch}
+                                                            clearErrors={clearErrors}
+                                                            setValue={setValue}
+                                                            watch={watch}
                                                             onChange={(e) => handleFieldMappingChange(index, e.target.value)}
                                                             defaultOption="Select mapping"
                                                             value={importData.fieldMappings[index]?.mappedTo || ''}
                                                         >
-
                                                             <option value="fullName">Full Name</option>
                                                             <option value="phoneNumber">Phone Number</option>
                                                             <option value="email">Email</option>

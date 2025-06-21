@@ -9,7 +9,8 @@ export default function FileInput({
     label = "Upload file",
     class_ = "",
     accept,
-    setFile
+    setFile,
+    showToast
 }) {
     const [selectedFile, setSelectedFile] = useState(null);
     const [isDragOver, setIsDragOver] = useState(false);
@@ -37,7 +38,10 @@ export default function FileInput({
                 formProps.onChange(event);
             }
         } else {
-            alert('Please select a CSV file');
+            // Show toast instead of alert
+            if (showToast) {
+                showToast('Please select a CSV file');
+            }
             // Clear the input
             event.target.value = '';
             setSelectedFile(null);
@@ -81,7 +85,10 @@ export default function FileInput({
                 }
             }
         } else {
-            alert('Please select a CSV file');
+            // Show toast instead of alert
+            if (showToast) {
+                showToast('Please select a CSV file', 'error');
+            }
         }
     };
 

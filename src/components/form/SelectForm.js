@@ -17,7 +17,8 @@ export default function SelectForm({
     labelClass,
     setValue,
     watch,
-    onChange
+    onChange,
+    value // Add this prop to accept external value
 }) {
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownDirection, setDropdownDirection] = useState('down');
@@ -32,6 +33,7 @@ export default function SelectForm({
     useEffect(() => {
         calculateDirection()
     }, [])
+
     const calculateDirection = () => {
         if (ref.current) {
             const rect = ref.current.getBoundingClientRect();
@@ -55,28 +57,51 @@ export default function SelectForm({
         }
     });
 
+    // Fixed getCurrentValue to handle both watch and value prop
     const getCurrentValue = () => {
-        const v = options.find(e => e.value === watch(formProps?.name)) || {}
-        return v?.label || ""
+        // Prioritize external value prop, then watch, then empty string
+        const currentValue = value !== undefined ? value : (watch && formProps?.name ? watch(formProps.name) : '');
+        const option = options.find(e => e.value === currentValue);
+        return option?.label || "";
+    };
+
+    // Get the actual value (not label) for comparisons
+    const getCurrentActualValue = () => {
+        return value !== undefined ? value : (watch && formProps?.name ? watch(formProps.name) : '');
     };
 
     const handleSelect = (optionValue) => {
         setIsOpen(false);
+
+        // Call external onChange first
         if (onChange) {
             onChange({
                 target: {
                     value: optionValue
                 }
-            })
+            });
         }
+
+        // Clear errors
         if (optionValue && clearErrors && formProps?.name) {
             clearErrors(formProps.name);
         }
 
+        // Update form value
         if (setValue && formProps?.name) {
             setValue(formProps.name, optionValue);
         }
     };
+
+    // Sync external value with form state
+    useEffect(() => {
+        if (value !== undefined && setValue && formProps?.name) {
+            const currentFormValue = watch ? watch(formProps.name) : '';
+            if (currentFormValue !== value) {
+                setValue(formProps.name, value);
+            }
+        }
+    }, [value, setValue, formProps?.name, watch]);
 
     useEffect(() => {
         const handleKeydown = (event) => {
@@ -127,6 +152,8 @@ export default function SelectForm({
                     className="sr-only"
                     {...formProps}
                     disabled={disabled}
+                    value={getCurrentActualValue()} // Make sure hidden select has correct value
+                    onChange={() => { }} // Prevent React warning
                 >
                     <option value="">{defaultOption}</option>
                     {children}
@@ -138,7 +165,7 @@ export default function SelectForm({
                     onClick={() => !disabled && setIsOpen(!isOpen)}
                 >
                     <span className="capitalize truncate text-left flex-1 px-1">
-                        {getCurrentValue() || label}
+                        {getCurrentValue() || defaultOption}
                     </span>
                     <div className="flex items-center gap-1 ml-2 pr-1">
                         <svg
@@ -155,13 +182,14 @@ export default function SelectForm({
 
                 {/* Dropdown options */}
                 {isOpen && (
-                    <div className={`absolute w-full bg-white rounded-lg border border-primary/10 z-[10001]  overflow-y-auto ${dropdownDirection === 'up'
-                        ? 'bottom-full  rounded-t-lg rounded-b-none'
-                        : 'top-full  rounded-b-lg rounded-t-none'
-                        }`}>                        {/* Default option */}
+                    <div className={`absolute w-full bg-white rounded-lg border border-primary/10 z-[10001] overflow-y-auto ${dropdownDirection === 'up'
+                        ? 'bottom-full rounded-t-lg rounded-b-none'
+                        : 'top-full rounded-b-lg rounded-t-none'
+                        }`}>
+                        {/* Default option */}
                         {defaultOption && (
                             <div
-                                className={`px-3 py-2 text-[13px] cursor-pointer capitalize ${getCurrentValue() === "" ? 'bg-primary text-white' : 'hover:bg-gray-50 text-text3'}`}
+                                className={`px-3 py-2 text-[13px] cursor-pointer capitalize ${getCurrentActualValue() === "" ? 'bg-primary text-white' : 'hover:bg-gray-50 text-text3'}`}
                                 onClick={() => handleSelect("")}
                             >
                                 {defaultOption}
@@ -172,7 +200,7 @@ export default function SelectForm({
                         {options.map((option, index) => (
                             <div
                                 key={index}
-                                className={`px-3 py-2 text-[13px] cursor-pointer capitalize flex items-center gap-2 ${option.label === getCurrentValue()
+                                className={`px-3 py-2 text-[13px] cursor-pointer capitalize flex items-center gap-2 ${getCurrentActualValue() === option.value
                                     ? 'bg-primary text-white'
                                     : 'hover:bg-gray-50 text-text3'
                                     }`}
