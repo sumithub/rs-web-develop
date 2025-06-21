@@ -75,7 +75,7 @@ export default function PaymentInvoices() {
                 <div className="flex justify-between items-center gap-11">
                     <div className="w-1/2">
                         <Search
-                            mainClass='w-[35%]'
+                            mainClass='w-[40%]'
                             placeholder="Search By Invoice ID"
                             onSearch={(s) => {
                                 setSearch(s)

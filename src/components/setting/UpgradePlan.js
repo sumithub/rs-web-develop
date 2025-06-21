@@ -75,12 +75,12 @@ export default function UpgradePlan({ onClose, id }) {
                     </div>)}
 
                     <div className="flex justify-between">
-                        <div className="font-semibold text-xl">Total</div>
-                        <div className="font-semibold text-xl">$950</div>
+                        <div className="font-bold text-xl">Total</div>
+                        <div className="font-bold text-xl">$950</div>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 mt-6">
+                <div className="grid grid-cols-2 gap-5 mt-7">
                     <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
                     <SecondaryButton title="Upgrade Now" type="submit" disabled={sending} class_="text-lg!" />
                 </div>

@@ -36,6 +36,13 @@ export default function CancelSubscription({ onClose, id }) {
             setSending(false)
         }
     }
+
+    const Project = [
+        { title: "Current Plan", price: "Growth Plan ($99.00/Mo)" },
+        { title: "Nect Renewal Date", price: "Jan 25, 2025" },
+        // { title: "Auto Renew", price: "Enabled" },
+    ]
+
     return (
         <Model onClose={onClose} title="Cancel Subscription" modalClass="w-[70%]!">
 
@@ -50,66 +57,58 @@ export default function CancelSubscription({ onClose, id }) {
                 </div>
 
                 <div className="mt-5">
-                    <div className="flex justify-between mt-3">
-                        <div className="text-text3">Current Plan</div>
-                        <div className="font-medium">Growth Plan ($99.00/Mo)</div>
-                    </div>
-
-                    <hr className="border border-border2 my-3" />
-
-                    <div className="flex justify-between">
-                        <div className="text-text3">Nect Renewal Date</div>
-                        <div className="font-medium">Jan 25, 2025</div>
-                    </div>
-
-                    <hr className="border border-border2 my-3" />
-
+                    {Project.map((e, i) => <div key={i}>
+                        <div className="flex justify-between mt-3">
+                            <div className="text-text3">{e.title}</div>
+                            <div className="font-medium">{e.price}</div>
+                        </div>
+                        <hr className="border border-border2 my-3" />
+                    </div>)}
                     <div className="flex justify-between">
                         <div className="text-text3">Auto Renew</div>
                         <div className="font-medium">Enabled</div>
                     </div>
-                </div>
+                    <div className="font-semibold text-xl mt-5">
+                        Select A Reason
+                    </div>
 
-                <div className="font-semibold text-xl mt-4">
-                    Select A Reason
-                </div>
+                    <SelectForm label=""
+                        class_="mt-1!"
+                        selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                        defaultOption="select"
+                        formProps={{ ...register("select", { required: true }) }}
+                        errors={errors}
+                        clearErrors={clearErrors}
+                        setValue={setValue}
+                        watch={watch}
+                    >
+                        <option value="tooExpensive">Too Expensive</option>
+                        <option value="noLongerNeeded">No Longer Needed</option>
+                        <option value="switchingToAnotherProvider">Switching to Another Provider</option>
+                        <option value="notGettingEnoughValue">Not Getting Enough Value</option>
+                        <option value="other">Other (Please specify)</option>
+                    </SelectForm>
 
-                <SelectForm label=""
-                    class_="mt-1!"
-                    selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
-                    defaultOption="select"
-                    formProps={{ ...register("select", { required: true }) }}
-                    errors={errors}
-                    clearErrors={clearErrors}
-                    setValue={setValue}
-                    watch={watch}
-                >
-                    <option value="tooExpensive">Too Expensive</option>
-                    <option value="noLongerNeeded">No Longer Needed</option>
-                    <option value="switchingToAnotherProvider">Switching to Another Provider</option>
-                    <option value="notGettingEnoughValue">Not Getting Enough Value</option>
-                    <option value="other">Other (Please specify)</option>
-                </SelectForm>
+                    <InputForm
+                        label="Additional Comments"
+                        class_="mt-3! w-full!"
+                        isTextArea={true} inputClass="mt-2.5"
+                        formProps={{ ...register("additional", { required: false }) }}
+                        errors={errors}
+                        rows={5}
+                        placeholder="XYZ.."
+                    />
 
-                <InputForm
-                    label="Additional Comments"
-                    class_="mt-3! w-full!"
-                    isTextArea={true} inputClass="mt-2.5"
-                    formProps={{ ...register("additional", { required: false }) }}
-                    errors={errors}
-                    rows={5}
-                    placeholder="XYZ.."
-                />
+                    <div className="font-semibold mt-3">
+                        Wait! Get 20% Off For 3 Months Instead Of Canceling, Enjoy A 20% Discount For The Next 3 Billing Cycles.
+                    </div>
 
-                <div className="font-semibold mt-3">
-                    Wait! Get 20% Off For 3 Months Instead Of Canceling, Enjoy A 20% Discount For The Next 3 Billing Cycles.
-                </div>
-
-                <div className="grid grid-cols-4 gap-5 mt-7">
-                    <CancelButton title="Cancel Subscription" onClick={() => { setOpenCancelled(true) }} class_="text-danger! bg-danger/10!" />
-                    <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => toast.success("Switched Sccessfully")} />
-                    <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => toast.success("Applied Sccessfully")} />
-                    <SecondaryButton title="keep subscription" type="submit" disabled={sending} />
+                    <div className="grid grid-cols-4 gap-5 mt-7">
+                        <CancelButton title="Cancel Subscription" onClick={() => { setOpenCancelled(true) }} class_="text-danger! bg-danger/10!" />
+                        <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => toast.success("Switched Sccessfully")} />
+                        <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => toast.success("Applied Sccessfully")} />
+                        <SecondaryButton title="keep subscription" type="submit" disabled={sending} />
+                    </div>
                 </div>
             </form>
         </Model >
