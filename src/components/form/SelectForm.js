@@ -150,7 +150,7 @@ export default function SelectForm({
                     onClick={() => !disabled && setIsOpen(!isOpen)}
                 >
                     <span className="capitalize truncate text-left flex-1 px-1">
-                        {getCurrentValue() || label}
+                        {getCurrentValue() || label || "Select"}
                     </span>
                     <div className="flex items-center gap-1 ml-2 pr-1">
                         <svg

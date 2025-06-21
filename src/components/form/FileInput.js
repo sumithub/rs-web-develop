@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SecondaryButton from '../common/SecondaryButton';
 import Image from 'next/image';
 
@@ -10,10 +10,16 @@ export default function FileInput({
     class_ = "",
     accept,
     setFile,
+    selectedFile: propSelectedFile = null,
     showToast
 }) {
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(propSelectedFile);
     const [isDragOver, setIsDragOver] = useState(false);
+
+    // Update selectedFile when prop changes (when navigating back to step 1)
+    useEffect(() => {
+        setSelectedFile(propSelectedFile);
+    }, [propSelectedFile]);
 
     let error = "";
     if (formProps?.name && errors?.[formProps.name]) {

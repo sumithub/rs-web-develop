@@ -27,6 +27,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     const [file, setFile] = useState(null)
     const [importData, setImportData] = useState({
         fileName: "",
+        selectedFile: null, // Add selectedFile to importData to persist it
         fieldMappings: [],
         validationResults: {
             totalCustomers: 250,
@@ -72,6 +73,15 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     useEffect(() => {
         getData();
     }, [sortBy]);
+
+    // Add useEffect to restore file when navigating back to step 1
+    useEffect(() => {
+        if (tab === 1 && importData.selectedFile) {
+            setFile(importData.selectedFile);
+            // Set the form value
+            setValue('csvFile', importData.selectedFile);
+        }
+    }, [tab, importData.selectedFile, setValue]);
 
     const getData = async () => {
         try {
@@ -156,6 +166,15 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         const isValid = await validateCurrentStep();
         console.log(isValid, tab)
         if (isValid && tab < 6) {
+            // Store file in importData when moving from step 1
+            if (tab === 1 && file) {
+                setImportData(prev => ({
+                    ...prev,
+                    selectedFile: file,
+                    fileName: file.name
+                }));
+            }
+
             if (tab === 3) {
                 const formData = getValues();
                 setImportData(prev => ({
@@ -228,6 +247,17 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         }
     };
 
+    const handleSetFile = (selectedFile) => {
+        setFile(selectedFile);
+        if (selectedFile) {
+            setImportData(prev => ({
+                ...prev,
+                selectedFile: selectedFile,
+                fileName: selectedFile.name
+            }));
+        }
+    };
+
     return (
         <main>
 
@@ -266,6 +296,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                     })
                                 }}
                                 setFile={setFile}
+                                selectedFile={file}
                                 errors={errors}
                                 isRequired={true}
                                 label="Upload file"
@@ -389,7 +420,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                 errors={errors}
                                 clearErrors={clearErrors} setValue={setValue} watch={watch}
                             >
-                                <option value="">Select tag</option>
                                 <option value="high value">High Value</option>
                                 <option value="loyal">Loyal</option>
                                 <option value="instead of source">Instead of source</option>
@@ -414,7 +444,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                 <div className="flex gap-4">
                                     <RadioForm
                                         label="Ignore duplicates"
-                                        inputClass='mb-2!'
                                         name="duplicateHandling"
                                         value="ignore"
                                         formProps={{ ...register("duplicateHandling", { required: true }) }}
@@ -422,7 +451,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                     />
                                     <RadioForm
                                         label="Overwrite existing"
-                                        inputClass='mb-2!'
                                         name="duplicateHandling"
                                         value="overwrite"
                                         formProps={{ ...register("duplicateHandling", { required: true }) }}
@@ -430,7 +458,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                     />
                                     <RadioForm
                                         label="Allow duplicates"
-                                        inputClass='mb-2!'
                                         name="duplicateHandling"
                                         value="allow"
                                         formProps={{ ...register("duplicateHandling", { required: true }) }}
