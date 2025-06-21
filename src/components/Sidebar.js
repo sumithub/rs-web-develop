@@ -15,6 +15,7 @@ export default function Sidebar({ collapse, toggleSidebar }) {
                 [
                     { title: "Clients", link: "/admin/business-management/clients-management" },
                     { title: "Locations", link: "/admin/business-management/locations-management" },
+                    { title: "Tagging", link: "/admin/business-management/customer-tagging" },
                 ]
         },
 
