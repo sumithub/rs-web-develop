@@ -47,7 +47,7 @@ export default function UpgradePlan({ onClose, id }) {
                     placeholder="Enter plan"
                     inputClass="border-primary/10 py-3.5!"
                     isRequired={true}
-                    formProps={{ ...register("plan", { required: true }) }}
+                    formProps={{ ...register("currentPlan", { required: true }) }}
                     errors={errors}
                     setValue={setValue}
                 />
@@ -59,7 +59,9 @@ export default function UpgradePlan({ onClose, id }) {
                     formProps={{ ...register("availablePlan", { required: true }) }}
                     errors={errors}
                     clearErrors={clearErrors} setValue={setValue} watch={watch}>
-                    <option value="plan">Enterprise Plan</option>
+                    <option value="basic-plan">Basic Plan</option>
+                    <option value="professional-plan">Professional Plan</option>
+                    <option value="enterprise-plan">Enterprise Plan</option>
                 </SelectForm>
 
                 <div className="mt-5">
