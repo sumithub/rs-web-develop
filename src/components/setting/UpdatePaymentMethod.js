@@ -32,6 +32,14 @@ export default function UpdatePaymentMethod({ onClose, id }) {
             setSending(false)
         }
     }
+
+    const Project = [
+        { title: "card number", price: "4242 4242 4242 4242" },
+        { title: "expiry date", price: "Apr 1, 2025" },
+        { title: "CVV", price: "***" },
+        { title: "cardholder name", price: "John Deo" },
+        { title: "billing address", price: "XYZ.." },
+    ]
     return (
         <Model onClose={onClose} title={id === "update" ? "Update Payment Method" : "Current Payment Method"} modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -71,37 +79,19 @@ export default function UpdatePaymentMethod({ onClose, id }) {
                         <SecondaryButton title="add new payment method" type="button" />
                     </div>
                 </div>
+                {Project.map((e, i) =>
+                    <div key={i}>
+                        <div className="flex justify-between mt-3">
+                            <div className="text-text3 capitalize text-base">{e.title}</div>
+                            <div className="font-semibold">{e.price}</div>
+                        </div>
 
-                <div className="flex justify-between mt-3">
-                    <div className="text-text3 capitalize text-base">card number</div>
-                    <div className="font-semibold">4242 4242 4242 4242</div>
-                </div>
+                        {i !== Project.length - 1 && (
+                            <hr className="my-3 border-t border-border-color" />
+                        )}
+                    </div>)}
 
-                <hr className="border border-border2 my-3" />
 
-                <div className="flex justify-between">
-                    <div className="text-text3 capitalize text-base">expiry date</div>
-                    <div className="font-semibold">Apr 1, 2025</div>
-                </div>
-
-                <hr className="border border-border2 my-3" />
-
-                <div className="flex justify-between">
-                    <div className="text-text3 capitalize text-base">CVV</div>
-                    <div className="font-semibold">****</div>
-                </div>
-                <hr className="border border-border2 my-3" />
-
-                <div className="flex justify-between">
-                    <div className="text-text3 capitalize text-base">cardholder name</div>
-                    <div className="font-semibold">John Deo</div>
-                </div>
-                <hr className="border border-border2 my-3" />
-
-                <div className="flex justify-between">
-                    <div className="text-text3 capitalize text-base">billing address</div>
-                    <div className="font-semibold">XYZ..</div>
-                </div>
 
                 <div className="grid grid-cols-2 gap-4 mt-6">
                     <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />

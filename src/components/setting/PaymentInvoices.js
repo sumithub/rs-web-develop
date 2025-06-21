@@ -49,6 +49,13 @@ export default function PaymentInvoices() {
         }
     }
 
+    const Project = [
+        { title: "plan name", price: "Growth Plan" },
+        { title: "Amount", price: "$99.00" },
+        { title: "due date", price: "Jan 25, 2025" },
+        { title: "payment method", price: "Visa **** 1234" },
+    ]
+
     return (
         <>
             {openSchedule &&
@@ -75,7 +82,7 @@ export default function PaymentInvoices() {
                 <div className="flex justify-between items-center gap-11">
                     <div className="w-1/2">
                         <Search
-                            mainClass='w-[40%]'
+                            mainClass='w-[50%]'
                             placeholder="Search By Invoice ID"
                             onSearch={(s) => {
                                 setSearch(s)
@@ -83,7 +90,7 @@ export default function PaymentInvoices() {
                         />
                     </div>
 
-                    <div className="grid grid-cols-4 gap-3">
+                    <div className="grid grid-cols-[1fr_1fr_1fr_1.5fr] gap-3">
                         <SelectForm defaultOption='Apply' class_="mt-0!"
                             setValue={setValue} watch={watch}
                             onChange={(e) => {
@@ -120,32 +127,17 @@ export default function PaymentInvoices() {
                 <div className="font-semibold text-lg mt-4">
                     Upcoming Payments
                 </div>
+                {Project.map((e, i) =>
+                    <div key={i}>
+                        <div className="flex justify-between mt-3">
+                            <div className="text-text3 capitalize text-base">{e.title}</div>
+                            <div className="font-semibold">{e.price}</div>
+                        </div>
+                        {i !== Project.length - 1 && (
+                            <hr className="mt-3 border-t border-border-color" />
+                        )}
+                    </div>)}
 
-                <div className="flex justify-between mt-3">
-                    <div className="text-text3 capitalize text-base">plan name</div>
-                    <div className="font-semibold">Growth Plan</div>
-                </div>
-
-                <hr className="border border-border2 my-3" />
-
-                <div className="flex justify-between">
-                    <div className="text-text3 capitalize text-base">Amount</div>
-                    <div className="font-semibold">$99.00</div>
-                </div>
-
-                <hr className="border border-border2 my-3" />
-
-                <div className="flex justify-between">
-                    <div className="text-text3 capitalize text-base">due date</div>
-                    <div className="font-semibold">Jan 25, 2025</div>
-                </div>
-
-                <hr className="border border-border2 my-3" />
-
-                <div className="flex justify-between">
-                    <div className="text-text3 capitalize text-base">payment method</div>
-                    <div className="font-semibold">Visa **** 1234</div>
-                </div>
 
                 <div className="grid grid-cols-2 gap-4 mt-5">
                     <CancelButton title="Cancel upcoming payment" class_="text-lg! bg-danger/10! border-danger/10! hover:border-danger/10!  text-danger!" onClick={() => { setOpen(true) }} />

@@ -40,7 +40,7 @@ export default function CancelSubscription({ onClose, id }) {
     const Project = [
         { title: "Current Plan", price: "Growth Plan ($99.00/Mo)" },
         { title: "Nect Renewal Date", price: "Jan 25, 2025" },
-        // { title: "Auto Renew", price: "Enabled" },
+        { title: "Auto Renew", price: "Enabled" },
     ]
 
     return (
@@ -62,12 +62,10 @@ export default function CancelSubscription({ onClose, id }) {
                             <div className="text-text3">{e.title}</div>
                             <div className="font-medium">{e.price}</div>
                         </div>
-                        <hr className="border border-border2 my-3" />
+                        {i !== Project.length - 1 && (
+                            <hr className="mt-3 border-t border-border-color" />
+                        )}
                     </div>)}
-                    <div className="flex justify-between">
-                        <div className="text-text3">Auto Renew</div>
-                        <div className="font-medium">Enabled</div>
-                    </div>
                     <div className="font-semibold text-xl mt-5">
                         Select A Reason
                     </div>

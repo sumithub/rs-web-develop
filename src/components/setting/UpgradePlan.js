@@ -72,6 +72,9 @@ export default function UpgradePlan({ onClose, id }) {
                         </div>
 
                         <hr className="border border-border2 my-3" />
+                        {/* {i !== PriceComparison.length - 1 && (
+                            <hr className="mt-3 border-t border-border2" />
+                        )} */}
                     </div>)}
 
                     <div className="flex justify-between">
