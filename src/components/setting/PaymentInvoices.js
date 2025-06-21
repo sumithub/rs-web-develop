@@ -22,7 +22,8 @@ export default function PaymentInvoices() {
     const [date, setDate] = useState("")
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
-    const [loading, setLoading] = useState(true);
+    const [pageLoading, setPageLoading] = useState(true); // For whole page loading
+    const [tableLoading, setTableLoading] = useState(false); // For table loading only
     const [sortBy, setSortBy] = useState("")
     const [type, setType] = useState("")
     const [type1, setType1] = useState("")
@@ -33,19 +34,40 @@ export default function PaymentInvoices() {
 
     useEffect(() => {
         getTemplate()
-    }, [search, date, type, type1, sortBy,])
+    }, [search, date, type, type1])
+
+    useEffect(() => {
+        // Separate effect for sorting - only shows table loading
+        if (sortBy) {
+            getTemplateForSort()
+        }
+    }, [sortBy])
 
     const getTemplate = async () => {
         try {
-            setLoading(true)
-            setList([])
+            setPageLoading(true)
             const res = await axios.get("/api")
             setList(res.data || paymentInvoice)
-            setLoading(false)
+            setPageLoading(false)
 
         } catch (error) {
             toast.error(getError(error))
-            setLoading(false)
+            setPageLoading(false)
+        }
+    }
+
+    const getTemplateForSort = async () => {
+        try {
+            setTableLoading(true)
+            setList([])
+
+            const res = await axios.get("/api")
+            setList(res.data || paymentInvoice)
+            setTableLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setTableLoading(false)
         }
     }
 
@@ -78,7 +100,7 @@ export default function PaymentInvoices() {
                 <UpdatePaymentMethod id="update"
                     onClose={() => { setOpenUpdate(false) }}
                 />}
-            {loading ? <Loading /> : <div>
+            {pageLoading ? <Loading /> : <div>
                 <div className="flex justify-between items-center gap-11">
                     <div className="w-1/2">
                         <Search
@@ -149,7 +171,7 @@ export default function PaymentInvoices() {
                 </div>
 
                 <div className="table-class mt-[15px]">
-                    {(list?.length > 0 ? <table className="w-full">
+                    {tableLoading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                         <thead>
                             <tr>
                                 <th><TableOrder title="Invoice Number"
@@ -201,10 +223,10 @@ export default function PaymentInvoices() {
                                 </tr>
                             )}</tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                    {list?.length > 0 && <div>
-                        <PaginationDemo />
-                    </div>}
                 </div>
+                {list?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>}
         </>
     )
