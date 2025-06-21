@@ -40,6 +40,10 @@ export default function NotificationManagement() {
         }
     }
 
+    const handleClick = () => {
+        toast.success("Resended Successfully")
+    }
+
     return (<>
         <AdminLayout>
             <div className="flex justify-between items-center gap-11">
@@ -64,7 +68,7 @@ export default function NotificationManagement() {
                         <option value="sent">Sent</option>
                         <option value="failed">Failed</option>
                     </CustomSelectBox>
-                    <SecondaryButton title="Resend" onClick={() => { toast.success("Resented Successfully") }} class_="text-xs! py-[9.4px]! font-normal!" />
+                    <SecondaryButton title="Resend" onClick={handleClick} class_="text-xs! py-[9.4px]! font-normal!" />
                     {/* 
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
                         onClick={() => { toast.success("Resented Successfully") }}>Resend</button> */}
@@ -133,11 +137,11 @@ export default function NotificationManagement() {
                             <td>{formatDate(e.date)}</td>
                             <td>
                                 <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'>
+                                    <button className='cursor-pointer' onClick={() => toast.success("Read Successfully")}>
                                         <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
                                     </button>
 
-                                    <button className='cursor-pointer'>
+                                    <button className='cursor-pointer' onClick={handleClick}>
                                         <Image src="/images/refresh1.svg" alt='refresh1' height={28} width={28} />
                                     </button>
                                 </div>
