@@ -101,6 +101,14 @@ export const REVIEW_ACTIONS = [
     { label: "Delete", value: "delete", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },
 ]
 
+export const changeUsersRole = [
+    { name: "Jaylon Torff", status: "Active", role: "Manager" },
+    { name: "Mia Wong", status: "Active", role: "Viewer" },
+    { name: "Liam Smith", status: "Active", role: "Owner" },
+    { name: "Emma Johnson", status: "Active", role: "Manager" },
+
+]
+
 export const allCustomers = [
     { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "At Risk", source: "Manual", date: "Jun 18,2024" },
 
