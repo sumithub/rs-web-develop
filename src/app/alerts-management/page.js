@@ -125,7 +125,10 @@ export default function AlertsManagement() {
                                 </td>
                                 <td>{formatDate(e.date)}</td>
                                 <td>
-                                    <Status status={e.action} />
+                                    <div className='flex items-center gap-2'>
+                                        <button className='cursor-pointer' onClick={() => toast.success("Read Successfully")}><Status status="Read" /></button>
+                                        <button className='cursor-pointer' onClick={() => toast.success("Dismissed Successfully")}><Status status="Dismiss" /></button>
+                                    </div>
                                 </td>
                             </tr>)}
                     </tbody>
