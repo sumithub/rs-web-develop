@@ -15,11 +15,11 @@ import { getError } from "../../../helper";
 import Loading from "../../components/Loading";
 import { customerTagging } from "../../constent/constArray";
 import PaginationDemo from "../../components/Pagination";
+import Link from "next/link";
 
 export default function CustomerTagging() {
     const [filterBy, setFilterBy] = useState("")
     const [open, setOpen] = useState(false)
-    const [openEdit, setOpenEdit] = useState(false)
     const [openTag, setOpenTag] = useState(false)
     const [sortBy, setSortBy] = useState(false)
     const [list, setList] = useState([])
@@ -131,7 +131,9 @@ export default function CustomerTagging() {
                                 </div>
                             </td>
                             <td><div className="line-clamp-1">{e.description}</div></td>
-                            <td className="underline text-primary!">{e.taggedCustomer}</td>
+                            <td className="underline text-primary!">
+                                <Link href="/customers">{e.taggedCustomer}</Link>
+                            </td>
                             <td>
                                 <div className='flex items-center gap-2'>
                                     <button className='cursor-pointer'>
@@ -148,6 +150,8 @@ export default function CustomerTagging() {
                         </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+            </div>
+            <div>
                 {list?.length > 0 && <div>
                     <PaginationDemo />
                 </div>}
