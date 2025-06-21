@@ -283,7 +283,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                             </div>
                             <div className="w-full border border-border-color mt-8">
                                 {loading ? (
-                                    <Loading />
+                                    <Loading class_="min-h-[300px]!" />
                                 ) : list?.length > 0 ? (
                                     <table className="w-full">
                                         <thead>
@@ -355,11 +355,10 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                             <option value="email">Email</option>
                                                         </SelectForm>
                                                         {mappingErrors[index] && (
-                                                            <div className="text-red-500 text-xs mt-1">
+                                                            <div className="text-danger text-xs mt-1">
                                                                 {mappingErrors[index]}
                                                             </div>
                                                         )}
-
                                                     </td>
                                                 </tr>
                                             ))}
