@@ -149,11 +149,11 @@ export default function NotificationModel({ onClose }) {
         <Model
             onClose={onClose}
             title="Notification"
-            modalClass="w-[30%]! shadow-md!"
-            flexClass="justify-end!"
-            class_="right-20! -top-72!"
+            modalClass="w-[30%]! shadow-[0px_0px_40px_0px_#0000001A]!"
+            flexClass="items-start! justify-end!"
+            class_="top-16! right-20! inset-0 items-start! justify-end!"
             modelHeaderClass="bg-white!"
-            modalBodyClass="min-h-[50vh]"
+            modalBodyClass=""
             overlayClass="bg-white! opacity-0!"
         >
             {/* Hidden file input */}
@@ -199,7 +199,7 @@ export default function NotificationModel({ onClose }) {
                                 <h2 className={`text-end text-xs mt-2.5 ${getUploadStatusColor()}`}>
                                     {getUploadStatusMessage()}
                                 </h2>
-                                <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-4 mt-1">
                                     <button
                                         className="text-xs hover:underline focus:outline-none focus:underline transition-colors"
                                         onClick={handleCancelUpload}
@@ -270,7 +270,7 @@ const Card = ({ notification, onMarkAsRead, onRemove }) => {
 
     return (
         <div
-            className="flex justify-between gap-2.5 p-3.5 mb-5 relative group"
+            className="flex justify-between gap-2.5 p-3.5 relative group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -296,14 +296,14 @@ const Card = ({ notification, onMarkAsRead, onRemove }) => {
                     {notification.message}
                 </p>
             </div>
-            <div className="w-[10%] flex flex-col items-end gap-2">
+            <div className="w-[25%] flex flex-col items-end gap-2">
                 <h2 className="text-sm text-end shrink-0 text-text3">
                     {notification.time}
                 </h2>
 
                 {/* Action buttons - show on hover */}
                 {isHovered && (
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col items-end gap-1">
                         {!notification.isRead && (
                             <button
                                 onClick={() => onMarkAsRead(notification.id)}
