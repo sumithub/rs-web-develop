@@ -1,4 +1,3 @@
-import { features } from "process";
 
 export const USER_ACTIONS = [
     { label: "Edit User", value: "edit", icon: "/dropdown/edit.svg", hoverIcon: "/dropdown/edit-active.svg" },
@@ -10,10 +9,10 @@ export const USER_ACTIONS = [
 ]
 
 export const users = [
-    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
 ];
 
 export const TEMPLATE_ACTIONS = [
@@ -102,6 +101,14 @@ export const REVIEW_ACTIONS = [
     { label: "Delete", value: "delete", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },
 ]
 
+export const changeUsersRole = [
+    { name: "Jaylon Torff", status: "Active", role: "Manager" },
+    { name: "Mia Wong", status: "Active", role: "Viewer" },
+    { name: "Liam Smith", status: "Active", role: "Owner" },
+    { name: "Emma Johnson", status: "Active", role: "Manager" },
+
+]
+
 export const allCustomers = [
     { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "At Risk", source: "Manual", date: "Jun 18,2024" },
 
@@ -161,15 +168,15 @@ export const notificationPreferences = [
 ]
 
 export const alertsManagement = [
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
 ]
 
 export const auditLogs = [

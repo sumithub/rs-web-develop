@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -14,14 +14,22 @@ export default function ResendInvitation({ onClose, user }) {
         register,
         handleSubmit,
         formState: { errors },
+        setValue
     } = useForm();
 
     const [sending, setSending] = useState(false);
 
+    useEffect(() => {
+        setValue("email", user?.email || "");
+    }, [user, setValue]);
+
     const onSubmit = async (data) => {
         try {
             setSending(true);
-            await axios.post("/api", data);
+            await axios.post("/api", {
+                ...data,
+                userId: user?.id
+            });
             toast.success("Invitation resent successfully");
             onClose();
         } catch (error) {
@@ -34,11 +42,12 @@ export default function ResendInvitation({ onClose, user }) {
     return (
         <Model title="Resend Invite Confirmation" onClose={onClose} modalClass="w-1/2!">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="text-secondary text-xl font-semibold capitalize">
-                    Are you sure you want to resend the invite to
+                <div className="text-secondary text-xl font-semibold">
+                    Are You Sure You Want To Resend The Invite To
                 </div>
+
                 <InputForm
-                    label={user?.name || "user"}
+                    label={user?.name || "User"}
                     placeholder="Enter Email"
                     class_="mt-4!"
                     formProps={{
@@ -53,8 +62,8 @@ export default function ResendInvitation({ onClose, user }) {
                     errors={errors}
                 />
 
-                <div className="text-secondary text-xl font-semibold capitalize mt-4">
-                    A new invitation email will be sent.
+                <div className="text-secondary text-xl font-semibold mt-4">
+                    A New Invitation Email Will Be Sent.
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 mt-6">

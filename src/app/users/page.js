@@ -34,7 +34,7 @@ export default function Users() {
     const [search, setSearch] = useState("")
     const [dates, setDates] = useState(null)
     const [openModal, setOpenModal] = useState(null)
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const [sortBy, setSortBy] = useState("")
     const [selId, setSelId] = useState("")

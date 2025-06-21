@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import Status from "../../Status";
@@ -9,9 +9,15 @@ import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import { toast } from "react-toastify";
 import SelectForm from "../../form/SelectForm";
+import { changeUsersRole } from "../../../constent/constArray";
+import axios from "axios";
+import { getError } from "../../../../helper";
+import Loading from "../../Loading";
 
 export default function ChangeUserRoles({ onClose }) {
     const [sortBy, setSortBy] = useState("")
+    const [list, setList] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const {
         register, setValue, watch,
@@ -21,13 +27,23 @@ export default function ChangeUserRoles({ onClose }) {
 
     const [sending, setSending] = useState(false);
 
-    const users = [
-        { name: "Jaylon Torff", status: "Active", role: "Manager" },
-        { name: "Mia Wong", status: "Active", role: "Viewer" },
-        { name: "Liam Smith", status: "Active", role: "Owner" },
-        { name: "Emma Johnson", status: "Active", role: "Manager" },
-        { name: "Noah Brown", status: "Active", role: "Viewer" },
-    ];
+    useEffect(() => {
+        getUser()
+    }, [sortBy])
+
+    const getUser = async () => {
+        try {
+            setLoading(true)
+            setList([])
+            const res = await axios.get("/api")
+            setList(res.data || changeUsersRole)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
 
     const pendingUsers = [
         { name: "John Deo", email: "johan@example.com", status: "Pending Invite" },
@@ -57,11 +73,11 @@ export default function ChangeUserRoles({ onClose }) {
                         You are about to change role for these users
                     </div>
                     <div className="text-secondary text-base font-semibold mt-5">
-                        Selected Users ({users.length})
+                        Selected Users ({list.length})
                     </div>
 
-                    <div className="table-class mt-5 overflow-auto max-h-60">
-                        <table className="w-full">
+                    <div className="table-class mt-5 overflow-auto">
+                        {loading ? <Loading class_="min-h-[300px]!" /> : (list?.length > 0 ? <table className='w-full'>
                             <thead>
                                 <tr>
                                     <th>
@@ -88,17 +104,16 @@ export default function ChangeUserRoles({ onClose }) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.map(({ name, status, role }, idx) => (
-                                    <tr key={idx}>
-                                        <td>{name}</td>
-                                        <td>
-                                            <Status status={status} />
-                                        </td>
-                                        <td>{role}</td>
-                                    </tr>
-                                ))}
+                                {list?.map((e, index) => <tr key={index}>
+                                    <td>{e.name}</td>
+                                    <td>
+                                        <Status status={e.status} />
+                                    </td>
+                                    <td>{e.role}</td>
+                                </tr>
+                                )}
                             </tbody>
-                        </table>
+                        </table> : <div className='text-center text-2xl text-danger mx-auto h-20'>No Data</div>)}
                     </div>
 
                     <SelectForm
@@ -128,17 +143,19 @@ export default function ChangeUserRoles({ onClose }) {
                         </div>
                     </div>
 
-                    {pendingUsers.map(({ name, email, status }, idx) => (
-                        <div key={idx}>
+                    {pendingUsers.map((e, index) => (
+                        <div key={index}>
                             <div className="flex items-center justify-between mt-5">
                                 <div className="text-base font-medium text-secondary capitalize">
-                                    {name} ({email})
+                                    {e.name} ({e.email})
                                 </div>
                                 <div className="text-base text-text3 capitalize">
-                                    <Status status={status} />
+                                    <Status status={e.status} />
                                 </div>
                             </div>
-                            <hr className="border-t border-border-color mt-3" />
+                            {index !== pendingUsers.length - 1 && (
+                                <hr className="mt-3 border-t border-border-color" />
+                            )}
                         </div>
                     ))}
 
