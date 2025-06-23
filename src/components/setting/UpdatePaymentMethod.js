@@ -48,26 +48,28 @@ export default function UpdatePaymentMethod({ onClose, id }) {
                     label="Card Number"
                     class_="mt-3! w-full!"
                     inputType="number"
-                    isRequired={true} inputClass="mt-2.5"
+                    isRequired={true} inputClass=""
                     formProps={{ ...register("additional", { required: true }) }}
                     errors={errors}
                     rows={5}
                     placeholder="Enter card number"
                 />
 
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center mt-5">
                     <div>
-                        <div className="font-medium mt-4">
+                        <div className="font-medium text-sm">
                             Select Payment Method
                         </div>
 
                         <div className="flex gap-2">
                             <RadioForm label="Credit Card" inputClass='mb-2!'
+                                labelClass="text-sm!"
                                 name="paymentMethod"
                                 value="credit"
                                 formProps={{ ...register("paymentMethod", { required: false }) }}
                                 errors={errors} />
                             <RadioForm label="Bank Transfer" inputClass='mb-2!'
+                                labelClass="text-sm!"
                                 name="paymentMethod"
                                 value="bank"
                                 formProps={{ ...register("paymentMethod", { required: false }) }}
@@ -75,19 +77,19 @@ export default function UpdatePaymentMethod({ onClose, id }) {
                         </div>
                     </div>
 
-                    <div className="mt-2">
-                        <SecondaryButton title="add new payment method" type="button" />
+                    <div className="">
+                        <SecondaryButton title="add new payment method" type="button" class_="font-normal! text-sm!" />
                     </div>
                 </div>
                 {Project.map((e, i) =>
                     <div key={i}>
                         <div className="flex justify-between mt-3">
                             <div className="text-text3 capitalize text-base">{e.title}</div>
-                            <div className="font-semibold">{e.price}</div>
+                            <div className="font-medium text-base">{e.price}</div>
                         </div>
 
                         {i !== Project.length - 1 && (
-                            <hr className="my-3 border-t border-border-color" />
+                            <hr className="my-3 border-t border-secondary/5" />
                         )}
                     </div>)}
 

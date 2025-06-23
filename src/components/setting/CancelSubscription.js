@@ -63,7 +63,7 @@ export default function CancelSubscription({ onClose, id }) {
                             <div className="font-medium">{e.price}</div>
                         </div>
                         {i !== Project.length - 1 && (
-                            <hr className="mt-3 border-t border-border-color" />
+                            <hr className="mt-3 border-t border-secondary/5" />
                         )}
                     </div>)}
                     <div className="font-semibold text-xl mt-5">
@@ -71,7 +71,7 @@ export default function CancelSubscription({ onClose, id }) {
                     </div>
 
                     <SelectForm label=""
-                        class_="mt-1!"
+                        class_="mt-2.5!"
                         selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                         defaultOption="select"
                         formProps={{ ...register("select", { required: true }) }}
@@ -89,7 +89,7 @@ export default function CancelSubscription({ onClose, id }) {
 
                     <InputForm
                         label="Additional Comments"
-                        class_="mt-3! w-full!"
+                        class_="mt-5! w-full!"
                         isTextArea={true} inputClass="mt-2.5"
                         formProps={{ ...register("additional", { required: false }) }}
                         errors={errors}
@@ -97,7 +97,7 @@ export default function CancelSubscription({ onClose, id }) {
                         placeholder="XYZ.."
                     />
 
-                    <div className="font-semibold mt-3">
+                    <div className="font-semibold mt-5">
                         Wait! Get 20% Off For 3 Months Instead Of Canceling, Enjoy A 20% Discount For The Next 3 Billing Cycles.
                     </div>
 

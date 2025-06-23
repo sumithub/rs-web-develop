@@ -33,16 +33,16 @@ export default function Usage() {
 
     return (
         <>
-            <div className="font-semibold">Subscription Usage Summary</div>
+            <div className="font-semibold text-lg">Subscription Usage Summary</div>
             <div className="bg-secondary2 p-5 rounded-[15px] grid grid-cols-4 gap-5 mt-3">
                 <div>
-                    <h2>Subscription ID</h2>
-                    <h3 className="font-semibold mt-2">SUB1234</h3>
+                    <h2 className="text-base">Subscription ID</h2>
+                    <h3 className="font-semibold text-lg mt-2">SUB1234</h3>
                 </div>
 
                 <div>
-                    <h2>Plan</h2>
-                    <h3 className="font-semibold mt-2">Pro Plan</h3>
+                    <h2 className="text-base">Plan</h2>
+                    <h3 className="font-semibold text-lg mt-2">Pro Plan</h3>
                 </div>
             </div>
 
