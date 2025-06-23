@@ -102,7 +102,7 @@ function CampaignsTemplates() {
 
                 <div className="flex items-center gap-3">
                     <CustomSelectBox
-                        class_="mt-0!"
+                        class_="mt-0! w-20!"
                         defaultOption="type"
                         value={type}
                         onChange={(e) => {
