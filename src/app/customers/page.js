@@ -208,6 +208,7 @@ function Customers() {
                         </div>
 
                         {tab === "list" && <DateRange
+                            value={date}
                             onChange={(e) => { setDate(e) }}
                         />}
 

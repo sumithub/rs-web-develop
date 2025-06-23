@@ -77,6 +77,7 @@ export default function UsersList({ onClose, onSave }) {
             </CustomSelectBox>
 
             <DateRange
+                value={dates}
                 onChange={(dates) => { setDates(dates) }}
             />
         </div>

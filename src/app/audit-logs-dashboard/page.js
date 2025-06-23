@@ -61,7 +61,9 @@ export default function AuditLogsDashboard() {
                     />
                 </div>
                 <div className="flex gap-[15px]">
-                    <DateRange onChange={(e) => { setDate(e) }} />
+                    <DateRange
+                        value={date}
+                        onChange={(e) => { setDate(e) }} />
 
                     {/* <DatePicker
                         icon={true}

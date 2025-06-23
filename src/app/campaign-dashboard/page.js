@@ -69,6 +69,7 @@ export default function CampaignDashboard() {
                 <option value="5 star">5 Star</option>
             </CustomSelectBox>
             <DateRange
+                value={date}
                 onChange={(e) => { setDate(e) }} />
         </div>}>
         {loading ? <Loading /> : <>

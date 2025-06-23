@@ -55,6 +55,7 @@ export default function SentimentAnalysis() {
                     </CustomSelectBox>
                     <DateRange
                         icon={true}
+                        value={date}
                         onChange={(e) => { setDate(e) }} />
                     {/* <button className="cursor-pointer disabled:pointer-events-none">
                         <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />

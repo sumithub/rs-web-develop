@@ -101,6 +101,7 @@ export default function UserManagement() {
                 />
                 <div className='flex items-center gap-3.5'>
                     <DateRange
+                        value={date}
                         onChange={(e) => { setDate(e) }}
                     />
                     <CustomSelectBox

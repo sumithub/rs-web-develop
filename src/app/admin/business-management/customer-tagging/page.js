@@ -233,6 +233,7 @@ function CustomerTagging() {
                     <h2 className="text-lg font-semibold">Tag Distribution</h2>
                     <div className="flex gap-3.5">
                         <DateRange
+                            value={date}
                             onChange={(e) => { setDate(e) }}
                         />
                         <CustomSelectBox

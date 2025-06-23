@@ -138,7 +138,6 @@ export default function PaymentInvoices() {
 
                     <DateRange
                         class_="mt-0!"
-
                         value={date}
                         onChange={(e) => { setDate(e) }}
                     />
