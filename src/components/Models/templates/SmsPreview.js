@@ -6,17 +6,35 @@ import InputForm from "../../form/InputForm";
 import RadioForm from "../../form/RadioForm";
 import Model from "../Model";
 import { useForm } from "react-hook-form";
-import { validEmailRgx } from "../../../../helper";
+import { getError, validEmailRgx } from "../../../../helper";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
 
-export default function SmsPreview({ onClose, type = "email" }) {
+export default function SmsPreview({ onClose, id, type = "email" }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [perView, setPerView] = useState("web")
+    const [sending, setSending] = useState(false)
 
-    const onSubmit = (data) => {
-        // For now, just log the data
-        console.log("Form Data:", data);
-    };
+    const onSubmit = async (data) => {
+        try {
+            setSending(true)
+            let res = null
+
+            if (id !== "add") {
+                res = await axios.put("/api", data)
+            } else {
+                res = await axios.post("/api", data)
+            }
+
+            toast.success("Saved Successfully")
+            setSending(false)
+            onClose()
+        } catch (error) {
+            toast.error(getError(error))
+            setSending(false)
+        }
+    }
 
     return (
         <Model onClose={onClose} title={`Test Send ${type === "email" ? "Template" : "SMS"}`}
@@ -69,8 +87,8 @@ export default function SmsPreview({ onClose, type = "email" }) {
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-5 mt-7">
-                            <CancelButton title="Cancel" class_="text-lg!" />
-                            <SecondaryButton title="Save Test" type="submit" class_="text-lg!" />
+                            <CancelButton title="Cancel" class_="text-lg!" onClick={onClose} />
+                            <SecondaryButton title="Save Test" type="submit" disabled={sending} class_="text-lg!" />
                         </div>
                     </div>
                     <div className="bg-white rounded-[10px]">
