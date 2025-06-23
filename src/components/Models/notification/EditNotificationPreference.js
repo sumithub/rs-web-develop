@@ -14,7 +14,6 @@ import CheckboxForm from "../../form/CheckboxForm"
 function EditNotificationPreferences({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
-    const [enabled, setEnabled] = useState(false)
 
     const onSubmit = async (data) => {
         try {
@@ -66,8 +65,6 @@ function EditNotificationPreferences({ onClose, id }) {
 
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={enabled}
-                        onChange={(e) => setEnabled(e.target.checked)}
                         formProps={{ ...register("enabled") }} errors={errors} />
                     <div>
                         Enabled
