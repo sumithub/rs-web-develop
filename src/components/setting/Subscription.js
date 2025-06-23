@@ -46,6 +46,7 @@ export default function Subscription() {
                     </div>
                 </div>
                 <hr className="border border-border2 my-5" />
+
                 <div className="bg-secondary2 p-5 rounded-[15px] grid grid-cols-4 gap-5">
                     <div>
                         <h2 className="pb-[15px] capitalize text-base">Subscription Status</h2>

@@ -74,7 +74,9 @@ export default function Dashboard() {
                 <option value="4 star">4 Star</option>
                 <option value="5 star">5 Star</option>
             </CustomSelectBox>
-            <DateRange onChange={(e) => { setDate(e) }} />
+            <DateRange
+                value={date}
+                onChange={(e) => { setDate(e) }} />
             <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50" onClick={() => { setOpen(true) }}><Image unoptimized={true} src="/images/flash.svg" alt="flash" height={16} width={16} />Boost</button>
         </div>}
     >

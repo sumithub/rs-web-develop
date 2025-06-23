@@ -12,10 +12,10 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { getError } from "../../../helper";
-import CheckboxForm from '../../components/form/Checkbox'
 import DateRangeForm from "../../components/form/DateRangeForm"
 import Loading from '../../components/Loading'
 import SimpleHorizontalBarChart from '../../components/charts/SimpleHorizontalBarChart'
+import Checkbox from '../../components/form/Checkbox'
 
 export default function ReportTemplates() {
     const [showReport, setShowReport] = useState(false)
@@ -114,26 +114,23 @@ export default function ReportTemplates() {
                         <h2 className='text-lg font-semibold'>Select Report Sections</h2>
                         <div className='flex gap-5 pt-[15px]'>
                             <div className='flex gap-2.5 items-center'>
-                                <CheckboxForm
+                                <Checkbox
                                     checked={showReport}
                                     onChange={handleCheckboxChange}
-                                    formProps={{ ...register("reviews") }} errors={errors}
                                 />
                                 <h2 className='text-sm'>Reviews</h2>
                             </div>
                             <div className='flex gap-2.5 items-center'>
-                                <CheckboxForm
+                                <Checkbox
                                     checked={showCampaign}
                                     onChange={handleCheckboxChange1}
-                                    formProps={{ ...register("campaigns") }} errors={errors}
                                 />
                                 <h2 className='text-sm'>Campaigns</h2>
                             </div>
                             <div className='flex gap-2.5 items-center'>
-                                <CheckboxForm
+                                <Checkbox
                                     checked={showSentiment}
                                     onChange={handleCheckboxChange2}
-                                    formProps={{ ...register("sentiments") }} errors={errors}
                                 />
                                 <h2 className='text-sm'>Sentiments</h2>
                             </div>
@@ -146,28 +143,25 @@ export default function ReportTemplates() {
                             <div className='flex gap-2.5 items-center'>
                                 <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                                 <h2 className='text-sm capitalize'>Review Over Time</h2>
-                                <CheckboxForm
+                                <Checkbox
                                     checked={reviewOverTime}
                                     onChange={e => setReviewOverTime(e)}
-                                    formProps={{ ...register("reviewOverTime") }} errors={errors}
                                 />
                             </div>
                             <div className='flex gap-2.5 items-center my-[15px]'>
                                 <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
                                 <h2 className='text-sm capitalize'>Review Rating Distribution</h2>
-                                <CheckboxForm
+                                <Checkbox
                                     checked={reviewRatingDistribution}
                                     onChange={e => setReviewRatingDistribution(e)}
-                                    formProps={{ ...register("reviewRatingDistribution") }} errors={errors}
                                 />
                             </div>
                             <div className='flex gap-2.5 items-center'>
                                 <Image unoptimized={true} src="/images/top-sources.svg" alt='top-sources' width={20} height={20} />
                                 <h2 className='text-sm capitalize'>top review sources</h2>
-                                <CheckboxForm
+                                <Checkbox
                                     checked={topReviewSources}
-                                    onChange={(e) => setTopReviewSources(e)}
-                                    formProps={{ ...register("topReviewSources") }} errors={errors} />
+                                    onChange={(e) => setTopReviewSources(e)} />
                             </div>
                         </div>
                     </div>}
@@ -180,7 +174,7 @@ export default function ReportTemplates() {
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Campaign Funnel Breakdown</h2>
-                                    <CheckboxForm
+                                    <Checkbox
                                         checked={campaignFunnelBreakdown}
                                         onChange={(e) => setCampaignFunnelBreakdown(e)}
                                         formProps={{ ...register("campaignFunnelBreakdown") }} errors={errors} />
@@ -188,18 +182,16 @@ export default function ReportTemplates() {
                                 <div className='flex gap-2.5 items-center my-[15px]'>
                                     <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Campaign Performance</h2>
-                                    <CheckboxForm
+                                    <Checkbox
                                         checked={campaignPerformance}
-                                        onChange={e => setCampaignPerformance(e)}
-                                        formProps={{ ...register("campaignPerformance") }} errors={errors} />
+                                        onChange={e => setCampaignPerformance(e)} />
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/top-sources.svg" alt='top-sources' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Campaign Engagement</h2>
-                                    <CheckboxForm
+                                    <Checkbox
                                         checked={campaignEngagement}
-                                        onChange={(e) => setCampaignEngagement(e)}
-                                        formProps={{ ...register("campaignEngagement") }} errors={errors} />
+                                        onChange={(e) => setCampaignEngagement(e)} />
                                 </div>
                             </div>
                         </div>
@@ -213,18 +205,16 @@ export default function ReportTemplates() {
                                 <div className='flex gap-2.5 items-center mb-[15px]'>
                                     <Image unoptimized={true} src="/images/review-distribution.svg" alt='review-distribution' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Sentiment trends</h2>
-                                    <CheckboxForm
+                                    <Checkbox
                                         checked={sentimentTrends}
-                                        onChange={e => setSentimentTrends(e)}
-                                        formProps={{ ...register("sentimentTrends") }} errors={errors} />
+                                        onChange={e => setSentimentTrends(e)} />
                                 </div>
                                 <div className='flex gap-2.5 items-center'>
                                     <Image unoptimized={true} src="/images/review-time.svg" alt='review-time' width={20} height={20} />
                                     <h2 className='text-sm capitalize'>Sentiments Distribution</h2>
-                                    <CheckboxForm
+                                    <Checkbox
                                         checked={sentimentDistribution}
-                                        onChange={e => setSentimentDistribution(e)}
-                                        formProps={{ ...register("sentimentsDistribution") }} errors={errors} />
+                                        onChange={e => setSentimentDistribution(e)} />
                                 </div>
                             </div>
                         </div>

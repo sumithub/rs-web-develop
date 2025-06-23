@@ -109,6 +109,7 @@ function ManageCampaigns() {
                         </CustomSelectBox>
 
                         <DateRange class_="shrink-0!"
+                            value={date}
                             onChange={(e) => { setDate(e) }}
                         />
 

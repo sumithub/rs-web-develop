@@ -25,9 +25,9 @@ export default function CampaignCard({ children, title, status, expandAll, openB
                     onClick={() => { setOpen(!open) }} /></button> */}
 
                 <button type="button">
-                    {open ? <Image src="/images/collapse.svg" alt="expand" height={26} width={26} unoptimized={true} /> :
+                    {open ? <Image src="/images/expand.svg" alt="expand" height={26} width={26} unoptimized={true} /> :
 
-                        <Image src="/images/expand.svg" alt="expand" height={26} width={26} unoptimized={true} />}
+                        <Image src="/images/collapse.svg" alt="expand" height={26} width={26} unoptimized={true} />}
                 </button>
             </div>
             {open ? children : ""}

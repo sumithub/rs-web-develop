@@ -115,6 +115,7 @@ function CampaignsTemplates() {
 
                     <div className='shrink-0!'>
                         <DateRange
+                            value={date}
                             onChange={(e) => { setDate(e) }}
                         />
                         {/* <DatePicker
