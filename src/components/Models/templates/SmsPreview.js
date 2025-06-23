@@ -3,13 +3,15 @@ import Image from "next/image";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import InputForm from "../../form/InputForm";
-import Radio from "../../form/Radio";
 import RadioForm from "../../form/RadioForm";
 import Model from "../Model";
 import { useForm } from "react-hook-form";
+import { validEmailRgx } from "../../../../helper";
+import { useState } from "react";
 
 export default function SmsPreview({ onClose, type = "email" }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [perView, setPerView] = useState("web")
 
     const onSubmit = (data) => {
         // For now, just log the data
@@ -27,19 +29,43 @@ export default function SmsPreview({ onClose, type = "email" }) {
                         <div>
                             <h2 className="text-sm font-medium">Send Via<span className="text-danger">*</span></h2>
                             <div className="flex items-center gap-5">
-                                <Radio label="Email" labelClass="font-normal!" />
-                                <Radio label="SMS" labelClass="font-normal!" />
+                                <RadioForm
+                                    label="Email"
+                                    labelClass="font-normal!"
+                                    name="sendVia"
+                                    formProps={{ ...register("sendVia", { required: true }) }}
+                                    errors={errors}
+                                />
+                                <RadioForm
+                                    label="SMS"
+                                    labelClass="font-normal!"
+                                    name="sendVia"
+                                    formProps={{ ...register("sendVia", { required: true }) }}
+                                    errors={errors}
+                                />
                             </div>
                             <InputForm
                                 label="Email Address"
                                 placeholder="Enter Email Address"
                                 isRequired={true}
+                                errors={errors}
+                                formProps={{
+                                    ...register("email", {
+                                        required: true,
+                                        pattern: {
+                                            value: validEmailRgx,
+                                            message: "Email is invalid."
+                                        },
+                                    })
+                                }}
                             />
                             <InputForm
                                 label="Custom Message"
                                 placeholder="Enter Custom Message"
                                 isTextArea={true}
                                 rows={4}
+                                formProps={{ ...register("message", { required: false }) }}
+                                errors={errors}
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-5 mt-7">
@@ -54,18 +80,26 @@ export default function SmsPreview({ onClose, type = "email" }) {
                         </div>
                         <div className="p-5">
                             <div className="grid grid-cols-3 gap-4 justify-between">
-                                <div className="flex items-center justify-center gap-3 border border-primary bg-primary/10 p-4 rounded-xl">
+                                <button onClick={() => {
+                                    setPerView("web")
+                                }} type="button" className={`${perView === "web" ? "border-primary bg-primary/10" : ""} p-4 flex items-center justify-center gap-3 border border-border-color rounded-xl cursor-pointer disabled:pointer-events-none`}>
                                     <Image src="/images/web.svg" alt="web" width={30} height={30} />
                                     <h2 className="text-base">Web</h2>
-                                </div>
-                                <div className="flex items-center justify-center gap-3 border border-border2/60 p-4 rounded-xl">
+                                </button>
+
+                                <button onClick={() => {
+                                    setPerView("mobile")
+                                }} type="button" className={`${perView === "mobile" ? "border-primary bg-primary/10" : ""} flex items-center justify-center gap-3 border border-border2/60 p-4 rounded-xl cursor-pointer disabled:pointer-events-none`}>
                                     <Image src="/images/mobile.svg" alt="mobile" width={30} height={30} />
                                     <h2 className="text-base">Mobile</h2>
-                                </div>
-                                <div className="flex items-center justify-center gap-3 border border-border2 p-4 rounded-xl">
+                                </button>
+
+                                <button onClick={() => {
+                                    setPerView("tablet")
+                                }} type="button" className={`${perView === "tablet" ? "border-primary bg-primary/10" : ""} flex items-center justify-center gap-3 border border-border2 p-4 rounded-xl cursor-pointer disabled:pointer-events-none`}>
                                     <Image src="/images/tablet.svg" alt="tablet" width={30} height={30} />
                                     <h2 className="text-base">Tablet</h2>
-                                </div>
+                                </button>
                             </div>
                             <div className="mt-7 border border-dark rounded-[10px]">
                                 <div className="p-2.5">
