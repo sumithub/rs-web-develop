@@ -61,7 +61,7 @@ export default function Signup() {
                                 message: "Full Name must be at least 3 characters.",
                             },
                             pattern: {
-                                value: /^[A-Za-z\s]+$/,
+                                value: /^(?!.*\s{3,})[A-Za-z\s]+$/,
                                 message: "Please enter a valid name (letters only)",
                             },
                         }),
