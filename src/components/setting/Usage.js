@@ -47,7 +47,7 @@ export default function Usage() {
             </div>
 
             <div className='table-class mt-[15px]'>
-                {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
+                {loading ? <Loading class_="min-h-[300px]!" /> : (list?.length > 0 ? <table className="w-full">
                     <thead>
                         <tr>
                             <th><TableOrder title="Features"

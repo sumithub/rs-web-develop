@@ -73,9 +73,22 @@ export default function UpdatePaymentMethod({ onClose, id }) {
                 <InputForm
                     label="Card Number"
                     class_="mt-3! w-full!"
-                    inputType="number"
+                    inputType="text"
                     isRequired={true} inputClass=""
-                    formProps={{ ...register("additional", { required: true }) }}
+                    formProps={{
+                        ...register("cardNumber", {
+                            required: "Card number is required",
+                            validate: (value) => {
+                                const digitsOnly = value.replace(/\s/g, '');
+                                if (digitsOnly.length !== 16) {
+                                    return "Please enter a valid 16-digit card number";
+                                }
+                                return true;
+                            }
+                        }),
+                        onChange: handleCardNumberChange,
+                        maxLength: 19
+                    }}
                     errors={errors}
                     placeholder="Enter card number"
                 />
@@ -86,14 +99,14 @@ export default function UpdatePaymentMethod({ onClose, id }) {
                             Select Payment Method
                         </div>
 
-                        <div className="flex gap-2">
-                            <RadioForm label="Credit Card" inputClass='mb-2!'
+                        <div className="flex gap-2 mb-2">
+                            <RadioForm label="Credit Card"
                                 labelClass="text-sm!"
                                 name="paymentMethod"
                                 value="credit"
                                 formProps={{ ...register("paymentMethod", { required: false }) }}
                                 errors={errors} />
-                            <RadioForm label="Bank Transfer" inputClass='mb-2!'
+                            <RadioForm label="Bank Transfer"
                                 labelClass="text-sm!"
                                 name="paymentMethod"
                                 value="bank"
@@ -111,7 +124,7 @@ export default function UpdatePaymentMethod({ onClose, id }) {
                     <div key={i}>
                         <div className="flex justify-between mt-3">
                             <div className="text-text3 capitalize text-base">{e.title}</div>
-                            <div className="font-medium text-base">{e.price}</div>
+                            <div className="font-medium text-base">{e.detail}</div>
                         </div >
 
                         {i !== Project.length - 1 && (

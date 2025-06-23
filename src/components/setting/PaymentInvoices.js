@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Search from "../form/Search";
 import SelectForm from "../form/SelectForm";
-import DateRangeForm from "../form/DateRangeForm";
 import CancelButton from "../common/CancelButton";
 import SecondaryButton from "../common/SecondaryButton";
 import TableOrder from "../TableOrder";
@@ -17,27 +16,27 @@ import UpdatePaymentMethod from './UpdatePaymentMethod'
 import { useForm } from "react-hook-form";
 import ScheduleEarlyPayment from "./ScheduleEarlyPayment";
 import { formatDate } from "../../../helper";
+import DateRange from "../form/DateRangePicker";
 
 export default function PaymentInvoices() {
     const [date, setDate] = useState("")
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
-    const [pageLoading, setPageLoading] = useState(true); // For whole page loading
-    const [tableLoading, setTableLoading] = useState(false); // For table loading only
+    const [pageLoading, setPageLoading] = useState(true);
+    const [tableLoading, setTableLoading] = useState(false);
     const [sortBy, setSortBy] = useState("")
     const [type, setType] = useState("")
     const [type1, setType1] = useState("")
     const [open, setOpen] = useState(false)
     const [openSchedule, setOpenSchedule] = useState(false)
     const [openUpdate, setOpenUpdate] = useState(false)
-    const { register, watch, setValue } = useForm();
+    const { watch, setValue } = useForm();
 
     useEffect(() => {
         getTemplate()
     }, [search, date, type, type1])
 
     useEffect(() => {
-        // Separate effect for sorting - only shows table loading
         if (sortBy) {
             getTemplateForSort()
         }
@@ -100,46 +99,52 @@ export default function PaymentInvoices() {
                 <UpdatePaymentMethod id="update"
                     onClose={() => { setOpenUpdate(false) }}
                 />}
-            {pageLoading ? <Loading /> : <div>
-                <div className="flex justify-between items-center gap-11">
-                    <div className="w-1/2">
-                        <Search
-                            mainClass='w-[50%]'
-                            placeholder="Search By Invoice ID"
-                            onSearch={(s) => {
-                                setSearch(s)
-                            }}
-                        />
-                    </div>
 
-                    <div className="grid grid-cols-[1fr_1fr_1fr_1.5fr] gap-3">
-                        <CancelButton title="Apply" class_="text-sm! font-normal! bg-white! border-text3/30!" />
-                        <SelectForm label=""
-                            defaultOption="Status"
-                            selectClass_="border border-text3/30!"
-                            class_="mt-0!"
-                            formProps={{ ...register("status", { required: false }) }}
-                            setValue={setValue}
-                            watch={watch}>
-                            <option value="all">All</option>
-                            <option value="paid">Paid</option>
-                            <option value="unpaid">Unpaid</option>
-                        </SelectForm>
-
-                        <SelectForm
-                            selectClass_="border border-text3/30!"
-                            defaultOption="Filter"
-                            class_="mt-0!"
-                            setValue={setValue} watch={watch}
-                            onChange={(e) => {
-                                setType1(e.target.value)
-                            }} />
-                        <DateRangeForm
-                            class_="mt-0!"
-                        />
-                    </div>
+            <div className="flex justify-between items-center gap-11">
+                <div className="w-1/2">
+                    <Search
+                        mainClass='w-[50%]'
+                        placeholder="Search By Invoice ID"
+                        onSearch={(s) => {
+                            setSearch(s)
+                        }}
+                    />
                 </div>
 
+                <div className="grid grid-cols-[1fr_1fr_1fr_1.5fr] gap-3">
+                    <CancelButton title="Apply" class_="text-sm! font-normal! bg-white! border-text3/30!" />
+                    <SelectForm label=""
+                        defaultOption="Status"
+                        selectClass_="border border-text3/30!"
+                        class_="mt-0!"
+                        onChange={(e) => {
+                            setType(e.target.value)
+                        }}
+                        setValue={setValue}
+                        watch={watch}>
+                        <option value="all">All</option>
+                        <option value="paid">Paid</option>
+                        <option value="unpaid">Unpaid</option>
+                    </SelectForm>
+
+                    <SelectForm
+                        selectClass_="border border-text3/30!"
+                        defaultOption="Filter"
+                        class_="mt-0!"
+                        setValue={setValue} watch={watch}
+                        onChange={(e) => {
+                            setType1(e.target.value)
+                        }} />
+
+                    <DateRange
+                        class_="mt-0!"
+
+                        value={date}
+                        onChange={(e) => { setDate(e) }}
+                    />
+                </div>
+            </div>
+            {pageLoading ? <Loading /> : <div>
                 <div className="font-semibold text-lg my-4">
                     Upcoming Payments
                 </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputForm from "../form/InputForm";
 import { useForm } from "react-hook-form";
 import SelectForm from "../form/SelectForm";
@@ -13,11 +13,60 @@ export default function UpgradePlan({ onClose, id }) {
     const { register, setValue, handleSubmit, clearErrors, formState: { errors }, watch } = useForm();
     const [sending, setSending] = useState(false)
 
-    const PriceComparison = [
-        { title: "Sub Total", price: "$900" },
-        { title: "GST", price: "$50" },
-        { title: "Discount", price: "$50" },
-    ]
+    // Set default values after component mounts
+    useEffect(() => {
+        setValue("currentPlan", "Enterprise Plan");
+        setValue("availablePlan", "professional-plan");
+    }, [setValue]);
+
+    // Watch the selected plan
+    const selectedPlan = watch("availablePlan");
+
+    // Dynamic pricing based on selected plan
+    const getPriceComparison = () => {
+        switch (selectedPlan) {
+            case "basic-plan":
+                return [
+                    { title: "Sub Total", price: "$300" },
+                    { title: "GST", price: "$30" },
+                    { title: "Discount", price: "$0" },
+                ];
+            case "professional-plan":
+                return [
+                    { title: "Sub Total", price: "$600" },
+                    { title: "GST", price: "$60" },
+                    { title: "Discount", price: "$30" },
+                ];
+            case "enterprise-plan":
+                return [
+                    { title: "Sub Total", price: "$900" },
+                    { title: "GST", price: "$50" },
+                    { title: "Discount", price: "$50" },
+                ];
+            default:
+                return [
+                    { title: "Sub Total", price: "$0" },
+                    { title: "GST", price: "$0" },
+                    { title: "Discount", price: "$0" },
+                ];
+        }
+    };
+
+    // Calculate total
+    const getTotal = () => {
+        switch (selectedPlan) {
+            case "basic-plan":
+                return "$330";
+            case "professional-plan":
+                return "$630";
+            case "enterprise-plan":
+                return "$950";
+            default:
+                return "$0";
+        }
+    };
+
+    const PriceComparison = getPriceComparison();
 
     const onSubmit = async (data) => {
         try {
@@ -38,24 +87,27 @@ export default function UpgradePlan({ onClose, id }) {
             setSending(false)
         }
     }
+
     return (
         <Model onClose={onClose} title="Upgrade Plan" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
-                    class_="mt-0!"
+                    class_="mt-0!" inputClass="py-3.5!"
                     label="Current Plan"
                     placeholder="Enter plan"
-                    inputClass="bg-dark! border-dark! py-3.5!"
                     isRequired={true}
-                    formProps={{ ...register("currentPlan", { required: true }) }}
+                    formProps={{
+                        ...register("currentPlan", { required: true }),
+                        readOnly: true
+                    }}
                     errors={errors}
                     setValue={setValue}
+                    disabled={true}
                 />
 
                 <SelectForm label="Available Plans"
                     selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                     isRequired={true}
-                    defaultOption="select"
                     formProps={{ ...register("availablePlan", { required: true }) }}
                     errors={errors}
                     clearErrors={clearErrors} setValue={setValue} watch={watch}>
@@ -74,14 +126,11 @@ export default function UpgradePlan({ onClose, id }) {
                         </div>
 
                         <hr className="border border-secondary/5 my-3" />
-                        {/* {i !== PriceComparison.length - 1 && (
-                            <hr className="mt-3 border-t border-secondary/5" />
-                        )} */}
                     </div>)}
 
                     <div className="flex justify-between">
                         <div className="font-bold text-xl">Total</div>
-                        <div className="font-bold text-xl">$950</div>
+                        <div className="font-bold text-xl">{getTotal()}</div>
                     </div>
                 </div>
 
@@ -90,6 +139,6 @@ export default function UpgradePlan({ onClose, id }) {
                     <SecondaryButton title="Upgrade Now" type="submit" disabled={sending} class_="text-lg!" />
                 </div>
             </form>
-        </Model >
+        </Model>
     )
 }
