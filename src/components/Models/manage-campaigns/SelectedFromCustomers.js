@@ -98,7 +98,7 @@ function SelectedCustomers({ onClose, onSave }) {
                     </thead>
 
                     <tbody>
-                        {list?.map((e, index) => <tr key={index}>
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                             <td>
                                 <div className="flex items-start gap-2">
                                     <Checkbox
@@ -117,10 +117,10 @@ function SelectedCustomers({ onClose, onSave }) {
                         </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                {list?.length > 0 && <div>
-                    <PaginationDemo />
-                </div>}
             </div>
+            {list?.length > 0 && <div>
+                <PaginationDemo />
+            </div>}
         </Model>
     )
 }

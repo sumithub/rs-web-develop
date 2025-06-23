@@ -63,7 +63,7 @@ export default function Usage() {
                     </thead>
 
                     <tbody>
-                        {list.map((e, i) => <tr key={i}>
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                             <td>{e.feature}</td>
                             <td>{e.used}</td>
                             <td>{e.limit}</td>

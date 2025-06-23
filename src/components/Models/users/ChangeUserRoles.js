@@ -104,7 +104,7 @@ export default function ChangeUserRoles({ onClose }) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {list?.map((e, index) => <tr key={index}>
+                                {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                     <td>{e.name}</td>
                                     <td>
                                         <Status status={e.status} />

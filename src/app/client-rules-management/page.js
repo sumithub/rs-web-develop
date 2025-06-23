@@ -126,37 +126,36 @@ function ClientRulesManagement() {
                     </thead>
 
                     <tbody>
-                        {list.map((e, i) =>
-                            <tr key={i}>
-                                <td>{e.id}</td>
-                                <td>{e.name}</td>
-                                <td>{e.location}</td>
-                                <td>{e.type}</td>
-                                <td>{e.condition}</td>
-                                <td>
-                                    <Status status={e.action} />
-                                </td>
-                                <td>
-                                    <Status status={e.status} />
-                                </td>
-                                <td>{formatDate(e.date)}</td>
-                                <td>
-                                    <div className='flex items-center gap-2'>
-                                        <button className='cursor-pointer'
-                                            onClick={() => {
-                                                setSelId("e.id")
-                                                setOpen(true)
-                                            }}>
-                                            <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                        </button>
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            <td>{e.id}</td>
+                            <td>{e.name}</td>
+                            <td>{e.location}</td>
+                            <td>{e.type}</td>
+                            <td>{e.condition}</td>
+                            <td>
+                                <Status status={e.action} />
+                            </td>
+                            <td>
+                                <Status status={e.status} />
+                            </td>
+                            <td>{formatDate(e.date)}</td>
+                            <td>
+                                <div className='flex items-center gap-2'>
+                                    <button className='cursor-pointer'
+                                        onClick={() => {
+                                            setSelId("e.id")
+                                            setOpen(true)
+                                        }}>
+                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>
 
-                                        <button className='cursor-pointer'
-                                            onClick={() => { setOpenDelete("delete") }}>
-                                            <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>)}
+                                    <button className='cursor-pointer'
+                                        onClick={() => { setOpenDelete("delete") }}>
+                                        <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>

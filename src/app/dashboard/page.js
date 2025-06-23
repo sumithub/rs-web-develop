@@ -175,7 +175,7 @@ export default function Dashboard() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list?.map((e, index) => <tr key={index}>
+                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex gap-2.5">
                                         <Image src={e.img} alt="google.svg" width={17} height={17} unoptimized={true} />

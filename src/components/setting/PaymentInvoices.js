@@ -199,26 +199,25 @@ export default function PaymentInvoices() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list.map((e, i) =>
-                                <tr key={i}>
-                                    <td>{e.invoiceNumber}</td>
-                                    <td>{e.planName}</td>
-                                    <td>{e.amount}</td>
-                                    <td>{formatDate(e.date)}</td>
-                                    <td><Status status={e.status} /></td>
-                                    <td>
-                                        <div className='flex items-center gap-2'>
-                                            <button className='cursor-pointer' onClick={() => { setOpenSchedule(true) }}>
-                                                <Image src="/images/open-eye2.svg" alt="open-eye2" height={28} width={28} />
-                                            </button>
+                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                <td>{e.invoiceNumber}</td>
+                                <td>{e.planName}</td>
+                                <td>{e.amount}</td>
+                                <td>{formatDate(e.date)}</td>
+                                <td><Status status={e.status} /></td>
+                                <td>
+                                    <div className='flex items-center gap-2'>
+                                        <button className='cursor-pointer' onClick={() => { setOpenSchedule(true) }}>
+                                            <Image src="/images/open-eye2.svg" alt="open-eye2" height={28} width={28} />
+                                        </button>
 
-                                            <button className='cursor-pointer'
-                                                onClick={() => { toast.success("Downloaded") }}>
-                                                <Image src="/images/download.svg" alt='download' height={28} width={28} />
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        <button className='cursor-pointer'
+                                            onClick={() => { toast.success("Downloaded") }}>
+                                            <Image src="/images/download.svg" alt='download' height={28} width={28} />
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
                             )}</tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                 </div>
