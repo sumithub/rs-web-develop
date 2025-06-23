@@ -73,41 +73,28 @@ export default function UpdatePaymentMethod({ onClose, id }) {
                 <InputForm
                     label="Card Number"
                     class_="mt-3! w-full!"
-                    inputType="text"
-                    isRequired={true}
-                    inputClass="mt-2.5"
-                    formProps={{
-                        ...register("cardNumber", {
-                            required: "Card number is required",
-                            validate: (value) => {
-                                const digitsOnly = value.replace(/\s/g, '');
-                                if (digitsOnly.length !== 16) {
-                                    return "Please enter a valid 16-digit card number";
-                                }
-                                // Basic Luhn algorithm check (optional)
-                                return true;
-                            }
-                        }),
-                        onChange: handleCardNumberChange,
-                        maxLength: 19 // 16 digits + 3 spaces
-                    }}
+                    inputType="number"
+                    isRequired={true} inputClass=""
+                    formProps={{ ...register("additional", { required: true }) }}
                     errors={errors}
                     placeholder="Enter card number"
                 />
 
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center mt-5">
                     <div>
-                        <div className="font-medium mt-4">
+                        <div className="font-medium text-sm">
                             Select Payment Method
                         </div>
 
                         <div className="flex gap-2">
                             <RadioForm label="Credit Card" inputClass='mb-2!'
+                                labelClass="text-sm!"
                                 name="paymentMethod"
                                 value="credit"
                                 formProps={{ ...register("paymentMethod", { required: false }) }}
                                 errors={errors} />
                             <RadioForm label="Bank Transfer" inputClass='mb-2!'
+                                labelClass="text-sm!"
                                 name="paymentMethod"
                                 value="bank"
                                 formProps={{ ...register("paymentMethod", { required: false }) }}
@@ -115,8 +102,8 @@ export default function UpdatePaymentMethod({ onClose, id }) {
                         </div>
                     </div>
 
-                    <div className="mt-2">
-                        <SecondaryButton title="add new payment method" type="button" />
+                    <div className="">
+                        <SecondaryButton title="add new payment method" type="button" class_="font-normal! text-sm!" />
                     </div>
                 </div>
 
@@ -124,19 +111,20 @@ export default function UpdatePaymentMethod({ onClose, id }) {
                     <div key={i}>
                         <div className="flex justify-between mt-3">
                             <div className="text-text3 capitalize text-base">{e.title}</div>
-                            <div className="font-semibold">{e.detail}</div>
-                        </div>
+                            <div className="font-medium text-base">{e.price}</div>
+                        </div >
 
                         {i !== Project.length - 1 && (
-                            <hr className="my-3 border-t border-border-color" />
-                        )}
-                    </div>)}
+                            <hr className="my-3 border-t border-secondary/5" />
+                        )
+                        }
+                    </div >)}
 
                 <div className="grid grid-cols-2 gap-4 mt-6">
                     <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
                     <SecondaryButton title="Save Payment Method" type="submit" class_="text-lg!" disabled={sending} />
                 </div>
-            </form>
+            </form >
         </Model >
     )
 }

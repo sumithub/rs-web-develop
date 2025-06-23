@@ -50,10 +50,10 @@ export default function CancelUpcomingPayment({ onClose, id }) {
                     {Project.map((e, i) => <div key={i}>
                         <div className="flex justify-between ">
                             <div className="text-text3 capitalize text-base">{e.title}</div>
-                            <div className="font-semibold">{e.Price}</div>
+                            <div className="font-semibold text-base">{e.Price}</div>
                         </div>
                         {i !== Project.length - 1 && (
-                            <hr className="my-3 border-t border-border-color" />
+                            <hr className="my-3 border-t border-secondary/5" />
                         )}
                     </div>)}
                 </div>

@@ -4,6 +4,10 @@ import Notification from "./Models/Notification";
 
 export default function Header({ headerChild, headerSearch, mainHeading = "Hello users!", subHeading = "Welcome back to dashboard.", collapse }) {
     const [openNotification, setOpenNotification] = useState(false)
+
+    const handleClick = () => {
+        setOpenNotification(!openNotification);
+    }
     return (
         <div className={`border-b border-border-color py-[18px] px-4 ${collapse ? "ml-20" : "ml-72"} transition-all bg-white fixed top-0 inset-x-0 z-50`}>
             {openNotification &&
@@ -22,9 +26,7 @@ export default function Header({ headerChild, headerSearch, mainHeading = "Hello
                 </div>
                 {headerSearch && <>{headerSearch}</>}
                 <div className="flex items-center gap-4">
-                    {headerChild && <div>{headerChild}</div>}
-
-                    <button className="relative" onClick={() => { setOpenNotification(true) }}>
+                    <button className="relative" onClick={handleClick}>
                         <span className="absolute z-20 -right-1/12 text-xs -top-1/28 bg-danger text-white h-3.5 w-3.5 flex items-center justify-center p-1 rounded-md">
                             <span className="text-[10px]">4</span>
                         </span>

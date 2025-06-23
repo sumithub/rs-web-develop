@@ -45,7 +45,7 @@ export default function UpgradePlan({ onClose, id }) {
                     class_="mt-0!"
                     label="Current Plan"
                     placeholder="Enter plan"
-                    inputClass="border-primary/10 py-3.5!"
+                    inputClass="bg-dark! border-dark! py-3.5!"
                     isRequired={true}
                     formProps={{ ...register("currentPlan", { required: true }) }}
                     errors={errors}
@@ -73,9 +73,9 @@ export default function UpgradePlan({ onClose, id }) {
                             <div className="font-semibold">{e.price}</div>
                         </div>
 
-                        <hr className="border border-border2 my-3" />
+                        <hr className="border border-secondary/5 my-3" />
                         {/* {i !== PriceComparison.length - 1 && (
-                            <hr className="mt-3 border-t border-border2" />
+                            <hr className="mt-3 border-t border-secondary/5" />
                         )} */}
                     </div>)}
 

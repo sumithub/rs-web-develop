@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Search from "../form/Search";
 import SelectForm from "../form/SelectForm";
-import DatePicker from "../form/DatePicker";
+import DateRangeForm from "../form/DateRangeForm";
 import CancelButton from "../common/CancelButton";
 import SecondaryButton from "../common/SecondaryButton";
 import TableOrder from "../TableOrder";
@@ -113,14 +113,10 @@ export default function PaymentInvoices() {
                     </div>
 
                     <div className="grid grid-cols-[1fr_1fr_1fr_1.5fr] gap-3">
-                        <SelectForm defaultOption='Apply' class_="mt-0!"
-                            setValue={setValue} watch={watch}
-                            onChange={(e) => {
-                                setType(e.target.value)
-                            }} />
-
+                        <CancelButton title="Apply" class_="text-sm! font-normal! bg-white! border-text3/30!" />
                         <SelectForm label=""
                             defaultOption="Status"
+                            selectClass_="border border-text3/30!"
                             class_="mt-0!"
                             formProps={{ ...register("status", { required: false }) }}
                             setValue={setValue}
@@ -130,23 +126,21 @@ export default function PaymentInvoices() {
                             <option value="unpaid">Unpaid</option>
                         </SelectForm>
 
-                        <SelectForm defaultOption="Filter" class_="mt-0!"
+                        <SelectForm
+                            selectClass_="border border-text3/30!"
+                            defaultOption="Filter"
+                            class_="mt-0!"
                             setValue={setValue} watch={watch}
                             onChange={(e) => {
                                 setType1(e.target.value)
                             }} />
-
-                        <DatePicker
-                            icon={true}
-                            mainClass="mt-0!"
-                            value={date}
-                            dateFormat="dd/MM/yyyy"
-                            onChange={(e) => setDate(e)}
+                        <DateRangeForm
+                            class_="mt-0!"
                         />
                     </div>
                 </div>
 
-                <div className="font-semibold text-lg mt-4">
+                <div className="font-semibold text-lg my-4">
                     Upcoming Payments
                 </div>
                 {Project.map((e, i) =>
@@ -156,7 +150,7 @@ export default function PaymentInvoices() {
                             <div className="font-semibold">{e.price}</div>
                         </div>
                         {i !== Project.length - 1 && (
-                            <hr className="mt-3 border-t border-border-color" />
+                            <hr className="mt-3 border-t border-secondary/5" />
                         )}
                     </div>)}
 
