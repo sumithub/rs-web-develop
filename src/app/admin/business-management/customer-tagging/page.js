@@ -193,7 +193,7 @@ function CustomerTagging() {
                         </thead>
 
                         <tbody>
-                            {list?.map((e, index) => <tr key={index}>
+                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-start gap-2">
                                         <Checkbox

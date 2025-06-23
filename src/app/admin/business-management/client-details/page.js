@@ -180,27 +180,26 @@ export default function ClientDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list?.map((e, index) =>
-                                <tr key={index}>
-                                    <td>
-                                        <div className="flex items-center gap-2.5">
-                                            <Checkbox
-                                                checked={e.selected}
-                                                onChange={(checked) => {
-                                                    setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                                }} />
-                                            <div>{e.name}</div>
-                                        </div>
-                                    </td>
-                                    <td>{e.address}</td>
-                                    <td>{e.reviews}</td>
-                                    <td>{e.rating}</td>
-                                    <td>
-                                        <button className='cursor-pointer'>
-                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
-                                        </button>
-                                    </td>
-                                </tr>)}
+                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                <td>
+                                    <div className="flex items-center gap-2.5">
+                                        <Checkbox
+                                            checked={e.selected}
+                                            onChange={(checked) => {
+                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                            }} />
+                                        <div>{e.name}</div>
+                                    </div>
+                                </td>
+                                <td>{e.address}</td>
+                                <td>{e.reviews}</td>
+                                <td>{e.rating}</td>
+                                <td>
+                                    <button className='cursor-pointer'>
+                                        <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                    </button>
+                                </td>
+                            </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                     {list?.length > 0 && <div>
@@ -234,27 +233,26 @@ export default function ClientDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list1?.map((e, index) =>
-                                <tr key={index}>
-                                    <td>
-                                        <div className="flex items-center gap-2.5">
-                                            <Checkbox
-                                                checked={e.selected}
-                                                onChange={(checked) => {
-                                                    setList1(list1 => list1.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                                }} />
-                                            <div>{e.name}</div>
-                                        </div>
-                                    </td>
-                                    <td><Status status={e.status} /></td>
-                                    <td>{e.locations}</td>
-                                    <td>{e.responses}</td>
-                                    <td>
-                                        <button className='cursor-pointer'>
-                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
-                                        </button>
-                                    </td>
-                                </tr>)}
+                            {list1?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                <td>
+                                    <div className="flex items-center gap-2.5">
+                                        <Checkbox
+                                            checked={e.selected}
+                                            onChange={(checked) => {
+                                                setList1(list1 => list1.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                            }} />
+                                        <div>{e.name}</div>
+                                    </div>
+                                </td>
+                                <td><Status status={e.status} /></td>
+                                <td>{e.locations}</td>
+                                <td>{e.responses}</td>
+                                <td>
+                                    <button className='cursor-pointer'>
+                                        <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                    </button>
+                                </td>
+                            </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                     {list1?.length > 0 && <div>
@@ -313,18 +311,17 @@ export default function ClientDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list2?.map((e, index) =>
-                                <tr key={index}>
-                                    <td>{e.id}</td>
-                                    <td>{e.date}</td>
-                                    <td>{e.amount}</td>
-                                    <td><Status status={e.status} /></td>
-                                    <td>
-                                        <button className='cursor-pointer'>
-                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
-                                        </button>
-                                    </td>
-                                </tr>)}
+                            {list2?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                <td>{e.id}</td>
+                                <td>{e.date}</td>
+                                <td>{e.amount}</td>
+                                <td><Status status={e.status} /></td>
+                                <td>
+                                    <button className='cursor-pointer'>
+                                        <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                    </button>
+                                </td>
+                            </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                     {list2?.length > 0 && <div>

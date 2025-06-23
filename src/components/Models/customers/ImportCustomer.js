@@ -346,12 +346,11 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {list?.map((e, index) => (
-                                                <tr key={index}>
-                                                    <td>{e.header}</td>
-                                                    <td>{e.firstRow}</td>
-                                                    <td>
-                                                        {/* <CustomSelectBox selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
+                                            {list?.map((e, index) => (<tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                                <td>{e.header}</td>
+                                                <td>{e.firstRow}</td>
+                                                <td>
+                                                    {/* <CustomSelectBox selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
                                                             class_="mt-0! w-full!"
                                                             positionClass=""
                                                             onChange={(e) => handleFieldMappingChange(index, e.target.value)}
@@ -368,30 +367,30 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                                 {mappingErrors[index]}
                                                             </div>
                                                         )} */}
-                                                        <SelectForm
-                                                            key={index}
-                                                            selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
-                                                            class_="mt-0!"
-                                                            formProps={{ ...register("mapping" + index, { required: true }) }}
-                                                            errors={errors}
-                                                            clearErrors={clearErrors}
-                                                            setValue={setValue}
-                                                            watch={watch}
-                                                            onChange={(e) => handleFieldMappingChange(index, e.target.value)}
-                                                            defaultOption="Select mapping"
-                                                            value={importData.fieldMappings[index]?.mappedTo || ''}
-                                                        >
-                                                            <option value="fullName">Full Name</option>
-                                                            <option value="phoneNumber">Phone Number</option>
-                                                            <option value="email">Email</option>
-                                                        </SelectForm>
-                                                        {mappingErrors[index] && (
-                                                            <div className="text-danger text-xs mt-1">
-                                                                {mappingErrors[index]}
-                                                            </div>
-                                                        )}
-                                                    </td>
-                                                </tr>
+                                                    <SelectForm
+                                                        key={index}
+                                                        selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
+                                                        class_="mt-0!"
+                                                        formProps={{ ...register("mapping" + index, { required: true }) }}
+                                                        errors={errors}
+                                                        clearErrors={clearErrors}
+                                                        setValue={setValue}
+                                                        watch={watch}
+                                                        onChange={(e) => handleFieldMappingChange(index, e.target.value)}
+                                                        defaultOption="Select mapping"
+                                                        value={importData.fieldMappings[index]?.mappedTo || ''}
+                                                    >
+                                                        <option value="fullName">Full Name</option>
+                                                        <option value="phoneNumber">Phone Number</option>
+                                                        <option value="email">Email</option>
+                                                    </SelectForm>
+                                                    {mappingErrors[index] && (
+                                                        <div className="text-danger text-xs mt-1">
+                                                            {mappingErrors[index]}
+                                                        </div>
+                                                    )}
+                                                </td>
+                                            </tr>
                                             ))}
                                         </tbody>
                                     </table>

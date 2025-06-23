@@ -80,7 +80,7 @@ export default function EmailTemplate({ onClose, onSave }) {
                     </thead>
 
                     <tbody>
-                        {list?.map((e, index) => <tr key={index}>
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                             <td><div className="flex items-center"><Radio mainClass="gap-0!" inputClass="mb-2!" class_="mt-2!" />{e.name}</div></td>
                             <td><div className="line-clamp-1">{e.description}</div></td>
                             <td>{e.type}</td>

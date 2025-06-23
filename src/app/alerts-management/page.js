@@ -103,34 +103,33 @@ export default function AlertsManagement() {
                         </tr>
                     </thead>
                     <tbody>
-                        {list.map((e, index) =>
-                            <tr key={index}>
-                                <td>
-                                    <div className="flex gap-2.5 items-center">
-                                        <Checkbox
-                                            checked={e.selected}
-                                            onChange={(checked) => {
-                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                            }}
-                                        />
-                                        {e.id}
-                                    </div>
-                                </td>
-                                <td>{e.name}</td>
-                                <td>{e.location}</td>
-                                <td>{e.type}</td>
-                                <td>{e.message}</td>
-                                <td>
-                                    <Status status={e.status} />
-                                </td>
-                                <td>{formatDate(e.date)}</td>
-                                <td>
-                                    <div className='flex items-center gap-2'>
-                                        <div className='cursor-pointer' onClick={() => toast.success("Read Successfully")}><Status status="Read" /></div>
-                                        <div className='cursor-pointer' onClick={() => toast.success("Dismissed Successfully")}><Status status="Dismiss" /></div>
-                                    </div>
-                                </td>
-                            </tr>)}
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            <td>
+                                <div className="flex gap-2.5 items-center">
+                                    <Checkbox
+                                        checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                    />
+                                    {e.id}
+                                </div>
+                            </td>
+                            <td>{e.name}</td>
+                            <td>{e.location}</td>
+                            <td>{e.type}</td>
+                            <td>{e.message}</td>
+                            <td>
+                                <Status status={e.status} />
+                            </td>
+                            <td>{formatDate(e.date)}</td>
+                            <td>
+                                <div className='flex items-center gap-2'>
+                                    <div className='cursor-pointer' onClick={() => toast.success("Read Successfully")}><Status status="Read" /></div>
+                                    <div className='cursor-pointer' onClick={() => toast.success("Dismissed Successfully")}><Status status="Dismiss" /></div>
+                                </div>
+                            </td>
+                        </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
