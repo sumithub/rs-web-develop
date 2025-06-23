@@ -40,7 +40,11 @@ const Dropdown = ({ options = USER_ACTIONS, onClickOption, class_ = "", editLink
         </button>
 
         {isOpen && (
-            <div className="absolute z-50 right-0 top-full mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200 ">
+            <div className="fixed z-[9999] bg-white rounded-md shadow-lg border border-gray-200 w-64"
+                style={{
+                    top: dropdownRef.current ? dropdownRef.current.getBoundingClientRect().bottom + window.scrollY + 4 : 0,
+                    left: dropdownRef.current ? dropdownRef.current.getBoundingClientRect().right + window.scrollX - 256 : 0
+                }}>
                 <ul className="py-1">
                     {options.map((option, i) => {
                         const isDeleteAction = option.label.toLowerCase().includes("delete") || option.label.toLowerCase().includes("remove");

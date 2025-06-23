@@ -352,7 +352,7 @@ export default function Review() {
                             <tbody>
                                 {loading ? <tr><td colSpan={6} className='text-center'><Loading /></td></tr> : (
                                     (list && list.length > 0) ? list.map((e, index) => {
-                                        return <tr key={index} className={`${index === 0 ? "" : "border-t"} border-border-color text-secondary text-sm text-left hover:bg-dark`}>
+                                        return <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                             <td className="py-3 px-4">
                                                 <div className="flex items-start gap-2">
                                                     <Checkbox
@@ -388,10 +388,10 @@ export default function Review() {
                                 )}
                             </tbody>
                         </table> : <div className='text-center text-2xl text-danger mx-auto h-20 py-20'>No Data</div>)}
-                        {list?.length > 0 && <div>
-                            <PaginationDemo />
-                        </div>}
                     </div>
+                    {list?.length > 0 && <div>
+                        <PaginationDemo />
+                    </div>}
                 </div>
             </>}
         </div>
