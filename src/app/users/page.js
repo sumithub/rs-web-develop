@@ -288,10 +288,10 @@ export default function Users() {
                         )}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto h-20'>No Data</div>)}
-                {list?.length > 0 && <div>
-                    <PaginationDemo />
-                </div>}
             </div>
+            {list?.length > 0 && <div>
+                <PaginationDemo />
+            </div>}
         </AdminLayout>
     )
 }

@@ -1,4 +1,3 @@
-
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import { USER_ACTIONS } from '../constent/constArray';
@@ -41,7 +40,7 @@ const Dropdown = ({ options = USER_ACTIONS, onClickOption, class_ = "", editLink
         </button>
 
         {isOpen && (
-            <div className="fixed z-50 right-20 top-1/2  mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200 ">
+            <div className="absolute z-50 right-0 top-full mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200 ">
                 <ul className="py-1">
                     {options.map((option, i) => {
                         const isDeleteAction = option.label.toLowerCase().includes("delete") || option.label.toLowerCase().includes("remove");

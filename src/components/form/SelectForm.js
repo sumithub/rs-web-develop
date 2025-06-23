@@ -168,7 +168,7 @@ export default function SelectForm({
                 {/* Dropdown options */}
                 {isOpen && (
                     <div className={`absolute w-full bg-white rounded-lg border border-primary/10 z-[10001]  overflow-y-auto ${dropdownDirection === 'up'
-                        ? 'bottom-full  rounded-t-lg rounded-b-none'
+                        ? 'bottom-full rounded-t-lg rounded-b-none'
                         : 'top-full  rounded-b-lg rounded-t-none'
                         }`}>                        {/* Default option */}
                         {defaultOption && (

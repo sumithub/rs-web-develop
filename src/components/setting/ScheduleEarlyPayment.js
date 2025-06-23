@@ -47,13 +47,17 @@ export default function ScheduleEarlyPayment({ onClose, id }) {
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize"> pay now to avoid automatic charge</h2>
                 </div>
-                <div>
+                <div className="mt-4">
                     {Early.map((e, i) =>
-                        <div key={i} className="flex justify-between mt-3">
-                            <div className="text-text3 capitalize text-base">{e.title}</div>
-                            <div className="font-semibold capitalize">{e.price}</div>
-                            <hr className="border border-border2 my-3" />
-                        </div>)}
+                        <div key={i}>
+                            <div className="flex w-full justify-between mt-3">
+                                <div className="text-text3 capitalize text-base">{e.title}</div>
+                                <div className="font-semibold capitalize">{e.price}</div>
+                            </div>
+                            {i !== Early.length - 1 && (
+                                <hr className="my-3 border-t border-secondary/5" />
+                            )
+                            }</div>)}
                 </div>
 
                 <DatePickerForm
