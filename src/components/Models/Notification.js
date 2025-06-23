@@ -259,7 +259,7 @@ export default function NotificationModel({ onClose }) {
 
             {/* View All Button */}
             <Link href="/notifications-management">
-                <SecondaryButton title="View all" />
+                <SecondaryButton title="View all" onClick={() => onClose()} />
             </Link>
         </Model>
     );
