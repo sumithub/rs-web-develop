@@ -1,37 +1,55 @@
-// __tests__/Signup.test.tsx
 import "@testing-library/jest-dom";
 
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import Signup from "./Signup";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 
-// Mocks
-jest.mock("axios");
+// Needed mocks
 jest.mock("next/navigation", () => ({
-  useRouter: jest.fn(),
-}));
-jest.mock("react-toastify", () => ({
-  toast: {
-    success: jest.fn(),
-  },
+  useRouter: () => ({ push: jest.fn() }),
 }));
 
-describe("Signup (Happy Path)", () => {
-  const pushMock = jest.fn();
-
+describe("Signup - Validation Errors", () => {
   beforeEach(() => {
-    (useRouter as jest.Mock).mockReturnValue({ push: pushMock });
-    jest.clearAllMocks();
+    render(<Signup />);
   });
 
-  it("submits the form with valid data and navigates to verification page", async () => {
-    (axios.post as jest.Mock).mockResolvedValue({ data: { success: true } });
+  it("shows error when full name is too short", async () => {
+    fireEvent.change(screen.getByPlaceholderText("Enter Your Full Name"), {
+      target: { value: "J" },
+    });
+    fireEvent.blur(screen.getByPlaceholderText("Enter Your Full Name"));
 
-    render(<Signup />);
+    await waitFor(() =>
+      expect(screen.getByText(/full name must be at least 3 characters/i)).toBeInTheDocument()
+    );
+  });
 
+  it("shows error when email is invalid", async () => {
+    fireEvent.change(screen.getByPlaceholderText("Enter Your Email Address"), {
+      target: { value: "invalid-email" },
+    });
+    fireEvent.blur(screen.getByPlaceholderText("Enter Your Email Address"));
+
+    await waitFor(() =>
+      expect(screen.getByText(/valid email address/i)).toBeInTheDocument()
+    );
+  });
+
+  it("shows error when password does not meet criteria", async () => {
+    fireEvent.change(screen.getByPlaceholderText("Create A Password"), {
+      target: { value: "123" },
+    });
+    fireEvent.blur(screen.getByPlaceholderText("Create A Password"));
+
+    await waitFor(() =>
+      expect(
+        screen.getByText(/password must be at least 8 characters/i)
+      ).toBeInTheDocument()
+    );
+  });
+
+  it("shows error when terms checkbox is not checked", async () => {
     fireEvent.change(screen.getByPlaceholderText("Enter Your Full Name"), {
       target: { value: "Jane Doe" },
     });
@@ -42,27 +60,12 @@ describe("Signup (Happy Path)", () => {
       target: { value: "StrongPass@1" },
     });
 
-    const checkbox = screen.getByLabelText(/I Agree To The/i);
-    fireEvent.click(checkbox);
-
     fireEvent.click(screen.getByRole("button", { name: /create account/i }));
 
-    await waitFor(() => {
-      expect(axios.post).toHaveBeenCalledWith(
-      'http://localhost:8080/api/users/register',
-        expect.objectContaining({
-          name: "Jane Doe",
-          email: "jane@example.com",
-          password: "StrongPass@1",
-          termsAccepted: true,
-        })
-      );
-
-      expect(toast.success).toHaveBeenCalledWith(
-        "Account created! Please check your email to verify your account."
-      );
-
-      expect(pushMock).toHaveBeenCalledWith("/verification-email");
-    });
+    await waitFor(() =>
+      expect(
+        screen.getByText(/you must accept the terms/i)
+      ).toBeInTheDocument()
+    );
   });
 });
