@@ -4,13 +4,8 @@ export default function CheckboxForm({ errors, id, label, name, checked, formPro
     let error = "";
 
     if (formProps?.name && errors?.[formProps.name]) {
-        const fieldError = errors[formProps.name];
-        if (fieldError.type === "pattern" || fieldError.type === "validate" || fieldError.type === "required") {
-            error = fieldError.message || "This field is required";
-        } else {
-            error = "This field is required";
-        }
-    }
+    error = errors[formProps.name]?.message || "This field is required";
+}
     return <div>
         <label className={`${class_} ${disabled ? "pointer-events-none" : ""}`} htmlFor={id || label}>
             <div className="pointer-events-none">

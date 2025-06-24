@@ -22,6 +22,7 @@ export default function Signup() {
         formState: { errors },
     } = useForm<SignupFormData>({
         resolver: zodResolver(signupSchema),
+        mode: "onBlur",
     });
 
     const [loading, setLoading] = useState(false);
