@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import { useState } from "react";
 
@@ -7,15 +8,8 @@ export default function InputForm({infoIcon, class_ = "", watch, setValue, clear
     let error = "";
 
     if (formProps?.name && errors?.[formProps.name]) {
-        const fieldError = errors[formProps.name];
-        if (fieldError.type === "pattern" || fieldError.type === "validate" || fieldError.type === "minLength") {
-            error = fieldError.message;
-        } else {
-            error = "This field is required";
-        }
-    } else if (formProps?.name && errors?.[formProps.name]?.type) {
-        error = errors[formProps.name]?.message || "This field is required";
-    }
+    error = errors[formProps.name]?.message || "This field is required";
+}
 
 
     const handleClick = () => {
