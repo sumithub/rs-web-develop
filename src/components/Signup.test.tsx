@@ -4,9 +4,20 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import Signup from "./Signup";
 
-// Needed mocks
 jest.mock("next/navigation", () => ({
-  useRouter: () => ({ push: jest.fn() }),
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
+}));
+
+jest.mock("axios", () => ({
+  post: jest.fn().mockResolvedValue({ data: {} }),
+}));
+
+jest.mock("react-toastify", () => ({
+  toast: {
+    success: jest.fn(),
+  },
 }));
 
 describe("Signup - Validation Errors", () => {
