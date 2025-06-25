@@ -1,6 +1,6 @@
 "use client";
 
-import { SignupFormData, signupSchema } from "./schemas/signupSchema";
+import { SignupFormData, SignupSchema } from "./schemas/SignupSchema";
 import { useEffect, useState } from "react";
 
 import CheckboxForm from "./form/CheckboxForm";
@@ -21,7 +21,7 @@ export default function Signup() {
         handleSubmit,
         formState: { errors },
     } = useForm<SignupFormData>({
-        resolver: zodResolver(signupSchema),
+        resolver: zodResolver(SignupSchema),
         mode: "onBlur",
     });
 
