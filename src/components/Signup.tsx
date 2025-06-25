@@ -7,7 +7,7 @@ import CheckboxForm from "./form/CheckboxForm";
 import Image from "next/image";
 import InputForm from "./form/InputForm";
 import Link from "next/link";
-import axios from "axios";
+import { signup } from "../api/authApi";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -33,45 +33,28 @@ useEffect(() => {
   setValue("userType", "USER");
 }, [setValue]);
 
-    const onSubmit = async (data: SignupFormData) => {
-        try {
-            const API_BASE = process.env.NEXT_PUBLIC_RS_API_BASE_URL || "http://localhost:8080";
-            if (!API_BASE) {
-                throw new Error("API base URL is not defined in environment variables.");
-            }
-            setLoading(true);
-            const response = await axios.post(`${API_BASE}/api/users/register`, data);
-            
-              // Parse and validate API response
-            const result = SignupResponseSchema.safeParse(response.data);
-            // Check if the response is valid
-            if (!result.success) {
-                console.error("Invalid response format", result.error);
-                toast.error("Something went wrong. Please try again later.");
-                return;
-            }
-            // If valid, proceed with the parsed data and use SignupResponse type
-            console.log("Signup successful:", result.data);
-            // You can access the user data like this:
-            // const user = result.data.user;
-            // If you need to access the mock verification link:
-            // const mockVerificationLink = result.data.mockVerificationLink;
-            // For example, you can log the user ID:
-            // console.log("User ID:", user.id);
-            // If you want to log the entire parsed data:
-            // console.log("Parsed Signup Response:", result.data);
-             const parsedData: SignupResponse = result.data;
-             console.log(JSON.stringify(parsedData));
+const onSubmit = async (formData: SignupFormData) => {
+  try {
+    setLoading(true);
 
-            toast.success("Account created! Please check your email to verify your account.");
-            route.push("/verification-email");
-        } catch (error: any) {
-            console.error("Signup error:", error);
-            setError(error?.response?.data?.message || error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+    // Calls the centralized authApi signup function
+    const parsedData = await signup(formData);
+    console.log("Parsed Signup Response:", parsedData);
+
+    toast.success("Account created! Please check your email to verify your account.");
+    route.push("/verification-email");
+  } catch (error: any) {
+    console.error("Signup error:", error);
+    // Check if the error response has the expected shape
+    const apiMessage = error?.response?.data?.message;
+    const fallbackMessage = "Something went wrong. Please try again.";
+
+    setError(apiMessage || error?.message || fallbackMessage);
+    toast.error(apiMessage || fallbackMessage);
+  } finally {
+    setLoading(false);
+  }
+};
 
     return (
         <div>
