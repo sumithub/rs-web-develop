@@ -1,6 +1,6 @@
 "use client";
 
-import { SignupFormData, SignupSchema } from "./schemas/SignupSchema";
+import { SignupFormData, SignupResponse, SignupResponseSchema, SignupSchema } from "./schemas/SignupSchema";
 import { useEffect, useState } from "react";
 
 import CheckboxForm from "./form/CheckboxForm";
@@ -40,7 +40,29 @@ useEffect(() => {
                 throw new Error("API base URL is not defined in environment variables.");
             }
             setLoading(true);
-            await axios.post(`${API_BASE}/api/users/register`, data);
+            const response = await axios.post(`${API_BASE}/api/users/register`, data);
+            
+              // Parse and validate API response
+            const result = SignupResponseSchema.safeParse(response.data);
+            // Check if the response is valid
+            if (!result.success) {
+                console.error("Invalid response format", result.error);
+                toast.error("Something went wrong. Please try again later.");
+                return;
+            }
+            // If valid, proceed with the parsed data and use SignupResponse type
+            console.log("Signup successful:", result.data);
+            // You can access the user data like this:
+            // const user = result.data.user;
+            // If you need to access the mock verification link:
+            // const mockVerificationLink = result.data.mockVerificationLink;
+            // For example, you can log the user ID:
+            // console.log("User ID:", user.id);
+            // If you want to log the entire parsed data:
+            // console.log("Parsed Signup Response:", result.data);
+             const parsedData: SignupResponse = result.data;
+             console.log(JSON.stringify(parsedData));
+
             toast.success("Account created! Please check your email to verify your account.");
             route.push("/verification-email");
         } catch (error: any) {
@@ -66,7 +88,7 @@ useEffect(() => {
                     inputType="text"
                     placeholder="Enter Your Full Name"
                     icon="/images/close.svg"
-                    formProps={{ ...register("name") }}
+                    formProps={{ ...register("fullName") }}
                     isRequired={true}
                     errors={errors}
                     setValue={setValue}

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const SignupSchema = z.object({
-  name: z.string().min(3, "Full Name must be at least 3 characters.")
+  fullName: z.string().min(3, "Full Name must be at least 3 characters.")
            .regex(/^(?!.*\s{3,})[A-Za-z\s]+$/, "Please enter a valid name (letters only)"),
   email: z.string().email("Please enter a valid email address."),
   password: z.string().regex(
@@ -15,3 +15,15 @@ userType: z.enum(["USER", "AGENCY_USER"]),
 });
 
 export type SignupFormData = z.infer<typeof SignupSchema>;
+
+export const SignupResponseSchema = z.object({
+  user: z.object({
+    id: z.string(),
+    email: z.string().email(),
+    fullName: z.string(),
+    userType: z.enum(["USER", "AGENCY_USER"]),
+  }),
+  mockVerificationLink: z.string().url().optional(),
+});
+
+export type SignupResponse = z.infer<typeof SignupResponseSchema>;
