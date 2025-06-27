@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 
-import AuthLayout from "../../components/common/AuthLayout";
-import ChangeEmail from "../../components/Models/ChangeEmail";
+import AuthLayout from "../components/common/AuthLayout";
+import ChangeEmail from  "../components/Models/ChangeEmail";
 import Image from 'next/image';
 import Link from 'next/link';
-import SecondaryButton from "../../components/common/SecondaryButton";
+import SecondaryButton from "../components/common/SecondaryButton";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
 
-function VerificationEmail() {
+function VerificationEmailClient() {
     const { handleSubmit } = useForm();
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
     const [sec, setSec] = useState(60);
     const [isTimerActive, setIsTimerActive] = useState(true);
-    const [mockLink, setMockLink] = useState(null);
+    const [mockLink, setMockLink] = useState<string | null>(null);
     const searchParams = useSearchParams();
-    const status = searchParams.get("status");
+    const status = searchParams?.get("status");
 
     useEffect(() => {
         const link = localStorage.getItem("mockVerificationLink");
@@ -34,7 +34,7 @@ function VerificationEmail() {
             setLoading(false);
         }
 
-        let interval = null;
+        let interval: ReturnType<typeof setInterval> | null = null;
         if (isTimerActive && sec > 0) {
             interval = setInterval(() => {
                 setSec(seconds => seconds - 1);
@@ -78,12 +78,10 @@ function VerificationEmail() {
     };
 
     return (
-        <AuthLayout>
+        <AuthLayout dangerClass={undefined}>
             {open &&
                 <ChangeEmail
-                    onClose={() => setOpen(false)}
-                    onSave={() => setOpen(true)}
-                />
+                onClose={() => setOpen(false)} id={undefined} />
             }
 
             {mockLink && status !== "expired" && (
@@ -151,8 +149,7 @@ function VerificationEmail() {
                         title="Resend Verification Email"
                         disabled={loading || isTimerActive}
                         type="submit"
-                        class_="disabled:bg-dark! disabled:text-text3! disabled:border-dark! py-3! mt-5!"
-                    />
+                        class_="disabled:bg-dark! disabled:text-text3! disabled:border-dark! py-3! mt-5!" onClick={undefined}                    />
 
                     <div className='flex items-center justify-between mt-5'>
                         <Link href="#" onClick={() => setOpen(true)} className='text-sm text-primary font-medium underline underline-offset-4'>Change Email</Link>
@@ -173,4 +170,4 @@ function VerificationEmail() {
     )
 }
 
-export default VerificationEmail
+export default VerificationEmailClient;
