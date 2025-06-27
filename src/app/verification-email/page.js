@@ -1,13 +1,16 @@
 "use client"
-import AuthLayout from "../../components/common/AuthLayout";
-import Link from 'next/link';
-import Image from 'next/image';
-import { useForm } from "react-hook-form";
+
 import { useEffect, useState } from "react";
+
+import AuthLayout from "../../components/common/AuthLayout";
+import ChangeEmail from "../../components/Models/ChangeEmail";
+import Image from 'next/image';
+import Link from 'next/link';
+import SecondaryButton from "../../components/common/SecondaryButton";
 import axios from "axios";
 import { toast } from "react-toastify";
-import ChangeEmail from "../../components/Models/ChangeEmail";
-import SecondaryButton from "../../components/common/SecondaryButton";
+import { useForm } from "react-hook-form";
+import { useSearchParams } from "next/navigation";
 
 function VerificationEmail() {
     const { handleSubmit } = useForm();
@@ -15,8 +18,22 @@ function VerificationEmail() {
     const [open, setOpen] = useState(false);
     const [sec, setSec] = useState(60);
     const [isTimerActive, setIsTimerActive] = useState(true);
+    const [mockLink, setMockLink] = useState(null);
+    const searchParams = useSearchParams();
+    const status = searchParams.get("status");
 
     useEffect(() => {
+        const link = localStorage.getItem("mockVerificationLink");
+        if (link) {
+            setMockLink(link);
+            localStorage.removeItem("mockVerificationLink");
+        }
+
+        if (status === "expired" && sec === 60) {
+            setIsTimerActive(false);
+            setLoading(false);
+        }
+
         let interval = null;
         if (isTimerActive && sec > 0) {
             interval = setInterval(() => {
@@ -30,13 +47,20 @@ function VerificationEmail() {
         return () => {
             if (interval) clearInterval(interval);
         };
-    }, [isTimerActive, sec]);
+    }, [isTimerActive, sec, status]);
 
     const onSubmit = async (data) => {
         try {
             setLoading(true);
             setIsTimerActive(true);
             setSec(59);
+            setMockLink(null);
+            
+            // Remove ?status=expired from the URL
+            const url = new URL(window.location.href);
+            url.searchParams.delete("status");
+            window.history.replaceState({}, "", url.toString());
+            
             await axios.put("/api", data);
             toast.success("Verification email sent successfully! Check your inbox or spam folder.");
         } catch (error) {
@@ -57,43 +81,81 @@ function VerificationEmail() {
         <AuthLayout>
             {open &&
                 <ChangeEmail
-                    onClose={() => {
-                        setOpen(false)
-                    }}
-                    onSave={() => {
-                        setOpen(true)
-                    }}
+                    onClose={() => setOpen(false)}
+                    onSave={() => setOpen(true)}
                 />
             }
+
+            {mockLink && status !== "expired" && (
+                <div className="mt-5 text-center">
+                    <div className="text-sm text-green-600 font-medium">
+                        Dev: <a href={mockLink} target="/verification-email-success" className="underline text-blue-600">Click here to verify</a>
+                    </div>
+                </div>
+            )}
+
+            {status === "expired" && (
+                <div className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-md my-4 text-center">
+                    <h2 className="text-lg font-semibold">Verification Link Issue</h2>
+                    <p className="mt-1 text-sm font-medium">Expired Token</p>
+                    <p className="text-sm">The verification link has expired. Please request a new one.</p>
+                </div>
+            )}
+
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <h2 className="text-[34px] leading-none font-semibold text-secondary capitalize text-center">verification email sent</h2>
+                    {status !== "expired" && (
+                        <div>
+                            <h2 className="text-[34px] leading-none font-semibold text-secondary capitalize text-center">
+                                verification email sent
+                            </h2>
 
-                    <div className='flex items-center justify-between mt-8'>
-                        <div className='text-[15px] text-text3 capitalize'>A verification email has been sent to your email address: </div>
-                        <div className='text-[15px] text-secondary font-medium disabled'>anu@gmail.com</div>
-                    </div>
+                            <div className="flex items-center justify-between mt-8">
+                                <div className="text-[15px] text-text3 capitalize">
+                                    A verification email has been sent to your email address:
+                                </div>
+                                <div className="text-[15px] text-secondary font-medium disabled">anu@gmail.com</div>
+                            </div>
 
-                    <div className='mt-5'>
-                        <div className='flex gap-2'>
-                            <Image unoptimized={true} src="images/warning.svg" alt='warning' height={22} width={22} />
-                            <div className='text-sm text-secondary font-medium capitalize'>please check your inbox(or spam folder) and click the verification link.</div>
+                            <div className="mt-5">
+                                <div className="flex gap-2">
+                                    <Image
+                                        unoptimized
+                                        src="images/warning.svg"
+                                        alt="warning"
+                                        height={22}
+                                        width={22}
+                                    />
+                                    <div className="text-sm text-secondary font-medium capitalize">
+                                        please check your inbox(or spam folder) and click the verification link.
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-2 mt-2">
+                                    <Image
+                                        unoptimized
+                                        src="images/warning.svg"
+                                        alt="warning"
+                                        height={22}
+                                        width={22}
+                                    />
+                                    <div className="text-sm text-secondary font-medium capitalize">
+                                        if you don't receive an email, wait 60 seconds before trying again.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    )}
 
-                        <div className='flex gap-2 mt-2'>
-                            <Image unoptimized={true} src="images/warning.svg" alt='warning' height={22} width={22} />
-                            <div className='text-sm text-secondary font-medium capitalize'>if you don't receive an email, wait 60 seconds before trying again.</div>
-                        </div>
-                    </div>
-
-                    <SecondaryButton title="Resend Verification Email"
-                        disabled={loading}
+                    <SecondaryButton
+                        title="Resend Verification Email"
+                        disabled={loading || isTimerActive}
                         type="submit"
-                        class_="disabled:bg-dark! disabled:text-text3! disabled:border-dark! py-3! mt-5!"/>
-                   
+                        class_="disabled:bg-dark! disabled:text-text3! disabled:border-dark! py-3! mt-5!"
+                    />
 
                     <div className='flex items-center justify-between mt-5'>
-                        <Link href="#" onClick={() => { setOpen(true) }} className='text-sm text-primary font-medium underline underline-offset-4'>Change Email</Link>
+                        <Link href="#" onClick={() => setOpen(true)} className='text-sm text-primary font-medium underline underline-offset-4'>Change Email</Link>
                         <div className='text-sm text-secondary'>
                             {isTimerActive ? formatTime(sec) : '00.59'}
                         </div>
