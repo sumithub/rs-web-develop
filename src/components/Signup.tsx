@@ -41,6 +41,11 @@ const onSubmit = async (formData: SignupFormData) => {
     const parsedData = await signup(formData);
     console.log("Parsed Signup Response:", parsedData);
 
+    // Save mock verification link to localStorage (for dev only)
+    if (parsedData?.mockVerificationLink) {
+      localStorage.setItem("mockVerificationLink", parsedData.mockVerificationLink);
+    }
+
     toast.success("Account created! Please check your email to verify your account.");
     route.push("/verification-email");
   } catch (error: any) {

@@ -20,4 +20,4 @@ function VerificationEmail() {
   )
 }
 
-export default VerificationEmail
+export default VerificationEmail;

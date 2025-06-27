@@ -2,7 +2,7 @@ import { requestInterceptor, responseInterceptorError } from "./interceptorHandl
 
 import axios from "axios";
 
-const API_BASE = process.env.NEXT_PUBLIC_RS_API_BASE_URL || "http://localhost:8080/api";
+const API_BASE = process.env.NEXT_PUBLIC_RS_API_BASE_URL || "https://rs-backend-ieyn.onrender.com/api";
 
  export const axiosInstance = axios.create({
   baseURL: API_BASE,
