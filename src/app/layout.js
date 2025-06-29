@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import AuthWrapper from "../contexts/AuthWrapper";
 
 export const metadata = {
   title: "Project 87",
@@ -31,7 +32,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <ToastContainer className="!z-[9999999]" />
         <div className='overflow-hidden bg-[#FEFEFE]'>
-          {children}
+        <AuthWrapper>{children}</AuthWrapper>
         </div>
       </body>
     </html>

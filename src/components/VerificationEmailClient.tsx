@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import AuthLayout from "../components/common/AuthLayout";
-import ChangeEmail from  "../components/Models/ChangeEmail";
+import ChangeEmail from  "../components/Models/ChangeEmail"
 import Image from 'next/image';
 import Link from 'next/link';
 import SecondaryButton from "../components/common/SecondaryButton";
@@ -11,6 +11,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
+import AuthContext from "../contexts/AuthContext";
 
 function VerificationEmailClient() {
     const { handleSubmit } = useForm();
@@ -21,6 +22,7 @@ function VerificationEmailClient() {
     const [mockLink, setMockLink] = useState<string | null>(null);
     const searchParams = useSearchParams();
     const status = searchParams?.get("status");
+    const { unVerifiedEmail } = useContext(AuthContext);
 
     useEffect(() => {
         const link = localStorage.getItem("mockVerificationLink");
@@ -112,7 +114,7 @@ function VerificationEmailClient() {
                                 <div className="text-[15px] text-text3 capitalize">
                                     A verification email has been sent to your email address:
                                 </div>
-                                <div className="text-[15px] text-secondary font-medium disabled">anu@gmail.com</div>
+                                <div className="text-[15px] text-secondary font-medium disabled">{unVerifiedEmail}</div>
                             </div>
 
                             <div className="mt-5">

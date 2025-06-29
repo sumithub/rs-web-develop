@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
+import AuthContext from "../contexts/AuthContext";
 
 export default function Signup() {
     const {
@@ -28,15 +30,16 @@ export default function Signup() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const route = useRouter();
+    const {unVerifiedEmail, setEmail} = useContext(AuthContext);
 
 useEffect(() => {
   setValue("userType", "USER");
+  console.log("context value:", unVerifiedEmail);
 }, [setValue]);
 
 const onSubmit = async (formData: SignupFormData) => {
   try {
     setLoading(true);
-
     // Calls the centralized authApi signup function
     const parsedData = await signup(formData);
     console.log("Parsed Signup Response:", parsedData);
@@ -45,7 +48,8 @@ const onSubmit = async (formData: SignupFormData) => {
     if (parsedData?.mockVerificationLink) {
       localStorage.setItem("mockVerificationLink", parsedData.mockVerificationLink);
     }
-
+    // Update context with unverified email
+    setEmail(formData.email);
     toast.success("Account created! Please check your email to verify your account.");
     route.push("/verification-email");
   } catch (error: any) {
