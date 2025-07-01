@@ -58,7 +58,11 @@ export default function LatestReviews() {
                             setSortBy={setSortBy}
                             field="client"
                         /></th>
-                        <th>Action</th>
+                        <th>
+                            <div className="flex justify-center">
+                                Action
+                            </div>
+                        </th>
                     </tr>
                 </thead>
 
@@ -68,6 +72,13 @@ export default function LatestReviews() {
                         <td>{e.review}</td>
                         <td>{e.reviewer}</td>
                         <td>{e.client}</td>
+                        <td>
+                            <div className="flex gap-2.5 justify-center">
+                                <Image src="/images/eyes3.svg" alt="eyes3" width={28} height={28} />
+                                <Image src="/images/refresh1.svg" alt="refresh1" width={28} height={28} />
+                                <Image src="/images/1.svg" alt="1" width={28} height={28} />
+                            </div>
+                        </td>
                     </tr>)}
                 </tbody>
             </table> : <div className='text-center text-2xl text-danger mx-auto h-20'>No Data</div>)}

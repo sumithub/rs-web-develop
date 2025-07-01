@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { getError } from "../../../helper";
 import { latestCampaigns } from '../../constent/constArray';
 import Status from "../../components/Status";
+import Image from "next/image";
 
 
 export default function LatestCampaigns() {
@@ -54,7 +55,7 @@ export default function LatestCampaigns() {
                             field="status"
                         /></th>
 
-                        <th>Action</th>
+                        <th><div className="flex justify-center">Action</div></th>
                     </tr>
                 </thead>
 
@@ -63,6 +64,13 @@ export default function LatestCampaigns() {
                         <td>{e.name}</td>
                         <td>{e.client}</td>
                         <td><Status Status={e.status} /></td>
+                        <td>
+                            <div className="flex gap-2.5 justify-center">
+                                <Image src="/images/play.svg" alt="play" width={28} height={28} />
+                                <Image src="/images/eyes3.svg" alt="eyes3" width={28} height={28} />
+                                <Image src="/images/edit.svg" alt="edit" width={28} height={28} />
+                            </div>
+                        </td>
                     </tr>)}
                 </tbody>
             </table> : <div className='text-center text-2xl text-danger mx-auto h-20'>No Data</div>)}
