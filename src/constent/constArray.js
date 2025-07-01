@@ -372,3 +372,14 @@ export const usersManagement = [
     { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
     { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
 ]
+
+export const rolesPermissions = [
+    { name: "Admin", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Owner", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Manager", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Guest", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Admin", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Owner", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Manager", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Guest", description: "Lorem Ipsum is simply", permissions: "Modify" },
+]
