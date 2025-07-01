@@ -14,7 +14,7 @@ import CustomSelectBox from "../../components/form/CustomSelectBox"
 import AdminLayout from "../../components/AdminLayout"
 import { getTextLength } from "../../utils/editorHelper"
 import SmsPreview from "../../components/Models/templates/SmsPreview"
-import Checkbox from "../../components/form/Checkbox"
+import CheckboxForm from "../../components/form/CheckboxForm"
 
 function AddTemplate() {
   const id = ""
@@ -63,10 +63,10 @@ function AddTemplate() {
       <div className='flex items-start gap-4'>
         <div className='w-[60%]'>
           <div className='shadow-sm rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
-            <div className="flex gap-2.5 items-center">
-              <Checkbox />
+            {isAdmin() && <div className="flex gap-2.5 items-center">
+              <CheckboxForm />
               <div>Clone Template</div>
-            </div>
+            </div>}
             <div className='grid grid-cols-2 gap-3'>
               <CustomSelectBox label="Template Type" isRequired={true} class_='mt-2! w-full!'
                 defaultOption='Template Type'
@@ -81,7 +81,7 @@ function AddTemplate() {
                 }}>
                 <option value="email">Email</option>
                 <option value="sms">SMS</option>
-                <option value="reviewResponseTemplate">Review Response Template</option>
+                {isAdmin() && <option value="reviewResponseTemplate">Review Response Template</option>}
               </CustomSelectBox>
 
               <InputForm
