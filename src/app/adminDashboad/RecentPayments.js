@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { getError } from "../../../helper";
 import { recentPayments } from '../../constent/constArray';
 import Status from "../../components/Status";
+import Image from "next/image";
 
 
 export default function RecentPayments() {
@@ -58,7 +59,11 @@ export default function RecentPayments() {
                             setSortBy={setSortBy}
                             field="client"
                         /></th>
-                        <th>Action</th>
+                        <th>
+                            <div className="flex justify-center">
+                                Action
+                            </div>
+                        </th>
                     </tr>
                 </thead>
 
@@ -68,6 +73,12 @@ export default function RecentPayments() {
                         <td>{e.amount}</td>
                         <td><Status Status={e.status} /></td>
                         <td>{e.client}</td>
+                        <td>
+                            <div className="flex gap-2.5 justify-center">
+                                <Image src="/images/eyes3.svg" alt="eyes3" width={28} height={28} />
+                                <Image src="/images/refresh1.svg" alt="refresh1" width={28} height={28} />
+                            </div>
+                        </td>
                     </tr>)}
                 </tbody>
             </table> : <div className='text-center text-2xl text-danger mx-auto h-20'>No Data</div>)}
