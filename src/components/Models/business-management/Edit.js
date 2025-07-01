@@ -128,10 +128,14 @@ export default function Edit({ onClose }) {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="plan" /></th>
-                            <th><TableOrder title="Status"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="status" /></th>
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Status"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="status" />
+                                </div>
+                            </th>
                             <th className="text-center!">Action</th>
                         </tr>
                     </thead>
@@ -150,7 +154,11 @@ export default function Edit({ onClose }) {
                                 </td>
                                 <td>{e.industry}</td>
                                 <td>{e.plan}</td>
-                                <td><Status status={e.status} /></td>
+                                <td>
+                                    <div className="flex justify-center">
+                                        <Status status={e.status} />
+                                    </div>
+                                </td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
                                         <button className='cursor-pointer' onClick={() => { setOpenUser(true) }}>

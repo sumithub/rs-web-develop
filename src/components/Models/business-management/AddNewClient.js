@@ -74,7 +74,7 @@ export default function AddNewClient({ onClose, id }) {
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                 </SelectForm>
-                <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="grid grid-cols-2 gap-5 mt-7">
                     <CancelButton title="Cancel" onClick={onClose} />
                     <SecondaryButton title="Save" type="submit" disabled={sending} />
                 </div>

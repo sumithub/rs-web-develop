@@ -82,16 +82,16 @@ export default function CreateCustomersTag({ onClose, id }) {
                         errors={errors}
                     />
 
-                    <div className="flex justify-between items-center mt-3">
+                    <div className="flex justify-between items-center mt-3.5">
                         <div className="font-semibold">
                             Select Customers From List
                         </div>
-                        <SecondaryButton title="add customers" type="button" onClick={() => { setOpen(true) }} />
+                        <SecondaryButton title="add customers" type="button" onClick={() => { setOpen(true) }} class_="text-sm font-normal" />
                     </div>
 
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 mt-6">
+                <div className="grid grid-cols-2 gap-5 mt-7">
                     <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
                     <SecondaryButton title="save tag" type="submit" disabled={sending} class_="text-lg!" />
                 </div>
