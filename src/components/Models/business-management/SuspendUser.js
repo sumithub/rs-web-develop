@@ -26,43 +26,43 @@ export default function SuspendUser({ onClose }) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="font-semibold text-lg capitalize">are you sure you want to suspend these users?</div>
 
-                <div className="mt-6 font-semibold text-lg">
+                <div className="mt-7 font-semibold text-lg">
                     Selected Users (03)
                 </div>
 
-                <div className="flex justify-between items-center mt-4">
-                    <div className="font-medium">
+                <div className="flex justify-between items-center mt-5">
+                    <div className="font-medium text-base">
                         John Doe  (Manager)
                     </div>
 
                     <div><Status status="Active" /></div>
                 </div>
 
-                <hr className="border border-border2 my-3" />
+                <hr className="border border-border2 my-3.5" />
 
                 <div className="flex justify-between items-center">
-                    <div className="font-medium">
+                    <div className="font-medium text-base">
                         Lisa Smith  (Owner)
                     </div>
 
                     <div><Status status="Active" /></div>
                 </div>
 
-                <hr className="border border-border2 my-3" />
+                <hr className="border border-border2 my-3.5" />
 
                 <div className="flex justify-between items-center">
-                    <div className="font-medium items-center">
+                    <div className="font-medium text-base">
                         Lisa Smith  (Manager)
                     </div>
 
                     <div><Status status="Active" /></div>
                 </div>
 
-                <div className="capitalize text-primary mt-6">You can reactivate suspended users later.</div>
+                <div className="capitalize text-primary text-sm mt-7">You can reactivate suspended users later.</div>
 
-                <div className="grid grid-cols-2 gap-4 mt-4">
-                    <CancelButton title="Cancel" onClick={onClose} />
-                    <SecondaryButton title="Confirm & Suspend" type="submit" disabled={sending} />
+                <div className="grid grid-cols-2 gap-5 mt-5">
+                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
+                    <SecondaryButton title="Confirm & Suspend" type="submit" disabled={sending} class_="text-lgI" />
                 </div>
             </form>
         </Model>

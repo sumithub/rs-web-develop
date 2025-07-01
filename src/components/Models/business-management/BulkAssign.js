@@ -33,7 +33,7 @@ export default function BulkAssign({ onClose, id }) {
     }
 
     return (
-        <Model onClose={onClose} title="Bulk Assign" modalClass="w-[70%]!">
+        <Model onClose={onClose} title="Bulk Assign" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <SelectForm
@@ -50,14 +50,17 @@ export default function BulkAssign({ onClose, id }) {
                         <option value="clientB">Client B</option>
                     </SelectForm>
 
-                    <div className="flex justify-between mt-3">
-                        <div className="text-primary">Selected Items</div>
-                        <div className="text-primary">45 Customers</div>
+                    <div className="flex justify-between mt-3 border border-primary bg-primary/10 py-3 px-2.5 rounded-[10px]">
+                        <div className="text-primary text-base font-medium">Selected Items</div>
+                        <div className="text-primary text-base font-medium">45 Customers</div>
                     </div>
 
                     <div className="mt-3">
                         <div className="font-semibold">Available Tags</div>
-                        <SelectForm class_="w-[10%]! text-primary" defaultOption="select"
+                        <SelectForm
+                            class_="w-[10%]! text-primary"
+                            selectClass_="bg-primary/10! text-primary! rounded-full!"
+                            defaultOption="select"
                             setValue={setValue}
                             watch={watch}
                             formProps={{ ...register("availableTags", { required: false }) }}
@@ -71,7 +74,7 @@ export default function BulkAssign({ onClose, id }) {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3 mt-6">
+                <div className="grid grid-cols-3 gap-5 mt-7">
                     <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
                     <SecondaryButton title="Assign Tag to Selected" onClick={() => {
                         toast.success("Assigned Successfully")
