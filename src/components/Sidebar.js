@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { title } from "process";
 
 export default function Sidebar({ collapse, toggleSidebar, role }) {
     const [list, setList] = useState([])
@@ -75,6 +76,15 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                         { title: "Tagging", link: "/admin/business-management/customer-tagging" },
                     ]
             },
+
+            {
+                title: "Users & Roles", link: "", icon: "sms-star",
+                submenu:
+                    [
+                        { title: "Users", link: "/admin/organization/users-management" },
+                        { title: "Roles & Permissions", link: "/admin/organization/roles-permissions" },
+                    ]
+            }
 
         ]
         if (role === "ADMIN") {
