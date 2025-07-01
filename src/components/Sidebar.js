@@ -1,11 +1,14 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 
 export default function Sidebar({ collapse, toggleSidebar }) {
+    useEffect(() => {
+        console.log("role", localStorage.getItem("role"))
+    }, [])
     const list = [
         { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
         {
