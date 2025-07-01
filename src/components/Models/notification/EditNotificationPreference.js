@@ -39,6 +39,7 @@ function EditNotificationPreferences({ onClose, id }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <InputForm
+                    class_="mt-0!"
                     inputClass="py-3.5!"
                     placeholder="CR-001"
                     label="Edit Notification Preference"

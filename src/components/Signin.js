@@ -37,6 +37,11 @@ export default function Signin() {
         try {
             setLoading(true);
             await axios.post("/api", data)
+            if (data?.email === "admin@gmail.com")
+                localStorage.setItem("role", "ADMIN")
+            else
+                localStorage.setItem("role", "USER")
+
             setTimeout(() => {
                 router.push("/dashboard")
             }, 1000);

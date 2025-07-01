@@ -2,44 +2,37 @@
 import { useEffect, useState } from "react"
 import AdminLayout from "../../../../components/AdminLayout"
 import Search from "../../../../components/form/Search"
-import DateRange from "../../../../components/form/DateRangePicker"
 import CustomSelectBox from "../../../../components/form/CustomSelectBox"
-import SecondaryButton from "../../../../components/common/SecondaryButton"
 import TableOrder from "../../../../components/TableOrder"
 import Checkbox from "../../../../components/form/Checkbox"
-import Status from "../../../../components/Status"
 import Image from "next/image"
 import PaginationDemo from "../../../../components/Pagination"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { getError } from "../../../../../helper"
 import Loading from "../../../../components/Loading"
-import { usersManagement } from "../../../../constent/constArray"
-import UserCreation from "../../../../components/Models/organization/UserCreation"
-import DeactivateUser from "../../../../components/Models/organization/DeactivateUser"
+import { rolesPermissions } from "../../../../constent/constArray"
+import EditRole from "../../../../components/Models/organization/EditRole"
 
-export default function UsersManagement() {
+export default function RolesPermissions() {
     const [sortBy, setSortBy] = useState(false)
     const [filterBy, setFilterBy] = useState("")
     const [filterBy1, setFilterBy1] = useState("")
-    const [date, setDate] = useState("")
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
-    const [openDeactivate, setOpenDeactivate] = useState(false)
-    const [selId, setSelId] = useState("")
 
     useEffect(() => {
-        getUsers()
-    }, [search, filterBy, date, filterBy1, sortBy])
+        getRoles()
+    }, [search, filterBy, filterBy1, sortBy])
 
-    const getUsers = async () => {
+    const getRoles = async () => {
         try {
             setLoading(true)
             setList([])
             const res = await axios.get("/api")
-            setList(res.data || usersManagement)
+            setList(res.data || rolesPermissions)
             setLoading(false)
 
         } catch (error) {
@@ -60,26 +53,13 @@ export default function UsersManagement() {
                     }}
                 />}>
             {open &&
-                <UserCreation
-                    id={selId}
+                <EditRole
                     onClose={() => {
-                        setSelId("")
                         setOpen(false)
                     }}
 
                     onSave={() => {
                         setOpen(true)
-                    }} />
-            }
-
-            {openDeactivate &&
-                <DeactivateUser
-                    onClose={() => {
-                        setOpenDeactivate(false)
-                    }}
-
-                    onSave={() => {
-                        setOpenDeactivate(true)
                     }} />
             }
             <div className='flex items-center justify-between'>
@@ -90,27 +70,12 @@ export default function UsersManagement() {
                     }}
                 />
                 <div className='flex items-center gap-3.5'>
-                    <DateRange
-                        onChange={(e) => { setDate(e) }}
-                    />
                     <CustomSelectBox
-                        defaultOption="Assigned Client"
+                        defaultOption="Filter By Role"
                         class_='mt-0! w-32!'
                         value={filterBy1}
                         onChange={(e) => {
                             setFilterBy1(e.target.value)
-                        }}
-                    >
-                        <option value="client1">Client 1</option>
-                        <option value="client2">Client 2</option>
-                    </CustomSelectBox>
-
-                    <CustomSelectBox
-                        defaultOption="Role"
-                        class_='mt-0! w-32!'
-                        value={filterBy}
-                        onChange={(e) => {
-                            setFilterBy(e.target.value)
                         }}
                     >
                         <option value="admin">Admin</option>
@@ -118,37 +83,36 @@ export default function UsersManagement() {
                         <option value="manager">Manager</option>
                         <option value="guest">Guest</option>
                     </CustomSelectBox>
-                    <SecondaryButton
-                        title="Add New User"
-                        class_="text-xs! font-normal!"
-                        onClick={() => setOpen(true)}
-                    />
+
+                    <CustomSelectBox
+                        defaultOption="Export"
+                        class_='mt-0! w-32!'
+                        value={filterBy}
+                        onChange={(e) => {
+                            setFilterBy(e.target.value)
+                        }}
+                    >
+                        <option value="csv">CSV</option>
+                        <option value="pdf">PDF</option>
+                    </CustomSelectBox>
                 </div>
             </div>
             <div className="table-class mt-3.5">
                 {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
                     <thead>
                         <tr>
-                            <th><TableOrder title="Name"
+                            <th><TableOrder title="Role Name"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="name" /></th>
-                            <th><TableOrder title="Email"
+                            <th><TableOrder title="Description"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="email" /></th>
-                            <th><TableOrder title="Role"
+                                field="description" /></th>
+                            <th><TableOrder title="Permissions"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="role" /></th>
-                            <th><TableOrder title="Assigned Client"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="client" /></th>
-                            <th><TableOrder title="Status"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="status" /></th>
+                                field="permissions" /></th>
                             <th className="text-center!">Actions</th>
                         </tr>
                     </thead>
@@ -165,20 +129,14 @@ export default function UsersManagement() {
                                         <div>{e.name}</div>
                                     </div>
                                 </td>
-                                <td>{e.email}</td>
-                                <td>{e.role}</td>
-                                <td>{e.assignedClient}</td>
-                                <td><Status status={e.status} /></td>
+                                <td>{e.description}</td>
+                                <td>{e.permissions}</td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
-                                        <button className='cursor-pointer'
-                                            onClick={() => setOpenDeactivate(true)}>
-                                            <Image unoptimized={true} src="/images/global.svg" alt='edit' height={28} width={28} />
+                                        <button className='cursor-pointer'>
+                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='edit' height={28} width={28} />
                                         </button>
-                                        <button className='cursor-pointer' onClick={() => {
-                                            setSelId("e.id")
-                                            setOpen(true)
-                                        }}>
+                                        <button className='cursor-pointer' onClick={() => setOpen(true)}>
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
                                     </div>

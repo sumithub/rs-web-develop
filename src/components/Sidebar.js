@@ -1,77 +1,98 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { title } from "process";
 
+export default function Sidebar({ collapse, toggleSidebar, role }) {
+    const [list, setList] = useState([])
+    useEffect(() => {
+        const userList = [
+            { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
+            {
+                title: "Customers", link: "/campaigns", icon: "customer",
+                submenu: [{ title: "Manage Customers", link: "/customers" }, { title: "Customer Tagging", link: "/customer-tagging" }]
+            },
+            // { title: "Customers", link: "/campaigns", icon: "customer", submenu: [{ title: "User Management", link: "/users" }] },
+            {
+                title: "Reviews", link: "/reviews", icon: "message",
+                submenu: [{ title: "Manage Reviews", link: "/review" }, { title: "Review Widgets", link: "/review-widgets" }, { title: "Review Sources", link: "/review-sources" }]
+            },
+            {
+                title: "Campaigns", link: "/campaigns", icon: "campaign",
+                submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }]
+            },
 
-export default function Sidebar({ collapse, toggleSidebar }) {
-    const list = [
-        { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
+            {
+                title: "Reports", link: "", icon: "report",
+                submenu:
+                    [
+                        { title: "Report Templates", link: "/report-templates" },
+                        { title: "Schedule & Delivery", link: "/schedule-delivery" },
+                        { title: "Report History", link: "/report-history" },
+                        { title: "Sentiment Analysis", link: "/sentiment-analysis" }
+                    ]
+            },
 
-        {
-            title: "Business Management", link: "", icon: "business",
-            submenu:
-                [
-                    { title: "Clients", link: "/admin/business-management/clients-management" },
-                    { title: "Locations", link: "/admin/business-management/locations-management" },
-                    { title: "Tagging", link: "/admin/business-management/customer-tagging" },
-                ]
-        },
+            {
+                title: "Notifications and Alerts", link: "", icon: "notification",
+                submenu:
+                    [
+                        { title: "Notifications", link: "/notifications-management" },
+                        { title: "Notification Preferences", link: "/notification-preferences-management" },
+                        { title: "Alerts", link: "/alerts-management" },
+                        { title: "Notification Log", link: "/audit-logs-dashboard" },
+                    ]
+            },
 
-        {
-            title: "Customers", link: "/campaigns", icon: "customer",
-            submenu: [{ title: "Manage Customers", link: "/customers" }, { title: "Customer Tagging", link: "/customer-tagging" }]
-        },
-        // { title: "Customers", link: "/campaigns", icon: "customer", submenu: [{ title: "User Management", link: "/users" }] },
-        {
-            title: "Reviews", link: "/reviews", icon: "message",
-            submenu: [{ title: "Manage Reviews", link: "/review" }, { title: "Review Widgets", link: "/review-widgets" }, { title: "Review Sources", link: "/review-sources" }]
-        },
-        {
-            title: "Campaigns", link: "/campaigns", icon: "campaign",
-            submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }]
-        },
+            {
+                title: "Rules and Automations", link: "", icon: "rule",
+                submenu: [{ title: "Custom Rules", link: "/client-rules-management" }]
+            },
 
-        {
-            title: "Reports", link: "", icon: "report",
-            submenu:
-                [
-                    { title: "Report Templates", link: "/report-templates" },
-                    { title: "Schedule & Delivery", link: "/schedule-delivery" },
-                    { title: "Report History", link: "/report-history" },
-                    { title: "Sentiment Analysis", link: "/sentiment-analysis" }
-                ]
-        },
+            // { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
 
-        {
-            title: "Notifications and Alerts", link: "", icon: "notification",
-            submenu:
-                [
-                    { title: "Notifications", link: "/notifications-management" },
-                    { title: "Notification Preferences", link: "/notification-preferences-management" },
-                    { title: "Alerts", link: "/alerts-management" },
-                    { title: "Notification Log", link: "/audit-logs-dashboard" },
-                ]
-        },
+            {
+                title: "Settings", icon: "settings",
+                submenu:
+                    [
+                        { title: "Users", link: "/users" },
+                        { title: "Locations", link: "/location-screen" },
+                        { title: "Business Profile", link: "/setting" }
+                    ]
+            },
+        ]
 
-        {
-            title: "Rules and Automations", link: "", icon: "rule",
-            submenu: [{ title: "Custom Rules", link: "/client-rules-management" }]
-        },
+        const adminList = [
+            { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
 
-        // { title: "Campaigns", link: "/campaigns", icon: "campaign", submenu: [{ title: "Campaign Dashboard", link: "/campaign-dashboard" }, { title: "Manage Campaigns", link: "/manage-campaigns" }, { title: "Templates", link: "/campaigns-templates" }] },
+            {
+                title: "Business Management", link: "", icon: "business",
+                submenu:
+                    [
+                        { title: "Clients", link: "/admin/business-management/clients-management" },
+                        { title: "Locations", link: "/admin/business-management/locations-management" },
+                        { title: "Tagging", link: "/admin/business-management/customer-tagging" },
+                    ]
+            },
 
-        {
-            title: "Settings", icon: "settings",
-            submenu:
-                [
-                    { title: "Users", link: "/users" },
-                    { title: "Locations", link: "/location-screen" },
-                    { title: "Business Profile", link: "/setting" }
-                ]
-        },
-    ]
+            {
+                title: "Users & Roles", link: "", icon: "sms-star",
+                submenu:
+                    [
+                        { title: "Users", link: "/admin/organization/users-management" },
+                        { title: "Roles & Permissions", link: "/admin/organization/roles-permissions" },
+                    ]
+            }
+
+        ]
+        if (role === "ADMIN") {
+            setList(adminList)
+        } else {
+            setList(userList)
+        }
+    }, [role])
 
     return <div className="relative z-50">
         <div className={`bg-white h-[100vh] ${collapse ? "w-20" : "w-72"} transition-all fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px] shadow-[0px_16px_44px_0px_#00000012]`}>
