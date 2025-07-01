@@ -31,7 +31,7 @@ export default function DeleteLocation({ onClose, title = "Confirm Location" }) 
             <DeleteTag title={`${title} Deletion`} question={`Are You Sure You Want To Delete The Location "Main Office"?`} />
 
             <div className="grid grid-cols-2 gap-3 mt-5">
-                <CancelButton title="No" class_="border-danger2! text-lg! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
+                <CancelButton title="cancel" class_="border-danger2! text-lg! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
                 />
                 <SecondaryButton title=" Yes, Delete" type="submit" class_="text-lg!" disabled={sending} />
             </div>

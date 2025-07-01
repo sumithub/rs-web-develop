@@ -11,6 +11,17 @@ export default function Sidebar({ collapse, toggleSidebar }) {
     }, [])
     const list = [
         { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
+
+        {
+            title: "Business Management", link: "", icon: "business",
+            submenu:
+                [
+                    { title: "Clients", link: "/admin/business-management/clients-management" },
+                    { title: "Locations", link: "/admin/business-management/locations-management" },
+                    { title: "Tagging", link: "/admin/business-management/customer-tagging" },
+                ]
+        },
+
         {
             title: "Customers", link: "/campaigns", icon: "customer",
             submenu: [{ title: "Manage Customers", link: "/customers" }, { title: "Customer Tagging", link: "/customer-tagging" }]
@@ -27,7 +38,13 @@ export default function Sidebar({ collapse, toggleSidebar }) {
 
         {
             title: "Reports", link: "", icon: "report",
-            submenu: [{ title: "Report Templates", link: "/report-templates" }, { title: "Schedule & Delivery", link: "/schedule-delivery" }, { title: "Report History", link: "/report-history" }]
+            submenu:
+                [
+                    { title: "Report Templates", link: "/report-templates" },
+                    { title: "Schedule & Delivery", link: "/schedule-delivery" },
+                    { title: "Report History", link: "/report-history" },
+                    { title: "Sentiment Analysis", link: "/sentiment-analysis" }
+                ]
         },
 
         {
@@ -50,7 +67,12 @@ export default function Sidebar({ collapse, toggleSidebar }) {
 
         {
             title: "Settings", icon: "settings",
-            submenu: [{ title: "Users", link: "/users" }, { title: "Locations", link: "/location-screen" }]
+            submenu:
+                [
+                    { title: "Users", link: "/users" },
+                    { title: "Locations", link: "/location-screen" },
+                    { title: "Business Profile", link: "/setting" }
+                ]
         },
     ]
 

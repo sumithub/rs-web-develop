@@ -69,6 +69,7 @@ export default function CampaignDashboard() {
                 <option value="5 star">5 Star</option>
             </CustomSelectBox>
             <DateRange
+                value={date}
                 onChange={(e) => { setDate(e) }} />
         </div>}>
         {loading ? <Loading /> : <>
@@ -113,7 +114,7 @@ export default function CampaignDashboard() {
                                 </thead>
                                 <tbody>
 
-                                    {list?.map((e, index) => <tr key={index}>
+                                    {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                         <td>{e.id}</td>
                                         <td>{formatDateTime(e.date)}</td>
                                         <td className="capitalize">{e.actionToken}</td>

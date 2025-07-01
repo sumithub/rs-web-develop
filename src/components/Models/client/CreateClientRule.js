@@ -14,21 +14,9 @@ import RadioForm from "../../form/RadioForm"
 import Image from "next/image"
 import StarRangeSlider from "../../StartRatingSlider"
 
-function CreateClientRule({ onClose, id, isCreate }) {
+function CreateClientRule({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
-    const [enabled, setEnabled] = useState(false)
-    const [auto, setAuto] = useState(false)
-    const [support, setSupport] = useState(false)
-    const [notify, setNotify] = useState(false)
-    const [emailTo, setEmailTo] = useState(false)
-    const [performance, setPerformance] = useState(false)
-    const [sendNotification, setSendNotification] = useState(false)
-    const [escalate, setEscalate] = useState(false)
-    const [audit, setAudit] = useState(false)
-    const [reviewTo, setReviewTo] = useState(false)
-    const [markReview, setMarkReview] = useState(false)
-    const [compliance, setCompliance] = useState(false)
     const [type, setType] = useState("")
 
     const onSubmit = async (data) => {
@@ -51,7 +39,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
         }
     }
 
-    let title = isCreate ? "Create Client Rule" : "Edit Client Rule"
+    let title = !id ? "Create Client Rule" : "Edit Client Rule"
 
     if (type === "positiveReview") {
         title = "Positive Review"
@@ -64,21 +52,22 @@ function CreateClientRule({ onClose, id, isCreate }) {
     return <Model onClose={onClose} title={title} modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-                {!isCreate && <InputForm
+                {id && <InputForm
                     label="Client Rule ID"
-                    disabled="clientRuleId"
-                    placeholder="Enter Rule Id"
+                    disabled={true}
+                    placeholder="CR-001"
                     isRequired={false}
                     class_="mt-0!"
-                    inputClass="border-primary/10 disabled:bg-dark! disabled:border-input-border!"
+                    inputClass="border-primary/10 disabled:bg-dark! disabled:border-input-border! py-3.5!"
                     formProps={{ ...register("clientRuleId", { required: false }) }}
                     errors={errors}
                     setValue={setValue}
                 />}
 
                 <SelectForm label="Event Type"
+                    class_={`${id ? "" : "mt-0!"}`}
                     selectClass_="py-3.5! px-2.5! border-primary/10!"
-                    isRequired={true}
+                    isRequired={(!type || type === "negativeReview") && true}
                     formProps={{ ...register("eventType", { required: true }) }}
                     errors={errors}
                     clearErrors={clearErrors}
@@ -97,7 +86,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
                 {(!type) && (<>
                     <InputForm label="Condition" placeholder="Enter condition" isRequired={true} errors={errors}
-                        inputClass="border-primary/10"
+                        inputClass="border-primary/10 py-3.5!"
                         formProps={{
                             ...register("condition", {
                                 required: true,
@@ -116,8 +105,6 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
                     <div className='flex gap-2.5 items-center mt-4'>
                         <CheckboxForm
-                            checked={enabled}
-                            onChange={(e) => setEnabled(e.target.checked)}
                             formProps={{ ...register("enabled") }} errors={errors} />
                         <div>
                             Enabled
@@ -125,7 +112,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     </div>
 
                     <InputForm label="Client" placeholder="Enter client name" isRequired={true} errors={errors}
-                        inputClass="border-primary/10"
+                        inputClass="border-primary/10 py-3.5!"
                         formProps={{
                             ...register("client", {
                                 required: true,
@@ -140,8 +127,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
                         errors={errors}
                         clearErrors={clearErrors}
                         setValue={setValue}
-                        watch={watch}
-                    >
+                        watch={watch}>
 
                         <option value="nyc">NYC</option>
                         <option value="la">LA</option>
@@ -158,7 +144,9 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     defaultOption="Select Condition"
                     formProps={{ ...register("ruleCondition", { required: true }) }}
                     errors={errors}
-                    clearErrors={clearErrors} setValue={setValue} watch={watch}>
+                    clearErrors={clearErrors}
+                    setValue={setValue}
+                    watch={watch}>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -170,20 +158,18 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
             {(type === "positiveReview" || type === "negativeReview") && (
                 <div className="mt-3 flex justify-between">
-                    <div>Threshold Rating</div>
+                    <div className="text-sm font-medium">Threshold Rating</div>
                     <StarRangeSlider />
                 </div>
             )}
 
             {(type === "newReview") && (<div>
-                <div className="mt-6 font-semibold text-xl">
+                <div className="mt-6 font-semibold text-lg">
                     Rule Condition
                 </div>
 
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={auto}
-                        onChange={(e) => setAuto(e.target.checked)}
                         formProps={{ ...register("autoApproveReview") }} errors={errors} />
                     <div>
                         Auto-Approve Review
@@ -191,21 +177,17 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={support}
-                        onChange={(e) => setSupport(e.target.checked)}
                         formProps={{ ...register("supportTeam") }} errors={errors} />
                     <div>
                         Send Notification To Support Team
                     </div>
                 </div>
 
-                <div className="mt-6 font-semibold text-xl">
+                <div className="mt-6 font-semibold text-lg">
                     Additional Action
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={emailTo}
-                        onChange={(e) => setEmailTo(e.target.checked)}
                         formProps={{ ...register("emailToReviewer") }} errors={errors} />
                     <div>
                         Trigger Welcome Email To Reviewer
@@ -214,7 +196,7 @@ function CreateClientRule({ onClose, id, isCreate }) {
             </div>)}
 
             {(type === "flaggedReview") && (<div>
-                <div className="mt-6 font-semibold text-xl">
+                <div className="mt-6 font-semibold text-lg">
                     Additional Action
                 </div>
 
@@ -240,8 +222,6 @@ function CreateClientRule({ onClose, id, isCreate }) {
             {(type === "reviewResponseReceived") && (<div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={notify}
-                        onChange={(e) => setNotify(e.target.checked)}
                         formProps={{ ...register("notifyAccountManager") }} errors={errors} />
                     <div>
                         Notify Account Manager
@@ -249,8 +229,6 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={performance}
-                        onChange={(e) => setPerformance(e.target.checked)}
                         formProps={{ ...register("performanceMetrics") }} errors={errors} />
                     <div>
                         Log Response Time For Performance Metrics
@@ -264,14 +242,12 @@ function CreateClientRule({ onClose, id, isCreate }) {
                     <h2 className="text-sm font-medium capitalize">This rule triggers automatically upon deletion.</h2>
                 </div>
 
-                <div className="mt-4 font-semibold text-xl">
+                <div className="mt-4 font-semibold text-lg">
                     Additional Action
                 </div>
 
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={audit}
-                        onChange={(e) => setAudit(e.target.checked)}
                         formProps={{ ...register("auditPurposes") }} errors={errors} />
                     <div>
                         Log Deletion Event For Audit Purposes
@@ -279,8 +255,6 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={compliance}
-                        onChange={(e) => setCompliance(e.target.checked)}
                         formProps={{ ...register("complianceTeam") }} errors={errors} />
                     <div>
                         Notify Compliance Team
@@ -295,8 +269,6 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={reviewTo}
-                        onChange={(e) => setReviewTo(e.target.checked)}
                         formProps={{ ...register("reviewToTestimonials") }} errors={errors} />
                     <div>
                         Auto-Promote Review To Testimonials
@@ -304,8 +276,6 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={markReview}
-                        onChange={(e) => setMarkReview(e.target.checked)}
                         formProps={{ ...register("markReviewAsFeatured") }} errors={errors} />
                     <div>
                         Mark Review As Featured
@@ -320,8 +290,6 @@ function CreateClientRule({ onClose, id, isCreate }) {
 
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={sendNotification}
-                        onChange={(e) => setSendNotification(e.target.checked)}
                         formProps={{ ...register("sendNotificationToSupportTeam") }} errors={errors} />
                     <div>
                         Send Notification To Support Team
@@ -329,8 +297,6 @@ function CreateClientRule({ onClose, id, isCreate }) {
                 </div>
                 <div className='flex gap-2.5 items-center mt-4'>
                     <CheckboxForm
-                        checked={escalate}
-                        onChange={(e) => setEscalate(e.target.checked)}
                         formProps={{ ...register("escalateAlert") }} errors={errors} />
                     <div>
                         Escalate Alert To Manager

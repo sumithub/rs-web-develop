@@ -10,7 +10,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import PhoneForm from "../../form/PhoneForm"
 
-function AddNewLocation({ onClose, id, isClient, onSave, type = "addNewLocation", }) {
+function AddNewLocation({ onClose, id, onSave, type }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
 
@@ -27,7 +27,8 @@ function AddNewLocation({ onClose, id, isClient, onSave, type = "addNewLocation"
             if (onSave) {
                 onSave(data)
             }
-            { type === "addNewLocation" ? toast.success("Location Added Successfully") : toast.success("Edited Successfully") }
+            { !type && (!id ? toast.success("Location Added Successfully") : toast.success("Edited Successfully")) }
+            { type && toast.success("Saved Successfully") }
             setSending(false)
             onClose()
         } catch (error) {
@@ -35,11 +36,13 @@ function AddNewLocation({ onClose, id, isClient, onSave, type = "addNewLocation"
             setSending(false)
         }
     }
-    return <Model onClose={onClose} title={(type === "addNewLocation" ? "Add New Location" : "Edit Location") + (isClient ? " (Client)" : "")} modalClass="w-1/2!" >
+    return <Model onClose={onClose} title={`${!id ? "Add New" : "Edit"} Location (Client)`} modalClass="w-1/2!" >
+        {/* <Model onClose={onClose} title={(!id ? "Add New Location" : "Edit Location") + (id ? " (Client)" : "")} modalClass="w-1/2!" > */}
+
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <div>
-                    {!isClient && <InputForm label="Client" placeholder="Enter your name" isRequired={true}
+                    {type && <InputForm label="Client" placeholder="Enter your name" isRequired={true}
                         formProps={{ ...register("client", { required: true }) }}
                         errors={errors} />}
 
@@ -80,7 +83,7 @@ function AddNewLocation({ onClose, id, isClient, onSave, type = "addNewLocation"
 
             <div className="grid grid-cols-2 gap-5 mt-[30px]">
                 <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
-                <SecondaryButton title={type === "addNewLocation" ? "Save Location" : "Update Location"} type="submit" disabled={sending} class_="text-lg!" />
+                <SecondaryButton title={!id ? "Save Location" : "Update Location"} type="submit" disabled={sending} class_="text-lg!" />
             </div>
         </form>
     </Model>

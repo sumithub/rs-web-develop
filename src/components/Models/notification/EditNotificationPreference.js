@@ -38,11 +38,16 @@ function EditNotificationPreferences({ onClose, id }) {
     return <Model onClose={onClose} title="Edit Notification Preference" modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-
-                <InputForm label="Edit Notification Preference" isRequired={true} errors={errors}
+                <InputForm
+                    inputClass="py-3.5!"
+                    placeholder="CR-001"
+                    label="Edit Notification Preference"
+                    isRequired={false}
+                    errors={errors}
+                    disabled={true}
                     formProps={{
                         ...register("condition", {
-                            required: true,
+                            required: false,
                         })
                     }}
                 />
@@ -73,7 +78,6 @@ function EditNotificationPreferences({ onClose, id }) {
             </div>
         </form>
     </Model>
-
 }
 
 export default EditNotificationPreferences

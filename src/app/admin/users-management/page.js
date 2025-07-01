@@ -101,6 +101,7 @@ export default function UserManagement() {
                 />
                 <div className='flex items-center gap-3.5'>
                     <DateRange
+                        value={date}
                         onChange={(e) => { setDate(e) }}
                     />
                     <CustomSelectBox
@@ -161,36 +162,35 @@ export default function UserManagement() {
                         </tr>
                     </thead>
                     <tbody>
-                        {list?.map((e, index) =>
-                            <tr key={index}>
-                                <td>
-                                    <div className="flex items-center gap-2.5">
-                                        <Checkbox
-                                            checked={e.selected}
-                                            onChange={(checked) => {
-                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                            }} />
-                                        <div>{e.name}</div>
-                                    </div>
-                                </td>
-                                <td>{e.email}</td>
-                                <td>{e.role}</td>
-                                <td>{e.client}</td>
-                                <td><Status status={e.status} /></td>
-                                <td>
-                                    <div className='flex w-auto items-center gap-2.5 justify-center'>
-                                        <button className='cursor-pointer' onClick={() => { setOpenUser(true) }}>
-                                            <Image unoptimized={true} src="/images/play.svg" alt='play' height={28} width={28} />
-                                        </button>
-                                        <button className='cursor-pointer'>
-                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
-                                        </button>
-                                        <button className='cursor-pointer' onClick={() => { setOpenEdit(true) }}>
-                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>)}
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            <td>
+                                <div className="flex items-center gap-2.5">
+                                    <Checkbox
+                                        checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }} />
+                                    <div>{e.name}</div>
+                                </div>
+                            </td>
+                            <td>{e.email}</td>
+                            <td>{e.role}</td>
+                            <td>{e.client}</td>
+                            <td><Status status={e.status} /></td>
+                            <td>
+                                <div className='flex w-auto items-center gap-2.5 justify-center'>
+                                    <button className='cursor-pointer' onClick={() => { setOpenUser(true) }}>
+                                        <Image unoptimized={true} src="/images/play.svg" alt='play' height={28} width={28} />
+                                    </button>
+                                    <button className='cursor-pointer'>
+                                        <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                    </button>
+                                    <button className='cursor-pointer' onClick={() => { setOpenEdit(true) }}>
+                                        <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                 {list?.length > 0 && <div>

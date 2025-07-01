@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 import InputForm from "./form/InputForm";
 import CheckboxForm from "./form/CheckboxForm";
-import Success from "./common/Success";
 import axios from "axios";
 import Image from "next/image";
 import { validEmailRgx, validPasswordRgx } from "../../helper";
@@ -118,7 +117,6 @@ export default function Signup() {
                     class_="flex justify-end items-center flex-row-reverse mt-[10px]"
                     inputClass="ml-0! mr-1"
                     id={"termsAccepted"}
-                    checked={watch("termsAccepted")}
                     errors={errors}
                     formProps={{ ...register("termsAccepted", { required: "You must agree to the terms and conditions to proceed." }) }}
                     label={<div className="text-sm text-secondary capitalize">

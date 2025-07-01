@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AdminLayout from "../../../components/AdminLayout"
 import TableOrder from "../../../components/TableOrder"
 import PaginationDemo from "../../../components/Pagination"
@@ -7,23 +7,40 @@ import Image from "next/image"
 import Search from "../../../components/form/Search"
 import CustomSelectBox from "../../../components/form/CustomSelectBox"
 import SecondaryButton from "../../../components/common/SecondaryButton"
+import { toast } from "react-toastify"
+import axios from "axios"
+import { adminTemplates } from "../../../constent/constArray"
+import Loading from "../../../components/Loading"
+
 export default function Template() {
     const [sortBy, setSortBy] = useState(false)
+    const [search, setSearch] = useState("")
+    const [filter, setFilter] = useState("")
+    const [list, setList] = useState([])
+    const [loading, setLoading] = useState(true)
 
-    const Business = [
-        { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-        { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
-        { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-        { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-        { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
-        { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-        { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
-        { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-        { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-        { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
-    ]
+    useEffect(() => {
+        getData()
+    }, [search, filter, sortBy])
+
+    const getData = async () => {
+        try {
+            setLoading(true)
+            setList([])
+            const res = await axios.get("/api")
+            setList(res.data || adminTemplates)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(getError(error))
+            setLoading(false)
+        }
+    }
+
     return (
-        <AdminLayout>
+        <AdminLayout headerSearch={<div>
+            <Search placeholder="Search" mainClass="w-full!" />
+        </div>}>
             <div>
                 <div className='flex items-center justify-between'>
                     <Search
@@ -36,39 +53,57 @@ export default function Template() {
                         <CustomSelectBox
                             defaultOption="All Templates"
                             class_='mt-0! w-48!'
+                            value={filter}
+                            onChange={(e) => {
+                                setFilter(e.target.value)
+                            }}
                         >
                             <option value="subscription-plan">Email Templates</option>
                             <option value="status">SMS Templates</option>
-                            <option value="status">Review Response Templates</option>
-                            <option value="status">Archived Templates</option>
+                            <option value="review-response">Review Response Templates</option>
+                            <option value="archived">Archived Templates</option>
                         </CustomSelectBox>
                         <SecondaryButton
                             title="Create New Template"
                             type='submit'
                             class_="text-xs! font-normal!"
+                            isLink={true} link='/create-email-template'
                         />
                     </div>
                 </div>
                 <div className="table-class mt-3.5">
-                    <table className="w-full">
+                    {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                         <thead>
                             <tr>
                                 <th><TableOrder title="Name"
                                     sortBy={sortBy}
                                     setSortBy={setSortBy}
                                     field="TagName" /></th>
-                                <th><TableOrder title="Type" /></th>
-                                <th><TableOrder title=" Subject" /></th>
+
+                                <th><TableOrder title="Type"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="type" /></th>
+
+                                <th><TableOrder title=" Subject"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="subject"
+                                /></th>
                                 <th>
                                     <div className="flex justify-center">
-                                        <TableOrder title="Last Updated" />
+                                        <TableOrder title="Last Updated"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="lastUpdate"
+                                        />
                                     </div>
                                 </th>
                                 <th className="text-center!">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {Business.map((e, i) =>
+                            {list.map((e, i) =>
                                 <tr key={i}>
                                     <td>{e.name}</td>
                                     <td>{e.type}</td>
@@ -92,9 +127,11 @@ export default function Template() {
                                     </td>
                                 </tr>)}
                         </tbody>
-                    </table>
+                    </table> : <div className='text-center text-2xl text-danger mx-auto h-20'>No Data</div>)}
                 </div>
-                <PaginationDemo />
+                {list?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>
         </AdminLayout>
     )

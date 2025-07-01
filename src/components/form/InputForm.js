@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function InputForm({infoIcon, class_ = "", watch, setValue, clearValue = false, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "", isTextArea, rows }) {
+export default function InputForm({ infoIcon, class_ = "", watch, setValue, clearValue = false, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "", isTextArea, rows }) {
     const [type, setType] = useState("password")
     let error = "";
 
@@ -17,7 +17,6 @@ export default function InputForm({infoIcon, class_ = "", watch, setValue, clear
         error = errors[formProps.name]?.message || "This field is required";
     }
 
-
     const handleClick = () => {
         if (inputType === "password") {
             setType(type === "password" ? "text" : "password");
@@ -28,21 +27,21 @@ export default function InputForm({infoIcon, class_ = "", watch, setValue, clear
 
     return (
         <div className={`mt-[15px] ${class_}`}>
-            <label className={`text-sm font-medium text-secondary inline-flex items-center gap-[5px] capitalize ${labelClass}`}> {infoIcon && (
-                            <span className="cursor-pointer" title="More information">
-                                {typeof infoIcon === "string" ? (
-                                    <Image
-                                        unoptimized={true}
-                                        src={infoIcon}
-                                        alt="info"
-                                        width={14}
-                                        height={14}
-                                    />
-                                ) : (
-                                    infoIcon
-                                )}
-                            </span>
-                        )} {label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}</label>
+            <label className={`text-sm font-medium text-secondary inline-flex items-center gap-[5px] mb-1 capitalize ${labelClass}`}> {infoIcon && (
+                <span className="cursor-pointer" title="More information">
+                    {typeof infoIcon === "string" ? (
+                        <Image
+                            unoptimized={true}
+                            src={infoIcon}
+                            alt="info"
+                            width={14}
+                            height={14}
+                        />
+                    ) : (
+                        infoIcon
+                    )}
+                </span>
+            )} {label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}</label>
 
             <div className="relative">
                 {(clearValue && inputType !== "password" && icon && watch(formProps?.name)) && (
@@ -66,7 +65,7 @@ export default function InputForm({infoIcon, class_ = "", watch, setValue, clear
                         onClick={handleClick} />
                 )}
                 {isTextArea ? <textarea rows={rows}
-                    className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
+                    className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary disabled:bg-dark disabled:border-input-border ${inputClass}`}
                     placeholder={placeholder || label}
                     {...formProps}
                     disabled={disabled}
@@ -75,7 +74,7 @@ export default function InputForm({infoIcon, class_ = "", watch, setValue, clear
                         placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
                         {...formProps}
                         disabled={disabled}
-                        className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary ${inputClass}`}
+                        className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary disabled:bg-dark disabled:border-input-border ${inputClass}`}
                     />}
             </div>
             {error && <p className="text-xs pt-[3px] capitalize text-danger">{error}</p>}
