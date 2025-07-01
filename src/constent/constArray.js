@@ -324,3 +324,17 @@ export const paymentInvoice = [
     { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Overdue" },
     { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Paid" },
 ]
+
+export const adminTemplates = [
+
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
+]
