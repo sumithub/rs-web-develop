@@ -19,7 +19,7 @@ export function formatDate(date, f) {
         if (typeof date === "string")
             d = new Date(date);
 
-        return format(d, f || 'dd MMM, yyyy');
+        return format(d, f || 'MMM dd, yyyy');
     } catch (e) {
         return "xx"
     }

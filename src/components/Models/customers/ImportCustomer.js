@@ -27,6 +27,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     const [file, setFile] = useState(null)
     const [importData, setImportData] = useState({
         fileName: "",
+        selectedFile: null, // Add selectedFile to importData to persist it
         fieldMappings: [],
         validationResults: {
             totalCustomers: 250,
@@ -72,6 +73,15 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     useEffect(() => {
         getData();
     }, [sortBy]);
+
+    // Add useEffect to restore file when navigating back to step 1
+    useEffect(() => {
+        if (tab === 1 && importData.selectedFile) {
+            setFile(importData.selectedFile);
+            // Set the form value
+            setValue('csvFile', importData.selectedFile);
+        }
+    }, [tab, importData.selectedFile, setValue]);
 
     const getData = async () => {
         try {
@@ -156,6 +166,15 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         const isValid = await validateCurrentStep();
         console.log(isValid, tab)
         if (isValid && tab < 6) {
+            // Store file in importData when moving from step 1
+            if (tab === 1 && file) {
+                setImportData(prev => ({
+                    ...prev,
+                    selectedFile: file,
+                    fileName: file.name
+                }));
+            }
+
             if (tab === 3) {
                 const formData = getValues();
                 setImportData(prev => ({
@@ -228,6 +247,17 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         }
     };
 
+    const handleSetFile = (selectedFile) => {
+        setFile(selectedFile);
+        if (selectedFile) {
+            setImportData(prev => ({
+                ...prev,
+                selectedFile: selectedFile,
+                fileName: selectedFile.name
+            }));
+        }
+    };
+
     return (
         <main>
 
@@ -256,7 +286,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                 accept=".csv"
                                 formProps={{
                                     ...register('csvFile', {
-                                        required: 'Please select a CSV file',
+                                        required: true,
                                         validate: (value) => {
                                             if (!value || (value instanceof FileList && value.length === 0)) {
                                                 return 'Please select a CSV file';
@@ -266,9 +296,11 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                     })
                                 }}
                                 setFile={setFile}
+                                selectedFile={file}
                                 errors={errors}
                                 isRequired={true}
                                 label="Upload file"
+                                showToast={toast.error}
                             />
                         </div>
                     )}
@@ -282,7 +314,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                             </div>
                             <div className="w-full border border-border-color mt-8">
                                 {loading ? (
-                                    <Loading />
+                                    <Loading class_="min-h-[300px]!" />
                                 ) : list?.length > 0 ? (
                                     <table className="w-full">
                                         <thead>
@@ -314,12 +346,11 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {list?.map((e, index) => (
-                                                <tr key={index}>
-                                                    <td>{e.header}</td>
-                                                    <td>{e.firstRow}</td>
-                                                    <td>
-                                                        {/* <CustomSelectBox selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
+                                            {list?.map((e, index) => (<tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                                <td>{e.header}</td>
+                                                <td>{e.firstRow}</td>
+                                                <td>
+                                                    {/* <CustomSelectBox selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
                                                             class_="mt-0! w-full!"
                                                             positionClass=""
                                                             onChange={(e) => handleFieldMappingChange(index, e.target.value)}
@@ -336,29 +367,30 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                                 {mappingErrors[index]}
                                                             </div>
                                                         )} */}
-                                                        <SelectForm key={index}
-                                                            selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
-                                                            class_="mt-0!"
-                                                            formProps={{ ...register("mapping" + index, { required: true }) }}
-                                                            errors={errors}
-                                                            clearErrors={clearErrors} setValue={setValue} watch={watch}
-                                                            onChange={(e) => handleFieldMappingChange(index, e.target.value)}
-                                                            defaultOption="Select mapping"
-                                                            value={importData.fieldMappings[index]?.mappedTo || ''}
-                                                        >
-
-                                                            <option value="fullName">Full Name</option>
-                                                            <option value="phoneNumber">Phone Number</option>
-                                                            <option value="email">Email</option>
-                                                        </SelectForm>
-                                                        {mappingErrors[index] && (
-                                                            <div className="text-red-500 text-xs mt-1">
-                                                                {mappingErrors[index]}
-                                                            </div>
-                                                        )}
-
-                                                    </td>
-                                                </tr>
+                                                    <SelectForm
+                                                        key={index}
+                                                        selectClass_={`border-primary3/10 ${mappingErrors[index] ? 'border-red-500' : ''}`}
+                                                        class_="mt-0!"
+                                                        formProps={{ ...register("mapping" + index, { required: true }) }}
+                                                        errors={errors}
+                                                        clearErrors={clearErrors}
+                                                        setValue={setValue}
+                                                        watch={watch}
+                                                        onChange={(e) => handleFieldMappingChange(index, e.target.value)}
+                                                        defaultOption="Select mapping"
+                                                        value={importData.fieldMappings[index]?.mappedTo || ''}
+                                                    >
+                                                        <option value="fullName">Full Name</option>
+                                                        <option value="phoneNumber">Phone Number</option>
+                                                        <option value="email">Email</option>
+                                                    </SelectForm>
+                                                    {mappingErrors[index] && (
+                                                        <div className="text-danger text-xs mt-1">
+                                                            {mappingErrors[index]}
+                                                        </div>
+                                                    )}
+                                                </td>
+                                            </tr>
                                             ))}
                                         </tbody>
                                     </table>
@@ -387,7 +419,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                 errors={errors}
                                 clearErrors={clearErrors} setValue={setValue} watch={watch}
                             >
-                                <option value="">Select tag</option>
                                 <option value="high value">High Value</option>
                                 <option value="loyal">Loyal</option>
                                 <option value="instead of source">Instead of source</option>
@@ -412,7 +443,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                 <div className="flex gap-4">
                                     <RadioForm
                                         label="Ignore duplicates"
-                                        inputClass='mb-2!'
                                         name="duplicateHandling"
                                         value="ignore"
                                         formProps={{ ...register("duplicateHandling", { required: true }) }}
@@ -420,7 +450,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                     />
                                     <RadioForm
                                         label="Overwrite existing"
-                                        inputClass='mb-2!'
                                         name="duplicateHandling"
                                         value="overwrite"
                                         formProps={{ ...register("duplicateHandling", { required: true }) }}
@@ -428,7 +457,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                     />
                                     <RadioForm
                                         label="Allow duplicates"
-                                        inputClass='mb-2!'
                                         name="duplicateHandling"
                                         value="allow"
                                         formProps={{ ...register("duplicateHandling", { required: true }) }}

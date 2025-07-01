@@ -33,21 +33,21 @@ export default function Usage() {
 
     return (
         <>
-            <div className="font-semibold">Subscription Usage Summary</div>
+            <div className="font-semibold text-lg">Subscription Usage Summary</div>
             <div className="bg-secondary2 p-5 rounded-[15px] grid grid-cols-4 gap-5 mt-3">
                 <div>
-                    <h2>Subscription ID</h2>
-                    <h3 className="font-semibold mt-2">SUB1234</h3>
+                    <h2 className="text-base">Subscription ID</h2>
+                    <h3 className="font-semibold text-lg mt-2">SUB1234</h3>
                 </div>
 
                 <div>
-                    <h2>Plan</h2>
-                    <h3 className="font-semibold mt-2">Pro Plan</h3>
+                    <h2 className="text-base">Plan</h2>
+                    <h3 className="font-semibold text-lg mt-2">Pro Plan</h3>
                 </div>
             </div>
 
             <div className='table-class mt-[15px]'>
-                {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
+                {loading ? <Loading class_="min-h-[300px]!" /> : (list?.length > 0 ? <table className="w-full">
                     <thead>
                         <tr>
                             <th><TableOrder title="Features"
@@ -63,7 +63,7 @@ export default function Usage() {
                     </thead>
 
                     <tbody>
-                        {list.map((e, i) => <tr key={i}>
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                             <td>{e.feature}</td>
                             <td>{e.used}</td>
                             <td>{e.limit}</td>

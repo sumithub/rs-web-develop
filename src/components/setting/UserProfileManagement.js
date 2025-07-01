@@ -276,7 +276,7 @@ export default function UserProfileManagement({ id = "user1" }) {
                             />
                             <SelectForm
                                 label="Time Zone"
-                                selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                                selectClass_="py-3! px-2.5! focus:border-primary/60!"
                                 isRequired={false}
                                 defaultOption="select"
                                 formProps={{ ...profileForm.register("timeZone", { required: false }) }}

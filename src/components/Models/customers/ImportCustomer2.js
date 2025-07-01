@@ -232,23 +232,22 @@ export default function ImportCustomer2({ onBack, activeStep, setActiveStep, onC
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {list?.map((e, index) => (
-                                            <tr key={index}>
-                                                <td>{e.header}</td>
-                                                <td>{e.firstRow}</td>
-                                                <td>
-                                                    <SelectForm
-                                                        selectClass_="border-primary3/10"
-                                                        class_="mt-0!"
-                                                        onChange={(e) => handleFieldMappingChange(index, e.target.value)}
-                                                    >
-                                                        <option value="">Select mapping</option>
-                                                        <option value="fullName">Full Name</option>
-                                                        <option value="phoneNumber">Phone Number</option>
-                                                        <option value="email">Email</option>
-                                                    </SelectForm>
-                                                </td>
-                                            </tr>
+                                        {list?.map((e, index) => (<tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                            <td>{e.header}</td>
+                                            <td>{e.firstRow}</td>
+                                            <td>
+                                                <SelectForm
+                                                    selectClass_="border-primary3/10"
+                                                    class_="mt-0!"
+                                                    onChange={(e) => handleFieldMappingChange(index, e.target.value)}
+                                                >
+                                                    <option value="">Select mapping</option>
+                                                    <option value="fullName">Full Name</option>
+                                                    <option value="phoneNumber">Phone Number</option>
+                                                    <option value="email">Email</option>
+                                                </SelectForm>
+                                            </td>
+                                        </tr>
                                         ))}
                                     </tbody>
                                 </table>

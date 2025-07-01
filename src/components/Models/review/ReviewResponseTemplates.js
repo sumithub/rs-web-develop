@@ -132,7 +132,7 @@ export default function ReviewResponseTemplates({ onClose }) {
                         </thead>
 
                         <tbody>
-                            {list?.map((e, index) => <tr key={index}>
+                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>{e.templateName}</td>
                                 <td className="py-3 px-4">
                                     <div className="flex items-center gap-1">

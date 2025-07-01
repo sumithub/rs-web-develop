@@ -114,6 +114,7 @@ function AddCustomer({ onClose, id, onSave }) {
                             isRequired={false} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                             formProps={{ ...register("tag", { required: false }) }}
                             errors={errors} clearErrors={clearErrors}>
+
                             <option value="high value">High Value</option>
                             <option value="loyal">Loyal</option>
                             <option value="instead of source">instead of source</option>

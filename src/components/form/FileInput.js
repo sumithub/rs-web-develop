@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SecondaryButton from '../common/SecondaryButton';
 import Image from 'next/image';
 
@@ -9,10 +9,17 @@ export default function FileInput({
     label = "Upload file",
     class_ = "",
     accept,
-    setFile
+    setFile,
+    selectedFile: propSelectedFile = null,
+    showToast
 }) {
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(propSelectedFile);
     const [isDragOver, setIsDragOver] = useState(false);
+
+    // Update selectedFile when prop changes (when navigating back to step 1)
+    useEffect(() => {
+        setSelectedFile(propSelectedFile);
+    }, [propSelectedFile]);
 
     let error = "";
     if (formProps?.name && errors?.[formProps.name]) {
@@ -37,7 +44,10 @@ export default function FileInput({
                 formProps.onChange(event);
             }
         } else {
-            alert('Please select a CSV file');
+            // Show toast instead of alert
+            if (showToast) {
+                showToast('Please select a CSV file');
+            }
             // Clear the input
             event.target.value = '';
             setSelectedFile(null);
@@ -81,7 +91,10 @@ export default function FileInput({
                 }
             }
         } else {
-            alert('Please select a CSV file');
+            // Show toast instead of alert
+            if (showToast) {
+                showToast('Please select a CSV file', 'error');
+            }
         }
     };
 

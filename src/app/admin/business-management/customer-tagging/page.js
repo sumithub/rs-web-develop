@@ -177,7 +177,7 @@ function CustomerTagging() {
                         </thead>
 
                         <tbody>
-                            {list?.map((e, index) => <tr key={index}>
+                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-start gap-2">
                                         <Checkbox
@@ -211,8 +211,81 @@ function CustomerTagging() {
 
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                 </div>
-                {list?.length > 0 && <div>
-                    <PaginationDemo />
+            </div>}
+            {view === "analytics" && <div className="mt-3.5">
+                <div className="flex justify-between">
+                    <h2 className="text-lg font-semibold">Tag Distribution</h2>
+                    <div className="flex gap-3.5">
+                        <DateRange
+                            value={date}
+                            onChange={(e) => { setDate(e) }}
+                        />
+                        <CustomSelectBox
+                            class_="mt-0! w-32!"
+                            defaultOption="Select"
+                            value={type}
+                            onChange={(e) => {
+                                setType(e.target.value)
+                            }}
+                        >
+                            <option value="subscription-plan">Client 1</option>
+                            <option value="status">Client 2</option>
+                        </CustomSelectBox>
+                    </div>
+                </div>
+                {loading ? <Loading /> : <div className="mt-5">
+                    <div className="grid grid-cols-2 gap-5">
+                        <DashboardChart title="Dummy Chart 1">
+                            <div className="flex items-start">
+                                <div className="w-[60%]">
+                                    <DashboardPieChart
+                                        labels={["5", "4", "3", "2", "1"]}
+                                        colors={["#0396FF", "#16C098", "#FFAE4C", "#07DBFA", "#988AFC"]}
+                                    />
+                                </div>
+                                <div className="mt-10 w-[40%]">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="bg-primary h-3 w-3 rounded-full"></div>
+                                        <div className="text-base text-secondary">5</div>
+                                        <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} />
+                                        <div className="text-sm text-secondary">50%</div>
+                                    </div>
+
+                                    <div className="flex  items-center gap-3 mb-2">
+                                        <div className="bg-success-light h-3 w-3 rounded-full"></div>
+                                        <div className="text-base text-secondary">4</div>
+                                        <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} />
+                                        <div className="text-sm text-secondary">20%</div>
+                                    </div>
+
+                                    <div className="flex  items-center gap-3 mb-2">
+                                        <div className="bg-custom-yellow h-3 w-3 rounded-full"></div>
+                                        <div className="text-base text-secondary">3</div>
+                                        <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} />
+                                        <div className="text-sm text-secondary">10%</div>
+                                    </div>
+
+                                    <div className="flex  items-center gap-3 mb-2">
+                                        <div className="bg-[#07DBFA] h-3 w-3 rounded-full"></div>
+                                        <div className="text-base text-secondary">2</div>
+                                        <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} />
+                                        <div className="text-sm text-secondary">10%</div>
+                                    </div>
+
+                                    <div className="flex  items-center gap-3 mb-2">
+                                        <div className="bg-custom-purple h-3 w-3 rounded-full"></div>
+                                        <div className="text-base text-secondary">1</div>
+                                        <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} />
+                                        <div className="text-sm text-secondary">10%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </DashboardChart>
+
+                        <DashboardChart title="Dummy Chart 2" height={366} width={656} class_="w-full">
+                            <DashboardLineChart />
+                        </DashboardChart>
+                    </div>
                 </div>}
             </div>}
             {

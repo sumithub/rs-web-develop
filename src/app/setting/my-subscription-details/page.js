@@ -6,6 +6,7 @@ import Status from "../../../components/Status";
 import SecondaryButton from "../../../components/common/SecondaryButton";
 import { useState } from "react";
 import Checkbox from "../../../components/form/Checkbox";
+import Image from "next/image";
 
 export default function MySubscriptionDetails() {
     const [tab, setTab] = useState("monthly")
@@ -38,7 +39,7 @@ export default function MySubscriptionDetails() {
                     </div>
                 </div>
             </div>
-            <div className="grid grid-cols-3 gap-3 mt-3.5">
+            <div className="grid grid-cols-3 gap-3 mt-3.5 items-start">
                 <div className="relative bg-white rounded-[15px] border border-border-color overflow-hidden w-full">
                     <div className="font-semibold px-5 pt-4 pb-3.5">
                         Basic Plan
@@ -145,31 +146,31 @@ const Card = () => {
 
             <div className="flex justify-between items-center">
                 <div className="text-sm">E2EE File Storage</div>
-                {/* <Image src="/images/tickSquare.png" alt="tick" width={15} height={15} /> */}
-                <Checkbox
+                <Image src="/images/tickSquare.png" alt="tick" width={15} height={15} />
+                {/* <Checkbox
                     checked={isChecked}
-                    onChange={e => setIsChecked(e)} />
+                    onChange={e => setIsChecked(e)} /> */}
             </div>
 
             <hr className="border border-border2 my-3.5" />
 
             <div className="flex justify-between items-center">
                 <div className="text-sm">E2EE Link Sharing</div>
-                <Checkbox
+                {/* <Checkbox
                     checked={isChecked1}
-                    onChange={e => setIsChecked1(e)} />
-                {/* <Image src="/images/tickSquare.png" alt="tick" width={15} height={15} />
-                             */}
+                    onChange={e => setIsChecked1(e)} /> */}
+                <Image src="/images/tickSquare.png" alt="tick" width={15} height={15} />
+
             </div>
 
             <hr className="border border-border2 my-3.5" />
 
             <div className="flex justify-between items-center">
                 <div className="text-sm">Optional Decentralized Storage</div>
-                {/* <Image src="/images/close-square.png" alt="close" width={15} height={15} /> */}
-                <Checkbox
+                <Image src="/images/close-square.png" alt="close" width={15} height={15} />
+                {/* <Checkbox
                     checked={isChecked2}
-                    onChange={e => setIsChecked2(e)} />
+                    onChange={e => setIsChecked2(e)} /> */}
             </div>
 
             <hr className="border border-border2 my-3.5" />
@@ -179,21 +180,21 @@ const Card = () => {
 
             <div className="flex justify-between items-center">
                 <div className="text-sm">Short Address</div>
-                {/* <Image src="/images/close-square.png" alt="close" width={15} height={15} /> */}
-                <Checkbox
+                <Image src="/images/close-square.png" alt="close" width={15} height={15} />
+                {/* <Checkbox
                     checked={isChecked3}
-                    onChange={e => setIsChecked3(e)} />
+                    onChange={e => setIsChecked3(e)} /> */}
             </div>
 
             <hr className="border border-border2 my-3.5" />
 
             <div className="flex justify-between items-center">
                 <div className="text-sm">Quick Alias Reply</div>
-                {/* <Image src="/images/close-square.png" alt="close" width={15} height={15} />
-                        */}
-                <Checkbox
+                <Image src="/images/close-square.png" alt="close" width={15} height={15} />
+
+                {/* <Checkbox
                     checked={isChecked4}
-                    onChange={e => setIsChecked4(e)} />
+                    onChange={e => setIsChecked4(e)} /> */}
             </div>
 
             <hr className="border border-border2 my-3.5" />

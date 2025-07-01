@@ -38,14 +38,15 @@ export default function Subscription() {
                 <div className="flex justify-between">
                     <h2 className="text-lg font-semibold py-[11px]">My Subscription Details</h2>
                     <div className="flex gap-[10px]">
-                        <CancelButton title="Cancel Subscription" class_="text-danger!  fonr-normal! bg-danger/10!" onClick={() => { setOpenCancel(true) }} />
+                        <CancelButton title="Cancel Subscription" class_="text-danger! border-danger/10! hover-border-danger/10! text-sm! fonr-normal! bg-danger/10!" onClick={() => { setOpenCancel(true) }} />
                         <Link href="/setting/my-subscription-details">
-                            <SecondaryButton title="View Usage Details" class_="bg-white! hover:bg-primary! font-normal! text-primary! hover:text-white!" />
+                            <SecondaryButton title="View Usage Details" class_="bg-white! hover:bg-primary! font-normal! text-sm! text-primary! hover:text-white!" />
                         </Link>
-                        <SecondaryButton title="Upgrade Plan" class_="font-normal!" onClick={() => { setOpen(true) }} />
+                        <SecondaryButton title="Upgrade Plan" class_="font-normal! text-sm!" onClick={() => { setOpen(true) }} />
                     </div>
                 </div>
                 <hr className="border border-border2 my-5" />
+
                 <div className="bg-secondary2 p-5 rounded-[15px] grid grid-cols-4 gap-5">
                     <div>
                         <h2 className="pb-[15px] capitalize text-base">Subscription Status</h2>

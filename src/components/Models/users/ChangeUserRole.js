@@ -55,10 +55,11 @@ export default function ChangeUserRole({ onClose, id, user = {} }) {
           Current Role: {role}
         </div>
 
-        <div className="flex items-center gap-3 mt-2">
+        <div className="flex items-center gap-3 mt-2 w-full">
           <div className="text-secondary text-sm font-semibold mt-2">New Role:</div>
           <SelectForm
             label=""
+            class_="w-32!"
             selectClass_="py-2.5! px-2.5! focus:border-primary/60!"
             formProps={{
               ...register("role", { required: true }),

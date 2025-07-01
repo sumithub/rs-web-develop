@@ -61,7 +61,9 @@ export default function AuditLogsDashboard() {
                     />
                 </div>
                 <div className="flex gap-[15px]">
-                    <DateRange onChange={(e) => { setDate(e) }} />
+                    <DateRange
+                        value={date}
+                        onChange={(e) => { setDate(e) }} />
 
                     {/* <DatePicker
                         icon={true}
@@ -136,7 +138,7 @@ export default function AuditLogsDashboard() {
                         </tr>
                     </thead>
                     <tbody>
-                        {list?.map((e, index) => <tr key={index}>
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                             <td>
                                 <div className="flex items-start gap-2">
                                     <Checkbox

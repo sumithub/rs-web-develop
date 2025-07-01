@@ -116,40 +116,39 @@ function LocationScreen() {
                     </thead>
 
                     <tbody>
-                        {list?.map((e, index) =>
-                            <tr key={index}>
-                                <td>
-                                    <div className="flex gap-2.5 items-center">
-                                        <Checkbox
-                                            checked={e.selected}
-                                            onChange={(checked) => {
-                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                            }}
-                                        />
-                                        {e.name}
-                                    </div>
-                                </td>
-                                <td>{e.address}</td>
-                                <td>{e.city}</td>
-                                <td>{e.state}</td>
-                                <td>{e.country}</td>
-                                <td>{e.phoneNumber}</td>
-                                <td>
-                                    <div className='flex items-center gap-2'>
-                                        <button className='cursor-pointer'
-                                            onClick={() => {
-                                                setSelId("e.id")
-                                                setOpen(true)
-                                            }}>
-                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                        </button>
-                                        <button className='cursor-pointer'
-                                            onClick={() => { setOpenDelete(true) }}>
-                                            <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>)}
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            <td>
+                                <div className="flex gap-2.5 items-center">
+                                    <Checkbox
+                                        checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                    />
+                                    {e.name}
+                                </div>
+                            </td>
+                            <td>{e.address}</td>
+                            <td>{e.city}</td>
+                            <td>{e.state}</td>
+                            <td>{e.country}</td>
+                            <td>{e.phoneNumber}</td>
+                            <td>
+                                <div className='flex items-center gap-2'>
+                                    <button className='cursor-pointer'
+                                        onClick={() => {
+                                            setSelId("e.id")
+                                            setOpen(true)
+                                        }}>
+                                        <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>
+                                    <button className='cursor-pointer'
+                                        onClick={() => { setOpenDelete(true) }}>
+                                        <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>

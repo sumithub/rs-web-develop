@@ -6,6 +6,7 @@ import UsersList from "../reports/UsersList"
 import { useState } from "react";
 import CancelButton from "../../common/CancelButton"
 import { toast } from "react-toastify";
+import axios from "axios";
 
 export default function SendTestEmail({ onClose, currentData, selectedUsers, setSelectedUsers }) {
     const [openUser, setOpenUser] = useState(false);
@@ -97,7 +98,7 @@ export default function SendTestEmail({ onClose, currentData, selectedUsers, set
             setIsLoading(false);
         } catch (error) {
             console.error('Failed to send test email:', error);
-            toast.err('Failed to send test email. Please try again.');
+            toast.error('Failed to send test email. Please try again.');
             setIsLoading(false);
         }
     };

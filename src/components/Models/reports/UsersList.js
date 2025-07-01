@@ -77,6 +77,7 @@ export default function UsersList({ onClose, onSave }) {
             </CustomSelectBox>
 
             <DateRange
+                value={dates}
                 onChange={(dates) => { setDates(dates) }}
             />
         </div>
@@ -103,7 +104,7 @@ export default function UsersList({ onClose, onSave }) {
                 }} class_="text-xs! font-normal! py-2.5! px-2.5" />
         </div>
 
-        <div className='w-full border border-border-color overflow-hidden rounded-tr-[20px] rounded-tl-[20px]'>
+        <div className='table-class'>
             {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                 <thead>
                     <tr>
@@ -130,7 +131,7 @@ export default function UsersList({ onClose, onSave }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {list?.map((e, index) => <tr key={index} className={`${index === list.length - 1 ? '' : 'border-b'}`}>
+                    {list?.map((e, index) => <tr key={index} className={`${index === list.length - 1 ? '' : 'border-b border-border-color'}`}>
                         <td>
                             <div className="flex items-start gap-2">
                                 <Checkbox
