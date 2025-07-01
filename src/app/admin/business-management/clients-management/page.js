@@ -24,7 +24,7 @@ export default function ClientsManagement() {
     const [openUser, setOpenUser] = useState(false)
     const [openClient, setOpenClient] = useState(false)
     const [filterBy, setFilterBy] = useState("")
-    const [filterBy1, setFilterBy1] = useState("")
+    const [status, setStatus] = useState("")
     const [date, setDate] = useState("")
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
@@ -33,7 +33,7 @@ export default function ClientsManagement() {
 
     useEffect(() => {
         getCustomerTag()
-    }, [search, filterBy, date, filterBy1, sortBy])
+    }, [search, filterBy, date, status, sortBy])
 
     const getCustomerTag = async () => {
         try {
@@ -107,9 +107,9 @@ export default function ClientsManagement() {
                     <CustomSelectBox
                         defaultOption="Status"
                         class_='mt-0! w-32!'
-                        value={filterBy1}
+                        value={status}
                         onChange={(e) => {
-                            setFilterBy1(e.target.value)
+                            setStatus(e.target.value)
                         }}
                     >
                         <option value="suspend">Suspend</option>
