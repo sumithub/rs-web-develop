@@ -15,6 +15,8 @@ import { toast } from "react-toastify"
 import { getError } from "../../../../../helper"
 import Loading from "../../../../components/Loading"
 import { usersManagement } from "../../../../constent/constArray"
+import UserCreation from "../../../../components/Models/organization/UserCreation"
+import DeactivateUser from "../../../../components/Models/organization/DeactivateUser"
 
 export default function UsersManagement() {
     const [sortBy, setSortBy] = useState(false)
@@ -24,6 +26,9 @@ export default function UsersManagement() {
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
+    const [open, setOpen] = useState(false)
+    const [openDeactivate, setOpenDeactivate] = useState(false)
+    const [selId, setSelId] = useState("")
 
     useEffect(() => {
         getUsers()
@@ -54,6 +59,29 @@ export default function UsersManagement() {
                         setSearch(s)
                     }}
                 />}>
+            {open &&
+                <UserCreation
+                    id={selId}
+                    onClose={() => {
+                        setSelId("")
+                        setOpen(false)
+                    }}
+
+                    onSave={() => {
+                        setOpen(true)
+                    }} />
+            }
+
+            {openDeactivate &&
+                <DeactivateUser
+                    onClose={() => {
+                        setOpenDeactivate(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenDeactivate(true)
+                    }} />
+            }
             <div className='flex items-center justify-between'>
                 <Search
                     placeholder="Search by Name, Email"
@@ -93,6 +121,7 @@ export default function UsersManagement() {
                     <SecondaryButton
                         title="Add New User"
                         class_="text-xs! font-normal!"
+                        onClick={() => setOpen(true)}
                     />
                 </div>
             </div>
@@ -142,10 +171,14 @@ export default function UsersManagement() {
                                 <td><Status status={e.status} /></td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
-                                        <button className='cursor-pointer' >
+                                        <button className='cursor-pointer'
+                                            onClick={() => setOpenDeactivate(true)}>
                                             <Image unoptimized={true} src="/images/global.svg" alt='edit' height={28} width={28} />
                                         </button>
-                                        <button className='cursor-pointer' >
+                                        <button className='cursor-pointer' onClick={() => {
+                                            setSelId("e.id")
+                                            setOpen(true)
+                                        }}>
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
                                     </div>
