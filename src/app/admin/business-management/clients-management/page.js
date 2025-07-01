@@ -17,14 +17,14 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import { getError } from "../../../../../helper"
 import Loading from "../../../../components/Loading"
-import { customerTagging } from "../../../../constent/constArray"
+import { clientsManagement } from "../../../../constent/constArray"
 
 export default function ClientsManagement() {
     const [sortBy, setSortBy] = useState(false)
     const [openUser, setOpenUser] = useState(false)
     const [openClient, setOpenClient] = useState(false)
     const [filterBy, setFilterBy] = useState("")
-    const [filterBy1, setFilterBy1] = useState("")
+    const [status, setStatus] = useState("")
     const [date, setDate] = useState("")
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
@@ -33,14 +33,14 @@ export default function ClientsManagement() {
 
     useEffect(() => {
         getCustomerTag()
-    }, [search, filterBy, date, filterBy1, sortBy])
+    }, [search, filterBy, date, status, sortBy])
 
     const getCustomerTag = async () => {
         try {
             setLoading(true)
             setList([])
             const res = await axios.get("/api")
-            setList(res.data || customerTagging)
+            setList(res.data || clientsManagement)
             setLoading(false)
 
         } catch (error) {
@@ -49,17 +49,6 @@ export default function ClientsManagement() {
         }
     }
 
-    const Business = [
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-    ]
     return (
         <AdminLayout
             noCard={false}
@@ -112,14 +101,15 @@ export default function ClientsManagement() {
                 />
                 <div className='flex items-center gap-3.5'>
                     <DateRange
+                        value={date}
                         onChange={(e) => { setDate(e) }}
                     />
                     <CustomSelectBox
                         defaultOption="Status"
                         class_='mt-0! w-32!'
-                        value={filterBy1}
+                        value={status}
                         onChange={(e) => {
-                            setFilterBy1(e.target.value)
+                            setStatus(e.target.value)
                         }}
                     >
                         <option value="suspend">Suspend</option>
@@ -160,15 +150,19 @@ export default function ClientsManagement() {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="plan" /></th>
-                            <th><TableOrder title="Status"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="status" /></th>
-                            <th className="text-center!">Action</th>
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Status"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="status" />
+                                </div>
+                            </th>
+                            <th className="text-center!">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {Business.map((e, index) =>
+                        {list.map((e, index) =>
                             <tr key={index}>
                                 <td>
                                     <div className="flex items-center gap-2.5">
@@ -182,7 +176,11 @@ export default function ClientsManagement() {
                                 </td>
                                 <td>{e.industry}</td>
                                 <td>{e.plan}</td>
-                                <td><Status status={e.status} /></td>
+                                <td>
+                                    <div className="flex justify-center">
+                                        <Status status={e.status} />
+                                    </div>
+                                </td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
                                         <button className='cursor-pointer' onClick={() => { setOpenUser(true) }}>
@@ -199,10 +197,10 @@ export default function ClientsManagement() {
                             </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                {list?.length > 0 && <div>
-                    <PaginationDemo />
-                </div>}
             </div>
+            {list?.length > 0 && <div>
+                <PaginationDemo />
+            </div>}
         </AdminLayout>
     )
 }

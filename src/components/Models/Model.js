@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
-export default function Model({ id = "", showHeader = true, customHeader = false, onClose, boostIcon = false, children, closeButton = true, closeButton2 = false, title, modalBodyClass = "", modalClass = "", modelHeaderClass = "" }) {
+export default function Model({ id = "", showHeader = true, customHeader = false, onClose, boostIcon = false, children, closeButton = true, closeButton2 = false, title, modalBodyClass = "", modalClass = "", modelHeaderClass = "", class_ = "", flexClass = "", overlayClass = "" }) {
     const ref = useRef(null);
     useEffect(() => {
         document.addEventListener('keydown', (event) => {
@@ -36,11 +36,11 @@ export default function Model({ id = "", showHeader = true, customHeader = false
 
     return (<div className="relative z-[9999]">
 
-        <div className={`fixed inset-0 bg-black opacity-65 transition-opacity`}></div>
+        <div className={`fixed inset-0 bg-black opacity-65 transition-opacity ${overlayClass}`}></div>
 
-        <div className="fixed inset-0 z-10 flex items-center justify-center">
+        <div className={`fixed inset-0 z-10 flex items-center justify-center ${class_}`}>
 
-            <div className="flex items-center justify-center md:items-center p-4 md:p-0 w-full">
+            <div className={`flex items-center justify-center md:items-center p-4 md:p-0 w-full ${flexClass}`}>
 
                 <div ref={ref} className={`${modalClass} overflow-x-hidden h-full relative transform overflow-y-hidden rounded-[10px] bg-white text-left shadow-xl transition-all md:w-full w-[90%] 2xl:max-w-7xl xl:max-w-[85%] max-w-[90%]`}>
 

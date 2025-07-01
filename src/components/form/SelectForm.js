@@ -56,9 +56,21 @@ export default function SelectForm({
     });
 
     const getCurrentValue = () => {
-        const v = options.find(e => e.value === watch(formProps?.name)) || {}
-        return v?.label || ""
+        const currentValue = watch(formProps?.name);
+        const v = options.find(e => e.value === currentValue);
+
+        // If no option is selected or value is empty, show the defaultOption
+        if (!v || !currentValue) {
+            return defaultOption || "";
+        }
+
+        return v.label || "";
     };
+
+    // const getCurrentValue = () => {
+    //     const v = options.find(e => e.value === watch(formProps?.name)) || {}
+    //     return v?.label || ""
+    // };
 
     const handleSelect = (optionValue) => {
         setIsOpen(false);
@@ -138,7 +150,7 @@ export default function SelectForm({
                     onClick={() => !disabled && setIsOpen(!isOpen)}
                 >
                     <span className="capitalize truncate text-left flex-1 px-1">
-                        {getCurrentValue() || label}
+                        {getCurrentValue() || label || "Select"}
                     </span>
                     <div className="flex items-center gap-1 ml-2 pr-1">
                         <svg
@@ -156,7 +168,7 @@ export default function SelectForm({
                 {/* Dropdown options */}
                 {isOpen && (
                     <div className={`absolute w-full bg-white rounded-lg border border-primary/10 z-[10001]  overflow-y-auto ${dropdownDirection === 'up'
-                        ? 'bottom-full  rounded-t-lg rounded-b-none'
+                        ? 'bottom-full rounded-t-lg rounded-b-none'
                         : 'top-full  rounded-b-lg rounded-t-none'
                         }`}>                        {/* Default option */}
                         {defaultOption && (

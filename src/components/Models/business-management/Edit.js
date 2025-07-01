@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import axios from "axios"
 import { toast } from "react-toastify"
-import { customerTagging } from "../../../constent/constArray"
+import { clientsManagement } from "../../../constent/constArray"
 import { getError } from "../../../../helper"
 import SuspendUser from "./SuspendUser"
 import AddNewClient from "./AddNewClient"
@@ -38,7 +38,7 @@ export default function Edit({ onClose }) {
             setLoading(true)
             setList([])
             const res = await axios.get("/api")
-            setList(res.data || customerTagging)
+            setList(res.data || clientsManagement)
             setLoading(false)
 
         } catch (error) {
@@ -47,17 +47,6 @@ export default function Edit({ onClose }) {
         }
     }
 
-    const Business = [
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-        { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-    ]
     return (
         <Model onClose={onClose} title="Edit" modalClass="w-[80%]!">
             {openUser &&
@@ -90,6 +79,7 @@ export default function Edit({ onClose }) {
                 />
                 <div className='flex items-center gap-3.5'>
                     <DateRange
+                        value={date}
                         onChange={(e) => { setDate(e) }}
                     />
                     <CustomSelectBox
@@ -138,15 +128,19 @@ export default function Edit({ onClose }) {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="plan" /></th>
-                            <th><TableOrder title="Status"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="status" /></th>
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Status"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="status" />
+                                </div>
+                            </th>
                             <th className="text-center!">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {Business.map((e, index) =>
+                        {list.map((e, index) =>
                             <tr key={index}>
                                 <td>
                                     <div className="flex items-center gap-2.5">
@@ -160,7 +154,11 @@ export default function Edit({ onClose }) {
                                 </td>
                                 <td>{e.industry}</td>
                                 <td>{e.plan}</td>
-                                <td><Status status={e.status} /></td>
+                                <td>
+                                    <div className="flex justify-center">
+                                        <Status status={e.status} />
+                                    </div>
+                                </td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
                                         <button className='cursor-pointer' onClick={() => { setOpenUser(true) }}>

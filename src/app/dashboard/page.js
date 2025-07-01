@@ -74,7 +74,9 @@ export default function Dashboard() {
                 <option value="4 star">4 Star</option>
                 <option value="5 star">5 Star</option>
             </CustomSelectBox>
-            <DateRange onChange={(e) => { setDate(e) }} />
+            <DateRange
+                value={date}
+                onChange={(e) => { setDate(e) }} />
             <button className="flex items-center justify-center gap-2 bg-primary border border-primary py-1.5 px-4 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50" onClick={() => { setOpen(true) }}><Image unoptimized={true} src="/images/flash.svg" alt="flash" height={16} width={16} />Boost</button>
         </div>}
     >
@@ -173,7 +175,7 @@ export default function Dashboard() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list?.map((e, index) => <tr key={index}>
+                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex gap-2.5">
                                         <Image src={e.img} alt="google.svg" width={17} height={17} unoptimized={true} />

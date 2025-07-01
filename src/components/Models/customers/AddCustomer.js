@@ -51,7 +51,7 @@ function AddCustomer({ onClose, id, onSave }) {
         }
     }
 
-    return <Model onClose={onClose} title={activeStep === 6 ? "Customers Imported Successfully!" : type === "import" ? "Import Customers" : (!id ? "Add New Customer" : "Edit Customer List")} modalClass={`${type === "manually" ? "w-1/2!" : "w-[60%]!"}`}>
+    return <Model onClose={onClose} title={activeStep === 6 ? "Customers Imported Successfully!" : type === "import" ? "Import Customers" : (!id ? "Add New Customer" : "Edit Customer")} modalClass={`${type === "manually" ? "w-1/2!" : "w-[60%]!"}`}>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 {!id && activeStep !== 6 && <div className="flex gap-4 items-center">
@@ -114,6 +114,7 @@ function AddCustomer({ onClose, id, onSave }) {
                             isRequired={false} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                             formProps={{ ...register("tag", { required: false }) }}
                             errors={errors} clearErrors={clearErrors}>
+
                             <option value="high value">High Value</option>
                             <option value="loyal">Loyal</option>
                             <option value="instead of source">instead of source</option>

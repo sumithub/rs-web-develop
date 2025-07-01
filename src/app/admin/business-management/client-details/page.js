@@ -36,6 +36,8 @@ export default function ClientDetails() {
         try {
             setLoading(true)
             setList([])
+            setList1([])
+            setList2([])
             const res = await axios.get("/api")
             setList(res.data || clientLocation)
             setList1(res.data || clientCampaign)
@@ -106,11 +108,26 @@ export default function ClientDetails() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-4 gap-3">
-                    <CancelButton title="Export Client Report" class_="w-[100%]!" />
-                    <CancelButton title="Suspend Client" class_="w-[80%]!" />
-                    <CancelButton title="Edit Client" class_="w-[60%]!" />
-                    <SecondaryButton title="Add Location" onClick={() => { setOpen(true) }} />
+                <div className="flex gap-3.5">
+                    <button className="flex gap-2.5 items-center border border-text3/30 rounded-lg p-2.5 text-xs text-text3 hover:bg-text3/10">
+                        Export Client Report
+                        <span>
+                            <Image src="/images/export-2.svg" alt="export-2" width={16} height={16} />
+                        </span>
+                    </button>
+                    <button className="flex gap-2.5 items-center border border-text3/30 rounded-lg p-2.5 text-xs text-text3 hover:bg-text3/10">
+                        Suspend Client
+                        <span>
+                            <Image src="/images/slash-2.svg" alt="slash-2" width={16} height={16} />
+                        </span>
+                    </button>
+                    <button className="flex gap-2.5 items-center border border-text3/30 rounded-lg p-2.5 text-xs text-text3 hover:bg-text3/10">
+                        Edit Client
+                        <span>
+                            <Image src="/images/edit-3.svg" alt="edit-3" width={16} height={16} />
+                        </span>
+                    </button>
+                    <SecondaryButton title="Add Location" onClick={() => { setOpen(true) }} class_="text-sm font-normal!" />
                 </div>
             </div>
             <div>
@@ -148,7 +165,7 @@ export default function ClientDetails() {
                             <DashboardCard title="Average Rating" count="4.2" img="/images/tick-sms.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/average2.png')]" />
                             <DashboardCard title="Total Reviews" count="5,200" img="/images/star1.svg" bgClass="bg-success-light" textColor="text-success-light" bgImage="bg-[url('/images/total2.png')]" />
                             <DashboardCard title="Total Location" count="05" img="/images/location2.svg" bgClass="bg-custom-purple" textColor="text-custom-purple" bgImage="bg-[url('/images/active2.png')]" />
-                            <DashboardCard title="Active Campaigns" count="04" img="/images/active2.png" bgClass="bg-custom-yellow" textColor="text-custom-purple" bgImage="bg-[url('/images/active2.png')]" />
+                            <DashboardCard title="Active Campaigns" count="04" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-purple" bgImage="bg-[url('/images/active2.png')]" />
                             <DashboardCard title="Positive Sentiment" count="75%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
                             <DashboardCard title="Negative Sentiment" count="12%" img="/images/chart-2.svg" bgClass="bg-danger" textColor="text-danger" bgImage="bg-[url('/images/negative.png')]" />
                         </div>
@@ -168,10 +185,14 @@ export default function ClientDetails() {
                                     sortBy={sortBy}
                                     setSortBy={setSortBy}
                                     field="address" /></th>
-                                <th><TableOrder title="Total Reviews"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="reviews" /></th>
+                                <th>
+                                    <div className="flex justify-center">
+                                        <TableOrder title="Total Reviews"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="reviews" />
+                                    </div>
+                                </th>
                                 <th><TableOrder title="Average Rating"
                                     sortBy={sortBy}
                                     setSortBy={setSortBy}
@@ -180,33 +201,32 @@ export default function ClientDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list?.map((e, index) =>
-                                <tr key={index}>
-                                    <td>
-                                        <div className="flex items-center gap-2.5">
-                                            <Checkbox
-                                                checked={e.selected}
-                                                onChange={(checked) => {
-                                                    setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                                }} />
-                                            <div>{e.name}</div>
-                                        </div>
-                                    </td>
-                                    <td>{e.address}</td>
-                                    <td>{e.reviews}</td>
-                                    <td>{e.rating}</td>
-                                    <td>
-                                        <button className='cursor-pointer'>
-                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
-                                        </button>
-                                    </td>
-                                </tr>)}
+                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                <td>
+                                    <div className="flex items-center gap-2.5">
+                                        <Checkbox
+                                            checked={e.selected}
+                                            onChange={(checked) => {
+                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                            }} />
+                                        <div>{e.name}</div>
+                                    </div>
+                                </td>
+                                <td>{e.address}</td>
+                                <td><div className="flex justify-center"> {e.reviews} </div></td>
+                                <td>{e.rating}</td>
+                                <td>
+                                    <button className='cursor-pointer'>
+                                        <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                    </button>
+                                </td>
+                            </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                    {list?.length > 0 && <div>
-                        <PaginationDemo />
-                    </div>}
                 </div>
+                {list?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>}
 
             {view === "campaign" && <div>
@@ -218,76 +238,94 @@ export default function ClientDetails() {
                                     sortBy={sortBy}
                                     setSortBy={setSortBy}
                                     field="name" /></th>
-                                <th><TableOrder title="Status"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="status" /></th>
-                                <th><TableOrder title="Locations Targeted"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="location" /></th>
-                                <th><TableOrder title="Responses"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="responses" /></th>
-                                <th>Action</th>
+                                <th>
+                                    <div className="flex justify-center">
+                                        <TableOrder title="Status"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="status" />
+                                    </div>
+                                </th>
+                                <th>
+                                    <div className="flex justify-center">
+                                        <TableOrder title="Locations Targeted"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="location" />
+                                    </div>
+                                </th>
+                                <th>
+                                    <div className="flex justify-center">
+                                        <TableOrder title="Responses"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="responses" />
+                                    </div>
+                                </th>
+                                <th className="text-center!">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {list1?.map((e, index) =>
-                                <tr key={index}>
-                                    <td>
-                                        <div className="flex items-center gap-2.5">
-                                            <Checkbox
-                                                checked={e.selected}
-                                                onChange={(checked) => {
-                                                    setList1(list1 => list1.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                                }} />
-                                            <div>{e.name}</div>
-                                        </div>
-                                    </td>
-                                    <td><Status status={e.status} /></td>
-                                    <td>{e.locations}</td>
-                                    <td>{e.responses}</td>
-                                    <td>
+                            {list1?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                <td>
+                                    <div className="flex items-center gap-2.5">
+                                        <Checkbox
+                                            checked={e.selected}
+                                            onChange={(checked) => {
+                                                setList1(list1 => list1.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                            }} />
+                                        <div>{e.name}</div>
+                                    </div>
+                                </td>
+                                <td><div className="flex justify-center"><Status status={e.status} /></div></td>
+                                <td><div className="flex justify-center">{e.locations}</div></td>
+                                <td><div className="flex justify-center">{e.responses}</div></td>
+                                <td>
+                                    <div className="flex justify-center">
                                         <button className='cursor-pointer'>
-                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} className="mx-auto" />
                                         </button>
-                                    </td>
-                                </tr>)}
+                                    </div>
+                                </td>
+                            </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                    {list1?.length > 0 && <div>
-                        <PaginationDemo />
-                    </div>}
                 </div>
+                {list1?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>}
 
             {view === "subscription" && <div>
-                <div className="table-class mt-3.5">
-                    <div className="bg-secondary2 rounded-[15px] p-5 flex justify-between items-center">
-                        <div>
-                            <h2 className="text-base">Plan</h2>
-                            <h2 className="text-lg font-medium pt-1.5">Business Premium</h2>
-                        </div>
+                <div className="bg-secondary2 rounded-[15px] p-5 grid grid-cols-4 items-center mt-3">
+                    <div>
+                        <h2 className="text-base">Plan</h2>
+                        <h2 className="text-lg font-medium pt-1.5">Business Premium</h2>
+                    </div>
+                    <div className="flex gap-5 items-center">
                         <hr className="border border-border-color w-16 h-full rotate-90" />
                         <div>
                             <h2 className="text-base">Billing Cycle</h2>
                             <h2 className="text-lg font-medium pt-1.5">Monthly</h2>
                         </div>
+                    </div>
+                    <div className="flex gap-5 items-center">
                         <hr className="border border-border-color w-16 rotate-90" />
                         <div>
                             <h2 className="text-base">Next Renewal</h2>
                             <h2 className="text-lg font-medium pt-1.5">April 25, 2025</h2>
                         </div>
+                    </div>
+                    <div className="flex gap-5 items-center">
                         <hr className="border border-border-color w-16 rotate-90" />
                         <div>
                             <h2 className="text-base">Payment Method</h2>
                             <h2 className="text-lg font-medium pt-1.5">Credit Card (**** 5678)</h2>
                         </div>
-
                     </div>
-                    {loading ? <Loading /> : (list2?.length > 0 ? <table className="w-full mt-4">
+                </div>
+                <div className="table-class mt-3.5">
+                    {loading ? <Loading /> : (list2?.length > 0 ? <table className="w-full">
                         <thead>
                             <tr>
                                 <th><TableOrder title="Invoice ID"
@@ -302,35 +340,54 @@ export default function ClientDetails() {
                                     sortBy={sortBy}
                                     setSortBy={setSortBy}
                                     field="amount" /></th>
-                                <th><TableOrder title="Status"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="status" /></th>
-                                <th><TableOrder title="Action"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="action" /></th>
+                                <th>
+                                    <div className="flex justify-center">
+                                        <TableOrder title="Status"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="status" />
+
+                                    </div>
+                                </th>
+                                <th>
+                                    <div className="flex justify-center">
+                                        <TableOrder title="Action"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="action" />
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {list2?.map((e, index) =>
-                                <tr key={index}>
-                                    <td>{e.id}</td>
-                                    <td>{e.date}</td>
-                                    <td>{e.amount}</td>
-                                    <td><Status status={e.status} /></td>
-                                    <td>
-                                        <button className='cursor-pointer'>
-                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                            {list2?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                <td>{e.id}</td>
+                                <td>{e.date}</td>
+                                <td>{e.amount}</td>
+                                <td><div className="flex justify-center"><Status status={e.status} /></div></td>
+                                <td>
+                                    <div className="flex justify-center">
+                                        {/* <button className='cursor-pointer bg-primary/10 py-1 px-2.5 rounded-full'>
+                                            <div className="flex items-center gap-2.5">
+                                                <Image unoptimized={true} src="/images/arrow-down2.svg" alt='arrow-down2' height={16} width={16} />
+                                                <h2 className="text-sm text-primary">Download PDF</h2>
+                                            </div>
+                                        </button> */}
+                                        <button className='cursor-pointer bg-success/10 py-1 px-2.5 rounded-full'>
+                                            <div className="flex items-center gap-2.5">
+                                                <Image unoptimized={true} src="/images/moneys.svg" alt='moneys' height={16} width={16} />
+                                                <h2 className="text-sm text-success">Pay Now</h2>
+                                            </div>
                                         </button>
-                                    </td>
-                                </tr>)}
+                                    </div>
+                                </td>
+                            </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                    {list2?.length > 0 && <div>
-                        <PaginationDemo />
-                    </div>}
                 </div>
+                {list2?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>}
         </AdminLayout>
     )

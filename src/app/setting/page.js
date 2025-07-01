@@ -1,32 +1,61 @@
 "use client"
-import Link from "next/link";
 import AdminLayout from "../../components/AdminLayout";
 import UserProfileManagement from "../../components/setting/UserProfileManagement"
+import { useState } from "react";
+import Subscription from "../../components/setting/Subscription";
+import Usage from "../../components/setting/Usage";
+import PaymentInvoices from "../../components/setting/PaymentInvoices";
 
 export default function Setting() {
-    return (<>
-        <AdminLayout>
-            <div className="grid grid-cols-[1.1fr_0fr_5fr] gap-[18px]">
-                <div className="flex flex-col gap-2.5">
-                    <Link href="/setting" className="inline-block">
-                        <h2 className="text-sm font-semibold bg-primary text-white py-3 px-5 rounded-[10px]">My Profile</h2>
-                    </Link>
-                    <Link href="/setting/my-subscription-details" className="inline-block">
-                        <h2 className="text-sm py-3 px-5 rounded-[10px]">My Subscription Details</h2>
-                    </Link>
-                    <Link href="/setting/my-usage-summary" className="inline-block">
-                        <h2 className="text-sm py-3 px-5 rounded-[10px]">My Usage Summary</h2>
-                    </Link>
-                    <Link href="/setting/payment-invoices" className="inline-block">
-                        <h2 className="text-sm py-3 px-5 rounded-[10px]">Payment & Invoices</h2>
-                    </Link>
-                </div>
-                <hr className="border border-border2 h-auto" />
-                <div>
-                    {/* <Profile /> */}
-                    <UserProfileManagement/>
-                </div>
+    const [tab, setTab] = useState(1);
+
+    return (<AdminLayout>
+        <div className="grid grid-cols-[1.1fr_0fr_5fr] gap-[18px]">
+            <div className="flex flex-col gap-2.5">
+                <button
+                    onClick={() => setTab(1)}
+                    className="inline-block text-left"
+                >
+                    <h2 className={`text-sm py-3 px-5 rounded-[10px] ${tab === 1 ? 'bg-primary text-white' : 'hover:bg-gray-100'
+                        }`}>
+                        My Profile
+                    </h2>
+                </button>
+                <button
+                    onClick={() => setTab(2)}
+                    className="inline-block text-left">
+                    <h2 className={`text-sm py-3 px-5 rounded-[10px] ${tab === 2 ? 'bg-primary text-white font-semibold' : 'hover:bg-gray-100'
+                        }`}>
+                        My Subscription Details
+                    </h2>
+                </button>
+                <button
+                    onClick={() => setTab(3)}
+                    className="inline-block text-left"
+                >
+                    <h2 className={`text-sm py-3 px-5 rounded-[10px] ${tab === 3 ? 'bg-primary text-white font-semibold' : 'hover:bg-gray-100'
+                        }`}>
+                        My Usage Summary
+                    </h2>
+                </button>
+                <button
+                    onClick={() => setTab(4)}
+                    className="inline-block text-left"
+                >
+                    <h2 className={`text-sm py-3 px-5 rounded-[10px] ${tab === 4 ? 'bg-primary text-white font-semibold' : 'hover:bg-gray-100'
+                        }`}>
+                        Payment & Invoices
+                    </h2>
+                </button>
             </div>
-        </AdminLayout>
-    </>)
+            <hr className="border border-border2 h-auto" />
+            <div>
+                {tab === 1 && <UserProfileManagement />}
+                {tab === 2 && <Subscription />}
+                {tab === 3 && <Usage />}
+                {tab === 4 && <PaymentInvoices />}
+            </div>
+        </div>
+    </AdminLayout>
+    )
 }

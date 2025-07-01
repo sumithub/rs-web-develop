@@ -14,6 +14,7 @@ import Loading from "../../components/Loading";
 import { auditLogsDashboard } from "../../constent/constArray";
 import AuditLogDetails from '../../components/Models/audit/AuditLogDetails'
 import DateRange from "../../components/form/DateRangePicker";
+import SecondaryButton from "../../components/common/SecondaryButton";
 
 export default function AuditLogsDashboard() {
     const [date, setDate] = useState("")
@@ -60,8 +61,9 @@ export default function AuditLogsDashboard() {
                     />
                 </div>
                 <div className="flex gap-[15px]">
-
-                    <DateRange onChange={(e) => { setDate(e) }} />
+                    <DateRange
+                        value={date}
+                        onChange={(e) => { setDate(e) }} />
 
                     {/* <DatePicker
                         icon={true}
@@ -79,14 +81,14 @@ export default function AuditLogsDashboard() {
                             setType(e.target.value)
                         }}>
                         <option value="fileUpload">File Upload</option>
-                        <option value="Customerreated">Customer Created</option>
+                        <option value="CustomerCreated">Customer Created</option>
                         <option value="smsUpdated">SMS Updated</option>
                         <option value="email">E-mail Updated</option>
                         <option value="customerUpdated">Customer Updated</option>
                     </CustomSelectBox>
 
                     <CustomSelectBox
-                        class_="mt-0!"
+                        class_="mt-0! w-40!"
                         defaultOption="Filter"
                         value={type1}
                         onChange={(e) => {
@@ -95,12 +97,13 @@ export default function AuditLogsDashboard() {
                         <option value="subscription">Subscription</option>
                         <option value="action">Action</option>
                     </CustomSelectBox>
+                    <SecondaryButton title="Reset" class_="text-xs font-normal!" disabled={loading} onClick={getData} />
 
-                    <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
+                    {/* <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
                         disabled={loading}
                         onClick={getData}
                     >
-                        Reset</button>
+                        Reset</button> */}
                 </div>
             </div>
             <div className='table-class mt-[15px]'>
@@ -135,7 +138,7 @@ export default function AuditLogsDashboard() {
                         </tr>
                     </thead>
                     <tbody>
-                        {list?.map((e, index) => <tr key={index}>
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                             <td>
                                 <div className="flex items-start gap-2">
                                     <Checkbox
@@ -167,6 +170,6 @@ export default function AuditLogsDashboard() {
             {list?.length > 0 && <div>
                 <PaginationDemo />
             </div>}
-        </AdminLayout >
+        </AdminLayout>
     </>)
 }

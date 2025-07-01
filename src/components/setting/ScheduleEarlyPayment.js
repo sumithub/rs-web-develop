@@ -7,12 +7,11 @@ import axios from "axios";
 import { getError } from "../../../helper";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import InputForm from "../form/InputForm";
+import DatePickerForm from "../form/DatePickerForm";
 
 export default function ScheduleEarlyPayment({ onClose, id }) {
-    const { handleSubmit, register, formState: { errors } } = useForm();
+    const { handleSubmit, register, clearErrors, watch, setValue, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
-
 
     const onSubmit = async (data) => {
         try {
@@ -34,6 +33,13 @@ export default function ScheduleEarlyPayment({ onClose, id }) {
         }
     }
 
+    const Early = [
+        { title: "plan", price: "growth plan ($99.00)" },
+        { title: "scheduled date", price: "Apr 01, 2025" },
+        { title: "payment method", price: "Visa **** 1234" },
+        { title: "cardholder name", price: "john deo" },
+    ]
+
     return (
         <Model onClose={onClose} title="Schedule Early Payment" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -41,42 +47,30 @@ export default function ScheduleEarlyPayment({ onClose, id }) {
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize"> pay now to avoid automatic charge</h2>
                 </div>
-
-                <div className="flex justify-between mt-3">
-                    <div className="text-text3 capitalize text-base">plan</div>
-                    <div className="font-semibold">Growth Plan($99.00/Mo)</div>
+                <div className="mt-4">
+                    {Early.map((e, i) =>
+                        <div key={i}>
+                            <div className="flex w-full justify-between mt-3">
+                                <div className="text-text3 capitalize text-base">{e.title}</div>
+                                <div className="font-semibold capitalize">{e.price}</div>
+                            </div>
+                            {i !== Early.length - 1 && (
+                                <hr className="my-3 border-t border-secondary/5" />
+                            )
+                            }</div>)}
                 </div>
 
-                <hr className="border border-border2 my-3" />
-
-                <div className="flex justify-between">
-                    <div className="text-text3 capitalize text-base">scheduled date</div>
-                    <div className="font-semibold">Apr 1, 2025</div>
-                </div>
-
-                <hr className="border border-border2 my-3" />
-
-                <div className="flex justify-between">
-                    <div className="text-text3 capitalize text-base">payment method</div>
-                    <div className="font-semibold">Visa **** 1234</div>
-                </div>
-
-                <hr className="border border-border2 my-3" />
-
-                <div className="flex justify-between">
-                    <div className="text-text3 capitalize text-base">cardholder name</div>
-                    <div className="font-semibold">John Deo</div>
-                </div>
-
-                <InputForm
+                <DatePickerForm
                     label="Choose New Payment Date"
+                    labelClass="font-medium"
                     isRequired={true}
-                    inputType="date"
+                    icon={true}
                     formProps={{ ...register("date", { required: true }) }}
-                    errors={errors}
-                    placeholder="" />
+                    mainClass="border-primary/10!"
+                    errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}
+                />
 
-                <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="grid grid-cols-2 gap-4 mt-7">
                     <CancelButton title="schedule for later" class_="text-lg!" onClick={() => {
                         toast.success("Scheduled Successfully")
                         onClose()
@@ -84,6 +78,6 @@ export default function ScheduleEarlyPayment({ onClose, id }) {
                     <SecondaryButton title="pay now" type="submit" class_="text-lg!" disabled={sending} />
                 </div>
             </form>
-        </Model >
+        </Model>
     )
 }

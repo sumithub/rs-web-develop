@@ -1,3 +1,4 @@
+
 export const USER_ACTIONS = [
     { label: "Edit User", value: "edit", icon: "/dropdown/edit.svg", hoverIcon: "/dropdown/edit-active.svg" },
     { label: "Suspend/Reactivate", value: "suspend/reactivate", icon: "/dropdown/pause.svg", hoverIcon: "/dropdown/pause-active.svg" },
@@ -8,10 +9,10 @@ export const USER_ACTIONS = [
 ]
 
 export const users = [
-    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
 ];
 
 export const TEMPLATE_ACTIONS = [
@@ -100,6 +101,14 @@ export const REVIEW_ACTIONS = [
     { label: "Delete", value: "delete", icon: "/dropdown/delete.svg", hoverIcon: "/dropdown/delete-active.svg" },
 ]
 
+export const changeUsersRole = [
+    { name: "Jaylon Torff", status: "Active", role: "Manager" },
+    { name: "Mia Wong", status: "Active", role: "Viewer" },
+    { name: "Liam Smith", status: "Active", role: "Owner" },
+    { name: "Emma Johnson", status: "Active", role: "Manager" },
+
+]
+
 export const allCustomers = [
     { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "At Risk", source: "Manual", date: "Jun 18,2024" },
 
@@ -149,7 +158,7 @@ export const clientRules = [
 export const notificationPreferences = [
     { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "yes", date: "Mar 03, 2024", },
     { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "yes", date: "Mar 03, 2024", },
-    { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "NO", date: "Mar 03, 2024", },
+    { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "No", date: "Mar 03, 2024", },
     { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
     { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
     { id: "NP-001", name: "Acme Corp", location: "Global", type: "Email", enabled: "Yes", date: "Mar 03, 2024", },
@@ -159,15 +168,15 @@ export const notificationPreferences = [
 ]
 
 export const alertsManagement = [
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
-    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024", action: "Dismiss" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "Read", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
+    { id: "AL-001", name: "Acme Corp", location: "NYC", type: "New Review", message: "Low Rating Alert", status: "New", date: "Mar 03, 2024" },
 ]
 
 export const auditLogs = [
@@ -300,4 +309,100 @@ export const auditLogsDashboard = [
     { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
     { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
     { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
+]
+
+export const subscriptionSummary = [
+    { feature: "Review Requests	", used: "3, 200", limit: "5,000" },
+    { feature: "Email Invitations	", used: 150, limit: 200 },
+    { feature: "SMS Invitations	", used: 90, limit: 100 },
+]
+
+export const paymentInvoice = [
+    { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Paid" },
+    { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Paid" },
+    { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Overdue" },
+    { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Overdue" },
+    { invoiceNumber: "CM2233445", planName: "Growth Plan", amount: "$70", date: "Jan 25, 2025", status: "Paid" },
+]
+
+export const adminTemplates = [
+
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
+]
+export const clientsManagement = [
+    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
+    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
+    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
+    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
+    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
+    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
+    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
+    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
+    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
+]
+
+export const locationsManagement = [
+    { name: "Location-1", address: "123 Main St.", client: "Xyz..", count: "50" },
+    { name: "Location-2", address: "123 Main St.", client: "Xyz..", count: "100" },
+    { name: "Location-3", address: "123 Main St.", client: "Xyz..", count: "30" },
+    { name: "Location-4", address: "123 Main St.", client: "Xyz..", count: "35" },
+    { name: "Location-5", address: "123 Main St.", client: "Xyz..", count: "50" },
+    { name: "Location-6", address: "123 Main St.", client: "Xyz..", count: "20" },
+    { name: "Location-7", address: "123 Main St.", client: "Xyz..", count: "80" },
+    { name: "Location-8", address: "123 Main St.", client: "Xyz..", count: "100" },
+    { name: "Location-9", address: "123 Main St.", client: "Xyz..", count: "50" },
+    { name: "Location-10", address: "123 Main St.", client: "Xyz..", count: "30" },
+]
+
+export const usersManagement = [
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+]
+
+export const rolesPermissions = [
+    { name: "Admin", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Owner", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Manager", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Guest", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Admin", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Owner", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Manager", description: "Lorem Ipsum is simply", permissions: "Modify" },
+    { name: "Guest", description: "Lorem Ipsum is simply", permissions: "Modify" },
+]
+
+export const latestReviews = [
+    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+]
+
+export const recentPayments = [
+    { invoiceNumber: "Invoice #12345", amount: "$199.99", status: "paid", client: "Jaydon Saris" },
+    { invoiceNumber: "Invoice #12345", amount: "$199.99", status: "paid", client: "Jaydon Saris" },
+    { invoiceNumber: "Invoice #12345", amount: "$199.99", status: "paid", client: "Jaydon Saris" },
+    { invoiceNumber: "Invoice #12345", amount: "$199.99", status: "paid", client: "Jaydon Saris" },
+    { invoiceNumber: "Invoice #12345", amount: "$199.99", status: "paid", client: "Jaydon Saris" },
+]
+
+export const latestCampaigns = [
+    { name: "Client A", client: "Jaydon Saris", status: "Active" },
+    { name: "Client B", client: "Jaydon Saris", status: "Paused" },
+    { name: "Client C", client: "Jaydon Saris", status: "Draft" },
+    { name: "Client D", client: "Jaydon Saris", status: "Paused" },
 ]

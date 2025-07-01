@@ -11,7 +11,7 @@ import { getError } from "../../../../helper";
 import SelectForm from "../../form/SelectForm";
 import SelectedCustomers from "../manage-campaigns/SelectedFromCustomers";
 
-export default function CreateCustomersTag({ onClose, id, type = "create" }) {
+export default function CreateCustomersTag({ onClose, id }) {
     const [open, setOpen] = useState(false)
     const { register, handleSubmit, setValue, watch, formState: { errors }, clearErrors } = useForm();
     const [sending, setSending] = useState(false)
@@ -26,7 +26,7 @@ export default function CreateCustomersTag({ onClose, id, type = "create" }) {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Updated Successfully")
+            toast.success("Saved Successfully")
             setSending(false)
             onClose()
         } catch (error) {
@@ -36,7 +36,7 @@ export default function CreateCustomersTag({ onClose, id, type = "create" }) {
     }
 
     return (
-        <Model onClose={onClose} title={type === "create" ? "Create Customer Tag" : "Edit Customer Tag"} modalClass="w-1/2!">
+        <Model onClose={onClose} title={!id ? "Create Customer Tag" : "Edit Customer Tag"} modalClass="w-1/2!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 {open &&
                     <SelectedCustomers
@@ -82,16 +82,16 @@ export default function CreateCustomersTag({ onClose, id, type = "create" }) {
                         errors={errors}
                     />
 
-                    <div className="flex justify-between items-center mt-3">
+                    <div className="flex justify-between items-center mt-3.5">
                         <div className="font-semibold">
                             Select Customers From List
                         </div>
-                        <SecondaryButton title="add customers" type="button" onClick={() => { setOpen(true) }} />
+                        <SecondaryButton title="add customers" type="button" onClick={() => { setOpen(true) }} class_="text-sm font-normal" />
                     </div>
 
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 mt-6">
+                <div className="grid grid-cols-2 gap-5 mt-7">
                     <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
                     <SecondaryButton title="save tag" type="submit" disabled={sending} class_="text-lg!" />
                 </div>

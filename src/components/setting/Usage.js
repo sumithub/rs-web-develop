@@ -4,7 +4,7 @@ import SecondaryButton from "../common/SecondaryButton"
 import TableOrder from "../TableOrder"
 import Loading from "../Loading"
 import axios from "axios"
-import { templates } from "../../constent/constArray"
+import { subscriptionSummary } from "../../constent/constArray"
 import { toast } from "react-toastify"
 import { getError } from "../../../helper"
 
@@ -22,7 +22,7 @@ export default function Usage() {
             setLoading(true)
             setList([])
             const res = await axios.get("/api")
-            setList(res.data || templates)
+            setList(res.data || subscriptionSummary)
             setLoading(false)
 
         } catch (error) {
@@ -33,21 +33,21 @@ export default function Usage() {
 
     return (
         <>
-            <div className="font-semibold">Subscription Usage Summary</div>
+            <div className="font-semibold text-lg">Subscription Usage Summary</div>
             <div className="bg-secondary2 p-5 rounded-[15px] grid grid-cols-4 gap-5 mt-3">
                 <div>
-                    <h2>Subscription ID</h2>
-                    <h3 className="font-semibold mt-2">SUB1234</h3>
+                    <h2 className="text-base">Subscription ID</h2>
+                    <h3 className="font-semibold text-lg mt-2">SUB1234</h3>
                 </div>
 
                 <div>
-                    <h2>Plan</h2>
-                    <h3 className="font-semibold mt-2">Pro Plan</h3>
+                    <h2 className="text-base">Plan</h2>
+                    <h3 className="font-semibold text-lg mt-2">Pro Plan</h3>
                 </div>
             </div>
 
             <div className='table-class mt-[15px]'>
-                {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
+                {loading ? <Loading class_="min-h-[300px]!" /> : (list?.length > 0 ? <table className="w-full">
                     <thead>
                         <tr>
                             <th><TableOrder title="Features"
@@ -61,26 +61,18 @@ export default function Usage() {
                             <th>Limit</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        <tr>
-                            <td>Review Requests</td>
-                            <td>3,200</td>
-                            <td>5,000</td>
-                        </tr>
-                        <tr>
-                            <td>Email Invitations</td>
-                            <td>150</td>
-                            <td>200</td>
-                        </tr>
-                        <tr>
-                            <td>SMS Invitations</td>
-                            <td>90</td>
-                            <td>100</td>
-                        </tr>
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            <td>{e.feature}</td>
+                            <td>{e.used}</td>
+                            <td>{e.limit}</td>
+                        </tr>)}
+
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>
-            <SecondaryButton title="View Detailed Report" class_="sm:w-1/5 text-xs! py-2.5! mt-5" mainClass="text-end" />
+            <SecondaryButton title="View Detailed Report" class_="w-40! text-xs! py-2.5! mt-5 font-normal!" mainClass="text-end" />
         </>
     )
 }

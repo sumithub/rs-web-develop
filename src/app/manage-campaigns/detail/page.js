@@ -536,7 +536,7 @@ export default function Detail({ }) {
                                 </SelectForm>
                                 {watch("customerSource") && <SelectForm
                                     class_="mt-10"
-                                    defaultOption="select" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                                    defaultOption="Exclude Duplicates" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"                                    
                                     formProps={{ ...register("excludeDuplicates", { required: false }) }}
                                     errors={errors} setValue={setValue}
                                     watch={watch}>

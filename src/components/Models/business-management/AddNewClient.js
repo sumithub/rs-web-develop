@@ -10,7 +10,7 @@ import SelectForm from "../../form/SelectForm";
 import axios from "axios";
 
 export default function AddNewClient({ onClose, id }) {
-    const { handleSubmit, register, setValue, watch, formState: { errors } } = useForm();
+    const { handleSubmit, register, setValue, watch, formState: { errors }, clearErrors } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -36,12 +36,14 @@ export default function AddNewClient({ onClose, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
                     label="Client Name"
+                    placeholder="Enter client name"
                     isRequired={true}
                     formProps={{ ...register("name", { required: true }) }}
                     errors={errors} />
 
                 <InputForm
                     label="Industry"
+                    placeholder="Enter industry"
                     isRequired={true}
                     formProps={{ ...register("industry", { required: true }) }}
                     errors={errors} />
@@ -52,6 +54,7 @@ export default function AddNewClient({ onClose, id }) {
                     defaultOption="select"
                     formProps={{ ...register("plan", { required: true }) }}
                     errors={errors}
+                    clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
                 >
@@ -64,13 +67,14 @@ export default function AddNewClient({ onClose, id }) {
                     defaultOption="select"
                     formProps={{ ...register("status", { required: true }) }}
                     errors={errors}
+                    clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
                 >
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                 </SelectForm>
-                <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="grid grid-cols-2 gap-5 mt-7">
                     <CancelButton title="Cancel" onClick={onClose} />
                     <SecondaryButton title="Save" type="submit" disabled={sending} />
                 </div>

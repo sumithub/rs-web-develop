@@ -18,10 +18,10 @@ function LocationScreen() {
     const [list, setList] = useState([])
     const [open, setOpen] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
-    const [openEdit, setOpenEdit] = useState(false)
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
     const [sortBy, setSortBy] = useState("")
+    const [selId, setSelId] = useState("")
 
     useEffect(() => {
         getData()
@@ -45,20 +45,10 @@ function LocationScreen() {
         <AdminLayout>
             {open &&
                 <AddNewLocation
-                    isClient={true}
-                    type='addNewLocation'
+                    id={selId}
                     onClose={() => {
+                        setSelId("");
                         setOpen(false)
-                    }}
-                />
-            }
-
-            {openEdit &&
-                <AddNewLocation
-                    isClient={true}
-                    type='edit'
-                    onClose={() => {
-                        setOpenEdit(false)
                     }}
                 />
             }
@@ -126,37 +116,39 @@ function LocationScreen() {
                     </thead>
 
                     <tbody>
-                        {list?.map((e, index) =>
-                            <tr key={index}>
-                                <td>
-                                    <div className="flex gap-2.5 items-center">
-                                        <Checkbox
-                                            checked={e.selected}
-                                            onChange={(checked) => {
-                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                            }}
-                                        />
-                                        {e.name}
-                                    </div>
-                                </td>
-                                <td>{e.address}</td>
-                                <td>{e.city}</td>
-                                <td>{e.state}</td>
-                                <td>{e.country}</td>
-                                <td>{e.phoneNumber}</td>
-                                <td>
-                                    <div className='flex items-center gap-2'>
-                                        <button className='cursor-pointer'
-                                            onClick={() => { setOpenEdit(true) }}>
-                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                        </button>
-                                        <button className='cursor-pointer'
-                                            onClick={() => { setOpenDelete(true) }}>
-                                            <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>)}
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            <td>
+                                <div className="flex gap-2.5 items-center">
+                                    <Checkbox
+                                        checked={e.selected}
+                                        onChange={(checked) => {
+                                            setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                        }}
+                                    />
+                                    {e.name}
+                                </div>
+                            </td>
+                            <td>{e.address}</td>
+                            <td>{e.city}</td>
+                            <td>{e.state}</td>
+                            <td>{e.country}</td>
+                            <td>{e.phoneNumber}</td>
+                            <td>
+                                <div className='flex items-center gap-2'>
+                                    <button className='cursor-pointer'
+                                        onClick={() => {
+                                            setSelId("e.id")
+                                            setOpen(true)
+                                        }}>
+                                        <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>
+                                    <button className='cursor-pointer'
+                                        onClick={() => { setOpenDelete(true) }}>
+                                        <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
             </div>

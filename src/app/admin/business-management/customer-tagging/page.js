@@ -26,10 +26,10 @@ function CustomerTagging() {
     const [view, setView] = useState("manage")
     const [search, setSearch] = useState("")
     const [open, setOpen] = useState(false)
-    const [open1, setOpen1] = useState(false)
     const [openBulk, setOpenBulk] = useState(false)
     const [sortBy, setSortBy] = useState("")
     const [date, setDate] = useState("")
+    const [selId, setSelId] = useState("")
 
     useEffect(() => {
         getData()
@@ -62,26 +62,10 @@ function CustomerTagging() {
                 />}>
             {open &&
                 <CreateCustomersTag
-                    type="create"
+                    id={selId}
                     onClose={() => {
                         setOpen(false)
-                    }}
-
-                    onSave={() => {
-                        setOpen(true)
-                    }}
-                />
-            }
-
-            {open1 &&
-                <CreateCustomersTag
-                    type="edit"
-                    onClose={() => {
-                        setOpen1(false)
-                    }}
-
-                    onSave={() => {
-                        setOpen1(true)
+                        setSelId("")
                     }}
                 />
             }
@@ -178,22 +162,31 @@ function CustomerTagging() {
                                     setSortBy={setSortBy}
                                     field="description"
                                 /></th>
-                                <th><TableOrder title="Tagged Customers"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="tagged"
-                                /></th>
-                                <th><TableOrder title="Created By"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="created"
-                                /></th>
-                                <th>Action</th>
+                                <th>
+                                    <div className='flex justify-center'>
+                                        <TableOrder title="Tagged Customers"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="tagged"
+                                        /></div>
+                                </th>
+                                <th>
+                                    <div className='flex justify-center'>
+                                        <TableOrder title="Created By"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="created"
+                                        /></div></th>
+                                <th>
+                                    <div className='flex justify-center'>
+                                        Action
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {list?.map((e, index) => <tr key={index}>
+                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-start gap-2">
                                         <Checkbox
@@ -206,11 +199,14 @@ function CustomerTagging() {
                                     </div>
                                 </td>
                                 <td>{e.description}</td>
-                                <td className='text-primary! underline underline-offset-4'>{e.customers}</td>
-                                <td>{e.created}</td>
+                                <td className='text-primary! underline underline-offset-4'><div className='flex justify-center'>{e.customers}</div></td>
+                                <td><div className='flex justify-center'>{e.created}</div></td>
                                 <td>
-                                    <div className='flex items-center gap-2'>
-                                        <button className='cursor-pointer' onClick={() => { setOpen1(true) }}>
+                                    <div className='flex items-center gap-2 justify-center'>
+                                        <button className='cursor-pointer' onClick={() => {
+                                            setSelId("e.id")
+                                            setOpen(true)
+                                        }}>
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
 
@@ -221,18 +217,18 @@ function CustomerTagging() {
                                 </td>
                             </tr>)}
                         </tbody>
-
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                    {list?.length > 0 && <div>
-                        <PaginationDemo />
-                    </div>}
                 </div>
+                {list?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>}
             {view === "analytics" && <div className="mt-3.5">
                 <div className="flex justify-between">
                     <h2 className="text-lg font-semibold">Tag Distribution</h2>
                     <div className="flex gap-3.5">
                         <DateRange
+                            value={date}
                             onChange={(e) => { setDate(e) }}
                         />
                         <CustomSelectBox
@@ -303,7 +299,7 @@ function CustomerTagging() {
                     </div>
                 </div>}
             </div>}
-        </AdminLayout>
+        </AdminLayout >
     )
 }
 

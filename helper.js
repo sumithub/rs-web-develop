@@ -19,7 +19,7 @@ export function formatDate(date, f) {
         if (typeof date === "string")
             d = new Date(date);
 
-        return format(d, f || 'dd MMM, yyyy');
+        return format(d, f || 'MMM dd, yyyy');
     } catch (e) {
         return "xx"
     }
@@ -49,4 +49,9 @@ export const phoneStyles = {
     "--react-international-phone-country-selector-background-color-hover": "#ffffff",
     "--react-international-phone-dropdown-item-background-color": "#ffffff",
     "--react-international-phone-height": "44px",
+}
+
+export function isAdmin(window) {
+    // return localStorage.getItem("role") === "ADMIN"
+    return true
 }

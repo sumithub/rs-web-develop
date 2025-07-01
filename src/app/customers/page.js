@@ -40,6 +40,7 @@ function Customers() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [selId, setSelId] = useState("")
+    const [boostCustomer, setBoostCustomer] = useState(null)
 
 
     useEffect(() => {
@@ -79,8 +80,10 @@ function Customers() {
 
             {openBoost &&
                 <BoostRequest
+                    customer={boostCustomer}
                     onClose={() => {
                         setOpenBoost(false)
+                        setBoostCustomer(null)
                     }}
 
                     onSave={() => {
@@ -175,9 +178,20 @@ function Customers() {
                             <option value="source: manual vs. imported">Source: Manual vs. Imported</option>
                         </CustomSelectBox>
 
-                        <button className="flex items-center text-xs justify-center gap-2 bg-primary border border-primary py-[10.5px] px-3 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
-                            onClick={() => { setOpenBoost(true) }}>
-                            <Image unoptimized={true} src="/images/flash.svg" alt="flash" height={16} width={16} />Boost</button>
+                        <button
+                            className="flex items-center text-xs justify-center gap-2 bg-primary border border-primary py-[10.5px] px-3 rounded-lg text-white cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
+                            onClick={() => {
+                                const selectedCustomers = list.filter(e => e.selected);
+                                if (selectedCustomers.length === 1) {
+                                    setBoostCustomer(selectedCustomers[0]);
+                                } else {
+                                    setBoostCustomer(selectedCustomers);
+                                }
+                                setOpenBoost(true);
+                            }}
+                        >
+                            <Image unoptimized={true} src="/images/flash.svg" alt="flash" height={16} width={16} />Boost
+                        </button>
 
                         <button className="bg-primary border border-primary text-xs hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
                             onClick={() => { setOpen(true) }}>Add New Customer</button>
@@ -194,6 +208,7 @@ function Customers() {
                         </div>
 
                         {tab === "list" && <DateRange
+                            value={date}
                             onChange={(e) => { setDate(e) }}
                         />}
 
@@ -287,7 +302,7 @@ function Customers() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list?.map((e, index) => <tr key={index}>
+                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-start gap-2">
                                         <Checkbox
@@ -304,7 +319,10 @@ function Customers() {
                                 <td><Status status={e.status} /></td>
                                 <td>{e.source}</td>
                                 <td>
-                                    <button onClick={() => { setOpenBoost(true) }}>
+                                    <button onClick={() => {
+                                        setBoostCustomer(e)
+                                        setOpenBoost(true)
+                                    }}>
                                         <Image unoptimized={true} src="/images/boost.svg" alt='boost' height={28} width={28} />
                                     </button>
                                 </td>

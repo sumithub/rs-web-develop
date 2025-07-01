@@ -8,11 +8,12 @@ import Status from "../../components/Status"
 import Checkbox from "../../components/form/Checkbox";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { getError } from "../../../helper";
+import { formatDate, getError } from "../../../helper";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import { notificationManagement } from "../../constent/constArray";
 import Image from "next/image";
+import SecondaryButton from "../../components/common/SecondaryButton";
 
 export default function NotificationManagement() {
     const [type, setType] = useState("")
@@ -39,6 +40,10 @@ export default function NotificationManagement() {
         }
     }
 
+    const handleClick = () => {
+        toast.success("Resended Successfully")
+    }
+
     return (<>
         <AdminLayout>
             <div className="flex justify-between items-center gap-11">
@@ -63,9 +68,10 @@ export default function NotificationManagement() {
                         <option value="sent">Sent</option>
                         <option value="failed">Failed</option>
                     </CustomSelectBox>
-
+                    <SecondaryButton title="Resend" onClick={handleClick} class_="text-xs! py-[9.4px]! font-normal!" />
+                    {/* 
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
-                        onClick={() => { toast.success("Resended Successfully") }}>Resend</button>
+                        onClick={() => { toast.success("Resented Successfully") }}>Resend</button> */}
                 </div>
             </div>
             <div className='table-class mt-[15px]'>
@@ -108,7 +114,7 @@ export default function NotificationManagement() {
                         </tr>
                     </thead>
                     <tbody>
-                        {list?.map((e, index) => <tr key={index}>
+                        {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                             <td>
                                 <div className="flex items-start gap-2">
                                     <Checkbox
@@ -128,14 +134,14 @@ export default function NotificationManagement() {
                             <td>
                                 <Status status={e.status} context="notify" />
                             </td>
-                            <td>{e.date}</td>
+                            <td>{formatDate(e.date)}</td>
                             <td>
                                 <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer'>
+                                    <button className='cursor-pointer' onClick={() => toast.success("Read Successfully")}>
                                         <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
                                     </button>
 
-                                    <button className='cursor-pointer'>
+                                    <button className='cursor-pointer' onClick={handleClick}>
                                         <Image src="/images/refresh1.svg" alt='refresh1' height={28} width={28} />
                                     </button>
                                 </div>
