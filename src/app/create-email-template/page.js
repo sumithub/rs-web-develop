@@ -7,7 +7,7 @@ import InputForm from "../../components/form/InputForm"
 // import SelectForm from "../../components/form/SelectForm"
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import { getError, validEmailRgx } from '../../../helper'
+import { getError, isAdmin, validEmailRgx } from '../../../helper'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import CustomSelectBox from "../../components/form/CustomSelectBox"
@@ -15,6 +15,7 @@ import AdminLayout from "../../components/AdminLayout"
 import { getTextLength } from "../../utils/editorHelper"
 import SmsPreview from "../../components/Models/templates/SmsPreview"
 import Checkbox from "../../components/form/Checkbox"
+
 function AddTemplate() {
   const id = ""
   const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm({ defaultValues: { type: "email" } });
@@ -185,10 +186,11 @@ function AddTemplate() {
             rows={15} className="rounded text-text3 text-sm border border-color w-full focus-visible:outline-none p-3" /> */}
 
             <div className="grid grid-cols-3 gap-3.5 mt-5">
-              {/* <CancelButton title="Back To list"
+              {isAdmin() ? < CancelButton title="Back To list"
                 class_="text-lg!"
-                isLink={true} link='/admin/template' /> */}
-              <CancelButton title="clone template" onClick={handleClick} class_="text-lg!" />
+                isLink={true} link='/admin/template' /> :
+                <CancelButton title="clone template" onClick={handleClick} class_="text-lg!" />}
+
               <SecondaryButton title="Save As Draft" class_='bg-white! text-primary! text-lg! hover:text-white! hover:bg-primary!' type='submit' />
               <SecondaryButton title="Save & Activate" type="submit" disabled={sending} class_="text-lg!" />
             </div>

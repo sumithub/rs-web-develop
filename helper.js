@@ -50,3 +50,8 @@ export const phoneStyles = {
     "--react-international-phone-dropdown-item-background-color": "#ffffff",
     "--react-international-phone-height": "44px",
 }
+
+export function isAdmin(window) {
+    // return localStorage.getItem("role") === "ADMIN"
+    return true
+}
