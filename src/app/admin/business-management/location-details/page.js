@@ -179,10 +179,10 @@ export default function LocationDetails() {
                                 </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                    {list?.length > 0 && <div>
-                        <PaginationDemo />
-                    </div>}
                 </div>
+                {list?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>}
             {view === "campaign" && <div>
                 <div className="bg-secondary2 rounded-[15px] p-5 mt-3.5 flex items-center">
@@ -239,10 +239,10 @@ export default function LocationDetails() {
                                 </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                    {list1?.length > 0 && <div>
-                        <PaginationDemo />
-                    </div>}
                 </div>
+                {list1?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>}
         </AdminLayout>
     )

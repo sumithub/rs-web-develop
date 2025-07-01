@@ -26,7 +26,7 @@ export default function CreateCustomersTag({ onClose, id }) {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Updated Successfully")
+            toast.success("Saved Successfully")
             setSending(false)
             onClose()
         } catch (error) {

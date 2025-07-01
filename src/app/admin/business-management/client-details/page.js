@@ -36,6 +36,8 @@ export default function ClientDetails() {
         try {
             setLoading(true)
             setList([])
+            setList1([])
+            setList2([])
             const res = await axios.get("/api")
             setList(res.data || clientLocation)
             setList1(res.data || clientCampaign)
@@ -203,10 +205,10 @@ export default function ClientDetails() {
                                 </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                    {list?.length > 0 && <div>
-                        <PaginationDemo />
-                    </div>}
                 </div>
+                {list?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>}
 
             {view === "campaign" && <div>
@@ -257,37 +259,37 @@ export default function ClientDetails() {
                                 </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                    {list1?.length > 0 && <div>
-                        <PaginationDemo />
-                    </div>}
                 </div>
+                {list1?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>}
 
             {view === "subscription" && <div>
-                <div className="table-class mt-3.5">
-                    <div className="bg-secondary2 rounded-[15px] p-5 flex justify-between items-center">
-                        <div>
-                            <h2 className="text-base">Plan</h2>
-                            <h2 className="text-lg font-medium pt-1.5">Business Premium</h2>
-                        </div>
-                        <hr className="border border-border-color w-16 h-full rotate-90" />
-                        <div>
-                            <h2 className="text-base">Billing Cycle</h2>
-                            <h2 className="text-lg font-medium pt-1.5">Monthly</h2>
-                        </div>
-                        <hr className="border border-border-color w-16 rotate-90" />
-                        <div>
-                            <h2 className="text-base">Next Renewal</h2>
-                            <h2 className="text-lg font-medium pt-1.5">April 25, 2025</h2>
-                        </div>
-                        <hr className="border border-border-color w-16 rotate-90" />
-                        <div>
-                            <h2 className="text-base">Payment Method</h2>
-                            <h2 className="text-lg font-medium pt-1.5">Credit Card (**** 5678)</h2>
-                        </div>
-
+                <div className="bg-secondary2 rounded-[15px] p-5 flex justify-between items-center mt-3">
+                    <div>
+                        <h2 className="text-base">Plan</h2>
+                        <h2 className="text-lg font-medium pt-1.5">Business Premium</h2>
                     </div>
-                    {loading ? <Loading /> : (list2?.length > 0 ? <table className="w-full mt-4">
+                    <hr className="border border-border-color w-16 h-full rotate-90" />
+                    <div>
+                        <h2 className="text-base">Billing Cycle</h2>
+                        <h2 className="text-lg font-medium pt-1.5">Monthly</h2>
+                    </div>
+                    <hr className="border border-border-color w-16 rotate-90" />
+                    <div>
+                        <h2 className="text-base">Next Renewal</h2>
+                        <h2 className="text-lg font-medium pt-1.5">April 25, 2025</h2>
+                    </div>
+                    <hr className="border border-border-color w-16 rotate-90" />
+                    <div>
+                        <h2 className="text-base">Payment Method</h2>
+                        <h2 className="text-lg font-medium pt-1.5">Credit Card (**** 5678)</h2>
+                    </div>
+
+                </div>
+                <div className="table-class mt-3.5">
+                    {loading ? <Loading /> : (list2?.length > 0 ? <table className="w-full">
                         <thead>
                             <tr>
                                 <th><TableOrder title="Invoice ID"
@@ -327,10 +329,10 @@ export default function ClientDetails() {
                                 </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                    {list2?.length > 0 && <div>
-                        <PaginationDemo />
-                    </div>}
                 </div>
+                {list2?.length > 0 && <div>
+                    <PaginationDemo />
+                </div>}
             </div>}
         </AdminLayout>
     )
