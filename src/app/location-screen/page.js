@@ -46,7 +46,6 @@ function LocationScreen() {
             {open &&
                 <AddNewLocation
                     id={selId}
-                    type='addNewLocation'
                     onClose={() => {
                         setSelId("");
                         setOpen(false)

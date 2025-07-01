@@ -9,7 +9,6 @@ export default function Status({ status = "", context = "" }) {
     if (
         s === "new" ||
         s === "completed" ||
-        s === "active" ||
         s === "vip" ||
         s === "connected" ||
         s === "paid") {
@@ -54,7 +53,7 @@ export default function Status({ status = "", context = "" }) {
     else if (s === "dismiss" || s === "suspend") {
         bgClass = "bg-[#DC35451A] text-danger"
     }
-    else if (s === "sent") {
+    else if (s === "sent" || s === "active") {
         if (c === "notify") {
             bgClass = "bg-[#0396FF1A] text-primary";
         } else {

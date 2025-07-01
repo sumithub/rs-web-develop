@@ -8,6 +8,17 @@ import { usePathname } from "next/navigation";
 export default function Sidebar({ collapse, toggleSidebar }) {
     const list = [
         { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
+
+        {
+            title: "Business Management", link: "", icon: "business",
+            submenu:
+                [
+                    { title: "Clients", link: "/admin/business-management/clients-management" },
+                    { title: "Locations", link: "/admin/business-management/locations-management" },
+                    { title: "Tagging", link: "/admin/business-management/customer-tagging" },
+                ]
+        },
+
         {
             title: "Customers", link: "/campaigns", icon: "customer",
             submenu: [{ title: "Manage Customers", link: "/customers" }, { title: "Customer Tagging", link: "/customer-tagging" }]

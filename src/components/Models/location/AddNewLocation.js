@@ -10,7 +10,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import PhoneForm from "../../form/PhoneForm"
 
-function AddNewLocation({ onClose, id, onSave }) {
+function AddNewLocation({ onClose, id, onSave, type }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
 
@@ -27,7 +27,8 @@ function AddNewLocation({ onClose, id, onSave }) {
             if (onSave) {
                 onSave(data)
             }
-            { !id ? toast.success("Location Added Successfully") : toast.success("Edited Successfully") }
+            { !type && (!id ? toast.success("Location Added Successfully") : toast.success("Edited Successfully")) }
+            { type && toast.success("Saved Successfully") }
             setSending(false)
             onClose()
         } catch (error) {
@@ -41,9 +42,9 @@ function AddNewLocation({ onClose, id, onSave }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <div>
-                    {/* {!id && <InputForm label="Client" placeholder="Enter your name" isRequired={true}
+                    {type && <InputForm label="Client" placeholder="Enter your name" isRequired={true}
                         formProps={{ ...register("client", { required: true }) }}
-                        errors={errors} />} */}
+                        errors={errors} />}
 
                     <InputForm label="Name" placeholder="Enter your name" isRequired={true}
                         formProps={{ ...register("name", { required: true }) }}

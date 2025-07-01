@@ -1,27 +1,23 @@
 "use client"
 import { useEffect, useState } from "react"
+import AdminLayout from "../../../../components/AdminLayout"
+import Search from "../../../../components/form/Search"
+import DateRange from "../../../../components/form/DateRangePicker"
+import CustomSelectBox from "../../../../components/form/CustomSelectBox"
+import SecondaryButton from "../../../../components/common/SecondaryButton"
+import TableOrder from "../../../../components/TableOrder"
+import Checkbox from "../../../../components/form/Checkbox"
+import Status from "../../../../components/Status"
 import Image from "next/image"
+import PaginationDemo from "../../../../components/Pagination"
 import axios from "axios"
 import { toast } from "react-toastify"
-import { clientsManagement } from "../../../constent/constArray"
-import { getError } from "../../../../helper"
-import SuspendUser from "./SuspendUser"
-import AddNewClient from "./AddNewClient"
-import Search from "../../form/Search"
-import DateRange from "../../form/DateRangePicker"
-import CustomSelectBox from "../../form/CustomSelectBox"
-import TableOrder from "../../TableOrder"
-import SecondaryButton from "../../common/SecondaryButton"
-import Checkbox from "../../form/Checkbox"
-import Status from "../../Status"
-import PaginationDemo from "../../Pagination"
-import Loading from "../../Loading"
-import Model from "../Model"
+import { getError } from "../../../../../helper"
+import Loading from "../../../../components/Loading"
+import { usersManagement } from "../../../../constent/constArray"
 
-export default function Edit({ onClose }) {
+export default function UsersManagement() {
     const [sortBy, setSortBy] = useState(false)
-    const [openUser, setOpenUser] = useState(false)
-    const [openClient, setOpenClient] = useState(false)
     const [filterBy, setFilterBy] = useState("")
     const [filterBy1, setFilterBy1] = useState("")
     const [date, setDate] = useState("")
@@ -30,15 +26,15 @@ export default function Edit({ onClose }) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        getCustomerTag()
+        getUsers()
     }, [search, filterBy, date, filterBy1, sortBy])
 
-    const getCustomerTag = async () => {
+    const getUsers = async () => {
         try {
             setLoading(true)
             setList([])
             const res = await axios.get("/api")
-            setList(res.data || clientsManagement)
+            setList(res.data || usersManagement)
             setLoading(false)
 
         } catch (error) {
@@ -48,67 +44,55 @@ export default function Edit({ onClose }) {
     }
 
     return (
-        <Model onClose={onClose} title="Edit" modalClass="w-[80%]!">
-            {openUser &&
-                <SuspendUser
-                    onClose={() => {
-                        setOpenUser(false)
+        <AdminLayout
+            noCard={false}
+            headerChild={
+                <Search
+                    mainClass='w-76!'
+                    placeholder="Search"
+                    onSearch={(s) => {
+                        setSearch(s)
                     }}
-
-                    onSave={() => {
-                        setOpenUser(true)
-                    }} />
-            }
-
-            {openClient &&
-                <AddNewClient
-                    onClose={() => {
-                        setOpenClient(false)
-                    }}
-
-                    onSave={() => {
-                        setOpenClient(true)
-                    }} />
-            }
+                />}>
             <div className='flex items-center justify-between'>
                 <Search
-                    placeholder="Search by Client Name, Industry"
+                    placeholder="Search by Name, Email"
                     onSearch={(s) => {
                         setSearch(s)
                     }}
                 />
                 <div className='flex items-center gap-3.5'>
                     <DateRange
-                        value={date}
                         onChange={(e) => { setDate(e) }}
                     />
                     <CustomSelectBox
-                        defaultOption="Status"
+                        defaultOption="Assigned Client"
                         class_='mt-0! w-32!'
                         value={filterBy1}
                         onChange={(e) => {
                             setFilterBy1(e.target.value)
                         }}
                     >
-                        <option value="suspend">Suspend</option>
-                        <option value="active">Active</option>
+                        <option value="client1">Client 1</option>
+                        <option value="client2">Client 2</option>
                     </CustomSelectBox>
 
                     <CustomSelectBox
-                        defaultOption="Filter By"
+                        defaultOption="Role"
                         class_='mt-0! w-32!'
                         value={filterBy}
                         onChange={(e) => {
                             setFilterBy(e.target.value)
                         }}
                     >
-                        <option value="subscription-plan">Subscription Plan</option>
-                        <option value="status">Status</option>
+                        <option value="admin">Admin</option>
+                        <option value="owner">Owner</option>
+                        <option value="manager">Manager</option>
+                        <option value="guest">Guest</option>
                     </CustomSelectBox>
                     <SecondaryButton
-                        title="Add New Client"
+                        title="Add New User"
                         class_="text-xs! font-normal!"
-                        onClick={() => { setOpenClient(true) }}
                     />
                 </div>
             </div>
@@ -116,23 +100,27 @@ export default function Edit({ onClose }) {
                 {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
                     <thead>
                         <tr>
-                            <th><TableOrder title="Client Name"
+                            <th><TableOrder title="Name"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="clientName" /></th>
-                            <th><TableOrder title="Industry"
+                                field="name" /></th>
+                            <th><TableOrder title="Email"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="industry" /></th>
-                            <th><TableOrder title="Subscription Plan"
+                                field="email" /></th>
+                            <th><TableOrder title="Role"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="plan" /></th>
+                                field="role" /></th>
+                            <th><TableOrder title="Assigned Client"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="client" /></th>
                             <th><TableOrder title="Status"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="status" /></th>
-                            <th className="text-center!">Action</th>
+                            <th className="text-center!">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -148,18 +136,16 @@ export default function Edit({ onClose }) {
                                         <div>{e.name}</div>
                                     </div>
                                 </td>
-                                <td>{e.industry}</td>
-                                <td>{e.plan}</td>
+                                <td>{e.email}</td>
+                                <td>{e.role}</td>
+                                <td>{e.assignedClient}</td>
                                 <td><Status status={e.status} /></td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
-                                        <button className='cursor-pointer' onClick={() => { setOpenUser(true) }}>
-                                            <Image unoptimized={true} src="/images/play.svg" alt='play' height={28} width={28} />
+                                        <button className='cursor-pointer' >
+                                            <Image unoptimized={true} src="/images/global.svg" alt='edit' height={28} width={28} />
                                         </button>
-                                        <button className='cursor-pointer'>
-                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
-                                        </button>
-                                        <button className='cursor-pointer'>
+                                        <button className='cursor-pointer' >
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
                                     </div>
@@ -167,10 +153,10 @@ export default function Edit({ onClose }) {
                             </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-                {list?.length > 0 && <div>
-                    <PaginationDemo />
-                </div>}
             </div>
-        </Model>
+            {list?.length > 0 && <div>
+                <PaginationDemo />
+            </div>}
+        </AdminLayout>
     )
 }

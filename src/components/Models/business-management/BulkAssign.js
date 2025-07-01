@@ -38,7 +38,6 @@ export default function BulkAssign({ onClose, id }) {
                 <div>
                     <SelectForm
                         label="Filter By Clients"
-                        defaultOption="Clients"
                         class_="mt-0!"
                         selectClass_="py-2.5! px-2.5!"
                         isRequired={true}
@@ -61,6 +60,7 @@ export default function BulkAssign({ onClose, id }) {
                         <SelectForm class_="w-[10%]! text-primary" defaultOption="select"
                             setValue={setValue}
                             watch={watch}
+                            formProps={{ ...register("availableTags", { required: false }) }}
                         >
                             <option value="vip1">VIP (01)</option>
                             <option value="vip2">VIP (02)</option>
