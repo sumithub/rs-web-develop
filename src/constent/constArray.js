@@ -383,3 +383,26 @@ export const rolesPermissions = [
     { name: "Manager", description: "Lorem Ipsum is simply", permissions: "Modify" },
     { name: "Guest", description: "Lorem Ipsum is simply", permissions: "Modify" },
 ]
+
+export const latestReviews = [
+    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+]
+
+export const recentPayments = [
+    { invoiceNumber: "Invoice #12345", amount: "$199.99", status: "paid", client: "Jaydon Saris" },
+    { invoiceNumber: "Invoice #12345", amount: "$199.99", status: "paid", client: "Jaydon Saris" },
+    { invoiceNumber: "Invoice #12345", amount: "$199.99", status: "paid", client: "Jaydon Saris" },
+    { invoiceNumber: "Invoice #12345", amount: "$199.99", status: "paid", client: "Jaydon Saris" },
+    { invoiceNumber: "Invoice #12345", amount: "$199.99", status: "paid", client: "Jaydon Saris" },
+]
+
+export const latestCampaigns = [
+    { name: "Client A", client: "Jaydon Saris", status: "Active" },
+    { name: "Client B", client: "Jaydon Saris", status: "Paused" },
+    { name: "Client C", client: "Jaydon Saris", status: "Draft" },
+    { name: "Client D", client: "Jaydon Saris", status: "Paused" },
+]
