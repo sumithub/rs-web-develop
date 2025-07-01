@@ -90,10 +90,10 @@ function SelectedCustomers({ onClose, onSave }) {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="source" /></th>
-                            <th><TableOrder title="Date Added"
+                            <th><div className="flex justify-center"><TableOrder title="Date Added"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="dateAdded" /></th>
+                                field="dateAdded" /></div></th>
                         </tr>
                     </thead>
 
@@ -113,7 +113,7 @@ function SelectedCustomers({ onClose, onSave }) {
                             <td>{e.phone}</td>
                             <td><Status status={e.status} /></td>
                             <td>{e.source}</td>
-                            <td>{formatDate(e.date)}</td>
+                            <td><div className="flex justify-center">{formatDate(e.date)}</div></td>
                         </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}

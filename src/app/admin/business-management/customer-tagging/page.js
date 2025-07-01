@@ -162,17 +162,26 @@ function CustomerTagging() {
                                     setSortBy={setSortBy}
                                     field="description"
                                 /></th>
-                                <th><TableOrder title="Tagged Customers"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="tagged"
-                                /></th>
-                                <th><TableOrder title="Created By"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="created"
-                                /></th>
-                                <th>Action</th>
+                                <th>
+                                    <div className='flex justify-center'>
+                                        <TableOrder title="Tagged Customers"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="tagged"
+                                        /></div>
+                                </th>
+                                <th>
+                                    <div className='flex justify-center'>
+                                        <TableOrder title="Created By"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="created"
+                                        /></div></th>
+                                <th>
+                                    <div className='flex justify-center'>
+                                        Action
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
 
@@ -190,10 +199,10 @@ function CustomerTagging() {
                                     </div>
                                 </td>
                                 <td>{e.description}</td>
-                                <td className='text-primary! underline underline-offset-4'>{e.customers}</td>
-                                <td>{e.created}</td>
+                                <td className='text-primary! underline underline-offset-4'><div className='flex justify-center'>{e.customers}</div></td>
+                                <td><div className='flex justify-center'>{e.created}</div></td>
                                 <td>
-                                    <div className='flex items-center gap-2'>
+                                    <div className='flex items-center gap-2 justify-center'>
                                         <button className='cursor-pointer' onClick={() => {
                                             setSelId("e.id")
                                             setOpen(true)
