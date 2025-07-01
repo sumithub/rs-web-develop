@@ -11,6 +11,8 @@ import { toast } from "react-toastify"
 import axios from "axios"
 import { adminTemplates } from "../../../constent/constArray"
 import Loading from "../../../components/Loading"
+import TemplatePreview from "../../../components/Models/TemplatePreview"
+import Link from "next/link"
 
 export default function Template() {
     const [sortBy, setSortBy] = useState(false)
@@ -18,6 +20,7 @@ export default function Template() {
     const [filter, setFilter] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         getData()
@@ -41,6 +44,14 @@ export default function Template() {
         <AdminLayout headerSearch={<div>
             <Search placeholder="Search" mainClass="w-full!" />
         </div>}>
+            {open &&
+                <TemplatePreview
+                    type={true}
+                    onClose={() => {
+                        setOpen(false)
+                    }}
+                />
+            }
             <div>
                 <div className='flex items-center justify-between'>
                     <Search
@@ -114,12 +125,14 @@ export default function Template() {
                                             <button className='cursor-pointer'>
                                                 <Image unoptimized={true} src="/images/copy.svg" alt='copy' height={28} width={28} />
                                             </button>
-                                            <button className='cursor-pointer'>
+                                            <button className='cursor-pointer' onClick={() => setOpen(true)}>
                                                 <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
                                             </button>
-                                            <button className='cursor-pointer'>
-                                                <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                            </button>
+                                            <Link href="/create-email-template">
+                                                <button className='cursor-pointer mt-2'>
+                                                    <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                                </button>
+                                            </Link>
                                             <button className='cursor-pointer'>
                                                 <Image unoptimized={true} src="/images/delete1.svg" alt='delete1' height={28} width={28} />
                                             </button>
@@ -133,6 +146,6 @@ export default function Template() {
                     <PaginationDemo />
                 </div>}
             </div>
-        </AdminLayout>
+        </AdminLayout >
     )
 }

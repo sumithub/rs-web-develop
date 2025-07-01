@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { title } from "process";
 
 export default function Sidebar({ collapse, toggleSidebar, role }) {
     const [list, setList] = useState([])
@@ -84,6 +83,10 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                         { title: "Users", link: "/admin/organization/users-management" },
                         { title: "Roles & Permissions", link: "/admin/organization/roles-permissions" },
                     ]
+            },
+
+            {
+                title: "Templates", link: "/admin/template", icon: "template",
             }
 
         ]

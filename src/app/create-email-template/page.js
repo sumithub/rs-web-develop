@@ -14,6 +14,7 @@ import CustomSelectBox from "../../components/form/CustomSelectBox"
 import AdminLayout from "../../components/AdminLayout"
 import { getTextLength } from "../../utils/editorHelper"
 import SmsPreview from "../../components/Models/templates/SmsPreview"
+import Checkbox from "../../components/form/Checkbox"
 function AddTemplate() {
   const id = ""
   const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm({ defaultValues: { type: "email" } });
@@ -61,7 +62,10 @@ function AddTemplate() {
       <div className='flex items-start gap-4'>
         <div className='w-[60%]'>
           <div className='shadow-sm rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
-
+            <div className="flex gap-2.5 items-center">
+              <Checkbox />
+              <div>Clone Template</div>
+            </div>
             <div className='grid grid-cols-2 gap-3'>
               <CustomSelectBox label="Template Type" isRequired={true} class_='mt-2! w-full!'
                 defaultOption='Template Type'
@@ -76,6 +80,7 @@ function AddTemplate() {
                 }}>
                 <option value="email">Email</option>
                 <option value="sms">SMS</option>
+                <option value="reviewResponseTemplate">Review Response Template</option>
               </CustomSelectBox>
 
               <InputForm
@@ -180,6 +185,9 @@ function AddTemplate() {
             rows={15} className="rounded text-text3 text-sm border border-color w-full focus-visible:outline-none p-3" /> */}
 
             <div className="grid grid-cols-3 gap-3.5 mt-5">
+              {/* <CancelButton title="Back To list"
+                class_="text-lg!"
+                isLink={true} link='/admin/template' /> */}
               <CancelButton title="clone template" onClick={handleClick} class_="text-lg!" />
               <SecondaryButton title="Save As Draft" class_='bg-white! text-primary! text-lg! hover:text-white! hover:bg-primary!' type='submit' />
               <SecondaryButton title="Save & Activate" type="submit" disabled={sending} class_="text-lg!" />
