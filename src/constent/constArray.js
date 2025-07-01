@@ -342,3 +342,13 @@ export const locationsManagement = [
     { name: "Location-9", address: "123 Main St.", client: "Xyz..", count: "50" },
     { name: "Location-10", address: "123 Main St.", client: "Xyz..", count: "30" },
 ]
+
+export const usersManagement = [
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+    { name: "Jaydon George", email: "JaydonGeorge@gmail.com", role: "Manager", assignedClient: "Xyz...", status: "Activate" },
+]
