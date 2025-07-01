@@ -3,20 +3,31 @@ import Image from "next/image";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import InputForm from "../../form/InputForm";
-import RadioForm from "../../form/RadioForm";
 import Model from "../Model";
 import { useForm } from "react-hook-form";
 import { getError, validEmailRgx } from "../../../../helper";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Radio from "../../form/Radio";
+import PhoneForm from "../../form/PhoneForm";
 
-export default function SmsPreview({ onClose, id, type = "email" }) {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+export default function SmsPreview({ onClose, id }) {
+    const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm();
     const [perView, setPerView] = useState("web")
     const [sending, setSending] = useState(false)
+    const [type, setType] = useState("email")
+
+    const handleViewChange = (event) => {
+        setType(event.target.value);
+        if (event.target.value === "sms")
+            setPerView("mobile")
+        else if (event.target.value === "email")
+            setPerView("web")
+    };
 
     const onSubmit = async (data) => {
+
         try {
             setSending(true)
             let res = null
@@ -39,30 +50,31 @@ export default function SmsPreview({ onClose, id, type = "email" }) {
     return (
         <Model onClose={onClose} title={`Test Send ${type === "email" ? "Template" : "SMS"}`}
             modalClass="w-[70%]!"
-            modalBodyClass="bg-dark"
-        >
+            modalBodyClass="bg-dark">
             <form onSubmit={handleSubmit(onSubmit)} className="">
                 <div className="grid grid-cols-[1fr_0.7fr] gap-5">
                     <div className="bg-white rounded-[10px] p-5 flex flex-col justify-between gap-5">
                         <div>
                             <h2 className="text-sm font-medium">Send Via<span className="text-danger">*</span></h2>
                             <div className="flex items-center gap-5">
-                                <RadioForm
+                                <Radio
                                     label="Email"
                                     labelClass="font-normal!"
-                                    name="sendVia"
-                                    formProps={{ ...register("sendVia", { required: true }) }}
-                                    errors={errors}
+                                    value="email"
+                                    checked={type === 'email'}
+                                    onChange={handleViewChange}
                                 />
-                                <RadioForm
+
+                                <Radio
                                     label="SMS"
                                     labelClass="font-normal!"
-                                    name="sendVia"
-                                    formProps={{ ...register("sendVia", { required: true }) }}
-                                    errors={errors}
+                                    value="sms"
+                                    checked={type === 'sms'}
+                                    onChange={handleViewChange}
                                 />
                             </div>
-                            <InputForm
+
+                            {type === "email" && <InputForm
                                 label="Email Address"
                                 placeholder="Enter Email Address"
                                 isRequired={true}
@@ -76,7 +88,17 @@ export default function SmsPreview({ onClose, id, type = "email" }) {
                                         },
                                     })
                                 }}
-                            />
+                            />}
+
+                            {type === "sms" &&
+                                <PhoneForm label="Mobile Number"
+                                    isRequired={true}
+                                    formProps={{ ...register("phone", { required: true }) }}
+                                    errors={errors}
+                                    clearErrors={clearErrors}
+                                    setValue={setValue}
+                                    watch={watch} />
+                            }
                             <InputForm
                                 label="Custom Message"
                                 placeholder="Enter Custom Message"
@@ -100,26 +122,26 @@ export default function SmsPreview({ onClose, id, type = "email" }) {
                             <div className="grid grid-cols-3 gap-4 justify-between">
                                 <button onClick={() => {
                                     setPerView("web")
-                                }} type="button" className={`${perView === "web" ? "border-primary bg-primary/10" : ""} p-4 flex items-center justify-center gap-3 border border-border-color rounded-xl cursor-pointer disabled:pointer-events-none`}>
+                                }} type="button" className={`${perView === "web" ? "border-primary bg-primary/10" : "border-border-color"} border p-4 flex items-center justify-center gap-3 rounded-xl cursor-pointer ${type === "sms" ? "disabled:pointer-events-none text-secondary/50 disabled:border-border-color/40 disabled:bg-white" : "disabled:pointer-events-none"}`} disabled={type === "sms"}>
                                     <Image src="/images/web.svg" alt="web" width={30} height={30} />
                                     <h2 className="text-base">Web</h2>
                                 </button>
 
                                 <button onClick={() => {
                                     setPerView("mobile")
-                                }} type="button" className={`${perView === "mobile" ? "border-primary bg-primary/10" : ""} flex items-center justify-center gap-3 border border-border2/60 p-4 rounded-xl cursor-pointer disabled:pointer-events-none`}>
+                                }} type="button" className={`${perView === "mobile" ? "border-primary bg-primary/10" : "border-border-color"} flex items-center justify-center gap-3 border p-4 rounded-xl cursor-pointer ${type === "email" ? "disabled:pointer-events-none text-secondary/50 disabled:border-color/40 disabled:bg-white" : ""} disabled:pointer-events-none disabled:text-secondary/50`} disabled={type === "email"}>
                                     <Image src="/images/mobile.svg" alt="mobile" width={30} height={30} />
                                     <h2 className="text-base">Mobile</h2>
                                 </button>
 
                                 <button onClick={() => {
                                     setPerView("tablet")
-                                }} type="button" className={`${perView === "tablet" ? "border-primary bg-primary/10" : ""} flex items-center justify-center gap-3 border border-border2 p-4 rounded-xl cursor-pointer disabled:pointer-events-none`}>
+                                }} type="button" className={`${perView === "tablet" ? "border-primary bg-primary/10" : "border-border-color"} border flex items-center justify-center gap-3 p-4 rounded-xl cursor-pointer ${type === "sms" ? "disabled:pointer-events-none text-secondary/50 disabled:border-border-color/40 disabled:bg-white" : "disabled:pointer-events-none"}`} disabled={type === "sms"}>
                                     <Image src="/images/tablet.svg" alt="tablet" width={30} height={30} />
                                     <h2 className="text-base">Tablet</h2>
                                 </button>
                             </div>
-                            <div className="mt-7 border border-dark rounded-[10px]">
+                            <div className={`mt-7 border border-dark rounded-[10px] ${perView === "mobile" ? "max-w-[300px] mx-auto" : perView === "tablet" ? "max-w-[500px] mx-auto" : "w-full"}`}>
                                 <div className="p-2.5">
                                     <h3 className="text-xs capitalize">Hi &#123;John Deo&#125;&#44;</h3>
                                     <h3 className="text-xs capitalize py-3.5">Thank you for your recent visit! We&#39;d love to hear your feedback.</h3>
