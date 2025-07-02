@@ -11,9 +11,9 @@ import Loading from "../Loading"
 import { formatDateTime } from "../../../helper"
 import DeleteCustomer from "../../components/Models/customers/DeleteCustomer"
 import Download from "../Models/customers/Download"
-import AddCustomer from "../Models/customers/AddCustomer"
+import EditCustomerList from "../Models/customers/EditCustomerList"
 
-export default function ListView(date, search) {
+export default function ListView() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [sortBy, setSortBy] = useState("")
@@ -23,7 +23,7 @@ export default function ListView(date, search) {
 
     useEffect(() => {
         getHistory()
-    }, [search, date, sortBy])
+    }, [sortBy])
 
     const getHistory = async () => {
         try {
@@ -54,7 +54,7 @@ export default function ListView(date, search) {
         }
 
         {open &&
-            <AddCustomer
+            <EditCustomerList
                 onClose={() => {
                     setOpen(false)
                 }}
