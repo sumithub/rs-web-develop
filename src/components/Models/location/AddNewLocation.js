@@ -10,7 +10,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import PhoneForm from "../../form/PhoneForm"
 
-function AddNewLocation({ onClose, id, onSave, type }) {
+function AddNewLocation({ onClose, id, onSave, type, showOnlyEdit }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
 
@@ -36,7 +36,7 @@ function AddNewLocation({ onClose, id, onSave, type }) {
             setSending(false)
         }
     }
-    return <Model onClose={onClose} title={`${!id ? "Add New" : "Edit"} Location (Client)`} modalClass="w-1/2!" >
+    return <Model onClose={onClose} title={`${!id ? "Add New" : "Edit"} ${(showOnlyEdit && id) ? "" : "Location"} ${!type ? "(Client)" : ""}`} modalClass="w-1/2!" >
         {/* <Model onClose={onClose} title={(!id ? "Add New Location" : "Edit Location") + (id ? " (Client)" : "")} modalClass="w-1/2!" > */}
 
         <form onSubmit={handleSubmit(onSubmit)}>

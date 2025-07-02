@@ -23,6 +23,7 @@ function Location() {
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
     const [sortBy, setSortBy] = useState("")
+    const [selId, setSelId] = useState("")
 
     useEffect(() => {
         getTemplate()
@@ -55,9 +56,12 @@ function Location() {
                 />}>
             {open &&
                 <AddNewLocation
+                    showOnlyEdit={true}
+                    id={selId}
                     type={true}
                     onClose={() => {
                         setOpen(false)
+                        setSelId("")
                     }}
                 />
             }
@@ -152,7 +156,10 @@ function Location() {
                                             <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
                                         </button>
                                         <button className='cursor-pointer'
-                                            onClick={() => { setOpen(true) }}>
+                                            onClick={() => {
+                                                setOpen(true)
+                                                setSelId("e.id")
+                                            }}>
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
                                         <button className='cursor-pointer'

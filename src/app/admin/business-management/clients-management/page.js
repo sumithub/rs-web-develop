@@ -10,7 +10,6 @@ import Checkbox from "../../../../components/form/Checkbox"
 import Status from "../../../../components/Status"
 import Image from "next/image"
 import PaginationDemo from "../../../../components/Pagination"
-import SuspendUser from "../../../../components/Models/business-management/SuspendUser"
 import AddNewClient from "../../../../components/Models/business-management/AddNewClient"
 import Edit from "../../../../components/Models/business-management/Edit"
 import axios from "axios"
@@ -18,6 +17,7 @@ import { toast } from "react-toastify"
 import { getError } from "../../../../../helper"
 import Loading from "../../../../components/Loading"
 import { clientsManagement } from "../../../../constent/constArray"
+import SuspendUsers from "../../../../components/Models/users/SuspendUsers"
 
 export default function ClientsManagement() {
     const [sortBy, setSortBy] = useState(false)
@@ -61,7 +61,7 @@ export default function ClientsManagement() {
                     }}
                 />}>
             {openUser &&
-                <SuspendUser
+                <SuspendUsers
                     onClose={() => {
                         setOpenUser(false)
                     }}

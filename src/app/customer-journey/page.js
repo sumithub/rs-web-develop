@@ -15,7 +15,6 @@ import { formatDate, getError } from '../../../helper';
 import { toast } from 'react-toastify';
 import Loading from "../../components/Loading"
 import SecondaryButton from '../../components/common/SecondaryButton';
-import CustomerJourneyView from "../../components/Models/customer-journey/CustomerJourneyView"
 
 export default function CustomerJourney() {
     const [list, setList] = useState([])
