@@ -106,6 +106,7 @@ export default function AdminDashboard() {
                 {view === "payments" && <Search placeholder="Search by Invoice Number" />}
                 {view === "campaigns" && <Search placeholder="Search by Reviewer" />}
             </div>
+
             {view === "reviews" &&
                 <LatestReviews />
             }

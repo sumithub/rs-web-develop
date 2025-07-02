@@ -22,12 +22,11 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     const [loading, setLoading] = useState(false);
     const [tab, setTab] = useState(1);
     const [importDone, setImportDone] = useState(false);
-    const [mappingErrors, setMappingErrors] = useState({}); // Add state for mapping validation errors
-
+    const [mappingErrors, setMappingErrors] = useState({});
     const [file, setFile] = useState(null)
     const [importData, setImportData] = useState({
         fileName: "",
-        selectedFile: null, // Add selectedFile to importData to persist it
+        selectedFile: null,
         fieldMappings: [],
         validationResults: {
             totalCustomers: 250,
@@ -81,14 +80,16 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
             // Set the form value
             setValue('csvFile', importData.selectedFile);
         }
+
     }, [tab, importData.selectedFile, setValue]);
 
     const getData = async () => {
         try {
             setLoading(true);
             setList([]);
-            const res = await axios.get("/api");
-            setList(res.data || fieldMapping);
+            // const res = await axios.get("/api");
+            // setList(res.data || fieldMapping);
+            setList(fieldMapping);
             setLoading(false);
         } catch (error) {
             toast.error(getError(error));
@@ -141,7 +142,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
 
     const validateCurrentStep = async () => {
         let isValid = true;
-
+        console.log(file)
         switch (tab) {
             case 1:
                 isValid = !file ? await trigger('csvFile') : true

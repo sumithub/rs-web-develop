@@ -74,8 +74,12 @@ function AddCustomer({ onClose, id, onSave }) {
 
                 {type === "manually" && <div>
                     <div>
-                        {!id && <div>
-                            <InputForm label="Customer Name" placeholder="Enter your name" isRequired={true}
+                        <div>
+                            <InputForm
+                                class_="mt-0!"
+                                label="Customer Name"
+                                placeholder="Enter your name"
+                                isRequired={true}
                                 formProps={{ ...register("customerName", { required: true }) }}
                                 errors={errors} />
 
@@ -98,17 +102,9 @@ function AddCustomer({ onClose, id, onSave }) {
                                 clearErrors={clearErrors}
                                 setValue={setValue}
                                 watch={watch} />
-                        </div>}
+                        </div>
 
-                        {id && <InputForm
-                            class_="mt-0!"
-                            label="List Name"
-                            placeholder="Enter List Name"
-                            isRequired={true}
-                            formProps={{ ...register("listName", { required: true }) }}
-                            errors={errors} />}
-
-                        <SelectForm label={(!id ? "tag" : "tags")}
+                        <SelectForm label="Tag"
                             setValue={setValue}
                             watch={watch}
                             isRequired={false} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
@@ -120,34 +116,6 @@ function AddCustomer({ onClose, id, onSave }) {
                             <option value="instead of source">instead of source</option>
                         </SelectForm>
                     </div>
-
-                    {id && <div>
-                        <div className="mt-4">
-                            <div className="text-sm text-secondary font-medium">Duplicate Handling<span className="text-danger">*</span></div>
-
-                            <div className="flex items-center gap-4">
-                                <RadioForm label="Ignore duplicates"
-                                    class_="mt-2!"
-                                    name="duplicateHandling"
-                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
-                                    errors={errors}
-                                />
-                                <RadioForm
-                                    label="Overwrite existing"
-                                    class_="mt-2!"
-                                    name="duplicateHandling"
-                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
-                                    errors={errors}
-                                />
-                                <RadioForm
-                                    label="Allow duplicates"
-                                    class_="mt-2!"
-                                    name="duplicateHandling"
-                                    formProps={{ ...register("duplicateHandling", { required: true }) }}
-                                    errors={errors} />
-                            </div>
-                        </div>
-                    </div>}
                 </div>}
             </div>
 

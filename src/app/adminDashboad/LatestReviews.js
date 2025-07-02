@@ -35,7 +35,7 @@ export default function LatestReviews() {
 
     return <main>
         <div className='table-class'>
-            {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+            {loading ? <Loading class_="min-h-[400px]!" /> : (list?.length > 0 ? <table className='w-full'>
                 <thead>
                     <tr>
                         <th><TableOrder title="Rating"
@@ -74,9 +74,15 @@ export default function LatestReviews() {
                         <td>{e.client}</td>
                         <td>
                             <div className="flex gap-2.5 justify-center">
-                                <Image src="/images/eyes3.svg" alt="eyes3" width={28} height={28} />
-                                <Image src="/images/refresh1.svg" alt="refresh1" width={28} height={28} />
-                                <Image src="/images/1.svg" alt="1" width={28} height={28} />
+                                <button>
+                                    <Image src="/images/eyes3.svg" alt="eyes3" width={28} height={28} unoptimized={true} />
+                                </button>
+                                <button>
+                                    <Image src="/images/refresh1.svg" alt="refresh1" width={28} height={28} unoptimized={true} />
+                                </button>
+                                <button>
+                                    <Image src="/images/1.svg" alt="1" width={28} height={28} unoptimized={true} />
+                                </button>
                             </div>
                         </td>
                     </tr>)}
