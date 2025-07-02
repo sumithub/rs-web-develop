@@ -33,7 +33,7 @@ export default function BulkAssign({ onClose, id }) {
     }
 
     return (
-        <Model onClose={onClose} title="Bulk Assign" modalClass="w-[50%]!">
+        <Model onClose={onClose} title="Bulk Assign" modalClass="w-[70%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <SelectForm
