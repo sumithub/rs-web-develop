@@ -4,7 +4,7 @@ import AdminLayout from "../../../../components/AdminLayout"
 import DashboardCard from "../../../../components/DashboardCard"
 import { clientCampaign, clientLocation, clientSubscription, locationCampaign, locationReviews } from "../../../../constent/constArray"
 import { toast } from "react-toastify"
-import { getError } from "../../../../../helper"
+import { formatDate, getError } from "../../../../../helper"
 import axios from "axios"
 import Search from "../../../../components/form/Search"
 import Loading from "../../../../components/Loading"
@@ -362,7 +362,7 @@ export default function ClientDetails() {
                         <tbody>
                             {list2?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>{e.id}</td>
-                                <td>{e.date}</td>
+                                <td>{formatDate(e.date)}</td>
                                 <td>{e.amount}</td>
                                 <td><div className="flex justify-center"><Status status={e.status} /></div></td>
                                 <td>
