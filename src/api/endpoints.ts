@@ -4,6 +4,8 @@ const API_ENDPOINTS = {
     verifyEmail: "/users/verify-email",
     resetPassword: "/users/reset-password",
     changePassword: "/users/change-password",
+    changeEmail: "/users/change-signup-email",
+    resendEmail: "/auth/resend-verification",
 };
 
 export default API_ENDPOINTS;
