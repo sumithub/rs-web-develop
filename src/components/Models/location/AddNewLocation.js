@@ -42,7 +42,11 @@ function AddNewLocation({ onClose, id, onSave, type }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <div>
-                    {type && <InputForm label="Client" placeholder="Enter your name" isRequired={true}
+                    {type && <InputForm
+                        label="Client"
+                        class_="mt-0!"
+                        placeholder="Enter your name"
+                        isRequired={true}
                         formProps={{ ...register("client", { required: true }) }}
                         errors={errors} />}
 
