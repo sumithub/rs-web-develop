@@ -50,7 +50,10 @@ function AddNewLocation({ onClose, id, onSave, type, showOnlyEdit }) {
                         formProps={{ ...register("client", { required: true }) }}
                         errors={errors} />}
 
-                    <InputForm label="Name" placeholder="Enter your name" isRequired={true}
+                    <InputForm label="Name"
+                        class_="mt-0!"
+                        placeholder="Enter your name"
+                        isRequired={true}
                         formProps={{ ...register("name", { required: true }) }}
                         errors={errors} />
 
