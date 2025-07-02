@@ -134,23 +134,23 @@ function UserCreation({ onClose, id, onSave }) {
                         <option value="location2">Location 2</option>
                     </SelectForm>
 
-                    <div className="mt-5">
-                        <div className="font-semibold">Password Management</div>
+                    <div className="mt-6">
+                        <div className="text-lg font-semibold">Password Management</div>
 
                         <div className="flex justify-between items-center mt-4">
-                            <div>Reset Password Link</div>
+                            <div className="text-sm font-medium">Reset Password Link</div>
                             <button type="button" onClick={() => setOpen(true)}>
-                                <div className="text-primary underline">Sends A Reset Link To Email</div>
+                                <div className="text-primary text-sm underline">Sends A Reset Link To Email</div>
                             </button>
                         </div>
 
-                        <div className="flex justify-between items-center mt-3">
-                            <div>Change Password</div>
+                        <div className="flex justify-between items-center mt-3.5">
+                            <div className="text-sm font-medium">Change Password</div>
                             <button type="button" onClick={() => {
                                 setOpen(true)
                                 setSelId("e.id")
                             }}>
-                                <div className="text-primary underline">Opens Password Update Form</div>
+                                <div className="text-primary text-sm underline">Opens Password Update Form</div>
                             </button>
                         </div>
                     </div>
