@@ -86,7 +86,7 @@ export default function CreateCustomersTag({ onClose, id }) {
                         <div className="font-semibold">
                             Select Customers From List
                         </div>
-                        <SecondaryButton title="add customers" type="button" onClick={() => { setOpen(true) }} class_="text-sm font-normal" />
+                        <SecondaryButton title="add customers" type="button" onClick={() => { setOpen(true) }} class_="text-xs font-normal py-2.5!" />
                     </div>
 
                 </div>
