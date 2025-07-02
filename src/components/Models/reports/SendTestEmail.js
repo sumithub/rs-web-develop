@@ -152,7 +152,24 @@ export default function SendTestEmail({ onClose, currentData, selectedUsers, set
                 <div className="flex gap-[15px]">
                     <div className="w-full border border-primary/10 rounded-lg p-2.5 flex justify-between items-center">
                         <div className="flex gap-[15px] flex-wrap">
-                            {selectedUsers.map(user => (
+                            {selectedUsers.map((user, index) => {
+                                return <div key={index}
+                                    className="flex gap-[7px] border border-primary/10 rounded-lg p-[5px] items-center">
+                                    <Image src={user.img} alt="request" width={17} height={17} />
+                                    <h2 className="text-sm">{user.name}</h2>
+                                    <Image
+                                        unoptimized={true}
+                                        src="/images/close-square.svg"
+                                        alt="close-square"
+                                        width={14}
+                                        height={14}
+                                        className="cursor-pointer hover:opacity-70"
+                                        onClick={() => handleRemoveUser(user.id)}
+                                    />
+                                </div>
+
+                            })}
+                            {/* {selectedUsers.map(user => (
                                 <div key={user.id} className="flex gap-[7px] border border-primary/10 rounded-lg p-[5px] items-center">
                                     <Image src={user.img} alt="request" width={17} height={17} />
                                     <h2 className="text-sm">{user.name}</h2>
@@ -166,7 +183,7 @@ export default function SendTestEmail({ onClose, currentData, selectedUsers, set
                                         onClick={() => handleRemoveUser(user.id)}
                                     />
                                 </div>
-                            ))}
+                            ))} */}
                             {selectedUsers.length === 0 && (
                                 <div className="text-sm text-gray-400 py-1">No users selected</div>
                             )}

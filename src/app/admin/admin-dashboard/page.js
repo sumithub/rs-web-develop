@@ -14,7 +14,12 @@ export default function AdminDashboard() {
     const [view, setView] = useState("reviews")
 
 
-    return <AdminLayout>
+    return <AdminLayout
+        headerSearch={
+            <Search
+                mainClass='w-80!'
+                placeholder="Search"
+            />}>
         <div>
             <div className="grid grid-cols-4 gap-5">
                 <DashboardCard title="total reviews" count="12,345" img="/images/sms-star.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/total.png')]" />
