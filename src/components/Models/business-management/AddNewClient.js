@@ -36,6 +36,7 @@ export default function AddNewClient({ onClose, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
                     label="Client Name"
+                    class_="mt-0!"
                     placeholder="Enter client name"
                     isRequired={true}
                     formProps={{ ...register("name", { required: true }) }}

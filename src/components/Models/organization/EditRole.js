@@ -41,6 +41,7 @@ function EditRole({ onClose, onSave }) {
                 <div>
                     <SelectForm
                         label="Role Name"
+                        class_="mt-0!"
                         selectClass_="py-2.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("role", { required: true }) }}

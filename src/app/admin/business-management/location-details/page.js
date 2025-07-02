@@ -4,7 +4,7 @@ import AdminLayout from "../../../../components/AdminLayout"
 import DashboardCard from "../../../../components/DashboardCard"
 import { locationCampaign, locationReviews } from "../../../../constent/constArray"
 import { toast } from "react-toastify"
-import { getError } from "../../../../../helper"
+import { formatDate, getError } from "../../../../../helper"
 import axios from "axios"
 import Search from "../../../../components/form/Search"
 import Loading from "../../../../components/Loading"
@@ -195,7 +195,7 @@ export default function LocationDetails() {
                                 </td>
                                 <td>
                                     <div className="flex justify-center">
-                                        {e.date}
+                                        {formatDate(e.date)}
                                     </div>
                                 </td>
                                 <td>
