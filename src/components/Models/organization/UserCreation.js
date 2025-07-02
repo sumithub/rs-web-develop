@@ -51,7 +51,10 @@ function UserCreation({ onClose, id, onSave }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <div>
-                    <InputForm label="Name" placeholder="Enter your name" isRequired={true}
+                    <InputForm label="Name"
+                        placeholder="Enter your name"
+                        class_="mt-0!"
+                        isRequired={true}
                         formProps={{ ...register("name", { required: true }) }}
                         errors={errors} />
 
