@@ -9,7 +9,7 @@ import InputForm from '../../form/InputForm';
 import { getError, validPasswordRgx } from '../../../../helper';
 import CancelButton from '../../common/CancelButton';
 
-function ResetPassword({ onClose }) {
+function ResetPassword({ onClose, id }) {
     const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm();
     const [sending, setSending] = useState(false);
 
@@ -20,7 +20,7 @@ function ResetPassword({ onClose }) {
                 password: data.newPassword,
             });
 
-            toast.success("Upgraded successfully");
+            { !id ? toast.success("Sended successfully") : toast.success("Upgraded successfully") };
             onClose();
         } catch (error) {
             toast.error(getError(error));
@@ -31,7 +31,7 @@ function ResetPassword({ onClose }) {
 
     return (
         <div>
-            <Model onClose={onClose} title="Reset Password" modalClass="w-1/2!">
+            <Model onClose={onClose} title={!id ? "Reset Password" : "Change Password"} modalClass="w-1/2!">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div>
                         <InputForm
@@ -63,7 +63,7 @@ function ResetPassword({ onClose }) {
 
                     <div className="grid grid-cols-2 gap-3 mt-6">
                         <CancelButton title="Cancel" onClick={onClose} />
-                        <SecondaryButton title="Upgrade password" type="submit" disabled={sending} />
+                        <SecondaryButton title={!id ? "Send Mail" : "Upgrade password"} type="submit" disabled={sending} />
                     </div>
                 </form>
             </Model>
