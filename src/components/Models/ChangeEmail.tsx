@@ -3,15 +3,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import Image from 'next/image';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import InputForm from '../form/InputForm';
 import Model from './Model';
-import { validEmailRgx } from '../../../helper';
 import { toast } from 'react-toastify';
 import AuthContext from '../../contexts/AuthContext';
 import { changeEmail } from '../../api/authApi';
-import { ChangeEmailFormData, ChangeEmailSchema } from '../schemas/ChangeEmail';
+import { ChangeEmailFormData, ChangeEmailSchema } from '../schemas/ChangeEmailSchema'
 
 function ChangeEmail({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm<ChangeEmailFormData>({
@@ -38,7 +36,6 @@ function ChangeEmail({ onClose, id }) {
                     setSending(false)
                     return;
                 }
-                
                 const parsedData = await changeEmail(formData,);
                 console.log("Parsed Signup Response:", parsedData);
                 // Save mock verification link to localStorage (for dev only)

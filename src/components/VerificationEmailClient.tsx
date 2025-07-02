@@ -7,11 +7,11 @@ import ChangeEmail from  "../components/Models/ChangeEmail"
 import Image from 'next/image';
 import Link from 'next/link';
 import SecondaryButton from "../components/common/SecondaryButton";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
 import AuthContext from "../contexts/AuthContext";
+import { resendEmailVerification } from "../api/authApi";
 
 function VerificationEmailClient() {
     const { handleSubmit } = useForm();
@@ -24,12 +24,15 @@ function VerificationEmailClient() {
     const status = searchParams?.get("status");
     const { unVerifiedEmail } = useContext(AuthContext);
 
+    console.log("Unverified Email from context:", unVerifiedEmail);
+
     useEffect(() => {
+        console.log("UseEffect mounted");
         const link = localStorage.getItem("mockVerificationLink");
         if (link) {
             setMockLink(link);
             localStorage.removeItem("mockVerificationLink");
-        }
+        } 
 
         if (status === "expired" && sec === 60) {
             setIsTimerActive(false);
@@ -39,7 +42,7 @@ function VerificationEmailClient() {
         let interval: ReturnType<typeof setInterval> | null = null;
         if (isTimerActive && sec > 0) {
             interval = setInterval(() => {
-                setSec(seconds => seconds - 1);
+                setSec(prev => prev - 1);
             }, 1000);
         } else if (sec === 0) {
             setIsTimerActive(false);
@@ -49,23 +52,37 @@ function VerificationEmailClient() {
         return () => {
             if (interval) clearInterval(interval);
         };
-    }, [isTimerActive, sec, status]);
+    }, [status, sec, isTimerActive]);
 
-    const onSubmit = async (data) => {
+    const onSubmit = async () => {
         try {
             setLoading(true);
             setIsTimerActive(true);
             setSec(59);
             setMockLink(null);
+            console.log("Unverified Email:", unVerifiedEmail);
             
             // Remove ?status=expired from the URL
             const url = new URL(window.location.href);
             url.searchParams.delete("status");
             window.history.replaceState({}, "", url.toString());
-            
-            await axios.put("/api", data);
+            localStorage.removeItem("mockVerificationLink");
+         
+          
+        // Calls the centralized authApi signup function
+        console.log("Resending verification email for:", unVerifiedEmail);
+        const parsedData = await resendEmailVerification({email:unVerifiedEmail});
+        console.log("Parsed resend Email Response:", parsedData);
+    
+        // Save mock verification link to localStorage (for dev only)
+        if (parsedData?.mockVerificationLink) {
+          localStorage.setItem("mockVerificationLink", parsedData.mockVerificationLink);
+        }
+        // Update context with unverified email
+
             toast.success("Verification email sent successfully! Check your inbox or spam folder.");
         } catch (error) {
+            console.log("Resend verification email error:", error);
             toast.error("Unable to resend verification email. Please try again later.");
             setIsTimerActive(false);
             setLoading(false);
@@ -150,15 +167,16 @@ function VerificationEmailClient() {
                     <SecondaryButton
                         title="Resend Verification Email"
                         disabled={loading || isTimerActive}
+                  
                         type="submit"
                         class_="disabled:bg-dark! disabled:text-text3! disabled:border-dark! py-3! mt-5!" onClick={undefined}                    />
-
+{
                     <div className='flex items-center justify-between mt-5'>
                         <Link href="#" onClick={() => setOpen(true)} className='text-sm text-primary font-medium underline underline-offset-4'>Change Email</Link>
                         <div className='text-sm text-secondary'>
                             {isTimerActive ? formatTime(sec) : '00.59'}
                         </div>
-                    </div>
+                    </div> }
 
                     <div className='flex justify-center mt-5'>
                         <Link href="/login" className="flex gap-[15px]">

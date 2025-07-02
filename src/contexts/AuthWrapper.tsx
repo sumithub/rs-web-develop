@@ -1,19 +1,5 @@
-// "use client";
-
-// import { useState } from "react";
-// import AuthContext from "./AuthContext";
-
-// export default function AuthWrapper({ children }) {
-//   const [email, setEmail] = useState("");
-//   return (
-//     <AuthContext.Provider value={{ unVerifiedEmail: email, setEmail }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// }
 
 "use client";
-
 import { useState, ReactNode } from "react";
 import AuthContext, { AuthContextType } from "./AuthContext";
 
@@ -28,10 +14,13 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     unVerifiedEmail: email,
     setEmail,
   };
-
+  
   return (
     <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );
 }
+
+
+

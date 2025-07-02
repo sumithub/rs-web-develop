@@ -1,14 +1,4 @@
 "use client";
-// import { createContext } from "react";
-
-// const AuthContext = createContext({
-//   unVerifiedEmail: ""
-// });
-// export default AuthContext;
-
-// AuthWrapper.tsx
-
-// auth-context.ts
 import { createContext } from "react";
 
 export interface AuthContextType {
