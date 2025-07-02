@@ -1,17 +1,19 @@
-import { Color } from '@tiptap/extension-color'
-import ListItem from '@tiptap/extension-list-item'
-import Placeholder from '@tiptap/extension-placeholder'
-import TextStyle from '@tiptap/extension-text-style'
-import { useCurrentEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import Highlight from '@tiptap/extension-highlight'
-import Link from '@tiptap/extension-link'
-import TextAlign from '@tiptap/extension-text-align'
-import Underline from '@tiptap/extension-underline'
 import { Extension, Node } from '@tiptap/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
+
+import { Color } from '@tiptap/extension-color'
 import { FontFamily } from '@tiptap/extension-font-family'
+import Highlight from '@tiptap/extension-highlight'
 import ImageEditorModal from '../components/Models/ImageEditorModal'
+import Link from '@tiptap/extension-link'
+import ListItem from '@tiptap/extension-list-item'
+import Placeholder from '@tiptap/extension-placeholder'
+import { ResizableImage } from "../components/ResizableImage"
+import StarterKit from '@tiptap/starter-kit'
+import TextAlign from '@tiptap/extension-text-align'
+import TextStyle from '@tiptap/extension-text-style'
+import Underline from '@tiptap/extension-underline'
+import { useCurrentEditor } from '@tiptap/react'
 
 // Simple Image Node (no toolbar buttons)
 const SimpleImage = Node.create({
@@ -806,9 +808,36 @@ export const extensions = [
             keepAttributes: false,
         },
     }),
+    ResizableImage
 ]
 
+export const insertResizableImage = (editor, file) => {
+  if (!editor || !file) return;
 
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    editor
+      .chain()
+      .focus()
+      .insertContent({
+        type: "paragraph", // Ensures valid parent
+        content: [
+          {
+            type: "resizableImage",
+            attrs: {
+              src: reader.result,
+              width: "300px",
+              id: Date.now().toString(), // helps re-render
+            },
+          },
+        ],
+      })
+      .run();
+  };
+
+  reader.readAsDataURL(file);
+};
 
 export const getTextLength = (html) => {
     if (!html) return 0;

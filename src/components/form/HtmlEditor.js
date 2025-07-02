@@ -1,8 +1,11 @@
 'use client'
-import { EditorProvider } from '@tiptap/react'
+
+import { MenuBar, extensions, getTextLength } from '../../utils/editorHelper'
 import React, { useState } from 'react'
-import { extensions, getTextLength, MenuBar } from '../../utils/editorHelper'
+
 import CustomSelectBox from './CustomSelectBox'
+import { EditorProvider } from '@tiptap/react'
+import ImageEditorModal from "../Models/ImageEditorModal";
 
 export default function HtmlEditor({
     type,
@@ -45,6 +48,34 @@ export default function HtmlEditor({
         { value: "business_name", label: "Business Name", type: "email" },
         { value: "direct_feedback", label: "Direct Feedback", type: "email" }
     ];
+
+        const [cropModalOpen, setCropModalOpen] = React.useState(false);
+        const [imageToCrop, setImageToCrop] = React.useState(null);
+        const [onCropDoneCallback, setOnCropDoneCallback] = React.useState(null);
+
+        React.useEffect(() => {
+            function openCropper(event) {
+            setImageToCrop(event.detail.src);
+            setOnCropDoneCallback(() => event.detail.onCrop);
+            setCropModalOpen(true);
+            }
+            window.addEventListener("open-image-cropper", openCropper);
+            return () => window.removeEventListener("open-image-cropper", openCropper);
+        }, []);
+
+        const handleCropComplete = (newSrc) => {
+            if (onCropDoneCallback) {
+            onCropDoneCallback(newSrc);
+            }
+            setCropModalOpen(false);
+        };
+
+        const handleImageUpload = (e) => {
+            const file = e.target.files?.[0];
+            if (file && editor) {
+                insertResizableImage(editor, file);
+            }
+            };
 
     return (
         <div className={`laptop:mb-2 mb-3 w-full relative  ${containerClass}`}>
@@ -121,6 +152,12 @@ export default function HtmlEditor({
                 // extensions={extensions}
                 // content={value || ""}
                 />
+                <ImageEditorModal
+                    isOpen={cropModalOpen}
+                    imageSrc={imageToCrop}
+                    onClose={() => setCropModalOpen(false)}
+                    onImageComplete={handleCropComplete}
+      />
             </div>
             {error && <div className="capitalize text-xs font-medium text-danger mt-1">{error}</div>}
         </div>
