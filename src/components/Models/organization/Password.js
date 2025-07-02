@@ -10,7 +10,7 @@ import { getError, validPasswordRgx } from '../../../../helper';
 import CancelButton from '../../common/CancelButton';
 
 function ResetPassword({ onClose }) {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm();
     const [sending, setSending] = useState(false);
 
     const onSubmit = async (data) => {
@@ -36,20 +36,23 @@ function ResetPassword({ onClose }) {
                     <div>
                         <InputForm
                             label="New Password"
+                            name="password"
                             inputType="password"
-                            isRequired={true}
-                            placeholder="Enter new password"
-                            class_='mt-0!'
+                            placeholder="Create A Password"
                             formProps={{
-                                ...register("newPassword", {
-                                    required: "Password is required",
-                                    minLength: {
+                                ...register("password", {
+                                    required: true,
+                                    pattern: {
                                         value: validPasswordRgx,
-                                        message: "Password must be at least 6 characters"
-                                    }
-                                })
+                                        message:
+                                            "Password must be at least 8 characters long and include a mix of letters, numbers, and special characters",
+                                    },
+                                }),
                             }}
+                            isRequired={true}
                             errors={errors}
+                            setValue={setValue}
+                            watch={watch}
                         />
                     </div>
 
