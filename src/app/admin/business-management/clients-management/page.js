@@ -52,7 +52,7 @@ export default function ClientsManagement() {
     return (
         <AdminLayout
             noCard={false}
-            headerChild={
+            headerSearch={
                 <Search
                     mainClass='w-76!'
                     placeholder="Search"

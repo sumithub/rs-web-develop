@@ -251,13 +251,13 @@ export const clientCampaign = [
 
 
 export const clientLocation = [
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
 ]
 
 

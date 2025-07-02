@@ -52,7 +52,7 @@ export default function ClientDetails() {
     return (
         <AdminLayout
             noCard={false}
-            headerChild={
+            headerSearch={
                 <Search
                     mainClass='w-76!'
                     placeholder="Search"
@@ -74,7 +74,7 @@ export default function ClientDetails() {
                             onClick={() => {
                                 setView("overview")
                             }}
-                            className={`${view === "overview" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                            className={`${view === "overview" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer  py-[15px]`}
                         >
                             Overview
                         </div>
@@ -83,7 +83,7 @@ export default function ClientDetails() {
                             onClick={() => {
                                 setView("location")
                             }}
-                            className={`${view === "location" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                            className={`${view === "location" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer  py-[15px]`}
                         >
                             Location
                         </div>
@@ -92,7 +92,7 @@ export default function ClientDetails() {
                             onClick={() => {
                                 setView("campaign")
                             }}
-                            className={`${view === "campaign" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                            className={`${view === "campaign" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer  py-[15px]`}
                         >
                             Campaign
                         </div>
@@ -101,7 +101,7 @@ export default function ClientDetails() {
                             onClick={() => {
                                 setView("subscription")
                             }}
-                            className={`${view === "subscription" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                            className={`${view === "subscription" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer  py-[15px]`}
                         >
                             Subscription
                         </div>
@@ -133,29 +133,37 @@ export default function ClientDetails() {
             <div>
                 {view === "overview" && <div>
                     <div className="bg-secondary2 rounded-[15px] p-5 mt-3.5 flex justify-between items-center">
-                        <div>
+                        <div className="">
                             <h2 className="text-base">Client Name</h2>
                             <h2 className="text-lg font-medium pt-1.5">Smith Auto Repair</h2>
                         </div>
-                        <hr className="border border-border-color w-16 h-full rotate-90" />
-                        <div>
-                            <h2 className="text-base">Industry</h2>
-                            <h2 className="text-lg font-medium pt-1.5">Automotive Services</h2>
+                        <div className="flex items-center ">
+                            <hr className="border border-border-color w-16 h-full rotate-90" />
+                            <div className="w-full">
+                                <h2 className="text-base">Industry</h2>
+                                <h2 className="text-lg font-medium pt-1.5">Automotive Services</h2>
+                            </div>
                         </div>
-                        <hr className="border border-border-color w-16 rotate-90" />
-                        <div>
-                            <h2 className="text-base">Phone</h2>
-                            <h2 className="text-lg font-medium pt-1.5">+61 400 987 654</h2>
+                        <div className="flex items-center ">
+                            <hr className="border border-border-color w-16 rotate-90" />
+                            <div>
+                                <h2 className="text-base">Phone</h2>
+                                <h2 className="text-lg font-medium pt-1.5">+61 400 987 654</h2>
+                            </div>
                         </div>
-                        <hr className="border border-border-color w-16 rotate-90" />
-                        <div>
-                            <h2 className="text-base">Email</h2>
-                            <h2 className="text-lg font-medium pt-1.5">smithautorepair@gmail.com</h2>
+                        <div className="flex items-center ">
+                            <hr className="border border-border-color w-16 rotate-90" />
+                            <div>
+                                <h2 className="text-base">Email</h2>
+                                <h2 className="text-lg font-medium pt-1.5">smithautorepair@gmail.com</h2>
+                            </div>
                         </div>
-                        <hr className="border border-border-color w-16 rotate-90" />
-                        <div>
-                            <h2 className="text-base">Website</h2>
-                            <h2 className="text-lg font-medium pt-1.5">www.smithautorepair.com</h2>
+                        <div className="flex items-center ">
+                            <hr className="border border-border-color w-16 rotate-90" />
+                            <div>
+                                <h2 className="text-base">Website</h2>
+                                <h2 className="text-lg font-medium pt-1.5">www.smithautorepair.com</h2>
+                            </div>
                         </div>
                     </div>
                     <hr className="border-t border-border2 my-5" />
@@ -165,7 +173,7 @@ export default function ClientDetails() {
                             <DashboardCard title="Average Rating" count="4.2" img="/images/tick-sms.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/average2.png')]" />
                             <DashboardCard title="Total Reviews" count="5,200" img="/images/star1.svg" bgClass="bg-success-light" textColor="text-success-light" bgImage="bg-[url('/images/total2.png')]" />
                             <DashboardCard title="Total Location" count="05" img="/images/location2.svg" bgClass="bg-custom-purple" textColor="text-custom-purple" bgImage="bg-[url('/images/active2.png')]" />
-                            <DashboardCard title="Active Campaigns" count="04" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-purple" bgImage="bg-[url('/images/active2.png')]" />
+                            <DashboardCard title="Active Campaigns" count="04" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-yellow" bgImage="bg-[url('/images/active3.png')]" />
                             <DashboardCard title="Positive Sentiment" count="75%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
                             <DashboardCard title="Negative Sentiment" count="12%" img="/images/chart-2.svg" bgClass="bg-danger" textColor="text-danger" bgImage="bg-[url('/images/negative.png')]" />
                         </div>
@@ -193,11 +201,15 @@ export default function ClientDetails() {
                                             field="reviews" />
                                     </div>
                                 </th>
-                                <th><TableOrder title="Average Rating"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="rating" /></th>
-                                <th >Actions</th>
+                                <th>
+                                    <div className="flex justify-center">
+                                        <TableOrder title="Average Rating"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="rating" />
+                                    </div>
+                                </th>
+                                <th><div className="flex justify-center">Actions</div></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -214,11 +226,19 @@ export default function ClientDetails() {
                                 </td>
                                 <td>{e.address}</td>
                                 <td><div className="flex justify-center"> {e.reviews} </div></td>
-                                <td>{e.rating}</td>
                                 <td>
-                                    <button className='cursor-pointer'>
-                                        <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
-                                    </button>
+                                    <div className="flex justify-center gap-1">
+                                        <Image unoptimized={true} src="/images/star.svg" alt="star1" width={16} height={16} />
+                                        {e.rating}
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div className="flex justify-center">
+                                        <button className='cursor-pointer'>
+                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>)}
                         </tbody>
@@ -297,7 +317,7 @@ export default function ClientDetails() {
             </div>}
 
             {view === "subscription" && <div>
-                <div className="bg-secondary2 rounded-[15px] p-5 grid grid-cols-4 items-center mt-3">
+                <div className="bg-secondary2 rounded-[15px] p-5 flex justify-between items-center mt-3">
                     <div>
                         <h2 className="text-base">Plan</h2>
                         <h2 className="text-lg font-medium pt-1.5">Business Premium</h2>
