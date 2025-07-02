@@ -3,7 +3,6 @@ import { toast } from "react-toastify"
 import CancelButton from "../../common/CancelButton"
 import SecondaryButton from "../../common/SecondaryButton"
 import InputForm from "../../form/InputForm"
-import RadioForm from "../../form/RadioForm"
 import Radio from "../../form/Radio"
 import SelectForm from "../../form/SelectForm"
 import Model from "../Model"
@@ -76,7 +75,7 @@ function AddCustomer({ onClose, id, onSave }) {
                     <div>
                         <div>
                             <InputForm
-                                class_="mt-0!"
+                                class_={`${!id ? "" : "mt-0!"}`}
                                 label="Customer Name"
                                 placeholder="Enter your name"
                                 isRequired={true}
