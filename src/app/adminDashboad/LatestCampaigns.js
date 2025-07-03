@@ -9,11 +9,13 @@ import { getError } from "../../../helper";
 import { latestCampaigns } from '../../constent/constArray';
 import Status from "../../components/Status";
 import Image from "next/image";
+import AdminDashboardModel from "../../components/Models/admin-dashboard/AdminDashboardModel";
 
 
 export default function LatestCampaigns() {
     const [loading, setLoading] = useState(true)
     const [sortBy, setSortBy] = useState("")
+    const [open, setOpen] = useState(false)
     const [list, setList] = useState([])
 
     useEffect(() => {
@@ -35,6 +37,14 @@ export default function LatestCampaigns() {
     }
 
     return <main>
+        {open &&
+            <AdminDashboardModel
+                id={open}
+                onClose={() => {
+                    setOpen(false)
+                }}
+            />
+        }
         <div className='table-class'>
             {loading ? <Loading class_="min-h-[400px]!" /> : (list?.length > 0 ? <table className='w-full'>
                 <thead>
@@ -74,7 +84,9 @@ export default function LatestCampaigns() {
                                     <Image src="/images/eyes3.svg" alt="eyes3" width={28} height={28} unoptimized={true} />
                                 </button>
 
-                                <button>
+                                <button onClick={() => {
+                                    setOpen("campaign-performance")
+                                }}>
                                     <Image src="/images/edit.svg" alt="edit" width={28} height={28} unoptimized={true} />
                                 </button>
                             </div>

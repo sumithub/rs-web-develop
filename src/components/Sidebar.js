@@ -87,6 +87,10 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
 
             {
                 title: "Templates", link: "/admin/template", icon: "template",
+            },
+
+            {
+                title: "Campaigns", link: "/admin/campaigns-management", icon: "profile",
             }
 
         ]
