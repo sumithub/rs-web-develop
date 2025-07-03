@@ -67,6 +67,7 @@ function AddTemplate() {
               <CheckboxForm />
               <div>Clone Template</div>
             </div>}
+
             <div className='grid grid-cols-2 gap-3'>
               <CustomSelectBox label="Template Type" isRequired={true} class_='mt-2! w-full!'
                 defaultOption='Template Type'
@@ -81,7 +82,7 @@ function AddTemplate() {
                 }}>
                 <option value="email">Email</option>
                 <option value="sms">SMS</option>
-                {isAdmin() && <option value="reviewResponseTemplate">Review Response Template</option>}
+                {isAdmin() && <option value="review Response Template">Review Response Template</option>}
               </CustomSelectBox>
 
               <InputForm
@@ -131,7 +132,7 @@ function AddTemplate() {
               />
             </div>}
 
-            <div className='mt-5'>
+            {isEmail && <div className='mt-5'>
               <HtmlEditor
                 limit={type === 'sms' ? 160 : ""}
                 label="Email Body"
@@ -145,13 +146,13 @@ function AddTemplate() {
                 shoeMenu={isEmail}
                 dynamicFields={true}
               />
+            </div>}
 
-            </div>
+
             {/* <HtmlEditor label="Email Body"
                formProps={{ ...register("message", { required: false }) }}
                                     errors={errors}
                                     clearErrors={clearErrors}
-              
             >
 
               <div className='grid grid-cols-3 gap-4'>

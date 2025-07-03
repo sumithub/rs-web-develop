@@ -10,8 +10,7 @@ import RecentPayments from "../../adminDashboad/RecentPayments"
 import LatestCampaigns from "../../adminDashboad/LatestCampaigns"
 import Loading from "../../../components/Loading"
 
-
-export default function AdminDashboard() {
+export default function Dashboard() {
     const [view, setView] = useState("reviews")
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
@@ -22,7 +21,6 @@ export default function AdminDashboard() {
             setLoading(false);
         }, 2000);
     }, [search]);
-
 
     return <AdminLayout
         headerSearch={

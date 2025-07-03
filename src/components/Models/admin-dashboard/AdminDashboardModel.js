@@ -43,6 +43,7 @@ export default function AdminDashboardModel({ onClose, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 {id === "subscription-revenue" && <SelectForm
+                    class_="mt-0!"
                     label="By Plan"
                     isRequired={false}
                     defaultOption="select"
@@ -58,6 +59,7 @@ export default function AdminDashboardModel({ onClose, id }) {
                 </SelectForm>}
 
                 <SelectForm
+                    class_="mt-0!"
                     label="By Client"
                     isRequired={false}
                     defaultOption="select"
