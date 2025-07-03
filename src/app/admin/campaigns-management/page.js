@@ -4,7 +4,6 @@ import AdminLayout from "../../../components/AdminLayout"
 import Search from "../../../components/form/Search"
 import DateRange from "../../../components/form/DateRangePicker"
 import CustomSelectBox from "../../../components/form/CustomSelectBox"
-import SecondaryButton from "../../../components/common/SecondaryButton"
 import TableOrder from "../../../components/TableOrder"
 import Status from "../../../components/Status"
 import Image from "next/image"
@@ -15,12 +14,13 @@ import { formatDate, getError } from "../../../../helper"
 import Loading from "../../../components/Loading"
 import { campaignsManagement } from "../../../constent/constArray"
 import Link from "next/link"
+import SecondaryButton from "../../../components/common/SecondaryButton"
 
 export default function CampaignsManagement() {
     const [sortBy, setSortBy] = useState(false)
-    const [filterBy, setFilterBy] = useState("")
-    const [filterBy1, setFilterBy1] = useState("")
-    const [filterBy2, setFilterBy2] = useState("")
+    const [byStatus, setByStatus] = useState("")
+    const [byClient, setByClient] = useState("")
+    const [byType, setByType] = useState("")
     const [date, setDate] = useState("")
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
@@ -28,7 +28,7 @@ export default function CampaignsManagement() {
 
     useEffect(() => {
         getCampaigns()
-    }, [search, filterBy, date, filterBy1, filterBy2, sortBy])
+    }, [search, byStatus, date, byClient, byType, sortBy])
 
     const getCampaigns = async () => {
         try {
@@ -64,13 +64,12 @@ export default function CampaignsManagement() {
                     }}
                 />
                 <div className='flex items-center gap-3.5'>
-
                     <CustomSelectBox
                         defaultOption="Filter By Type"
-                        class_='mt-0! w-33!'
-                        value={filterBy2}
+                        class_='mt-0! w-32!'
+                        value={byType}
                         onChange={(e) => {
-                            setFilterBy2(e.target.value)
+                            setByType(e.target.value)
                         }}
                     >
                         <option value="email">Email</option>
@@ -78,27 +77,27 @@ export default function CampaignsManagement() {
                     </CustomSelectBox>
 
                     <DateRange
+                        value={date}
                         onChange={(e) => { setDate(e) }}
                     />
 
                     <CustomSelectBox
                         defaultOption="Client"
-                        class_='mt-0! w-22!'
-                        value={filterBy1}
+                        class_='mt-0! w-32!'
+                        value={byClient}
                         onChange={(e) => {
-                            setFilterBy1(e.target.value)
-                        }}
-                    >
+                            setByClient(e.target.value)
+                        }}>
                         <option value="client1">Client 1</option>
                         <option value="client2">Client 2</option>
                     </CustomSelectBox>
 
                     <CustomSelectBox
                         defaultOption="Filter By Status"
-                        class_='mt-0! w-33!'
-                        value={filterBy}
+                        class_='mt-0! w-32!'
+                        value={byStatus}
                         onChange={(e) => {
-                            setFilterBy(e.target.value)
+                            setByStatus(e.target.value)
                         }}
                     >
                         <option value="draft">Draft</option>
@@ -106,10 +105,8 @@ export default function CampaignsManagement() {
                         <option value="scheduled">Scheduled</option>
                         <option value="completed">Completed</option>
                     </CustomSelectBox>
-                    <Link href="/manage-campaigns/detail" className='shrink-0'>
-                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0 w-full"
-                        >Create New Campaign</button>
-                    </Link>
+                    <SecondaryButton title="Create New Campaign" isLink={true} link="/manage-campaigns/detail" class_="text-xs! font-normal! py-[9px]!" />
+
                 </div>
             </div>
             <div className="table-class mt-3.5">
@@ -122,28 +119,22 @@ export default function CampaignsManagement() {
                                 field="name" />
                             </th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Client"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="client" />
-                                </div>
+                                <TableOrder title="Client"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="client" />
                             </th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Target Locations"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="targetLocation" />
-                                </div>
+                                <TableOrder title="Target Locations"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="targetLocation" />
                             </th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Status"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="status" />
-                                </div>
+                                <TableOrder title="Status"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="status" />
                             </th>
                             <th><TableOrder title="Created On"
                                 sortBy={sortBy}
@@ -153,30 +144,17 @@ export default function CampaignsManagement() {
                             <th className="text-center!">Actions</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         {list.map((e, index) =>
-                            <tr key={index}>
-                                <td>
-                                    {e.name}
-                                </td>
+                            <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                <td>{e.name}</td>
                                 <td>{e.client}</td>
+                                <td>{e.targetLocation}</td>
+                                <td><Status status={e.status} context="notify" /></td>
+                                <td>{formatDate(e.createdOn)}</td>
                                 <td>
-                                    <div className="flex justify-center">
-                                        {e.targetLocation}
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className="flex justify-center">
-                                        <Status status={e.status} context="notify" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className="flex justify-center">
-                                        {formatDate(e.createdOn)}
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className='flex w-auto items-center gap-2.5 justify-center'>
+                                    <div className='flex items-center gap-2.5 justify-center'>
                                         <button className='cursor-pointer'>
                                             <Image unoptimized={true} src="/images/eyes3.svg" alt='eye' height={28} width={28} />
                                         </button>
@@ -186,7 +164,7 @@ export default function CampaignsManagement() {
                                             </button>
                                         </Link>
                                         <button className='cursor-pointer'>
-                                            <Image unoptimized={true} src="/images/global.svg" alt='globlal' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/global.svg" alt='global' height={28} width={28} />
                                         </button>
                                     </div>
                                 </td>
