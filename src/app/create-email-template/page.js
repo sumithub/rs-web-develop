@@ -55,6 +55,7 @@ function AddTemplate() {
   let body = watch("body") || []
   const isEmail = type === "email"
   const isSMS = type === "sms"
+  const isReview = type === "reviewResponseTemplate"
 
   return <AdminLayout>
     {openPreview && <SmsPreview type={type}
@@ -64,7 +65,7 @@ function AddTemplate() {
         <div className='w-[60%]'>
           <div className='shadow-sm rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
             {isAdmin() && <div className="flex gap-2.5 items-center">
-              <CheckboxForm />
+              <CheckboxForm formProps={{ ...register("cloneTemplate") }} errors={errors} />
               <div>Clone Template</div>
             </div>}
 
@@ -96,7 +97,7 @@ function AddTemplate() {
               />
             </div>
 
-            {isEmail && <InputForm
+            {!isSMS && <InputForm
               inputClass='border-primary/10! focus:border-primary/60!'
               label="Subject Line"
               isRequired={true}
@@ -105,7 +106,7 @@ function AddTemplate() {
               errors={errors}
             />}
 
-            {isEmail && <div className='grid grid-cols-2 gap-3'>
+            {!isSMS && <div className='grid grid-cols-2 gap-3'>
               <InputForm
                 inputClass='border-primary/10! focus:border-primary/60!'
                 label="Sender Name"
@@ -132,10 +133,10 @@ function AddTemplate() {
               />
             </div>}
 
-            {isEmail && <div className='mt-5'>
+            <div className='mt-5'>
               <HtmlEditor
                 limit={type === 'sms' ? 160 : ""}
-                label="Email Body"
+                label={`${type === 'sms' ? "Message" : "Email"} Body`}
                 isRequired={true}
                 value={body}
                 onChange={(value) => {
@@ -143,10 +144,10 @@ function AddTemplate() {
                   setValue("body", value)
                 }}
                 type={type}
-                shoeMenu={isEmail}
+                shoeMenu={true}
                 dynamicFields={true}
               />
-            </div>}
+            </div>
 
 
             {/* <HtmlEditor label="Email Body"
