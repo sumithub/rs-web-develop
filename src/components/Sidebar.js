@@ -64,7 +64,7 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
         ]
 
         const adminList = [
-            { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
+            { title: "Dashboard", link: "/admin/dashboard", icon: "dashboard" },
 
             {
                 title: "Business Management", link: "", icon: "business",

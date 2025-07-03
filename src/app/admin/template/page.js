@@ -42,7 +42,7 @@ export default function Template() {
 
     return (
         <AdminLayout headerSearch={<div>
-            <Search placeholder="Search" mainClass="w-full!" />
+            <Search placeholder="Search" mainClass="w-96!" />
         </div>}>
             {open &&
                 <TemplatePreview
