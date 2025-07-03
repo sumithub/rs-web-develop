@@ -22,9 +22,9 @@ export default function ClientDetails() {
     const [sortBy, setSortBy] = useState(false)
     const [view, setView] = useState("overview")
     const [search, setSearch] = useState("")
-    const [list, setList] = useState([])
-    const [list1, setList1] = useState([])
-    const [list2, setList2] = useState([])
+    const [location, setLocation] = useState([])
+    const [campaign, setCampaign] = useState([])
+    const [subscription, setSubscription] = useState([])
     const [loading, setLoading] = useState(true)
 
 
@@ -35,13 +35,13 @@ export default function ClientDetails() {
     const getData = async () => {
         try {
             setLoading(true)
-            setList([])
-            setList1([])
-            setList2([])
+            setLocation([])
+            setCampaign([])
+            setSubscription([])
             const res = await axios.get("/api")
-            setList(res.data || clientLocation)
-            setList1(res.data || clientCampaign)
-            setList2(res.data || clientSubscription)
+            setLocation(res.data || clientLocation)
+            setCampaign(res.data || clientCampaign)
+            setSubscription(res.data || clientSubscription)
             setLoading(false)
 
         } catch (error) {
@@ -182,7 +182,7 @@ export default function ClientDetails() {
             </div>
             {view === "location" && <div>
                 <div className="table-class mt-3.5">
-                    {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
+                    {loading ? <Loading /> : (location?.length > 0 ? <table className="w-full">
                         <thead>
                             <tr>
                                 <th><TableOrder title="Location Name"
@@ -213,13 +213,13 @@ export default function ClientDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            {location?.map((e, index) => <tr key={index} className={index === location.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-center gap-2.5">
                                         <Checkbox
                                             checked={e.selected}
                                             onChange={(checked) => {
-                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                                setLocation(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
                                             }} />
                                         <div>{e.name}</div>
                                     </div>
@@ -244,14 +244,14 @@ export default function ClientDetails() {
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                 </div>
-                {list?.length > 0 && <div>
+                {location?.length > 0 && <div>
                     <PaginationDemo />
                 </div>}
             </div>}
 
             {view === "campaign" && <div>
                 <div className="table-class mt-3.5">
-                    {loading ? <Loading /> : (list1?.length > 0 ? <table className="w-full">
+                    {loading ? <Loading /> : (campaign?.length > 0 ? <table className="w-full">
                         <thead>
                             <tr>
                                 <th><TableOrder title="Campaign Name"
@@ -286,13 +286,13 @@ export default function ClientDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list1?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            {campaign?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-center gap-2.5">
                                         <Checkbox
                                             checked={e.selected}
                                             onChange={(checked) => {
-                                                setList1(list1 => list1.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                                setCampaign(campaign => campaign.map((item, i) => i === index ? { ...item, selected: checked } : item))
                                             }} />
                                         <div>{e.name}</div>
                                     </div>
@@ -311,7 +311,7 @@ export default function ClientDetails() {
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                 </div>
-                {list1?.length > 0 && <div>
+                {campaign?.length > 0 && <div>
                     <PaginationDemo />
                 </div>}
             </div>}
@@ -345,7 +345,7 @@ export default function ClientDetails() {
                     </div>
                 </div>
                 <div className="table-class mt-3.5">
-                    {loading ? <Loading /> : (list2?.length > 0 ? <table className="w-full">
+                    {loading ? <Loading /> : (subscription?.length > 0 ? <table className="w-full">
                         <thead>
                             <tr>
                                 <th><TableOrder title="Invoice ID"
@@ -380,7 +380,7 @@ export default function ClientDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list2?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            {subscription?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>{e.id}</td>
                                 <td>{formatDate(e.date)}</td>
                                 <td>{e.amount}</td>
@@ -405,7 +405,7 @@ export default function ClientDetails() {
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                 </div>
-                {list2?.length > 0 && <div>
+                {subscription?.length > 0 && <div>
                     <PaginationDemo />
                 </div>}
             </div>}

@@ -27,6 +27,7 @@ export default function Edit({ onClose }) {
     const [date, setDate] = useState("")
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
+    const [selId, setSelId] = useState("")
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -62,8 +63,10 @@ export default function Edit({ onClose }) {
 
             {openClient &&
                 <AddNewClient
+                    id={selId}
                     onClose={() => {
                         setOpenClient(false)
+                        setSelId("")
                     }}
 
                     onSave={() => {
@@ -167,7 +170,10 @@ export default function Edit({ onClose }) {
                                         <button className='cursor-pointer'>
                                             <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
                                         </button>
-                                        <button className='cursor-pointer'>
+                                        <button className='cursor-pointer' onClick={() => {
+                                            setSelId("e.id")
+                                            setOpenClient(true)
+                                        }}>
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
                                     </div>
