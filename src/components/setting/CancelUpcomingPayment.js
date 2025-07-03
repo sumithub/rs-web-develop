@@ -24,7 +24,7 @@ export default function CancelUpcomingPayment({ onClose, id }) {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Kept Successfully")
+            toast.success("Cancelled Successfully")
             setSending(false)
             onClose()
         } catch (error) {
@@ -68,8 +68,8 @@ export default function CancelUpcomingPayment({ onClose, id }) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mt-4">
-                    <CancelButton title="Cancel payment" onClick={onClose} class_="text-lg!" />
-                    <SecondaryButton title="keep payment" type="submit" disabled={sending} class_="text-lg!" />
+                    <CancelButton title="Cancel payment" type="submit" disabled={sending} class_="text-lg!" />
+                    <SecondaryButton title="keep payment" onClick={onClose} class_="text-lg!" />
                 </div>
             </form>
         </Model >

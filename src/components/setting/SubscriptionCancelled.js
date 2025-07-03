@@ -2,6 +2,7 @@ import Model from "../Models/Model";
 import { toast } from "react-toastify";
 import SecondaryButton from "../common/SecondaryButton";
 import Image from "next/image";
+import Link from "next/link";
 
 
 export default function SubscriptionCancelled({ onClose }) {
@@ -21,7 +22,9 @@ export default function SubscriptionCancelled({ onClose }) {
                     onClose()
                 }}
                     class_="bg-white! hover:bg-primary! text-lg! text-primary! hover:text-white!" />
-                <SecondaryButton title="back to dashboard" class_="text-lg!" onClick={onClose} />
+                <Link href="/dashboard">
+                    <SecondaryButton title="back to dashboard" class_="text-lg!" onClick={onClose} />
+                </Link>
             </div>
         </Model >
     )
