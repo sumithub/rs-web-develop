@@ -9,11 +9,13 @@ import { getError } from "../../../helper";
 import { recentPayments } from '../../constent/constArray';
 import Status from "../../components/Status";
 import Image from "next/image";
+import AdminDashboardModel from "../../components/Models/admin-dashboard/AdminDashboardModel";
 
 
 export default function RecentPayments() {
     const [loading, setLoading] = useState(true)
     const [sortBy, setSortBy] = useState("")
+    const [open, setOpen] = useState(false)
     const [list, setList] = useState([])
 
     useEffect(() => {
@@ -35,6 +37,14 @@ export default function RecentPayments() {
     }
 
     return <main>
+        {open &&
+            <AdminDashboardModel
+                id={open}
+                onClose={() => {
+                    setOpen(false)
+                }}
+            />
+        }
         <div className='table-class'>
             {loading ? <Loading class_="min-h-[400px]!" /> : (list?.length > 0 ? <table className='w-full'>
                 <thead>
@@ -75,7 +85,9 @@ export default function RecentPayments() {
                         <td>{e.client}</td>
                         <td>
                             <div className="flex gap-2.5 justify-center">
-                                <button>
+                                <button onClick={() => {
+                                    setOpen("subscription-revenue")
+                                }}>
                                     <Image src="/images/eyes3.svg" alt="eyes3" width={28} height={28} unoptimized={true} />
                                 </button>
                                 <button>

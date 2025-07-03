@@ -609,19 +609,19 @@ export default function AddReview({ heading = "", onClose, OnSave, id, onNext })
                     )}
 
                     {/* Action Buttons */}
-                    <div className="mt-[30px] grid grid-cols-2 gap-5">
+                    <div className="mt-[30px] grid grid-cols-2 items-center gap-5">
                         <SecondaryButton
                             title={sending ? "Saving..." : "Save"}
                             type="submit"
                             disabled={sending || !isFormValid}
-                            class_={`bg-white! text-primary! ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            class_={`bg-white! text-primary! border! border-primary! hover:text-white! hover:bg-primary! ${!isFormValid ? ' disabled:bg-dark! disabled:border disabled:border-dark! disabled:text-text3! cursor-not-allowed' : ''}`}
                         />
                         <SecondaryButton
                             title="Next"
                             onClick={handleNext}
                             type="button"
                             disabled={!isFormValid}
-                            class_={!isFormValid ? 'opacity-50 cursor-not-allowed' : ''}
+                            class_={!isFormValid ? 'disabled:bg-dark! disabled:text-text3! cursor-not-allowed' : ''}
                         />
                     </div>
                 </div>

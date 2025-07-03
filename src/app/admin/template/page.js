@@ -13,6 +13,8 @@ import { adminTemplates } from "../../../constent/constArray"
 import Loading from "../../../components/Loading"
 import TemplatePreview from "../../../components/Models/TemplatePreview"
 import Link from "next/link"
+import DeleteTemplate from "../../../components/Models/templates/DeleteTemplate"
+import { formatDate } from "../../../../helper"
 
 export default function Template() {
     const [sortBy, setSortBy] = useState(false)
@@ -21,6 +23,7 @@ export default function Template() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
 
     useEffect(() => {
         getData()
@@ -42,13 +45,26 @@ export default function Template() {
 
     return (
         <AdminLayout headerSearch={<div>
-            <Search placeholder="Search" mainClass="w-full!" />
+            <Search
+                placeholder="Search"
+                mainClass="w-96!"
+                onSearch={(s) => {
+                    setSearch(s)
+                }} />
         </div>}>
             {open &&
                 <TemplatePreview
                     type={true}
                     onClose={() => {
                         setOpen(false)
+                    }}
+                />
+            }
+
+            {openModal &&
+                <DeleteTemplate
+                    onClose={() => {
+                        setOpenModal(false)
                     }}
                 />
             }
@@ -77,7 +93,7 @@ export default function Template() {
                         <SecondaryButton
                             title="Create New Template"
                             type='submit'
-                            class_="text-xs! font-normal!"
+                            class_="text-xs! font-normal! py-2.5!"
                             isLink={true} link='/create-email-template'
                         />
                     </div>
@@ -86,10 +102,10 @@ export default function Template() {
                     {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                         <thead>
                             <tr>
-                                <th><TableOrder title="Name"
+                                <th><TableOrder title="Template Name"
                                     sortBy={sortBy}
                                     setSortBy={setSortBy}
-                                    field="TagName" /></th>
+                                    field="name" /></th>
 
                                 <th><TableOrder title="Type"
                                     sortBy={sortBy}
@@ -102,7 +118,7 @@ export default function Template() {
                                     field="subject"
                                 /></th>
                                 <th>
-                                    <div className="flex justify-center">
+                                    <div>
                                         <TableOrder title="Last Updated"
                                             sortBy={sortBy}
                                             setSortBy={setSortBy}
@@ -110,19 +126,19 @@ export default function Template() {
                                         />
                                     </div>
                                 </th>
-                                <th className="text-center!">Action</th>
+                                <th className="text-center!">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {list.map((e, i) =>
-                                <tr key={i}>
+                                <tr key={i} className={i === list.length - 1 ? '' : 'border-b border-border-color'}>
                                     <td>{e.name}</td>
                                     <td>{e.type}</td>
-                                    <td className="text-center!">{e.subject}</td>
-                                    <td className="text-center!">{e.updated}</td>
+                                    <td>{e.subject}</td>
+                                    <td >{formatDate(e.lastUpdate)}</td>
                                     <td>
                                         <div className='flex w-auto items-center gap-2.5 justify-center'>
-                                            <button className='cursor-pointer'>
+                                            <button className='cursor-pointer' onClick={() => toast.success("Copied Successfully")}>
                                                 <Image unoptimized={true} src="/images/copy.svg" alt='copy' height={28} width={28} />
                                             </button>
                                             <button className='cursor-pointer' onClick={() => setOpen(true)}>
@@ -133,7 +149,7 @@ export default function Template() {
                                                     <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                                 </button>
                                             </Link>
-                                            <button className='cursor-pointer'>
+                                            <button className='cursor-pointer' onClick={() => setOpenModal(true)}>
                                                 <Image unoptimized={true} src="/images/delete1.svg" alt='delete1' height={28} width={28} />
                                             </button>
                                         </div>

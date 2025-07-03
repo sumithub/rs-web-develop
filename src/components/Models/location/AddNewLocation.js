@@ -90,7 +90,7 @@ function AddNewLocation({ onClose, id, onSave, type, showOnlyEdit }) {
 
             <div className="grid grid-cols-2 gap-5 mt-[30px]">
                 <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
-                <SecondaryButton title={!id ? "Save Location" : "Update Location"} type="submit" disabled={sending} class_="text-lg!" />
+                <SecondaryButton title={(!id || showOnlyEdit) ? "Save Location" : "Update Location"} type="submit" disabled={sending} class_="text-lg!" />
             </div>
         </form>
     </Model>

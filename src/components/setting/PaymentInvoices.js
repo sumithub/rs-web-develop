@@ -30,7 +30,7 @@ export default function PaymentInvoices() {
     const [open, setOpen] = useState(false)
     const [openSchedule, setOpenSchedule] = useState(false)
     const [openUpdate, setOpenUpdate] = useState(false)
-    const { watch, setValue } = useForm();
+    const { watch, setValue, register } = useForm();
 
     useEffect(() => {
         getTemplate()
@@ -117,11 +117,12 @@ export default function PaymentInvoices() {
                         defaultOption="Status"
                         selectClass_="border border-text3/30!"
                         class_="mt-0!"
+                        formProps={{ ...register("status", { required: false }) }}
+                        setValue={setValue}
+                        watch={watch}
                         onChange={(e) => {
                             setType(e.target.value)
-                        }}
-                        setValue={setValue}
-                        watch={watch}>
+                        }}>
                         <option value="all">All</option>
                         <option value="paid">Paid</option>
                         <option value="unpaid">Unpaid</option>
@@ -131,10 +132,15 @@ export default function PaymentInvoices() {
                         selectClass_="border border-text3/30!"
                         defaultOption="Filter"
                         class_="mt-0!"
+                        formProps={{ ...register("filter", { required: false }) }}
                         setValue={setValue} watch={watch}
                         onChange={(e) => {
                             setType1(e.target.value)
-                        }} />
+                        }} >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </SelectForm>
 
                     <DateRange
                         class_="mt-0! w-full!"

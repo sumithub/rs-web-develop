@@ -91,11 +91,12 @@ export default function UsersManagement() {
                 />
                 <div className='flex items-center gap-3.5'>
                     <DateRange
+                        value={date}
                         onChange={(e) => { setDate(e) }}
                     />
                     <CustomSelectBox
                         defaultOption="Assigned Client"
-                        class_='mt-0! w-32!'
+                        class_='mt-0! w-36!'
                         value={filterBy1}
                         onChange={(e) => {
                             setFilterBy1(e.target.value)
@@ -107,7 +108,7 @@ export default function UsersManagement() {
 
                     <CustomSelectBox
                         defaultOption="Role"
-                        class_='mt-0! w-32!'
+                        class_='mt-0! w-28!'
                         value={filterBy}
                         onChange={(e) => {
                             setFilterBy(e.target.value)
@@ -137,18 +138,30 @@ export default function UsersManagement() {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="email" /></th>
-                            <th><TableOrder title="Role"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="role" /></th>
-                            <th><TableOrder title="Assigned Client"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="client" /></th>
-                            <th><TableOrder title="Status"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="status" /></th>
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Role"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="role" />
+                                </div>
+                            </th>
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Assigned Client"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="client" />
+                                </div>
+                            </th>
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Status"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="status" />
+                                </div>
+                            </th>
                             <th className="text-center!">Actions</th>
                         </tr>
                     </thead>
@@ -166,9 +179,21 @@ export default function UsersManagement() {
                                     </div>
                                 </td>
                                 <td>{e.email}</td>
-                                <td>{e.role}</td>
-                                <td>{e.assignedClient}</td>
-                                <td><Status status={e.status} /></td>
+                                <td>
+                                    <div className="flex justify-center">
+                                        {e.role}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="flex justify-center">
+                                        {e.assignedClient}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="flex justify-center">
+                                        <Status status={e.status} />
+                                    </div>
+                                </td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
                                         <button className='cursor-pointer'

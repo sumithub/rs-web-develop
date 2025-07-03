@@ -536,7 +536,7 @@ export default function Detail({ }) {
                                 </SelectForm>
                                 {watch("customerSource") && <SelectForm
                                     class_="mt-10"
-                                    defaultOption="Exclude Duplicates" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"                                    
+                                    defaultOption="Exclude Duplicates" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                                     formProps={{ ...register("excludeDuplicates", { required: false }) }}
                                     errors={errors} setValue={setValue}
                                     watch={watch}>
@@ -899,7 +899,7 @@ export default function Detail({ }) {
                         onClick={() => { router.push("/manage-campaigns") }}
                         disabled={sending} /> : <SecondaryButton title="Save as Draft" class_="text-lg!" type="submit"
                             disabled={sending} />}
-                    <SecondaryButton disabled={isAllPending} title="Schedule for Later" class_="bg-white! hover:bg-primary! text-primary! text-lg! hover:text-white!" onClick={() => { setOpenSchedule(true) }} type="button" />
+                    <SecondaryButton disabled={isAllPending} title="Schedule for Later" class_="bg-white! disabled:bg-dark! disabled:text-text3! text-primary! text-lg! hover:text-white! hover:bg-primary!" onClick={() => { setOpenSchedule(true) }} type="button" />
                     <CancelButton title="Launch Now" disabled={sending || isAllPending} type="submit" class_="text-lg!" />
                 </div>
             </form>

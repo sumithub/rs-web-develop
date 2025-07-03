@@ -13,7 +13,12 @@ import SubscriptionCancelled from "./SubscriptionCancelled";
 
 
 export default function CancelSubscription({ onClose, id }) {
-    const { register, handleSubmit, setValue, watch, formState: { errors }, clearErrors } = useForm();
+    const { register, handleSubmit, setValue, watch, formState: { errors }, clearErrors, getValues, trigger } = useForm({
+        mode: 'onChange',
+        defaultValues: {
+            select: "",
+        }
+    });
     const [sending, setSending] = useState(false)
     const [openCancelled, setOpenCancelled] = useState(false)
 
@@ -28,7 +33,7 @@ export default function CancelSubscription({ onClose, id }) {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Kept Successfully")
+            toast.success(" Successfully")
             setSending(false)
             onClose()
         } catch (error) {
@@ -43,12 +48,41 @@ export default function CancelSubscription({ onClose, id }) {
         { title: "Auto Renew", price: "Enabled" },
     ]
 
+    const handleCancelClick = async (e) => {
+        e.preventDefault()
+
+        // Get current form values
+        const values = getValues()
+
+        // Manual validation check
+        let hasErrors = false
+        const newErrors = {}
+
+        if (!values.select || values.select.trim() === '') {
+            hasErrors = true
+        }
+
+        if (hasErrors) {
+            // Trigger validation to show errors
+            await trigger(['select'])
+            // toast.error("Please fill all required fields correctly")
+            return
+        }
+
+        // All fields are valid, clear errors and open modal
+        clearErrors()
+        setOpenCancelled(true)
+    }
+
     return (
         <Model onClose={onClose} title="Cancel Subscription" modalClass="w-[70%]!">
 
             {openCancelled &&
                 <SubscriptionCancelled
-                    onClose={() => { setOpenCancelled(false) }} />
+                    onClose={() => {
+                        setOpenCancelled(false)
+                        onClose()
+                    }} />
             }
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mt-4 flex gap-2.5 p-2.5 items-center bg-custom-yellow-light/10 rounded-lg">
@@ -102,10 +136,18 @@ export default function CancelSubscription({ onClose, id }) {
                     </div>
 
                     <div className="grid grid-cols-4 gap-5 mt-7">
-                        <CancelButton title="Cancel Subscription" onClick={() => { setOpenCancelled(true) }} class_="text-danger! bg-danger/10!" />
-                        <SecondaryButton title="Switch To A Lower Plan" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => toast.success("Switched Sccessfully")} />
-                        <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => toast.success("Applied Sccessfully")} />
-                        <SecondaryButton title="keep subscription" type="submit" disabled={sending} />
+                        <CancelButton title="Cancel Subscription" type="button"
+                            disabled={sending}
+                            onClick={handleCancelClick} class_="text-danger! bg-danger/10!" />
+                        <SecondaryButton title="Switch To A Lower Plan" onClick={() => {
+                            toast.success("Switched Successfully")
+                            onClose()
+                        }} class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" />
+                        <SecondaryButton title="Apply 20% Discount" class_="bg-white! hover:bg-primary! text-primary! hover:text-white!" onClick={() => {
+                            toast.success("Applied Successfully")
+                            onClose()
+                        }} />
+                        <SecondaryButton title="keep subscription" onClick={onClose} />
                     </div>
                 </div>
             </form>

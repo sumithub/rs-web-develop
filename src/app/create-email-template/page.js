@@ -23,6 +23,7 @@ function AddTemplate() {
   const [type, setType] = useState("email")
   const [openPreview, setOpenPreview] = useState(false)
   // const [dynamicFields, setDynamicFields] = useState(false)
+  const [submitAction, setSubmitAction] = useState("saveAndActivate");
 
   const handleClick = () => {
     toast.success("Cloned Successfully")
@@ -33,6 +34,7 @@ function AddTemplate() {
     try {
       if (getTextLength(data.body) > 160) {
         toast.error('Message must be 160 characters or less')
+        return;
       }
       setSending(true)
       let res = null
@@ -43,9 +45,12 @@ function AddTemplate() {
         res = await axios.post("/api", data)
       }
 
-      toast.success("Template Created Successfully")
+      if (submitAction === "saveAsDraft") {
+        toast.success("Saved Successfully");
+      } else if (submitAction === "saveAndActivate") {
+        toast.success("Template Created Successfully");
+      }
       setSending(false)
-      // onClose()
     } catch (error) {
       toast.error(getError(error))
       setSending(false)
@@ -55,6 +60,7 @@ function AddTemplate() {
   let body = watch("body") || []
   const isEmail = type === "email"
   const isSMS = type === "sms"
+  const isReview = type === "reviewResponseTemplate"
 
   return <AdminLayout>
     {openPreview && <SmsPreview type={type}
@@ -63,11 +69,12 @@ function AddTemplate() {
       <div className='flex items-start gap-4'>
         <div className='w-[60%]'>
           <div className='shadow-sm rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
-            {isAdmin() && <div className="flex gap-2.5 items-center">
-              <CheckboxForm />
+            {isAdmin() && <div className="flex gap-2.5 items-center mt-2">
+              <CheckboxForm formProps={{ ...register("cloneTemplate") }} errors={errors} />
               <div>Clone Template</div>
             </div>}
-            <div className='grid grid-cols-2 gap-3'>
+
+            <div className={`grid grid-cols-2 gap-3`}>
               <CustomSelectBox label="Template Type" isRequired={true} class_='mt-2! w-full!'
                 defaultOption='Template Type'
                 selectClass_="py-[13.2px]! px-2.5! border-primary/10! focus:border-primary/60!"
@@ -95,7 +102,7 @@ function AddTemplate() {
               />
             </div>
 
-            {isEmail && <InputForm
+            {!isSMS && <InputForm
               inputClass='border-primary/10! focus:border-primary/60!'
               label="Subject Line"
               isRequired={true}
@@ -104,7 +111,7 @@ function AddTemplate() {
               errors={errors}
             />}
 
-            {isEmail && <div className='grid grid-cols-2 gap-3'>
+            {!isSMS && <div className='grid grid-cols-2 gap-3'>
               <InputForm
                 inputClass='border-primary/10! focus:border-primary/60!'
                 label="Sender Name"
@@ -134,7 +141,7 @@ function AddTemplate() {
             <div className='mt-5'>
               <HtmlEditor
                 limit={type === 'sms' ? 160 : ""}
-                label="Email Body"
+                label={`${type === 'sms' ? "Message" : "Email"} Body`}
                 isRequired={true}
                 value={body}
                 onChange={(value) => {
@@ -142,16 +149,16 @@ function AddTemplate() {
                   setValue("body", value)
                 }}
                 type={type}
-                shoeMenu={isEmail}
+                shoeMenu={true}
                 dynamicFields={true}
               />
-
             </div>
+
+
             {/* <HtmlEditor label="Email Body"
                formProps={{ ...register("message", { required: false }) }}
                                     errors={errors}
                                     clearErrors={clearErrors}
-              
             >
 
               <div className='grid grid-cols-3 gap-4'>
@@ -191,8 +198,11 @@ function AddTemplate() {
                 isLink={true} link='/admin/template' /> :
                 <CancelButton title="clone template" onClick={handleClick} class_="text-lg!" />}
 
-              <SecondaryButton title="Save As Draft" class_='bg-white! text-primary! text-lg! hover:text-white! hover:bg-primary!' type='submit' />
-              <SecondaryButton title="Save & Activate" type="submit" disabled={sending} class_="text-lg!" />
+              <SecondaryButton title="Save As Draft" class_='bg-white! disabled:bg-dark disabled:text-text3! text-primary! text-lg! hover:text-white! hover:bg-primary!'
+                disabled={sending}
+                type="submit"
+                onClick={() => setSubmitAction("saveAsDraft")} />
+              <SecondaryButton title="Save & Activate" type="submit" disabled={sending} onClick={() => setSubmitAction("saveAndActivate")} class_="text-lg!" />
             </div>
           </div>
         </div>

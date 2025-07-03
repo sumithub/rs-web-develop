@@ -9,10 +9,10 @@ export const USER_ACTIONS = [
 ]
 
 export const users = [
-    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", id: 1, email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", id: 2, email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", id: 3, email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", id: 4, email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
 ];
 
 export const TEMPLATE_ACTIONS = [
@@ -327,16 +327,16 @@ export const paymentInvoice = [
 
 export const adminTemplates = [
 
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
 ]
 export const clientsManagement = [
     { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
@@ -415,3 +415,12 @@ export const customerJourney = [
     { num: "5", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
     { num: "6", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
 ];
+
+export const campaignsManagement = [
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Active", createdOn: "Jun 18,2024" },
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Active", createdOn: "Jun 18,2024" },
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Completed", createdOn: "Jun 18,2024" },
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Active", createdOn: "Jun 18,2024" },
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Active", createdOn: "Jun 18,2024" },
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Completed", createdOn: "Jun 18,2024" },
+]
