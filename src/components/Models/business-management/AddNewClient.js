@@ -32,7 +32,7 @@ export default function AddNewClient({ onClose, id }) {
         }
     }
     return (
-        <Model onClose={onClose} title="Add New Client" modalClass="w-1/2!">
+        <Model onClose={onClose} title={!id ? "Add New Client" : "Edit"} modalClass="w-1/2!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
                     label="Client Name"

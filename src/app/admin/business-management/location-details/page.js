@@ -168,43 +168,42 @@ export default function LocationDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list?.map((e, index) =>
-                                <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
-                                    <td>
-                                        <div className="flex items-center gap-2.5">
-                                            <Checkbox
-                                                checked={e.selected}
-                                                onChange={(checked) => {
-                                                    setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                                }} />
-                                            <div>{e.customer}</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className="flex gap-2 items-center">
-                                            <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                            <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                            <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                            <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                            <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className="flex justify-center">
-                                            {e.review}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className="flex justify-center">
-                                            {formatDate(e.date)}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className="flex justify-center">
-                                            <Status status={e.status} context="left" />
-                                        </div>
-                                    </td>
-                                </tr>)}
+                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                <td>
+                                    <div className="flex items-center gap-2.5">
+                                        <Checkbox
+                                            checked={e.selected}
+                                            onChange={(checked) => {
+                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                            }} />
+                                        <div>{e.customer}</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="flex gap-2 items-center">
+                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
+                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
+                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
+                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
+                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="flex justify-center">
+                                        {e.review}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="flex justify-center">
+                                        {formatDate(e.date)}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="flex justify-center">
+                                        <Status status={e.status} context="left" />
+                                    </div>
+                                </td>
+                            </tr>)}
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                 </div>
@@ -212,78 +211,78 @@ export default function LocationDetails() {
                     <PaginationDemo />
                 </div>}
             </div>}
-
-            {view === "campaign" && <div>
-                <div className="bg-secondary2 rounded-[15px] p-5 mt-3.5 flex items-center">
-                    <div>
-                        <h2 className="text-base">Location Name</h2>
-                        <h2 className="text-lg font-medium pt-1.5">Melbourne CBD</h2>
+            {
+                view === "campaign" && <div>
+                    <div className="bg-secondary2 rounded-[15px] p-5 mt-3.5 flex items-center">
+                        <div>
+                            <h2 className="text-base">Location Name</h2>
+                            <h2 className="text-lg font-medium pt-1.5">Melbourne CBD</h2>
+                        </div>
+                        <hr className="border border-border-color w-16 h-full rotate-90" />
+                        <div>
+                            <h2 className="text-base">Client Name</h2>
+                            <h2 className="text-lg font-medium pt-1.5">Client A</h2>
+                        </div>
                     </div>
-                    <hr className="border border-border-color w-16 h-full rotate-90" />
-                    <div>
-                        <h2 className="text-base">Client Name</h2>
-                        <h2 className="text-lg font-medium pt-1.5">Client A</h2>
-                    </div>
-                </div>
 
-                <div className="table-class mt-3.5">
-                    {loading ? <Loading /> : (list1?.length > 0 ? <table className="w-full">
-                        <thead>
-                            <tr>
-                                <th><TableOrder title="Campaign Name"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="name" /></th>
-                                <th>
-                                    <div className="flex justify-center">
-                                        <TableOrder title="Status"
-                                            sortBy={sortBy}
-                                            setSortBy={setSortBy}
-                                            field="status" />
-                                    </div>
-                                </th>
-                                <th>
-                                    <div className="flex justify-center">
-                                        <TableOrder title="Responses"
-                                            sortBy={sortBy}
-                                            setSortBy={setSortBy}
-                                            field="responses" />
-                                    </div>
-                                </th>
-                                <th><div className="flex justify-center">Action </div></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {list1?.map((e, index) =>
-                                <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
-                                    <td>
-                                        <div className="flex items-center gap-2.5">
-                                            <Checkbox
-                                                checked={e.selected}
-                                                onChange={(checked) => {
-                                                    setList1(list1 => list1.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                                }} />
-                                            <div>{e.name}</div>
-                                        </div>
-                                    </td>
-                                    <td><div className="flex justify-center"><Status status={e.status} context="notify" /></div></td>
-                                    <td><div className="flex justify-center">{e.responses}</div></td>
-                                    <td>
+                    <div className="table-class mt-3.5">
+                        {loading ? <Loading /> : (list1?.length > 0 ? <table className="w-full">
+                            <thead>
+                                <tr>
+                                    <th><TableOrder title="Campaign Name"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="name" /></th>
+                                    <th>
                                         <div className="flex justify-center">
-                                            <button className='cursor-pointer'>
-                                                <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
-                                            </button>
+                                            <TableOrder title="Status"
+                                                sortBy={sortBy}
+                                                setSortBy={setSortBy}
+                                                field="status" />
                                         </div>
-                                    </td>
-                                </tr>)}
-                        </tbody>
-                    </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                                    </th>
+                                    <th>
+                                        <div className="flex justify-center">
+                                            <TableOrder title="Responses"
+                                                sortBy={sortBy}
+                                                setSortBy={setSortBy}
+                                                field="responses" />
+                                        </div>
+                                    </th>
+                                    <th><div className="flex justify-center">Action </div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {list1?.map((e, index) =>
+                                    <tr key={index}>
+                                        <td>
+                                            <div className="flex items-center gap-2.5">
+                                                <Checkbox
+                                                    checked={e.selected}
+                                                    onChange={(checked) => {
+                                                        setList1(list1 => list1.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                                    }} />
+                                                <div>{e.name}</div>
+                                            </div>
+                                        </td>
+                                        <td><div className="flex justify-center"><Status status={e.status} context="notify" /></div></td>
+                                        <td><div className="flex justify-center">{e.responses}</div></td>
+                                        <td>
+                                            <div className="flex justify-center">
+                                                <button className='cursor-pointer'>
+                                                    <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>)}
+                            </tbody>
+                        </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+                    </div>
+                    {list1?.length > 0 && <div>
+                        <PaginationDemo />
+                    </div>}
                 </div>
-                {list1?.length > 0 && <div>
-                    <PaginationDemo />
-                </div>}
-            </div>
             }
-        </AdminLayout>
+        </AdminLayout >
     )
 }

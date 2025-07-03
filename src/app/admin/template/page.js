@@ -131,7 +131,7 @@ export default function Template() {
                         </thead>
                         <tbody>
                             {list.map((e, i) =>
-                                <tr key={i}>
+                                <tr key={i} className={i === list.length - 1 ? '' : 'border-b border-border-color'}>
                                     <td>{e.name}</td>
                                     <td>{e.type}</td>
                                     <td>{e.subject}</td>
