@@ -61,12 +61,12 @@ export default function TemplatePreview({ onClose, id }) {
                         isTextArea={true} />
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mt-4">
-                    <CancelButton title="test send" class_="text-lg!" onClick={onClose} />
-                    <SecondaryButton title="Edit Template" class_="bg-white! hover:bg-primary! font-normal! text-lg! text-primary! hover:text-white!" isLink={true} link='/create-email-template' />
+                <div className="grid grid-cols-3 gap-4 mt-4 shrink-0">
+                    <CancelButton title="Test Send" class_="text-lg!" onClick={onClose} />
+                    <SecondaryButton title="Edit Template" class_="bg-white! disabled:bg-dark! disabled:text-text3! text-primary! text-lg! hover:text-white! hover:bg-primary!" isLink={true} link='/create-email-template' />
                     <SecondaryButton title="Confirm & Save" type="submit" disabled={sending} class_="text-lg!" />
                 </div>
             </form>
-        </Model >
+        </Model>
     )
 }

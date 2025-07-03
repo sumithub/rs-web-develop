@@ -64,12 +64,12 @@ function AddTemplate() {
       <div className='flex items-start gap-4'>
         <div className='w-[60%]'>
           <div className='shadow-sm rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
-            {isAdmin() && <div className="flex gap-2.5 items-center">
+            {isAdmin() && <div className="flex gap-2.5 items-center mt-2">
               <CheckboxForm formProps={{ ...register("cloneTemplate") }} errors={errors} />
               <div>Clone Template</div>
             </div>}
 
-            <div className='grid grid-cols-2 gap-3'>
+            <div className={`grid grid-cols-2 gap-3`}>
               <CustomSelectBox label="Template Type" isRequired={true} class_='mt-2! w-full!'
                 defaultOption='Template Type'
                 selectClass_="py-[13.2px]! px-2.5! border-primary/10! focus:border-primary/60!"
@@ -193,7 +193,7 @@ function AddTemplate() {
                 isLink={true} link='/admin/template' /> :
                 <CancelButton title="clone template" onClick={handleClick} class_="text-lg!" />}
 
-              <SecondaryButton title="Save As Draft" class_='bg-white! text-primary! text-lg! hover:text-white! hover:bg-primary!' type='submit' />
+              <SecondaryButton title="Save As Draft" class_='bg-white! disabled:bg-dark disabled:text-text3! text-primary! text-lg! hover:text-white! hover:bg-primary!' type='submit' />
               <SecondaryButton title="Save & Activate" type="submit" disabled={sending} class_="text-lg!" />
             </div>
           </div>
