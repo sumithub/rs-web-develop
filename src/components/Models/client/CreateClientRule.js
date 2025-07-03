@@ -13,6 +13,7 @@ import CheckboxForm from "../../form/CheckboxForm"
 import RadioForm from "../../form/RadioForm"
 import Image from "next/image"
 import StarRangeSlider from "../../StartRatingSlider"
+import CustomSelectBox from "../../form/CustomSelectBox"
 
 function CreateClientRule({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
@@ -138,22 +139,37 @@ function CreateClientRule({ onClose, id }) {
             </div>
 
             {type === "flaggedReview" && (
-                <SelectForm label="Flagged Keywords"
-                    selectClass_="py-3.5! px-2.5! border-primary/10!"
-                    isRequired={true}
-                    defaultOption="Select Condition"
-                    formProps={{ ...register("flaggedKeywords", { required: true }) }}
-                    errors={errors}
-                    clearErrors={clearErrors}
-                    setValue={setValue}
-                    watch={watch}
+                <CustomSelectBox label="Flagged Review" isRequired={true} class_='mt-2! w-full!'
+                    defaultOption='Template Type'
+                    selectClass_="py-[13.2px]! px-2.5! border-primary/10! focus:border-primary/60!"
+                    formProps={{ ...register("flaggedReview", { required: true }) }}
+                    errors={errors} clearErrors={clearErrors}
+                    value={watch("flaggedReview")}
                     multiSelect={true}
-                >
+                    onChange={(e) => {
+                        const v = e.target.value
+                        setValue("flaggedReview", v)
+                    }}>
                     <option value="profanity">Profanity</option>
                     <option value="spam">Spam</option>
+                </CustomSelectBox>
+
+                // <SelectForm label="Flagged Keywords"
+                //     selectClass_="py-3.5! px-2.5! border-primary/10!"
+                //     isRequired={true}
+                //     defaultOption="Select Condition"
+                //     formProps={{ ...register("flaggedKeywords", { required: true }) }}
+                //     errors={errors}
+                //     clearErrors={clearErrors}
+                //     setValue={setValue}
+                //     watch={watch}
+                //     multiSelect={true}
+                // >
+                //     <option value="profanity">Profanity</option>
+                //     <option value="spam">Spam</option>
 
 
-                </SelectForm>
+                // </SelectForm>
             )}
 
             {(type === "positiveReview" || type === "negativeReview") && (

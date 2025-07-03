@@ -48,7 +48,7 @@ export default function CancelSubscription({ onClose, id }) {
         { title: "Auto Renew", price: "Enabled" },
     ]
 
-    const handleInviteClick = async (e) => {
+    const handleCancelClick = async (e) => {
         e.preventDefault()
 
         // Get current form values
@@ -138,7 +138,7 @@ export default function CancelSubscription({ onClose, id }) {
                     <div className="grid grid-cols-4 gap-5 mt-7">
                         <CancelButton title="Cancel Subscription" type="button"
                             disabled={sending}
-                            onClick={handleInviteClick} class_="text-danger! bg-danger/10!" />
+                            onClick={handleCancelClick} class_="text-danger! bg-danger/10!" />
                         <SecondaryButton title="Switch To A Lower Plan" onClick={() => {
                             toast.success("Switched Successfully")
                             onClose()
