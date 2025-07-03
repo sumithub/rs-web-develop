@@ -87,14 +87,10 @@ export default function LatestReviews() {
                                 <button onClick={() => setOpen("review-trends")}>
                                     <Image src="/images/eyes3.svg" alt="eyes3" width={28} height={28} unoptimized={true} />
                                 </button>
-                                <button onClick={() => {
-                                    setOpen("campaign-performance")
-                                }}>
+                                <button >
                                     <Image src="/images/refresh1.svg" alt="refresh1" width={28} height={28} unoptimized={true} />
                                 </button>
-                                <button onClick={() => {
-                                    setOpen("subscription-revenue")
-                                }}>
+                                <button>
                                     <Image src="/images/1.svg" alt="1" width={28} height={28} unoptimized={true} />
                                 </button>
                             </div>
