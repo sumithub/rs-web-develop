@@ -23,6 +23,7 @@ function AddTemplate() {
   const [type, setType] = useState("email")
   const [openPreview, setOpenPreview] = useState(false)
   // const [dynamicFields, setDynamicFields] = useState(false)
+  const [submitAction, setSubmitAction] = useState("saveAndActivate");
 
   const handleClick = () => {
     toast.success("Cloned Successfully")
@@ -44,7 +45,11 @@ function AddTemplate() {
         res = await axios.post("/api", data)
       }
 
-      toast.success("Template Created Successfully")
+      if (submitAction === "saveAsDraft") {
+        toast.success("Saved Successfully");
+      } else if (submitAction === "saveAndActivate") {
+        toast.success("Template Created Successfully");
+      }
       setSending(false)
     } catch (error) {
       toast.error(getError(error))
@@ -193,8 +198,11 @@ function AddTemplate() {
                 isLink={true} link='/admin/template' /> :
                 <CancelButton title="clone template" onClick={handleClick} class_="text-lg!" />}
 
-              <SecondaryButton title="Save As Draft" class_='bg-white! disabled:bg-dark disabled:text-text3! text-primary! text-lg! hover:text-white! hover:bg-primary!' onClick={() => toast.success("Saved Successfully")} />
-              <SecondaryButton title="Save & Activate" type="submit" disabled={sending} class_="text-lg!" />
+              <SecondaryButton title="Save As Draft" class_='bg-white! disabled:bg-dark disabled:text-text3! text-primary! text-lg! hover:text-white! hover:bg-primary!'
+                disabled={sending}
+                type="submit"
+                onClick={() => setSubmitAction("saveAsDraft")} />
+              <SecondaryButton title="Save & Activate" type="submit" disabled={sending} onClick={() => setSubmitAction("saveAndActivate")} class_="text-lg!" />
             </div>
           </div>
         </div>
