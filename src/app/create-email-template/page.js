@@ -33,6 +33,7 @@ function AddTemplate() {
     try {
       if (getTextLength(data.body) > 160) {
         toast.error('Message must be 160 characters or less')
+        return;
       }
       setSending(true)
       let res = null
@@ -45,7 +46,6 @@ function AddTemplate() {
 
       toast.success("Template Created Successfully")
       setSending(false)
-      // onClose()
     } catch (error) {
       toast.error(getError(error))
       setSending(false)
@@ -83,7 +83,7 @@ function AddTemplate() {
                 }}>
                 <option value="email">Email</option>
                 <option value="sms">SMS</option>
-                {isAdmin() && <option value="review Response Template">Review Response Template</option>}
+                {isAdmin() && <option value="reviewResponseTemplate">Review Response Template</option>}
               </CustomSelectBox>
 
               <InputForm
@@ -193,7 +193,7 @@ function AddTemplate() {
                 isLink={true} link='/admin/template' /> :
                 <CancelButton title="clone template" onClick={handleClick} class_="text-lg!" />}
 
-              <SecondaryButton title="Save As Draft" class_='bg-white! disabled:bg-dark disabled:text-text3! text-primary! text-lg! hover:text-white! hover:bg-primary!' type='submit' />
+              <SecondaryButton title="Save As Draft" class_='bg-white! disabled:bg-dark disabled:text-text3! text-primary! text-lg! hover:text-white! hover:bg-primary!' onClick={() => toast.success("Saved Successfully")} />
               <SecondaryButton title="Save & Activate" type="submit" disabled={sending} class_="text-lg!" />
             </div>
           </div>
