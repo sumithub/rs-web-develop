@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AdminLayout from "../../../components/AdminLayout"
 import DashboardPieChart from "../../../components/charts/DashboardPieChart"
 import DashboardCard from "../../../components/DashboardCard"
@@ -8,14 +8,33 @@ import Search from "../../../components/form/Search"
 import LatestReviews from "../../adminDashboad/LatestReviews"
 import RecentPayments from "../../adminDashboad/RecentPayments"
 import LatestCampaigns from "../../adminDashboad/LatestCampaigns"
+import Loading from "../../../components/Loading"
 
 
 export default function AdminDashboard() {
     const [view, setView] = useState("reviews")
+    const [loading, setLoading] = useState(true)
+    const [search, setSearch] = useState("")
+
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    }, [search]);
 
 
-    return <AdminLayout>
-        <div>
+    return <AdminLayout
+        headerSearch={
+            <Search
+                mainClass='w-80!'
+                placeholder="Search"
+                onSearch={(s) => {
+                    setSearch(s)
+                }}
+            />}>
+
+        {loading ? <Loading /> : <div>
             <div className="grid grid-cols-4 gap-5">
                 <DashboardCard title="total reviews" count="12,345" img="/images/sms-star.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/total.png')]" />
 
@@ -106,6 +125,7 @@ export default function AdminDashboard() {
                 {view === "payments" && <Search placeholder="Search by Invoice Number" />}
                 {view === "campaigns" && <Search placeholder="Search by Reviewer" />}
             </div>
+
             {view === "reviews" &&
                 <LatestReviews />
             }
@@ -117,6 +137,6 @@ export default function AdminDashboard() {
             {view === "campaigns" &&
                 <LatestCampaigns />
             }
-        </div>
+        </div>}
     </AdminLayout>
 }

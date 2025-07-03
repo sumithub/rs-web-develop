@@ -70,7 +70,8 @@ export default function FileInput({
         const file = event.dataTransfer.files[0];
         if (file && file.type === 'text/csv') {
             setSelectedFile(file);
-
+            if (setFile)
+                setFile(file)
             // Get the actual file input element
             const fileInput = document.getElementById('csv-file-input');
             if (fileInput) {

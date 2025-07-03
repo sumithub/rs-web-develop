@@ -5,7 +5,6 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import { clientsManagement } from "../../../constent/constArray"
 import { getError } from "../../../../helper"
-import SuspendUser from "./SuspendUser"
 import AddNewClient from "./AddNewClient"
 import Search from "../../form/Search"
 import DateRange from "../../form/DateRangePicker"
@@ -17,6 +16,7 @@ import Status from "../../Status"
 import PaginationDemo from "../../Pagination"
 import Loading from "../../Loading"
 import Model from "../Model"
+import SuspendUsers from "../users/SuspendUsers"
 
 export default function Edit({ onClose }) {
     const [sortBy, setSortBy] = useState(false)
@@ -50,7 +50,7 @@ export default function Edit({ onClose }) {
     return (
         <Model onClose={onClose} title="Edit" modalClass="w-[80%]!">
             {openUser &&
-                <SuspendUser
+                <SuspendUsers
                     onClose={() => {
                         setOpenUser(false)
                     }}

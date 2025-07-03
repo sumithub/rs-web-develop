@@ -15,6 +15,7 @@ function UserCreation({ onClose, id, onSave }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
     const [open, setOpen] = useState(false)
+    const [selId, setSelId] = useState("")
 
     const onSubmit = async (data) => {
         try {
@@ -40,7 +41,9 @@ function UserCreation({ onClose, id, onSave }) {
     return <Model onClose={onClose} title={!id ? "User Creation" : "Edit User"} modalClass="w-1/2!" >
         {open &&
             <ResetPassword
+                id={selId}
                 onClose={() => {
+                    setSelId("");
                     setOpen(false)
                 }}
 
@@ -51,7 +54,10 @@ function UserCreation({ onClose, id, onSave }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <div>
-                    <InputForm label="Name" placeholder="Enter your name" isRequired={true}
+                    <InputForm label="Name"
+                        placeholder="Enter your name"
+                        class_="mt-0!"
+                        isRequired={true}
                         formProps={{ ...register("name", { required: true }) }}
                         errors={errors} />
 
@@ -140,7 +146,10 @@ function UserCreation({ onClose, id, onSave }) {
 
                         <div className="flex justify-between items-center mt-3">
                             <div>Change Password</div>
-                            <button type="button">
+                            <button type="button" onClick={() => {
+                                setOpen(true)
+                                setSelId("e.id")
+                            }}>
                                 <div className="text-primary underline">Opens Password Update Form</div>
                             </button>
                         </div>

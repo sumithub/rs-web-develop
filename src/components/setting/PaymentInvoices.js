@@ -100,10 +100,10 @@ export default function PaymentInvoices() {
                     onClose={() => { setOpenUpdate(false) }}
                 />}
 
-            <div className="flex justify-between items-center gap-11">
-                <div className="w-1/2">
+            <div className="flex justify-between items-center gap-2">
+                <div className="w-[30%]">
                     <Search
-                        mainClass='w-[50%]'
+                        mainClass='w-full!'
                         placeholder="Search By Invoice ID"
                         onSearch={(s) => {
                             setSearch(s)
@@ -111,7 +111,7 @@ export default function PaymentInvoices() {
                     />
                 </div>
 
-                <div className="grid grid-cols-[1fr_1fr_1fr_1.5fr] gap-3">
+                <div className="grid grid-cols-[1fr_1fr_1fr_2.3fr] gap-3">
                     <CancelButton title="Apply" class_="text-sm! font-normal! bg-white! border-text3/30!" />
                     <SelectForm label=""
                         defaultOption="Status"
@@ -137,7 +137,7 @@ export default function PaymentInvoices() {
                         }} />
 
                     <DateRange
-                        class_="mt-0!"
+                        class_="mt-0! w-full!"
                         value={date}
                         onChange={(e) => { setDate(e) }}
                     />

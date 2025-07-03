@@ -9,8 +9,8 @@ import InputForm from '../../form/InputForm';
 import { getError, validPasswordRgx } from '../../../../helper';
 import CancelButton from '../../common/CancelButton';
 
-function ResetPassword({ onClose }) {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+function ResetPassword({ onClose, id }) {
+    const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm();
     const [sending, setSending] = useState(false);
 
     const onSubmit = async (data) => {
@@ -20,7 +20,7 @@ function ResetPassword({ onClose }) {
                 password: data.newPassword,
             });
 
-            toast.success("Upgraded successfully");
+            { !id ? toast.success("Sended successfully") : toast.success("Upgraded successfully") };
             onClose();
         } catch (error) {
             toast.error(getError(error));
@@ -31,25 +31,28 @@ function ResetPassword({ onClose }) {
 
     return (
         <div>
-            <Model onClose={onClose} title="Reset Password" modalClass="w-1/2!">
+            <Model onClose={onClose} title={!id ? "Reset Password" : "Change Password"} modalClass="w-1/2!">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div>
                         <InputForm
                             label="New Password"
+                            name="password"
                             inputType="password"
-                            isRequired={true}
-                            placeholder="Enter new password"
-                            class_='mt-0!'
+                            placeholder="Create A Password"
                             formProps={{
-                                ...register("newPassword", {
-                                    required: "Password is required",
-                                    minLength: {
+                                ...register("password", {
+                                    required: true,
+                                    pattern: {
                                         value: validPasswordRgx,
-                                        message: "Password must be at least 6 characters"
-                                    }
-                                })
+                                        message:
+                                            "Password must be at least 8 characters long and include a mix of letters, numbers, and special characters",
+                                    },
+                                }),
                             }}
+                            isRequired={true}
                             errors={errors}
+                            setValue={setValue}
+                            watch={watch}
                         />
                     </div>
 
@@ -60,7 +63,7 @@ function ResetPassword({ onClose }) {
 
                     <div className="grid grid-cols-2 gap-3 mt-6">
                         <CancelButton title="Cancel" onClick={onClose} />
-                        <SecondaryButton title="Upgrade password" type="submit" disabled={sending} />
+                        <SecondaryButton title={!id ? "Send Mail" : "Upgrade password"} type="submit" disabled={sending} />
                     </div>
                 </form>
             </Model>

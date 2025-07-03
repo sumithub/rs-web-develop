@@ -36,7 +36,7 @@ export default function RecentPayments() {
 
     return <main>
         <div className='table-class'>
-            {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+            {loading ? <Loading class_="min-h-[400px]!" /> : (list?.length > 0 ? <table className='w-full'>
                 <thead>
                     <tr>
                         <th><TableOrder title="Invoice Number"
@@ -71,12 +71,16 @@ export default function RecentPayments() {
                     {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                         <td>{e.invoiceNumber}</td>
                         <td>{e.amount}</td>
-                        <td><Status Status={e.status} /></td>
+                        <td><Status status={e.status} /></td>
                         <td>{e.client}</td>
                         <td>
                             <div className="flex gap-2.5 justify-center">
-                                <Image src="/images/eyes3.svg" alt="eyes3" width={28} height={28} />
-                                <Image src="/images/refresh1.svg" alt="refresh1" width={28} height={28} />
+                                <button>
+                                    <Image src="/images/eyes3.svg" alt="eyes3" width={28} height={28} unoptimized={true} />
+                                </button>
+                                <button>
+                                    <Image src="/images/refresh1.svg" alt="refresh1" width={28} height={28} unoptimized={true} />
+                                </button>
                             </div>
                         </td>
                     </tr>)}

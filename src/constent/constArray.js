@@ -251,13 +251,13 @@ export const clientCampaign = [
 
 
 export const clientLocation = [
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
 ]
 
 
@@ -406,3 +406,12 @@ export const latestCampaigns = [
     { name: "Client C", client: "Jaydon Saris", status: "Draft" },
     { name: "Client D", client: "Jaydon Saris", status: "Paused" },
 ]
+
+export const customerJourney = [
+    { num: "1", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
+    { num: "2", name: "John Smith", type: "Negative Review Handling", status: "In Progress", last: "Jun 18,2024" },
+    { num: "3", name: "Marcus Dias", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
+    { num: "4", name: "John Smith", type: "Service Feedback", status: "Failed", last: "Jun 18,2024" },
+    { num: "5", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
+    { num: "6", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
+];

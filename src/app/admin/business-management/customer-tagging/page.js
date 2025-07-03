@@ -18,6 +18,7 @@ import DateRange from '../../../../components/form/DateRangePicker'
 import DashboardChart from '../../../../components/DashboardChart'
 import DashboardPieChart from '../../../../components/charts/DashboardPieChart'
 import DashboardLineChart from '../../../../components/charts/DashboardLineChart'
+import DeleteTag from "../../../../components/Models/customers/DeleteTag"
 
 function CustomerTagging() {
     const [type, setType] = useState("")
@@ -30,6 +31,7 @@ function CustomerTagging() {
     const [sortBy, setSortBy] = useState("")
     const [date, setDate] = useState("")
     const [selId, setSelId] = useState("")
+    const [openTag, setOpenTag] = useState(false)
 
     useEffect(() => {
         getData()
@@ -52,7 +54,7 @@ function CustomerTagging() {
     return (
         <AdminLayout
             noCard={false}
-            headerChild={
+            headerSearch={
                 <Search
                     mainClass='w-76!'
                     placeholder="Search"
@@ -66,6 +68,18 @@ function CustomerTagging() {
                     onClose={() => {
                         setOpen(false)
                         setSelId("")
+                    }}
+                />
+            }
+
+            {openTag &&
+                <DeleteTag
+                    onClose={() => {
+                        setOpenTag(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenTag(true)
                     }}
                 />
             }
@@ -210,7 +224,7 @@ function CustomerTagging() {
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
 
-                                        <button className='cursor-pointer'>
+                                        <button className='cursor-pointer' onClick={() => setOpenTag(true)}>
                                             <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
                                         </button>
                                     </div>
