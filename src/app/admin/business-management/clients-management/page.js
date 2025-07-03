@@ -54,7 +54,7 @@ export default function ClientsManagement() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-76!'
+                    mainClass='w-96!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -94,6 +94,7 @@ export default function ClientsManagement() {
             }
             <div className='flex items-center justify-between'>
                 <Search
+                    mainClass="w-80!"
                     placeholder="Search by Client Name, Industry"
                     onSearch={(s) => {
                         setSearch(s)
@@ -163,7 +164,7 @@ export default function ClientsManagement() {
                     </thead>
                     <tbody>
                         {list.map((e, index) =>
-                            <tr key={index}>
+                            <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-center gap-2.5">
                                         <Checkbox

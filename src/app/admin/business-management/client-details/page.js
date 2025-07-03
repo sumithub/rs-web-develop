@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import AdminLayout from "../../../../components/AdminLayout"
 import DashboardCard from "../../../../components/DashboardCard"
-import { clientCampaign, clientLocation, clientSubscription, locationCampaign, locationReviews } from "../../../../constent/constArray"
+import { clientCampaign, clientLocation, clientSubscription } from "../../../../constent/constArray"
 import { toast } from "react-toastify"
 import { formatDate, getError } from "../../../../../helper"
 import axios from "axios"
