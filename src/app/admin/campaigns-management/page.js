@@ -14,6 +14,7 @@ import { toast } from "react-toastify"
 import { formatDate, getError } from "../../../../helper"
 import Loading from "../../../components/Loading"
 import { campaignsManagement } from "../../../constent/constArray"
+import Link from "next/link"
 
 export default function CampaignsManagement() {
     const [sortBy, setSortBy] = useState(false)
@@ -105,10 +106,10 @@ export default function CampaignsManagement() {
                         <option value="scheduled">Scheduled</option>
                         <option value="completed">Completed</option>
                     </CustomSelectBox>
-                    <SecondaryButton
-                        title="Create New Campaign"
-                        class_="text-xs! font-normal!"
-                    />
+                    <Link href="/manage-campaigns/detail" className='shrink-0'>
+                        <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0 w-full"
+                        >Create New Campaign</button>
+                    </Link>
                 </div>
             </div>
             <div className="table-class mt-3.5">
@@ -179,9 +180,11 @@ export default function CampaignsManagement() {
                                         <button className='cursor-pointer'>
                                             <Image unoptimized={true} src="/images/eyes3.svg" alt='eye' height={28} width={28} />
                                         </button>
-                                        <button className='cursor-pointer' >
-                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                        </button>
+                                        <Link href="/manage-campaigns/detail">
+                                            <button className='cursor-pointer mt-2' >
+                                                <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                            </button>
+                                        </Link>
                                         <button className='cursor-pointer'>
                                             <Image unoptimized={true} src="/images/global.svg" alt='globlal' height={28} width={28} />
                                         </button>
