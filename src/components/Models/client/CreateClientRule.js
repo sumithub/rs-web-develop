@@ -137,21 +137,21 @@ function CreateClientRule({ onClose, id }) {
                 </>)}
             </div>
 
-            {(type === "flaggedReview" || type === "positiveReview" || type === "negativeReview") && (
-                <SelectForm label="Rule Condition"
+            {type === "flaggedReview" && (
+                <SelectForm label="Flagged Keywords"
                     selectClass_="py-3.5! px-2.5! border-primary/10!"
                     isRequired={true}
                     defaultOption="Select Condition"
-                    formProps={{ ...register("ruleCondition", { required: true }) }}
+                    formProps={{ ...register("flaggedKeywords", { required: true }) }}
                     errors={errors}
                     clearErrors={clearErrors}
                     setValue={setValue}
-                    watch={watch}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    watch={watch}
+                    multiSelect={true}
+                >
+                    <option value="profanity">Profanity</option>
+                    <option value="spam">Spam</option>
+
 
                 </SelectForm>
             )}
