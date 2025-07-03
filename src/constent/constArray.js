@@ -415,3 +415,12 @@ export const customerJourney = [
     { num: "5", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
     { num: "6", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
 ];
+
+export const campaignsManagement = [
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Active", createdOn: "Jun 18,2024" },
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Active", createdOn: "Jun 18,2024" },
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Completed", createdOn: "Jun 18,2024" },
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Active", createdOn: "Jun 18,2024" },
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Active", createdOn: "Jun 18,2024" },
+    { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Completed", createdOn: "Jun 18,2024" },
+]
