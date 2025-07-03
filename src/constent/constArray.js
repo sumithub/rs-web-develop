@@ -9,10 +9,10 @@ export const USER_ACTIONS = [
 ]
 
 export const users = [
-    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
-    { name: "Jaydon George", email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", id: 1, email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", id: 2, email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Pending Invite", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", id: 3, email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Suspended", lastActive: "Aug 05,2024" },
+    { name: "Jaydon George", id: 4, email: "johan@example.com", img: "/images/request.png", role: "Manager", status: "Active", lastActive: "Aug 05,2024" },
 ];
 
 export const TEMPLATE_ACTIONS = [
