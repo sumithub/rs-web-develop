@@ -327,16 +327,16 @@ export const paymentInvoice = [
 
 export const adminTemplates = [
 
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "Email", subject: "Manager", updated: "Mar 22,2024" },
-    { name: "Nature Template", type: "SMS", subject: "Manager", updated: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "Email", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
+    { name: "Nature Template", type: "SMS", subject: "Welcome to Our Service", lastUpdate: "Mar 22,2024" },
 ]
 export const clientsManagement = [
     { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },

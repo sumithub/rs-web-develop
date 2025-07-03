@@ -14,6 +14,8 @@ import Loading from "../../../components/Loading"
 import TemplatePreview from "../../../components/Models/TemplatePreview"
 import Link from "next/link"
 import DeleteTemplate from "../../../components/Models/templates/DeleteTemplate"
+import { formatDate } from "../../../../helper"
+
 export default function Template() {
     const [sortBy, setSortBy] = useState(false)
     const [search, setSearch] = useState("")
@@ -91,7 +93,7 @@ export default function Template() {
                         <SecondaryButton
                             title="Create New Template"
                             type='submit'
-                            class_="text-xs! font-normal!"
+                            class_="text-xs! font-normal! py-2.5!"
                             isLink={true} link='/create-email-template'
                         />
                     </div>
@@ -116,7 +118,7 @@ export default function Template() {
                                     field="subject"
                                 /></th>
                                 <th>
-                                    <div className="flex justify-center">
+                                    <div>
                                         <TableOrder title="Last Updated"
                                             sortBy={sortBy}
                                             setSortBy={setSortBy}
@@ -132,8 +134,8 @@ export default function Template() {
                                 <tr key={i}>
                                     <td>{e.name}</td>
                                     <td>{e.type}</td>
-                                    <td className="text-center!">{e.subject}</td>
-                                    <td className="text-center!">{e.updated}</td>
+                                    <td>{e.subject}</td>
+                                    <td >{formatDate(e.lastUpdate)}</td>
                                     <td>
                                         <div className='flex w-auto items-center gap-2.5 justify-center'>
                                             <button className='cursor-pointer' onClick={() => toast.success("Copied Successfully")}>

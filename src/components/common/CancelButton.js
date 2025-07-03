@@ -4,7 +4,7 @@ export default function CancelButton({ mainClass = "", onClick, disabled = false
 
     if (isLink) {
         return <div className={`${mainClass}`}>
-            <Link href={link} type={type} className={`text-base font-medium bg-dark hover:bg-white text-text3 w-full p-2 rounded-lg border border-dark hover:border-border-color cursor-pointer capitalize disabled:pointer-events-none disabled:opacity-50 ${class_}`}>{title}</Link>
+            <Link href={link} type={type} className={`text-base font-medium bg-dark hover:bg-white text-text3 text-center inline-block w-full p-2 rounded-lg border border-dark hover:border-border-color cursor-pointer capitalize disabled:pointer-events-none disabled:opacity-50 ${class_}`}>{title}</Link>
         </div>
     }
 
