@@ -415,3 +415,15 @@ td {
 .range-slider .range-slider__thumb {
   background-color: white !;
 }
+
+.hmmm {
+  @apply w-[70%]
+}
+
+.hmmm3 {
+  @apply w-[80%]
+}
+
+.hmmm3 {
+  @apply w-[90%]
+}

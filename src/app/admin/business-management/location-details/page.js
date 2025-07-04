@@ -114,7 +114,7 @@ export default function LocationDetails() {
                     {loading ? <Loading /> : <div>
                         <h2 className="text-lg font-semibold pb-5">Performance Stats</h2>
                         <div className="grid grid-cols-3 gap-x-4 gap-y-5">
-                            <DashboardCard title="Average Rating" count="4.2" img="/images/tick-sms.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/average2.png')]" />
+                            <DashboardCard title="Average Rating" count="4.2" img="/images/sms-star.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/average2.png')]" />
                             <DashboardCard title="Total Reviews" count="5,200" img="/images/star1.svg" bgClass="bg-success-light" textColor="text-success-light" bgImage="bg-[url('/images/total2.png')]" />
                             <DashboardCard title="Active Campaigns" count="02" img="/images/location2.svg" bgClass="bg-custom-purple" textColor="text-custom-purple" bgImage="bg-[url('/images/active2.png')]" />
                             <DashboardCard title="Positive Sentiment" count="75%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
