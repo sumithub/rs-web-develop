@@ -184,9 +184,11 @@ export default function UsersManagement() {
                                         {e.role}
                                     </div>
                                 </td>
-                                <td>
+                                <td className="">
                                     <div className="flex justify-center">
-                                        {e.assignedClient}
+                                        <div className="line-clamp-1">
+                                            {e.assignedClient}
+                                        </div>
                                     </div>
                                 </td>
                                 <td>

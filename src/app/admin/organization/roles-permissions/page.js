@@ -129,7 +129,11 @@ export default function RolesPermissions() {
                                         <div>{e.name}</div>
                                     </div>
                                 </td>
-                                <td>{e.description}</td>
+                                <td>
+                                    <div className="line-clamp-1">
+                                        {e.description}
+                                    </div>
+                                </td>
                                 <td>{e.permissions}</td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
