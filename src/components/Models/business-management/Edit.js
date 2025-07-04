@@ -144,7 +144,7 @@ export default function Edit({ onClose }) {
                     </thead>
                     <tbody>
                         {list.map((e, index) =>
-                            <tr key={index}>
+                            <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-center gap-2.5">
                                         <Checkbox
