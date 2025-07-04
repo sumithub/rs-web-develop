@@ -213,7 +213,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
 
             await axios.post("/api", postData);
             toast.success("Imported Successfully");
-            onClose();
+            onClose(2);
         } catch (error) {
             toast.error(getError(error));
             setLoading(false);
@@ -226,7 +226,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
             setActiveStep(activeStep - 1);
         } else if (tab === 1) {
             // Close the modal when on first tab
-            onClose();
+            onClose(0);
         } else if (onBack) {
             onBack();
         }
