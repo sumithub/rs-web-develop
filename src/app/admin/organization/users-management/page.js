@@ -53,7 +53,7 @@ export default function UsersManagement() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-76!'
+                    mainClass='w-72!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)

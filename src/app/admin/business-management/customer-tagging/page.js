@@ -56,7 +56,7 @@ function CustomerTagging() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-76!'
+                    mainClass='w-72!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -126,15 +126,16 @@ function CustomerTagging() {
                                 setSearch(s)
                             }}
                         />
-                        <div className="flex items-start gap-3">
-                            <div className="border border-border-color px-2 py-1 rounded-lg w-28">
-                                <div className="flex items-start justify-center gap-2 mt-1">
+                        <div className="flex gap-3">
+                            <div className="border border-border-color px-2 py-0.5 rounded-lg w-28">
+                                <div className="flex items-center justify-center gap-2 mt-0.5">
                                     <Checkbox
+                                        class_='mt-[2px]'
                                         checked={list?.length > 0 && list.every(e => e.selected)}
                                         onChange={(checked) => {
                                             setList(list => list.map(e => ({ ...e, selected: checked })))
                                         }} />
-                                    <div className="text-text3 text-sm capitalize mt-[2px]">Select all</div>
+                                    <div className="text-text3 text-sm capitalize">Select all</div>
                                 </div>
                             </div>
 
@@ -144,8 +145,9 @@ function CustomerTagging() {
                             >Bulk Change Tags</button>
 
                             <CustomSelectBox
-                                class_="mt-0! w-32!"
+                                class_="mt-0! w-24!"
                                 defaultOption="Select"
+                                selectClass_='py-[8px]!'
                                 value={type}
                                 onChange={(e) => {
                                     setType(e.target.value)
@@ -155,7 +157,7 @@ function CustomerTagging() {
                             </CustomSelectBox>
 
                             <div className='shrink-0'>
-                                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.3px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0 w-full"
+                                <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[9.7px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0 w-full"
                                     onClick={() => { setOpen(true) }} >Create Customer Tag</button>
                             </div>
                         </div>
@@ -259,48 +261,58 @@ function CustomerTagging() {
                     </div>
                 </div>
                 {loading ? <Loading /> : <div className="mt-5">
-                    <div className="grid grid-cols-2 gap-5">
+                    <div className="grid grid-cols-2 items-start gap-5">
                         <DashboardChart title="Dummy Chart 1">
                             <div className="flex items-start">
-                                <div className="w-[60%]">
+                                <div className="w-[50%]">
                                     <DashboardPieChart
                                         labels={["5", "4", "3", "2", "1"]}
                                         colors={["#0396FF", "#16C098", "#FFAE4C", "#07DBFA", "#988AFC"]}
                                     />
                                 </div>
-                                <div className="mt-10 w-[40%]">
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <div className="bg-primary h-3 w-3 rounded-full"></div>
-                                        <div className="text-base text-secondary">5</div>
-                                        <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} />
+                                <div className="mt-10 w-[50%]">
+                                    <div className="flex items-center justify-between gap-3 mb-2">
+                                        <div className='flex gap-2.5 items-center'>
+                                            <div className="bg-primary h-3 w-3 rounded-full"></div>
+                                            <div className="text-base text-secondary">VIP Tag Chart</div>
+                                        </div>
+                                        {/* <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} /> */}
                                         <div className="text-sm text-secondary">50%</div>
                                     </div>
 
-                                    <div className="flex  items-center gap-3 mb-2">
-                                        <div className="bg-success-light h-3 w-3 rounded-full"></div>
-                                        <div className="text-base text-secondary">4</div>
-                                        <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} />
+                                    <div className="flex justify-between items-center gap-3 mb-2">
+                                        <div className='flex items-center gap-2.5'>
+                                            <div className="bg-success-light h-3 w-3 rounded-full"></div>
+                                            <div className="text-base text-secondary">Negative Tag Chart</div>
+                                        </div>
+                                        {/* <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} /> */}
                                         <div className="text-sm text-secondary">20%</div>
                                     </div>
 
-                                    <div className="flex  items-center gap-3 mb-2">
-                                        <div className="bg-custom-yellow h-3 w-3 rounded-full"></div>
-                                        <div className="text-base text-secondary">3</div>
-                                        <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} />
+                                    <div className="flex justify-between items-center gap-3 mb-2">
+                                        <div className='flex items-center gap-2.5'>
+                                            <div className="bg-custom-yellow h-3 w-3 rounded-full"></div>
+                                            <div className="text-base text-secondary">Needs Follow-up Tag Chart</div>
+                                        </div>
+                                        {/* <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} /> */}
                                         <div className="text-sm text-secondary">10%</div>
                                     </div>
 
-                                    <div className="flex  items-center gap-3 mb-2">
-                                        <div className="bg-[#07DBFA] h-3 w-3 rounded-full"></div>
-                                        <div className="text-base text-secondary">2</div>
-                                        <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} />
+                                    <div className="flex justify-between items-center gap-3 mb-2">
+                                        <div className='flex items-center gap-2.5'>
+                                            <div className="bg-[#07DBFA] h-3 w-3 rounded-full"></div>
+                                            <div className="text-base text-secondary">Dummy-1</div>
+                                        </div>
+                                        {/* <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} /> */}
                                         <div className="text-sm text-secondary">10%</div>
                                     </div>
 
-                                    <div className="flex  items-center gap-3 mb-2">
-                                        <div className="bg-custom-purple h-3 w-3 rounded-full"></div>
-                                        <div className="text-base text-secondary">1</div>
-                                        <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} />
+                                    <div className="flex justify-between items-center gap-3 mb-2">
+                                        <div className='flex items-center gap-2.5'>
+                                            <div className="bg-custom-purple h-3 w-3 rounded-full"></div>
+                                            <div className="text-base text-secondary">Dummy-2</div>
+                                        </div>
+                                        {/* <Image src="/images/star.svg" alt="star" height={16} width={16} unoptimized={true} /> */}
                                         <div className="text-sm text-secondary">10%</div>
                                     </div>
                                 </div>
