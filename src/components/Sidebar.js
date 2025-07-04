@@ -185,7 +185,10 @@ const MenuItem = ({ i, e, submenu, collapse, toggleSidebar }) => {
         </div> : <>
             <Link href={e.link} className={`${(pathname === e.link || pathname === (e.link + "/[id]")) ? "bg-dark text-primary" : "text-text3"}  relative flex gap-2 items-center px-4 py-3 text-sm rounded-[10px]`}>
                 <div className="flex gap-2 overflow-hidden">
-                    <Image src="/sidebar-icons/dashboard.svg" alt="dashboard" height={20} width={20} unoptimized={true} className="shrink-0" />
+                    <Image src={`/sidebar-icons/${e.icon || "customer"}${(pathname === e.link || pathname === (e.link + "/[id]")) ? "-active" : ""}.svg`} alt={e.title} height={20} width={20} className="shrink-0" />
+
+                    {/* <Image src="/sidebar-icons/dashboard.svg" alt="dashboard" height={20} width={20} unoptimized={true} className="shrink-0" /> */}
+
                     <span className={`capitalize leading-[normal] ${collapse ? "w-0" : "w-auto"}`}>{e.title}</span>
                 </div>
             </Link>

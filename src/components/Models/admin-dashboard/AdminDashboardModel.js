@@ -43,6 +43,7 @@ export default function AdminDashboardModel({ onClose, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 {id === "subscription-revenue" && <SelectForm
+                    selectClass_="py-3!"
                     class_="mt-0!"
                     label="By Plan"
                     isRequired={false}
@@ -59,6 +60,7 @@ export default function AdminDashboardModel({ onClose, id }) {
                 </SelectForm>}
 
                 <SelectForm
+                    selectClass_="py-3!"
                     class_={`${(id === "review-trends" || id === "campaign-performance" ? "mt-0!" : "")}`}
                     label="By Client"
                     isRequired={false}
@@ -75,6 +77,7 @@ export default function AdminDashboardModel({ onClose, id }) {
                 </SelectForm>
 
                 {id === "campaign-performance" && <SelectForm
+                    selectClass_="py-3!"
                     label="By Engagement"
                     isRequired={false}
                     defaultOption="select"
@@ -88,6 +91,7 @@ export default function AdminDashboardModel({ onClose, id }) {
                 </SelectForm>}
 
                 {id === "campaign-performance" && <SelectForm
+                    selectClass_="py-3!"
                     label="By Conversion"
                     isRequired={false}
                     defaultOption="select"
@@ -101,6 +105,7 @@ export default function AdminDashboardModel({ onClose, id }) {
                 </SelectForm>}
 
                 {id === "subscription-revenue" && <SelectForm
+                    selectClass_="py-3!"
                     label="By Billing Cycle"
                     isRequired={false}
                     defaultOption="select"
@@ -114,6 +119,7 @@ export default function AdminDashboardModel({ onClose, id }) {
                 </SelectForm>}
 
                 {id === "review-trends" && <SelectForm
+                    selectClass_="py-3!"
                     label="By Location"
                     isRequired={false}
                     defaultOption="select"
@@ -128,6 +134,7 @@ export default function AdminDashboardModel({ onClose, id }) {
                 </SelectForm>}
 
                 {id === "review-trends" && <SelectForm
+                    selectClass_="py-3!"
                     label="By Sentiment"
                     isRequired={false}
                     defaultOption="select"
