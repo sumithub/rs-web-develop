@@ -43,7 +43,10 @@ export default function Signin() {
                 localStorage.setItem("role", "USER")
 
             setTimeout(() => {
-                router.push("/dashboard")
+                if (data?.email === "admin@gmail.com")
+                    router.push("/admin/dashboard")
+                else
+                    router.push("/dashboard")
             }, 1000);
         } catch (error) {
             toast.error("Invalid email or password.Please try again.")
