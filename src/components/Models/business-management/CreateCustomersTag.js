@@ -77,6 +77,7 @@ export default function CreateCustomersTag({ onClose, id }) {
                     <InputForm class_="mt-2!"
                         label="Description"
                         isRequired={true}
+                        isTextArea={true}
                         placeholder="Enter Description"
                         formProps={{ ...register("description", { required: true }) }}
                         errors={errors}
