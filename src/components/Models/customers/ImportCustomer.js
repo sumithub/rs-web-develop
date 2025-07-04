@@ -5,7 +5,7 @@ import SelectForm from "../../form/SelectForm";
 import Loading from "../../Loading";
 import TableOrder from "../../TableOrder";
 import axios from "axios";
-import { getError } from "../../../../helper";
+import { getError, isAdmin } from "../../../../helper";
 import { toast } from "react-toastify";
 import { fieldMapping } from "../../../constent/constArray";
 import CancelButton from "../../common/CancelButton";
@@ -486,12 +486,12 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                 these errors and upload the file again.
                                             </div>
                                         </div>
-                                        <SecondaryButton
+                                        {isAdmin() && <SecondaryButton
                                             title="Download Error Report"
                                             type="button"
                                             onClick={() => { toast.success('Download Successfully') }}
                                             class_="shrink-0! text-xs!"
-                                        />
+                                        />}
                                     </div>
                                     <div className="text-danger text-xs capitalize mt-2">
                                         No customers have been added

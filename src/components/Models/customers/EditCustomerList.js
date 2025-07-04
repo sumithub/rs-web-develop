@@ -42,8 +42,6 @@ function EditCustomerList({ onClose, id, onSave }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <div>
-
-
                     <InputForm
                         class_="mt-0!"
                         label="List Name"
