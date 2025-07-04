@@ -267,14 +267,14 @@ function CustomerTagging() {
                 {loading ? <Loading /> : <div className="mt-5">
                     <div className="grid grid-cols-2 items-start gap-5">
                         <DashboardChart title="Dummy Chart 1">
-                            <div className="flex items-start">
-                                <div className="w-[50%]">
+                            <div className="flex items-start gap-5 mt-2.5">
+                                <div className="w-[45%]">
                                     <DashboardPieChart
                                         labels={["5", "4", "3", "2", "1"]}
                                         colors={["#0396FF", "#16C098", "#FFAE4C", "#07DBFA", "#988AFC"]}
                                     />
                                 </div>
-                                <div className="mt-10 w-[50%]">
+                                <div className="mt-10 w-[55%]">
                                     <div className="flex items-center justify-between gap-3 mb-2">
                                         <div className='flex gap-2.5 items-center'>
                                             <div className="bg-primary h-3 w-3 rounded-full"></div>
