@@ -701,16 +701,18 @@ export const MenuBar = ({ disable }) => {
                 disabled={disable}
             >
                 😊
-                {showPicker && (
-                    <div style={{ position: 'absolute', zIndex: 100 }}>
-                        {/* <button type='button' onClick={() => setShowPicker(!showPicker)}>Close</button> */}
-                        <Picker data={data} onEmojiSelect={(emoji) => {
-                            // console.log(emoji.native);
-                            editor.chain().focus().insertContent(emoji.native).run();
-                        }} />
-                    </div>
-                )}
             </button>
+            <div style={{ position: 'absolute', zIndex: 100, display: showPicker ? 'block' : 'none' }}>
+                <Picker
+                    onClickOutside={(e) => {
+                        if (showPicker)
+                            setShowPicker(!showPicker)
+                    }}
+                    data={data}
+                    onEmojiSelect={(emoji) => {
+                        editor.chain().focus().insertContent(emoji.native).run();
+                    }} />
+            </div>
             {/* Alignment Buttons */}
             <button
                 type="button"
