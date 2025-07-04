@@ -59,6 +59,7 @@ export default function AdminDashboardModel({ onClose, id }) {
                 </SelectForm>}
 
                 <SelectForm
+                    class_={`${(id === "review-trends" || id === "campaign-performance" ? "mt-0!" : "")}`}
                     label="By Client"
                     isRequired={false}
                     defaultOption="select"
