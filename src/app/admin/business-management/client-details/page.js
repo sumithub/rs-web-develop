@@ -67,7 +67,7 @@ export default function ClientDetails() {
                     }}
                 />
             }
-            <div className="flex justify-between items-center w-7">
+            <div className="flex justify-between items-center">
                 <div className="inline-block">
                     <div className='flex items-center gap-10 px-5 bg-white shadow-sm rounded-[10px]'>
                         <div
