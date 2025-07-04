@@ -33,11 +33,12 @@ export default function BulkAssign({ onClose, id }) {
     }
 
     return (
-        <Model onClose={onClose} title="Bulk Assign" modalClass="w-[70%]!">
+        <Model onClose={onClose} title="Bulk Assign" modalClass="w-[70%]!" modalBodyClass="pt-5!">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <SelectForm
                         label="Filter By Clients"
+                        labelClass="mb-2.5!"
                         class_="mt-0!"
                         selectClass_="py-2.5! px-2.5!"
                         isRequired={true}
@@ -50,15 +51,15 @@ export default function BulkAssign({ onClose, id }) {
                         <option value="clientB">Client B</option>
                     </SelectForm>
 
-                    <div className="flex justify-between mt-3 border border-primary bg-primary/10 py-3 px-2.5 rounded-[10px]">
+                    <div className="flex justify-between mt-3.5 border border-primary bg-primary/10 py-3 px-2.5 rounded-[10px]">
                         <div className="text-primary text-base font-medium">Selected Items</div>
                         <div className="text-primary text-base font-medium">45 Customers</div>
                     </div>
 
-                    <div className="mt-3">
+                    <div className="mt-3.5">
                         <div className="font-semibold">Available Tags</div>
                         <SelectForm
-                            class_="w-[10%]! text-primary"
+                            class_="w-[12%]! text-primary mt-2.5!"
                             selectClass_="bg-primary/10! text-primary! rounded-full!"
                             defaultOption="select"
                             setValue={setValue}
