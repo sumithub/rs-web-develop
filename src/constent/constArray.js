@@ -424,3 +424,12 @@ export const campaignsManagement = [
     { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Active", createdOn: "Jun 18,2024" },
     { name: "John Deo", client: "Client A", targetLocation: "Sydney, Melbourne", status: "Completed", createdOn: "Jun 18,2024" },
 ]
+
+export const manageCustomers = [
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
+    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
+]

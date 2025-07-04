@@ -72,6 +72,7 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                     [
                         { title: "Clients", link: "/admin/business-management/clients-management" },
                         { title: "Locations", link: "/admin/business-management/locations-management" },
+                        { title: "Manage Customers", link: "/admin/business-management/manage-customers" },
                         { title: "Tagging", link: "/admin/business-management/customer-tagging" },
                     ]
             },

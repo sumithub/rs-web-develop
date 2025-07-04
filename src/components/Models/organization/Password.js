@@ -20,7 +20,7 @@ function ResetPassword({ onClose, id }) {
                 password: data.newPassword,
             });
 
-            { !id ? toast.success("Sended successfully") : toast.success("Upgraded successfully") };
+            { !id ? toast.success("Sended successfully") : toast.success("Updated successfully") };
             onClose();
         } catch (error) {
             toast.error(getError(error));
@@ -63,7 +63,7 @@ function ResetPassword({ onClose, id }) {
 
                     <div className="grid grid-cols-2 gap-3 mt-6">
                         <CancelButton title="Cancel" onClick={onClose} />
-                        <SecondaryButton title={!id ? "Send Mail" : "Upgrade password"} type="submit" disabled={sending} />
+                        <SecondaryButton title={!id ? "Send Mail" : "Update password"} type="submit" disabled={sending} />
                     </div>
                 </form>
             </Model>
