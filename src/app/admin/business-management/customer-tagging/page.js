@@ -214,7 +214,11 @@ function CustomerTagging() {
                                         <div>{e.name}</div>
                                     </div>
                                 </td>
-                                <td>{e.description}</td>
+                                <td>
+                                    <div className='line-clamp-1'>
+                                        {e.description}
+                                    </div>
+                                </td>
                                 <td className='text-primary! underline underline-offset-4'><div className='flex justify-center'>{e.customers}</div></td>
                                 <td><div className='flex justify-center'>{e.created}</div></td>
                                 <td>

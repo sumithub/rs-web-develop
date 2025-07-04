@@ -151,7 +151,11 @@ function Location() {
                                     </div>
                                 </td>
                                 <td>{e.address}</td>
-                                <td>{e.client}</td>
+                                <td>
+                                    <div className='line-clamp-1'>
+                                        {e.client}
+                                    </div>
+                                </td>
                                 <td className='text-center!'>{e.count}</td>
                                 <td className="flex justify-center">
                                     <div className='flex items-center gap-2'>
