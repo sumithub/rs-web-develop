@@ -146,7 +146,9 @@ function AddTemplate() {
                 value={body}
                 onChange={(value) => {
                   clearErrors("body")
-                  setValue("body", value)
+                  if (type === 'sms' && getTextLength(body) >= 160) { } else {
+                    setValue("body", value)
+                  }
                 }}
                 type={type}
                 shoeMenu={true}

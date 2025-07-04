@@ -69,10 +69,14 @@ export default function HtmlEditor({
                         setEditor(editor)
                     }}
                     onUpdate={({ editor }) => {
-                        console.log("Editor content updated:", editor.getHTML());
                         const html = editor.getHTML();
                         if (html && clearErrors) {
                             clearErrors(formProps?.name)
+                        }
+                        if (limit && getTextLength(html) > limit) {
+                            editor.chain().clearContent().run();
+                            editor.chain().focus().insertContent(value).run();
+                            return
                         }
                         if (onChange) {
                             onChange(html)
