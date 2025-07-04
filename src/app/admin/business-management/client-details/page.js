@@ -167,7 +167,7 @@ export default function ClientDetails() {
                         </div>
                     </div>
                     <hr className="border-t border-border2 my-5" />
-                    <div>
+                    {loading ? <Loading /> : <div>
                         <h2 className="text-lg font-semibold pb-5">Performance Stats</h2>
                         <div className="grid grid-cols-3 gap-x-4 gap-y-5">
                             <DashboardCard title="Average Rating" count="4.2" img="/images/tick-sms.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/average2.png')]" />
@@ -177,7 +177,7 @@ export default function ClientDetails() {
                             <DashboardCard title="Positive Sentiment" count="75%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
                             <DashboardCard title="Negative Sentiment" count="12%" img="/images/chart-2.svg" bgClass="bg-danger" textColor="text-danger" bgImage="bg-[url('/images/negative.png')]" />
                         </div>
-                    </div>
+                    </div>}
                 </div>}
             </div>
             {view === "location" && <div>
@@ -286,7 +286,7 @@ export default function ClientDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {campaign?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            {campaign?.map((e, index) => <tr key={index} className={index === campaign.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-center gap-2.5">
                                         <Checkbox
@@ -380,7 +380,7 @@ export default function ClientDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {subscription?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            {subscription?.map((e, index) => <tr key={index} className={index === subscription.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>{e.id}</td>
                                 <td>{formatDate(e.date)}</td>
                                 <td>{e.amount}</td>
