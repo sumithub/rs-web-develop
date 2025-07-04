@@ -83,7 +83,7 @@ function ClientRulesManagement() {
                         <option value="inactive">Inactive</option>
                     </CustomSelectBox>
 
-                    <SecondaryButton title="Add New Role" class_='text-xs! font-normal!'
+                    <SecondaryButton title="Add New Rule" class_='text-xs! font-normal!'
                         onClick={() => { setOpen(true) }} />
                 </div>
             </div>

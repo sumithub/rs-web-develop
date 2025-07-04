@@ -71,7 +71,7 @@ export default function RecentPayments() {
                         /></th>
                         <th>
                             <div className="flex justify-center">
-                                Action
+                                Actions
                             </div>
                         </th>
                     </tr>

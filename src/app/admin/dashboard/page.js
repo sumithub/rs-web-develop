@@ -13,7 +13,11 @@ import Loading from "../../../components/Loading"
 export default function Dashboard() {
     const [view, setView] = useState("reviews")
     const [loading, setLoading] = useState(true)
+    const [tableLoading, setTableLoading] = useState(false)
     const [search, setSearch] = useState("")
+    const [reviewSearch, setReviewSearch] = useState("")
+    const [paymentSearch, setPaymentSearch] = useState("")
+    const [campaignSearch, setCampaignSearch] = useState("")
 
     useEffect(() => {
         setLoading(true);
@@ -21,6 +25,13 @@ export default function Dashboard() {
             setLoading(false);
         }, 2000);
     }, [search]);
+
+    useEffect(() => {
+        setTableLoading(true);
+        setTimeout(() => {
+            setTableLoading(false);
+        }, 1000);
+    }, [reviewSearch, paymentSearch, campaignSearch]);
 
     return <AdminLayout
         headerSearch={
@@ -70,7 +81,6 @@ export default function Dashboard() {
                             <div className="flex  items-center gap-3 mb-5">
                                 <div className="bg-custom-yellow h-3 w-3 rounded-full"></div>
                                 <div className="text-base text-secondary">delivered</div>
-
                             </div>
 
                             <div className="flex  items-center gap-3 mb-5">
@@ -82,7 +92,6 @@ export default function Dashboard() {
                             <div className="flex  items-center gap-3 mb-5">
                                 <div className="bg-custom-purple h-3 w-3 rounded-full"></div>
                                 <div className="text-base text-secondary">clicked</div>
-
                             </div>
                         </div>
                     </div>
@@ -119,22 +128,28 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                {view === "reviews" && <Search placeholder="Search by Reviewer" />}
-                {view === "payments" && <Search placeholder="Search by Invoice Number" />}
-                {view === "campaigns" && <Search placeholder="Search by Reviewer" />}
+                {view === "reviews" && <Search placeholder="Search by Reviewer" onSearch={(s) => {
+                    setReviewSearch(s)
+                }} />}
+                {view === "payments" && <Search placeholder="Search by Invoice Number" onSearch={(s) => {
+                    setPaymentSearch(s)
+                }} />}
+                {view === "campaigns" && <Search placeholder="Search by Reviewer" onSearch={(s) => {
+                    setCampaignSearch(s)
+                }} />}
             </div>
 
-            {view === "reviews" &&
-                <LatestReviews />
-            }
-
-            {view === "payments" &&
-                <RecentPayments />
-            }
-
-            {view === "campaigns" &&
-                <LatestCampaigns />
-            }
+            {tableLoading ? (
+                <div className="flex justify-center items-center border border-border-color rounded-[20px]">
+                    <Loading class_=" min-h-[400px]!" />
+                </div>
+            ) : (
+                <>
+                    {view === "reviews" && <LatestReviews />}
+                    {view === "payments" && <RecentPayments />}
+                    {view === "campaigns" && <LatestCampaigns />}
+                </>
+            )}
         </div>}
     </AdminLayout>
 }

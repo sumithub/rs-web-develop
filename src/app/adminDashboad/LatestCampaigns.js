@@ -65,7 +65,7 @@ export default function LatestCampaigns() {
                             field="status"
                         /></th>
 
-                        <th><div className="flex justify-center">Action</div></th>
+                        <th><div className="flex justify-center">Actions</div></th>
                     </tr>
                 </thead>
 
