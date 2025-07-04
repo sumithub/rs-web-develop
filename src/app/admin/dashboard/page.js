@@ -4,6 +4,8 @@ import AdminLayout from "../../../components/AdminLayout"
 import DashboardPieChart from "../../../components/charts/DashboardPieChart"
 import DashboardCard from "../../../components/DashboardCard"
 import DashboardChart from "../../../components/DashboardChart"
+import DashboardBar2 from "../../../components/charts/DashboardBar2"
+import DashboardTrend from "../../../components/charts/DashboardTrend"
 import Search from "../../../components/form/Search"
 import LatestReviews from "../../adminDashboad/LatestReviews"
 import RecentPayments from "../../adminDashboad/RecentPayments"
@@ -55,41 +57,47 @@ export default function Dashboard() {
             </div>
 
             <div className="grid grid-cols-3 gap-5 mt-5">
-                <DashboardChart title="Review Trends" drillDown={true} flexClass="flex items-center justify-between" />
-                <DashboardChart title="Campaign Performance" drillDown={true} flexClass="flex items-center justify-between" />
+                <DashboardChart title="Review Trends" drillDown={true} flexClass="flex items-center justify-between" >
+                    <DashboardTrend />
+                </DashboardChart>
+                <DashboardChart title="Campaign Performance" drillDown={true} flexClass="flex items-center justify-between" >
+                    <DashboardBar2 />
+                </DashboardChart>
+
                 <DashboardChart title="Subscription Revenue" drillDown={true} flexClass="flex items-center justify-between" >
 
                     <div>
-                        <div>
+                        <div className="mt-8">
                             <DashboardPieChart
                                 labels={["Opened", "Bounced", "Delivered", "Reviewed", "Clicked"]}
                                 colors={["#0396FF", "#16C098", "#FFAE4C", "#07DBFA", "#988AFC"]}
+                                maxWidth={240}
                             />
                         </div>
                         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-5 capitalize">
-                            <div className="flex items-center gap-3 mb-5">
+                            <div className="flex items-center gap-x-3 mb-2">
                                 <div className="bg-primary h-3 w-3 rounded-full"></div>
                                 <div className="text-base text-secondary">opened</div>
                             </div>
 
-                            <div className="flex  items-center gap-3 mb-5">
+                            <div className="flex  items-center gap-x-3 mb-2">
                                 <div className="bg-success-light h-3 w-3 rounded-full"></div>
                                 <div className="text-base text-secondary">Bounced</div>
 
                             </div>
 
-                            <div className="flex  items-center gap-3 mb-5">
+                            <div className="flex  items-center gap-x-3 mb-2">
                                 <div className="bg-custom-yellow h-3 w-3 rounded-full"></div>
                                 <div className="text-base text-secondary">delivered</div>
                             </div>
 
-                            <div className="flex  items-center gap-3 mb-5">
+                            <div className="flex  items-center gap-x-3 mb-2">
                                 <div className="bg-[#07DBFA] h-3 w-3 rounded-full"></div>
                                 <div className="text-base text-secondary">reviewed</div>
 
                             </div>
 
-                            <div className="flex  items-center gap-3 mb-5">
+                            <div className="flex  items-center gap-3 mb-2">
                                 <div className="bg-custom-purple h-3 w-3 rounded-full"></div>
                                 <div className="text-base text-secondary">clicked</div>
                             </div>

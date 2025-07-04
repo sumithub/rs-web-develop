@@ -35,7 +35,7 @@ const options = {
     },
 };
 
-export default function DashboardPieChart({ labels, colors }) {
+export default function DashboardPieChart({ labels, colors, maxWidth = 300 }) {
     const data = {
         labels: labels || labels_,
         datasets: [
@@ -47,7 +47,7 @@ export default function DashboardPieChart({ labels, colors }) {
             },
         ],
     }; return (
-        <div style={{ width: '100%', maxWidth: 300, margin: 'auto' }}>
+        <div style={{ width: '100%', maxWidth, margin: 'auto' }}>
             <Pie data={data} options={options} />
         </div>
     );
