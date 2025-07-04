@@ -190,7 +190,9 @@ export default function LocationDetails() {
                                 </td>
                                 <td>
                                     <div className="flex justify-center">
-                                        {e.review}
+                                        <div className="line-clamp-1">
+                                            {e.review}
+                                        </div>
                                     </div>
                                 </td>
                                 <td>
