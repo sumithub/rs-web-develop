@@ -25,7 +25,9 @@ import Link from "next/link"
 
 export default function Detail({ }) {
     const id = ""
-    const { register, handleSubmit, clearErrors, formState: { errors }, setValue, watch } = useForm({ defaultValues: { customerSource: "existing" } });
+    const { register, handleSubmit, clearErrors, formState: { errors }, setValue, watch } = useForm({
+        defaultValues: { excludeDuplicates: "Exclude Duplicates", customerSource: "existing" }
+    });
     const [sending, setSending] = useState(false)
     const [openSchedule, setOpenSchedule] = useState(false)
     const [openCustomer, setOpenCustomer] = useState(false)
@@ -381,13 +383,14 @@ export default function Detail({ }) {
 
         {openCustomerDetail &&
             <ImportCustomerDetail
-                onClose={() => {
+                onClose={(count) => {
+                    setCustomersSelected(count)
                     setOpenCustomerDetail(false)
                 }}
-                onSave={() => {
+                onSave={(count) => {
                     setOpenSchedule(false)
+                    setCustomersSelected(count || 0)
                 }}
-
             />
         }
 
@@ -536,7 +539,7 @@ export default function Detail({ }) {
                                 </SelectForm>
                                 {watch("customerSource") && <SelectForm
                                     class_="mt-10"
-                                    defaultOption="Exclude Duplicates" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                                    defaultOption="" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                                     formProps={{ ...register("excludeDuplicates", { required: false }) }}
                                     errors={errors} setValue={setValue}
                                     watch={watch}>
@@ -548,7 +551,7 @@ export default function Detail({ }) {
                             <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
                                 <div>Total Selected Customers</div>
                                 <div className="flex items-center gap-2">
-                                    <div>{customersSelected ? '250 Customers' : '0 Customers'}</div>
+                                    <div>{customersSelected ? `${customersSelected} Customers` : '0 Customers'}</div>
                                     <Image src="/images/eye1.svg" alt='eye' height={16} width={16} unoptimized={true} />
                                 </div>
                             </div>
