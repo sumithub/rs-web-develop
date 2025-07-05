@@ -1,24 +1,25 @@
 "use client"
-import { useEffect, useState } from "react"
-import AdminLayout from "../../../components/AdminLayout"
-import Search from "../../../components/form/Search"
-import CustomSelectBox from "../../../components/form/CustomSelectBox"
-import SecondaryButton from "../../../components/common/SecondaryButton"
-import TableOrder from "../../../components/TableOrder"
-import Checkbox from "../../../components/form/Checkbox"
-import Status from "../../../components/Status"
-import PaginationDemo from "../../../components/Pagination"
 import axios from "axios"
+import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { getError } from "../../../../helper"
-import Loading from "../../../components/Loading"
+import Model from "../Model"
+import AssignWidget from "./AssignWidget"
+import PublishToUser from "./PublishToUser"
+import UnpublishUser from "./UnpublishUser"
+import Search from "../../form/Search"
+import CustomSelectBox from "../../form/CustomSelectBox"
+import SecondaryButton from "../../common/SecondaryButton"
+import Loading from "../../Loading"
+import TableOrder from "../../TableOrder"
+import Checkbox from "../../form/Checkbox"
+import PaginationDemo from "../../Pagination"
 import { widgetManagement } from "../../../constent/constArray"
+import Status from "../../Status"
 import Image from "next/image"
-import AssignWidget from "../../../components/Models/admin/AssignWidget"
-import PublishToUser from "../../../components/Models/admin/PublishToUser"
-import UnpublishUser from "../../../components/Models/admin/UnpublishUser"
 
-export default function WidgetsManagement() {
+
+export default function ClientList({ onClose }) {
     const [sortBy, setSortBy] = useState(false)
     const [filterBy, setFilterBy] = useState("")
     const [filterByClients, setFilterByClients] = useState("")
@@ -49,15 +50,7 @@ export default function WidgetsManagement() {
     }
 
     return (
-        <AdminLayout noCard={false}
-            headerSearch={
-                <Search
-                    mainClass='w-72!'
-                    placeholder="Search"
-                    onSearch={(s) => {
-                        setSearch(s)
-                    }}
-                />}>
+        <Model onClose={onClose} title="Select From Client List" modalClass="w-[80%]!">
             {open &&
                 <AssignWidget
                     id={open}
@@ -236,6 +229,6 @@ export default function WidgetsManagement() {
             {list?.length > 0 && <div>
                 <PaginationDemo />
             </div>}
-        </AdminLayout>
+        </Model>
     )
 }
