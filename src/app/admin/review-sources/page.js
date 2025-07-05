@@ -43,43 +43,39 @@ export default function ReviewSources() {
     }
     return (<AdminLayout>
 
-        <div className="flex justify-between">
-            <div className="flex gap-5 w-full">
-                <div className="flex gap-2.5 items-center">
-                    <h2 className="text-lg capitalize font-medium shrink-0">Manage Review Sources</h2>
-                    <div className="text-primary/10">|</div>
-                    <h2 className="text-lg capitalize font-medium shrink-0">Connect your business to review platforms</h2>
-                </div>
-                <div className="w-1/4">
-                    <Search
-                        mainClass='w-full!'
-                        placeholder="Search by Review Sources"
-                        onSearch={(s) => {
-                            setSearch(s)
-                        }}
-                    />
-                </div>
+        <div className="flex gap-3.5 flex-wrap justify-between items-center">
+            <div className="flex gap-2.5 items-center">
+                <h2 className="text-lg capitalize font-medium">Manage Review Sources</h2>
+                <div className="text-primary/10">|</div>
+                <h2 className="text-lg capitalize font-medium">Connect your business to review platforms</h2>
             </div>
-            <div className='flex items-center gap-3.5'>
-
-                <CancelButton title="Assigned Clients" />
-
-                <CustomSelectBox
-                    defaultOption="Filters"
-                    class_='mt-0! w-26!'
-                    value={filterBy}
-                    onChange={(e) => {
-                        setFilterBy(e.target.value)
+            <div className="w-1/5">
+                <Search
+                    mainClass='w-full!'
+                    placeholder="Search by Review Sources"
+                    onSearch={(s) => {
+                        setSearch(s)
                     }}
-                ><option value="filter 1">Filter 1</option>
-                    <option value="filter 2">Filter 2</option>
-                </CustomSelectBox>
-
-                <SecondaryButton
-                    title="Add New Source"
-                    class_="text-xs! font-normal!"
                 />
             </div>
+
+            <CancelButton title="Assigned Clients" class_="" />
+
+            <CustomSelectBox
+                defaultOption="Filters"
+                class_='mt-0! w-26!'
+                value={filterBy}
+                onChange={(e) => {
+                    setFilterBy(e.target.value)
+                }}
+            ><option value="filter 1">Filter 1</option>
+                <option value="filter 2">Filter 2</option>
+            </CustomSelectBox>
+
+            <SecondaryButton
+                title="Add New Source"
+                class_="text-xs! font-normal!"
+            />
         </div>
         <div className="table-class mt-3.5">
             {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
@@ -129,7 +125,9 @@ export default function ReviewSources() {
                                         onChange={(checked) => {
                                             setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
                                         }} />
-                                    <div></div>
+                                    <div>
+                                        <Image src={e.img} alt="yelp-logo" width={56} height={24} className="w-[56px] h-auto" />
+                                    </div>
                                 </div>
                             </td>
                             <td>{e.url}</td>

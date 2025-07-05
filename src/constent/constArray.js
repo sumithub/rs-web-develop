@@ -509,9 +509,9 @@ export const widgetManagement = [
 ]
 
 export const reviewSourcesList = [
-    { url: "https//www.google.com", clientName: "John Deo", status: "Connected" },
-    { url: "https//www.google.com", clientName: "John Deo", status: "Disconnect" },
-    { url: "https//www.google.com", clientName: "John Deo", status: "Connected" },
-    { url: "https//www.google.com", clientName: "John Deo", status: "Disconnect" },
-    { url: "https//www.google.com", clientName: "John Deo", status: "Connected" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Connected", img: "/images/yelp-logo.svg" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Disconnect", img: "/images/yelp-logo.svg" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Connected", img: "/images/yelp-logo.svg" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Disconnect", img: "/images/yelp-logo.svg" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Connected", img: "/images/yelp-logo.svg" },
 ]
