@@ -14,6 +14,7 @@ import { reviewsOversight } from "../../../constent/constArray"
 import Switch from "../../../components/form/Switch"
 import Image from "next/image"
 import ReviewDetails from "../../../components/Models/reviews-oversight/ReviewDetails"
+import DashboardCard from "../../../components/DashboardCard"
 
 export default function ReviewsOversight() {
     const [sortBy, setSortBy] = useState(false)
@@ -53,6 +54,15 @@ export default function ReviewsOversight() {
                         setSearch(s)
                     }}
                 />}>
+            <div className="grid grid-cols-3 gap-x-4 gap-y-5 mb-5">
+                <DashboardCard title="Total Reviews" count="15,432" img="/images/sms-star.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/average2.png')]" />
+                <DashboardCard title="Positive Reviews" count="78%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
+                <DashboardCard title="Neutral Reviews" count="15%" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-yellow" bgImage="bg-[url('/images/active3.png')]" />
+                <DashboardCard title="Negative Reviews" count="7%" img="/images/chart-2.svg" bgClass="bg-danger" textColor="text-danger" bgImage="bg-[url('/images/negative.png')]" />
+                <DashboardCard title="Most Reviewed Business" count="1,245" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-yellow" bgImage="bg-[url('/images/active3.png')]" />
+                <DashboardCard title=" Most Active Review Source" count="65%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
+            </div>
+
             {open &&
                 <ReviewDetails
                     onClose={() => {
@@ -131,28 +141,22 @@ export default function ReviewsOversight() {
                                 setSortBy={setSortBy}
                                 field="name" /></th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Location"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="location" />
-                                </div>
+                                <TableOrder title="Location"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="location" />
                             </th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Customer"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="details" />
-                                </div>
+                                <TableOrder title="Customer"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="details" />
                             </th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Rating"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="rating" />
-                                </div>
+                                <TableOrder title="Rating"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="rating" />
                             </th>
                             <th>
                                 <div className="flex justify-center">
@@ -178,7 +182,11 @@ export default function ReviewsOversight() {
                                         field="timestamp" />
                                 </div>
                             </th>
-                            <th>Actions</th>
+                            <th>
+                                <div className="flex justify-center">
+                                    Actions
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -187,13 +195,21 @@ export default function ReviewsOversight() {
                                 <td>
                                     {e.clientName}
                                 </td>
-                                <td>{e.location}</td>
                                 <td>
-                                    <div className="flex justify-center">
-                                        {e.customer}
+                                    {e.location}
+                                </td>
+                                <td>
+                                    {e.customer}
+                                </td>
+                                <td>
+                                    <div className="flex items-center gap-1">
+                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
+                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
+                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
+                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
+                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
                                     </div>
                                 </td>
-                                <td >  </td>
                                 <td>
                                     <div className="flex justify-center">
                                         <Status status={e.sentiment} />
@@ -213,9 +229,9 @@ export default function ReviewsOversight() {
                                         </div>
                                     </div>
                                 </td>
-                                <td> <button onClick={() => setOpen(true)}>
+                                <td><div className="flex justify-center"><button onClick={() => setOpen(true)}>
                                     <Image src="/images/eyes3.svg" alt="eyes3" width={28} height={28} unoptimized={true} />
-                                </button></td>
+                                </button></div></td>
                             </tr>)}
                     </tbody>
                 </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}

@@ -489,3 +489,16 @@ export const CustomerTimeline = [
     { title: "Jun 12,2024", name: "Review Request Sent" },
     { title: "Jun 12,2024", name: "Customer Added to Campaign" },
 ]
+
+export const ReviewOversight = [
+    { title: "Customer", subtitle: "John Doe" },
+    { title: "Email", subtitle: "john@example.com" },
+    { title: "Phone", subtitle: "+61412345678" },
+    { title: "Business", subtitle: "ABC Dental - Melbourne" },
+    { title: "Review Source", subtitle: "Google" },
+    { title: "Rating", subtitle: "Star" },
+    { title: "Sentiment", subtitle: "Positive" },
+    { title: "Status", subtitle: "Approved" },
+    { title: "Timestamp", subtitle: "Jun 18,2024 | 10:00AM" },
+    { title: "Review Text", subtitle: "Great service, highly recommend!" },
+]
