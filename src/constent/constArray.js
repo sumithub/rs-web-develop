@@ -452,3 +452,11 @@ export const manageCustomers = [
     { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
     { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
 ]
+
+export const reviewsOversight = [
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Positive', reviewSource: "Google", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Positive', reviewSource: "Yelp", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Neutral', reviewSource: "Facebook", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Positive', reviewSource: "Yelp", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Positive', reviewSource: "Yelp", timestamp: "Jun 18,2024 | 14:20:11" },
+];
