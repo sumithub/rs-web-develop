@@ -50,6 +50,7 @@ export default function AddNewClient({ onClose, id }) {
                     errors={errors} />
 
                 <SelectForm
+                    selectClass_="py-3!"
                     label="Subscription Plan"
                     isRequired={true}
                     defaultOption="select"
@@ -63,6 +64,7 @@ export default function AddNewClient({ onClose, id }) {
                 </SelectForm>
 
                 <SelectForm
+                    selectClass_="py-3!"
                     label="Status"
                     isRequired={true}
                     defaultOption="select"

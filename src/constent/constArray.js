@@ -213,7 +213,6 @@ export const locationScreen = [
     { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
 ]
 
-
 export const manageTags = [
     { name: "VIP", description: "High-value customers", customers: "120", created: "Client A" },
     { name: "Negative", description: "Customers with issues", customers: "45", created: "Client A" },
@@ -227,17 +226,15 @@ export const manageTags = [
 
 ]
 
-
 export const locationReviews = [
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "Gustavo Torff", review: "Wait time was long.", date: "11 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Pending" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "Gustavo Torff", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Wait time was long.", date: "11 Mar 2025", status: "Replied" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Pending" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
 ]
-
 
 export const locationCampaign = [
     { name: "John Deo", status: "Active", responses: "150" },

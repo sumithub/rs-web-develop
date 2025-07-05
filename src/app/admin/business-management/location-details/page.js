@@ -47,7 +47,7 @@ export default function LocationDetails() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-72!'
+                    mainClass='w-96!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -180,12 +180,12 @@ export default function LocationDetails() {
                                     </div>
                                 </td>
                                 <td>
-                                    <div className="flex gap-2 items-center">
-                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
+                                    <div className="flex items-center gap-2">
+                                        {e.ratings?.map((rating, i) => (
+                                            <div key={i} >
+                                                <Image src={rating} alt="star" height={20} width={20} unoptimized={true} />
+                                            </div>
+                                        ))}
                                     </div>
                                 </td>
                                 <td>
