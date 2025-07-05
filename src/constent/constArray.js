@@ -385,20 +385,30 @@ export const rolesPermissions = [
 ]
 
 export const latestReviews = [
-    { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 
-     { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
-        
-           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 
-           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 
-           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
+
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 ]
 
 export const recentPayments = [
@@ -441,4 +451,25 @@ export const manageCustomers = [
     { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
     { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
     { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
+]
+
+export const JourneyCustomer = [
+    { title: "Client", name: "ABC Ltd" },
+    { title: "Business Type", name: "E-Commerce" },
+    { title: "Journey Type", name: "Journey Type" },
+    { title: "Journey Start", name: "Jun 18,2024" },
+    { title: "Last Update", name: "Jun 20,2024" },
+]
+
+export const CustomerDetails = [
+    { title: "Name", name: "John Smith" },
+    { title: "Email", name: "johnsmith@gmail.com" },
+    { title: "Phone", name: "+61-123456789" },
+]
+
+export const CustomerTimeline = [
+    { title: "Jun 14,2024", name: "Clicked Review Link" },
+    { title: "Jun 13,2024", name: "Opened Email" },
+    { title: "Jun 12,2024", name: "Review Request Sent" },
+    { title: "Jun 12,2024", name: "Customer Added to Campaign" },
 ]
