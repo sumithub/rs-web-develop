@@ -39,7 +39,6 @@ export function formatDateTime(date) {
     }
 }
 
-
 export const phoneStyles = {
     "--react-international-phone-border-radius": '8px',
     "--react-international-phone-border-color": "#0396FF1A",
@@ -49,9 +48,4 @@ export const phoneStyles = {
     "--react-international-phone-country-selector-background-color-hover": "#ffffff",
     "--react-international-phone-dropdown-item-background-color": "#ffffff",
     "--react-international-phone-height": "44px",
-}
-
-export function isAdmin(window) {
-    // return localStorage.getItem("role") === "ADMIN"
-    return true
 }

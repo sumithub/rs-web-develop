@@ -5,24 +5,24 @@ import RenameList from "../Models/customers/RenameList"
 import DeleteList from "../Models/customers/DeleteList"
 import Download from "../Models/customers/Download"
 
-export default function GridView() {
+export default function AdminGridView() {
     const [openRename, setOpenRename] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
     const [openDownload, setOpenDownload] = useState(false)
 
     const Project = [
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
-        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", source: "CSV Import", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
+        { title: "DELETE EXAMPLE - Elwyn", date: "Jun 18,2024", client: "ABC Garage", totalcustomer: "150" },
     ]
     return (<>
 
@@ -74,12 +74,12 @@ export default function GridView() {
                     </div>
                     <div>
                         <div className='flex items-center justify-between pt-[15px]'>
-                            <h2 className='text-sm font-medium text-text3'>Date</h2>
+                            <h2 className='text-sm font-medium text-text3 capitalize'>created on</h2>
                             <h2 className='text-sm font-medium'>{e.date}</h2>
                         </div>
                         <div className='flex items-center justify-between pt-[15px]'>
-                            <h2 className='text-sm font-medium text-text3'>Source</h2>
-                            <h2 className='text-sm font-medium'>{e.source}</h2>
+                            <h2 className='text-sm font-medium text-text3'>client</h2>
+                            <h2 className='text-sm font-medium'>{e.client}</h2>
                         </div>
                         <div className='flex items-center justify-between pt-[15px]'>
                             <h2 className='text-sm font-medium text-text3 capitalize'>Total customer</h2>
