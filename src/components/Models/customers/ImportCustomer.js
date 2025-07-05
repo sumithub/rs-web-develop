@@ -5,7 +5,7 @@ import SelectForm from "../../form/SelectForm";
 import Loading from "../../Loading";
 import TableOrder from "../../TableOrder";
 import axios from "axios";
-import { getError, isAdmin } from "../../../../helper";
+import { getError } from "../../../../helper";
 import { toast } from "react-toastify";
 import { fieldMapping } from "../../../constent/constArray";
 import CancelButton from "../../common/CancelButton";
@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import RadioForm from "../../form/RadioForm";
 import Image from "next/image";
 import FileInput from "../../form/FileInput";
+import { useRole } from "../../../utils/hooks";
 
 export default function ImportCustomer({ onBack, activeStep, setActiveStep, onClose, icon = false }) {
     const [sortBy, setSortBy] = useState("");
@@ -24,6 +25,8 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     const [importDone, setImportDone] = useState(false);
     const [mappingErrors, setMappingErrors] = useState({});
     const [file, setFile] = useState(null)
+     const { isAdmin } = useRole();
+    
     const [importData, setImportData] = useState({
         fileName: "",
         selectedFile: null,
@@ -486,7 +489,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                 these errors and upload the file again.
                                             </div>
                                         </div>
-                                        {isAdmin() && <SecondaryButton
+                                    {!isAdmin &&   <SecondaryButton
                                             title="Download Error Report"
                                             type="button"
                                             onClick={() => { toast.success('Download Successfully') }}
