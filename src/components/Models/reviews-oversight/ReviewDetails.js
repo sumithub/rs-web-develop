@@ -7,10 +7,12 @@ import { getError } from "../../../../helper"
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import ManualReply from "../../Models/reviews-oversight/ManualReply"
 
 function ReviewDetails({ onClose, onSave }) {
     const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false)
+    const [open, setOpen] = useState(false)
 
     const onSubmit = async (data) => {
         try {
@@ -34,10 +36,20 @@ function ReviewDetails({ onClose, onSave }) {
         }
     }
     return <Model onClose={onClose} title="Review Details" modalClass="w-1/2!" >
+        {open &&
+            <ManualReply
+                onClose={() => {
+                    setOpen(false)
+                }}
+
+                onSave={() => {
+                    setOpen(true)
+                }} />
+        }
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-3 gap-5 mt-[30px]">
                 <CancelButton title="Delete" type="submit" disabled={sending} class_="text-lg!" />
-                <SecondaryButton title="Manual Reply" class_="text-lg!" />
+                <SecondaryButton title="Manual Reply" class_="text-lg!" onClick={() => setOpen(true)} />
                 <SecondaryButton title="view full log" onClick={onClose} class_="text-lg!" />
             </div>
         </form>
