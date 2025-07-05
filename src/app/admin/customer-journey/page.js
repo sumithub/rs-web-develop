@@ -11,7 +11,7 @@ import Status from "../../../components/Status"
 import PaginationDemo from "../../../components/Pagination"
 import axios from "axios"
 import { toast } from "react-toastify"
-import { getError } from "../../../../helper"
+import { formatDateTime, getError } from "../../../../helper"
 import Loading from "../../../components/Loading"
 import { customerJourney } from "../../../constent/constArray"
 import Switch from "../../../components/form/Switch"
@@ -184,7 +184,7 @@ export default function CustomersJourney() {
                                     </div>
                                 </td>
                                 <td>
-                                    {e.timestamp}
+                                    {formatDateTime(e.timestamp)}
                                 </td>
                             </tr>)}
                     </tbody>
