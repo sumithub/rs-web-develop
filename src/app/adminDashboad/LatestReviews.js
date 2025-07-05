@@ -78,7 +78,16 @@ export default function LatestReviews() {
 
                 <tbody>
                     {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
-                        <td><Image src={e.rating} alt="star" height={20} width={20} unoptimized={true} /></td>
+                        {/* <td><Image src={e.rating} alt="star" height={20} width={20} unoptimized={true} /></td> */}
+                        <td>
+                        <div className="flex items-center">
+                          {e.ratings?.map((rating, i) => (
+                                <div key={i} >
+                            <Image src={rating}alt="star" height={20} width={20} unoptimized={true} />
+                                </div>
+                            ))}
+                        </div>
+                        </td>
                         <td>{e.review}</td>
                         <td>{e.reviewer}</td>
                         <td>{e.client}</td>

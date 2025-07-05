@@ -385,11 +385,20 @@ export const rolesPermissions = [
 ]
 
 export const latestReviews = [
-    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
-    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
-    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
-    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
-    { rating: "/images/star.svg", review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+
+     { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+        
+           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+
+           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+
+           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
 ]
 
 export const recentPayments = [
