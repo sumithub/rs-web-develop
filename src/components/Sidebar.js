@@ -97,6 +97,7 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                     [
                         { title: "Manage Reviews", link: "/admin/reviews-oversight" },
                         { title: "Widgets", link: "/admin/widgets-management" },
+                        { title: "Sources", link: "/admin/review-sources" },
                     ]
             },
 
