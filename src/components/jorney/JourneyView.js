@@ -8,7 +8,10 @@ function JourneyView() {
                     <div className="text-base text-text3">{e.title}</div>
                     <div className="text-base font-medium">{e.name}</div>
                 </div>
-                <hr className="border-t border-secondary/5 w-full mt-3" />
+                {i !== JourneyCustomer.length - 1 && (
+                    <hr className="mt-3 border-t border-secondary/5" />
+                )
+                }
             </div>)}
     </>
 }

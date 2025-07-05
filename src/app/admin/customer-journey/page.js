@@ -15,8 +15,9 @@ import { getError } from "../../../../helper"
 import Loading from "../../../components/Loading"
 import { customerJourney } from "../../../constent/constArray"
 import Switch from "../../../components/form/Switch"
+import CustomerJourney from "../../../components/Models/admin/customer-journey/CustomerJourney"
 
-export default function CustomerJourney() {
+export default function CustomersJourney() {
     const [sortBy, setSortBy] = useState(false)
     const [filterBy, setFilterBy] = useState("")
     const [filterBySort, setFilterBySort] = useState("")
@@ -24,6 +25,7 @@ export default function CustomerJourney() {
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         getUsers()
@@ -45,6 +47,16 @@ export default function CustomerJourney() {
 
     return (
         <AdminLayout>
+            {open &&
+                <CustomerJourney
+                    onClose={() => {
+                        setOpen(false)
+                    }}
+
+                    onSave={() => {
+                        setOpen(true)
+                    }} />
+            }
             <div className='flex items-center justify-between'>
                 <Search
                     placeholder="Search by Customer Name, Email, Phone, Event Type"
@@ -89,6 +101,7 @@ export default function CustomerJourney() {
 
                     <SecondaryButton
                         title="Export"
+                        onClick={() => setOpen(true)}
                         class_="text-xs! font-normal!"
                     />
                 </div>
