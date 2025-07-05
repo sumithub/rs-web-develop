@@ -52,7 +52,7 @@ export default function WidgetsManagement() {
         <AdminLayout noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-72!'
+                    mainClass='w-96!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -94,6 +94,7 @@ export default function WidgetsManagement() {
             <div className='flex items-center justify-between'>
                 <Search
                     placeholder="Search by.."
+                    mainClass="w-[25%]!"
                     onSearch={(s) => {
                         setSearch(s)
                     }}

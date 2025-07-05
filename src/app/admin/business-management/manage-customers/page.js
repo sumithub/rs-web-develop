@@ -61,7 +61,7 @@ function ManageCustomers() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-72!'
+                    mainClass='w-96!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -163,7 +163,7 @@ function ManageCustomers() {
 
                     {view === "customer" && <div className='flex items-center gap-2.5 my-3.5 justify-between'>
                         <Search
-                            mainClass='w-72!'
+                            mainClass='w-96!'
                             placeholder="Search by name, email Or phone"
                             onSearch={(s) => {
                                 setCustomerSearch(s)

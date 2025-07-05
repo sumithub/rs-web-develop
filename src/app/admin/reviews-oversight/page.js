@@ -48,7 +48,7 @@ export default function ReviewsOversight() {
         <AdminLayout noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-72!'
+                    mainClass='w-96!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
