@@ -279,11 +279,19 @@ function ManageCustomers() {
                                     sortBy={sortBy}
                                     setSortBy={setSortBy}
                                     field="tags" /></th>
-                                <th><TableOrder title="Status"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="status" /></th>
-                                <th>Actions</th>
+                                <th>
+                                    <div className='flex justify-center!'>
+                                        <TableOrder title="Status"
+                                            sortBy={sortBy}
+                                            setSortBy={setSortBy}
+                                            field="status" />
+                                    </div>
+                                </th>
+                                <th>
+                                    <div className='flex justify-center!'>
+                                        Actions
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -303,9 +311,13 @@ function ManageCustomers() {
                                 <td>{e.phone}</td>
                                 <td>{e.client}</td>
                                 <td>{e.tags}</td>
-                                <td><Status status={e.status} /></td>
                                 <td>
-                                    <div className='flex items-center gap-2'>
+                                    <div className='flex justify-center'>
+                                        <Status status={e.status} />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className='flex items-center justify-center gap-2'>
                                         <button className='cursor-pointer'
                                             onClick={() => {
                                                 setSelId("e.id")

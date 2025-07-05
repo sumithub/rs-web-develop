@@ -85,21 +85,31 @@ export default function ListView() {
                             setSortBy={setSortBy}
                             field="listName"
                         /></th>
-                        <th><TableOrder title="Created On"
-                            sortBy={sortBy}
-                            setSortBy={setSortBy}
-                            field="createdOn"
-                        /></th>
-                        <th><TableOrder title="Source"
-                            sortBy={sortBy}
-                            setSortBy={setSortBy}
-                            field="source"
-                        /></th>
-                        <th><TableOrder title="Tagged Customers"
-                            sortBy={sortBy}
-                            setSortBy={setSortBy}
-                            field="taggedCustomers"
-                        /></th>
+                        <th>
+                            <div className="flex justify-center">
+                                <TableOrder title="Created On"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="createdOn"
+                                /></div>
+                        </th>
+                        <th>
+                            <div className="flex justify-center">
+                                <TableOrder title="Source"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="source"
+                                /></div>
+                        </th>
+                        <th>
+                            <div className="flex justify-center">
+                                <TableOrder title="Tagged Customers"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="taggedCustomers"
+                                />
+                            </div>
+                        </th>
                         <th className="text-center!">Action</th>
                     </tr>
                 </thead>
@@ -116,9 +126,13 @@ export default function ListView() {
                                 <div>{e.listName}</div>
                             </div>
                         </td>
-                        <td>{formatDateTime(e.createdOn)}</td>
-                        <td>{e.source}</td>
-                        <td className="text-primary! underline underline-offset-2">{e.taggedCustomers}</td>
+                        <td><div className="flex justify-center">{formatDateTime(e.createdOn)}</div></td>
+                        <td><div className="flex justify-center">{e.source}</div></td>
+                        <td className="text-primary! underline underline-offset-2">
+                            <div className="flex justify-center">
+                                {e.taggedCustomers}
+                            </div>
+                        </td>
                         <td>
                             <div className='flex items-center gap-2 justify-center'>
                                 <button className='cursor-pointer' onClick={() => { setOpen(true) }}>
