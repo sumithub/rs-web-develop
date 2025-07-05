@@ -5,7 +5,7 @@ import Status from "../Status"
 function JourneyTimeline() {
     return <>
         <div className="">
-            <h2 className="text-lg font-semibold mt-5 mb-3.5">Customer Details</h2>
+            <h2 className="text-lg font-semibold mt-5 mb-3.5">Journey Timeline</h2>
             <div className="flex justify-between mt-3">
                 <div className="text-base text-text3">Jun 15,2024</div>
                 <div className="text-base font-medium flex items-center gap-2.5">
