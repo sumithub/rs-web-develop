@@ -489,3 +489,12 @@ export const CustomerTimeline = [
     { title: "Jun 12,2024", name: "Review Request Sent" },
     { title: "Jun 12,2024", name: "Customer Added to Campaign" },
 ]
+
+export const widgetManagement = [
+    { widgetName: "Carasoul", type: "Dynamic", status: "Published", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Draft", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Published", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Draft", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Published", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Draft", assignedClients: "150" }
+]
