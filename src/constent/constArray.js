@@ -502,3 +502,11 @@ export const ReviewOversight = [
     { title: "Timestamp", subtitle: "Jun 18,2024 | 10:00AM" },
     { title: "Review Text", subtitle: "Great service, highly recommend!" },
 ]
+export const widgetManagement = [
+    { widgetName: "Carasoul", type: "Dynamic", status: "Published", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Draft", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Published", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Draft", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Published", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Draft", assignedClients: "150" }
+]

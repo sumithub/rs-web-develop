@@ -96,6 +96,7 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 submenu:
                     [
                         { title: "Manage Reviews", link: "/admin/reviews-oversight" },
+                        { title: "Widgets", link: "/admin/widgets-management" },
                     ]
             },
 
