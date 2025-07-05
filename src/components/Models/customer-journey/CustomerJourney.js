@@ -7,6 +7,9 @@ import CancelButton from "../../common/CancelButton"
 import SecondaryButton from "../../common/SecondaryButton"
 import { useForm } from "react-hook-form"
 import { useState } from "react"
+import JourneyView from "../../../components/jorney/JourneyView"
+import JourneyDetails from "../../../components/jorney/JourneyDetails"
+import JourneyTimeline from "../../../components/jorney/JourneyTimeline"
 
 function CustomerJourney({ onClose, onSave }) {
     const { handleSubmit } = useForm();
@@ -36,12 +39,17 @@ function CustomerJourney({ onClose, onSave }) {
         }
     }
 
-    return <Model onClose={onClose} title="Customer Journey" modalClass="w-1/2!">
+
+
+    return <Model onClose={onClose} title="Customer Journey View" modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-2 gap-3">
-                <CancelButton title="Cancel" onClick={onClose} />
-                <SecondaryButton title="Delete Event" />
-                <SecondaryButton title="Edit Event" type="submit" disabled={sending} onClick={onSubmit} />
+            <JourneyView />
+            <JourneyDetails />
+            <JourneyTimeline />
+            <div className="grid grid-cols-3 gap-5 mt-7">
+                <CancelButton title="Export Journey PDF" onClick={onClose} class_="text-lg! py-[8.2px]!" />
+                <SecondaryButton title="Edit Journey" type="submit" disabled={sending} onClick={onSubmit} class_="bg-white text-primary! hover:text-white! hover:bg-primary! text-lg! py-[8.2px]!" />
+                <SecondaryButton title="Delete Journey" class_="text-lg! py-[8.2px]!" />
             </div>
         </form>
     </Model>

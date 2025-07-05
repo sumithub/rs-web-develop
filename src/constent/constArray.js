@@ -128,6 +128,15 @@ export const customerHistory = [
 
     { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
 ]
+export const adminCustomerHistory = [
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
+]
 
 export const fieldMapping = [
     { header: "Full Name", firstRow: "DELETE EXAMPLE - Elwyn" },
@@ -460,3 +469,23 @@ export const reviewsOversight = [
     { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Positive', reviewSource: "Yelp", timestamp: "Jun 18,2024 | 14:20:11" },
     { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Positive', reviewSource: "Yelp", timestamp: "Jun 18,2024 | 14:20:11" },
 ];
+export const JourneyCustomer = [
+    { title: "Client", name: "ABC Ltd" },
+    { title: "Business Type", name: "E-Commerce" },
+    { title: "Journey Type", name: "Journey Type" },
+    { title: "Journey Start", name: "Jun 18,2024" },
+    { title: "Last Update", name: "Jun 20,2024" },
+]
+
+export const CustomerDetails = [
+    { title: "Name", name: "John Smith" },
+    { title: "Email", name: "johnsmith@gmail.com" },
+    { title: "Phone", name: "+61-123456789" },
+]
+
+export const CustomerTimeline = [
+    { title: "Jun 14,2024", name: "Clicked Review Link" },
+    { title: "Jun 13,2024", name: "Opened Email" },
+    { title: "Jun 12,2024", name: "Review Request Sent" },
+    { title: "Jun 12,2024", name: "Customer Added to Campaign" },
+]
