@@ -24,10 +24,8 @@ function VerificationEmailClient() {
     const status = searchParams?.get("status");
     const { unVerifiedEmail } = useContext(AuthContext);
 
-    console.log("Unverified Email from context:", unVerifiedEmail);
 
     useEffect(() => {
-        console.log("UseEffect mounted");
         const link = localStorage.getItem("mockVerificationLink");
         if (link) {
             setMockLink(link);
@@ -60,29 +58,17 @@ function VerificationEmailClient() {
             setIsTimerActive(true);
             setSec(59);
             setMockLink(null);
-            console.log("Unverified Email:", unVerifiedEmail);
             
             // Remove ?status=expired from the URL
             const url = new URL(window.location.href);
             url.searchParams.delete("status");
             window.history.replaceState({}, "", url.toString());
-            localStorage.removeItem("mockVerificationLink");
-         
-          
-        // Calls the centralized authApi signup function
-        console.log("Resending verification email for:", unVerifiedEmail);
-        const parsedData = await resendEmailVerification({email:unVerifiedEmail});
-        console.log("Parsed resend Email Response:", parsedData);
-    
-        // Save mock verification link to localStorage (for dev only)
-        if (parsedData?.mockVerificationLink) {
-          localStorage.setItem("mockVerificationLink", parsedData.mockVerificationLink);
-        }
-        // Update context with unverified email
 
+        // Calls the centralized authApi signup function
+        const parsedData = await resendEmailVerification({email:unVerifiedEmail});
+    
             toast.success("Verification email sent successfully! Check your inbox or spam folder.");
         } catch (error) {
-            console.log("Resend verification email error:", error);
             toast.error("Unable to resend verification email. Please try again later.");
             setIsTimerActive(false);
             setLoading(false);
@@ -167,7 +153,6 @@ function VerificationEmailClient() {
                     <SecondaryButton
                         title="Resend Verification Email"
                         disabled={loading || isTimerActive}
-                  
                         type="submit"
                         class_="disabled:bg-dark! disabled:text-text3! disabled:border-dark! py-3! mt-5!" onClick={undefined}                    />
 {

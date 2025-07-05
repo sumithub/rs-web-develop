@@ -34,7 +34,6 @@ export default function Signup() {
 
 useEffect(() => {
   setValue("userType", "USER");
-  console.log("context value:", unVerifiedEmail);
 }, [setValue]);
 
 const onSubmit = async (formData: SignupFormData) => {
@@ -42,7 +41,6 @@ const onSubmit = async (formData: SignupFormData) => {
     setLoading(true);
     // Calls the centralized authApi signup function
     const parsedData = await signup(formData);
-    console.log("Parsed Signup Response:", parsedData);
 
     // Save mock verification link to localStorage (for dev only)
     if (parsedData?.mockVerificationLink) {

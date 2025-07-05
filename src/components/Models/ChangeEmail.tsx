@@ -24,12 +24,10 @@ function ChangeEmail({ onClose, id }) {
     useEffect(()=>{},[currentEmail])
     const onSubmit = async (formData: ChangeEmailFormData) => {
         
-        console.log("Form Data:", formData);
         try {
           
             localStorage.removeItem("mockVerificationLink");    
             setSending(true)
-            console.log("Submitting form...");
                 // Calls the centralized authApi signup function
                 if(currentEmail === formData.newEmail) {
                     toast.error("This is your current email. Please enter a different one.");
@@ -37,11 +35,9 @@ function ChangeEmail({ onClose, id }) {
                     return;
                 }
                 const parsedData = await changeEmail(formData,);
-                console.log("Parsed Signup Response:", parsedData);
                 // Save mock verification link to localStorage (for dev only)
                 if (parsedData?.mockVerificationLink) {
                   localStorage.setItem("mockVerificationLink", parsedData.mockVerificationLink);
-                  console.log("New Mock Verification Link:", parsedData.mockVerificationLink);
                 }
                 // Update context with unverified email
                 toast.success("Email updated successfully! Please check your inbox for verification.")
@@ -50,7 +46,7 @@ function ChangeEmail({ onClose, id }) {
                 setCurrentEmail(formData.newEmail);
                 onClose()
         } catch (error) {
-            console.log("Error", error)
+            console.error("Error", error)
             // Check if the error response has the expected shape
             const apiMessage = error?.response?.data?.message;
             const fallbackMessage = "Unable to update email. Please try again later.";

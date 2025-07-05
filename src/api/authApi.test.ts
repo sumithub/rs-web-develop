@@ -1,7 +1,8 @@
 import { ChangeEmailFormData, ChangeEmailResponseSchema } from "../components/schemas/ChangeEmailSchema";
+import { ResendEmailVerificationData, ResendEmailVerificationResponseSchema } from "../components/schemas/ResendVerificationEmail";
 import { SignupFormData, SignupResponseSchema } from "../components/schemas/SignupSchema";
 
-import { authApi } from "./authApi";
+import { authApi, resendEmailVerification } from "./authApi";
 import { axiosInstance } from "./axios";
 
 jest.mock("axios", () => ({
@@ -92,40 +93,46 @@ describe("authApi.changeEmail", () => {
   });
 })
 
-// describe("authApi.resendEmailVerification", () => {
-//   const validFormData: ResendEmailVerificationData = {
-//       email: "user@example.com",
-//   };
 
-//   const validApiResponse = {
-//       success: true,
-//       message: "Verification email sent successfully",
-//   };
+describe("resendEmail", () => {
+  const validFormData: ResendEmailVerificationData = {
+      email: "newemail@example.com",
+  };
 
-//   it("should return parsed data on valid response", async () => {
-//       mockedAxios.post.mockResolvedValueOnce({ data: validApiResponse });
+  const validApiResponse = "Verification email sent successfully";
+  
+  it("should return parsed data on valid response", async () => {
+      mockedAxios.post.mockResolvedValueOnce({ data: validApiResponse });
+      const result = await authApi.resendEmailVerification(validFormData);
 
-//       const result = await authApi.resendEmailVerification(validFormData);
+      expect(result).toEqual(ResendEmailVerificationResponseSchema.parse(validApiResponse));
+      expect(mockedAxios.post).toHaveBeenCalledWith("/auth/resend-verification", validFormData);
+  })
+  it("should throw an error if the API response does not match the schema ", async () => {
+   
+    mockedAxios.post.mockResolvedValueOnce({ invalid: "data" });
 
-//       expect(result).toEqual(ResendEmailVerificationResponseSchema.parse(validApiResponse));
-//       expect(mockedAxios.post).toHaveBeenCalledWith("/users/resend-email", validFormData);
-//   });
+    await expect(resendEmailVerification(validFormData)).rejects.toThrow(
+        "Invalid API response format"
+    );
+    expect(mockedAxios.post).toHaveBeenCalledWith("/auth/resend-verification", validFormData);
+   
+});
+it("should handle network or server errors gracefully ", async () => {
+  // Mock axios throwing an error
+  mockedAxios.post.mockRejectedValueOnce(new Error("Network Error"));
 
-//   it("should throw error on invalid API response", async () => {
-//       const invalidResponse = { foo: "bar" };
+  await expect(resendEmailVerification(validFormData)).rejects.toThrow(
+      "Network Error"
+  );
+  // Assertions
+  expect(axiosInstance.post).toHaveBeenCalledWith(
+      "/auth/resend-verification",
+      validFormData
+  );
+});
+}
+)
 
-//       mockedAxios.post.mockResolvedValueOnce({ data: invalidResponse });
 
-//       await expect(authApi.resendEmailVerification(validFormData)).rejects.toThrow("Invalid API response format");
 
-//       expect(mockedAxios.post).toHaveBeenCalledWith("/users/resend-email", validFormData);
-//   });
-
-//   it("should propagate axios error", async () => {
-//       mockedAxios.post.mockRejectedValueOnce(new Error("Network Error"));
-
-//       await expect(authApi.resendEmailVerification(validFormData)).rejects.toThrow("Network Error");
-
-//       expect(mockedAxios.post).toHaveBeenCalledWith("/users/resend-email", validFormData);
-//   });
-// });

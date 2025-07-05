@@ -36,7 +36,7 @@ describe("ChangeEmail Component", () => {
     jest.clearAllMocks();
   });
 
-  // ✅ Happy Path
+  // All good
   it("successfully submits with a valid new email", async () => {
     (changeEmail as jest.Mock).mockResolvedValueOnce({
       mockVerificationLink: "http://mock-link.com",
@@ -63,7 +63,7 @@ describe("ChangeEmail Component", () => {
     });
   });
 
-  // ❌ Unhappy: new email is same as current
+  // new email is same as current
   it("shows error if new email is same as current", async () => {
     renderComponent();
     const input = screen.getByPlaceholderText(/Enter Your Email Address/i);
@@ -78,7 +78,7 @@ describe("ChangeEmail Component", () => {
     });
   });
 
-  // ❌ Unhappy: API call fails
+  // API call fails
   it("shows error if API throws", async () => {
     (changeEmail as jest.Mock).mockRejectedValueOnce({
       response: { data: { message: "Something went wrong" } },
@@ -98,7 +98,7 @@ describe("ChangeEmail Component", () => {
     });
   });
 
-  // ❌ Unhappy: invalid email (schema failure)
+  // invalid email (schema failure)
   it("prevents submission if email is invalid", async () => {
     renderComponent();
 
