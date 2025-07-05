@@ -8,7 +8,7 @@ import Status from "../../../components/Status"
 import PaginationDemo from "../../../components/Pagination"
 import axios from "axios"
 import { toast } from "react-toastify"
-import { getError } from "../../../../helper"
+import { formatDateTime, getError } from "../../../../helper"
 import Loading from "../../../components/Loading"
 import { reviewsOversight } from "../../../constent/constArray"
 import Switch from "../../../components/form/Switch"
@@ -225,7 +225,7 @@ export default function ReviewsOversight() {
                                 <td className="">
                                     <div className="flex justify-center">
                                         <div className="line-clamp-1">
-                                            {e.timestamp}
+                                            {formatDateTime(e.timestamp)}
                                         </div>
                                     </div>
                                 </td>

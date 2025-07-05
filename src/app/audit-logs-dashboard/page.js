@@ -8,7 +8,7 @@ import CustomSelectBox from "../../components/form/CustomSelectBox";
 import Checkbox from "../../components/form/Checkbox";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getError } from "../../../helper";
+import { formatDateTime, getError } from "../../../helper";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 import { auditLogsDashboard } from "../../constent/constArray";
@@ -154,7 +154,7 @@ export default function AuditLogsDashboard() {
                             <td className="capitalize">{e.action}</td>
                             <td className="capitalize">{e.details}</td>
                             <td className="capitalize">{e.performed}</td>
-                            <td>{e.timestamp}</td>
+                            <td>{formatDateTime(e.timestamp)}</td>
                             <td>
                                 <div className='flex items-center gap-2'>
                                     <button className='cursor-pointer'

@@ -510,3 +510,11 @@ export const widgetManagement = [
     { widgetName: "Carasoul", type: "Dynamic", status: "Published", assignedClients: "150" },
     { widgetName: "Carasoul", type: "Dynamic", status: "Draft", assignedClients: "150" }
 ]
+
+export const reviewSourcesList = [
+    { url: "https//www.google.com", clientName: "John Deo", status: "Connected" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Disconnect" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Connected" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Disconnect" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Connected" },
+]
