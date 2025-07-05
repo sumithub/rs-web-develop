@@ -385,20 +385,30 @@ export const rolesPermissions = [
 ]
 
 export const latestReviews = [
-    { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 
-     { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
-        
-           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 
-           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 
-           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
+
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 ]
 
 export const recentPayments = [
@@ -417,12 +427,12 @@ export const latestCampaigns = [
 ]
 
 export const customerJourney = [
-    { num: "1", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
-    { num: "2", name: "John Smith", type: "Negative Review Handling", status: "In Progress", last: "Jun 18,2024" },
-    { num: "3", name: "Marcus Dias", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
-    { num: "4", name: "John Smith", type: "Service Feedback", status: "Failed", last: "Jun 18,2024" },
-    { num: "5", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
-    { num: "6", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Success", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Bounced", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Approved", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Pending Review", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Replied", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Delivered", timestamp: "Jun 18,2024 | 14:20:11" },
 ];
 
 export const campaignsManagement = [
