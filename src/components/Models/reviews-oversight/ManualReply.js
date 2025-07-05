@@ -60,8 +60,10 @@ function AddTemplate({ onClose, id }) {
                         <option value="natureTemplate">Nature Template</option>
                     </SelectForm>
 
-                    <div className="pt-5">
-                        <Radio label="Or Compose Reply" />
+                    <div className="pt-3.5">
+                        <Radio label="Or Compose Reply"
+                            class_='mt-0!'
+                        />
                         <HtmlEditor
                             label=""
                             isRequired={true}
