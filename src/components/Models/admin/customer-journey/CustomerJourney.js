@@ -72,7 +72,6 @@ function CustomerJourney({ onClose, onSave, id }) {
                             <h2 className="text-base text-text3">Performed By</h2>
                             <h2 className="text-base font-semibold">System Admin</h2>
                         </div>
-                        <hr className="border-t border-border2 w-full my-3.5" />
                     </div>
                 </div>
 
