@@ -100,90 +100,125 @@ function ManageCustomers() {
             }
 
             <div>
-                <div className="flex justify-between items-center mb-3 w-full">
+                <div className="">
+                    <div className='flex items-center justify-between'>
+                        <div className="bg-white shadow-sm inline-block rounded-[10px] overflow-hidden">
+                            <div className='inline-flex items-center gap-10 px-[20px]'>
+                                <div
+                                    onClick={() => {
+                                        setView("customer")
+                                    }}
+                                    className={`${view === "customer" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                                >
+                                    All Customers
+                                </div>
 
-                    <div className='bg-white shadow-sm rounded-[10px] overflow-hidden'>
-                        <div className='flex items-center gap-10 px-[20px]'>
-                            <div
-                                onClick={() => {
-                                    setView("customer")
-                                }}
-                                className={`${view === "customer" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
-                            >
-                                All Customers
-                            </div>
-
-                            <div
-                                onClick={() => {
-                                    setView("history")
-                                }}
-                                className={`${view === "history" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
-                            >
-                                Customer List History
+                                <div
+                                    onClick={() => {
+                                        setView("history")
+                                    }}
+                                    className={`${view === "history" ? "text-primary font-semibold border-b-2 border-primary" : "text-text3 font-normal"} cursor-pointer shrink-0 py-[15px]`}
+                                >
+                                    Customer List History
+                                </div>
                             </div>
                         </div>
+
+                        {/* <div className='flex items-center gap-[15px] my-3.5'>
+                            <div className='w-72!'>
+                                <Search
+                                    mainClass='w-full!'
+                                    placeholder="Search by list name or date"
+                                    onSearch={(s) => {
+                                        setSearch(s)
+                                    }}
+                                />
+                            </div>
+
+                            <button
+                                onClick={() => {
+                                    setTab("list")
+                                }}
+                                className={`${tab === "list" ? "bg-primary" : ""}  border border-border-color h-9 w-9 rounded-lg flex items-center justify-center mx-auto`}>
+
+                                {tab === "grid" && <Image unoptimized={true} src="/images/list.svg" alt="list" width={16} height={16} />}
+                                {tab === "list" && <Image unoptimized={true} src="/images/list-active.svg" alt="list" width={16} height={16} />}
+                            </button>
+
+                            <button
+                                onClick={() => {
+                                    setTab("grid")
+                                }}
+                                className={`${tab === "grid" ? "bg-primary" : ""}  border border-border-color h-9 w-9 rounded-lg flex items-center justify-center mx-auto`}>
+
+                                {tab === "list" && <Image unoptimized={true} src="/images/grid.svg" alt="grid" width={16} height={16} />}
+                                {tab === "grid" && <Image unoptimized={true} src="/images/grid-active.svg" alt="grid" width={16} height={16} />}
+                            </button>
+                        </div> */}
+
                     </div>
-                    {view === "customer" && <div className='grid grid-cols-[1.5fr_0.8fr_0.5fr_0.8fr] gap-3 items-center justify-end'>
+                    {view === "customer" && <div className='flex items-center gap-2.5 my-3.5 justify-between'>
                         <Search
-                            mainClass='w-full!'
+                            mainClass='w-72!'
                             placeholder="Search by name, email Or phone"
                             onSearch={(s) => {
                                 setSearch(s)
                             }}
                         />
+                        <div className='flex items-center gap-3.5'>
+                            <CustomSelectBox
+                                defaultOption="Client"
+                                class_='mt-0! w-24!'
+                                value={filterByClient}
+                                onChange={(e) => {
+                                    setFilterByClient(e.target.value)
+                                }}
+                            >
+                                <option value="client1">Client 1</option>
+                                <option value="client2">Client 2</option>
+                            </CustomSelectBox>
 
-                        <CustomSelectBox
-                            defaultOption="Client"
-                            class_='mt-0!'
-                            value={filterByClient}
-                            onChange={(e) => {
-                                setFilterByClient(e.target.value)
-                            }}
-                        >
-                            <option value="client1">Client 1</option>
-                            <option value="client2">Client 2</option>
-                        </CustomSelectBox>
+                            <CustomSelectBox
+                                defaultOption="Source"
+                                class_='mt-0! w-24!'
+                                value={filterBySource}
+                                onChange={(e) => {
+                                    setFilterBySource(e.target.value)
+                                }}
+                            >
+                                <option value="csvImport">CSV Import</option>
+                                <option value="manual">Manual</option>
+                            </CustomSelectBox>
 
-                        <CustomSelectBox
-                            defaultOption="Source"
-                            class_='mt-0!'
-                            value={filterBySource}
-                            onChange={(e) => {
-                                setFilterBySource(e.target.value)
-                            }}
-                        >
-                            <option value="csvImport">CSV Import</option>
-                            <option value="manual">Manual</option>
-                        </CustomSelectBox>
+                            <CustomSelectBox
+                                defaultOption="Tags"
+                                class_='mt-0! w-24!'
+                                value={filterByTags}
+                                onChange={(e) => {
+                                    setFilterByTags(e.target.value)
+                                }}
+                            >
+                                <option value="vip">VIP</option>
+                            </CustomSelectBox>
 
-                        <CustomSelectBox
-                            defaultOption="Tags"
-                            class_='mt-0!'
-                            value={filterByTags}
-                            onChange={(e) => {
-                                setFilterByTags(e.target.value)
-                            }}
-                        >
-                            <option value="vip">VIP</option>
-                        </CustomSelectBox>
+                            <CustomSelectBox
+                                defaultOption="Status"
+                                class_='mt-0! w-24!'
+                                value={filterByStatus}
+                                onChange={(e) => {
+                                    setFilterByStatus(e.target.value)
+                                }}
+                            >
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </CustomSelectBox>
 
-                        <CustomSelectBox
-                            defaultOption="Status"
-                            class_='mt-0!'
-                            value={filterByStatus}
-                            onChange={(e) => {
-                                setFilterByStatus(e.target.value)
-                            }}
-                        >
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </CustomSelectBox>
-
-                        <button className="bg-primary border border-primary text-xs hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
-                            onClick={() => { setOpen(true) }}>Add Customer</button>
+                            <button className="bg-primary border border-primary text-xs hover:bg-white hover:text-primary rounded-lg py-[9.5px] px-3 text-white text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
+                                onClick={() => { setOpen(true) }}>Add Customer</button>
+                        </div>
                     </div>}
-                    {view === "history" && <div className='flex justify-between items-center gap-[15px]'>
-                        <div className='w-60!'>
+                    {view === "history" && <div className='flex justify-between items-center gap-[15px] my-3.5'>
+                        <div className='w-72!'>
                             <Search
                                 mainClass='w-full!'
                                 placeholder="Search by list name or date"
@@ -192,27 +227,29 @@ function ManageCustomers() {
                                 }}
                             />
                         </div>
+                        <div className='flex items-center gap-3.5'>
+                            <button
+                                onClick={() => {
+                                    setTab("list")
+                                }}
+                                className={`${tab === "list" ? "bg-primary" : ""}  border border-border-color h-9 w-9 rounded-lg flex items-center justify-center mx-auto`}>
 
-                        <button
-                            onClick={() => {
-                                setTab("list")
-                            }}
-                            className={`${tab === "list" ? "bg-primary" : ""}  border border-border-color h-9 w-9 rounded-lg flex items-center justify-center mx-auto`}>
+                                {tab === "grid" && <Image unoptimized={true} src="/images/list.svg" alt="list" width={16} height={16} />}
+                                {tab === "list" && <Image unoptimized={true} src="/images/list-active.svg" alt="list" width={16} height={16} />}
+                            </button>
 
-                            {tab === "grid" && <Image unoptimized={true} src="/images/list.svg" alt="list" width={16} height={16} />}
-                            {tab === "list" && <Image unoptimized={true} src="/images/list-active.svg" alt="list" width={16} height={16} />}
-                        </button>
+                            <button
+                                onClick={() => {
+                                    setTab("grid")
+                                }}
+                                className={`${tab === "grid" ? "bg-primary" : ""}  border border-border-color h-9 w-9 rounded-lg flex items-center justify-center mx-auto`}>
 
-                        <button
-                            onClick={() => {
-                                setTab("grid")
-                            }}
-                            className={`${tab === "grid" ? "bg-primary" : ""}  border border-border-color h-9 w-9 rounded-lg flex items-center justify-center mx-auto`}>
-
-                            {tab === "list" && <Image unoptimized={true} src="/images/grid.svg" alt="grid" width={16} height={16} />}
-                            {tab === "grid" && <Image unoptimized={true} src="/images/grid-active.svg" alt="grid" width={16} height={16} />}
-                        </button>
+                                {tab === "list" && <Image unoptimized={true} src="/images/grid.svg" alt="grid" width={16} height={16} />}
+                                {tab === "grid" && <Image unoptimized={true} src="/images/grid-active.svg" alt="grid" width={16} height={16} />}
+                            </button>
+                        </div>
                     </div>}
+
                 </div>
 
             </div>
