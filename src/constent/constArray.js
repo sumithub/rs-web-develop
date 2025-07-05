@@ -127,6 +127,15 @@ export const customerHistory = [
     { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
 
     { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
+] 
+export const adminCustomerHistory = [
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
 ]
 
 export const fieldMapping = [
