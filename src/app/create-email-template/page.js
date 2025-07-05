@@ -7,7 +7,8 @@ import InputForm from "../../components/form/InputForm"
 // import SelectForm from "../../components/form/SelectForm"
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import { getError, isAdmin, validEmailRgx } from '../../../helper'
+import { getError, validEmailRgx } from '../../../helper'
+import { useRole } from '../../utils/hooks'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import CustomSelectBox from "../../components/form/CustomSelectBox"
@@ -19,6 +20,8 @@ import CheckboxForm from "../../components/form/CheckboxForm"
 function AddTemplate() {
   const id = ""
   const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm({ defaultValues: { type: "email" } });
+  const { isAdmin } = useRole();
+
   const [sending, setSending] = useState(false)
   const [type, setType] = useState("email")
   const [openPreview, setOpenPreview] = useState(false)
@@ -69,7 +72,7 @@ function AddTemplate() {
       <div className='flex items-start gap-4'>
         <div className='w-[60%]'>
           <div className='shadow-sm rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
-            {isAdmin() && <div className="flex gap-2.5 items-center mt-2">
+            {isAdmin && <div className="flex gap-2.5 items-center mt-2">
               <CheckboxForm formProps={{ ...register("cloneTemplate") }} errors={errors} />
               <div>Clone Template</div>
             </div>}
@@ -88,7 +91,7 @@ function AddTemplate() {
                 }}>
                 <option value="email">Email</option>
                 <option value="sms">SMS</option>
-                {isAdmin() && <option value="reviewResponseTemplate">Review Response Template</option>}
+                {isAdmin && <option value="reviewResponseTemplate">Review Response Template</option>}
               </CustomSelectBox>
 
               <InputForm
@@ -195,7 +198,7 @@ function AddTemplate() {
             rows={15} className="rounded text-text3 text-sm border border-color w-full focus-visible:outline-none p-3" /> */}
 
             <div className="grid grid-cols-3 gap-3.5 mt-5">
-              {isAdmin() ? < CancelButton title="Back To list"
+              {isAdmin ? < CancelButton title="Back To list"
                 class_="text-lg!"
                 isLink={true} link='/admin/template' /> :
                 <CancelButton title="clone template" onClick={handleClick} class_="text-lg!" />}

@@ -55,3 +55,4 @@ export function isAdmin(window) {
     // return localStorage.getItem("role") === "ADMIN"
     return true
 }
+
