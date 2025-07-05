@@ -8,6 +8,8 @@ import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import ManualReply from "../../Models/reviews-oversight/ManualReply"
+import Image from "next/image"
+import { ReviewOversight } from "../../../constent/constArray"
 
 function ReviewDetails({ onClose, onSave }) {
     const { handleSubmit } = useForm();
@@ -35,6 +37,9 @@ function ReviewDetails({ onClose, onSave }) {
             setSending(false)
         }
     }
+
+
+
     return <Model onClose={onClose} title="Review Details" modalClass="w-1/2!" >
         {open &&
             <ManualReply
@@ -47,10 +52,20 @@ function ReviewDetails({ onClose, onSave }) {
                 }} />
         }
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-3 gap-5 mt-[30px]">
+            {ReviewOversight.map((e, i) => <div key={i}>
+                <div className="flex justify-between">
+                    <h2 className="text-base capitalize text-text3">{e.title}</h2>
+                    <h2 className="text-base capitalize font-medium">{e.subtitle}</h2>
+                </div>
+                <hr className="border-t border-border2 w-full my-3.5" />
+            </div>)}
+            <div className="grid grid-cols-[1fr_1fr_1fr_auto] gap-5 mt-[30px]">
                 <CancelButton title="Delete" type="submit" disabled={sending} class_="text-lg!" />
-                <SecondaryButton title="Manual Reply" class_="text-lg!" onClick={() => setOpen(true)} />
+                <SecondaryButton title="Manual Reply" class_="text-lg! bg-white! text-primary! hover:text-white! hover:bg-primary!" onClick={() => setOpen(true)} />
                 <SecondaryButton title="view full log" onClick={onClose} class_="text-lg!" />
+                <div>
+                    <Image src="/images/component34.svg" alt="component34" width={47} height={47} />
+                </div>
             </div>
         </form>
     </Model>
