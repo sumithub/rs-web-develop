@@ -91,7 +91,7 @@ function AddTemplate() {
                 }}>
                 <option value="email">Email</option>
                 <option value="sms">SMS</option>
-                {isAdmin && <option value="reviewResponseTemplate">Review Response Template</option>}
+                {isAdmin && <option value="review Response Template">Review Response Template</option>}
               </CustomSelectBox>
 
               <InputForm
