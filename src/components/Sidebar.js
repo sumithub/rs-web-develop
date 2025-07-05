@@ -92,6 +92,14 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
             },
 
             {
+                title: "Reviews", link: "", icon: "sms-star",
+                submenu:
+                    [
+                        { title: "Manage Reviews", link: "/admin/reviews-oversight" },
+                    ]
+            },
+
+            {
                 title: "Campaigns", link: "/admin/campaigns-management", icon: "profile",
             }
 
