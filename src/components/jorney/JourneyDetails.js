@@ -1,9 +1,9 @@
 "use client"
 import { CustomerDetails } from "../../constent/constArray"
-function JourneyDetails() {
+function JourneyDetails({ class_ = "" }) {
     return <>
         <div className="">
-            <h2 className="text-lg font-semibold mt-5 mb-3.5">Customer Details</h2>
+            <h2 className={`text-lg font-semibold mt-5 mb-3.5 ${class_}`}>Customer Details</h2>
             {CustomerDetails.map((e, i) =>
                 <div key={i}>
                     <div className="flex justify-between mt-3">

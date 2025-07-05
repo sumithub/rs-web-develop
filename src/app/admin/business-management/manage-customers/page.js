@@ -25,8 +25,6 @@ function ManageCustomers() {
     const [filterByTags, setFilterByTags] = useState("")
     const [filterByStatus, setFilterByStatus] = useState("")
     const [search, setSearch] = useState("")
-    const [customerSearch, setCustomerSearch] = useState("")
-    const [historySearch, setHistorySearch] = useState("")
     const [open, setOpen] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
     const [openModal, setOpenModal] = useState(null)
@@ -36,19 +34,20 @@ function ManageCustomers() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [selId, setSelId] = useState("")
+    const [customerSearch, setCustomerSearch] = useState("")
+    const [historySearch, setHistorytSearch] = useState("")
     const [tableLoading, setTableLoading] = useState(false)
-
 
     useEffect(() => {
         getCustomer()
-    }, [search, sortBy, filterByClient, filterBySource, filterByTags, filterByStatus])
+    }, [search, sortBy, customerSearch, filterByClient, filterBySource, filterByTags, filterByStatus])
 
-  useEffect(() => {
+    useEffect(() => {
         setTableLoading(true);
         setTimeout(() => {
             setTableLoading(false);
         }, 1000);
-    }, [customerSearch,historySearch]);
+    }, [search, customerSearch, historySearch]);
 
 
     const getCustomer = async () => {
@@ -111,7 +110,7 @@ function ManageCustomers() {
             }
 
             <div>
-                <div className="">
+                <div>
                     <div className='flex items-center justify-between'>
                         <div className="bg-white shadow-sm inline-block rounded-[10px] overflow-hidden">
                             <div className='inline-flex items-center gap-10 px-[20px]'>
@@ -135,13 +134,13 @@ function ManageCustomers() {
                             </div>
                         </div>
 
-                        {/* <div className='flex items-center gap-[15px] my-3.5'>
+                        {view === "history" && <div className='flex items-center gap-[15px] my-3.5'>
                             <div className='w-72!'>
                                 <Search
                                     mainClass='w-full!'
                                     placeholder="Search by list name or date"
                                     onSearch={(s) => {
-                                        setSearch(s)
+                                        setHistorytSearch(s)
                                     }}
                                 />
                             </div>
@@ -165,9 +164,11 @@ function ManageCustomers() {
                                 {tab === "list" && <Image unoptimized={true} src="/images/grid.svg" alt="grid" width={16} height={16} />}
                                 {tab === "grid" && <Image unoptimized={true} src="/images/grid-active.svg" alt="grid" width={16} height={16} />}
                             </button>
-                        </div> */}
+                        </div>}
 
                     </div>
+
+
                     {view === "customer" && <div className='flex items-center gap-2.5 my-3.5 justify-between'>
                         <Search
                             mainClass='w-72!'
@@ -228,13 +229,13 @@ function ManageCustomers() {
                                 onClick={() => { setOpen(true) }}>Add Customer</button>
                         </div>
                     </div>}
-                    {view === "history" && <div className='flex justify-between items-center gap-[15px] my-3.5'>
+                    {/* {view === "history" && <div className='flex justify-between items-center gap-[15px] my-3.5'>
                         <div className='w-72!'>
                             <Search
                                 mainClass='w-full!'
                                 placeholder="Search by list name or date"
                                 onSearch={(s) => {
-                                    setHistorySearch(s)
+                                    setHistorytSearch(s)
                                 }}
                             />
                         </div>
@@ -259,15 +260,14 @@ function ManageCustomers() {
                                 {tab === "grid" && <Image unoptimized={true} src="/images/grid-active.svg" alt="grid" width={16} height={16} />}
                             </button>
                         </div>
-                    </div>}
+                    </div>} */}
 
                 </div>
-
             </div>
 
             {view === "customer" && <>
                 <div className='table-class'>
-                    {tableLoading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+                    {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                         <thead>
                             <tr>
                                 <th><TableOrder title="Customer Name"
@@ -354,19 +354,17 @@ function ManageCustomers() {
                     <PaginationDemo />
                 </div>}
             </>}
-
-
-     {tableLoading ? (
+            {tableLoading ? (
                 <div className="flex justify-center items-center border border-border-color rounded-[20px]">
                     <Loading class_=" min-h-[400px]!" />
                 </div>
             ) : (
                 <>
-            {view === "history" && <div className=''>
-                {tab === "list" && <AdminListView />}
-                {tab === "grid" && <AdminGridView />}
-            </div>
-            }
+                    {view === "history" && <div className=''>
+                        {tab === "list" && <AdminListView />}
+                        {tab === "grid" && <AdminGridView />}
+                    </div>
+                    }
                 </>
             )}
         </AdminLayout>

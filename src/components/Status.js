@@ -10,6 +10,7 @@ export default function Status({ status = "", context = "" }) {
         s === "new" ||
         s === "completed" ||
         s === "vip" ||
+        s === "success" ||
         s === "connected" ||
         s === "paid") {
         bgClass = "bg-[#28A7451A] text-success";
