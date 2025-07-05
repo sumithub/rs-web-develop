@@ -14,6 +14,7 @@ import AddNewLocation from '../../../../components/Models/location/AddNewLocatio
 import DeleteLocation from '../../../../components/Models/location/DeleteLocation'
 import AdminLayout from '../../../../components/AdminLayout'
 import CustomSelectBox from '../../../../components/form/CustomSelectBox'
+import Link from 'next/link'
 
 function Location() {
     const [list, setList] = useState([])
@@ -48,7 +49,7 @@ function Location() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-72!'
+                    mainClass='w-96!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -159,9 +160,9 @@ function Location() {
                                 <td className='text-center!'>{e.count}</td>
                                 <td className="flex justify-center">
                                     <div className='flex items-center gap-2'>
-                                        <button className='cursor-pointer'>
+                                        <Link href="/admin/business-management/location-details" className='cursor-pointer'>
                                             <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
-                                        </button>
+                                        </Link>
                                         <button className='cursor-pointer'
                                             onClick={() => {
                                                 setOpen(true)

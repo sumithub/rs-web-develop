@@ -18,6 +18,7 @@ import { getError } from "../../../../../helper"
 import Loading from "../../../../components/Loading"
 import { clientsManagement } from "../../../../constent/constArray"
 import SuspendUsers from "../../../../components/Models/users/SuspendUsers"
+import Link from "next/link"
 
 export default function ClientsManagement() {
     const [sortBy, setSortBy] = useState(false)
@@ -187,9 +188,9 @@ export default function ClientsManagement() {
                                         <button className='cursor-pointer' onClick={() => { setOpenUser(true) }}>
                                             <Image unoptimized={true} src="/images/play.svg" alt='play' height={28} width={28} />
                                         </button>
-                                        <button className='cursor-pointer'>
+                                        <Link href="/admin/business-management/client-details" className='cursor-pointer'>
                                             <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
-                                        </button>
+                                        </Link>
                                         <button className='cursor-pointer' onClick={() => { setOpenEdit(true) }}>
                                             <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>

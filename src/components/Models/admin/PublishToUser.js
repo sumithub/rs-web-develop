@@ -39,11 +39,11 @@ export default function PublishToUser({ onClose, id }) {
                     Publish User
                 </div>
 
-                <div className="flex align-items justify-center font-normal mb-4 capitalize text-text3">
+                <div className="flex align-items justify-center font-normal mb-4 mt-2.5 text-sm capitalize text-text3">
                     Are you sure you want to publish this user.
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 mt-5">
+                <div className="grid grid-cols-2 gap-5 mt-7">
                     <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
                     <SecondaryButton title="Confirm" type="submit" disabled={sending} class_="text-lg!" />
                 </div>
