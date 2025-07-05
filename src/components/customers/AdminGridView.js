@@ -78,7 +78,7 @@ export default function AdminGridView() {
                             <h2 className='text-sm font-medium'>{e.date}</h2>
                         </div>
                         <div className='flex items-center justify-between pt-[15px]'>
-                            <h2 className='text-sm font-medium text-text3'>client</h2>
+                            <h2 className='text-sm font-medium text-text3 capitalize'>client</h2>
                             <h2 className='text-sm font-medium'>{e.client}</h2>
                         </div>
                         <div className='flex items-center justify-between pt-[15px]'>

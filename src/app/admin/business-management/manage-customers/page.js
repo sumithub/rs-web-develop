@@ -10,8 +10,8 @@ import PaginationDemo from '../../../../components/Pagination'
 import DeleteModal from '../../../../components/Models/DeleteModal';
 import AddCustomer from '../../../../components/Models/customers/AddCustomer';
 import CustomSelectBox from '../../../../components/form/CustomSelectBox';
-import GridView from '../../../../components/customers/GridView';
-import ListView from '../../../../components/customers/ListView';
+import AdminGridView from '../../../../components/customers/AdminGridView';
+import AdminListView from '../../../../components/customers/AdminListView';
 import { manageCustomers } from '../../../../constent/constArray'
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -25,6 +25,8 @@ function ManageCustomers() {
     const [filterByTags, setFilterByTags] = useState("")
     const [filterByStatus, setFilterByStatus] = useState("")
     const [search, setSearch] = useState("")
+    const [customerSearch, setCustomerSearch] = useState("")
+    const [historySearch, setHistorySearch] = useState("")
     const [open, setOpen] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
     const [openModal, setOpenModal] = useState(null)
@@ -34,11 +36,20 @@ function ManageCustomers() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [selId, setSelId] = useState("")
+    const [tableLoading, setTableLoading] = useState(false)
 
 
     useEffect(() => {
         getCustomer()
     }, [search, sortBy, filterByClient, filterBySource, filterByTags, filterByStatus])
+
+  useEffect(() => {
+        setTableLoading(true);
+        setTimeout(() => {
+            setTableLoading(false);
+        }, 1000);
+    }, [customerSearch,historySearch]);
+
 
     const getCustomer = async () => {
         try {
@@ -162,7 +173,7 @@ function ManageCustomers() {
                             mainClass='w-72!'
                             placeholder="Search by name, email Or phone"
                             onSearch={(s) => {
-                                setSearch(s)
+                                setCustomerSearch(s)
                             }}
                         />
                         <div className='flex items-center gap-3.5'>
@@ -223,7 +234,7 @@ function ManageCustomers() {
                                 mainClass='w-full!'
                                 placeholder="Search by list name or date"
                                 onSearch={(s) => {
-                                    setSearch(s)
+                                    setHistorySearch(s)
                                 }}
                             />
                         </div>
@@ -256,7 +267,7 @@ function ManageCustomers() {
 
             {view === "customer" && <>
                 <div className='table-class'>
-                    {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+                    {tableLoading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
                         <thead>
                             <tr>
                                 <th><TableOrder title="Customer Name"
@@ -344,11 +355,20 @@ function ManageCustomers() {
                 </div>}
             </>}
 
+
+     {tableLoading ? (
+                <div className="flex justify-center items-center border border-border-color rounded-[20px]">
+                    <Loading class_=" min-h-[400px]!" />
+                </div>
+            ) : (
+                <>
             {view === "history" && <div className=''>
-                {tab === "list" && <ListView />}
-                {tab === "grid" && <GridView />}
+                {tab === "list" && <AdminListView />}
+                {tab === "grid" && <AdminGridView />}
             </div>
             }
+                </>
+            )}
         </AdminLayout>
     )
 }
