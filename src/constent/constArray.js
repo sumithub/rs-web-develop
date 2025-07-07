@@ -532,3 +532,10 @@ export const featureManagement = [
     { featureName: "Review Auto-Response", description: "AI-driven responses" },
     { featureName: "Review Auto-Response", description: "AI-driven responses" },
 ]
+
+export const subscriptionManagement = [
+    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
+    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
+    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Cenceled" },
+    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
+]
