@@ -6,9 +6,8 @@ import { getError } from "../../../../helper";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-import Input from "../../form/Input";
 
-export default function DisconnectReviewSourceConfirmation({ onClose, onSave }) {
+export default function DisconnectReviewSourceConfirmation({ onClose, onSave, id }) {
     const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false)
 
@@ -25,6 +24,14 @@ export default function DisconnectReviewSourceConfirmation({ onClose, onSave }) 
     return (
         <Model onClose={onClose} title="Disconnect Review Source Confirmation" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
+
+                {id && <div className="flex justify-between items-center mb-2">
+                    <div className="text-text3">Client Name</div>
+                    <div>John Deo</div>
+                </div>}
+
+                {id && <hr className="border border-border-color mb-2 " />
+                }
                 <div>
                     <h2 className="text-lg font-semibold">Disconnect from Yelp</h2>
                     <Image unoptimized={true} src="/images/yelp-logo.svg" alt="yelp-logo" width={116} height={47} className="pt-2.5" />

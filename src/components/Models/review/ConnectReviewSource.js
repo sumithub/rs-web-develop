@@ -9,9 +9,10 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Image from "next/image";
 import InputForm from "../../form/InputForm";
+import SelectForm from "../../form/SelectForm";
 
 export default function ConnectReviewSource({ onClose, onSave, id }) {
-    const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
+    const { register, handleSubmit, clearErrors, formState: { errors }, watch, setValue } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -36,6 +37,20 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
     return (
         <Model onClose={onClose} title="Connect Review Source" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
+
+                {id && <SelectForm
+                    class_="mb-5"
+                    label="Choose Client"
+                    isRequired={true}
+                    defaultOption="Select"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    formProps={{ ...register("cooldownPeriod", { required: true }) }} errors={errors} clearErrors={clearErrors}
+                    setValue={setValue}
+                    watch={watch}
+                >
+                    <option value="johnDeo">John Deo</option>
+                </SelectForm>}
+
                 <div>
                     <h2 className="text-lg font-semibold">Connect to Yelp</h2>
                     <Image unoptimized={true} src="/images/yelp-logo.svg" alt="yelp-logo" width={116} height={47} className="pt-2.5" />
