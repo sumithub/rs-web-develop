@@ -21,15 +21,12 @@ function CustomerJourney({ onClose, onSave, id }) {
             setSending(true)
             let res = null
 
-            if (id = "add") {
+            if (id !== "add") {
                 res = await axios.put("/api", data)
             } else {
                 res = await axios.post("/api", data)
             }
-            if (onSave) {
-                onSave(data)
-            }
-            toast.success("Successfully")
+            toast.success("Deleted Successfully")
             setSending(false)
             onClose()
         } catch (error) {
@@ -78,7 +75,7 @@ function CustomerJourney({ onClose, onSave, id }) {
             </div>
             <div className="grid grid-cols-3 gap-5 mt-7">
                 <CancelButton title="back to list" onClick={onClose} class_="text-lg! py-[8.2px]!" />
-                <SecondaryButton title="Delete Event" type="submit" disabled={sending} onClick={onSubmit} class_="bg-white text-danger! border border-danger! hover:text-white! hover:bg-danger! text-lg! py-[8.2px]!" />
+                <SecondaryButton title="Delete Event" type="submit" disabled={sending} class_="bg-white text-danger! border border-danger! hover:text-white! hover:bg-danger! text-lg! py-[8.2px]!" />
                 <SecondaryButton title="Edit Event" class_="text-lg! py-[8.2px]!" />
             </div>
         </form>
