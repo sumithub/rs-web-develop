@@ -122,6 +122,7 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 title: "Billing", link: "", icon: "buliding",
                 submenu:
                     [
+                        { title: "Payments", link: "/admin/management/payment-management" },
                         { title: "Invoices", link: "/admin/management/invoice-management" },
                     ]
             },

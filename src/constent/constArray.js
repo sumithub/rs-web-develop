@@ -549,3 +549,13 @@ export const invoiceManagement = [
     { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Overdue" },
     { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Paid" },
 ]
+
+export const paymentManagement = [
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Completed", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Pending", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Completed", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Pending", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Completed", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Pending", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Completed", date: "Mar 25,2025" },
+]
