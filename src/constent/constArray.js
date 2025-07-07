@@ -515,3 +515,9 @@ export const reviewSourcesList = [
     { url: "https//www.google.com", clientName: "John Deo", status: "Disconnect", img: "/images/yelp-logo.svg" },
     { url: "https//www.google.com", clientName: "John Deo", status: "Connected", img: "/images/yelp-logo.svg" },
 ]
+
+export const planManagement = [
+    { planName: "Basic", price: "$20/Mo", discount: "10%", email: "1000", sms: "100" },
+    { planName: "Standard", price: "$50/Mo", discount: "15%", email: "5,000", sms: "500" },
+    { planName: "Premium", price: "$100/Mo", discount: "20%", email: "10,000", sms: "1,000" },
+]
