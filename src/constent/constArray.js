@@ -539,3 +539,13 @@ export const subscriptionManagement = [
     { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Cenceled" },
     { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
 ]
+
+export const invoiceManagement = [
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Paid" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Paid" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Overdue" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Paid" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Paid" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Overdue" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Paid" },
+]
