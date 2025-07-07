@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import { useState } from "react";
 
-export default function DeletePlan({ onClose, title = "Plan" }) {
+export default function DeletePlan({ onClose, id }) {
     const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false);
 
@@ -17,7 +17,7 @@ export default function DeletePlan({ onClose, title = "Plan" }) {
         try {
             setSending(true);
             await axios.put("/api");
-            toast.success("Plan Deleted Successfully");
+            toast.success(`${id ? "Feature" : "Plan"} Deleted Successfully `);
             onClose();
         } catch (error) {
             toast.error(getError(error));
@@ -26,9 +26,11 @@ export default function DeletePlan({ onClose, title = "Plan" }) {
         }
     };
 
+    let title = id ? "Feature" : "Plan"
+
     return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
         <form onSubmit={handleSubmit(onSubmit)} className="text-center">
-            <DeleteTag title={`Delete ${title}`} question="Are You Sure? You want To Delete This plan." />
+            <DeleteTag title={`Delete ${title}`} question={`Are You Sure? You want To Delete This ${title}.`} />
 
             <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="Cancel" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}

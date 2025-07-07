@@ -521,3 +521,14 @@ export const planManagement = [
     { planName: "Standard", price: "$50/Mo", discount: "15%", email: "5,000", sms: "500" },
     { planName: "Premium", price: "$100/Mo", discount: "20%", email: "10,000", sms: "1,000" },
 ]
+
+export const featureManagement = [
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+]

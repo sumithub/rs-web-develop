@@ -103,6 +103,15 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
 
             {
                 title: "Campaigns", link: "/admin/campaigns-management", icon: "profile",
+            },
+
+            {
+                title: "Plans and Features", link: "", icon: "tag",
+                submenu:
+                    [
+                        { title: "Plans", link: "/admin/management/plan-management" },
+                        { title: "Features", link: "/admin/management/feature-management" },
+                    ]
             }
 
         ]
