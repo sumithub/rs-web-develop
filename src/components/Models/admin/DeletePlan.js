@@ -32,10 +32,10 @@ export default function DeletePlan({ onClose, id }) {
         <form onSubmit={handleSubmit(onSubmit)} className="text-center">
             <DeleteTag title={`Delete ${title}`} question={`Are You Sure? You want To Delete This ${title}.`} />
 
-            <div className="grid grid-cols-2 gap-3 mt-5">
-                <CancelButton title="Cancel" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
+            <div className="grid grid-cols-2 gap-5 mt-7">
+                <CancelButton title="Cancel" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white! text-lg!" onClick={onClose}
                 />
-                <SecondaryButton title=" Yes, Delete" type="submit" disabled={sending} />
+                <SecondaryButton title=" Yes, Delete" type="submit" disabled={sending} class_="text-lg!" />
             </div>
         </form>
     </Model >
