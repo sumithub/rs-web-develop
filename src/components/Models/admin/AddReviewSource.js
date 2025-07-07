@@ -39,6 +39,7 @@ export default function AddReviewSource({ onClose, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
                     label="Platform Name"
+                    labelClass="mb-2.5!"
                     class_="mt-0!"
                     placeholder="Enter platform name"
                     isRequired={true}
@@ -47,7 +48,7 @@ export default function AddReviewSource({ onClose, id }) {
 
                 <FileInput
                     accept=".csv, .xls , .xlsx"
-                    class_="mt-3"
+                    class_="mt-3.5!"
                     formProps={{
                         ...register('csvFile', {
                             required: true,
@@ -63,6 +64,7 @@ export default function AddReviewSource({ onClose, id }) {
 
                 <InputForm
                     label="URL Validation Rule"
+                    labelClass="mb-2.5!"
                     placeholder="Add URL"
                     hideOptional={true}
                     isRequired={true}
@@ -74,33 +76,38 @@ export default function AddReviewSource({ onClose, id }) {
 
                 <InputForm
                     label="API Key"
+                    labelClass="mb-2.5!"
                     placeholder="Enter key"
                     isRequired={false}
                     formProps={{ ...register("industry", { required: false }) }}
                     errors={errors} />
 
-                <div className="mt-3">
-                    <div>Popular Platform</div>
-                    <div className="flex justify-between items-center">
-                        <div>Yes</div>
-                        <RadioForm name="popularPlatform" />
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <div>No</div>
-                        <RadioForm name="popularPlatform" />
+                <div className="mt-3.5">
+                    <div className="text-sm pb-2.5">Popular Platform</div>
+                    <div className="grid grid-cols-4 gap-2.5">
+                        <div className="flex justify-between items-center bg-primary/5 rounded-lg p-2.5">
+                            <div className="text-sm">Yes</div>
+                            <RadioForm name="popularPlatform" class_="mt-0!" />
+                        </div>
+                        <div className="flex justify-between items-center bg-primary/5 rounded-lg p-2.5">
+                            <div className="text-sm">No</div>
+                            <RadioForm name="popularPlatform" class_="mt-0!" labelClass="ml-0!" />
+                        </div>
                     </div>
                 </div>
 
-                <div className="mt-3">
-                    <div>Status</div>
-                    <div className="flex justify-between">
-                        <div>Inactive</div>
-                        <Switch />
+                <div className="mt-3.5">
+                    <div className="text-sm pb-2.5 font-medium">Status</div>
+                    <div className="bg-primary/5 rounded-lg p-2.5">
+                        <div className="flex items-center gap-3.5">
+                            <div className="text-sm font-medium">Inactive</div>
+                            <Switch class_="mb-0!" />
+                        </div>
                     </div>
                 </div>
                 <div className="grid grid-cols-2 gap-5 mt-7">
-                    <CancelButton title="Cancel" onClick={onClose} />
-                    <SecondaryButton title="Save" type="submit" disabled={sending} />
+                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
+                    <SecondaryButton title="Save" type="submit" disabled={sending} class_="text-lg!" />
                 </div>
             </form>
         </Model>

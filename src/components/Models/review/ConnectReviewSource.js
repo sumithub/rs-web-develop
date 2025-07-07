@@ -39,7 +39,7 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 {id && <SelectForm
-                    class_="mb-5"
+                    class_="mb-3.5 mt-0!"
                     label="Choose Client"
                     isRequired={true}
                     defaultOption="Select"
@@ -70,9 +70,9 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
                     <Image unoptimized={true} src="/images/warning.svg" alt="warning" width={22} height={22} className="" />
                     <h2 className="text-sm">Paste your business profile URL from the platform's website.</h2>
                 </div>
-                <div className="grid grid-cols-2 gap-3 mt-[30px]">
-                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg! font-medium! py-3!" />
-                    <SecondaryButton title="Connect" type="submit" disabled={sending} class_="text-lg! font-medium! py-3!" />
+                <div className="grid grid-cols-2 gap-5 mt-[30px]">
+                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg! font-medium!" />
+                    <SecondaryButton title="Connect" type="submit" disabled={sending} class_="text-lg! font-medium!" />
                 </div>
             </form>
         </Model>

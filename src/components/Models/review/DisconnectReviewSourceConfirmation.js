@@ -25,12 +25,12 @@ export default function DisconnectReviewSourceConfirmation({ onClose, onSave, id
         <Model onClose={onClose} title="Disconnect Review Source Confirmation" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
 
-                {id && <div className="flex justify-between items-center mb-2">
-                    <div className="text-text3">Client Name</div>
-                    <div>John Deo</div>
+                {id && <div className="flex justify-between items-center mb-3">
+                    <div className="text-text3 text-base">Client Name</div>
+                    <div className="text-base font-medium">John Deo</div>
                 </div>}
 
-                {id && <hr className="border border-border-color mb-2 " />
+                {id && <hr className="border border-border-color mb-3.5" />
                 }
                 <div>
                     <h2 className="text-lg font-semibold">Disconnect from Yelp</h2>
@@ -48,9 +48,9 @@ export default function DisconnectReviewSourceConfirmation({ onClose, onSave, id
                     <Image unoptimized={true} src="/images/warning.svg" alt="warning" width={22} height={22} className="" />
                     <h2 className="text-sm">Are you sure you want to disconnect This will stop fetching new reviews</h2>
                 </div>
-                <div className="grid grid-cols-2 gap-3 mt-[30px]">
-                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg! font-medium! py-3!" />
-                    <SecondaryButton title="confirm Disconnect" type="submit" disabled={sending} class_="text-lg! font-medium! py-3!" />
+                <div className="grid grid-cols-2 gap-5 mt-[30px]">
+                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg! font-medium!" />
+                    <SecondaryButton title="confirm Disconnect" type="submit" disabled={sending} class_="text-lg! font-medium!" />
                 </div>
             </form>
         </Model>
