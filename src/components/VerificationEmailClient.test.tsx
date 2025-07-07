@@ -1,16 +1,16 @@
 import "@testing-library/jest-dom";
 
+import AuthContext, { AuthContextType } from "../contexts/AuthContext";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-import AuthContext, { AuthContextType } from "../contexts/AuthContext";
-import VerificationEmailClient from "./VerificationEmailClient";
-import { axiosInstance } from "../api/axios";
-import { resendEmailVerification } from "../api/authApi";
 import API_ENDPOINTS from "../api/endpoints";
 import { ResendEmailVerificationResponseSchema } from "./schemas/ResendVerificationEmail";
+import VerificationEmailClient from "./VerificationEmailClient";
+import { act } from "react-dom/test-utils";
+import { axiosInstance } from "../api/axios";
+import { resendEmailVerification } from "../api/authApi";
 
 const mockedAxios = axiosInstance as jest.Mocked<typeof axiosInstance>;
-import { act } from "react-dom/test-utils";
 
 
 jest.mock("next/navigation", () => ({
@@ -118,13 +118,3 @@ it("should start with timer at 60 and button disabled", () => {
     expect(button).toBeDisabled(); // Button should remain disabled
   });
 });
-
-
-
-
-
-
-
-
-
-

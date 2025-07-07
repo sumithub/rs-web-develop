@@ -9,7 +9,6 @@ window.matchMedia = window.matchMedia || function() {
 };
 
 jest.mock("axios");
-
 const mockPush = jest.fn();
 
 jest.mock("next/navigation", () => ({
@@ -24,8 +23,5 @@ jest.mock("next/navigation", () => ({
 afterEach(() => {
   jest.clearAllMocks();
 });
-
-
-
 
 global.mockPush = mockPush;

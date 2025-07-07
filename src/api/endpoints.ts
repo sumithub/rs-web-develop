@@ -1,9 +1,9 @@
 const API_ENDPOINTS = {
     register: "/auth/register",
-    login: "/users/login",
-    verifyEmail: "/users/verify-email",
-    resetPassword: "/users/reset-password",
-    changePassword: "/users/change-password",
+    login: "/auth/login",
+    verifyEmail: "/auth/verify-email",
+    resetPassword: "/auth/reset-password",
+    changePassword: "/auth/change-password",
     changeEmail: "/auth/change-signup-email",
     resendEmail: "/auth/resend-verification",
 };

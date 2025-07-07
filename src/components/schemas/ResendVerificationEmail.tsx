@@ -7,6 +7,7 @@ export const ResendEmailVerificationSchema = z.object({
 export type ResendEmailVerificationData = z.infer<typeof ResendEmailVerificationSchema>;
 
 export const ResendEmailVerificationResponseSchema = z.string()
-   export type VerificationEmailResponse = z.infer<typeof ResendEmailVerificationResponseSchema>;
+
+export type VerificationEmailResponse = z.infer<typeof ResendEmailVerificationResponseSchema>;
 
       

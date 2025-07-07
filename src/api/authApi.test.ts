@@ -1,8 +1,8 @@
 import { ChangeEmailFormData, ChangeEmailResponseSchema } from "../components/schemas/ChangeEmailSchema";
 import { ResendEmailVerificationData, ResendEmailVerificationResponseSchema } from "../components/schemas/ResendVerificationEmail";
 import { SignupFormData, SignupResponseSchema } from "../components/schemas/SignupSchema";
-
 import { authApi, resendEmailVerification } from "./authApi";
+
 import { axiosInstance } from "./axios";
 
 jest.mock("axios", () => ({
@@ -36,7 +36,7 @@ describe("authApi.signup", () => {
     const result = await authApi.signup(validFormData);
 
     expect(result).toEqual(SignupResponseSchema.parse(validApiResponse));
-    expect(mockedAxios.post).toHaveBeenCalledWith("/users/register", validFormData);
+    expect(mockedAxios.post).toHaveBeenCalledWith("/auth/register", validFormData);
   });
 
   it("should throw error on invalid API response", async () => {
@@ -46,7 +46,7 @@ describe("authApi.signup", () => {
 
     await expect(authApi.signup(validFormData)).rejects.toThrow("Invalid API response format");
 
-    expect(mockedAxios.post).toHaveBeenCalledWith("/users/register", validFormData);
+    expect(mockedAxios.post).toHaveBeenCalledWith("/auth/register", validFormData);
   });
 
   it("should propagate axios error", async () => {
@@ -54,7 +54,7 @@ describe("authApi.signup", () => {
 
     await expect(authApi.signup(validFormData)).rejects.toThrow("Network Error");
 
-    expect(mockedAxios.post).toHaveBeenCalledWith("/users/register", validFormData);
+    expect(mockedAxios.post).toHaveBeenCalledWith("/auth/register", validFormData);
   });
 });
 
@@ -73,7 +73,7 @@ describe("authApi.changeEmail", () => {
       const result = await authApi.changeEmail(validFormData);
 
       expect(result).toEqual(ChangeEmailResponseSchema.parse(validApiResponse));
-      expect(mockedAxios.post).toHaveBeenCalledWith("/users/change-signup-email", validFormData);
+      expect(mockedAxios.post).toHaveBeenCalledWith("/auth/change-signup-email", validFormData);
   })
   it("should throw error on invalid API response", async () => {
       const invalidResponse = { foo: "bar" };
@@ -82,14 +82,14 @@ describe("authApi.changeEmail", () => {
 
       await expect(authApi.changeEmail(validFormData)).rejects.toThrow("Invalid API response format");
 
-      expect(mockedAxios.post).toHaveBeenCalledWith("/users/change-signup-email", validFormData);
+      expect(mockedAxios.post).toHaveBeenCalledWith("/auth/change-signup-email", validFormData);
   })
   it("should propagate axios error", async () => {
       mockedAxios.post.mockRejectedValueOnce(new Error("Network Error"));
 
       await expect(authApi.changeEmail(validFormData)).rejects.toThrow("Network Error");
 
-      expect(mockedAxios.post).toHaveBeenCalledWith("/users/change-signup-email", validFormData);
+      expect(mockedAxios.post).toHaveBeenCalledWith("/auth/change-signup-email", validFormData);
   });
 })
 
@@ -133,6 +133,3 @@ it("should handle network or server errors gracefully ", async () => {
 });
 }
 )
-
-
-

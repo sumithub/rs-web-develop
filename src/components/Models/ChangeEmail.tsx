@@ -1,15 +1,17 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useForm } from 'react-hook-form';
-import InputForm from '../form/InputForm';
-import Model from './Model';
-import { toast } from 'react-toastify';
-import AuthContext from '../../contexts/AuthContext';
-import { changeEmail } from '../../api/authApi';
+
 import { ChangeEmailFormData, ChangeEmailSchema } from '../schemas/ChangeEmailSchema'
+import React, { useContext, useEffect, useState } from 'react';
+
+import AuthContext from '../../contexts/AuthContext';
+import Image from 'next/image';
+import InputForm from '../form/InputForm';
+import Link from 'next/link';
+import Model from './Model';
+import { changeEmail } from '../../api/authApi';
+import { toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 function ChangeEmail({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm<ChangeEmailFormData>({
@@ -20,12 +22,10 @@ function ChangeEmail({ onClose, id }) {
     const {unVerifiedEmail, setEmail}= useContext(AuthContext)
     const [currentEmail, setCurrentEmail] = useState(unVerifiedEmail);
 
-
     useEffect(()=>{},[currentEmail])
     const onSubmit = async (formData: ChangeEmailFormData) => {
         
-        try {
-          
+        try {    
             localStorage.removeItem("mockVerificationLink");    
             setSending(true)
                 // Calls the centralized authApi signup function
@@ -83,21 +83,21 @@ function ChangeEmail({ onClose, id }) {
                          
                              <input type="hidden" {...register("currentEmail")} value={currentEmail} />
                                <InputForm
-  label="Email ID"
-  clearValue={true}
-  placeholder="Enter Your Email Address"
-  icon="/images/close.svg"
-  isRequired={true}
-  errors={errors}
-  formProps={{ ...register("newEmail") }}
-  setValue={setValue}
-  watch={watch}
-  infoIcon={null}
-  labelClass=""
-  disabled={null}
-  isTextArea={false}
-  rows={undefined}
-/>
+                                label="Email ID"
+                                clearValue={true}
+                                placeholder="Enter Your Email Address"
+                                icon="/images/close.svg"
+                                isRequired={true}
+                                errors={errors}
+                                formProps={{ ...register("newEmail") }}
+                                setValue={setValue}
+                                watch={watch}
+                                infoIcon={null}
+                                labelClass=""
+                                disabled={null}
+                                isTextArea={false}
+                                rows={undefined}
+                                />
                         </div>
                         <div className='grid grid-cols-2 gap-4'>
                             <button type='button' className="text-lg font-medium bg-dark hover:bg-white text-text3 w-full mt-5 py-3 rounded-[10px] border border-dark hover:border-border-color cursor-pointer" onClick={onClose}>Cancel</button>
