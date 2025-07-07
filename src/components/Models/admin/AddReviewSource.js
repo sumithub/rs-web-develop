@@ -9,9 +9,11 @@ import InputForm from "../../form/InputForm";
 import axios from "axios";
 import RadioForm from "../../form/RadioForm";
 import Switch from "../../form/Switch";
+import FileInput from "../../form/FileInput";
 
 export default function AddReviewSource({ onClose, id }) {
     const { handleSubmit, register, setValue, watch, formState: { errors }, clearErrors } = useForm();
+    const [file, setFile] = useState(null)
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -43,6 +45,21 @@ export default function AddReviewSource({ onClose, id }) {
                     formProps={{ ...register("name", { required: true }) }}
                     errors={errors} />
 
+                <FileInput
+                    accept=".csv, .xls , .xlsx"
+                    class_="mt-3"
+                    formProps={{
+                        ...register('csvFile', {
+                            required: true,
+                        })
+                    }}
+                    setFile={setFile}
+                    selectedFile={file}
+                    errors={errors}
+                    isRequired={true}
+                    label="Upload Logo Here"
+                    showToast={toast.error}
+                />
 
                 <InputForm
                     label="URL Validation Rule"
