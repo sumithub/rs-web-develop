@@ -112,8 +112,20 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                         { title: "Plans", link: "/admin/management/plan-management" },
                         { title: "Features", link: "/admin/management/feature-management" },
                     ]
-            }
+            },
 
+            {
+                title: "Client Subscriptions", link: "/admin/management/subscription-management", icon: "card-tick",
+            },
+
+            {
+                title: "Billing", link: "", icon: "buliding",
+                submenu:
+                    [
+                        { title: "Payments", link: "/admin/management/payment-management" },
+                        { title: "Invoices", link: "/admin/management/invoice-management" },
+                    ]
+            },
         ]
         if (role === "ADMIN") {
             setList(adminList)
