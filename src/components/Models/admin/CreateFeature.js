@@ -50,7 +50,9 @@ export default function CreateFeature({ onClose, id }) {
 
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
+                    class_="mt-0!"
                     label="Feature Name"
+                    labelClass="mb-2.5"
                     rows={5}
                     isRequired={true}
                     placeholder="Enter feature name"
@@ -61,6 +63,7 @@ export default function CreateFeature({ onClose, id }) {
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
                     label="Description"
+                    labelClass="mb-2.5"
                     rows={5}
                     isRequired={true}
                     placeholder="Enter description"

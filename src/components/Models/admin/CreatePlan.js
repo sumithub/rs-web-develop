@@ -52,6 +52,8 @@ export default function CreatePlan({ onClose, id }) {
 
                 <SelectForm
                     label="Plan Name"
+                    labelClass="mb-2.5!"
+                    class_="mt-0!"
                     isRequired={true}
                     selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                     formProps={{ ...register("planName", { required: true }) }} errors={errors} clearErrors={clearErrors}
@@ -67,6 +69,7 @@ export default function CreatePlan({ onClose, id }) {
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
                     label="Price ($/Mo)"
+                    labelClass="mb-2.5!"
                     isRequired={false}
                     placeholder="Enter price"
                     formProps={{ ...register("price", { required: false }) }}
@@ -75,6 +78,7 @@ export default function CreatePlan({ onClose, id }) {
 
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
+                    labelClass="mb-2.5!"
                     label="Discount (%)"
                     rows={5}
                     isRequired={false}
@@ -85,6 +89,7 @@ export default function CreatePlan({ onClose, id }) {
 
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
+                    labelClass="mb-2.5!"
                     label="Email Quota"
                     rows={5}
                     isRequired={false}
@@ -95,6 +100,7 @@ export default function CreatePlan({ onClose, id }) {
 
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
+                    labelClass="mb-2.5!"
                     label="SMS Quota"
                     rows={5}
                     isRequired={false}
@@ -103,24 +109,28 @@ export default function CreatePlan({ onClose, id }) {
                     errors={errors}
                 />
 
-                <div className="mt-3">
-                    <div>Features</div>
-                    <div className="flex items-start gap-4">
+                <div className="mt-3.5">
+                    <div className="text-sm font-medium pb-2.5">Features</div>
+                    <div className="grid grid-cols-4 items-center gap-3.5">
                         <CheckboxForm
                             label="Features-1"
-                            class_='flex flex-row-reverse gap-4'
+                            class_='flex flex-row-reverse justify-end gap-2.5'
+                            inputClass="ml-0!"
                         />
                         <CheckboxForm
                             label="Features-2"
-                            class_='flex flex-row-reverse gap-4'
+                            class_='flex flex-row-reverse justify-end gap-2.5'
+                            inputClass="ml-0!"
                         />
                         <CheckboxForm
                             label="Features-3"
-                            class_='flex flex-row-reverse gap-4'
+                            class_='flex flex-row-reverse justify-end gap-2.5'
+                            inputClass="ml-0!"
                         />
                         <CheckboxForm
                             label="Features-4"
-                            class_='flex flex-row-reverse gap-4'
+                            class_='flex flex-row-reverse justify-end gap-2.5'
+                            inputClass="ml-0!"
                         />
                     </div>
                 </div>
