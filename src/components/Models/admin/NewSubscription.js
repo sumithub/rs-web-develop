@@ -51,6 +51,8 @@ export default function NewSubscription({ onClose, id }) {
 
                 {!id && <SelectForm
                     label="Client"
+                    labelClass="mb-2.5!"
+                    class_="mt-0!"
                     isRequired={true}
                     selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                     formProps={{ ...register("client", { required: true }) }} errors={errors} clearErrors={clearErrors}
@@ -64,6 +66,8 @@ export default function NewSubscription({ onClose, id }) {
                 {id && <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
                     label="Current Plan"
+                    labelClass="mb-2.5!"
+                    class_="mt-0!"
                     isRequired={false}
                     disabled={true}
                     placeholder="Basic"
@@ -74,6 +78,7 @@ export default function NewSubscription({ onClose, id }) {
 
                 <SelectForm
                     label={!id ? "Plan" : "New Plan"}
+                    labelClass="mb-2.5!"
                     isRequired={true}
                     selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                     formProps={{ ...register("plan", { required: true }) }} errors={errors} clearErrors={clearErrors}
@@ -88,6 +93,7 @@ export default function NewSubscription({ onClose, id }) {
 
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
+                    labelClass="mb-2.5!"
                     label={`${!id ? "Start" : "Effective"} Date `}
                     isRequired={true}
                     inputType="date"
@@ -98,6 +104,7 @@ export default function NewSubscription({ onClose, id }) {
 
                 {!id && <SelectForm
                     label="Payment Method"
+                    labelClass="mb-2.5!"
                     isRequired={true}
                     selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                     formProps={{ ...register("paymentMethod", { required: true }) }} errors={errors} clearErrors={clearErrors}
@@ -110,6 +117,7 @@ export default function NewSubscription({ onClose, id }) {
                 {id && <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
                     label="Prorated Billing"
+                    labelClass="mb-2.5!"
                     isRequired={true}
                     placeholder="Enter bill"
                     formProps={{ ...register("proratedBilling", { required: true }) }}

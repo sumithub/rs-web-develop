@@ -98,15 +98,21 @@ export default function SubscriptionManagement() {
                                 setSortBy={setSortBy}
                                 field="name" />
                             </th>
-                            <th><TableOrder title="Plan"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="plan" />
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Plan"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="plan" />
+                                </div>
                             </th>
-                            <th><TableOrder title="Status"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="status" />
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Status"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="status" />
+                                </div>
                             </th>
                             <th className="text-center!">Actions</th>
                         </tr>
@@ -121,10 +127,14 @@ export default function SubscriptionManagement() {
                                     {e.clientName}
                                 </td>
                                 <td>
-                                    {e.plan}
+                                    <div className="flex justify-center">
+                                        {e.plan}
+                                    </div>
                                 </td>
                                 <td>
-                                    <Status status={e.status} />
+                                    <div className="flex justify-center">
+                                        <Status status={e.status} />
+                                    </div>
                                 </td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
