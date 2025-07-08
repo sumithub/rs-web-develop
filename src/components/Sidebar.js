@@ -126,6 +126,10 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                         { title: "Invoices", link: "/admin/management/invoice-management" },
                     ]
             },
+
+            {
+                title: "Rules", link: "/admin/global-rules-management", icon: "rule",
+            },
         ]
         if (role === "ADMIN") {
             setList(adminList)

@@ -559,3 +559,12 @@ export const paymentManagement = [
     { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Pending", date: "Mar 25,2025" },
     { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Completed", date: "Mar 25,2025" },
 ]
+
+export const globalRulesManagement = [
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Notify", status: "Active", createdDate: "Mar 03, 2024" },
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Alert", status: "Inactive", createdDate: "Mar 03, 2024" },
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Notify", status: "Active", createdDate: "Mar 03, 2024" },
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Alert", status: "Inactive", createdDate: "Mar 03, 2024" },
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Notify", status: "Active", createdDate: "Mar 03, 2024" },
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Alert", status: "Inactive", createdDate: "Mar 03, 2024" },
+]

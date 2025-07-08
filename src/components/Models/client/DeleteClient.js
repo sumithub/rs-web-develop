@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import { useState } from "react";
 
-export default function DeleteClient({ onClose, title = "Client ID" }) {
+export default function DeleteClient({ onClose, id }) {
     const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false);
 
@@ -17,7 +17,7 @@ export default function DeleteClient({ onClose, title = "Client ID" }) {
         try {
             setSending(true);
             await axios.put("/api");
-            toast.success("Client Deleted Successfully");
+            toast.success(`${id ? "Global Id" : "Client"} Deleted Successfully`);
             onClose();
         } catch (error) {
             toast.error(getError(error));
@@ -26,9 +26,11 @@ export default function DeleteClient({ onClose, title = "Client ID" }) {
         }
     };
 
+    let title = id ? "Global" : "Client";
+
     return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
         <form onSubmit={handleSubmit(onSubmit)} className="text-center">
-            <DeleteTag title={`Delete ${title}`} question="Confirmation prompt before deletion." />
+            <DeleteTag title={`Delete ${title} ID`} question={id ? "On confirmation, the rule is removed from the list; if canceled, no changes occur." : "Confirmation prompt before deletion."} />
 
             <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="No" class_="border-danger2! hover:bg-danger! text-lg! bg-white! text-danger2! hover:text-white!" onClick={onClose}
