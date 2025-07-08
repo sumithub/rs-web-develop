@@ -141,6 +141,11 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                         { title: "Notification Log", link: "/audit-logs-dashboard" },
                     ]
             },
+
+            {
+                title: "Audit Logs", link: "/admin/audit-logs", icon: "audit",
+            },
+
         ]
         if (role === "ADMIN") {
             setList(adminList)

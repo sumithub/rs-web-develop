@@ -574,3 +574,13 @@ export const SubscriptionUsage = [
     { name: "Email Quota Used", title: "500/1,000" },
     { name: "SMS Quota Used", title: " 50/100" },
 ]
+
+export const auditLog = [
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+]
