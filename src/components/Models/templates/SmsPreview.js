@@ -12,7 +12,7 @@ import axios from "axios";
 import Radio from "../../form/Radio";
 import PhoneForm from "../../form/PhoneForm";
 
-export default function SmsPreview({ onClose, id }) {
+export default function SmsPreview({ onClose, id, body }) {
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm();
     const [perView, setPerView] = useState("web")
     const [sending, setSending] = useState(false)
@@ -58,24 +58,24 @@ export default function SmsPreview({ onClose, id }) {
                 return '';
         }
     };
-    const getWidth = () => {
-        console.log(perView)
-        switch (perView) {
-            case 'web':
-                return ' w-[90%]! xl:max-w-[90%]!';
-            case 'tablet':
-                return ' w-[80%]!';
-            case 'mobile':
-                return ' w-[70%]!';
-            default:
-                return '';
-        }
-    };
+    // const getWidth = () => {
+    //     console.log(perView)
+    //     switch (perView) {
+    //         case 'web':
+    //             return ' w-[90%]! xl:max-w-[90%]!';
+    //         case 'tablet':
+    //             return ' w-[80%]!';
+    //         case 'mobile':
+    //             return ' w-[70%]!';
+    //         default:
+    //             return '';
+    //     }
+    // };
+
+
     return (
         <Model onClose={onClose} title={`Test Send ${type === "email" ? "Template" : "SMS"}`}
-            modalClass={getWidth()}
             modalBodyClass="bg-dark">
-            {getWidth()}
             <form onSubmit={handleSubmit(onSubmit)} className="">
                 <div className="flex  gap-5 ">
                     <div className="bg-white rounded-[10px] p-5 flex flex-col justify-between gap-5  w-[400px]">
@@ -135,7 +135,7 @@ export default function SmsPreview({ onClose, id }) {
                         </div>
                         <div className="grid grid-cols-2 gap-5 mt-7">
                             <CancelButton title="Cancel" class_="text-lg!" onClick={onClose} />
-                            <SecondaryButton title="Save Test" type="submit" disabled={sending} class_="text-lg!" />
+                            <SecondaryButton title="Send Test" type="submit" disabled={sending} class_="text-lg!" />
                         </div>
                     </div>
 
@@ -170,19 +170,22 @@ export default function SmsPreview({ onClose, id }) {
                                 </button>
                             </div>
                             <div className={`mt-7 border border-dark rounded-[10px] `}>
-                                <div className="p-2.5">
+                                <div className='tiptap p-2.5'
+                                    dangerouslySetInnerHTML={{ __html: body }}
+                                />
+                                {/* <div className="p-2.5">
                                     <h3 className="text-xs capitalize">Hi &#123;John Deo&#125;&#44;</h3>
                                     <h3 className="text-xs capitalize py-3.5">Thank you for your recent visit! We&#39;d love to hear your feedback.</h3>
                                     <h3 className="text-xs capitalize">Click the link below to leave a review:</h3>
                                     <h3 className="text-xs capitalize"> &#123;review_link&#125; Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.</h3>
                                     <h3 className="text-xs pt-5">&#123;Business_name&#125;</h3>
-                                </div>
+                                </div> */}
                             </div>
                             <Image src="/images/template.png" alt="template" width={407} height={196} className="mt-7 w-full h-auto" />
                         </div>
                     </div>
                 </div>
             </form>
-        </Model >
+        </Model>
     )
 }

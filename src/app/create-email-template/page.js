@@ -66,7 +66,7 @@ function AddTemplate() {
   const isReview = type === "reviewResponseTemplate"
 
   return <AdminLayout>
-    {openPreview && <SmsPreview type={type}
+    {openPreview && <SmsPreview type={type} body={body}
       onClose={() => { setOpenPreview(false) }} />}
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className='flex items-start gap-4'>
@@ -223,9 +223,9 @@ function AddTemplate() {
             </div>
             <div className='p-5'>
               <div className='border border-border-color rounded-[10px] p-5 text-secondary text-sm mb-8 leading-normal'>
-                <div className='tiptap'
+                {body ? <div className='tiptap'
                   dangerouslySetInnerHTML={{ __html: body }}
-                />
+                /> : <></>}
               </div>
               <SecondaryButton title="Test Send" type="button" disabled={sending} class_="text-lg!"
                 onClick={() => setOpenPreview(true)} />
