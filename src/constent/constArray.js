@@ -567,3 +567,13 @@ export const auditLog = [
     { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
     { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
 ]
+
+export const notificationsDashboard = [
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Unread" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Unread" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+]
