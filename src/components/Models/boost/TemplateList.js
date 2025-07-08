@@ -11,7 +11,7 @@ import { templateList } from '../../../constent/constArray'
 import Loading from '../../Loading'
 import CustomSelectBox from '../../form/CustomSelectBox'
 
-function TemplateList({ onClose, onSave }) {
+function TemplateList({ onClose, onSave, type = "" }) {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
@@ -57,7 +57,11 @@ function TemplateList({ onClose, onSave }) {
                             <option value="filter 2">Filter 2</option>
                         </CustomSelectBox>
                         <SecondaryButton title="Select Template" class_="text-sm! font-normal!"
-                            onClick={onSave} />
+                            onClick={() => {
+                                if (onSave) {
+                                    onSave(list[0])
+                                }
+                            }} />
                     </div>
                 </div>
 
@@ -80,7 +84,7 @@ function TemplateList({ onClose, onSave }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            {(list || []).filter(l => ((l.templateType || "").toLowerCase().includes((type || "").toLowerCase())))?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className='flex items-center'>
                                         <Radio class_='mt-0!' />
