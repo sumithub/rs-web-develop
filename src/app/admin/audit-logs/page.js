@@ -60,15 +60,17 @@ export default function AuditLogs() {
                     }} />
             }
             <div className='flex items-center justify-between'>
+
                 <Search
                     placeholder="Global Search"
+                    mainClass="shrink-0! w-1/5!"
                     onSearch={(s) => {
                         setSearch(s)
                     }}
                 />
                 <div className='flex items-center gap-3.5'>
 
-                    < div className="flex items-center gap-2">
+                    < div className="flex items-center gap-2 shrink-0">
                         <div className="font-medium">Auto-Refresh</div>
                         <Switch class_="mt-2" />
                     </div>
@@ -98,6 +100,7 @@ export default function AuditLogs() {
                     <CancelButton title="User" class_="text-xs! bg-white! border border-border-color! py-2.5!" mainClass="shrink-0" />
 
                     <DateRange
+                        class_="shrink-0"
                         value={date}
                         onChange={(e) => { setDate(e) }}
                     />
@@ -116,6 +119,7 @@ export default function AuditLogs() {
                     <CancelButton title="Module" class_="text-xs! bg-white! border border-border-color! py-2.5!" mainClass="shrink-0" />
 
                     <SecondaryButton
+                        mainClass="shrink-0"
                         title="Export CSV/PDF"
                         onClick={() => toast.success("Exported Successfully")}
                         class_="text-xs! font-normal!"
@@ -134,29 +138,20 @@ export default function AuditLogs() {
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="time" /></th>
-                            <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Client"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="client" />
-                                </div>
+                            <th><TableOrder title="Client"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="client" />
                             </th>
-                            <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Location"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="location" />
-                                </div>
+                            <th><TableOrder title="Location"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="location" />
                             </th>
-                            <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="User"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="user" />
-                                </div>
+                            <th><TableOrder title="User"
+                                sortBy={sortBy}
+                                setSortBy={setSortBy}
+                                field="user" />
                             </th>
                             <th>
                                 <div className="flex justify-center">
@@ -180,23 +175,15 @@ export default function AuditLogs() {
                                     {formatDate(e.date)}
                                 </td>
                                 <td>{e.time}</td>
+                                <td>{e.client}</td>
                                 <td>
-                                    <div className="flex justify-center">
-                                        {e.client}
+                                    <div className="line-clamp-1">
+                                        {e.location}
                                     </div>
                                 </td>
-                                <td className="">
-                                    <div className="flex justify-center">
-                                        <div className="line-clamp-1">
-                                            {e.location}
-                                        </div>
-                                    </div>
-                                </td>
-                                <td className="">
-                                    <div className="flex justify-center">
-                                        <div className="line-clamp-1">
-                                            {e.user}
-                                        </div>
+                                <td>
+                                    <div className="line-clamp-1">
+                                        {e.user}
                                     </div>
                                 </td>
                                 <td>
