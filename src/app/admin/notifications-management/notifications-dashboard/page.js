@@ -141,7 +141,7 @@ export default function NotificationsDashboard() {
                         onChange={(e) => { setDate(e) }}
                     />
                     <button className="rounded-lg bg-primary/10 text-primary px-2.5 text-xs inline-flex items-center gap-2.5"><span><Image src="/images/export.svg" alt="export" width={16} height={16} /></span>Export</button>
-                    <button className="rounded-lg bg-danger/10 text-danger px-2.5  text-xs inline-flex items-center gap-2.5"><span><Image src="/images/delete.svg" lang="delete" width={16} height={16} /></span> Delete</button>
+                    <button className="rounded-lg bg-danger/10 text-danger px-2.5  text-xs inline-flex items-center gap-2.5"><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     {/* <CancelButton title="Export" onClick={handleClick} class_="text-xs! py-[9.4px]! font-normal!" />
                     <CancelButton title="Delete" onClick={() => { toast.success("Deleted Successfully") }} class_="text-xs! py-[9.4px]! font-normal!" /> */}
                     {/* 
