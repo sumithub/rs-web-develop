@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import LocationsDropdown from "../components/Models/LocationsDropdown"
 
 export default function Sidebar({ collapse, toggleSidebar, role }) {
     const [list, setList] = useState([])
+    const [openLocation, setOpenLocation] = useState(false)
+
     useEffect(() => {
         const userList = [
             { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
@@ -155,6 +158,12 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
     }, [role])
 
     return <div className="relative z-50">
+
+        {openLocation && <LocationsDropdown
+            onClose={() => {
+                setOpenLocation(false)
+            }}
+        />}
         <div className={`bg-white h-[100vh] ${collapse ? "w-20" : "w-72"} transition-all fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px] shadow-[0px_16px_44px_0px_#00000012]`}>
             <div className="relative h-full pb-10">
                 <div className="pt-5 text-center relative h-12">
@@ -172,7 +181,7 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                                 <div className="text-xs font-medium line-clamp-1">4517 Washington Ave. Manchester, Kentucky 39495</div>
                                 <button className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={20} width={20} unoptimized={true} /></button>
 
-                                <button className="cursor-pointer"><Image src="/images/add1.svg" alt="add" height={25} width={25} unoptimized={true} /></button>
+                                <button onClick={() => { setOpenLocation(true) }} className="cursor-pointer"><Image src="/images/add1.svg" alt="add" height={25} width={25} unoptimized={true} /></button>
                             </div>
                         </div>
 
