@@ -130,6 +130,17 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
             {
                 title: "Rules", link: "/admin/global-rules-management", icon: "rule",
             },
+
+            {
+                title: "Notifications and Alerts", link: "", icon: "notification",
+                submenu:
+                    [
+                        { title: "Notifications", link: "" },
+                        { title: "Alerts", link: "" },
+                        { title: "System Wide Notifications", link: "" },
+                        { title: "Notification Log", link: "/audit-logs-dashboard" },
+                    ]
+            },
         ]
         if (role === "ADMIN") {
             setList(adminList)
