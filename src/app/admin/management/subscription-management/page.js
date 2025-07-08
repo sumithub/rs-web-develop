@@ -45,7 +45,7 @@ export default function SubscriptionManagement() {
     return (
         <AdminLayout headerSearch={
             <Search
-                mainClass='w-80!'
+                mainClass='w-96!'
                 placeholder="Search"
                 onSearch={(s) => {
                     setSearch(s)
