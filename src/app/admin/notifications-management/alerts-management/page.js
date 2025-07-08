@@ -7,12 +7,12 @@ import TableOrder from "../../../../components/TableOrder"
 import PaginationDemo from "../../../../components/Pagination"
 import axios from "axios"
 import { toast } from "react-toastify"
-import { formatDate, getError } from "../../../../../helper"
+import { getError } from "../../../../../helper"
 import Loading from "../../../../components/Loading"
 import { alertManagement } from "../../../../constent/constArray"
 import Image from "next/image"
-import CreateClientRule from "../../../../components/Models/client/CreateClientRule"
-import DeleteClient from "../../../../components/Models/client/DeleteClient"
+import CreateNewAlert from "../../../../components/Models/admin/CreateNewAlert"
+import DeleteList from "../../../../components/Models/customers/DeleteList"
 import Status from "../../../../components/Status"
 import CustomSelectBox from "../../../../components/form/CustomSelectBox"
 
@@ -54,7 +54,7 @@ export default function AlertsManagement() {
                 }}
             />}>
             {open &&
-                <CreateClientRule
+                <CreateNewAlert
                     id={selId}
                     onClose={() => {
                         setSelId("")
@@ -67,7 +67,7 @@ export default function AlertsManagement() {
             }
 
             {openDelete &&
-                <DeleteClient
+                <DeleteList
                     id={true}
                     onClose={() => {
                         setOpenDelete(false)
@@ -77,7 +77,7 @@ export default function AlertsManagement() {
             <div className='flex items-center justify-between'>
 
                 <Search
-                    placeholder="Search"
+                    placeholder="Search By Alerts"
                     onSearch={(s) => {
                         setSearch(s)
                     }}
@@ -86,7 +86,7 @@ export default function AlertsManagement() {
                 <div className='flex items-center gap-3.5'>
 
                     <CustomSelectBox
-                        defaultOption="Filters"
+                        defaultOption="Filter By Type"
                         class_='mt-0! w-36!'
                         value={filterByFilter}
                         onChange={(e) => {
@@ -98,7 +98,7 @@ export default function AlertsManagement() {
                     </CustomSelectBox>
 
                     <SecondaryButton
-                        title="Add New Rule"
+                        title="Add New Alert"
                         onClick={() => setOpen(true)}
                         class_="text-xs! font-normal!"
                     />
@@ -108,26 +108,31 @@ export default function AlertsManagement() {
                 {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
                     <thead>
                         <tr>
-                            <th><TableOrder title="ID"
+                            <th><TableOrder title="Alert Name"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="id" />
+                                field="alertName" />
                             </th>
-                            <th><TableOrder title="Event Type"
+                            <th><TableOrder title="Client Scope"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
-                                field="name" />
+                                field="clientScope" />
                             </th>
                             <th>
                                 <div className="flex justify-center">
-                                    <TableOrder title="Condition"
+                                    <TableOrder title="Trigger Event"
                                         sortBy={sortBy}
                                         setSortBy={setSortBy}
-                                        field="condition" />
+                                        field="triggerEvent" />
                                 </div>
                             </th>
-                            <th className="text-center!">
-                                Action
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Delivery Method"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="deliveryMethod" />
+                                </div>
                             </th>
                             <th>
                                 <div className="flex justify-center">
@@ -137,14 +142,6 @@ export default function AlertsManagement() {
                                         field="status" />
                                 </div>
                             </th>
-                            <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Created Date"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="date" />
-                                </div>
-                            </th>
                             <th className="text-center!">Actions</th>
                         </tr>
                     </thead>
@@ -152,29 +149,24 @@ export default function AlertsManagement() {
                         {list.map((e, index) =>
                             <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
-                                    <div>{e.id}</div>
+                                    <div>{e.alertName}</div>
                                 </td>
                                 <td>
-                                    {e.eventType}
+                                    {e.clientScope}
                                 </td>
                                 <td>
                                     <div className="flex justify-center">
-                                        {e.condition}
+                                        {e.triggerEvent}
                                     </div>
                                 </td>
                                 <td>
                                     <div className="flex justify-center">
-                                        <Status status={e.action} />
+                                        {e.deliveryMethod}
                                     </div>
                                 </td>
                                 <td>
                                     <div className="flex justify-center">
                                         <Status status={e.status} />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className="flex justify-center">
-                                        {formatDate(e.createdDate)}
                                     </div>
                                 </td>
                                 <td>
