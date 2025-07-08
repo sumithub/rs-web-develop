@@ -11,72 +11,66 @@ import { toast } from "react-toastify";
 import { getError, validEmailRgx } from "../../../../helper";
 import { useForm } from "react-hook-form";
 import PhoneForm from "../../form/PhoneForm";
-import AddCustomer from "../customers/AddCustomer";
 import Image from "next/image";
 import axios from "axios";
 import InputForm from "../../form/InputForm";
 import Preview from "../manage-campaigns/Preview"
-import AddTemplate from "../templates/AddTemplate"
 import SelectForm from "../../form/SelectForm";
 import Link from "next/link";
+import { customerList } from "../../../constent/constArray";
 
 export default function BoostRequest({ onClose, onSave, id, customer }) {
     const [select, setSelect] = useState("")
     const [overrideTemplates, setOverrideTemplates] = useState(false)
     const [selectedCustomers, setSelectedCustomers] = useState([])
     const [searchQuery, setSearchQuery] = useState("")
-    const [selectedCampaign, setSelectedCampaign] = useState("")
-    const [emailTemplate, setEmailTemplate] = useState({ name: "Nature Template", preview: "Lorem Ipsum.." })
-    const [smsTemplate, setSmsTemplate] = useState({ name: "Nature Template", preview: "Lorem Ipsum.." })
+    const [emailTemplate, setEmailTemplate] = useState(null)
+    const [smsTemplate, setSmsTemplate] = useState(null)
     const [showDetails, setShowDetails] = useState(false)
-    const { register, setValue, watch, clearErrors, handleSubmit, formState: { errors }, } = useForm();
+    const { register, setValue, watch, clearErrors, handleSubmit, reset, trigger, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
     const [openTemplate, setOpenTemplate] = useState(false)
     const [openPreview, setOpenPreview] = useState(false)
-    const [openEdit, setOpenEdit] = useState(false)
     const [openSelect, setOpenSelect] = useState(false)
-    const [open, setOpen] = useState(false)
     const [showCustomerFields, setShowCustomerFields] = useState(false);
-    const [addedCustomer, setAddedCustomer] = useState(null);
-
-    // Watch form values for real-time updates
+    const [openList, setOpenList] = useState(false)
     const formData = watch();
-    
+    const [previewType, setPreviewType] = useState("email"); // "email" or "sms"
+    const [templateType, setTemplateType] = useState([])
 
     useEffect(() => {
         if (Array.isArray(customer)) {
             setSelectedCustomers(customer);
-            // Do not pre-fill form fields
-            setValue("name", "");
-            setValue("email", "");
-            setValue("phone", "");
         } else if (customer) {
-            setSelectedCustomers([]);
-            setValue("name", customer.customerName || customer.name || "");
-            setValue("email", customer.email || "");
-            setValue("phone", customer.phone || "");
-        } else {
-            setSelectedCustomers([]);
-            setValue("name", "");
-            setValue("email", "");
-            setValue("phone", "");
+            setSelectedCustomers((prev) => ([...prev, customer]));
         }
     }, [customer, setValue]);
 
     const onSubmit = async (data) => {
         try {
-            setSending(true)
             if (!select) {
                 toast.error("Please select how to send (Email, SMS, or Both)")
-                setSending(false)
                 return
             }
+            if ((select === "email" || select === "both") && !emailTemplate) {
+                toast.error("Please select email template")
+                return
+            }
+            if ((select === "sms" || select === "both") && !smsTemplate) {
+                toast.error("Please select sms template")
+                return
+            }
+            if (selectedCustomers.length === 0) {
+                toast.error("Please select the customers")
+            }
+            setSending(true)
+
             const submitData = {
                 ...data,
                 sendVia: select,
                 overrideTemplates,
                 selectedCustomers,
-                campaign: selectedCampaign,
+                campaign: watch("campaign"),
                 emailTemplate: overrideTemplates ? emailTemplate : null,
                 smsTemplate: overrideTemplates ? smsTemplate : null,
             }
@@ -96,33 +90,26 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
         }
     }
 
-    const handleTemplateSelection = (template, type) => {
-        if (type === 'email') {
-            setEmailTemplate(template)
-        } else if (type === 'sms') {
-            setSmsTemplate(template)
-        }
-        setOpenTemplate(false)
-    }
 
     const handleCustomerSelection = (customers) => {
         // If multiple customers were passed as initial selection, merge them with new ones
         setSelectedCustomers(prev => {
             // Merge and avoid duplicates by email (or id if available)
-            const all = [...prev, ...customers];            
+            const all = [...prev, ...customers];
             return all;
         });
         setOpenSelect(false);
     }
 
-    const handleNewCustomer = (customer) => {
-        setValue("name", customer.customerName)
-        setValue("email", customer.email)
-        setValue("phone", customer.phone)
-        setOpen(false)
-    }
+    // const handleNewCustomer = (customer) => {
+    //     setValue("name", customer.customerName)
+    //     setValue("email", customer.email)
+    //     setValue("phone", customer.phone)
+    //     setOpen(false)
+    // }
 
     const handleSearch = (query) => {
+        setOpenList(true)
         setSearchQuery(query)
     }
 
@@ -135,29 +122,48 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
     )
     const validCustomers = totalSelected - skippedCustomers.length
 
+    let filteredCustomers = Array.isArray(customerList) ? customerList : [];
+    if (searchQuery?.trim()) {
+        const query = searchQuery.toLowerCase().trim();
+        filteredCustomers = filteredCustomers.filter(c => {
+            if (!c) return false;
+            return (
+                (c.name || "").toLowerCase().includes(query) ||
+                (c.email || "").toLowerCase().includes(query) ||
+                (c.phone || "").toLowerCase().includes(query)
+            );
+        });
+    }
+    const handlePreview = (type) => {
+        setPreviewType(type);
+        setOpenPreview(true);
+    };
+
+    const handleTemplateSave = (templateData) => {
+        if (templateType === "email") {
+            setEmailTemplate(templateData)
+        } else if (templateType === "sms") {
+            setSmsTemplate(templateData)
+        }
+        setOpenTemplate(false)
+    }
     return (
         <Model onClose={onClose} title="Boost Request" modalClass="w-1/2!" boostIcon={true}>
-            {openTemplate &&
-                <TemplateList
-                    onClose={() => {
-                        setOpenTemplate(false)
-                    }}
-                    onSave={handleTemplateSelection}
-                />
-            }
-
             {openPreview &&
                 <Preview
+                    previewType={previewType}
                     onClose={() => {
                         setOpenPreview(false)
                     }}
                 />
             }
-            {openEdit &&
-                <AddTemplate
+            {openTemplate &&
+                <TemplateList
+                    type={templateType}
                     onClose={() => {
-                        setOpenEdit(false)
+                        setOpenTemplate(false)
                     }}
+                    onSave={handleTemplateSave}
                 />
             }
             {openSelect &&
@@ -169,19 +175,6 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                 />
             }
 
-            {open &&
-                <AddCustomer
-                    onClose={() => {
-                        setOpen(false)
-                    }}
-                    onSave={(customer) => {
-                        handleNewCustomer(customer);
-                        setAddedCustomer(customer);
-                        setShowCustomerFields(true);
-                    }}
-                />
-            }
-
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <div className="text-lg font-semibold capitalize">
@@ -189,20 +182,47 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                     </div>
 
                     <div className="flex justify-between mt-4">
-                        <Search
-                            placeholder="Search by email, name or phone number"
-                            mainClass="w-3/5!"
-                            value={searchQuery}
-                            onChange={handleSearch}
-                        />
+                        <div>
+                            <Search
+                                placeholder="Search by email, name or phone number"
+                                mainClass="w-3/5!"
+                                value={searchQuery}
+                                onSearch={handleSearch}
+                            />
+                            {openList && <div>
+                                <div onClick={() => { setOpenList(false) }}>X</div>
+                                {filteredCustomers.map((e, i) => {
+                                    const selected = selectedCustomers.find(s => s.name === e.name)
+
+                                    return <div key={i} className={'border-b border-border-color'}>
+                                        <div className="flex items-start gap-2">
+                                            <Checkbox
+                                                checked={selected}
+                                                onChange={() => {
+                                                    if (selected) {
+                                                        setSelectedCustomers((prev) => prev.filter(p => p.name !== e.name))
+                                                    } else {
+                                                        setSelectedCustomers(prev => ([...prev, e]))
+                                                    }
+                                                }}
+                                            />
+                                            <div>{e.customerName}</div>
+                                        </div>
+                                        {e.email} | {e.phone}
+                                    </div>
+                                })}
+                            </div>}
+                        </div>
                         <SecondaryButton
+                            type="button"
                             title="Add New Customer"
                             class_="text-sm!"
-                            onClick={() => { setOpen(true) }}
+                            // onClick={() => { setOpen(true) }}
+                            onClick={() => { setShowCustomerFields(true) }}
                         />
                     </div>
 
-                    {showCustomerFields && (
+                    {showCustomerFields && (<>
                         <div className="grid grid-cols-2 gap-3 mt-4">
                             <InputForm
                                 label="Name"
@@ -240,14 +260,45 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                                 watch={watch}
                             />
                         </div>
-                    )}
+                        <div className="text-end">
+                            <SecondaryButton
+                                title="Add"
+                                class_="text-sm! w-auto!"
+                                type="button"
+                                onClick={async () => {
+                                    const isValid = await trigger();
+                                    if (isValid) {
+                                        const newCustomer = {
+                                            name: watch("name"),
+                                            email: watch("email"), phone: watch("phone")
+                                        };
+                                        setShowCustomerFields(false)
+                                        setSelectedCustomers(prev => [...prev, newCustomer]);
+                                        reset();
+                                    }
+                                }}
+                            />
+                        </div>
+                    </>)}
 
+                    {selectedCustomers.length > 0 && <div>
+                        <div>Selected Customers</div>
+                        {selectedCustomers.map((e, i) => {
+                            return <div key={i} className="flex justify-between items-center"
+                            >{e.name}
+                                <span onClick={() => {
+                                    setSelectedCustomers((prev) => prev.filter((_, idx) => idx !== i))
+                                }}>X</span>
+                            </div>
+                        })}
+                    </div>}
                     <div className="flex items-center justify-between mt-4">
                         <div className="text-lg font-semibold">
                             Choose From Existing Customer<span className="text-text3 font-normal"> (Optional)</span>
                         </div>
                         <div>
                             <SecondaryButton
+                                type="button"
                                 title="select from customer List"
                                 class_="text-sm!"
                                 onClick={() => { setOpenSelect(true) }}
@@ -270,19 +321,6 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                             <option value="campaign1">Campaign 1</option>
                             <option value="campaign2">Campaign 2</option>
                         </SelectForm>
-
-                        {/* <SelectForm
-                            defaultOption="Default Campaign"
-                            label="Choose Campaign"
-                            labelClass="mb-2.5!"
-                            selectClass_="py-2.5! px-2.5!"
-                            value={selectedCampaign}
-                            onChange={(e) => setSelectedCampaign(e.target.value)}
-                            setValue={setValue}
-                            watch={watch}>
-                            <option value="campaign1">Campaign 1</option>
-                            <option value="campaign2">Campaign 2</option>
-                        </SelectForm> */}
 
                         <div className="mt-2.5 flex gap-2.5 items-center">
                             <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
@@ -337,67 +375,72 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
 
                     {overrideTemplates && (
                         <>
-                            <div className="mt-5">
+                            {(select === "email" || select === "both") && <div className="mt-5">
                                 <div className="flex justify-between items-center">
                                     <div className="text-sm">E-Mail Template<span className="text-danger">*</span></div>
                                     <SecondaryButton
+                                        type="button"
                                         title="Template Selection"
                                         class_="text-xs! font-normal!"
-                                        onClick={() => { setOpenTemplate(true) }}
+                                        onClick={() => {
+                                            setOpenTemplate(true);
+                                            setTemplateType("email")
+                                        }}
                                     />
                                 </div>
-                                <div className="flex justify-between items-center rounded-lg bg-dark p-2 mt-2.5">
+                                {emailTemplate && <div className="flex justify-between items-center rounded-lg bg-dark p-2 mt-2.5">
                                     <div>
-                                        <h2 className="text-sm font-medium">{emailTemplate.name}</h2>
-                                        <h3 className="text-text3 text-xs">{emailTemplate.preview}</h3>
+                                        <h2 className="text-sm font-medium">{emailTemplate?.name}</h2>
+                                        <h3 className="text-text3 text-xs">{emailTemplate?.preview}</h3>
                                     </div>
                                     <div className="flex gap-2.5">
                                         <button
-                                            onClick={() => setOpenPreview(true)}
+                                            onClick={() => handlePreview("email")}
                                             className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
                                             <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={12} height={12} />
                                             Preview
                                         </button>
-                                        <Link href="/create-email-template"
-                                            // onClick={() => setOpenEdit(true)}
+                                        <Link href={`/create-email-template?edit=${emailTemplate?.id}`}
                                             className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
                                             <Image unoptimized={true} src="/images/edit2.svg" alt="edit2" width={12} height={12} />
                                             Edit
                                         </Link>
                                     </div>
-                                </div>
-                            </div>
+                                </div>}
+                            </div>}
 
-                            <div className="mt-3.5">
+                            {(select === "sms" || select === "both") && <div className="mt-5">
                                 <div className="flex justify-between items-center">
                                     <div className="text-sm">SMS Template<span className="text-danger">*</span></div>
                                     <SecondaryButton
                                         title="Template Selection"
                                         class_="text-xs! font-normal!"
-                                        onClick={() => { setOpenTemplate(true) }}
+                                        onClick={() => {
+                                            setOpenTemplate(true);
+                                            setTemplateType("sms")
+                                        }}
                                     />
                                 </div>
-                                <div className="flex justify-between items-center rounded-lg bg-dark p-2 mt-2.5">
+                                {smsTemplate && <div className="flex justify-between items-center rounded-lg bg-dark p-2 mt-2.5">
                                     <div>
-                                        <h2 className="text-sm font-medium">{smsTemplate.name}</h2>
-                                        <h3 className="text-text3 text-xs">{smsTemplate.preview}</h3>
+                                        <h2 className="text-sm font-medium">{smsTemplate?.name}</h2>
+                                        <h3 className="text-text3 text-xs">{smsTemplate?.preview}</h3>
                                     </div>
                                     <div className="flex gap-2.5">
                                         <button
-                                            onClick={() => setOpenPreview(true)}
+                                            onClick={() => handlePreview("sms")}
                                             className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
                                             <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={12} height={12} />
                                             Preview
                                         </button>
-                                        <Link href="/create-email-template"
-                                            // onClick={() => setOpenEdit(true)} 
+                                        <Link href={`/create-sms-template?edit=${smsTemplate?.id}`}
                                             className="bg-primary/10 rounded-lg text-primary flex gap-1 items-center py-2 px-2.5" type="button">
                                             <Image unoptimized={true} src="/images/edit2.svg" alt="edit2" width={12} height={12} />
                                             Edit
                                         </Link>
                                     </div>
-                                </div>
-                            </div>
+                                </div>}
+                            </div>}
                         </>
                     )}
 

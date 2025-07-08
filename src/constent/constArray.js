@@ -54,24 +54,28 @@ export const emailTemplates = [
 ]
 
 export const templateList = [
-    { templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
-    { templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
-    { templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
-    { templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Sms Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Sms Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Sms Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Sms Template" },
 ]
 
 export const customerList = [
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 1", email: "john1@example.com", phone: "+919876543210", status: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 2", email: "john2@example.com", phone: "+919876543210", status: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 3", email: "john3@example.com", phone: "+919876543210", status: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 4", email: "john4@example.com", phone: "+919876543210", status: "at risk", source: "Manual", date: "Jun 18,2024" },
 ]
 
 export const selectedCustomers = [
-    { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
-    { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
-    { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
-    { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
 ]
 
 export const customerTagging = [
@@ -110,13 +114,13 @@ export const changeUsersRole = [
 ]
 
 export const allCustomers = [
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "At Risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 1", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "At Risk", source: "Manual", date: "Jun 18,2024" },
 
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Vip", source: " CSV Import", date: "Jun 18,2024" },
+    { name: "John Doe 2", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Vip", source: " CSV Import", date: "Jun 18,2024" },
 
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Priority", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 3", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Priority", source: "Manual", date: "Jun 18,2024" },
 
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Dp", source: "CSV Import", date: "Jun 18,2024" },
+    { name: "John Doe 4", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Dp", source: "CSV Import", date: "Jun 18,2024" },
 ]
 
 export const customerHistory = [
@@ -451,12 +455,12 @@ export const campaignsManagement = [
 ]
 
 export const manageCustomers = [
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
 ]
 
 export const reviewsOversight = [

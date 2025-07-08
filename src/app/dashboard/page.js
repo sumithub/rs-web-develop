@@ -85,10 +85,6 @@ export default function Dashboard() {
                 onClose={() => {
                     setOpen(false)
                 }}
-
-                onSave={() => {
-                    setOpen(true)
-                }}
             />
         }
         <div className="bg-light min-h-[calc(100dvh_-_85px)]">
