@@ -460,11 +460,11 @@ export const manageCustomers = [
 ]
 
 export const reviewsOversight = [
-    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Positive', reviewSource: "Google", timestamp: "Jun 18,2024 | 14:20:11" },
-    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Positive', reviewSource: "Yelp", timestamp: "Jun 18,2024 | 14:20:11" },
-    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Neutral', reviewSource: "Facebook", timestamp: "Jun 18,2024 | 14:20:11" },
-    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Positive', reviewSource: "Yelp", timestamp: "Jun 18,2024 | 14:20:11" },
-    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", sentiment: 'Positive', reviewSource: "Yelp", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], sentiment: 'Positive', reviewSource: "Google", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg",], sentiment: 'Positive', reviewSource: "Yelp", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], sentiment: 'Neutral', reviewSource: "Facebook", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", ratings: ["/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], sentiment: 'Positive', reviewSource: "Yelp", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], sentiment: 'Positive', reviewSource: "Yelp", timestamp: new Date('2024-06-18T10:00:00'), },
 ];
 export const JourneyCustomer = [
     { title: "Client", name: "ABC Ltd" },
@@ -474,11 +474,6 @@ export const JourneyCustomer = [
     { title: "Last Update", name: "Jun 20,2024" },
 ]
 
-export const CustomerDetails = [
-    { title: "Name", name: "John Smith" },
-    { title: "Email", name: "johnsmith@gmail.com" },
-    { title: "Phone", name: "+61-123456789" },
-]
 
 export const CustomerTimeline = [
     { title: "Jun 14,2024", name: "Clicked Review Link" },
@@ -487,18 +482,6 @@ export const CustomerTimeline = [
     { title: "Jun 12,2024", name: "Customer Added to Campaign" },
 ]
 
-export const ReviewOversight = [
-    { title: "Customer", subtitle: "John Doe" },
-    { title: "Email", subtitle: "john@example.com" },
-    { title: "Phone", subtitle: "+61412345678" },
-    { title: "Business", subtitle: "ABC Dental - Melbourne" },
-    { title: "Review Source", subtitle: "Google" },
-    { title: "Rating", subtitle: "Star" },
-    { title: "Sentiment", subtitle: "Positive" },
-    { title: "Status", subtitle: "Approved" },
-    { title: "Timestamp", subtitle: "Jun 18,2024 | 10:00AM" },
-    { title: "Review Text", subtitle: "Great service, highly recommend!" },
-]
 export const widgetManagement = [
     { widgetName: "Carasoul", type: "Dynamic", status: "Published", assignedClients: "150" },
     { widgetName: "Carasoul", type: "Dynamic", status: "Draft", assignedClients: "150" },

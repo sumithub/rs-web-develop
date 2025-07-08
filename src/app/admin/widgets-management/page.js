@@ -197,7 +197,7 @@ export default function WidgetsManagement() {
                                         <Status status={e.status} />
                                     </div>
                                 </td>
-                                <td className="">
+                                <td>
                                     <div className="flex justify-center">
                                         <div className="line-clamp-1 text-primary underline">
                                             {e.assignedClients}

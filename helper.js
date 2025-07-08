@@ -33,7 +33,7 @@ export function formatDateTime(date) {
         if (typeof date === "string")
             d = new Date(date);
 
-        return format(d, 'dd MMM | hh:mm a');
+        return format(d, 'dd MMM, yyyy | hh:mm a');
     } catch (e) {
         return "xx"
     }
