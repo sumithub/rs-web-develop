@@ -583,10 +583,10 @@ export const notificationsDashboard = [
 ]
 
 export const alertManagement = [
-    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", delivaryMethod: "Email + In-App", status: "Active" },
-    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", delivaryMethod: "In-App Only", status: "Inactive" },
-    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", delivaryMethod: "Email + In-App", status: "Active" },
-    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", delivaryMethod: "In-App Only", status: "Inactive" },
-    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", delivaryMethod: "Email + In-App", status: "Active" },
-    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", delivaryMethod: "In-App Only", status: "Inactive" },
+    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", deliveryMethod: "Email + In-App", status: "Active" },
+    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", deliveryMethod: "In-App Only", status: "Inactive" },
+    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", deliveryMethod: "Email + In-App", status: "Active" },
+    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", deliveryMethod: "In-App Only", status: "Inactive" },
+    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", deliveryMethod: "Email + In-App", status: "Active" },
+    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", deliveryMethod: "In-App Only", status: "Inactive" },
 ]

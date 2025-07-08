@@ -8,6 +8,12 @@ import LocationsDropdown from "../components/Models/LocationsDropdown"
 export default function Sidebar({ collapse, toggleSidebar, role }) {
     const [list, setList] = useState([])
     const [openLocation, setOpenLocation] = useState(false)
+    const [selectedLocation, setSelectedLocation] = useState("4517 Washington Ave. Manchester, Kentucky 39495")
+
+    const handleLocationSelect = (location) => {
+        setSelectedLocation(location);
+        setOpenLocation(false);
+    };
 
     useEffect(() => {
         const userList = [
@@ -163,6 +169,8 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
             onClose={() => {
                 setOpenLocation(false)
             }}
+            onLocationSelect={handleLocationSelect}
+            selectedLocation={selectedLocation}
         />}
         <div className={`bg-white h-[100vh] ${collapse ? "w-20" : "w-72"} transition-all fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px] shadow-[0px_16px_44px_0px_#00000012]`}>
             <div className="relative h-full pb-10">
@@ -175,10 +183,10 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 <div className="relative h-full flex flex-col justify-between overflow-y-auto custom-scrollbar pb-10 pt-10 scrollbar-none">
                     <div>
                         <div className="px-3 mb-4">
-                            <div className="flex gap-1 items-center px-4 py-3 text-sm rounded-[10px] bg-primary text-white">
+                            <div className="flex gap-1 items-center px-4 py-3 text-sm rounded-lg bg-primary text-white">
                                 <Image className="shrink-0" src="/sidebar-icons/location.svg" alt="location" height={20} width={20} unoptimized={true} />
 
-                                <div className="text-xs font-medium line-clamp-1">4517 Washington Ave. Manchester, Kentucky 39495</div>
+                                <div className="text-xs font-medium line-clamp-1">{selectedLocation}</div>
                                 <button className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={20} width={20} unoptimized={true} /></button>
 
                                 <button onClick={() => { setOpenLocation(true) }} className="cursor-pointer"><Image src="/images/add1.svg" alt="add" height={25} width={25} unoptimized={true} /></button>

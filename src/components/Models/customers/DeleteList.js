@@ -7,7 +7,7 @@ import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
 import Model from "../Model";
 
-export default function DeleteList({ onClose }) {
+export default function DeleteList({ onClose, id }) {
     const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false);
 
@@ -15,7 +15,7 @@ export default function DeleteList({ onClose }) {
         try {
             setSending(true);
             await axios.put("/api");
-            toast.success("List Deleted Successfully");
+            toast.success(`${id ? "Alert" : "List"}  Deleted Successfully`);
             onClose();
         } catch (error) {
             toast.error(getError(error));
@@ -23,9 +23,11 @@ export default function DeleteList({ onClose }) {
             setSending(false);
         }
     };
+
+    let title = id ? "Alert" : "List";
     return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
         <form onSubmit={handleSubmit(onSubmit)} className="text-center">
-            <DeleteUser title="Delete List" question="Confirmation prompt before deletion." />
+            <DeleteUser title={`Delete ${title}`} question={id ? "Are You Sure? You want To Delete This Alert." : "Confirmation prompt before deletion."} />
 
             <div className="grid grid-cols-2 gap-3 mt-5">
                 <CancelButton title="Cancel" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose} />
