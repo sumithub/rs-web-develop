@@ -39,7 +39,9 @@ export default function MakeAPayment({ onClose, id }) {
 
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
+                    class_="mt-0!"
                     label="Client"
+                    labelClass="mb-2.5!"
                     rows={5}
                     isRequired={true}
                     placeholder="Enter client"
@@ -50,6 +52,7 @@ export default function MakeAPayment({ onClose, id }) {
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
                     label="Invoice"
+                    labelClass="mb-2.5!"
                     rows={5}
                     isRequired={true}
                     placeholder="Enter invoice"
@@ -60,15 +63,18 @@ export default function MakeAPayment({ onClose, id }) {
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
                     label="Amount Due"
+                    labelClass="mb-2.5!"
                     rows={5}
                     isRequired={true}
                     placeholder="Enter amount"
                     formProps={{ ...register("amount", { required: true }) }}
                     errors={errors}
+                    icon2="/images/calendar1.svg"
                 />
 
                 <SelectForm
                     label="Payment Method"
+                    labelClass="mb-2.5!"
                     isRequired={true}
                     selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                     formProps={{ ...register("paymentMethod", { required: true }) }} errors={errors} clearErrors={clearErrors}

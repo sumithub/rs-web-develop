@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function InputForm({ infoIcon, class_ = "", watch, setValue, clearValue = false, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "", isTextArea, rows }) {
+export default function InputForm({ icon2 = "", infoIcon, class_ = "", watch, setValue, clearValue = false, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", formProps, errors, icon, disabled, iconClass = "", isTextArea, rows }) {
     const [type, setType] = useState("password")
     let error = "";
 
@@ -53,6 +53,15 @@ export default function InputForm({ infoIcon, class_ = "", watch, setValue, clea
                         height={16}
                         className={`absolute cursor-pointer top-4 right-2.5 ${iconClass}`}
                         onClick={handleClick} />
+                )}
+                {icon2 && (
+                    <Image
+                        unoptimized
+                        src={icon2}
+                        alt="icon"
+                        width={16}
+                        height={16}
+                        className={`absolute cursor-pointer top-4 right-2.5 ${iconClass}`} />
                 )}
                 {(inputType === "password") && (
                     <Image

@@ -15,16 +15,21 @@ import { auditLogsDashboard } from "../../constent/constArray";
 import AuditLogDetails from '../../components/Models/audit/AuditLogDetails'
 import DateRange from "../../components/form/DateRangePicker";
 import SecondaryButton from "../../components/common/SecondaryButton";
+import { useRole } from "../../utils/hooks";
+import CreateAuditLogEntry from "../../components/Models/admin/CreateAuditLogEntry"
 
 export default function AuditLogsDashboard() {
     const [date, setDate] = useState("")
     const [list, setList] = useState([])
     const [open, setOpen] = useState(false)
+    const [openAudit, setOpenAudit] = useState(false)
     const [loading, setLoading] = useState(true)
     const [type, setType] = useState("")
     const [type1, setType1] = useState("")
     const [search, setSearch] = useState("")
     const [sortBy, setSortBy] = useState("")
+    const { isAdmin } = useRole();
+    const [selId, setSelId] = useState("")
 
     useEffect(() => {
         getData()
@@ -50,11 +55,20 @@ export default function AuditLogsDashboard() {
                 <AuditLogDetails
                     onClose={() => { setOpen(false) }}
                 />}
+
+            {openAudit &&
+                <CreateAuditLogEntry
+                    id={selId}
+                    onClose={() => {
+                        setSelId("")
+                        setOpenAudit(false)
+                    }}
+                />}
             <div className="flex justify-between items-center gap-11">
                 <div className="w-1/3">
                     <Search
                         mainClass='w-full!'
-                        placeholder="Search logs by keywords"
+                        placeholder={isAdmin ? "For filtering locations by name." : "Search logs by keywords"}
                         onSearch={(s) => {
                             setSearch(s)
                         }}
@@ -97,7 +111,8 @@ export default function AuditLogsDashboard() {
                         <option value="subscription">Subscription</option>
                         <option value="action">Action</option>
                     </CustomSelectBox>
-                    <SecondaryButton title="Reset" class_="text-xs font-normal!" disabled={loading} onClick={getData} />
+                    {!isAdmin && <SecondaryButton title="Reset" class_="text-xs font-normal!" disabled={loading} onClick={getData} />}
+                    {isAdmin && <SecondaryButton title="Create" class_="text-xs font-normal!" onClick={() => setOpenAudit(true)} />}
 
                     {/* <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50"
                         disabled={loading}
@@ -161,6 +176,12 @@ export default function AuditLogsDashboard() {
                                         onClick={() => { setOpen(true) }}>
                                         <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
                                     </button>
+                                    {isAdmin && <button className='cursor-pointer' onClick={() => {
+                                        setSelId("e.id")
+                                        setOpenAudit(true)
+                                    }}>
+                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                    </button>}
                                 </div>
                             </td>
                         </tr>)}

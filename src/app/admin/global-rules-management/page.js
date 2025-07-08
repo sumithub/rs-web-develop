@@ -1,38 +1,41 @@
 "use client"
 import { useEffect, useState } from "react"
-import AdminLayout from "../../../../components/AdminLayout"
-import Search from "../../../../components/form/Search"
-import SecondaryButton from "../../../../components/common/SecondaryButton"
-import TableOrder from "../../../../components/TableOrder"
-import PaginationDemo from "../../../../components/Pagination"
+import AdminLayout from "../../../components/AdminLayout"
+import Search from "../../../components/form/Search"
+import SecondaryButton from "../../../components/common/SecondaryButton"
+import TableOrder from "../../../components/TableOrder"
+import PaginationDemo from "../../../components/Pagination"
 import axios from "axios"
 import { toast } from "react-toastify"
-import { formatDate, getError } from "../../../../../helper"
-import Loading from "../../../../components/Loading"
-import { paymentManagement } from "../../../../constent/constArray"
+import { formatDate, getError } from "../../../../helper"
+import Loading from "../../../components/Loading"
+import { globalRulesManagement } from "../../../constent/constArray"
 import Image from "next/image"
-import ViewInvoice from "../../../../components/Models/admin/ViewInvoice"
-import MakeAPayment from "../../../../components/Models/admin/MakeAPayment"
-import Status from "../../../../components/Status"
+import CreateClientRule from "../../../components/Models/client/CreateClientRule"
+import DeleteClient from "../../../components/Models/client/DeleteClient"
+import Status from "../../../components/Status"
+import CustomSelectBox from "../../../components/form/CustomSelectBox"
 
-export default function PaymentManagement() {
+export default function GlobalRulesManagement() {
     const [sortBy, setSortBy] = useState(false)
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
-    const [openPayment, setOpenPayment] = useState(false)
+    const [selId, setSelId] = useState("")
+    const [openDelete, setOpenDelete] = useState(false)
+    const [filterByFilter, setFilterByFilter] = useState("")
 
     useEffect(() => {
         getUsers()
-    }, [search, sortBy])
+    }, [search, sortBy, filterByFilter])
 
     const getUsers = async () => {
         try {
             setLoading(true)
             setList([])
             const res = await axios.get("/api")
-            setList(res.data || paymentManagement)
+            setList(res.data || globalRulesManagement)
             setLoading(false)
 
         } catch (error) {
@@ -51,8 +54,10 @@ export default function PaymentManagement() {
                 }}
             />}>
             {open &&
-                <ViewInvoice
+                <CreateClientRule
+                    id={selId}
                     onClose={() => {
+                        setSelId("")
                         setOpen(false)
                     }}
 
@@ -60,48 +65,69 @@ export default function PaymentManagement() {
                         setOpen(true)
                     }} />
             }
-            {openPayment &&
-                <MakeAPayment
+
+            {openDelete &&
+                <DeleteClient
+                    id={true}
                     onClose={() => {
-                        setOpenPayment(false)
+                        setOpenDelete(false)
                     }}
-
-                    onSave={() => {
-                        setOpenPayment(true)
-                    }} />
+                />
             }
-
             <div className='flex items-center justify-between'>
 
-                <div className="font-medium">Payment Management</div>
-
-                <SecondaryButton
-                    title="Make A Payment"
-                    onClick={() => { setOpenPayment(true) }}
-                    class_="text-xs! font-normal!"
+                <Search
+                    placeholder="Search"
+                    onSearch={(s) => {
+                        setSearch(s)
+                    }}
                 />
+
+                <div className='flex items-center gap-3.5'>
+
+                    <CustomSelectBox
+                        defaultOption="Filters"
+                        class_='mt-0! w-36!'
+                        value={filterByFilter}
+                        onChange={(e) => {
+                            setFilterByFilter(e.target.value)
+                        }}
+                    >
+                        <option value="filter1">Filter 1</option>
+                        <option value="filter2">Filter 2</option>
+                    </CustomSelectBox>
+
+                    <SecondaryButton
+                        title="Add New Rule"
+                        onClick={() => setOpen(true)}
+                        class_="text-xs! font-normal!"
+                    />
+                </div>
             </div>
             <div className="table-class mt-3.5">
                 {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
                     <thead>
                         <tr>
-                            <th><TableOrder title="Invoice ID"
+                            <th><TableOrder title="ID"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="id" />
                             </th>
-                            <th><TableOrder title="Client Name"
+                            <th><TableOrder title="Event Type"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
                                 field="name" />
                             </th>
                             <th>
                                 <div className="flex justify-center">
-                                    <TableOrder title="Amount"
+                                    <TableOrder title="Condition"
                                         sortBy={sortBy}
                                         setSortBy={setSortBy}
-                                        field="amount" />
+                                        field="condition" />
                                 </div>
+                            </th>
+                            <th className="text-center!">
+                                Action
                             </th>
                             <th>
                                 <div className="flex justify-center">
@@ -113,7 +139,7 @@ export default function PaymentManagement() {
                             </th>
                             <th>
                                 <div className="flex justify-center">
-                                    <TableOrder title="Date"
+                                    <TableOrder title="Created Date"
                                         sortBy={sortBy}
                                         setSortBy={setSortBy}
                                         field="date" />
@@ -129,11 +155,16 @@ export default function PaymentManagement() {
                                     <div>{e.id}</div>
                                 </td>
                                 <td>
-                                    {e.clientName}
+                                    {e.eventType}
                                 </td>
                                 <td>
                                     <div className="flex justify-center">
-                                        {e.amount}
+                                        {e.condition}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="flex justify-center">
+                                        <Status status={e.action} />
                                     </div>
                                 </td>
                                 <td>
@@ -143,20 +174,21 @@ export default function PaymentManagement() {
                                 </td>
                                 <td>
                                     <div className="flex justify-center">
-                                        {formatDate(e.date)}
+                                        {formatDate(e.createdDate)}
                                     </div>
                                 </td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
                                         <button className='cursor-pointer' onClick={() => {
+                                            setSelId("e.id")
                                             setOpen(true)
                                         }}>
-                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
                                         <button className='cursor-pointer' onClick={() => {
-                                            setOpen(true)
+                                            setOpenDelete(true)
                                         }}>
-                                            <Image unoptimized={true} src="/images/refresh1.svg" alt='refresh1' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/delete1.svg" alt='edit' height={28} width={28} />
                                         </button>
                                     </div>
                                 </td>
