@@ -33,12 +33,11 @@ export function formatDateTime(date) {
         if (typeof date === "string")
             d = new Date(date);
 
-        return format(d, 'dd MMM | hh:mm a');
+        return format(d, 'dd MMM, yyyy | hh:mm a');
     } catch (e) {
         return "xx"
     }
 }
-
 
 export const phoneStyles = {
     "--react-international-phone-border-radius": '8px',
@@ -49,9 +48,4 @@ export const phoneStyles = {
     "--react-international-phone-country-selector-background-color-hover": "#ffffff",
     "--react-international-phone-dropdown-item-background-color": "#ffffff",
     "--react-international-phone-height": "44px",
-}
-
-export function isAdmin(window) {
-    // return localStorage.getItem("role") === "ADMIN"
-    return true
 }

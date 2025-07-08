@@ -13,7 +13,6 @@ import Checkbox from "../../../../components/form/Checkbox"
 import Status from "../../../../components/Status"
 import PaginationDemo from "../../../../components/Pagination"
 import Image from "next/image"
-import CancelButton from "../../../../components/common/CancelButton"
 import SecondaryButton from "../../../../components/common/SecondaryButton"
 import AddNewLocation from "../../../../components/Models/location/AddNewLocation"
 
@@ -26,7 +25,6 @@ export default function ClientDetails() {
     const [campaign, setCampaign] = useState([])
     const [subscription, setSubscription] = useState([])
     const [loading, setLoading] = useState(true)
-
 
     useEffect(() => {
         getData()
@@ -54,7 +52,7 @@ export default function ClientDetails() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-72!'
+                    mainClass='w-96!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)

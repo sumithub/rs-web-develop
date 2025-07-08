@@ -71,6 +71,7 @@ export default function Template() {
             <div>
                 <div className='flex items-center justify-between'>
                     <Search
+                   mainClass="w-72!"
                         placeholder="Search Templates"
                         onSearch={(s) => {
                             setSearch(s)

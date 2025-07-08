@@ -10,8 +10,8 @@ import PaginationDemo from '../../../../components/Pagination'
 import DeleteModal from '../../../../components/Models/DeleteModal';
 import AddCustomer from '../../../../components/Models/customers/AddCustomer';
 import CustomSelectBox from '../../../../components/form/CustomSelectBox';
-import GridView from '../../../../components/customers/GridView';
-import ListView from '../../../../components/customers/ListView';
+import AdminGridView from '../../../../components/customers/AdminGridView';
+import AdminListView from '../../../../components/customers/AdminListView';
 import { manageCustomers } from '../../../../constent/constArray'
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -34,11 +34,12 @@ function ManageCustomers() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [selId, setSelId] = useState("")
-
+    const [customerSearch, setCustomerSearch] = useState("")
+    const [historySearch, setHistorytSearch] = useState("")
 
     useEffect(() => {
         getCustomer()
-    }, [search, sortBy, filterByClient, filterBySource, filterByTags, filterByStatus])
+    }, [search, historySearch, customerSearch, sortBy, filterByClient, filterBySource, filterByTags, filterByStatus])
 
     const getCustomer = async () => {
         try {
@@ -46,8 +47,9 @@ function ManageCustomers() {
             setList([])
             const res = await axios.get("/api")
             setList(res.data || manageCustomers)
-            setLoading(false)
-
+            setTimeout(() => {
+                setLoading(false)
+            }, 200)
         } catch (error) {
             toast.error(getError(error))
             setLoading(false)
@@ -59,7 +61,7 @@ function ManageCustomers() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-72!'
+                    mainClass='w-96!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -100,7 +102,7 @@ function ManageCustomers() {
             }
 
             <div>
-                <div className="">
+                <div>
                     <div className='flex items-center justify-between'>
                         <div className="bg-white shadow-sm inline-block rounded-[10px] overflow-hidden">
                             <div className='inline-flex items-center gap-10 px-[20px]'>
@@ -124,13 +126,13 @@ function ManageCustomers() {
                             </div>
                         </div>
 
-                        {/* <div className='flex items-center gap-[15px] my-3.5'>
+                        {view === "history" && <div className='flex items-center gap-[15px] my-3.5'>
                             <div className='w-72!'>
                                 <Search
                                     mainClass='w-full!'
                                     placeholder="Search by list name or date"
                                     onSearch={(s) => {
-                                        setSearch(s)
+                                        setHistorytSearch(s)
                                     }}
                                 />
                             </div>
@@ -154,15 +156,17 @@ function ManageCustomers() {
                                 {tab === "list" && <Image unoptimized={true} src="/images/grid.svg" alt="grid" width={16} height={16} />}
                                 {tab === "grid" && <Image unoptimized={true} src="/images/grid-active.svg" alt="grid" width={16} height={16} />}
                             </button>
-                        </div> */}
+                        </div>}
 
                     </div>
+
+
                     {view === "customer" && <div className='flex items-center gap-2.5 my-3.5 justify-between'>
                         <Search
-                            mainClass='w-72!'
+                            mainClass='w-96!'
                             placeholder="Search by name, email Or phone"
                             onSearch={(s) => {
-                                setSearch(s)
+                                setCustomerSearch(s)
                             }}
                         />
                         <div className='flex items-center gap-3.5'>
@@ -217,13 +221,13 @@ function ManageCustomers() {
                                 onClick={() => { setOpen(true) }}>Add Customer</button>
                         </div>
                     </div>}
-                    {view === "history" && <div className='flex justify-between items-center gap-[15px] my-3.5'>
+                    {/* {view === "history" && <div className='flex justify-between items-center gap-[15px] my-3.5'>
                         <div className='w-72!'>
                             <Search
                                 mainClass='w-full!'
                                 placeholder="Search by list name or date"
                                 onSearch={(s) => {
-                                    setSearch(s)
+                                    setHistorytSearch(s)
                                 }}
                             />
                         </div>
@@ -248,95 +252,113 @@ function ManageCustomers() {
                                 {tab === "grid" && <Image unoptimized={true} src="/images/grid-active.svg" alt="grid" width={16} height={16} />}
                             </button>
                         </div>
+                    </div>} */}
+
+                </div>
+            </div>
+            {loading ? <Loading class_={`border border-border-color rounded-[20px]`} /> : <div>
+                {view === "customer" && <>
+                    <div className='table-class'>
+                        {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+                            <thead>
+                                <tr>
+                                    <th><TableOrder title="Customer Name"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="customerName" /></th>
+                                    <th><TableOrder title="Email"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="email" /></th>
+                                    <th><TableOrder title="Phone"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="phone" /></th>
+                                    <th><TableOrder title="Client"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="client" /></th>
+                                    <th><TableOrder title="Tags"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="tags" /></th>
+                                    <th>
+                                        <div className='flex justify-center!'>
+                                            <TableOrder title="Status"
+                                                sortBy={sortBy}
+                                                setSortBy={setSortBy}
+                                                field="status" />
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className='flex justify-center!'>
+                                            Actions
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                                    <td>
+                                        <div className="flex items-start gap-2">
+                                            <Checkbox
+                                                checked={e.selected}
+                                                onChange={(checked) => {
+                                                    setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                                }}
+                                            />
+                                            <div>{e.customerName}</div>
+                                        </div>
+                                    </td>
+                                    <td>{e.email}</td>
+                                    <td>{e.phone}</td>
+                                    <td>{e.client}</td>
+                                    <td>{e.tags}</td>
+                                    <td>
+                                        <div className='flex justify-center'>
+                                            <Status status={e.status} />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className='flex items-center justify-center gap-2'>
+                                            <button className='cursor-pointer'
+                                                onClick={() => {
+                                                    setSelId("e.id")
+                                                    setOpen(true)
+                                                }}
+                                            >
+                                                <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                            </button>
+
+                                            <button className='cursor-pointer'
+                                                onClick={() => { setOpenDelete("deleteCustomer") }}
+                                            >
+                                                <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>)}
+                            </tbody>
+                        </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
+
+                    </div>
+                    {list?.length > 0 && <div>
+                        <PaginationDemo />
                     </div>}
+                </>}
 
+                {view === "history" && <div className='mt-4'>
+                    {loading ? (
+                        <div className="flex justify-center items-center border border-border-color rounded-[20px]">
+                            <Loading class_=" min-h-[400px]!" />
+                        </div>
+                    ) : (
+                        <>  {tab === "list" && <AdminListView />}
+                            {tab === "grid" && <AdminGridView />}
+                        </>)}
                 </div>
-
-            </div>
-
-            {view === "customer" && <>
-                <div className='table-class'>
-                    {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
-                        <thead>
-                            <tr>
-                                <th><TableOrder title="Customer Name"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="customerName" /></th>
-                                <th><TableOrder title="Email"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="email" /></th>
-                                <th><TableOrder title="Phone"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="phone" /></th>
-                                <th><TableOrder title="Client"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="client" /></th>
-                                <th><TableOrder title="Tags"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="tags" /></th>
-                                <th><TableOrder title="Status"
-                                    sortBy={sortBy}
-                                    setSortBy={setSortBy}
-                                    field="status" /></th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
-                                <td>
-                                    <div className="flex items-start gap-2">
-                                        <Checkbox
-                                            checked={e.selected}
-                                            onChange={(checked) => {
-                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
-                                            }}
-                                        />
-                                        <div>{e.customerName}</div>
-                                    </div>
-                                </td>
-                                <td>{e.email}</td>
-                                <td>{e.phone}</td>
-                                <td>{e.client}</td>
-                                <td>{e.tags}</td>
-                                <td><Status status={e.status} /></td>
-                                <td>
-                                    <div className='flex items-center gap-2'>
-                                        <button className='cursor-pointer'
-                                            onClick={() => {
-                                                setSelId("e.id")
-                                                setOpen(true)
-                                            }}
-                                        >
-                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                        </button>
-
-                                        <button className='cursor-pointer'
-                                            onClick={() => { setOpenDelete("deleteCustomer") }}
-                                        >
-                                            <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>)}
-                        </tbody>
-                    </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
-
-                </div>
-                {list?.length > 0 && <div>
-                    <PaginationDemo />
-                </div>}
-            </>}
-
-            {view === "history" && <div className=''>
-                {tab === "list" && <ListView />}
-                {tab === "grid" && <GridView />}
-            </div>
-            }
+                }
+            </div>}
         </AdminLayout>
     )
 }

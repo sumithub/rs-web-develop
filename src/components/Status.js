@@ -10,7 +10,11 @@ export default function Status({ status = "", context = "" }) {
         s === "new" ||
         s === "completed" ||
         s === "vip" ||
+        s === "success" ||
         s === "connected" ||
+        s === "positive" ||
+        s === "published" ||
+        s === "edited campaign" ||
         s === "paid") {
         bgClass = "bg-[#28A7451A] text-success";
     } else if (
@@ -38,13 +42,13 @@ export default function Status({ status = "", context = "" }) {
     } else if (s === "processing") {
         bgClass = "bg-[#FFC1071A] text-[#FFC107]";
     }
-    else if (s === "inactive") {
+    else if (s === "inactive" || s === "neutral" || s === "pending") {
         bgClass = "bg-[#FFC1071A] text-custom-yellow-light"
     }
     else if (s === "read") {
         bgClass = "bg-[#FFC1071A] text-custom-yellow-light"
     }
-    else if (s === "alert") {
+    else if (s === "alert" || s === "canceled") {
         bgClass = "bg-[#DC35451A] text-danger"
     }
     else if (s === "no") {

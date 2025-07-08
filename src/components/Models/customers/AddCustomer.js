@@ -6,19 +6,22 @@ import InputForm from "../../form/InputForm"
 import Radio from "../../form/Radio"
 import SelectForm from "../../form/SelectForm"
 import Model from "../Model"
-import { getError, isAdmin, validEmailRgx } from "../../../../helper"
+import { getError, validEmailRgx } from "../../../../helper"
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import PhoneForm from "../../form/PhoneForm"
 import Image from "next/image"
 import ImportCustomer from "../customers/ImportCustomer"
+import { useRole } from "../../../utils/hooks"
 
 function AddCustomer({ onClose, id, onSave }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
     const [type, setType] = useState("manually")
     const [activeStep, setActiveStep] = useState(1);
+      const { isAdmin } = useRole();
+    
 
     const handleViewChange = (event) => {
         setType(event.target.value);
@@ -120,7 +123,7 @@ function AddCustomer({ onClose, id, onSave }) {
                             <option value="instead of source">instead of source</option>
                         </SelectForm>
 
-                        {isAdmin() && <SelectForm
+                        {isAdmin && <SelectForm
                             label="Client"
                             selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
                             isRequired={false}

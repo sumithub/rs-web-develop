@@ -9,9 +9,10 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Image from "next/image";
 import InputForm from "../../form/InputForm";
+import SelectForm from "../../form/SelectForm";
 
 export default function ConnectReviewSource({ onClose, onSave, id }) {
-    const { register, handleSubmit, clearErrors, formState: { errors }, } = useForm();
+    const { register, handleSubmit, clearErrors, formState: { errors }, watch, setValue } = useForm();
     const [sending, setSending] = useState(false)
 
     const onSubmit = async (data) => {
@@ -36,6 +37,20 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
     return (
         <Model onClose={onClose} title="Connect Review Source" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
+
+                {id && <SelectForm
+                    class_="mb-3.5 mt-0!"
+                    label="Choose Client"
+                    isRequired={true}
+                    defaultOption="Select"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    formProps={{ ...register("cooldownPeriod", { required: true }) }} errors={errors} clearErrors={clearErrors}
+                    setValue={setValue}
+                    watch={watch}
+                >
+                    <option value="johnDeo">John Deo</option>
+                </SelectForm>}
+
                 <div>
                     <h2 className="text-lg font-semibold">Connect to Yelp</h2>
                     <Image unoptimized={true} src="/images/yelp-logo.svg" alt="yelp-logo" width={116} height={47} className="pt-2.5" />
@@ -55,9 +70,9 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
                     <Image unoptimized={true} src="/images/warning.svg" alt="warning" width={22} height={22} className="" />
                     <h2 className="text-sm">Paste your business profile URL from the platform's website.</h2>
                 </div>
-                <div className="grid grid-cols-2 gap-3 mt-[30px]">
-                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg! font-medium! py-3!" />
-                    <SecondaryButton title="Connect" type="submit" disabled={sending} class_="text-lg! font-medium! py-3!" />
+                <div className="grid grid-cols-2 gap-5 mt-[30px]">
+                    <CancelButton title="Cancel" onClick={onClose} class_="text-lg! font-medium!" />
+                    <SecondaryButton title="Connect" type="submit" disabled={sending} class_="text-lg! font-medium!" />
                 </div>
             </form>
         </Model>
