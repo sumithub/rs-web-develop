@@ -181,7 +181,7 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                         Send review, referral, or feedback requests to one or more customers
                     </div>
 
-                    <div className="flex justify-between mt-4 w-full">
+                    <div className="flex justify-between items-center mt-4 w-full">
                         <div className="w-3/5! relative">
                             <Search
                                 mainClass="w-full!"
@@ -190,10 +190,11 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                                 onSearch={handleSearch}
                             />
                             {openList && <div
-                                className={`absolute w-full bg-white  border border-border-color z-10 max-h-60 overflow-y-auto   top-full  rounded-b-lg rounded-t-none'`}>
-                                <div className="text-right">
-                                    <button className="pr-4"
-                                        onClick={() => { setOpenList(false) }}>X</button>
+                                className={`absolute w-full bg-white  border border-border-color z-10 max-h-60 overflow-y-auto top-full  rounded-b-lg rounded-t-none`}>
+                                <div className="flex items-center justify-between px-4 py-2">
+                                    <div className="text-base font-semibold">Customers</div>
+                                    <button className=""
+                                        onClick={() => { setOpenList(false) }}><Image src="/images/close1.svg" alt="close" height={20} width={20} unoptimized={true} /></button>
                                 </div>
                                 {filteredCustomers.map((e, i) => {
                                     const selected = selectedCustomers.find(s => s.name === e.name)
@@ -206,7 +207,7 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                                                 setSelectedCustomers(prev => ([...prev, e]))
                                             }
                                         }}
-                                        className={'px-4 py-2 text-sm cursor-pointer capitalize flex items-center gap-2 hover:bg-dark text-text3'}>
+                                        className={'px-4 py-2 text-sm cursor-pointer capitalize flex items-center hover:bg-dark '}>
                                         <div className="flex items-start gap-2">
                                             <Checkbox checked={selected} />
                                             <div>{e.customerName}</div>
@@ -226,7 +227,7 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                     </div>
 
                     {showCustomerFields && (<>
-                        <div className="grid grid-cols-2 gap-3 mt-4">
+                        <div className="grid grid-cols-2 gap-3">
                             <InputForm
                                 label="Name"
                                 isRequired={true}
@@ -285,13 +286,17 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                     </>)}
 
                     {selectedCustomers.length > 0 && <div>
-                        <div>Selected Customers</div>
+                        <div className="text-lg font-semibold mt-2">Selected Customers</div>
                         {selectedCustomers.map((e, i) => {
-                            return <div key={i} className="flex justify-between items-center"
-                            >{e.name}
-                                <span onClick={() => {
+                            return <div key={i} className={`flex justify-between items-center gap-y-4 py-2 ${i !== selectedCustomers.length - 1 ? 'border-b border-gray-200' : ''}`}
+                            >
+                                <div>{e.name}</div>
+                                <div className="my-2"> {e.email} </div>
+                                <div>{e.phone} </div>
+                                <button onClick={() => {
                                     setSelectedCustomers((prev) => prev.filter((_, idx) => idx !== i))
-                                }}>X</span>
+                                }}><Image src="/images/close1.svg" alt="close" height={20} width={20} unoptimized={true} />
+                                </button>
                             </div>
                         })}
                     </div>}
