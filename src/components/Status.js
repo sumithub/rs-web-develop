@@ -41,7 +41,7 @@ export default function Status({ status = "", context = "" }) {
     } else if (s === "processing") {
         bgClass = "bg-[#FFC1071A] text-[#FFC107]";
     }
-    else if (s === "inactive" || s === "neutral") {
+    else if (s === "inactive" || s === "neutral" || s === "pending") {
         bgClass = "bg-[#FFC1071A] text-custom-yellow-light"
     }
     else if (s === "read") {

@@ -95,20 +95,29 @@ export default function PaymentManagement() {
                                 setSortBy={setSortBy}
                                 field="name" />
                             </th>
-                            <th><TableOrder title="Amount"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="amount" />
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Amount"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="amount" />
+                                </div>
                             </th>
-                            <th><TableOrder title="Status"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="status" />
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Status"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="status" />
+                                </div>
                             </th>
-                            <th><TableOrder title="Date"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="date" />
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Date"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="date" />
+                                </div>
                             </th>
                             <th className="text-center!">Actions</th>
                         </tr>
@@ -123,13 +132,19 @@ export default function PaymentManagement() {
                                     {e.clientName}
                                 </td>
                                 <td>
-                                    {e.amount}
+                                    <div className="flex justify-center">
+                                        {e.amount}
+                                    </div>
                                 </td>
                                 <td>
-                                    <Status status={e.status} />
+                                    <div className="flex justify-center">
+                                        <Status status={e.status} />
+                                    </div>
                                 </td>
                                 <td>
-                                    {formatDate(e.date)}
+                                    <div className="flex justify-center">
+                                        {formatDate(e.date)}
+                                    </div>
                                 </td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>
@@ -137,6 +152,11 @@ export default function PaymentManagement() {
                                             setOpen(true)
                                         }}>
                                             <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                        </button>
+                                        <button className='cursor-pointer' onClick={() => {
+                                            setOpen(true)
+                                        }}>
+                                            <Image unoptimized={true} src="/images/refresh1.svg" alt='refresh1' height={28} width={28} />
                                         </button>
                                     </div>
                                 </td>
