@@ -63,6 +63,7 @@ export default function CreateNewAlert({ onClose, id }) {
 
                 <SelectForm
                     label="Client Scope"
+                    labelClass="mb-2.5!"
                     isRequired={true}
                     defaultOption=""
                     selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
@@ -76,6 +77,7 @@ export default function CreateNewAlert({ onClose, id }) {
 
                 <SelectForm
                     label="Trigger Event"
+                    labelClass="mb-2.5!"
                     isRequired={true}
                     defaultOption=""
                     selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
@@ -89,6 +91,7 @@ export default function CreateNewAlert({ onClose, id }) {
 
                 <SelectForm
                     label="Delivery Method"
+                    labelClass="mb-2.5!"
                     isRequired={true}
                     defaultOption=""
                     selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"

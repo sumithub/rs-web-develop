@@ -119,20 +119,16 @@ export default function AlertsManagement() {
                                 field="clientScope" />
                             </th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Trigger Event"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="triggerEvent" />
-                                </div>
+                                <TableOrder title="Trigger Event"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="triggerEvent" />
                             </th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Delivery Method"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="deliveryMethod" />
-                                </div>
+                                <TableOrder title="Delivery Method"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="deliveryMethod" />
                             </th>
                             <th>
                                 <div className="flex justify-center">
@@ -155,14 +151,10 @@ export default function AlertsManagement() {
                                     {e.clientScope}
                                 </td>
                                 <td>
-                                    <div className="flex justify-center">
-                                        {e.triggerEvent}
-                                    </div>
+                                    {e.triggerEvent}
                                 </td>
                                 <td>
-                                    <div className="flex justify-center">
-                                        {e.deliveryMethod}
-                                    </div>
+                                    {e.deliveryMethod}
                                 </td>
                                 <td>
                                     <div className="flex justify-center">
