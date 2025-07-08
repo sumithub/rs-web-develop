@@ -33,31 +33,41 @@ export default function ScheduleEarlyPayment({ onClose, id }) {
         }
     }
 
-    const Early = [
-        { title: "plan", price: "growth plan ($99.00)" },
-        { title: "scheduled date", price: "Apr 01, 2025" },
-        { title: "payment method", price: "Visa **** 1234" },
-        { title: "cardholder name", price: "john deo" },
-    ]
-
     return (
         <Model onClose={onClose} title="Schedule Early Payment" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mt-4 flex gap-2.5 items-center bg-custom-yellow-light/10 p-2.5 rounded-lg">
+                <div className="mt-2 flex gap-2.5 items-center bg-custom-yellow-light/10 p-2.5 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize"> pay now to avoid automatic charge</h2>
                 </div>
                 <div className="mt-4">
-                    {Early.map((e, i) =>
-                        <div key={i}>
-                            <div className="flex w-full justify-between mt-3">
-                                <div className="text-text3 capitalize text-base">{e.title}</div>
-                                <div className="font-semibold capitalize">{e.price}</div>
-                            </div>
-                            {i !== Early.length - 1 && (
-                                <hr className="my-3 border-t border-secondary/5" />
-                            )
-                            }</div>)}
+
+                    <div>
+                        <div className="flex w-full justify-between mt-3">
+                            <div className="text-text3 capitalize text-base">plan</div>
+                            <div className="font-semibold capitalize">growth plan ($99.00)</div>
+                        </div>
+                        <hr className="my-3 border-t border-secondary/5" />
+
+                        <div className="flex w-full justify-between mt-3">
+                            <div className="text-text3 capitalize text-base">scheduled date</div>
+                            <div className="font-semibold capitalize">Apr 01, 2025</div>
+                        </div>
+                        <hr className="my-3 border-t border-secondary/5" />
+
+                        <div className="flex w-full justify-between mt-3">
+                            <div className="text-text3 capitalize text-base">payment method</div>
+                            <div className="font-semibold capitalize">Visa **** 1234</div>
+                        </div>
+                        <hr className="my-3 border-t border-secondary/5" />
+
+
+                        <div className="flex w-full justify-between mt-3">
+                            <div className="text-text3 capitalize text-base">cardholder name</div>
+                            <div className="font-semibold capitalize">john deo</div>
+                        </div>
+                        <hr className="my-3 border-t border-secondary/5" />
+                    </div>
                 </div>
 
                 <DatePickerForm
