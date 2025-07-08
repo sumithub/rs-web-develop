@@ -64,19 +64,19 @@ export default function NotificationsDashboard() {
                         setOpen(true)
                     }} />
             }
-            <div className="flex justify-between items-start w-full mb-5 mt-3.5">
-                <Search
-                    mainClass='max-w-[270px]!'
-                    placeholder='Search by "Client, Location, Event Type...'
-                    onSearch={(s) => {
-                        setSearch(s)
-                    }}
-                />
-
-
+            <div className="flex justify-between items-center">
+                <div className="w-4/5">
+                    <Search
+                        mainClass=''
+                        placeholder='Search by "Client, Location, Event Type...'
+                        onSearch={(s) => {
+                            setSearch(s)
+                        }}
+                    />
+                </div>
                 <CustomSelectBox
                     defaultOption="Sort By"
-                    class_='mt-0! w-36!'
+                    class_='mt-0! w-28!'
                     value={filterBySort}
                     onChange={(e) => {
                         setFilterBySort(e.target.value)
@@ -85,24 +85,22 @@ export default function NotificationsDashboard() {
                     <option value="sort1">Sort 1</option>
                     <option value="sort2">Sort 2</option>
                 </CustomSelectBox>
-
-                <div className="flex gap-3">
-
-                    <div className="border border-border-color px-2 py-0.5 rounded-lg w-28">
-                        <div className="flex items-center justify-center gap-2 mt-0.5">
-                            <Checkbox
-                                class_='mt-[2px]'
-                                checked={list?.length > 0 && list.every(e => e.selected)}
-                                onChange={(checked) => {
-                                    setList(list => list.map(e => ({ ...e, selected: checked })))
-                                }} />
-                            <div className="text-text3 text-sm capitalize">Select all</div>
-                        </div>
-                    </div>
-
+            </div>
+            <div className="flex justify-between items-start w-full mb-5 mt-3.5">
+                <div className="border border-border-color px-2 py-[3.5px] rounded-lg flex items-center justify-center gap-2 mt-0.5">
+                    <Checkbox
+                        class_='mt-[2px]'
+                        checked={list?.length > 0 && list.every(e => e.selected)}
+                        onChange={(checked) => {
+                            setList(list => list.map(e => ({ ...e, selected: checked })))
+                        }} />
+                    <div className="text-text3 text-sm capitalize">Select all</div>
+                </div>
+                <div className="flex gap-3.5">
                     <CustomSelectBox
+                        selectClass_="py-2!"
                         defaultOption="Status"
-                        class_='mt-0! w-36!'
+                        class_='mt-0! w-28!'
                         value={filterByStatus}
                         onChange={(e) => {
                             setFilterByStatus(e.target.value)
@@ -115,7 +113,8 @@ export default function NotificationsDashboard() {
 
                     <CustomSelectBox
                         defaultOption="Notification Type"
-                        class_='mt-0! w-28!'
+                        selectClass_="py-2!"
+                        class_='mt-0! w-40!'
                         value={filterBy}
                         onChange={(e) => {
                             setFilterBy(e.target.value)
@@ -124,10 +123,11 @@ export default function NotificationsDashboard() {
                         <option value="reviewAlert">Review Alert</option>
                     </CustomSelectBox>
 
-                    <CancelButton title="Location" class_="text-xs! bg-white! border border-border-color! py-2.5!" mainClass="shrink-0" />
+                    {/* <CancelButton title="Location" class_="text-xs! bg-white! border border-border-color! py-2.5!" mainClass="shrink-0" /> */}
+                    <button className="text-xs border border-border2 text-text3 p-2.5 rounded-lg flex items-center gap-2.5">Location<span><Image src="/images/location1.svg" alt="location1" width={16} height={16} /></span></button>
 
                     <CustomSelectBox
-                        class_="mt-0! w-32!"
+                        class_="mt-0! w-28!"
                         defaultOption="Client"
                         value={filterByClient}
                         onChange={(e) => {
@@ -140,8 +140,10 @@ export default function NotificationsDashboard() {
                         value={date}
                         onChange={(e) => { setDate(e) }}
                     />
-                    <CancelButton title="Export" onClick={handleClick} class_="text-xs! py-[9.4px]! font-normal!" />
-                    <CancelButton title="Delete" onClick={() => { toast.success("Deleted Successfully") }} class_="text-xs! py-[9.4px]! font-normal!" />
+                    <button className="rounded-lg bg-primary/10 text-primary px-2.5 text-xs inline-flex items-center gap-2.5"><span><Image src="/images/export.svg" alt="export" width={16} height={16} /></span>Export</button>
+                    <button className="rounded-lg bg-danger/10 text-danger px-2.5  text-xs inline-flex items-center gap-2.5"><span><Image src="/images/delete.svg" lang="delete" width={16} height={16} /></span> Delete</button>
+                    {/* <CancelButton title="Export" onClick={handleClick} class_="text-xs! py-[9.4px]! font-normal!" />
+                    <CancelButton title="Delete" onClick={() => { toast.success("Deleted Successfully") }} class_="text-xs! py-[9.4px]! font-normal!" /> */}
                     {/* 
                     <button className="bg-primary border border-primary hover:bg-white hover:text-primary rounded-lg py-[10.5px] px-3 text-white text-xs text-center capitalize cursor-pointer disabled:pointer-events-none disabled:opacity-50 shrink-0"
                         onClick={() => { toast.success("Resented Successfully") }}>Resend</button> */}
@@ -171,10 +173,14 @@ export default function NotificationsDashboard() {
                                 setSortBy={setSortBy}
                                 sortBy={sortBy}
                                 field="summary" /></th>
-                            <th><TableOrder title="Status"
-                                setSortBy={setSortBy}
-                                sortBy={sortBy}
-                                field="status" /></th>
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Status"
+                                        setSortBy={setSortBy}
+                                        sortBy={sortBy}
+                                        field="status" />
+                                </div>
+                            </th>
                             <th className="flex justify-center">Actions</th>
                         </tr>
                     </thead>
@@ -196,10 +202,12 @@ export default function NotificationsDashboard() {
                             <td>{e.notificationType}</td>
                             <td>{e.messageSummary}</td>
                             <td>
-                                <Status status={e.status} context="notify" />
+                                <div className="flex justify-center">
+                                    <Status status={e.status} context="notify" />
+                                </div>
                             </td>
                             <td>
-                                <div className='flex items-center gap-2'>
+                                <div className='flex items-center justify-center gap-2'>
                                     <button className='cursor-pointer' onClick={() => setOpen(true)}>
                                         <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
                                     </button>
