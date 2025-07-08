@@ -91,15 +91,26 @@ export default function CancelSubscription({ onClose, id }) {
                 </div>
 
                 <div className="mt-5">
-                    {Project.map((e, i) => <div key={i}>
+                    <div>
                         <div className="flex justify-between mt-3">
-                            <div className="text-text3">{e.title}</div>
-                            <div className="font-medium">{e.price}</div>
+                            <div className="text-text3">Current Plan</div>
+                            <div className="font-medium">Growth Plan ($99.00/Mo)</div>
                         </div>
-                        {i !== Project.length - 1 && (
-                            <hr className="mt-3 border-t border-secondary/5" />
-                        )}
-                    </div>)}
+
+                        <hr className="mt-3 border-t border-secondary/5" />
+                        <div className="flex justify-between mt-3">
+                            <div className="text-text3">Nect Renewal Date</div>
+                            <div className="font-medium">Growth Plan ($99.00/Mo)</div>
+                        </div>
+
+                        <hr className="mt-3 border-t border-secondary/5" />
+
+                        <div className="flex justify-between mt-3">
+                            <div className="text-text3">Auto Renew</div>
+                            <div className="font-medium">Enabled</div>
+                        </div>
+
+                    </div>
                     <div className="font-semibold text-xl mt-5">
                         Select A Reason
                     </div>
@@ -151,6 +162,6 @@ export default function CancelSubscription({ onClose, id }) {
                     </div>
                 </div>
             </form>
-        </Model >
+        </Model>
     )
 }

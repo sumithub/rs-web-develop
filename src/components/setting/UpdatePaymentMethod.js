@@ -58,21 +58,14 @@ export default function UpdatePaymentMethod({ onClose, id }) {
         }
     }
 
-    const Project = [
-        { title: "card number", detail: "4242 4242 4242 4242" },
-        { title: "expiry date", detail: "Apr 1, 2025" },
-        { title: "CVV", detail: "***" },
-        { title: "cardholder name", detail: "John Deo" },
-        { title: "billing address", detail: "XYZ.." },
-    ]
 
     return (
-        <Model onClose={onClose} title={id === "update" ? "Update Payment Method" : "Current Payment Method"} modalClass="w-[50%]!">
+        <Model onClose={onClose} title={id === "update" ? "Update Payment Method" : "Current Payment Method"} modalClass="w-1/2!">
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <InputForm
                     label="Card Number"
-                    class_="mt-3! w-full!"
+                    class_="mt-1! w-full!"
                     inputType="text"
                     isRequired={true} inputClass=""
                     formProps={{
@@ -120,18 +113,37 @@ export default function UpdatePaymentMethod({ onClose, id }) {
                     </div>
                 </div>
 
-                {Project.map((e, i) =>
-                    <div key={i}>
-                        <div className="flex justify-between mt-3">
-                            <div className="text-text3 capitalize text-base">{e.title}</div>
-                            <div className="font-medium text-base">{e.detail}</div>
-                        </div >
+                <div>
+                    <div className="flex justify-between mt-3">
+                        <div className="text-text3 capitalize text-base">card number</div>
+                        <div className="font-medium text-base">4242 4242 4242 4242</div>
+                    </div>
+                    <hr className="my-3 border-t border-secondary/5" />
 
-                        {i !== Project.length - 1 && (
-                            <hr className="my-3 border-t border-secondary/5" />
-                        )
-                        }
-                    </div >)}
+
+                    <div className="flex justify-between mt-3">
+                        <div className="text-text3 capitalize text-base">expiry date</div>
+                        <div className="font-medium text-base">Apr 01, 2025</div>
+                    </div>
+                    <hr className="my-3 border-t border-secondary/5" />
+
+                    <div className="flex justify-between mt-3">
+                        <div className="text-text3 capitalize text-base">CVV</div>
+                        <div className="font-medium text-base">***</div>
+                    </div>
+                    <hr className="my-3 border-t border-secondary/5" />
+
+                    <div className="flex justify-between mt-3">
+                        <div className="text-text3 capitalize text-base">cardholder name</div>
+                        <div className="font-medium text-base">john deo</div>
+                    </div>
+                    <hr className="my-3 border-t border-secondary/5" />
+
+                    <div className="flex justify-between mt-3">
+                        <div className="text-text3 capitalize text-base">billing address</div>
+                        <div className="font-medium text-base">xyz...</div>
+                    </div>
+                </div>
 
                 <div className="grid grid-cols-2 gap-4 mt-6">
                     <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />

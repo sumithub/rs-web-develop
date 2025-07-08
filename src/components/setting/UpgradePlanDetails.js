@@ -1,16 +1,14 @@
 "use client"
-
-import AdminLayout from "../../../components/AdminLayout";
-import CancelButton from "../../../components/common/CancelButton";
-import Status from "../../../components/Status";
-import SecondaryButton from "../../../components/common/SecondaryButton";
 import { useState } from "react";
 import Image from "next/image";
+import CancelButton from "../common/CancelButton";
+import Status from "../Status";
+import SecondaryButton from "../common/SecondaryButton";
 
-export default function MySubscriptionDetails() {
+export default function UpgradePlanDetails() {
     const [tab, setTab] = useState("monthly")
     return (
-        <AdminLayout>
+        <div>
             <div className="flex justify-between items-center">
                 <div className="font-semibold text-lg">
                     Upgrade Plan
@@ -114,7 +112,7 @@ export default function MySubscriptionDetails() {
 
                 </div>
             </div>
-        </AdminLayout>
+        </div>
     )
 }
 
