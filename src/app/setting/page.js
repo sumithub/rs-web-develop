@@ -62,7 +62,7 @@ export default function Setting() {
             <hr className="border border-border2 h-auto" />
             <div>
                 {tab === 1 && <UserProfileManagement />}
-                {tab === 2 && <Subscription />}
+                {tab === 2 && <Subscription setTab={setTab} />}
                 {tab === 3 && <Usage />}
                 {tab === 4 && <PaymentInvoices />}
                 {tab === 5 && <UpgradePlanDetails />}

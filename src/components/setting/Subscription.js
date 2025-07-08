@@ -9,7 +9,7 @@ import UpgradePlan from '../setting/UpgradePlan'
 import CancelSubscription from "./CancelSubscription"
 import Loading from "../Loading"
 
-export default function Subscription() {
+export default function Subscription({ setTab }) {
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
     const [openCancel, setOpenCancel] = useState(false)
@@ -39,7 +39,7 @@ export default function Subscription() {
                     <h2 className="text-lg font-semibold py-[11px]">My Subscription Details</h2>
                     <div className="flex gap-[10px]">
                         <CancelButton title="Cancel Subscription" class_="text-danger! border-danger/10! hover-border-danger/10! text-sm! fonr-normal! bg-danger/10!" onClick={() => { setOpenCancel(true) }} />
-                        <SecondaryButton title="View Usage Details" class_="bg-white! hover:bg-primary! font-normal! text-sm! text-primary! hover:text-white! disabled:bg-dark! disabled:text-text3! cursor-not-allowed" />
+                        <SecondaryButton onClick={() => { setTab(5) }} title="View Usage Details" class_="bg-white! hover:bg-primary! font-normal! text-sm! text-primary! hover:text-white! disabled:bg-dark! disabled:text-text3! cursor-not-allowed" />
                         <SecondaryButton title="Upgrade Plan" class_="font-normal! text-sm!" onClick={() => { setOpen(true) }} />
                     </div>
                 </div>

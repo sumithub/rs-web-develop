@@ -223,9 +223,9 @@ function AddTemplate() {
             </div>
             <div className='p-5'>
               <div className='border border-border-color rounded-[10px] p-5 text-secondary text-sm mb-8 leading-normal'>
-                {body ? <div className='tiptap'
+                <div className='tiptap'
                   dangerouslySetInnerHTML={{ __html: body }}
-                /> : <div></div>}
+                />
               </div>
               <SecondaryButton title="Test Send" type="button" disabled={sending} class_="text-lg!"
                 onClick={() => setOpenPreview(true)} />
