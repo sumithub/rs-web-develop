@@ -181,11 +181,11 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                         Send review, referral, or feedback requests to one or more customers
                     </div>
 
-                    <div className="flex justify-between mt-4">
+                    <div className="flex justify-between items-center mt-4">
                         <div>
                             <Search
                                 placeholder="Search by email, name or phone number"
-                                mainClass="w-3/5!"
+                                mainClass="w-96!"
                                 value={searchQuery}
                                 onSearch={handleSearch}
                             />
@@ -223,7 +223,7 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                     </div>
 
                     {showCustomerFields && (<>
-                        <div className="grid grid-cols-2 gap-3 mt-4">
+                        <div className="grid grid-cols-2 gap-3">
                             <InputForm
                                 label="Name"
                                 isRequired={true}
@@ -282,13 +282,17 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                     </>)}
 
                     {selectedCustomers.length > 0 && <div>
-                        <div>Selected Customers</div>
+                        <div className="text-lg font-semibold">Selected Customers</div>
                         {selectedCustomers.map((e, i) => {
-                            return <div key={i} className="flex justify-between items-center"
-                            >{e.name}
-                                <span onClick={() => {
+                            return <div key={i} className={`flex justify-between items-center gap-y-4 py-2 ${i !== selectedCustomers.length - 1 ? 'border-b border-gray-200' : ''}`}
+                            >
+                                <div>{e.name}</div>
+                                <div className="my-2"> {e.email} </div>
+                                <div>{e.phone} </div>
+                                <button onClick={() => {
                                     setSelectedCustomers((prev) => prev.filter((_, idx) => idx !== i))
-                                }}>X</span>
+                                }}><Image src="/images/close1.svg" alt="close" height={20} width={20} unoptimized={true} />
+                                </button>
                             </div>
                         })}
                     </div>}
