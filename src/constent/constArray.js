@@ -577,3 +577,12 @@ export const notificationsDashboard = [
     { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Unread" },
     { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
 ]
+
+export const alertManagement = [
+    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", delivaryMethod: "Email + In-App", status: "Active" },
+    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", delivaryMethod: "In-App Only", status: "Inactive" },
+    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", delivaryMethod: "Email + In-App", status: "Active" },
+    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", delivaryMethod: "In-App Only", status: "Inactive" },
+    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", delivaryMethod: "Email + In-App", status: "Active" },
+    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", delivaryMethod: "In-App Only", status: "Inactive" },
+]

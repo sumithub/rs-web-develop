@@ -139,8 +139,8 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 submenu:
                     [
                         { title: "Notifications", link: "/admin/notifications-management/notifications-dashboard" },
-                        { title: "Alerts", link: "" },
-                        { title: "System Wide Notifications", link: "" },
+                        { title: "Alerts", link: "/admin/notifications-management/alerts-management" },
+                        // { title: "System Wide Notifications", link: "" },
                         { title: "Notification Log", link: "/audit-logs-dashboard" },
                     ]
             },
