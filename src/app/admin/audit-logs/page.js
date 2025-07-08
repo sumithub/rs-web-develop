@@ -59,25 +59,26 @@ export default function AuditLogs() {
                         setOpen(true)
                     }} />
             }
-            <div className='flex items-center justify-between'>
-
-                <Search
-                    placeholder="Global Search"
-                    mainClass="shrink-0! w-1/5!"
-                    onSearch={(s) => {
-                        setSearch(s)
-                    }}
-                />
-                <div className='flex items-center gap-3.5'>
+            <div className='flex items-center justify-between gap-8'>
+                <div className="w-[20%]!">
+                    <Search
+                        placeholder="Global Search"
+                        mainClass="w-full!"
+                        onSearch={(s) => {
+                            setSearch(s)
+                        }}
+                    />
+                </div>
+                <div className='flex items-center gap-3.5 shrink-0'>
 
                     < div className="flex items-center gap-2 shrink-0">
-                        <div className="font-medium">Auto-Refresh</div>
+                        <div className="font-medium text-xs">Auto-Refresh</div>
                         <Switch class_="mt-2" />
                     </div>
 
                     <CustomSelectBox
                         defaultOption="Client"
-                        class_='mt-0! w-36!'
+                        class_='mt-0! w-28!'
                         value={filterByClient}
                         onChange={(e) => {
                             setFilterByClient(e.target.value)
