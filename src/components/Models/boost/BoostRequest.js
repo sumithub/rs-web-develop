@@ -181,31 +181,34 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                         Send review, referral, or feedback requests to one or more customers
                     </div>
 
-                    <div className="flex justify-between items-center mt-4">
-                        <div>
+                    <div className="flex justify-between mt-4 w-full">
+                        <div className="w-3/5! relative">
                             <Search
+                                mainClass="w-full!"
                                 placeholder="Search by email, name or phone number"
-                                mainClass="w-96!"
                                 value={searchQuery}
                                 onSearch={handleSearch}
                             />
-                            {openList && <div>
-                                <div onClick={() => { setOpenList(false) }}>X</div>
+                            {openList && <div
+                                className={`absolute w-full bg-white  border border-border-color z-10 max-h-60 overflow-y-auto   top-full  rounded-b-lg rounded-t-none'`}>
+                                <div className="text-right">
+                                    <button className="pr-4"
+                                        onClick={() => { setOpenList(false) }}>X</button>
+                                </div>
                                 {filteredCustomers.map((e, i) => {
                                     const selected = selectedCustomers.find(s => s.name === e.name)
 
-                                    return <div key={i} className={'border-b border-border-color'}>
+                                    return <div key={i}
+                                        onClick={() => {
+                                            if (selected) {
+                                                setSelectedCustomers((prev) => prev.filter(p => p.name !== e.name))
+                                            } else {
+                                                setSelectedCustomers(prev => ([...prev, e]))
+                                            }
+                                        }}
+                                        className={'px-4 py-2 text-sm cursor-pointer capitalize flex items-center gap-2 hover:bg-dark text-text3'}>
                                         <div className="flex items-start gap-2">
-                                            <Checkbox
-                                                checked={selected}
-                                                onChange={() => {
-                                                    if (selected) {
-                                                        setSelectedCustomers((prev) => prev.filter(p => p.name !== e.name))
-                                                    } else {
-                                                        setSelectedCustomers(prev => ([...prev, e]))
-                                                    }
-                                                }}
-                                            />
+                                            <Checkbox checked={selected} />
                                             <div>{e.customerName}</div>
                                         </div>
                                         {e.email} | {e.phone}
