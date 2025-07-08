@@ -35,8 +35,6 @@ function CustomerJourney({ onClose, onSave, id }) {
         }
     }
 
-
-
     return <Model onClose={onClose} title="Customer Journey" modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>

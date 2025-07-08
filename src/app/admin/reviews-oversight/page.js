@@ -176,7 +176,7 @@ export default function ReviewsOversight() {
                             </th>
                             <th>
                                 <div className="flex justify-center">
-                                    <TableOrder title="TimeStamp"
+                                    <TableOrder title="Timestamp"
                                         sortBy={sortBy}
                                         setSortBy={setSortBy}
                                         field="timestamp" />
@@ -192,22 +192,16 @@ export default function ReviewsOversight() {
                     <tbody>
                         {list.map((e, index) =>
                             <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
-                                <td>
-                                    {e.clientName}
-                                </td>
-                                <td>
-                                    {e.location}
-                                </td>
-                                <td>
-                                    {e.customer}
-                                </td>
+                                <td>{e.clientName} </td>
+                                <td>{e.location}</td>
+                                <td>{e.customer}</td>
                                 <td>
                                     <div className="flex items-center gap-1">
-                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
-                                        <Image src="/images/star.svg" alt="star" width={16} height={16} />
+                                        {e.ratings?.map((rating, i) => (
+                                            <div key={i} >
+                                                <Image src={rating} alt="star" height={16} width={16} unoptimized={true} />
+                                            </div>
+                                        ))}
                                     </div>
                                 </td>
                                 <td>
@@ -222,11 +216,9 @@ export default function ReviewsOversight() {
                                         </div>
                                     </div>
                                 </td>
-                                <td className="">
-                                    <div className="flex justify-center">
-                                        <div className="line-clamp-1">
-                                            {formatDateTime(e.timestamp)}
-                                        </div>
+                                <td>
+                                    <div className="flex justify-center items-center">
+                                        {formatDateTime(e.timestamp)}
                                     </div>
                                 </td>
                                 <td><div className="flex justify-center"><button onClick={() => setOpen(true)}>

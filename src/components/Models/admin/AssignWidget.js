@@ -56,7 +56,7 @@ export default function AssignWidget({ onClose, id }) {
             }
             <form onSubmit={handleSubmit(onSubmit)}>
                 {(id === "assignWidget" || id === "assignWidgets") && <div className="flex justify-between items-center">
-                    <div className="font-semibold text-xl">Select Clients From List</div>
+                    <div className="font-semibold text-base">Select Clients From List</div>
 
                     <SecondaryButton title="Add Clients" onClick={() => setOpenClient(true)} class_="text-xs! py-2.5!" />
                 </div>}
