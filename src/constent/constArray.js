@@ -536,7 +536,7 @@ export const featureManagement = [
 export const subscriptionManagement = [
     { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
     { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
-    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Cenceled" },
+    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Canceled" },
     { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
 ]
 
@@ -567,4 +567,10 @@ export const globalRulesManagement = [
     { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Alert", status: "Inactive", createdDate: "Mar 03, 2024" },
     { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Notify", status: "Active", createdDate: "Mar 03, 2024" },
     { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Alert", status: "Inactive", createdDate: "Mar 03, 2024" },
+]
+export const SubscriptionUsage = [
+    { name: "Client", title: "ABC Corp" },
+    { name: "plan", title: "Basic" },
+    { name: "Email Quota Used", title: "500/1,000" },
+    { name: "SMS Quota Used", title: " 50/100" },
 ]

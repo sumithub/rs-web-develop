@@ -42,7 +42,7 @@ export default function InvoiceManagement() {
     return (
         <AdminLayout headerSearch={
             <Search
-                mainClass='w-80!'
+                mainClass='w-96!'
                 placeholder="Search"
                 onSearch={(s) => {
                     setSearch(s)
@@ -82,15 +82,21 @@ export default function InvoiceManagement() {
                                 setSortBy={setSortBy}
                                 field="name" />
                             </th>
-                            <th><TableOrder title="Amount"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="amount" />
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Amount"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="amount" />
+                                </div>
                             </th>
-                            <th><TableOrder title="Status"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="status" />
+                            <th>
+                                <div className="flex justify-center">
+                                    <TableOrder title="Status"
+                                        sortBy={sortBy}
+                                        setSortBy={setSortBy}
+                                        field="status" />
+                                </div>
                             </th>
                             <th className="text-center!">Actions</th>
                         </tr>
@@ -105,10 +111,14 @@ export default function InvoiceManagement() {
                                     {e.clientName}
                                 </td>
                                 <td>
-                                    {e.amount}
+                                    <div className="flex justify-center">
+                                        {e.amount}
+                                    </div>
                                 </td>
                                 <td>
-                                    <Status status={e.status} />
+                                    <div className="flex justify-center">
+                                        <Status status={e.status} />
+                                    </div>
                                 </td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>

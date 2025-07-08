@@ -47,7 +47,7 @@ export default function Status({ status = "", context = "" }) {
     else if (s === "read") {
         bgClass = "bg-[#FFC1071A] text-custom-yellow-light"
     }
-    else if (s === "alert") {
+    else if (s === "alert" || s === "canceled") {
         bgClass = "bg-[#DC35451A] text-danger"
     }
     else if (s === "no") {
