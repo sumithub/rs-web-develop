@@ -536,7 +536,7 @@ export const featureManagement = [
 export const subscriptionManagement = [
     { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
     { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
-    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Cenceled" },
+    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Canceled" },
     { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
 ]
 
@@ -558,4 +558,11 @@ export const paymentManagement = [
     { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Completed", date: "Mar 25,2025" },
     { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Pending", date: "Mar 25,2025" },
     { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Completed", date: "Mar 25,2025" },
+]
+
+export const SubscriptionUsage = [
+    { name: "Client", title: "ABC Corp" },
+    { name: "plan", title: "Basic" },
+    { name: "Email Quota Used", title: "500/1,000" },
+    { name: "SMS Quota Used", title: " 50/100" },
 ]
