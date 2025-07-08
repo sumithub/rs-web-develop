@@ -33,7 +33,7 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
     const [openPreview, setOpenPreview] = useState(false)
     const [openSelect, setOpenSelect] = useState(false)
     const [showCustomerFields, setShowCustomerFields] = useState(false);
-    const [openList, setOpenList] = useState(true)
+    const [openList, setOpenList] = useState(false)
     const formData = watch();
     const [previewType, setPreviewType] = useState("email"); // "email" or "sms"
     const [templateType, setTemplateType] = useState([])
