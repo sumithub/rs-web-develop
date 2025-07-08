@@ -119,14 +119,28 @@ export default function UpgradePlan({ onClose, id }) {
                 <div className="mt-5">
                     <div className="font-semibold text-xl">Price Comparison</div>
 
-                    {PriceComparison.map((e, i) => <div key={i}>
+                    <div>
                         <div className="flex justify-between mt-3">
-                            <div>{e.title}</div>
-                            <div className="font-semibold">{e.price}</div>
+                            <div>Sub Total</div>
+                            <div className="font-semibold">$600</div>
                         </div>
 
                         <hr className="border border-secondary/5 my-3" />
-                    </div>)}
+
+                        <div className="flex justify-between mt-3">
+                            <div>GST</div>
+                            <div className="font-semibold">$60</div>
+                        </div>
+
+                        <hr className="border border-secondary/5 my-3" />
+
+                        <div className="flex justify-between my-3">
+                            <div>Discount</div>
+                            <div className="font-semibold">$30
+                            </div>
+                        </div>
+
+                    </div>
 
                     <div className="flex justify-between">
                         <div className="font-bold text-xl">Total</div>

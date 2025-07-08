@@ -33,41 +33,50 @@ export default function CancelUpcomingPayment({ onClose, id }) {
         }
     }
 
-    const Project = [
-        { title: "plan", Price: "Growth Plan($99.00/Mo)" },
-        { title: "due date", Price: "Apr 1, 2025" },
-        { title: "payment method", Price: "Visa **** 1234" },
-    ]
 
     return (
         <Model onClose={onClose} title="Cancel Upcoming Payment" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mt-4 flex gap-2.5 items-center bg-custom-yellow-light/10 p-2.5 rounded-lg">
+                <div className="mt-2 flex gap-2.5 items-center bg-custom-yellow-light/10 p-2.5 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize">Are you sure you want to cancel the upcoming payment for your subscription?</h2>
                 </div>
                 <div className="mt-3">
-                    {Project.map((e, i) => <div key={i}>
-                        <div className="flex justify-between ">
-                            <div className="text-text3 capitalize text-base">{e.title}</div>
-                            <div className="font-semibold text-base">{e.Price}</div>
+                    <div>
+                        <div className="flex justify-between">
+                            <div className="text-text3 capitalize text-base">plan</div>
+                            <div className="font-semibold text-base">Growth Plan($99.00/Mo)
+                            </div>
                         </div>
-                        {i !== Project.length - 1 && (
-                            <hr className="my-3 border-t border-secondary/5" />
-                        )}
-                    </div>)}
+
+                        <hr className="my-3 border-t border-secondary/5" />
+
+                        <div className="flex justify-between">
+                            <div className="text-text3 capitalize text-base">due date</div>
+                            <div className="font-semibold text-base">Apr 01, 2025
+                            </div>
+                        </div>
+
+                        <hr className="my-3 border-t border-secondary/5" />
+
+                        <div className="flex justify-between">
+                            <div className="text-text3 capitalize text-base">payment method</div>
+                            <div className="font-semibold text-base">visa **** 1234
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="mt-4 flex gap-2.5 items-center bg-custom-yellow-light/10 p-2.5 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize">This Will Not Cancel Your Subscription.</h2>
                 </div>
 
-                <div className="mt-4 flex gap-2.5 items-center bg-custom-yellow-light/10 p-2.5 rounded-lg">
+                <div className="mt-6 flex gap-2.5 items-center bg-custom-yellow-light/10 p-2.5 rounded-lg">
                     <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                     <h2 className="text-sm font-medium capitalize">You May lose Access If Payment Is Missed.</h2>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="grid grid-cols-2 gap-4 mt-7">
                     <CancelButton title="Cancel payment" type="submit" disabled={sending} class_="text-lg!" />
                     <SecondaryButton title="keep payment" onClick={onClose} class_="text-lg!" />
                 </div>

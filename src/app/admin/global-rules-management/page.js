@@ -119,12 +119,10 @@ export default function GlobalRulesManagement() {
                                 field="name" />
                             </th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Condition"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="condition" />
-                                </div>
+                                <TableOrder title="Condition"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="condition" />
                             </th>
                             <th className="text-center!">
                                 Action
@@ -158,9 +156,7 @@ export default function GlobalRulesManagement() {
                                     {e.eventType}
                                 </td>
                                 <td>
-                                    <div className="flex justify-center">
-                                        {e.condition}
-                                    </div>
+                                    {e.condition}
                                 </td>
                                 <td>
                                     <div className="flex justify-center">

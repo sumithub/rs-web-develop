@@ -14,7 +14,9 @@ export default function LocationsDropdown({ onClose, id }) {
                 />
             </div>
             <hr className="border-t border-border2 my-3.5" />
-            <h2 className="text-base text-text3 capitalize">4517 washington ave. manchester, Kentucky 39495</h2>
+            <div className="bg-dark p-2.5 rounded-sm">
+                <h2 className="text-base text-primary capitalize">4517 washington ave. manchester, Kentucky 39495</h2>
+            </div>
             <hr className="border-t border-border2 my-3.5" />
             <h2 className="text-base text-text3">2972 Westheimer Rd. santa ana, lllinois 85486</h2>
             <hr className="border-t border-border2 my-3.5" />
