@@ -140,7 +140,7 @@ function CreateClientRule({ onClose, id }) {
 
             {type === "flaggedReview" && (
                 <CustomSelectBox label="Flagged Review" isRequired={true} class_='mt-2! w-full!'
-                    defaultOption='Template Type'
+                    defaultOption='Select reason(s)'
                     selectClass_="py-[13.2px]! px-2.5! border-primary/10! focus:border-primary/60!"
                     formProps={{ ...register("flaggedReview", { required: true }) }}
                     errors={errors} clearErrors={clearErrors}

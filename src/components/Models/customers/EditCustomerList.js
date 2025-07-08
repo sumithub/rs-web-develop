@@ -42,8 +42,6 @@ function EditCustomerList({ onClose, id, onSave }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <div>
-
-
                     <InputForm
                         class_="mt-0!"
                         label="List Name"
@@ -93,7 +91,7 @@ function EditCustomerList({ onClose, id, onSave }) {
                     </div>
                 </div>
             </div>
-            <div className="grid grid-cols-2 gap-3 mt-5">
+            <div className="grid grid-cols-2 gap-5 mt-7">
                 <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
                 <SecondaryButton title="Apply Changes" type="submit" disabled={sending} class_="text-lg!" />
             </div>

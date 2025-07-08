@@ -18,8 +18,8 @@ export default function LocationDetails() {
     const [sortBy, setSortBy] = useState(false)
     const [view, setView] = useState("overview")
     const [search, setSearch] = useState("")
-    const [list, setList] = useState([])
-    const [list1, setList1] = useState([])
+    const [reviews, setReviews] = useState([])
+    const [campaign, setCampaign] = useState([])
     const [loading, setLoading] = useState(true)
 
 
@@ -30,11 +30,11 @@ export default function LocationDetails() {
     const getData = async () => {
         try {
             setLoading(true)
-            setList([])
-            setList1([])
+            setReviews([])
+            setCampaign([])
             const res = await axios.get("/api")
-            setList(res.data || locationReviews)
-            setList1(res.data || locationCampaign)
+            setReviews(res.data || locationReviews)
+            setCampaign(res.data || locationCampaign)
             setLoading(false)
 
         } catch (error) {
@@ -47,7 +47,7 @@ export default function LocationDetails() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-76!'
+                    mainClass='w-72!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -111,16 +111,16 @@ export default function LocationDetails() {
                         </div>
                     </div>
                     <hr className="border-t border-border2 my-5" />
-                    <div>
+                    {loading ? <Loading /> : <div>
                         <h2 className="text-lg font-semibold pb-5">Performance Stats</h2>
                         <div className="grid grid-cols-3 gap-x-4 gap-y-5">
-                            <DashboardCard title="Average Rating" count="4.2" img="/images/tick-sms.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/average2.png')]" />
+                            <DashboardCard title="Average Rating" count="4.2" img="/images/sms-star.svg" bgClass="bg-primary" textColor="text-primary" bgImage="bg-[url('/images/average2.png')]" />
                             <DashboardCard title="Total Reviews" count="5,200" img="/images/star1.svg" bgClass="bg-success-light" textColor="text-success-light" bgImage="bg-[url('/images/total2.png')]" />
                             <DashboardCard title="Active Campaigns" count="02" img="/images/location2.svg" bgClass="bg-custom-purple" textColor="text-custom-purple" bgImage="bg-[url('/images/active2.png')]" />
                             <DashboardCard title="Positive Sentiment" count="75%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
                             <DashboardCard title="Negative Sentiment" count="12%" img="/images/chart-2.svg" bgClass="bg-danger" textColor="text-danger" bgImage="bg-[url('/images/negative.png')]" />
                         </div>
-                    </div>
+                    </div>}
                 </div>}
             </div>
             {view === "reviews" && <div>
@@ -137,7 +137,7 @@ export default function LocationDetails() {
                 </div>
 
                 <div className="table-class mt-3.5">
-                    {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
+                    {loading ? <Loading /> : (reviews?.length > 0 ? <table className="w-full">
                         <thead>
                             <tr>
                                 <th><TableOrder title="Customer"
@@ -168,13 +168,13 @@ export default function LocationDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
+                            {reviews?.map((e, index) => <tr key={index} className={index === reviews.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-center gap-2.5">
                                         <Checkbox
                                             checked={e.selected}
                                             onChange={(checked) => {
-                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                                setReviews(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
                                             }} />
                                         <div>{e.customer}</div>
                                     </div>
@@ -190,7 +190,9 @@ export default function LocationDetails() {
                                 </td>
                                 <td>
                                     <div className="flex justify-center">
-                                        {e.review}
+                                        <div className="line-clamp-1">
+                                            {e.review}
+                                        </div>
                                     </div>
                                 </td>
                                 <td>
@@ -207,7 +209,7 @@ export default function LocationDetails() {
                         </tbody>
                     </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                 </div>
-                {list?.length > 0 && <div>
+                {reviews?.length > 0 && <div>
                     <PaginationDemo />
                 </div>}
             </div>}
@@ -226,7 +228,7 @@ export default function LocationDetails() {
                     </div>
 
                     <div className="table-class mt-3.5">
-                        {loading ? <Loading /> : (list1?.length > 0 ? <table className="w-full">
+                        {loading ? <Loading /> : (campaign?.length > 0 ? <table className="w-full">
                             <thead>
                                 <tr>
                                     <th><TableOrder title="Campaign Name"
@@ -253,14 +255,14 @@ export default function LocationDetails() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {list1?.map((e, index) =>
-                                    <tr key={index}>
+                                {campaign?.map((e, index) =>
+                                    <tr key={index} className={index === campaign.length - 1 ? '' : 'border-b border-border-color'}>
                                         <td>
                                             <div className="flex items-center gap-2.5">
                                                 <Checkbox
                                                     checked={e.selected}
                                                     onChange={(checked) => {
-                                                        setList1(list1 => list1.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                                        setCampaign(campaign => campaign.map((item, i) => i === index ? { ...item, selected: checked } : item))
                                                     }} />
                                                 <div>{e.name}</div>
                                             </div>
@@ -278,7 +280,7 @@ export default function LocationDetails() {
                             </tbody>
                         </table> : <div className='text-center text-2xl text-danger mx-auto py-20'>No Data</div>)}
                     </div>
-                    {list1?.length > 0 && <div>
+                    {campaign?.length > 0 && <div>
                         <PaginationDemo />
                     </div>}
                 </div>

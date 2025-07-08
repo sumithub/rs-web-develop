@@ -6,7 +6,7 @@ import InputForm from "../../form/InputForm"
 import Radio from "../../form/Radio"
 import SelectForm from "../../form/SelectForm"
 import Model from "../Model"
-import { getError, validEmailRgx } from "../../../../helper"
+import { getError, isAdmin, validEmailRgx } from "../../../../helper"
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -75,6 +75,7 @@ function AddCustomer({ onClose, id, onSave }) {
                     <div>
                         <div>
                             <InputForm
+                                inputClass="py-3.5!"
                                 class_={`${!id ? "" : "mt-0!"}`}
                                 label="Customer Name"
                                 placeholder="Enter your name"
@@ -82,7 +83,11 @@ function AddCustomer({ onClose, id, onSave }) {
                                 formProps={{ ...register("customerName", { required: true }) }}
                                 errors={errors} />
 
-                            <InputForm label="Email" placeholder="Enter email" isRequired={true}
+                            <InputForm
+                                inputClass="py-3.5!"
+                                label="Email"
+                                placeholder="Enter email"
+                                isRequired={true}
                                 formProps={{
                                     ...register("email", {
                                         required: true, pattern: {
@@ -114,11 +119,27 @@ function AddCustomer({ onClose, id, onSave }) {
                             <option value="loyal">Loyal</option>
                             <option value="instead of source">instead of source</option>
                         </SelectForm>
+
+                        {isAdmin() && <SelectForm
+                            label="Client"
+                            selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
+                            isRequired={false}
+                            defaultOption="select"
+                            formProps={{ ...register("client", { required: false }) }}
+                            errors={errors}
+                            clearErrors={clearErrors}
+                            setValue={setValue}
+                            watch={watch}
+                        >
+                            <option value="clientA">Client A</option>
+                            <option value="clientB">Client B</option>
+                            <option value="clientC">Client C</option>
+                        </SelectForm>}
                     </div>
                 </div>}
             </div>
 
-            {type === "manually" && <div className="grid grid-cols-2 gap-3 mt-5">
+            {type === "manually" && <div className="grid grid-cols-2 gap-5 mt-7">
                 <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
                 <SecondaryButton title="Apply Changes" type="submit" disabled={sending} class_="text-lg!" />
             </div>}

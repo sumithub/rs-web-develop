@@ -46,7 +46,7 @@ export default function RolesPermissions() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-76!'
+                    mainClass='w-72!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -118,7 +118,7 @@ export default function RolesPermissions() {
                     </thead>
                     <tbody>
                         {list.map((e, index) =>
-                            <tr key={index}>
+                            <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-center gap-2.5">
                                         <Checkbox
@@ -129,7 +129,11 @@ export default function RolesPermissions() {
                                         <div>{e.name}</div>
                                     </div>
                                 </td>
-                                <td>{e.description}</td>
+                                <td>
+                                    <div className="line-clamp-1">
+                                        {e.description}
+                                    </div>
+                                </td>
                                 <td>{e.permissions}</td>
                                 <td>
                                     <div className='flex w-auto items-center gap-2.5 justify-center'>

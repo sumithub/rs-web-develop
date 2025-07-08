@@ -49,7 +49,7 @@ export default function CampaignsManagement() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-76!'
+                    mainClass='w-72!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -57,7 +57,7 @@ export default function CampaignsManagement() {
                 />}>
             <div className='flex items-center justify-between'>
                 <Search
-                    mainClass='w-76!'
+                    mainClass='w-72!'
                     placeholder="Search by Campaign Name, Client"
                     onSearch={(s) => {
                         setSearch(s)

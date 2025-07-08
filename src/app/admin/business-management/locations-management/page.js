@@ -48,7 +48,7 @@ function Location() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-76!'
+                    mainClass='w-72!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -119,11 +119,14 @@ function Location() {
                                 setSortBy={setSortBy}
                                 field="address"
                             /></th>
-                            <th><TableOrder title="Assigned Client"
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
-                                field="client"
-                            /></th>
+                            <th>
+                                <div className='line-clamp-1'> <TableOrder title="Assigned Client"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="client"
+                                />
+                                </div>
+                            </th>
                             <th className='flex justify-center'><TableOrder title="Reviews Count"
                                 sortBy={sortBy}
                                 setSortBy={setSortBy}
@@ -148,7 +151,11 @@ function Location() {
                                     </div>
                                 </td>
                                 <td>{e.address}</td>
-                                <td>{e.client}</td>
+                                <td>
+                                    <div className='line-clamp-1'>
+                                        {e.client}
+                                    </div>
+                                </td>
                                 <td className='text-center!'>{e.count}</td>
                                 <td className="flex justify-center">
                                     <div className='flex items-center gap-2'>

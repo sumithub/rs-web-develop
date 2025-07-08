@@ -15,7 +15,7 @@ export default function DeactivateUser({ onClose }) {
         try {
             setSending(true);
             await axios.put("/api");
-            toast.success("Deleted Successfully");
+            toast.success("Deactivated Successfully");
             onClose();
         } catch (error) {
             toast.error(getError(error));

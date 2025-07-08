@@ -9,10 +9,11 @@ import Link from '@tiptap/extension-link'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
 import { Extension, Node } from '@tiptap/core'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FontFamily } from '@tiptap/extension-font-family'
 import ImageEditorModal from '../components/Models/ImageEditorModal'
-
+import Picker from '@emoji-mart/react'
+import data from '@emoji-mart/data'
 // Simple Image Node (no toolbar buttons)
 const SimpleImage = Node.create({
     name: 'simpleImage',
@@ -132,6 +133,7 @@ export const MenuBar = ({ disable }) => {
     const [showImageEditor, setShowImageEditor] = useState(false)
     const [currentImageSrc, setCurrentImageSrc] = useState('')
     const fontSizes = [8, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48, 56, 60]
+    const [showPicker, setShowPicker] = useState(false);
 
     const fontFamilies = [
         { name: 'Inter', value: null },
@@ -208,6 +210,10 @@ export const MenuBar = ({ disable }) => {
     const removeBackgroundColor = () => {
         editor.chain().focus().unsetHighlight().run()
         setShowBackgroundColorDropdown(false)
+    }
+
+    const openEmojiPicker = () => {
+        setShowPicker(!showPicker)
     }
 
     const setLink = useCallback(() => {
@@ -687,7 +693,26 @@ export const MenuBar = ({ disable }) => {
                     <path d="M9.83341 7.4375H5.16675C4.92758 7.4375 4.72925 7.23917 4.72925 7C4.72925 6.76083 4.92758 6.5625 5.16675 6.5625H9.83341C10.0726 6.5625 10.2709 6.76083 10.2709 7C10.2709 7.23917 10.0726 7.4375 9.83341 7.4375Z" fill="#1F2933" />
                 </svg>
             </button>
-
+            <button
+                type="button"
+                onClick={openEmojiPicker}
+                // className={`${editor.isActive('link') ? 'is-active' : ''} border-r border-text3`}
+                className={`border-r border-text3 relative`}
+                disabled={disable}
+            >
+                😊
+            </button>
+            <div style={{ position: 'absolute', zIndex: 100, display: showPicker ? 'block' : 'none' }}>
+                <Picker
+                    onClickOutside={(e) => {
+                        if (showPicker)
+                            setShowPicker(!showPicker)
+                    }}
+                    data={data}
+                    onEmojiSelect={(emoji) => {
+                        editor.chain().focus().insertContent(emoji.native).run();
+                    }} />
+            </div>
             {/* Alignment Buttons */}
             <button
                 type="button"

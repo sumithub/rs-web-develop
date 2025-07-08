@@ -53,7 +53,7 @@ export default function UsersManagement() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-76!'
+                    mainClass='w-72!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -167,7 +167,7 @@ export default function UsersManagement() {
                     </thead>
                     <tbody>
                         {list.map((e, index) =>
-                            <tr key={index}>
+                            <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
                                     <div className="flex items-center gap-2.5">
                                         <Checkbox
@@ -184,9 +184,11 @@ export default function UsersManagement() {
                                         {e.role}
                                     </div>
                                 </td>
-                                <td>
+                                <td className="">
                                     <div className="flex justify-center">
-                                        {e.assignedClient}
+                                        <div className="line-clamp-1">
+                                            {e.assignedClient}
+                                        </div>
                                     </div>
                                 </td>
                                 <td>
