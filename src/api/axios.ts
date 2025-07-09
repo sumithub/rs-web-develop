@@ -2,7 +2,7 @@ import { requestInterceptor, responseInterceptorError } from "./interceptorHandl
 
 import axios from "axios";
 
-const API_BASE = process.env.NEXT_PUBLIC_RS_API_BASE_URL || "https://rs-backend-ieyn.onrender.com/api";
+const API_BASE = process.env.NEXT_PUBLIC_RS_API_BASE_URL || "https://rs-backend-ieyn.onrender.com/api"; 
 
  export const axiosInstance = axios.create({
   baseURL: API_BASE,
@@ -15,6 +15,7 @@ const API_BASE = process.env.NEXT_PUBLIC_RS_API_BASE_URL || "https://rs-backend-
 
 // Request Interceptor – attach token if available
 axiosInstance.interceptors.request.use(requestInterceptor);
+
 
 // Response Interceptor – handle global errors
 axiosInstance.interceptors.response.use(

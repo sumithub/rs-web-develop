@@ -1,35 +1,56 @@
 "use client"
-import React, { useState } from 'react';
-import Link from 'next/link';
+
+import { ChangeEmailFormData, ChangeEmailSchema } from '../schemas/ChangeEmailSchema'
+import React, { useContext, useEffect, useState } from 'react';
+
+import AuthContext from '../../contexts/AuthContext';
 import Image from 'next/image';
-import axios from 'axios';
-import { useForm } from 'react-hook-form';
-import InputForm from '../../components/form/InputForm';
+import InputForm from '../form/InputForm';
+import Link from 'next/link';
 import Model from './Model';
-import { validEmailRgx } from '../../../helper';
+import { changeEmail } from '../../api/authApi';
 import { toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 function ChangeEmail({ onClose, id }) {
-    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm<ChangeEmailFormData>({
+            resolver: zodResolver(ChangeEmailSchema),
+            mode: "onBlur",
+        })
     const [sending, setSending] = useState(false)
+    const {unVerifiedEmail, setEmail}= useContext(AuthContext)
+    const [currentEmail, setCurrentEmail] = useState(unVerifiedEmail);
 
-
-    const onSubmit = async (data) => {
-        try {
+    useEffect(()=>{},[currentEmail])
+    const onSubmit = async (formData: ChangeEmailFormData) => {
+        
+        try {    
+            localStorage.removeItem("mockVerificationLink");    
             setSending(true)
-            let res = null
-
-            if (id !== "add") {
-                res = await axios.put("/api", data)
-            } else {
-                res = await axios.post("/api", data)
-            }
-
-            toast.success("Email updated successfully! Please check your inbox for verification.")
-            setSending(false)
-            onClose()
+                // Calls the centralized authApi signup function
+                if(currentEmail === formData.newEmail) {
+                    toast.error("This is your current email. Please enter a different one.");
+                    setSending(false)
+                    return;
+                }
+                const parsedData = await changeEmail(formData,);
+                // Save mock verification link to localStorage (for dev only)
+                if (parsedData?.mockVerificationLink) {
+                  localStorage.setItem("mockVerificationLink", parsedData.mockVerificationLink);
+                }
+                // Update context with unverified email
+                toast.success("Email updated successfully! Please check your inbox for verification.")
+                setSending(false)
+                setEmail(formData.newEmail);
+                setCurrentEmail(formData.newEmail);
+                onClose()
         } catch (error) {
-            toast.error("Unable to update email. Please try again later.")
+            console.error("Error", error)
+            // Check if the error response has the expected shape
+            const apiMessage = error?.response?.data?.message;
+            const fallbackMessage = "Unable to update email. Please try again later.";
+            toast.error(apiMessage || fallbackMessage);
             setSending(false)
         }
     }
@@ -43,7 +64,7 @@ function ChangeEmail({ onClose, id }) {
 
                     <div className='flex items-center justify-between'>
                         <div className='text-base text-[#616E7C] capitalize'>current email</div>
-                        <div className='text-base text-secondary font-medium'>anu@gmail.com</div>
+                        <div className='text-base text-secondary font-medium'>{unVerifiedEmail}</div>
                     </div>
 
                     <div className='mt-5'>
@@ -56,38 +77,27 @@ function ChangeEmail({ onClose, id }) {
                             <Image unoptimized={true} src="images/warning.svg" alt='warning' height={22} width={22} />
                             <div className='text-sm text-secondary font-medium capitalize'>a new verification email will be sent to the updated email.</div>
                         </div>
-
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div>
-                            <InputForm
-                                label="New Email"
-                                name="newEmail"
+                         
+                             <input type="hidden" {...register("currentEmail")} value={currentEmail} />
+                               <InputForm
+                                label="Email ID"
                                 clearValue={true}
-                                inputType="text"
-                                placeholder="Enter Email ID "
-                                isRequired={true}
+                                placeholder="Enter Your Email Address"
                                 icon="/images/close.svg"
-                                formProps={{
-                                    ...register("email", {
-                                        required: "Email is required",
-                                        pattern: {
-                                            value: validEmailRgx,
-                                            message: "Please enter a valid email address.",
-                                        },
-                                        validate: (value) => {
-                                            if (value === "anu@gmail.com") {
-                                                return "This is your current email. Please enter a different one.";
-                                            }
-                                            return true;
-                                        }
-                                    }),
-                                }}
+                                isRequired={true}
                                 errors={errors}
-                                clearErrors={clearErrors}
+                                formProps={{ ...register("newEmail") }}
                                 setValue={setValue}
                                 watch={watch}
-                            />
+                                infoIcon={null}
+                                labelClass=""
+                                disabled={null}
+                                isTextArea={false}
+                                rows={undefined}
+                                />
                         </div>
                         <div className='grid grid-cols-2 gap-4'>
                             <button type='button' className="text-lg font-medium bg-dark hover:bg-white text-text3 w-full mt-5 py-3 rounded-[10px] border border-dark hover:border-border-color cursor-pointer" onClick={onClose}>Cancel</button>
