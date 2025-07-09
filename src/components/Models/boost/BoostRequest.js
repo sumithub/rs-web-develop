@@ -19,7 +19,8 @@ import SelectForm from "../../form/SelectForm";
 import Link from "next/link";
 import { customerList } from "../../../constent/constArray";
 
-export default function BoostRequest({ onClose, onSave, id, customer }) {
+export default function BoostRequest({ onClose, onSave, id, customer, isCustomer = false }) {
+    console.log(isCustomer)
     const [select, setSelect] = useState("")
     const [overrideTemplates, setOverrideTemplates] = useState(false)
     const [selectedCustomers, setSelectedCustomers] = useState([])
