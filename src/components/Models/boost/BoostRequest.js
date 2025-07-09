@@ -19,7 +19,8 @@ import SelectForm from "../../form/SelectForm";
 import Link from "next/link";
 import { customerList } from "../../../constent/constArray";
 
-export default function BoostRequest({ onClose, onSave, id, customer }) {
+export default function BoostRequest({ onClose, onSave, id, customer, isCustomer = false }) {
+    console.log(isCustomer)
     const [select, setSelect] = useState("")
     const [overrideTemplates, setOverrideTemplates] = useState(false)
     const [selectedCustomers, setSelectedCustomers] = useState([])
@@ -193,7 +194,7 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                                 className={`absolute w-full bg-white  border border-border-color z-10 max-h-60 overflow-y-auto top-full  rounded-b-lg rounded-t-none`}>
                                 <div className="flex items-center justify-between px-4 py-2">
                                     <div className="text-base font-semibold">Customers</div>
-                                    <button className=""
+                                    <button className="" type="button"
                                         onClick={() => { setOpenList(false) }}><Image src="/images/close1.svg" alt="close" height={20} width={20} unoptimized={true} /></button>
                                 </div>
                                 {filteredCustomers.map((e, i) => {
@@ -293,7 +294,7 @@ export default function BoostRequest({ onClose, onSave, id, customer }) {
                                 <div>{e.name}</div>
                                 <div className="my-2"> {e.email} </div>
                                 <div>{e.phone} </div>
-                                <button onClick={() => {
+                                <button type="button" onClick={() => {
                                     setSelectedCustomers((prev) => prev.filter((_, idx) => idx !== i))
                                 }}><Image src="/images/close1.svg" alt="close" height={20} width={20} unoptimized={true} />
                                 </button>

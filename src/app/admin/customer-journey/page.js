@@ -26,6 +26,7 @@ export default function CustomersJourney() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
+    const [enabled, setEnabled] = useState(false)
 
     useEffect(() => {
         getUsers()
@@ -66,8 +67,12 @@ export default function CustomersJourney() {
                 />
                 <div className='flex items-center gap-3.5'>
 
-                    < div className="flex items-center gap-2">
-                        <Switch class_="mt-2" />
+                    < div className="flex items-center gap-4">
+                        <Switch
+                            checked={enabled}
+                            onChange={setEnabled}
+                            class_={`${enabled ? 'bg-green-500' : 'bg-gray-300'
+                                } relative inline-flex h-4 w-8 items-center rounded-full transition mt-2`} />
                         <div>Table</div>
                     </div>
 

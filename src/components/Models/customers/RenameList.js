@@ -37,7 +37,7 @@ export default function RenameList({ onClose, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputForm
                     class_="mt-1!"
-                    label="Add New Name"
+                    label={!id ? "Add New Name" : "List Name"}
                     isRequired={true}
                     placeholder="Enter Name"
                     formProps={{ ...register("addNewName", { required: true }) }}
