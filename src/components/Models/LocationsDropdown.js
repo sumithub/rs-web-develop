@@ -3,7 +3,7 @@ import { useState } from "react";
 import Search from "../form/Search";
 import Model from "./Model";
 
-export default function LocationsDropdown({ onClose, id, onLocationSelect, selectedLocation }) {
+export default function LocationsDropdown({ onClose, onLocationSelect, selectedLocation }) {
     const [search, setSearch] = useState("")
 
     // Sample locations data
@@ -26,13 +26,13 @@ export default function LocationsDropdown({ onClose, id, onLocationSelect, selec
         onClose();
     };
 
-    return <Model onClose={onClose} closeButton={false}
+    return <Model closeButton={false}
         modalClass="shadow-[0px_0px_40px_0px_#0000001A]! md:w-full w-full! 2xl:max-w-[100%] xl:max-w-[100%]! max-w-[100%]"
         flexClass="items-start! justify-start!"
-        class_="top-2! absolute! right-0! left-0! inset-0 items-start! justify-end!"
+        class_="top-0! absolute! right-3! left-3! inset-0 items-start! justify-end!"
         modelHeaderClass="bg-white! p-0!"
         modalBodyClass="px-3! pt-3! pb-3!"
-        overlayClass="bg-white! opacity-0!"
+        overlayClass="bg-white! opacity-0! hidden!"
     >
         <div className="pt-1">
             <div>

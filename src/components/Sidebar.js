@@ -13,9 +13,7 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
     const handleLocationSelect = (location) => {
         setSelectedLocation(location);
         localStorage.setItem("location", location)
-        setOpenLocation(false);
     };
-
     useEffect(() => {
         const userList = [
             { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
@@ -172,7 +170,6 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
     }, [role])
 
     return <div className="relative z-50">
-
         <div className={`bg-white h-[100vh] ${collapse ? "w-20" : "w-72"} transition-all fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px] shadow-[0px_16px_44px_0px_#00000012]`}>
             <div className="relative h-full pb-10">
                 <div className="pt-5 text-center relative h-12">
@@ -184,18 +181,20 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 <div className="relative h-full flex flex-col justify-between overflow-y-auto custom-scrollbar pb-10 pt-10 scrollbar-none">
                     <div className="relative">
                         <div
+                            id="location-btn"
                             onClick={() => {
                                 if (collapse) {
                                     toggleSidebar()
+                                } else {
+                                    setOpenLocation(!openLocation)
                                 }
-                                setOpenLocation(!openLocation)
                             }}
-                            className="px-3 mb-4 cursor-pointer">
+                            className="px-3 pb-4 cursor-pointer">
                             <div className={` flex gap-2 items-center justify-between px-4 py-3 text-sm rounded-lg bg-primary text-white`}>
                                 <Image className="shrink-0" src="/sidebar-icons/location.svg" alt="location" height={20} width={20} unoptimized={true} />
 
                                 <div className={`${collapse ? "hidden" : "flex"}  items-center w-full gap-1`}>
-                                    <div className="text-sm font-medium line-clamp-1">{selectedLocation}</div>
+                                    <div className="text-sm font-medium line-clamp-1 capitalize">{selectedLocation}</div>
                                     {/* <button type="button" className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={20} width={20} unoptimized={true} /></button> */}
                                 </div>
                                 <div className={`${collapse ? "hidden" : "flex"}  gap-2`}>
@@ -204,18 +203,16 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                                     <button type="button" className="cursor-pointer"><Image src="/images/add1.svg" alt="add" height={25} width={25} unoptimized={true} className="shrink-0" /></button>
                                 </div>
                             </div>
-
-                            <div>
-                                {openLocation && <LocationsDropdown
-                                    onClose={() => {
-                                        setOpenLocation(false)
-                                    }}
-                                    onLocationSelect={handleLocationSelect}
-                                    selectedLocation={selectedLocation}
-                                />}
-                            </div>
                         </div>
-
+                        <div>
+                            {openLocation && <LocationsDropdown
+                                onClose={() => {
+                                    setOpenLocation(false)
+                                }}
+                                onLocationSelect={handleLocationSelect}
+                                selectedLocation={selectedLocation}
+                            />}
+                        </div>
                         <ul className="flex flex-col gap-y-3 px-3">
                             {list.map((e, i) => {
                                 const submenu = e?.submenu

@@ -13,7 +13,7 @@ import Loading from "../../components/Loading";
 import CustomSelectBox from "../../components/form/CustomSelectBox";
 import Search from "../../components/form/Search";
 import AddTemplate from "../../components/Models/templates/AddTemplate";
-import DeleteModal from "../../components/Models/templates/DeleteTemplate";
+import DeleteModal from "../../components/Models/review/DeleteTemplate";
 
 export default function ReviewResponses() {
 
