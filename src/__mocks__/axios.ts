@@ -1,6 +1,7 @@
 const axiosMock = {
   post: jest.fn(),
   get: jest.fn(),
+  put: jest.fn(),
   create: jest.fn(() => axiosMock), // important for axiosInstance.create()
   interceptors: {
     request: { use: jest.fn() },
