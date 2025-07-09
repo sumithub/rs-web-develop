@@ -38,7 +38,7 @@ export default function SmsPreview({ onClose, id, body }) {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Saved Successfully")
+            toast.success("Sent Successfully")
             setSending(false)
             onClose()
         } catch (error) {
