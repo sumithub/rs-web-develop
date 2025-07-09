@@ -16,8 +16,8 @@ export default function AuditLogDetails({ onClose }) {
         <Model onClose={onClose} title="Audit Log Details" modalClass="w-1/2!">
             {auditLogsDetail.map((e, i) => (<div key={i}>
                 <div className="flex justify-between">
-                    <div className="text-text3 capitalize">{e.name}</div>
-                    <div className="font-medium capitalize">{e.detail}</div>
+                    <div className="text-text3 text-base capitalize">{e.name}</div>
+                    <div className="font-medium text-base capitalize">{e.detail}</div>
                 </div>
 
                 {i !== auditLogsDetail.length - 1 && (
