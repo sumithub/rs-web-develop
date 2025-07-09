@@ -4,6 +4,8 @@ import ChangeEmail from "./ChangeEmail";
 import AuthContext, { AuthContextType } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { changeEmail } from "../../api/authApi";
+import { axiosInstance } from "../../api/axios";
+import API_ENDPOINTS from "../../api/endpoints";
 
 jest.mock("react-toastify", () => ({
   toast: {
@@ -14,6 +16,9 @@ jest.mock("react-toastify", () => ({
 
 jest.mock("../../api/authApi", () => ({
   changeEmail: jest.fn(),
+}));
+jest.mock("axios", () => ({
+  post: jest.fn().mockResolvedValue({ data: {} }),
 }));
 
 const mockSetEmail = jest.fn();
@@ -112,7 +117,68 @@ describe("ChangeEmail Component", () => {
         expect(screen.getByText(/Please enter a valid email address/i)).toBeInTheDocument();
     });
 
+  })
+  it("should throq 400 error if the email is same as current email", async () => {
+    (changeEmail as jest.Mock).mockRejectedValueOnce({
+      response: { status: 400, data: { message: "New email must be different or Email is already verified. You cannot change a verified email address." } }
+    });
+    renderComponent();  
+
+    const input = screen.getByPlaceholderText(/Enter Your Email Address/i);
+    const submit = screen.getByRole("button", { name: /update email/i });
+
+    fireEvent.change(input, { target: { value: "awe@gmail.com" } });
+    fireEvent.click(submit);
+
+    await waitFor(() => {
+      expect(changeEmail).toHaveBeenCalled()
+      expect(toast.error).toHaveBeenCalledWith("New email must be different or Email is already verified. You cannot change a verified email address.");
+     })
   });
+  it("should throw 409 error if the email is already registered", async () => {
+    (changeEmail as jest.Mock).mockRejectedValueOnce({
+      response: { status: 409, data: { message: "New email already exists" } }
+    });
+    renderComponent();  
+
+    const input = screen.getByPlaceholderText(/Enter Your Email Address/i);
+    const submit = screen.getByRole("button", { name: /update email/i });
+
+    fireEvent.change(input, { target: { value: "awe@gmail.com" } });
+    fireEvent.click(submit);
+
+    await waitFor(() => {
+      expect(changeEmail).toHaveBeenCalled()
+      expect(toast.error).toHaveBeenCalledWith("New email already exists");
+     })
+  });
+  it("should show error if user is not found (404)", async () => {
+    (changeEmail as jest.Mock).mockRejectedValueOnce({
+      response: {
+        status: 404,
+        data: {
+          message: "User with current email not found"
+        }
+      }
+    });
+  
+    renderComponent();
+  
+    const input = screen.getByPlaceholderText(/Enter Your Email Address/i);
+    const submit = screen.getByRole("button", { name: /update email/i });
+  
+    fireEvent.change(input, { target: { value: "awe@gmail.com" } });
+    fireEvent.click(submit);
+  
+    await waitFor(() => {
+      expect(changeEmail).toHaveBeenCalled();
+      expect(toast.error).toHaveBeenCalledWith("User with current email not found");
+    });
+  });
+
+
 });
+
+
 
 
