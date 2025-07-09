@@ -184,7 +184,7 @@ function ManageCustomers() {
 
                             <CustomSelectBox
                                 defaultOption="Source"
-                                class_='mt-0! w-24!'
+                                class_='mt-0! w-32!'
                                 value={filterBySource}
                                 onChange={(e) => {
                                     setFilterBySource(e.target.value)

@@ -120,7 +120,7 @@ export default function ClientsManagement() {
 
                     <CustomSelectBox
                         defaultOption="Filter By"
-                        class_='mt-0! w-32!'
+                        class_='mt-0! w-40!'
                         value={filterBy}
                         onChange={(e) => {
                             setFilterBy(e.target.value)

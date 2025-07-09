@@ -78,7 +78,7 @@ export default function CustomersJourney() {
 
                     <CustomSelectBox
                         defaultOption="Sort By"
-                        class_='mt-0! w-36!'
+                        class_='mt-0! w-28!'
                         value={filterBySort}
                         onChange={(e) => {
                             setFilterBySort(e.target.value)
@@ -90,7 +90,7 @@ export default function CustomersJourney() {
 
                     <CustomSelectBox
                         defaultOption="Event Type"
-                        class_='mt-0! w-28!'
+                        class_='mt-0! w-36!'
                         value={filterBy}
                         onChange={(e) => {
                             setFilterBy(e.target.value)
