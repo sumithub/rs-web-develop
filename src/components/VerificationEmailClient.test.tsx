@@ -1,18 +1,22 @@
 import "@testing-library/jest-dom";
 
-import AuthContext, { AuthContextType } from "../contexts/AuthContext";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-import API_ENDPOINTS from "../api/endpoints";
-import { ResendEmailVerificationResponseSchema } from "./schemas/ResendVerificationEmail";
+import AuthContext, { AuthContextType } from "../contexts/AuthContext";
 import VerificationEmailClient from "./VerificationEmailClient";
-import { act } from "react-dom/test-utils";
 import { axiosInstance } from "../api/axios";
 import { resendEmailVerification } from "../api/authApi";
+import API_ENDPOINTS from "../api/endpoints";
 
 const mockedAxios = axiosInstance as jest.Mocked<typeof axiosInstance>;
 
 
+jest.mock("react-toastify", () => ({
+  toast: {
+    success: jest.fn(),
+    error: jest.fn(),
+  },
+}));
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
@@ -29,15 +33,11 @@ const mockAuthContext: AuthContextType = {
 const mockResponseData = 
 "Verification email sent successfully"
 const mockFormData = {  email: "Ex@ge.com.au" };
+const invalidMockFormData = { email: "invalid-email" };
 jest.mock("axios", () => ({
   post: jest.fn().mockResolvedValue({ data: {} }),
 }));
 
-jest.mock("react-toastify", () => ({
-  toast: {
-    success: jest.fn(),
-  },
-}));
 const renderComponent = () =>
   render(
       <AuthContext.Provider value={mockAuthContext}>
@@ -61,44 +61,22 @@ it("should send a verification email and return the parsed response", async () =
     );
     expect(result).toEqual(mockResponseData);
   });
-  it("should throw an error if the API response does not match the schema", async () => {
-    // Mock axios response
+  it("should throw a 400 error for invalid email address", async () => {
     mockedAxios.post.mockResolvedValueOnce({
-        data: { invalid: "data" },
-    });
+      response: { status: 400, data: { message: "Invalid email provided" } }
+  });
 
-    // Mock schema validation failure
-    jest.spyOn(ResendEmailVerificationResponseSchema, "safeParse").mockReturnValueOnce({
-        success: false,
-        error: {
-            flatten: () => ({ fieldErrors: { email: ["Invalid email"] } }),
-        },
-    });
-
-    await expect(resendEmailVerification(mockFormData)).rejects.toThrow(
-        "Invalid API response format"
+    await expect(resendEmailVerification(invalidMockFormData)).rejects.toThrow(
+        	"Invalid email provided"
     );
 
     // Assertions
     expect(axiosInstance.post).toHaveBeenCalledWith(
         API_ENDPOINTS.resendEmail,
-        mockFormData
+        invalidMockFormData
     );
 });
-
-it("should handle network or server errors gracefully ", async () => {
-    // Mock axios throwing an error
-    (axiosInstance.post as jest.Mock).mockRejectedValueOnce(new Error("Network Error"));
-    await expect(resendEmailVerification(mockFormData)).rejects.toThrow(
-        "Network Error"
-    );
-    // Assertions
-    expect(axiosInstance.post).toHaveBeenCalledWith(
-        API_ENDPOINTS.resendEmail,
-        mockFormData
-    );
-
-});   
+  
 it("should start with timer at 60 and button disabled", () => {
   renderComponent();
   expect(screen.getByText(/00.60|01.00/)).toBeInTheDocument(); // seconds format may vary
@@ -117,4 +95,27 @@ it("should start with timer at 60 and button disabled", () => {
     expect(screen.getByText(/00.59|01.00/)).toBeInTheDocument(); // Timer should reset to 59 seconds
     expect(button).toBeDisabled(); // Button should remain disabled
   });
+it("should handle network or server errors gracefully ", async () => {
+    // Mock axios throwing an error
+    (axiosInstance.post as jest.Mock).mockRejectedValueOnce(new Error("Network Error"));
+    await expect(resendEmailVerification(mockFormData)).rejects.toThrow(
+        "Network Error"
+    );
+    // Assertions
+    expect(axiosInstance.post).toHaveBeenCalledWith(
+        API_ENDPOINTS.resendEmail,
+        mockFormData
+    );
+
+}); 
 });
+
+
+
+
+
+
+
+
+
+
