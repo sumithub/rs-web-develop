@@ -509,7 +509,7 @@ export default function Detail({ }) {
                             </div>
                         </div>
                         {customersSelected && <div>
-                            <div className="flex justify-between">
+                            <div className="flex justify-between items-center">
                                 <div>
                                     <div className="flex items-center gap-5 mb-4">
                                         <div className="flex items-center gap-2">
@@ -520,8 +520,16 @@ export default function Detail({ }) {
                                             type="button"
                                             onClick={() => { setOpenCustomer("details") }} />
                                     </div>
-                                </div>
-                                <CancelButton type="button" title="proceed anyway" class_="bg-white! border-border-color! font-normal! text-sm!" />
+                                </div> {watch("customerSource") && <SelectForm
+                                    class_="mt-0!"
+                                    defaultOption="" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                                    formProps={{ ...register("excludeDuplicates", { required: false }) }}
+                                    errors={errors} setValue={setValue}
+                                    watch={watch}>
+                                    <option value="Exclude Duplicates">Exclude Duplicates</option>
+                                    <option value="Proceed Anyway">Proceed Anyway</option>
+                                </SelectForm>}
+                                {/* <CancelButton type="button" title="proceed anyway" class_="bg-white! border-border-color! font-normal! text-sm!" /> */}
                             </div>
                             <div className="grid grid-cols-[3fr_1fr] items-start gap-3">
                                 <SelectForm
@@ -537,7 +545,7 @@ export default function Detail({ }) {
                                     <option value="14">14 Days</option>
                                     <option value="21">21 Days</option>
                                 </SelectForm>
-                                {watch("customerSource") && <SelectForm
+                                {/* {watch("customerSource") && <SelectForm
                                     class_="mt-10"
                                     defaultOption="" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                                     formProps={{ ...register("excludeDuplicates", { required: false }) }}
@@ -545,7 +553,7 @@ export default function Detail({ }) {
                                     watch={watch}>
                                     <option value="Exclude Duplicates">Exclude Duplicates</option>
                                     <option value="Proceed Anyway">Proceed Anyway</option>
-                                </SelectForm>}
+                                </SelectForm>} */}
                             </div>
 
                             <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
@@ -617,7 +625,7 @@ export default function Detail({ }) {
                                 {/* Reminder Email Template Options */}
                                 {selectedTemplates.primary && (
                                     <div className="mt-4">
-                                        <div className="flex items-start gap-4 mt-1 mb-4">
+                                        <div className="flex items-center gap-4 mt-1 mb-4">
                                             <div className="text-gray-600 text-sm font-medium">Reminder Email Template</div>
                                             <div className="flex items-start gap-5">
                                                 <Radio
@@ -661,8 +669,9 @@ export default function Detail({ }) {
                                                 <>
                                                     <div className="flex items-start gap-4 mt-1 mb-4">
                                                         <div className="text-gray-600 text-sm font-medium">Final Reminder Email Template<span className="text-red-500">*</span></div>
-                                                        <div className="flex items-start gap-2">
+                                                        <div className="flex items-start gap-5">
                                                             <Radio
+                                                                class_="mt-0!"
                                                                 name="final"
                                                                 label="Custom final reminder email"
                                                                 checked={campaignType === 'both' ? !sameAsEmailFinal : sameAsFinal === "customFinalReminderEmail"}
@@ -679,6 +688,7 @@ export default function Detail({ }) {
                                                                 showTooltip={true}
                                                             />
                                                             <Radio
+                                                                class_="mt-0!"
                                                                 name="final"
                                                                 label="Same as reminder"
                                                                 checked={campaignType === 'both' ? sameAsEmailFinal : sameAsFinal === "sameAsPrimary"}
@@ -889,11 +899,14 @@ export default function Detail({ }) {
                             </SelectForm>
                         </div>
 
-                        <SelectForm label="Weekend Delivery" defaultOption="Restrict" selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
+                        <SelectForm label="Weekend Delivery" selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
                             formProps={{ ...register("weekendDelivery", { required: false }) }}
                             errors={errors} setValue={setValue}
                             watch={watch}
-                        />
+                        >
+                            <option value="restrict">Restrict</option>
+                            <option value="allow">Allow</option>
+                        </SelectForm>
                     </CampaignCard>
                 </div>
 
