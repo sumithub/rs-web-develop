@@ -302,9 +302,9 @@ export default function BoostRequest({ onClose, onSave, id, customer, isCustomer
                     </div> : ""}
 
                     <div>
+                        <div className="text-secondary font-medium flex items-center mt-5">Choose Campaign <span className="text-neutral-400 font-normal mx-1">(Optional)</span> (<span> <Image src="/images/info-blue.svg" alt="info" height={20} width={20} unoptimized={true} className="ml-1" /> </span> <span className="capitalize text-[13px] ml-2 mr-1">customer will be added to this Campaign for automated follow-ups </span> )</div>
                         <SelectForm
-                            label="Choose Campaign"
-                            labelClass="mb-2.5!"
+                            class_="mt-2!"
                             selectClass_="py-2.5! px-2.5!"
                             formProps={{
                                 ...register("campaign")
@@ -318,10 +318,10 @@ export default function BoostRequest({ onClose, onSave, id, customer, isCustomer
                             <option value="campaign2">Campaign 2</option>
                         </SelectForm>
 
-                        <div className="mt-2.5 flex gap-2.5 items-center">
+                        {/* <div className="mt-2.5 flex gap-2.5 items-center">
                             <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                             <h2 className="text-sm font-medium capitalize">customer will be added to this campaign for automated follow-ups</h2>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="mt-5">
@@ -330,14 +330,14 @@ export default function BoostRequest({ onClose, onSave, id, customer, isCustomer
                                 checked={overrideTemplates}
                                 onChange={() => setOverrideTemplates(!overrideTemplates)}
                             />
-                            <h2 className="text-sm">Override Default Templates?</h2>
+                            <div className="text-sm flex items-center">Override Default Templates? (<span> <Image src="/images/info-blue.svg" alt="info" height={20} width={20} unoptimized={true} className="ml-1" /> </span> <span className="capitalize text-[13px] ml-2 mr-1 font-medium"> unlock to use the Campaign's default templates </span> )</div>
                         </div>
                     </div>
 
-                    <div className="mt-2.5 flex items-center gap-2.5">
+                    {/* <div className="mt-2.5 flex items-center gap-2.5">
                         <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                         <h2 className="text-sm font-medium">Check To Use Custom Templates For This Request. (Uncheck To Apply The Campaign's Defaults)</h2>
-                    </div>
+                    </div> */}
 
                     {overrideTemplates && (
                         <>
@@ -410,12 +410,12 @@ export default function BoostRequest({ onClose, onSave, id, customer, isCustomer
                         </>
                     )}
 
-                    {!overrideTemplates && (
+                    {/* {!overrideTemplates && (
                         <div className="mt-3.5 flex items-center gap-2.5">
                             <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                             <h2 className="text-sm font-medium">Campaign's default templates will apply.</h2>
                         </div>
-                    )}
+                    )} */}
 
                     <div className="mt-3.5">
                         <button
