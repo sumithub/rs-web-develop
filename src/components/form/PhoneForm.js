@@ -14,7 +14,18 @@ export default function PhoneForm({ isRequired = false,
     watch,
     widthClass = ""
 }) {
-    const error = isRequired && (errors?.[formProps?.name]?.message || errors?.[formProps?.name]?.type);
+    let error = "";
+    console.log(errors)
+    if (formProps?.name && errors?.[formProps.name]) {
+        const fieldError = errors[formProps.name];
+        if (fieldError.type === "pattern" || fieldError.type === "validate" || fieldError.type === "minLength") {
+            error = fieldError.message;
+        } else {
+            error = "This field is required";
+        }
+    } else if (formProps?.name && errors?.[formProps.name]?.type) {
+        error = errors[formProps.name]?.message || "This field is required";
+    }
     const value = watch ? watch(formProps.name) : null;
     return (<div className={`mt-4 text-lg relative w-full ${class_}`}>
         {label && <label className={`text-sm font-medium text-secondary mb-1 block capitalize  ${labelClass}`}>{label}{isRequired ? <span className="text-danger">*</span> : <span className="text-neutral-400"> (Optional)</span>}</label>}
