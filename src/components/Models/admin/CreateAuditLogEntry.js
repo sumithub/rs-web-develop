@@ -39,6 +39,8 @@ export default function CreateAuditLogEntry({ onClose, id }) {
 
                 <SelectForm
                     label="Subscription Id"
+                    labelClass="mb-2.5!"
+                    class_="mt-0!"
                     isRequired={true}
                     selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                     formProps={{ ...register("subscriptionId", { required: true }) }} errors={errors} clearErrors={clearErrors}
@@ -52,6 +54,7 @@ export default function CreateAuditLogEntry({ onClose, id }) {
 
                 <SelectForm
                     label="Action"
+                    labelClass="mb-2.5!"
                     isRequired={true}
                     selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                     formProps={{ ...register("action", { required: true }) }} errors={errors} clearErrors={clearErrors}
@@ -66,6 +69,7 @@ export default function CreateAuditLogEntry({ onClose, id }) {
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
                     label="Detail"
+                    labelClass="mb-2.5!"
                     rows={5}
                     isRequired={false}
                     isTextArea={true}
@@ -77,6 +81,7 @@ export default function CreateAuditLogEntry({ onClose, id }) {
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
                     label="Preformed By"
+                    labelClass="mb-2.5!"
                     rows={5}
                     isRequired={true}
                     placeholder=""
@@ -87,6 +92,7 @@ export default function CreateAuditLogEntry({ onClose, id }) {
                 <InputForm
                     inputClass='border-primary/10! focus:border-primary/60!'
                     label="Timestamp"
+                    labelClass="mb-2.5!"
                     rows={5}
                     inputType="date"
                     isRequired={true}
