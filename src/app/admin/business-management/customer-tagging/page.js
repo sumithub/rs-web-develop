@@ -195,7 +195,7 @@ function CustomerTagging() {
                                         /></div></th>
                                 <th>
                                     <div className='flex justify-center'>
-                                        Action
+                                        Actions
                                     </div>
                                 </th>
                             </tr>

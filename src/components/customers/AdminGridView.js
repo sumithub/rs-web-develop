@@ -28,6 +28,7 @@ export default function AdminGridView() {
 
         {openRename &&
             <RenameList
+                id={true}
                 onClose={() => {
                     setOpenRename(false)
                 }}
