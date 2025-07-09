@@ -26,7 +26,12 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
             // { title: "Customers", link: "/campaigns", icon: "customer", submenu: [{ title: "User Management", link: "/users" }] },
             {
                 title: "Reviews", link: "/reviews", icon: "message",
-                submenu: [{ title: "Manage Reviews", link: "/review" }, { title: "Review Widgets", link: "/review-widgets" }, { title: "Review Sources", link: "/review-sources" }]
+                submenu: [{ title: "Manage Reviews", link: "/review" },
+                { title: "Review Sources", link: "/review-sources" },
+                { title: "Review Responses", link: "/review-responses" },
+                { title: "Review Widgets", link: "/review-widgets" },
+
+                ]
             },
             {
                 title: "Campaigns", link: "/campaigns", icon: "campaign",
@@ -106,8 +111,9 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 submenu:
                     [
                         { title: "Manage Reviews", link: "/admin/reviews-oversight" },
-                        { title: "Widgets", link: "/admin/widgets-management" },
                         { title: "Sources", link: "/admin/review-sources" },
+                        { title: "Widgets", link: "/admin/widgets-management" },
+
                     ]
             },
 

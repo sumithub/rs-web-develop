@@ -149,10 +149,10 @@ export const fieldMapping = [
 ]
 
 export const reviewResponse = [
-    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
-    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
-    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
-    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], lastUpdate: "Jun 18,2024" },
 ]
 
 

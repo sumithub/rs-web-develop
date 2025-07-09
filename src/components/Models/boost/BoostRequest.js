@@ -323,7 +323,7 @@ export default function BoostRequest({ onClose, onSave, id, customer, isCustomer
                             checked={overrideTemplates}
                             onChange={() => setOverrideTemplates(!overrideTemplates)}
                         />
-                        <div className="text-sm flex items-center">Override Default Templates? (<span> <Image src="/images/info-blue.svg" alt="info" height={20} width={20} unoptimized={true} className="ml-1" /> </span> <span className="capitalize text-[13px] ml-2 mr-1 font-medium"> unlock to use the Campaign's default templates </span> )</div>
+                        <div className="text-sm flex items-center">Override Default Templates? (<span> <Image src="/images/info-blue.svg" alt="info" height={20} width={20} unoptimized={true} className="ml-1" /> </span> <span className="capitalize text-[13px] ml-2 mr-1 font-medium"> uncheck to use the Campaign's default templates </span> )</div>
                     </div>
                 </div>
 
