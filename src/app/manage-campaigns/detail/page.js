@@ -21,7 +21,6 @@ import { useRouter } from "next/navigation"
 import SelectedCustomers from "../../../components/Models/manage-campaigns/SelectedCustomers"
 import ImportCustomerDetail from "../../../components/Models/manage-campaigns/ImportCustomerDetail"
 import RadioForm from "../../../components/form/RadioForm"
-import Link from "next/link"
 
 export default function Detail({ }) {
     const id = ""
@@ -37,6 +36,8 @@ export default function Detail({ }) {
     const [expandAll, setExpandAll] = useState(undefined)
     const [openPreview, setOpenPreview] = useState(false)
     const router = useRouter()
+    const [selId, setSelId] = useState("")
+
     const [cardStatuses, setCardStatuses] = useState({
         campaignDetails: 'pending',
         targeting: 'pending',
@@ -106,7 +107,6 @@ export default function Detail({ }) {
     const handleEmailReminderToggle = (value) => {
         setEmailReminderEnabled(value === 'sameAsPrimary');
     };
-
 
 
     const watchedFields = watch()
@@ -320,15 +320,19 @@ export default function Detail({ }) {
                                     Preview
                                 </button>
 
-                                <Link href="/create-email-template"
+                                <button
                                     className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:opacity-50 disabled:cursor-not-allowed"
-                                    // onClick={() => setOpenModal(true)}
+                                    // onClick={() => setOpenModal(true) }
+                                    onClick={(el) => {
+                                        setSelId("e.id")
+                                        setOpenModal(el)
+                                    }}
                                     type="button"
                                     disabled={!hasTemplate}
                                 >
                                     <Image src="/images/edit2.svg" alt='edit' height={14} width={14} unoptimized={true} />
                                     Edit
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -343,9 +347,20 @@ export default function Detail({ }) {
         cardClass="w-[70%]! relative h-[85vh] overflow-y-auto pt-0! scrollbar-none">
         {openModal &&
             <AddTemplate
+                id={selId}
                 onClose={() => {
-                    setOpenModal(false)
+                    setOpenModal(false);
+                    setSelId("");
                 }}
+                onSave={() => {
+
+                    setOpenModal(false);
+                    setSelId("");
+                }}
+
+            // onClose={() => {
+            //     setOpenModal(false)
+            // }}
             />
         }
 
@@ -437,7 +452,7 @@ export default function Detail({ }) {
                         title="Campaign Details"
                         status={getCardStatus('campaignDetails')}>
                         <div>
-                            <div className="grid grid-cols-2 gap-3">
+                            <div className="grid grid-cols-1 gap-3">
                                 <InputForm
                                     label="Campaign Name"
                                     placeholder="Enter Name"
@@ -509,9 +524,9 @@ export default function Detail({ }) {
                             </div>
                         </div>
                         {customersSelected && <div>
-                            <div className="flex justify-between items-center">
+                            <div className="flex justify-between items-start mb-4">
                                 <div>
-                                    <div className="flex items-center gap-5 mb-4">
+                                    <div className="flex items-center gap-5">
                                         <div className="flex items-center gap-2">
                                             <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                                             <div className="text-danger text-lg font-semibold capitalize">{customersSelected || 5} customers are already in an active campaign?</div>
@@ -522,7 +537,7 @@ export default function Detail({ }) {
                                     </div>
                                 </div> {watch("customerSource") && <SelectForm
                                     class_="mt-0!"
-                                    defaultOption="" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                                    defaultOption="" selectClass_="bg-white! py-2! border-primary/10! focus:border-primary/60!"
                                     formProps={{ ...register("excludeDuplicates", { required: false }) }}
                                     errors={errors} setValue={setValue}
                                     watch={watch}>
@@ -531,7 +546,7 @@ export default function Detail({ }) {
                                 </SelectForm>}
                                 {/* <CancelButton type="button" title="proceed anyway" class_="bg-white! border-border-color! font-normal! text-sm!" /> */}
                             </div>
-                            <div className="grid grid-cols-[3fr_1fr] items-start gap-3">
+                            <div className="grid grid-cols-1 items-start gap-3">
                                 <SelectForm
                                     label="Cooldown Period"
                                     isRequired={true}
