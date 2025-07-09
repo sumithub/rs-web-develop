@@ -181,7 +181,7 @@ export default function SmsPreview({ onClose, id, body }) {
                                     <h3 className="text-xs pt-5">&#123;Business_name&#125;</h3>
                                 </div> */}
                             </div>
-                            <Image src="/images/template.png" alt="template" width={407} height={196} className="mt-7 w-full h-auto" />
+                            {/* <Image src="/images/template.png" alt="template" width={407} height={196} className="mt-7 w-full h-auto" /> */}
                         </div>
                     </div>
                 </div>

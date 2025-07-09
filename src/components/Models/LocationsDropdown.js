@@ -27,9 +27,9 @@ export default function LocationsDropdown({ onClose, id, onLocationSelect, selec
     };
 
     return <Model onClose={onClose} closeButton={false}
-        modalClass="w-[14%]! shadow-[0px_0px_40px_0px_#0000001A]!"
+        modalClass="w-full! shadow-[0px_0px_40px_0px_#0000001A]!"
         flexClass="items-start! justify-start!"
-        class_="top-36! left-3! inset-0 items-start! justify-end!"
+        class_="top-2! absolute! right-2! left-2! inset-0 items-start! justify-end!"
         modelHeaderClass="bg-white! p-0!"
         modalBodyClass="px-2! pb-3!"
         overlayClass="bg-white! opacity-0!"
