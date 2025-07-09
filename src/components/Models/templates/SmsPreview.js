@@ -170,7 +170,7 @@ export default function SmsPreview({ onClose, id, body }) {
                                 </button>
                             </div>
                             <div className={`mt-7 border border-dark rounded-[10px] `}>
-                                <div className='tiptap p-2.5'
+                                <div className='tiptap p-5'
                                     dangerouslySetInnerHTML={{ __html: body }}
                                 />
                                 {/* <div className="p-2.5">

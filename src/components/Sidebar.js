@@ -177,14 +177,23 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 </div>
                 <div className="relative h-full flex flex-col justify-between overflow-y-auto custom-scrollbar pb-10 pt-10 scrollbar-none">
                     <div className="relative">
-                        <div onClick={() => { setOpenLocation(true) }} className="px-3 mb-4 cursor-pointer">
-                            <div className="flex gap-1 items-center justify-between p-3 text-sm rounded-lg bg-primary text-white">
+                        <div
+                            onClick={() => {
+                                if (collapse) {
+                                    toggleSidebar()
+                                }
+                                setOpenLocation(!openLocation)
+                            }}
+                            className="px-3 mb-4 cursor-pointer">
+                            <div className={` flex gap-2 items-center justify-between px-4 py-3 text-sm rounded-lg bg-primary text-white`}>
                                 <Image className="shrink-0" src="/sidebar-icons/location.svg" alt="location" height={20} width={20} unoptimized={true} />
-                                <div className="flex items-center w-full gap-1">
+
+                                <div className={`${collapse ? "hidden" : "flex"}  items-center w-full gap-1`}>
                                     <div className="text-sm font-medium line-clamp-1">{selectedLocation}</div>
                                     {/* <button type="button" className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={20} width={20} unoptimized={true} /></button> */}
                                 </div>
-                                <div className="flex gap-2">
+                                <div className={`${collapse ? "hidden" : "flex"}  gap-2`}>
+
                                     <button type="button" className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={25} width={25} unoptimized={true} className="shrink-0" /></button>
                                     <button type="button" className="cursor-pointer"><Image src="/images/add1.svg" alt="add" height={25} width={25} unoptimized={true} className="shrink-0" /></button>
                                 </div>

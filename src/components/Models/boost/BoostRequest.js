@@ -85,7 +85,7 @@ export default function BoostRequest({ onClose, onSave, id, customer, isCustomer
         }
     }
 
-
+    console.log(errors)
     const handleCustomerSelection = (customers) => {
         // If multiple customers were passed as initial selection, merge them with new ones
         setSelectedCustomers(prev => {
@@ -256,12 +256,13 @@ export default function BoostRequest({ onClose, onSave, id, customer, isCustomer
                                 placeholder="Enter phone number"
                                 formProps={{
                                     ...register("phone", {
-                                        required: "Phone number is required",
+                                        required: true,
                                     })
                                 }}
                                 errors={errors}
                                 setValue={setValue}
                                 watch={watch}
+                                clearErrors={clearErrors}
                             />
                         </div>
                         <div className="text-end mt-3">
