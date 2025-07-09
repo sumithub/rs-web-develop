@@ -41,10 +41,10 @@ export default function ReviewSources() {
                 <h2 className="text-sm text-text3 pt-1 capitalize">Connect your business to review platforms</h2>
             </div>
             <div className=" flex gap-3.5">
-                <div className="w-80">
+                <div className="w-96">
                     <Search
                         mainClass='w-full!'
-                        placeholder="Search by Review Sources"
+                        placeholder="Search Review Platforms"
                         onSearch={(s) => {
                             setSearch(s)
                         }}
