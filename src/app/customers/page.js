@@ -79,6 +79,7 @@ function Customers() {
 
             {openBoost &&
                 <BoostRequest
+                    isCustomer={true}
                     customer={boostCustomer}
                     onClose={() => {
                         setOpenBoost(false)
