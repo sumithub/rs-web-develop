@@ -27,11 +27,11 @@ export default function LocationsDropdown({ onClose, id, onLocationSelect, selec
     };
 
     return <Model onClose={onClose} closeButton={false}
-        modalClass="w-full! shadow-[0px_0px_40px_0px_#0000001A]!"
+        modalClass="shadow-[0px_0px_40px_0px_#0000001A]! md:w-full w-full! 2xl:max-w-[100%] xl:max-w-[100%]! max-w-[100%]"
         flexClass="items-start! justify-start!"
-        class_="top-2! absolute! right-2! left-2! inset-0 items-start! justify-end!"
+        class_="top-2! absolute! right-0! left-0! inset-0 items-start! justify-end!"
         modelHeaderClass="bg-white! p-0!"
-        modalBodyClass="px-2! pb-3!"
+        modalBodyClass="px-3! pt-3! pb-3!"
         overlayClass="bg-white! opacity-0!"
     >
         <div className="pt-1">
@@ -51,7 +51,7 @@ export default function LocationsDropdown({ onClose, id, onLocationSelect, selec
                 return (
                     <div key={index}>
                         <div
-                            className={`${isSelected ? "bg-dark p-2.5 rounded-md" : ""} cursor-pointer hover:bg-gray-100 rounded-md ${isSelected ? "" : "p-2.5"}`}
+                            className={`${isSelected ? "bg-dark p-2 rounded-md" : ""} cursor-pointer rounded-md ${isSelected ? "" : ""}`}
                             onClick={() => handleLocationSelect(location)}
                         >
                             <h2 className={`text-sm capitalize ${isSelected ? "text-primary" : "text-text3"}`}>
