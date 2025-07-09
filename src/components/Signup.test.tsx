@@ -3,6 +3,9 @@ import "@testing-library/jest-dom";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import Signup from "./Signup";
+import { axiosInstance } from "../api/axios";
+import { signup } from "../api/authApi";
+import AuthContext, { AuthContextType } from "../contexts/AuthContext";
 
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
@@ -17,12 +20,31 @@ jest.mock("axios", () => ({
 jest.mock("react-toastify", () => ({
   toast: {
     success: jest.fn(),
+    error: jest.fn(),
   },
 }));
+jest.mock("axios", () => ({
+  post: jest.fn().mockResolvedValue({ data: {} }),
+}));
+jest.mock("../api/authApi", () => ({
+  signup: jest.fn(),
+}));
 
+const mockSetEmail = jest.fn();
+const mockedAxios = axiosInstance as jest.Mocked<typeof axiosInstance>;
+const mockAuthContext: AuthContextType = {
+  unVerifiedEmail: "current@example.com",
+  setEmail: mockSetEmail,
+};
+const renderComponent = () =>
+  render(
+      <AuthContext.Provider value={mockAuthContext}>
+      <Signup />
+    </AuthContext.Provider>
+  );
 describe("Signup - Validation Errors", () => {
   beforeEach(() => {
-    render(<Signup />);
+    renderComponent();
   });
 
   it("shows error when full name is too short", async () => {
@@ -79,4 +101,93 @@ describe("Signup - Validation Errors", () => {
       ).toBeInTheDocument()
     );
   });
+  it("should throw 400 error if the user already exists", async () => {
+    (signup as jest.Mock).mockRejectedValueOnce({
+      response: { status: 400, data: { message: "User already exists" } }
+      });
+    const nameInput = screen.getByPlaceholderText("Enter Your Full Name");
+    const emailInput = screen.getByPlaceholderText("Enter Your Email Address");
+    const passwordInput = screen.getByPlaceholderText("Create A Password");
+    const checkbox = screen.getByRole("checkbox");
+    const button = screen.getByRole("button", { name: /Create Account/i });
+    fireEvent.change(nameInput, { target: { value: "Ana Maria" } });
+    fireEvent.change(emailInput, { target: { value: "ana@example.com" } });
+    fireEvent.change(passwordInput, { target: { value: "Passw0rd@" } });
+    fireEvent.click(checkbox);
+    fireEvent.click(button);
+    // Check if the mocked axios post was called with the correct endpoint and data
+    await waitFor(() => {
+    expect(screen.getByText(/User already exists/i)).toBeInTheDocument();
+   })
+})
+it("should throw 401 error if we hit the wrong api", async () => {
+  (signup as jest.Mock).mockRejectedValueOnce({
+    response: { status: 400, data: { message: "Unauthorized" } }
+    });
+  const nameInput = screen.getByPlaceholderText("Enter Your Full Name");
+  const emailInput = screen.getByPlaceholderText("Enter Your Email Address");
+  const passwordInput = screen.getByPlaceholderText("Create A Password");
+  const checkbox = screen.getByRole("checkbox");
+  const button = screen.getByRole("button", { name: /Create Account/i });
+  fireEvent.change(nameInput, { target: { value: "Ana Maria" } });
+  fireEvent.change(emailInput, { target: { value: "ana@example.com" } });
+  fireEvent.change(passwordInput, { target: { value: "Passw0rd@" } });
+  fireEvent.click(checkbox);
+  fireEvent.click(button);
+  // Check if the mocked axios post was called with the correct endpoint and data
+  await waitFor(() => {
+  expect(screen.getByText(/Unauthorized/i)).toBeInTheDocument();
+ })
+})
+it("should update context with email after successful signup", async () => {
+ 
+  const mockEmail = "ana@example.com";
+
+  // Mock the API response
+  (signup as jest.Mock).mockResolvedValueOnce({
+    mockVerificationLink: "http://localhost/verify", // optional
+  });
+
+  const nameInput = screen.getByPlaceholderText("Enter Your Full Name");
+    const emailInput = screen.getByPlaceholderText("Enter Your Email Address");
+    const passwordInput = screen.getByPlaceholderText("Create A Password");
+    const checkbox = screen.getByRole("checkbox");
+    const button = screen.getByRole("button", { name: /Create Account/i });
+    fireEvent.change(nameInput, { target: { value: "Ana Maria" } });
+    fireEvent.change(emailInput, { target: { value: "ana@example.com" } });
+    fireEvent.change(passwordInput, { target: { value: "Passw0rd@" } });
+    fireEvent.click(checkbox);
+    fireEvent.click(button);
+
+  // Wait for async form submit to resolve
+  await waitFor(() => {
+    expect(signup).toHaveBeenCalled();
+    expect(mockSetEmail).toHaveBeenCalledWith(mockEmail);
+  });
+})
+it("should throw 403 error if user is not allowed to register", async () => {
+  (signup as jest.Mock).mockRejectedValueOnce({
+    response: {
+      status: 403,
+      data: { message: "Unauthorised" },
+    },
+  });
+
+  const nameInput = screen.getByPlaceholderText("Enter Your Full Name");
+  const emailInput = screen.getByPlaceholderText("Enter Your Email Address");
+  const passwordInput = screen.getByPlaceholderText("Create A Password");
+  const checkbox = screen.getByRole("checkbox");
+  const button = screen.getByRole("button", { name: /Create Account/i });
+
+  fireEvent.change(nameInput, { target: { value: "Ana Maria" } });
+  fireEvent.change(emailInput, { target: { value: "ana@example.com" } });
+  fireEvent.change(passwordInput, { target: { value: "Passw0rd@" } });
+  fireEvent.click(checkbox);
+  fireEvent.click(button);
+
+  await waitFor(() => {
+    expect(screen.getByText(/Unauthorised/i)).toBeInTheDocument();
+  });
 });
+
+})
