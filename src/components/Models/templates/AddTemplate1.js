@@ -112,7 +112,6 @@ function AddTemplate({ onClose, id }) {
 
             <div className='mt-5'>
               <HtmlEditor
-
                 label="Email Body"
                 isRequired={true}
                 value={body}
