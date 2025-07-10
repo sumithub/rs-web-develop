@@ -30,7 +30,7 @@ export default function CustomersJourney() {
 
     useEffect(() => {
         getUsers()
-    }, [search, filterBy, date, filterBySort, sortBy])
+    }, [search, filterBy, date, filterBySort, sortBy, enabled])
 
     const getUsers = async () => {
         try {

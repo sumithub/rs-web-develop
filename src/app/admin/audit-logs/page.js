@@ -32,7 +32,7 @@ export default function AuditLogs() {
 
     useEffect(() => {
         getUsers()
-    }, [search, filterBy, date, filterByClient, filterByType, sortBy])
+    }, [search, filterBy, date, filterByClient, filterByType, sortBy, enabled])
 
     const getUsers = async () => {
         try {
