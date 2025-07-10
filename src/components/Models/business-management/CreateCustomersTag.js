@@ -85,7 +85,7 @@ export default function CreateCustomersTag({ onClose, id }) {
                     />
 
                     <div className="flex justify-between items-center mt-3.5">
-                        <div className="font-semibold">
+                        <div className="font-semibold text-lg">
                             Select Customers From List
                         </div>
                         <SecondaryButton title="add customers" type="button" onClick={() => { setOpen(true) }} class_="text-xs font-normal py-2.5!" />
