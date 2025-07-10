@@ -44,6 +44,7 @@ export default function HtmlEditor({
         { value: "first_name", label: "Customer First Name", type: "email" },
         { value: "business_name", label: "Business Name", type: "email" },
         { value: "direct_feedback", label: "Direct Feedback", type: "email" },
+
         { value: "full_name", label: "Customer Full Name", type: "reviewResponseTemplate" },
         { value: "first_name", label: "Customer First Name", type: "reviewResponseTemplate" },
         { value: "direct_feedback", label: "Direct Feedback", type: "reviewResponseTemplate" },
