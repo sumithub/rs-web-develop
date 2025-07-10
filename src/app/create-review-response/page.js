@@ -49,7 +49,9 @@ export default function CreateReviewResponse() {
             <div className='flex items-start gap-4'>
                 <div className='w-[60%]'>
                     <div>
-                        <h2 className="capitalize text-lg font-semibold">Create review response</h2>
+                        {/* <h2 className="capitalize text-lg font-semibold">{`${id && id !== "create" ? "Edit" : "Create"} Review Response`}</h2> */}
+                        <h2 className="capitalize text-lg font-semibold">Create Review Response</h2>
+
                         <InputForm
                             inputClass='border-primary/10! focus:border-primary/60!'
                             label="Template Name"
@@ -61,37 +63,48 @@ export default function CreateReviewResponse() {
                         />
 
                         <div className="pt-5">
-                            <h2 className="text-sm font-medium">Rating Applied<span className="text-danger">*</span></h2>
+                            <h2 className="text-sm font-medium">Rating Applied <span className="text-danger">*</span></h2>
                             <div className="flex items-center gap-5 pt-2.5">
                                 <div className="flex items-center gap-2.5">
-                                    <CheckboxForm />
+                                    <CheckboxForm formProps={{ ...register("rating1") }} errors={errors} />
                                     <Image src="/images/star.svg" alt="star" width={18} height={18} />
                                 </div>
                                 <div className="flex items-center gap-2.5">
-                                    <CheckboxForm />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <CheckboxForm formProps={{ ...register("rating2") }} errors={errors} />
+                                    <div className="flex items-center gap-3">
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    </div>
                                 </div>
                                 <div className="flex items-center gap-2.5">
-                                    <CheckboxForm />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <CheckboxForm formProps={{ ...register("rating3") }} errors={errors} />
+                                    <div className="flex items-center gap-3">
+
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    </div>
                                 </div>
                                 <div className="flex items-center gap-2.5">
-                                    <CheckboxForm />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <CheckboxForm formProps={{ ...register("rating4") }} errors={errors} />
+                                    <div className="flex items-center gap-3">
+
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    </div>
                                 </div>
                                 <div className="flex items-center gap-2.5">
-                                    <CheckboxForm />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <CheckboxForm formProps={{ ...register("rating5") }} errors={errors} />
+                                    <div className="flex items-center gap-3">
+
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    </div>
                                 </div>
                             </div>
                         </div>

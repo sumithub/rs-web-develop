@@ -60,8 +60,8 @@ export default function ReviewsOversight() {
                 <DashboardCard title="Positive Reviews" count="78%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
                 <DashboardCard title="Neutral Reviews" count="15%" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-yellow" bgImage="bg-[url('/images/active3.png')]" />
                 <DashboardCard title="Negative Reviews" count="7%" img="/images/chart-2.svg" bgClass="bg-danger" textColor="text-danger" bgImage="bg-[url('/images/negative.png')]" />
-                <DashboardCard title="Most Reviewed Business" count="1,245" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-yellow" bgImage="bg-[url('/images/active3.png')]" />
-                <DashboardCard title=" Most Active Review Source" count="65%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
+                <DashboardCard title="Most Reviewed Business" count="1,245" type="abc dental" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-yellow" bgImage="bg-[url('/images/active3.png')]" />
+                <DashboardCard title=" Most Active Review Source" count="65%" type="google" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
             </div>
 
             {open &&
