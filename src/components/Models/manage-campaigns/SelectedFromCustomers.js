@@ -67,7 +67,7 @@ function SelectedCustomers({ onClose, onSave }) {
             </div>
 
             <div className="table-class overflow-y-auto!">
-                {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+                {loading ? <Loading class_="min-h-[400px]!" /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
                             <th><TableOrder title="Customer Name"

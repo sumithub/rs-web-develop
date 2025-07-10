@@ -86,6 +86,7 @@ export default function ReviewsOversight() {
                     < div className="flex items-center gap-2">
                         <div className="text-sm font-medium">Table View</div>
                         <Switch
+                            switchClass_="w-9!"
                             checked={enabled}
                             onChange={setEnabled}
                             class_={`${enabled ? 'bg-green-500' : 'bg-gray-300'

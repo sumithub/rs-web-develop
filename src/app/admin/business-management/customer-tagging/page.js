@@ -120,7 +120,7 @@ function CustomerTagging() {
                 <div>
                     <div className="flex justify-between items-start w-full mb-5 mt-3.5">
                         <Search
-                            mainClass='max-w-[270px]!'
+                            mainClass='w-80!'
                             placeholder="Search by Tags"
                             onSearch={(s) => {
                                 setSearch(s)
