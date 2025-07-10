@@ -11,6 +11,7 @@ import { getError } from "../../../helper"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import Image from "next/image"
+import CheckboxForm from "../../components/form/CheckboxForm"
 
 export default function CreateReviewResponse() {
     const id = ""
@@ -47,7 +48,8 @@ export default function CreateReviewResponse() {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className='flex items-start gap-4'>
                 <div className='w-[60%]'>
-                    <div className='shadow-sm rounded-[10px] px-5 pb-5 pt-3 mt-4 '>
+                    <div>
+                        <h2 className="capitalize text-lg font-semibold">Create review response</h2>
                         <InputForm
                             inputClass='border-primary/10! focus:border-primary/60!'
                             label="Template Name"
@@ -58,6 +60,41 @@ export default function CreateReviewResponse() {
                             errors={errors}
                         />
 
+                        <div className="pt-5">
+                            <h2 className="text-sm font-medium">Rating Applied<span className="text-danger">*</span></h2>
+                            <div className="flex items-center gap-5 pt-2.5">
+                                <div className="flex items-center gap-2.5">
+                                    <CheckboxForm />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                </div>
+                                <div className="flex items-center gap-2.5">
+                                    <CheckboxForm />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                </div>
+                                <div className="flex items-center gap-2.5">
+                                    <CheckboxForm />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                </div>
+                                <div className="flex items-center gap-2.5">
+                                    <CheckboxForm />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                </div>
+                                <div className="flex items-center gap-2.5">
+                                    <CheckboxForm />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                </div>
+                            </div>
+                        </div>
                         <div className='mt-5'>
                             <HtmlEditor
                                 label="Response Test"
@@ -72,8 +109,8 @@ export default function CreateReviewResponse() {
                             />
                         </div>
 
-                        <div className="flex items-center justify-center w-full mx-auto gap-3.5 mt-5">
-                            <CancelButton title="Cancel" class_="text-lg! w-full!" />
+                        <div className="grid grid-cols-2 gap-5 mt-7">
+                            <CancelButton title="Cancel" class_="text-lg!" />
                             <SecondaryButton title="Save" type="submit" disabled={sending} class_="text-lg!" />
                         </div>
                     </div>
