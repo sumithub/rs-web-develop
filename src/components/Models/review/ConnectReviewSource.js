@@ -6,7 +6,7 @@ import Model from "../Model";
 import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import InputForm from "../../form/InputForm";
 import SelectForm from "../../form/SelectForm";
@@ -14,6 +14,10 @@ import SelectForm from "../../form/SelectForm";
 export default function ConnectReviewSource({ onClose, onSave, id }) {
     const { register, handleSubmit, clearErrors, formState: { errors }, watch, setValue } = useForm();
     const [sending, setSending] = useState(false)
+
+    useEffect(() => {
+        setValue("url", "https://www.yelp.com");
+    }, [setValue]);
 
     const onSubmit = async (data) => {
         try {
@@ -34,6 +38,8 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
             setSending(false)
         }
     }
+
+
     return (
         <Model onClose={onClose} title="Connect Review Source" modalClass="w-[50%]!">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -57,10 +63,11 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
                 </div>
                 <InputForm
                     label="Business Profile URL"
-                    placeholder="Add URL"
+                    placeholder="https://www.yelp.com"
                     hideOptional={true}
                     isRequired={true}
                     icon="/images/add-link.svg"
+                    defaultValue={watch("url") || ""}
                     infoIcon="/images/url.svg"
                     formProps={{ ...register("url", { required: true }) }}
                     errors={errors}
