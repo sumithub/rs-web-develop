@@ -4,7 +4,7 @@ import SecondaryButton from "../../common/SecondaryButton";
 import SelectForm from "../../form/SelectForm";
 import InputForm from "../../form/InputForm";
 import CancelButton from "../../common/CancelButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import axios from "axios";
@@ -14,6 +14,10 @@ export default function NewSubscription({ onClose, id }) {
     const { register, handleSubmit, setValue, formState: { errors }, watch, clearErrors } = useForm();
     const [sending, setSending] = useState("")
     const [openClient, setOpenClient] = useState(false)
+
+    useEffect(() => {
+        setValue("currentPlan", "Basic")
+    }, [setValue])
 
     const onSubmit = async (data) => {
         try {
@@ -68,10 +72,10 @@ export default function NewSubscription({ onClose, id }) {
                     label="Current Plan"
                     labelClass="mb-2.5!"
                     class_="mt-0!"
-                    isRequired={false}
+                    isRequired={true}
                     disabled={true}
-                    placeholder="Basic"
-                    formProps={{ ...register("currentPlan", { required: false }) }}
+                    placeholder=""
+                    formProps={{ ...register("currentPlan", { required: true }) }}
                     errors={errors}
                 />}
 
