@@ -315,7 +315,7 @@ export default function AddReview({ heading = "", onClose, OnSave, id, onNext })
                                     inputClass="border border-primary3/10 py-[13.2px]! px-2.5! bg-white!"
                                     labelClass="pb-2.5! inline-block"
                                     class_="mt-0!"
-                                    type="number"
+                                    inputType="number"
                                 />
                             </div>
                             {validationErrors.colorScheme && <p className="text-red-500 text-xs mt-1">{validationErrors.colorScheme}</p>}
@@ -346,7 +346,7 @@ export default function AddReview({ heading = "", onClose, OnSave, id, onNext })
                                         inputClass="border border-primary3/10 p-2.5! bg-white!"
                                         labelClass="pb-2.5! inline-block"
                                         class_="mt-0!"
-                                        type="number"
+                                        inputType="number"
                                     />
                                 )}
 

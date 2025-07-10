@@ -8,7 +8,7 @@ export default function InputForm({ icon2 = "", infoIcon, class_ = "", watch, se
 
     if (formProps?.name && errors?.[formProps.name]) {
         const fieldError = errors[formProps.name];
-        if (fieldError.type === "pattern" || fieldError.type === "validate" || fieldError.type === "minLength") {
+        if (fieldError.type === "pattern" || fieldError.type === "validate" || fieldError.type === "minLength" || fieldError.type === "min") {
             error = fieldError.message;
         } else {
             error = "This field is required";
