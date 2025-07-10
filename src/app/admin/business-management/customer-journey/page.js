@@ -26,7 +26,7 @@ export default function CustomersJourney() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
-    const [enabled, setEnabled] = useState(false)
+    const [enabled, setEnabled] = useState(true)
 
     useEffect(() => {
         getUsers()
