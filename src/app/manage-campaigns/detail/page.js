@@ -225,6 +225,8 @@ export default function Detail({ }) {
             }
             toast.success("Campaign Created Successfully")
             setSending(false)
+            router.push("/manage-campaigns")
+
         } catch (error) {
             toast.error(getError(error))
             setSending(false)
@@ -758,7 +760,9 @@ export default function Detail({ }) {
                                         formProps={{
                                             ...register("emailReminderNo", {
                                                 required: emailReminderEnabled,
-                                                valueAsNumber: true
+                                                valueAsNumber: true,
+                                                min: { value: 0, message: "The number of reminders must be 1 or greater." }
+
                                             })
                                         }} inputType="number"
                                         errors={errors} />
@@ -878,7 +882,9 @@ export default function Detail({ }) {
                                                         formProps={{
                                                             ...register("smsReminderNo", {
                                                                 required: smsReminderEnabled,
-                                                                valueAsNumber: true
+                                                                valueAsNumber: true,
+                                                                min: { value: 0, message: "The number of reminders must be 1 or greater." }
+
                                                             })
                                                         }} inputType="number"
                                                         errors={errors} />
@@ -906,7 +912,7 @@ export default function Detail({ }) {
                             <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-[13.6px]! focus:border-primary/60! border-primary/10!"
                                 formProps={{ ...register("sendTime", { required: true }) }}
                                 errors={errors} setValue={setValue}
-                                watch={watch}>
+                                watch={watch} clearErrors={clearErrors}>
                                 <option value="morning">morning (8 AM - 12 PM)</option>
                                 <option value="afternoon">afternoon (12 PM - 4 PM)</option>
                                 <option value="evening">evening (4 PM - 8 PM)</option>

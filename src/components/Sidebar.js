@@ -4,11 +4,15 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import LocationsDropdown from "../components/Models/LocationsDropdown"
+import AddNewLocation from '../components/Models/location/AddNewLocation'
+import { useRole } from "../utils/hooks";
 
 export default function Sidebar({ collapse, toggleSidebar, role }) {
     const [list, setList] = useState([])
     const [openLocation, setOpenLocation] = useState(false)
     const [selectedLocation, setSelectedLocation] = useState("Select Location")
+    const [open, setOpen] = useState(false)
+    const { isAdmin } = useRole();
 
     const handleLocationSelect = (location) => {
         setSelectedLocation(location);
@@ -170,6 +174,13 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
     }, [role])
 
     return <div className="relative z-50">
+        {open &&
+            <AddNewLocation
+                onClose={() => {
+                    setOpen(false)
+                }}
+            />
+        }
         <div className={`bg-white h-[100vh] ${collapse ? "w-20" : "w-72"} transition-all fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px] shadow-[0px_16px_44px_0px_#00000012]`}>
             <div className="relative h-full pb-10">
                 <div className="pt-5 text-center relative h-12">
@@ -180,39 +191,42 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 </div>
                 <div className="relative h-full flex flex-col justify-between overflow-y-auto custom-scrollbar pb-10 pt-10 scrollbar-none">
                     <div className="relative">
-                        <div
-                            id="location-btn"
-                            onClick={() => {
-                                if (collapse) {
-                                    toggleSidebar()
-                                } else {
-                                    setOpenLocation(!openLocation)
-                                }
-                            }}
-                            className="px-3 pb-4 cursor-pointer">
-                            <div className={` flex gap-2 items-center justify-between px-4 py-3 text-sm rounded-lg bg-primary text-white`}>
-                                <Image className="shrink-0" src="/sidebar-icons/location.svg" alt="location" height={20} width={20} unoptimized={true} />
 
-                                <div className={`${collapse ? "hidden" : "flex"}  items-center w-full gap-1`}>
-                                    <div className="text-sm font-medium line-clamp-1 capitalize">{selectedLocation}</div>
-                                    {/* <button type="button" className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={20} width={20} unoptimized={true} /></button> */}
-                                </div>
-                                <div className={`${collapse ? "hidden" : "flex"}  gap-2`}>
+                        {!isAdmin && <>
+                            <div
+                                className="px-3 pb-4">
+                                <div className={`flex gap-2 items-center justify-between px-4 py-3 text-sm rounded-lg bg-primary text-white`}>
+                                    <Image className="shrink-0" src="/sidebar-icons/location.svg" alt="location" height={20} width={20} unoptimized={true} />
 
-                                    <button type="button" className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={25} width={25} unoptimized={true} className="shrink-0" /></button>
-                                    <button type="button" className="cursor-pointer"><Image src="/images/add1.svg" alt="add" height={25} width={25} unoptimized={true} className="shrink-0" /></button>
+                                    <div className={`${collapse ? "hidden" : "flex"}  items-center w-full gap-1`}>
+                                        <div className="text-sm font-medium line-clamp-1 capitalize">{selectedLocation}</div>
+                                        {/* <button type="button" className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={20} width={20} unoptimized={true} /></button> */}
+                                    </div>
+                                    <div className={`${collapse ? "hidden" : "flex"}  gap-2`}>
+
+                                        <button id="location-btn"
+                                            onClick={() => {
+                                                if (collapse) {
+                                                    toggleSidebar()
+                                                } else {
+                                                    setOpenLocation(!openLocation)
+                                                }
+                                            }} type="button" className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={25} width={25} unoptimized={true} className="shrink-0" /></button>
+                                        <button onClick={() => { setOpen(true) }} type="button" className="cursor-pointer"><Image src="/images/add1.svg" alt="add" height={25} width={25} unoptimized={true} className="shrink-0" /></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            {openLocation && <LocationsDropdown
-                                onClose={() => {
-                                    setOpenLocation(false)
-                                }}
-                                onLocationSelect={handleLocationSelect}
-                                selectedLocation={selectedLocation}
-                            />}
-                        </div>
+                            <div>
+                                {openLocation && <LocationsDropdown
+                                    onClose={() => {
+                                        setOpenLocation(false)
+                                    }}
+                                    onLocationSelect={handleLocationSelect}
+                                    selectedLocation={selectedLocation}
+                                />}
+                            </div>
+                        </>}
+
                         <ul className="flex flex-col gap-y-3 px-3">
                             {list.map((e, i) => {
                                 const submenu = e?.submenu
