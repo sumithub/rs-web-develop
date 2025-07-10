@@ -76,14 +76,15 @@ export default function NotificationsDashboard() {
                 </div>
                 <CustomSelectBox
                     defaultOption="Sort By"
-                    class_='mt-0! w-28!'
+                    class_='mt-0! w-36!'
                     value={filterBySort}
                     onChange={(e) => {
                         setFilterBySort(e.target.value)
                     }}
                 >
-                    <option value="sort1">Sort 1</option>
-                    <option value="sort2">Sort 2</option>
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="urgencyLevel">Urgency Level</option>
                 </CustomSelectBox>
             </div>
             <div className="flex justify-between items-start w-full mb-5 mt-3.5">

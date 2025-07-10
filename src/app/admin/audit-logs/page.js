@@ -28,6 +28,7 @@ export default function AuditLogs() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
+    const [enabled, setEnabled] = useState(true)
 
     useEffect(() => {
         getUsers()
@@ -73,7 +74,11 @@ export default function AuditLogs() {
 
                     < div className="flex items-center gap-2 shrink-0">
                         <div className="font-medium text-xs">Auto-Refresh</div>
-                        <Switch class_="mt-2" />
+                        <Switch
+                            checked={enabled}
+                            onChange={setEnabled}
+                            class_={`${enabled ? 'bg-green-500' : 'bg-gray-300'
+                                } relative inline-flex h-4 w-8 items-center rounded-full transition mt-2`} />
                     </div>
 
                     <CustomSelectBox
