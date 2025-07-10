@@ -84,12 +84,12 @@ export default function ReviewsOversight() {
                 <div className='flex items-center gap-3.5'>
 
                     < div className="flex items-center gap-2">
-                        <div>Table View</div>
+                        <div className="text-sm font-medium">Table View</div>
                         <Switch
                             checked={enabled}
                             onChange={setEnabled}
                             class_={`${enabled ? 'bg-green-500' : 'bg-gray-300'
-                                } relative inline-flex h-4 w-8 items-center rounded-full transition mt-2`} />
+                                } relative inline-flex h-4 w-4 items-center rounded-full transition mt-2 w-auto!`} />
                     </div>
 
                     <CustomSelectBox
