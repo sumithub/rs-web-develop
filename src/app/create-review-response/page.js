@@ -11,12 +11,13 @@ import { getError } from "../../../helper"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import Image from "next/image"
-import CheckboxForm from "../../components/form/CheckboxForm"
+import Checkbox from "../../components/form/Checkbox"
 
 export default function CreateReviewResponse() {
     const id = ""
     const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm({ defaultValues: { type: "email" } });
     const [sending, setSending] = useState(false)
+    const [rating, setRating] = useState(0);
 
     const onSubmit = async (data) => {
         try {
@@ -24,13 +25,27 @@ export default function CreateReviewResponse() {
                 toast.error('Message must be 160 characters or less')
                 return;
             }
+
+            // Add validation for ratings
+            if (rating.length === 0) {
+                toast.error('Please select at least one rating level')
+                return;
+            }
+
             setSending(true)
+
+            // Include selectedRatings in the data being sent
+            const formData = {
+                ...data,
+                rating
+            };
+
             let res = null
 
             if (id !== "add") {
-                res = await axios.put("/api", data)
+                res = await axios.put("/api", formData)
             } else {
-                res = await axios.post("/api", data)
+                res = await axios.post("/api", formData)
             }
             toast.success("Saved Successfully");
 
@@ -40,6 +55,7 @@ export default function CreateReviewResponse() {
             setSending(false)
         }
     }
+
 
     let body = watch("body") || []
 
@@ -62,41 +78,40 @@ export default function CreateReviewResponse() {
                             errors={errors}
                         />
 
-                        <div className="pt-5">
+                        {/* <div className="pt-5">
                             <h2 className="text-sm font-medium">Rating Applied <span className="text-danger">*</span></h2>
                             <div className="flex items-center gap-5 pt-2.5">
                                 <div className="flex items-center gap-2.5">
-                                    <CheckboxForm formProps={{ ...register("rating1") }} errors={errors} />
+                                    <Checkbox />
                                     <Image src="/images/star.svg" alt="star" width={18} height={18} />
                                 </div>
                                 <div className="flex items-center gap-2.5">
-                                    <CheckboxForm formProps={{ ...register("rating2") }} errors={errors} />
+                                    <Checkbox />
                                     <div className="flex items-center gap-3">
                                         <Image src="/images/star.svg" alt="star" width={18} height={18} />
                                         <Image src="/images/star.svg" alt="star" width={18} height={18} />
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2.5">
-                                    <CheckboxForm formProps={{ ...register("rating3") }} errors={errors} />
+                                    <Checkbox />
+                                    <div className="flex items-center gap-3">
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-2.5">
+                                    <Checkbox />
                                     <div className="flex items-center gap-3">
 
                                         <Image src="/images/star.svg" alt="star" width={18} height={18} />
                                         <Image src="/images/star.svg" alt="star" width={18} height={18} />
                                         <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-2.5">
-                                    <CheckboxForm formProps={{ ...register("rating4") }} errors={errors} />
-                                    <div className="flex items-center gap-3">
-
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
                                         <Image src="/images/star.svg" alt="star" width={18} height={18} />
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2.5">
-                                    <CheckboxForm formProps={{ ...register("rating5") }} errors={errors} />
+                                    <Checkbox />
                                     <div className="flex items-center gap-3">
 
                                         <Image src="/images/star.svg" alt="star" width={18} height={18} />
@@ -107,7 +122,41 @@ export default function CreateReviewResponse() {
                                     </div>
                                 </div>
                             </div>
+                        </div> */}
+
+                        <div className="pt-5">
+                            <h2 className="text-sm font-medium">Rating Applied <span className="text-danger">*</span></h2>
+                            <div className="flex items-center gap-5 pt-2.5">
+                                {[1, 2, 3, 4, 5].map((r) => (
+                                    <div key={r} className="flex items-center gap-2.5 cursor-pointer"
+                                        onClick={(checked) => {
+                                            if (checked) {
+                                                setRating(r);
+                                            } else {
+                                                setRating(0);
+                                            }
+                                        }}>
+                                        <Checkbox
+                                            checked={rating === r}
+
+                                        />
+                                        <div className="flex items-center gap-3">
+                                            {Array.from({ length: r }, (_, index) => (
+                                                <Image
+                                                    key={index}
+                                                    src="/images/star.svg"
+                                                    alt="star"
+                                                    width={20}
+                                                    height={20}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
+
+
                         <div className='mt-5'>
                             <HtmlEditor
                                 label="Response Test"
