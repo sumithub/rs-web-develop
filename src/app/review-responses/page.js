@@ -58,7 +58,7 @@ export default function ReviewResponses() {
         <div>
             <div className="flex gap-3 justify-between">
                 <Search placeholder="Search by Template Name"
-                    mainClass="w-2/5!"
+                    mainClass="w-72!"
                     onSearch={(s) => {
                         setSearch(s)
                     }}
