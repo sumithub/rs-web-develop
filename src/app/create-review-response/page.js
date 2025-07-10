@@ -116,7 +116,7 @@ export default function CreateReviewResponse() {
                     </div>
                 </div>
 
-                <div className='w-[40%] mt-4'>
+                <div className='w-[40%]'>
                     <div className='shadow-sm rounded-[10px]'>
 
                         <div className='bg-[#0396FF1a] px-5 py-4 rounded-tl-[10px] rounded-tr-[10px]'>
