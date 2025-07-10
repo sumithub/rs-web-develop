@@ -58,6 +58,7 @@ export default function CreateReviewResponse() {
 
 
     let body = watch("body") || []
+    let templateName = watch("name") || ""
 
     return <AdminLayout>
 
@@ -188,10 +189,42 @@ export default function CreateReviewResponse() {
                             </div>
                         </div>
                         <div className='p-5'>
-                            <div className='border border-border-color rounded-[10px] p-5 text-secondary text-sm mb-8 leading-normal'>
-                                <div className='tiptap'
-                                    dangerouslySetInnerHTML={{ __html: body }}
-                                />
+                            {/* Template Name Preview */}
+                            <div className='mb-4'>
+                                <div className='text-sm font-medium mb-2 capitalize'>Template Name: {templateName || "Enter template name"} </div>
+                                {/* <div className='text-base font-semibold text-secondary'>
+                                    {templateName || "Enter template name"}
+                                </div> */}
+                            </div>
+
+                            {/* Rating Preview */}
+                            <div className='mb-4'>
+                                <div className='text-sm font-medium mb-2'>Rating Applied:</div>
+                                <div className='flex items-center gap-1'>
+                                    {rating > 0 ? (
+                                        Array.from({ length: rating }, (_, index) => (
+                                            <Image
+                                                key={index}
+                                                src="/images/star.svg"
+                                                alt="star"
+                                                width={20}
+                                                height={20}
+                                            />
+                                        ))
+                                    ) : (
+                                        <span className='text-text3 text-sm '>No rating selected</span>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Response Content Preview */}
+                            <div className='mb-4'>
+
+                                <div className='border border-border-color rounded-[10px] p-5 text-secondary text-sm leading-normal'>
+                                    <div className='tiptap'
+                                        dangerouslySetInnerHTML={{ __html: body || "<p>Enter response content...</p>" }}
+                                    />
+                                </div>
                             </div>
                             {/* <SecondaryButton title="Test Send" type="button" disabled={sending} class_="text-lg!"
                                 onClick={() => setOpenPreview(true)} /> */}
