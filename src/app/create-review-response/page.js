@@ -15,9 +15,7 @@ import Image from "next/image"
 export default function CreateReviewResponse() {
     const id = ""
     const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm({ defaultValues: { type: "email" } });
-
     const [sending, setSending] = useState(false)
-    const [submitAction, setSubmitAction] = useState("saveAndActivate");
 
     const onSubmit = async (data) => {
         try {
@@ -33,12 +31,8 @@ export default function CreateReviewResponse() {
             } else {
                 res = await axios.post("/api", data)
             }
+            toast.success("Saved Successfully");
 
-            if (submitAction === "saveAsDraft") {
-                toast.success("Saved Successfully");
-            } else if (submitAction === "saveAndActivate") {
-                toast.success("Template Created Successfully");
-            }
             setSending(false)
         } catch (error) {
             toast.error(getError(error))
@@ -49,6 +43,7 @@ export default function CreateReviewResponse() {
     let body = watch("body") || []
 
     return <AdminLayout>
+
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className='flex items-start gap-4'>
                 <div className='w-[60%]'>
@@ -70,9 +65,7 @@ export default function CreateReviewResponse() {
                                 value={body}
                                 onChange={(value) => {
                                     clearErrors("body")
-
                                     setValue("body", value)
-
                                 }}
                                 shoeMenu={true}
                                 dynamicFields={true}
@@ -81,7 +74,7 @@ export default function CreateReviewResponse() {
 
                         <div className="flex items-center justify-center w-full mx-auto gap-3.5 mt-5">
                             <CancelButton title="Cancel" class_="text-lg! w-full!" />
-                            <SecondaryButton title="Save" type="submit" disabled={sending} onClick={() => setSubmitAction("saveAndActivate")} class_="text-lg!" />
+                            <SecondaryButton title="Save" type="submit" disabled={sending} class_="text-lg!" />
                         </div>
                     </div>
                 </div>

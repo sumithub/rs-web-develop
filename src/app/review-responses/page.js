@@ -12,14 +12,12 @@ import TableOrder from "../../components/TableOrder";
 import Loading from "../../components/Loading";
 import CustomSelectBox from "../../components/form/CustomSelectBox";
 import Search from "../../components/form/Search";
-import AddTemplate from "../../components/Models/templates/AddTemplate";
 import DeleteModal from "../../components/Models/review/DeleteTemplate";
+import Link from "next/link";
 
 export default function ReviewResponses() {
 
     const [openDelete, setOpenDelete] = useState(false)
-    const [open, setOpen] = useState(false)
-    const [sending, setSending] = useState(false)
     const [sortBy, setSortBy] = useState("")
     const [search, setSearch] = useState("")
     const [list, setList] = useState([])
@@ -53,18 +51,6 @@ export default function ReviewResponses() {
 
                 onSave={() => {
                     setOpenDelete(true)
-                }}
-            />
-        }
-
-        {open &&
-            <AddTemplate
-                onClose={() => {
-                    setOpen(false)
-                }}
-
-                onSave={() => {
-                    setOpen(true)
                 }}
             />
         }
@@ -135,9 +121,9 @@ export default function ReviewResponses() {
                             <td>{formatDate(e.lastUpdate)}</td>
                             <td>
                                 <div className='flex items-center gap-2'>
-                                    <button className='cursor-pointer' onClick={() => { setOpen(true) }} type="button">
+                                    <Link href="/create-review-response" className='cursor-pointer' type="button">
                                         <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
-                                    </button>
+                                    </Link>
 
                                     <button className='cursor-pointer' onClick={() => { setOpenDelete(true) }} type="button">
                                         <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
