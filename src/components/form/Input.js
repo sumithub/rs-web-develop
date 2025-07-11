@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Input({ hideOptional = false, isTextArea, rows = 3, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "", error, icon, disabled, iconClass = "", class_ = "", onIconClick, infoIcon }) {
+export default function Input({ hideOptional = false, isTextArea, rows = 3, isRequired, label, placeholder, labelClass, inputType = "text", inputClass = "",
+    value,
+    error, icon, disabled, iconClass = "", class_ = "", onIconClick, infoIcon }) {
     const [type, setType] = useState("password")
 
     const handleClick = () => {
@@ -54,6 +56,7 @@ export default function Input({ hideOptional = false, isTextArea, rows = 3, isRe
                     placeholder={placeholder} disabled={disabled}
                     className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary disabled:bg-dark disabled:border-input-border ${inputClass}`}
                 /> : <input
+                    {...(value ? { value } : {})}
                     placeholder={placeholder} type={inputType === "password" ? type : (inputType || "text")}
                     disabled={disabled}
                     className={`border ${error ? "border-danger" : "border-primary/10"} focus:outline-0 focus-visible:outline-0 focus:border-primary/60 w-full rounded-lg py-3 px-2.5 text-sm text-secondary disabled:bg-dark disabled:border-input-border ${inputClass}`}

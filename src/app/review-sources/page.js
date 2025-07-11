@@ -33,6 +33,16 @@ export default function ReviewSources() {
             setLoading(false)
         }
     }
+    const populer = [
+        { status: "connected", url: "https://www.google.com", name: "Google" },
+        { status: "not-connected", url: "https://www.yelp.com", name: "Yelp" },
+    ]
+    const all = [
+        { status: "connected", url: "https://www.trustpilot.com", name: "Trustpilot" },
+        { status: "not-connected", url: "https://www.facebook.com", name: "Facebook" },
+        { status: "not-connected", url: "https://www.tripadvisor.com", name: "TripAdvisor" },
+        { status: "not-connected", url: "https://www.bbb.com", name: "Better Business Bureau" },
+    ]
     return (<AdminLayout>
 
         <div className="flex justify-between">
@@ -66,33 +76,32 @@ export default function ReviewSources() {
             <div className="pt-[15px]">
                 <h2 className="text-lg font-semibold">Popular Review Sources</h2>
                 <div className="pt-[15px] grid grid-cols-3 gap-y-[15px] gap-x-5">
-                    <ReviewCard />
-                    <ReviewCard />
+                    {populer.map((e, i) => <ReviewCard key={i} data={e} />)}
                 </div>
             </div>
             <div className="pt-5">
                 <h2 className="text-lg font-semibold">All Review Sources</h2>
                 <div className="pt-[15px] grid grid-cols-3 gap-y-[15px] gap-x-5">
-                    <ReviewCard status="connected" />
-                    <ReviewCard />
-                    <ReviewCard />
-                    <ReviewCard />
+                    {all.map((e, i) => <ReviewCard key={i} data={e} />)}
+
                 </div>
             </div>
         </div >)}
     </AdminLayout>
     )
 }
-function ReviewCard({ status }) {
+function ReviewCard({ data }) {
+    const { status, url, name } = data;
     const [openDisconnect, setOpenDisconnect] = useState(false)
     const [openModal, setOpenModal] = useState(false)
-    const isConnected = status !== "connected";
+    const isConnected = status === "connected";
 
     return (
 
         <div className="p-[15px] shadow-sm rounded-[15px]">
             {openDisconnect &&
                 <DisconnectReviewSourceConfirmation
+                    data={data}
                     onClose={() => {
                         setOpenDisconnect(false)
                     }}
@@ -104,6 +113,7 @@ function ReviewCard({ status }) {
 
             {openModal &&
                 <ConnectReviewSource
+                    data={data}
                     onClose={() => {
                         setOpenModal(false)
                     }}
@@ -114,20 +124,21 @@ function ReviewCard({ status }) {
                 <Status status={isConnected ? "connected" : "not connected"} />
             </div>
             <div>
-                <h2 className="text-base font-medium pt-2.5">Google Reviews</h2>
+                <h2 className="text-base font-medium pt-2.5">{name} Reviews</h2>
                 <hr className="border border-secondary/5 my-[15px]" />
-                {isConnected && (<Input
+                {isConnected && <Input
                     label="URL"
                     placeholder="Add URL"
                     hideOptional={true}
                     isRequired={true}
+                    value={url}
                     infoIcon="/images/url.svg"
                     inputClass="p-2.5!"
                     icon="/images/add-link.svg"
-                />)}
+                />}
                 {!isConnected && (<div className="flex items-center gap-2.5 bg-danger/10 p-2.5 rounded-[7px] mt-[15px]">
                     <Image unoptimized={true} src="/images/warning.svg" alt="warning" width={22} height={22} className="" />
-                    <h2 className="text-sm">You Are not Connected to Google.</h2>
+                    <h2 className="text-sm">You Are not Connected to {name}.</h2>
                 </div>)}
             </div>
             <div >
@@ -157,7 +168,7 @@ function ReviewCard({ status }) {
                         >
                             Connect
                         </button>
-                        <button onClick={() => setOpenModal(true)}>
+                        {/* <button onClick={() => setOpenModal(true)}>
                             <Image
                                 unoptimized={true}
                                 src="/images/edit.svg"
@@ -165,7 +176,7 @@ function ReviewCard({ status }) {
                                 width={46}
                                 height={46}
                             />
-                        </button>
+                        </button> */}
                     </div>
                 )}
             </div>

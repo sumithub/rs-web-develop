@@ -11,13 +11,14 @@ import Image from "next/image";
 import InputForm from "../../form/InputForm";
 import SelectForm from "../../form/SelectForm";
 
-export default function ConnectReviewSource({ onClose, onSave, id }) {
+export default function ConnectReviewSource({ onClose, onSave, id, data }) {
     const { register, handleSubmit, clearErrors, formState: { errors }, watch, setValue } = useForm();
     const [sending, setSending] = useState(false)
+    const { name, url } = data
 
     useEffect(() => {
-        setValue("url", "https://www.yelp.com");
-    }, [setValue]);
+        setValue("url", url);
+    }, [setValue, url]);
 
     const onSubmit = async (data) => {
         try {
@@ -58,12 +59,12 @@ export default function ConnectReviewSource({ onClose, onSave, id }) {
                 </SelectForm>}
 
                 <div>
-                    <h2 className="text-lg font-semibold">Connect to Yelp</h2>
+                    <h2 className="text-lg font-semibold">Connect to {name}</h2>
                     <Image unoptimized={true} src="/images/yelp-logo.svg" alt="yelp-logo" width={116} height={47} className="pt-2.5" />
                 </div>
                 <InputForm
                     label="Business Profile URL"
-                    placeholder="https://www.yelp.com"
+                    placeholder=""
                     hideOptional={true}
                     isRequired={true}
                     icon="/images/add-link.svg"
