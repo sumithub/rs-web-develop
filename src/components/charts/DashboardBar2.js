@@ -46,6 +46,9 @@ export default function DashboardBar2() {
                     label: (context) => `${context.dataset.data[context.dataIndex].toFixed(1)}M`,
                 },
             },
+            datalabels: {
+                display: false
+            }
         },
         scales: {
             x: {
