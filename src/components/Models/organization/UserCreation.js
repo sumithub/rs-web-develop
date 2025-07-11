@@ -54,7 +54,9 @@ function UserCreation({ onClose, id, onSave }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <div>
-                    <InputForm label="Name"
+                    <InputForm
+                        inputClass="py-3.5!"
+                        label="Name"
                         placeholder="Enter your name"
                         class_="mt-0!"
                         isRequired={true}
@@ -62,6 +64,7 @@ function UserCreation({ onClose, id, onSave }) {
                         errors={errors} />
 
                     <InputForm
+                        inputClass="py-3.5!"
                         label="Email"
                         name="email"
                         clearValue={true}
@@ -83,7 +86,7 @@ function UserCreation({ onClose, id, onSave }) {
 
                     <SelectForm
                         label="Role"
-                        selectClass_="py-2.5! px-2.5!"
+                        selectClass_="py-3.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("role", { required: true }) }}
                         errors={errors} clearErrors={clearErrors}
@@ -98,7 +101,7 @@ function UserCreation({ onClose, id, onSave }) {
 
                     <SelectForm
                         label="Status"
-                        selectClass_="py-2.5! px-2.5!"
+                        selectClass_="py-3.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("status", { required: true }) }}
                         errors={errors} clearErrors={clearErrors}
@@ -110,7 +113,7 @@ function UserCreation({ onClose, id, onSave }) {
 
                     <SelectForm
                         label="Assign To Client"
-                        selectClass_="py-2.5! px-2.5!"
+                        selectClass_="py-3.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("assignToClient", { required: true }) }}
                         errors={errors} clearErrors={clearErrors}
@@ -123,7 +126,7 @@ function UserCreation({ onClose, id, onSave }) {
 
                     <SelectForm
                         label="Assign To Location"
-                        selectClass_="py-2.5! px-2.5!"
+                        selectClass_="py-3.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("assignToLocation", { required: true }) }}
                         errors={errors} clearErrors={clearErrors}

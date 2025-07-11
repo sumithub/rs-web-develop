@@ -261,13 +261,13 @@ export const clientCampaign = [
 
 
 export const clientLocation = [
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
 ]
 
 
@@ -355,8 +355,6 @@ export const clientsManagement = [
     { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
     { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
     { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
     { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
 ]
 

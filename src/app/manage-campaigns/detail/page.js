@@ -229,7 +229,11 @@ export default function Detail({ }) {
             }
             toast.success("Campaign Created Successfully")
             setSending(false)
-            router.push("/manage-campaigns")
+
+            if (isAdmin)
+                router.push("/admin/campaigns-management")
+            else
+                router.push("/manage-campaigns")
 
         } catch (error) {
             toast.error(getError(error))
@@ -496,8 +500,8 @@ export default function Detail({ }) {
                                 type="button"
                                 onClick={() => { setOpenCustomer(true) }} />
                         </div>
-
                         }
+
                         {!isAdmin && <div className="my-4">
                             <div className="text-secondary text-sm font-medium capitalize">Select Customer Source</div>
                             <div>

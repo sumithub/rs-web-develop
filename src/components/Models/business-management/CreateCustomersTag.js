@@ -54,7 +54,7 @@ export default function CreateCustomersTag({ onClose, id }) {
                         label="Link Client"
                         defaultOption="Select Clients"
                         class_="mt-0!"
-                        selectClass_="py-3! px-2.5!"
+                        selectClass_="py-3.5! px-2.5!"
                         isRequired={false}
                         formProps={{ ...register("linkClients", { required: false }) }}
                         errors={errors} clearErrors={clearErrors}
