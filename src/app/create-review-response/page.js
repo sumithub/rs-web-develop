@@ -17,7 +17,7 @@ export default function CreateReviewResponse() {
     const id = ""
     const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm({ defaultValues: { type: "email" } });
     const [sending, setSending] = useState(false)
-    const [rating, setRating] = useState(0);
+    const [ratings, setRatings] = useState([]);
 
     const onSubmit = async (data) => {
         try {
@@ -27,7 +27,7 @@ export default function CreateReviewResponse() {
             }
 
             // Add validation for ratings
-            if (rating.length === 0) {
+            if (ratings.length === 0) {
                 toast.error('Please select at least one rating level')
                 return;
             }
@@ -37,7 +37,7 @@ export default function CreateReviewResponse() {
             // Include selectedRatings in the data being sent
             const formData = {
                 ...data,
-                rating
+                ratings
             };
 
             let res = null
@@ -79,52 +79,6 @@ export default function CreateReviewResponse() {
                             errors={errors}
                         />
 
-                        {/* <div className="pt-5">
-                            <h2 className="text-sm font-medium">Rating Applied <span className="text-danger">*</span></h2>
-                            <div className="flex items-center gap-5 pt-2.5">
-                                <div className="flex items-center gap-2.5">
-                                    <Checkbox />
-                                    <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                </div>
-                                <div className="flex items-center gap-2.5">
-                                    <Checkbox />
-                                    <div className="flex items-center gap-3">
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-2.5">
-                                    <Checkbox />
-                                    <div className="flex items-center gap-3">
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-2.5">
-                                    <Checkbox />
-                                    <div className="flex items-center gap-3">
-
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-2.5">
-                                    <Checkbox />
-                                    <div className="flex items-center gap-3">
-
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                        <Image src="/images/star.svg" alt="star" width={18} height={18} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
-
                         <div className="pt-5">
                             <h2 className="text-sm font-medium">Rating Applied <span className="text-danger">*</span></h2>
                             <div className="flex items-center gap-5 pt-2.5">
@@ -132,15 +86,12 @@ export default function CreateReviewResponse() {
                                     <div key={r} className="flex items-center gap-2.5 cursor-pointer"
                                         onClick={(checked) => {
                                             if (checked) {
-                                                setRating(r);
+                                                setRatings((prev) => [...prev, r]);
                                             } else {
-                                                setRating(0);
+                                                setRatings((prev) => prev.filter((item) => item !== r));
                                             }
                                         }}>
-                                        <Checkbox
-                                            checked={rating === r}
-
-                                        />
+                                        <Checkbox checked={ratings.includes(r)} />
                                         <div className="flex items-center gap-3">
                                             {Array.from({ length: r }, (_, index) => (
                                                 <Image
@@ -169,9 +120,14 @@ export default function CreateReviewResponse() {
                                 }}
                                 shoeMenu={true}
                                 dynamicFields={true}
+                                type={"reviewResponseTemplate"}
                             />
+                            <div className="flex justify-end mt-4">
+                                <div className="text-primary flex gap-2 text-base font-medium">
+                                    <span className="">Insert Dynamic Fields</span> <span>+</span></div>
+                            </div>
                         </div>
-
+                        <textarea placeholder="Type here" className="border border-border2 rounded-[10px] p-4 w-full mt-4" />
                         <div className="grid grid-cols-2 gap-5 mt-7">
                             <CancelButton title="Cancel" class_="text-lg!" />
                             <SecondaryButton title="Save" type="submit" disabled={sending} class_="text-lg!" />
@@ -191,14 +147,14 @@ export default function CreateReviewResponse() {
                         <div className='p-5'>
                             {/* Template Name Preview */}
                             <div className='mb-4'>
-                                <div className='text-sm font-medium mb-2 capitalize'>Template Name: {templateName || "Enter template name"} </div>
+                                <div className='text-sm font-medium mb-2 capitalize'>Template Name: {templateName || ""} </div>
                                 {/* <div className='text-base font-semibold text-secondary'>
                                     {templateName || "Enter template name"}
                                 </div> */}
                             </div>
 
                             {/* Rating Preview */}
-                            <div className='mb-4'>
+                            {/* <div className='mb-4'>
                                 <div className='text-sm font-medium mb-2'>Rating Applied:</div>
                                 <div className='flex items-center gap-1'>
                                     {rating > 0 ? (
@@ -215,7 +171,7 @@ export default function CreateReviewResponse() {
                                         <span className='text-text3 text-sm '>No rating selected</span>
                                     )}
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Response Content Preview */}
                             <div className='mb-4'>

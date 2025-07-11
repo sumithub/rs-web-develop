@@ -5,7 +5,6 @@ import { extensions, getTextLength, MenuBar } from '../../utils/editorHelper'
 import CustomSelectBox from './CustomSelectBox'
 
 export default function HtmlEditor({
-    type,
     editorClass,
     isRequired = false,
     readOnly = false,
@@ -21,7 +20,8 @@ export default function HtmlEditor({
     children,
     dynamicFields = false, // For dynamic fields, we can pass the formProps to setValue
     shoeMenu = true,
-    limit
+    limit,
+    type
 }) {
     const [editor, setEditor] = useState(null);
 
@@ -37,18 +37,22 @@ export default function HtmlEditor({
         error = errors[formProps?.name]?.message
     }
 
-    const options = [
+    let options = []
+    if (type === "sms") options = [
         { value: "full_name", label: "Customer Name", type: "sms" },
         { value: "business_phone", label: "Business Phone", type: "sms" },
+    ]
+    else if (type === "email") options = [
         { value: "full_name", label: "Customer Full Name", type: "email" },
         { value: "first_name", label: "Customer First Name", type: "email" },
         { value: "business_name", label: "Business Name", type: "email" },
         { value: "direct_feedback", label: "Direct Feedback", type: "email" },
-
-        { value: "full_name", label: "Customer Full Name", type: "reviewResponseTemplate" },
-        { value: "first_name", label: "Customer First Name", type: "reviewResponseTemplate" },
-        { value: "direct_feedback", label: "Direct Feedback", type: "reviewResponseTemplate" },
-        { value: "business_name", label: "Business Name", type: "reviewResponseTemplate" }
+    ]
+    else if (type === "reviewResponseTemplate") options = [
+        { value: "Suggest Response", label: "Suggest Response", type: "reviewResponseTemplate" },
+        { value: "Hope To see you again", label: "Hope To see you again", type: "reviewResponseTemplate" },
+        { value: "thanks for sharing!", label: "thanks for sharing!", type: "reviewResponseTemplate" },
+        { value: "Appreciate the kind feedback", label: "Appreciate the kind feedback", type: "reviewResponseTemplate" }
     ];
 
     return (
@@ -105,14 +109,22 @@ export default function HtmlEditor({
                                             if (!selectedValue || !editor) return;
 
                                             // Insert `{{selectedValue}}` at current cursor position
-                                            editor
-                                                .chain()
-                                                .focus()
-                                                .insertContent(`{{${selectedValue}}}`)
-                                                .run();
+                                            if (type === "sms" || type === "email")
+                                                editor
+                                                    .chain()
+                                                    .focus()
+                                                    .insertContent(`{{${selectedValue}}}`)
+                                                    .run();
+                                            else if (type === "reviewResponseTemplate")
+                                                editor
+                                                    .chain()
+                                                    .focus()
+                                                    .insertContent(selectedValue)
+                                                    .run();
+
                                         }}
                                     >
-                                        {options.filter(e => e.type === type).map(option => (
+                                        {options.map(option => (
                                             <option key={option.value} value={option.value}>
                                                 {option.label}
                                             </option>
@@ -123,7 +135,10 @@ export default function HtmlEditor({
                         )
                     }
 
-                    slotAfter={!limit ? undefined : <div className="text-[12px] text-right text-secondary mt-1 p-4">{getTextLength(editor.getHTML())}/{limit}</div>}
+                    slotAfter={<div>
+                        {!limit ? null : <div className="text-[12px] text-right text-secondary mt-1 p-4">{getTextLength(editor.getHTML())}/{limit}</div>}
+                    </div>
+                    }
                     extensions={[...extensions,]}
                     content={value || ""}
                 // slotBefore={readOnly ? undefined : <div className=''><MenuBar /></div>}
@@ -132,6 +147,6 @@ export default function HtmlEditor({
                 />
             </div>
             {error && <div className="capitalize text-xs font-medium text-danger mt-1">{error}</div>}
-        </div>
+        </div >
     )
 }
