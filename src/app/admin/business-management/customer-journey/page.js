@@ -16,6 +16,8 @@ import Loading from "../../../../components/Loading"
 import { customerJourney } from "../../../../constent/constArray"
 import Switch from "../../../../components/form/Switch"
 import CustomerJourney from "../../../../components/Models/admin/customer-journey/CustomerJourney"
+import { Tooltip } from "react-tooltip"
+import Image from "next/image"
 
 export default function CustomersJourney() {
     const [sortBy, setSortBy] = useState(false)
@@ -168,7 +170,7 @@ export default function CustomersJourney() {
                                 <td>
                                     {e.type}
                                 </td>
-                                <td className="">
+                                <td >
                                     <div className="line-clamp-1">
                                         {e.details}
                                     </div>
@@ -179,7 +181,20 @@ export default function CustomersJourney() {
                                     </div>
                                 </td>
                                 <td>
-                                    {e.timestamp}
+                                    <div className="flex items-center gap-2">
+                                        <div>{e.timestamp}</div>
+                                        <div data-tooltip-id="my-tooltip">
+                                            <Image src="/images/info.svg" alt="info" height={20} width={20} unoptimized={true} className="cursor-pointer" />
+                                        </div>
+                                        <Tooltip className="text-secondary! text-sm! capitalize! bg-white! shadow-xs! rounded-md! border! border-gray-200!" place="bottom" id="my-tooltip">
+                                            <div>John Doe - email Sent (Jun 18,2024 | 14:20:11)</div>
+                                            <div className="py-2">John Doe - Email Opened (Jun 18,2024 | 14:20:11)</div>
+                                            <div>John Doe - Review Submitted (Jun 18,2024 | 14:20:11)</div>
+                                            <div className="py-2">john Doe - Review Flagged (Jun 18,2024 | 14:20:11)</div>
+                                            <hr className="border-b border-border-color" />
+                                            <div className="text-base text-primary text-end font-medium pt-2">Back to Table View</div>
+                                        </Tooltip>
+                                    </div>
                                 </td>
                             </tr>)}
                     </tbody>
