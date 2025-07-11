@@ -159,43 +159,6 @@ export default function CreateTemplate() {
                             />
                         </div>
 
-                        {/* <HtmlEditor label="Email Body"
-                       formProps={{ ...register("message", { required: false }) }}
-                                            errors={errors}
-                                            clearErrors={clearErrors}
-                    >
-        
-                      <div className='grid grid-cols-3 gap-4'>
-                        <InputForm label="Customer Name" isRequired={true}
-                          formProps={{ ...register("customerName", { required: true }) }}
-                          errors={errors}
-                        />
-        
-                        {isEmail && <DatePickerForm label="Appointment Date" isRequired={true}
-                          formProps={{ ...register("appointmentDate", { required: true }) }}
-                          errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}
-                        />}
-                        {isEmail && <InputForm label="Review Link" isRequired={true}
-                          formProps={{ ...register("reviewLink", { required: true }) }}
-                          errors={errors}
-                        />}
-        
-                        <InputForm label="Business Name" isRequired={true}
-                          formProps={{ ...register("businessName", { required: true }) }}
-                          errors={errors}
-                        />
-                        <InputForm label="Insert Field" isRequired={true}
-                          formProps={{ ...register("insertDynamicFields", { required: true }) }}
-                          errors={errors}
-                        />
-                      </div>
-                    </HtmlEditor> */}
-
-                        {/* <div className="text-sm text-secondary font-medium capitalize mt-3 mb-2">email body</div>
-                  <textarea
-                    required={true}
-                    rows={15} className="rounded text-text3 text-sm border border-color w-full focus-visible:outline-none p-3" /> */}
-
                         <div className="grid grid-cols-3 gap-3.5 mt-5">
                             {isAdmin ? < CancelButton title="Back To list"
                                 class_="text-lg!"
