@@ -3,14 +3,12 @@ import Image from "next/image";
 import Model from "../Model";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import { useState } from "react";
 
 export default function Template({ onClose, title = "Template" }) {
-    const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false);
 
     const onSubmit = async () => {
@@ -27,15 +25,13 @@ export default function Template({ onClose, title = "Template" }) {
     };
 
     return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
-        <form onSubmit={handleSubmit(onSubmit)} className="text-center">
-            <DeleteTemplate title={`Delete ${title}`} question="Are You Sure? You want To Delete This Template." />
+        <DeleteTemplate title={`Delete ${title}`} question="Are You Sure? You want To Delete This Template." />
 
-            <div className="grid grid-cols-2 gap-3 mt-5">
-                <CancelButton title="No" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
-                />
-                <SecondaryButton title=" Yes, Delete" type="submit" disabled={sending} />
-            </div>
-        </form>
+        <div className="grid grid-cols-2 gap-3 mt-5">
+            <CancelButton title="No" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
+            />
+            <SecondaryButton title=" Yes, Delete" onClick={onSubmit} disabled={sending} />
+        </div>
     </Model >
 }
 

@@ -60,13 +60,13 @@ export default function RemoveUsers({ onClose }) {
                     </div>
                 ))}
 
-                <div className="text-danger text-sm font-medium my-4">
+                <div className="text-danger text-sm font-medium my-4 capitalize">
                     Note: you will lose all associated user data.
                 </div>
 
                 <div className="flex items-start gap-2 mt-1">
                     <Checkbox checked={confirm} onChange={() => setConfirm(!confirm)} />
-                    <div className="text-secondary text-base capitalize font-medium mt-[2px]">
+                    <div className="text-secondary text-base capitalize font-medium">
                         Remove to confirm
                     </div>
                 </div>

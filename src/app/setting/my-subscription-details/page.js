@@ -5,7 +5,6 @@ import CancelButton from "../../../components/common/CancelButton";
 import Status from "../../../components/Status";
 import SecondaryButton from "../../../components/common/SecondaryButton";
 import { useState } from "react";
-import Checkbox from "../../../components/form/Checkbox";
 import Image from "next/image";
 
 export default function MySubscriptionDetails() {

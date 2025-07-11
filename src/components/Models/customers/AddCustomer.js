@@ -6,19 +6,22 @@ import InputForm from "../../form/InputForm"
 import Radio from "../../form/Radio"
 import SelectForm from "../../form/SelectForm"
 import Model from "../Model"
-import { getError, isAdmin, validEmailRgx } from "../../../../helper"
+import { getError, validEmailRgx } from "../../../../helper"
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import PhoneForm from "../../form/PhoneForm"
 import Image from "next/image"
 import ImportCustomer from "../customers/ImportCustomer"
+import { useRole } from "../../../utils/hooks"
 
 function AddCustomer({ onClose, id, onSave }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
     const [type, setType] = useState("manually")
     const [activeStep, setActiveStep] = useState(1);
+    const { isAdmin } = useRole();
+
 
     const handleViewChange = (event) => {
         setType(event.target.value);
@@ -108,7 +111,7 @@ function AddCustomer({ onClose, id, onSave }) {
                                 watch={watch} />
                         </div>
 
-                        <SelectForm label="Tag"
+                        {!isAdmin && <SelectForm label="Tag"
                             setValue={setValue}
                             watch={watch}
                             isRequired={false} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
@@ -118,23 +121,22 @@ function AddCustomer({ onClose, id, onSave }) {
                             <option value="high value">High Value</option>
                             <option value="loyal">Loyal</option>
                             <option value="instead of source">instead of source</option>
-                        </SelectForm>
-
-                        {isAdmin() && <SelectForm
-                            label="Client"
-                            selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
-                            isRequired={false}
-                            defaultOption="select"
-                            formProps={{ ...register("client", { required: false }) }}
-                            errors={errors}
-                            clearErrors={clearErrors}
-                            setValue={setValue}
-                            watch={watch}
-                        >
-                            <option value="clientA">Client A</option>
-                            <option value="clientB">Client B</option>
-                            <option value="clientC">Client C</option>
                         </SelectForm>}
+
+                        {isAdmin && <InputForm
+                            inputClass="py-3.5!"
+                            label="Tags"
+                            isRequired={true}
+                            formProps={{ ...register("tags", { required: true }) }}
+                            errors={errors} />}
+
+
+                        {isAdmin && <InputForm
+                            inputClass="py-3.5!"
+                            label="Client"
+                            isRequired={true}
+                            formProps={{ ...register("client", { required: true }) }}
+                            errors={errors} />}
                     </div>
                 </div>}
             </div>

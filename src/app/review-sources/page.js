@@ -36,23 +36,20 @@ export default function ReviewSources() {
     return (<AdminLayout>
 
         <div className="flex justify-between">
-            <div className="flex gap-5 w-full">
-                <div className="flex gap-2.5 items-center">
-                    <h2 className="text-lg capitalize font-medium shrink-0">Manage Review Sources</h2>
-                    <div className="text-primary/10">|</div>
-                    <h2 className="text-lg capitalize font-medium shrink-0">Connect your business to review platforms</h2>
-                </div>
-                <div className="w-1/4">
+            <div className="">
+                <h2 className="text-lg capitalize font-medium shrink-0">Manage Review Sources</h2>
+                <h2 className="text-sm text-text3 pt-1 capitalize">Connect your business to review platforms</h2>
+            </div>
+            <div className=" flex gap-3.5">
+                <div className="w-96">
                     <Search
                         mainClass='w-full!'
-                        placeholder="Search by Review Sources"
+                        placeholder="Search Review Platforms"
                         onSearch={(s) => {
                             setSearch(s)
                         }}
                     />
                 </div>
-            </div>
-            <div>
                 <CustomSelectBox
                     defaultOption="Filters"
                     class_='mt-0! w-26!'

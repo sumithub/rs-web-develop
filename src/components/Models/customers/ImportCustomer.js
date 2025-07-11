@@ -5,7 +5,7 @@ import SelectForm from "../../form/SelectForm";
 import Loading from "../../Loading";
 import TableOrder from "../../TableOrder";
 import axios from "axios";
-import { getError, isAdmin } from "../../../../helper";
+import { getError } from "../../../../helper";
 import { toast } from "react-toastify";
 import { fieldMapping } from "../../../constent/constArray";
 import CancelButton from "../../common/CancelButton";
@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import RadioForm from "../../form/RadioForm";
 import Image from "next/image";
 import FileInput from "../../form/FileInput";
+import { useRole } from "../../../utils/hooks";
 
 export default function ImportCustomer({ onBack, activeStep, setActiveStep, onClose, icon = false }) {
     const [sortBy, setSortBy] = useState("");
@@ -24,6 +25,8 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     const [importDone, setImportDone] = useState(false);
     const [mappingErrors, setMappingErrors] = useState({});
     const [file, setFile] = useState(null)
+    const { isAdmin } = useRole();
+
     const [importData, setImportData] = useState({
         fileName: "",
         selectedFile: null,
@@ -48,26 +51,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
     } = useForm({
         mode: 'onChange'
     });
-
-    const IMPORTSUMMARY = [
-        { title: "File Name", summary: "Abc.Csv" },
-        { title: "Total Customers In File", summary: "250" },
-        { title: "Valid Customers To Import", summary: "245" },
-        { title: "Duplicates Skipped", summary: "03" },
-        {
-            title: "Invalid Entries",
-            summary: "02",
-            hasDetail: true,
-            detailType: "invalid_entries"
-        },
-        { title: "Assigned Tag", summary: "VIP Customers" }
-    ];
-
-    const IMPORTSUMMARY1 = [
-        { title: "imported customers ", summary: 245 },
-        { title: "customer list", summary: "new leads-march 2025" },
-        { title: "assigned tag", summary: "VIP customers" },
-    ];
 
     useEffect(() => {
         getData();
@@ -232,21 +215,6 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
         }
     };
 
-    const handleViewDetail = (detailType, title) => {
-        switch (detailType) {
-            case 'invalid_entries':
-                // Handle invalid entries detail view
-                console.log('Opening invalid entries details...');
-                // You can:
-                // - Open a modal
-                // - Navigate to a detail page
-                // - Show a dropdown with details
-                // - Make an API call to fetch detailed data
-                break;
-            default:
-                console.log(`View detail for: ${title}`);
-        }
-    };
 
     const handleSetFile = (selectedFile) => {
         setFile(selectedFile);
@@ -486,7 +454,7 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                                 these errors and upload the file again.
                                             </div>
                                         </div>
-                                        {isAdmin() && <SecondaryButton
+                                        {!isAdmin && <SecondaryButton
                                             title="Download Error Report"
                                             type="button"
                                             onClick={() => { toast.success('Download Successfully') }}
@@ -561,31 +529,52 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                                 Import Summary
                             </div>
 
-                            {IMPORTSUMMARY.map((d, i) => (
-                                <div key={i}>
-                                    <div className="flex justify-between text-base">
-                                        <div className="text-text3 capitalize">{d.title}</div>
-                                        <div className="text-secondary font-medium capitalize">
-                                            {d.hasDetail ? (
-                                                <div className="flex items-center capitalize">
-                                                    <span>{d.summary}</span>
-                                                    <span className="border-r border-border-color h-4 mx-2"></span>
-                                                    <button
-                                                        className="text-primary underline cursor-pointer disabled:pointer-events-none capitalize"
-                                                        onClick={() => handleViewDetail(d.detailType, d.title)}
-                                                    >view detail
-                                                    </button>
-                                                </div>
-                                            ) : (
-                                                d.summary
-                                            )}
-                                        </div>
+
+                            <div>
+                                <div className="flex justify-between text-base">
+                                    <div className="text-text3 capitalize">File Name
                                     </div>
-                                    {i !== IMPORTSUMMARY.length - 1 && (
-                                        <hr className="my-4 border-t border-border-color" />
-                                    )}
+                                    <div className="text-secondary font-medium capitalize">Abc.Csv </div>
                                 </div>
-                            ))}
+                                <hr className="my-4 border-t border-border-color" />
+
+                                <div className="flex justify-between text-base">
+                                    <div className="text-text3 capitalize">total customers in file
+                                    </div>
+                                    <div className="text-secondary font-medium capitalize">250</div>
+                                </div>
+                                <hr className="my-4 border-t border-border-color" />
+
+                                <div className="flex justify-between text-base">
+                                    <div className="text-text3 capitalize">valid customers to import
+                                    </div>
+                                    <div className="text-secondary font-medium capitalize">245</div>
+                                </div>
+                                <hr className="my-4 border-t border-border-color" />
+
+                                <div className="flex justify-between text-base">
+                                    <div className="text-text3 capitalize">duplicates skipped
+                                    </div>
+                                    <div className="text-secondary font-medium capitalize">03</div>
+                                </div>
+                                <hr className="my-4 border-t border-border-color" />
+
+                                <div className="flex justify-between text-base">
+                                    <div className="text-text3 capitalize">invalid entries
+                                    </div>
+                                    <button
+
+                                    >02<span className="border-r pr-2 border-border-color"></span><span className="text-primary underline pl-2 cursor-pointer disabled:pointer-events-none capitalize">View Detail</span>
+                                    </button>
+                                </div>
+                                <hr className="my-4 border-t border-border-color" />
+
+                                <div className="flex justify-between text-base">
+                                    <div className="text-text3 capitalize">assigned tag
+                                    </div>
+                                    <div className="text-secondary font-medium capitalize">VIP Customers</div>
+                                </div>
+                            </div>
                         </>
                     )}
 
@@ -596,17 +585,28 @@ export default function ImportCustomer({ onBack, activeStep, setActiveStep, onCl
                             </div>
                             <div>
                                 <div className="gap-10">
-                                    {IMPORTSUMMARY1.map((d, i) => (
-                                        <div key={i}>
-                                            <div className="flex justify-between">
-                                                <div className="text-text3 capitalize">{d.title}</div>
-                                                <div className="text-secondary font-medium capitalize">{d.summary}</div>
-                                            </div>
-                                            {i !== IMPORTSUMMARY1.length - 1 && (
-                                                <hr className="my-4 border-t border-border-color" />
-                                            )}
+
+                                    <div>
+                                        <div className="flex justify-between">
+                                            <div className="text-text3 capitalize">imported customers</div>
+                                            <div className="text-secondary font-medium capitalize">254</div>
                                         </div>
-                                    ))}
+
+                                        <hr className="my-4 border-t border-border-color" />
+
+                                        <div className="flex justify-between">
+                                            <div className="text-text3 capitalize">customer list</div>
+                                            <div className="text-secondary font-medium capitalize">new leads-march 2025</div>
+                                        </div>
+
+                                        <hr className="my-4 border-t border-border-color" />
+
+                                        <div className="flex justify-between">
+                                            <div className="text-text3 capitalize">assigned tag</div>
+                                            <div className="text-secondary font-medium capitalize">VIP customers</div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </>

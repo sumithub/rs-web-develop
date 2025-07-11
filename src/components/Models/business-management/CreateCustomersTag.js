@@ -54,7 +54,7 @@ export default function CreateCustomersTag({ onClose, id }) {
                         label="Link Client"
                         defaultOption="Select Clients"
                         class_="mt-0!"
-                        selectClass_="py-2.5! px-2.5!"
+                        selectClass_="py-3! px-2.5!"
                         isRequired={false}
                         formProps={{ ...register("linkClients", { required: false }) }}
                         errors={errors} clearErrors={clearErrors}
@@ -68,6 +68,7 @@ export default function CreateCustomersTag({ onClose, id }) {
                     <InputForm
                         class_="mt-2!"
                         label="Tag Name"
+                        inputClass="py-3.5!"
                         isRequired={true}
                         placeholder="Enter Tag Name"
                         formProps={{ ...register("tagName", { required: true }) }}
@@ -84,7 +85,7 @@ export default function CreateCustomersTag({ onClose, id }) {
                     />
 
                     <div className="flex justify-between items-center mt-3.5">
-                        <div className="font-semibold">
+                        <div className="font-semibold text-lg">
                             Select Customers From List
                         </div>
                         <SecondaryButton title="add customers" type="button" onClick={() => { setOpen(true) }} class_="text-xs font-normal py-2.5!" />

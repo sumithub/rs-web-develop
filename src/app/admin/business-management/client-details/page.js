@@ -13,7 +13,6 @@ import Checkbox from "../../../../components/form/Checkbox"
 import Status from "../../../../components/Status"
 import PaginationDemo from "../../../../components/Pagination"
 import Image from "next/image"
-import CancelButton from "../../../../components/common/CancelButton"
 import SecondaryButton from "../../../../components/common/SecondaryButton"
 import AddNewLocation from "../../../../components/Models/location/AddNewLocation"
 
@@ -26,7 +25,6 @@ export default function ClientDetails() {
     const [campaign, setCampaign] = useState([])
     const [subscription, setSubscription] = useState([])
     const [loading, setLoading] = useState(true)
-
 
     useEffect(() => {
         getData()
@@ -54,7 +52,7 @@ export default function ClientDetails() {
             noCard={false}
             headerSearch={
                 <Search
-                    mainClass='w-72!'
+                    mainClass='w-96!'
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)
@@ -387,18 +385,18 @@ export default function ClientDetails() {
                                 <td><div className="flex justify-center"><Status status={e.status} /></div></td>
                                 <td>
                                     <div className="flex justify-center">
-                                        {/* <button className='cursor-pointer bg-primary/10 py-1 px-2.5 rounded-full'>
+                                        {e.status === "Paid" && <button className='cursor-pointer bg-primary/10 py-1 px-2.5 rounded-full'>
                                             <div className="flex items-center gap-2.5">
                                                 <Image unoptimized={true} src="/images/arrow-down2.svg" alt='arrow-down2' height={16} width={16} />
                                                 <h2 className="text-sm text-primary">Download PDF</h2>
                                             </div>
-                                        </button> */}
-                                        <button className='cursor-pointer bg-success/10 py-1 px-2.5 rounded-full'>
+                                        </button>}
+                                        {e.status === "Overdue" && <button className='cursor-pointer bg-success/10 py-1 px-2.5 rounded-full'>
                                             <div className="flex items-center gap-2.5">
                                                 <Image unoptimized={true} src="/images/moneys.svg" alt='moneys' height={16} width={16} />
                                                 <h2 className="text-sm text-success">Pay Now</h2>
                                             </div>
-                                        </button>
+                                        </button>}
                                     </div>
                                 </td>
                             </tr>)}

@@ -14,7 +14,6 @@ import ApplyTags from '../../components/Models/customers/ApplyTags';
 import CustomSelectBox from '../../components/form/CustomSelectBox';
 import GridView from '../../components/customers/GridView';
 import ListView from '../../components/customers/ListView';
-import DatePicker from '../../components/form/DatePicker';
 import { allCustomers } from '../../constent/constArray'
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -80,6 +79,7 @@ function Customers() {
 
             {openBoost &&
                 <BoostRequest
+                    isCustomer={true}
                     customer={boostCustomer}
                     onClose={() => {
                         setOpenBoost(false)

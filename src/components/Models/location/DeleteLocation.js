@@ -3,14 +3,12 @@ import Image from "next/image";
 import Model from "../Model";
 import CancelButton from "../../common/CancelButton";
 import SecondaryButton from "../../common/SecondaryButton";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import { useState } from "react";
 
 export default function DeleteLocation({ onClose, title = "Confirm Location" }) {
-    const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false);
 
     const onSubmit = async () => {
@@ -27,15 +25,13 @@ export default function DeleteLocation({ onClose, title = "Confirm Location" }) 
     };
 
     return <Model onClose={onClose} modalClass="w-[30%]!" closeButton={false} closeButton2={true} modelHeaderClass="bg-white!">
-        <form onSubmit={handleSubmit(onSubmit)} className="text-center">
-            <DeleteTag title={`${title} Deletion`} question={`Are You Sure You Want To Delete The Location "Main Office"?`} />
+        <DeleteTag title={`${title} Deletion`} question={`Are You Sure You Want To Delete The Location "Main Office"?`} />
 
-            <div className="grid grid-cols-2 gap-3 mt-5">
-                <CancelButton title="cancel" class_="border-danger2! text-lg! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
-                />
-                <SecondaryButton title=" Yes, Delete" type="submit" class_="text-lg!" disabled={sending} />
-            </div>
-        </form>
+        <div className="grid grid-cols-2 gap-3 mt-5">
+            <CancelButton title="cancel" class_="border-danger2! text-lg! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose}
+            />
+            <SecondaryButton title=" Yes, Delete" onClick={onSubmit} class_="text-lg!" disabled={sending} />
+        </div>
     </Model >
 }
 

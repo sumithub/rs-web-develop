@@ -10,11 +10,13 @@ import { getError } from "../../../../helper"
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { useRole } from "../../../utils/hooks"
 
 
 function EditCustomerList({ onClose, id, onSave }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
     const [sending, setSending] = useState(false)
+      const { isAdmin } = useRole();
 
     const onSubmit = async (data) => {
         try {
@@ -38,11 +40,12 @@ function EditCustomerList({ onClose, id, onSave }) {
         }
     }
 
-    return <Model onClose={onClose} title="Edit Customers List" modalClass="w-1/2!">
+    return <Model onClose={onClose} title={(isAdmin? "Rename":"Edit Customer List")} modalClass="w-1/2!">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <div>
                     <InputForm
+                    inputClass="py-3.5!"
                         class_="mt-0!"
                         label="List Name"
                         placeholder="Enter List Name"
@@ -50,7 +53,7 @@ function EditCustomerList({ onClose, id, onSave }) {
                         formProps={{ ...register("listName", { required: true }) }}
                         errors={errors} />
 
-                    <SelectForm label="Tags"
+                {!isAdmin && <SelectForm label="Tags"
                         setValue={setValue}
                         watch={watch}
                         isRequired={false} selectClass_="py-3.5! px-2.5! focus:border-primary/60!"
@@ -60,10 +63,10 @@ function EditCustomerList({ onClose, id, onSave }) {
                         <option value="high value">High Value</option>
                         <option value="loyal">Loyal</option>
                         <option value="instead of source">instead of source</option>
-                    </SelectForm>
+                    </SelectForm>}
                 </div>
 
-                <div>
+            {!isAdmin && <div>
                     <div className="mt-4">
                         <div className="text-sm text-secondary font-medium">Duplicate Handling<span className="text-danger">*</span></div>
 
@@ -89,11 +92,11 @@ function EditCustomerList({ onClose, id, onSave }) {
                                 errors={errors} />
                         </div>
                     </div>
-                </div>
+                </div>}
             </div>
             <div className="grid grid-cols-2 gap-5 mt-7">
                 <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
-                <SecondaryButton title="Apply Changes" type="submit" disabled={sending} class_="text-lg!" />
+                <SecondaryButton title={(isAdmin? "save":"Apply changes")} type="submit" disabled={sending} class_="text-lg!" />
             </div>
         </form>
     </Model>

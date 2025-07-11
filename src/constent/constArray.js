@@ -54,24 +54,28 @@ export const emailTemplates = [
 ]
 
 export const templateList = [
-    { templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
-    { templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
-    { templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
-    { templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Email Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Sms Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Sms Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Sms Template" },
+    { name: "Nature Template", templateList: "Nature Template", description: "Lorem ipsum..", templateType: "Sms Template" },
 ]
 
 export const customerList = [
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
-    { name: "John Doe", email: "john@example.com", phone: +919876543210, status: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 1", email: "john1@example.com", phone: "+919876543210", status: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 2", email: "john2@example.com", phone: "+919876543210", status: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 3", email: "john3@example.com", phone: "+919876543210", status: "at risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 4", email: "john4@example.com", phone: "+919876543210", status: "at risk", source: "Manual", date: "Jun 18,2024" },
 ]
 
 export const selectedCustomers = [
-    { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
-    { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
-    { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
-    { customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: +919876543210 },
 ]
 
 export const customerTagging = [
@@ -110,13 +114,13 @@ export const changeUsersRole = [
 ]
 
 export const allCustomers = [
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "At Risk", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 1", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "At Risk", source: "Manual", date: "Jun 18,2024" },
 
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Vip", source: " CSV Import", date: "Jun 18,2024" },
+    { name: "John Doe 2", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Vip", source: " CSV Import", date: "Jun 18,2024" },
 
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Priority", source: "Manual", date: "Jun 18,2024" },
+    { name: "John Doe 3", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Priority", source: "Manual", date: "Jun 18,2024" },
 
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Dp", source: "CSV Import", date: "Jun 18,2024" },
+    { name: "John Doe 4", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", status: "Dp", source: "CSV Import", date: "Jun 18,2024" },
 ]
 
 export const customerHistory = [
@@ -128,6 +132,15 @@ export const customerHistory = [
 
     { listName: "January VIP Customers", createdOn: "Jun 18,2024", source: "CSV Import", taggedCustomers: 150 },
 ]
+export const adminCustomerHistory = [
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
+
+    { listName: "January VIP Customers", createdOn: "Jun 18,2024", client: "ABC Garage", totalCustomers: 150 },
+]
 
 export const fieldMapping = [
     { header: "Full Name", firstRow: "DELETE EXAMPLE - Elwyn" },
@@ -136,10 +149,10 @@ export const fieldMapping = [
 ]
 
 export const reviewResponse = [
-    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
-    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
-    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
-    { templateName: "Positive Feedback", lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], lastUpdate: "Jun 18,2024" },
+    { templateName: "Positive Feedback", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], lastUpdate: "Jun 18,2024" },
 ]
 
 
@@ -204,7 +217,6 @@ export const locationScreen = [
     { name: "John Deo", address: "123 Main St.", city: "NYC", state: "NY", country: "USA", phoneNumber: "555-1234" },
 ]
 
-
 export const manageTags = [
     { name: "VIP", description: "High-value customers", customers: "120", created: "Client A" },
     { name: "Negative", description: "Customers with issues", customers: "45", created: "Client A" },
@@ -218,17 +230,15 @@ export const manageTags = [
 
 ]
 
-
 export const locationReviews = [
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "Gustavo Torff", review: "Wait time was long.", date: "11 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Pending" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
-    { customer: "John Deo", review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "Gustavo Torff", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Wait time was long.", date: "11 Mar 2025", status: "Replied" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Pending" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
+    { customer: "John Deo", ratings: ["/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], review: "Excellent service!", date: "10 Mar 2025", status: "Replied" },
 ]
-
 
 export const locationCampaign = [
     { name: "John Deo", status: "Active", responses: "150" },
@@ -385,20 +395,30 @@ export const rolesPermissions = [
 ]
 
 export const latestReviews = [
-    { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 
-     { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
-        
-           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 
-           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 
-           { ratings: ["/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg","/images/star.svg",]
-        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris" },
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
+
+    {
+        ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",]
+        , review: "Great service!", reviewer: "John Doe", client: "Jaydon Saris"
+    },
 ]
 
 export const recentPayments = [
@@ -417,12 +437,12 @@ export const latestCampaigns = [
 ]
 
 export const customerJourney = [
-    { num: "1", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
-    { num: "2", name: "John Smith", type: "Negative Review Handling", status: "In Progress", last: "Jun 18,2024" },
-    { num: "3", name: "Marcus Dias", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
-    { num: "4", name: "John Smith", type: "Service Feedback", status: "Failed", last: "Jun 18,2024" },
-    { num: "5", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
-    { num: "6", name: "John Smith", type: "Post-Purchase Review", status: "Completed", last: "Jun 18,2024" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Success", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Bounced", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Approved", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Pending Review", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Replied", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Delivered", timestamp: "Jun 18,2024 | 14:20:11" },
 ];
 
 export const campaignsManagement = [
@@ -435,10 +455,138 @@ export const campaignsManagement = [
 ]
 
 export const manageCustomers = [
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
-    { customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Active" },
+    { name: "John Doe", customerName: "John Doe", email: "john@example.com", phone: "+91 9876543210", client: "ABC Garage", tags: "VIP", status: "Inactive" },
+]
+
+export const reviewsOversight = [
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], sentiment: 'Positive', reviewSource: "Google", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg",], sentiment: 'Positive', reviewSource: "Yelp", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], sentiment: 'Neutral', reviewSource: "Facebook", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", ratings: ["/images/star.svg", "/images/star.svg", "/images/rating-star.svg", "/images/rating-star.svg", "/images/rating-star.svg",], sentiment: 'Positive', reviewSource: "Yelp", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "ABC Dental", location: "Melbourne", customer: "John Doe", ratings: ["/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg", "/images/star.svg",], sentiment: 'Positive', reviewSource: "Yelp", timestamp: new Date('2024-06-18T10:00:00'), },
+];
+export const JourneyCustomer = [
+    { title: "Client", name: "ABC Ltd" },
+    { title: "Business Type", name: "E-Commerce" },
+    { title: "Journey Type", name: "Journey Type" },
+    { title: "Journey Start", name: "Jun 18,2024" },
+    { title: "Last Update", name: "Jun 20,2024" },
+]
+
+
+export const CustomerTimeline = [
+    { title: "Jun 14,2024", name: "Clicked Review Link" },
+    { title: "Jun 13,2024", name: "Opened Email" },
+    { title: "Jun 12,2024", name: "Review Request Sent" },
+    { title: "Jun 12,2024", name: "Customer Added to Campaign" },
+]
+
+export const widgetManagement = [
+    { widgetName: "Carasoul", type: "Dynamic", status: "Published", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Draft", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Published", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Draft", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Published", assignedClients: "150" },
+    { widgetName: "Carasoul", type: "Dynamic", status: "Draft", assignedClients: "150" }
+]
+
+export const reviewSourcesList = [
+    { url: "https//www.google.com", clientName: "John Deo", status: "Connected", img: "/images/yelp-logo.svg" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Disconnect", img: "/images/yelp-logo.svg" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Connected", img: "/images/yelp-logo.svg" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Disconnect", img: "/images/yelp-logo.svg" },
+    { url: "https//www.google.com", clientName: "John Deo", status: "Connected", img: "/images/yelp-logo.svg" },
+]
+
+export const planManagement = [
+    { planName: "Basic", price: "$20/Mo", discount: "10%", email: "1000", sms: "100" },
+    { planName: "Standard", price: "$50/Mo", discount: "15%", email: "5,000", sms: "500" },
+    { planName: "Premium", price: "$100/Mo", discount: "20%", email: "10,000", sms: "1,000" },
+]
+
+export const featureManagement = [
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+    { featureName: "Review Auto-Response", description: "AI-driven responses" },
+]
+
+export const subscriptionManagement = [
+    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
+    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
+    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Canceled" },
+    { id: "SUB123", clientName: "ABC Corp", plan: "Basic", status: "Active" },
+]
+
+export const invoiceManagement = [
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Paid" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Paid" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Overdue" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Paid" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Paid" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Overdue" },
+    { id: "INV123", clientName: "ABC Corp", amount: "$50", status: "Paid" },
+]
+
+export const paymentManagement = [
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Completed", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Pending", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Completed", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Pending", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Completed", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Pending", date: "Mar 25,2025" },
+    { id: "PAY-001", clientName: "ABC Corp", amount: "$79", status: "Completed", date: "Mar 25,2025" },
+]
+
+export const globalRulesManagement = [
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Notify", status: "Active", createdDate: "Mar 03, 2024" },
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Alert", status: "Inactive", createdDate: "Mar 03, 2024" },
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Notify", status: "Active", createdDate: "Mar 03, 2024" },
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Alert", status: "Inactive", createdDate: "Mar 03, 2024" },
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Notify", status: "Active", createdDate: "Mar 03, 2024" },
+    { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Alert", status: "Inactive", createdDate: "Mar 03, 2024" },
+]
+export const SubscriptionUsage = [
+    { name: "Client", title: "ABC Corp" },
+    { name: "plan", title: "Basic" },
+    { name: "Email Quota Used", title: "500/1,000" },
+    { name: "SMS Quota Used", title: " 50/100" },
+]
+
+export const auditLog = [
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+    { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
+]
+
+export const notificationsDashboard = [
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Unread" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Unread" },
+    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+]
+
+export const alertManagement = [
+    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", deliveryMethod: "Email + In-App", status: "Active" },
+    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", deliveryMethod: "In-App Only", status: "Inactive" },
+    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", deliveryMethod: "Email + In-App", status: "Active" },
+    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", deliveryMethod: "In-App Only", status: "Inactive" },
+    { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", deliveryMethod: "Email + In-App", status: "Active" },
+    { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", deliveryMethod: "In-App Only", status: "Inactive" },
 ]

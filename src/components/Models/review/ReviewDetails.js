@@ -15,7 +15,7 @@ export default function ReviewDetails({ onClose, onSave }) {
 
     const Copy = async () => {
         try {
-            toast.success("Coped Successfully")
+            toast.success("Copied Successfully")
             onClose()
         } catch (error) {
             toast.error(getError(error))

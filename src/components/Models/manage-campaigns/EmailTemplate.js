@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import CustomSelectBox from "../../form/CustomSelectBox";
 import Loading from "../../Loading";
 
-export default function EmailTemplate({ onClose, onSave }) {
+export default function EmailTemplate({ onClose, onSave, type = "" }) {
 
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
@@ -37,7 +37,7 @@ export default function EmailTemplate({ onClose, onSave }) {
         }
     }
 
-    return <Model title="E-mail Templates" onClose={onClose} modalClass="w-1/2!">
+    return <Model title={`${type || "E-mail"} Templates`} onClose={onClose} modalClass="w-1/2!">
         <main>
             <div className="flex items-center justify-between mb-5">
                 <Search placeholder="Search by Filter by name, email, phone" mainClass="w-1/2!"
@@ -56,7 +56,7 @@ export default function EmailTemplate({ onClose, onSave }) {
                         <option value="filter 2">Filter 2</option>
                     </CustomSelectBox>
                     <SecondaryButton title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
-                        onClick={() => onSave({})} />
+                        onClick={() => onSave(list[0])} />
                 </div>
             </div>
 
@@ -81,7 +81,7 @@ export default function EmailTemplate({ onClose, onSave }) {
 
                     <tbody>
                         {list?.map((e, index) => <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
-                            <td><div className="flex items-center"><Radio mainClass="gap-0!" inputClass="mb-2!" class_="mt-2!" />{e.name}</div></td>
+                            <td><div className="flex items-center gap-2"><Radio mainClass="gap-0!" inputClass="mb-2!" class_="mt-2!" />{e.name}</div></td>
                             <td><div className="line-clamp-1">{e.description}</div></td>
                             <td>{e.type}</td>
                         </tr>)}

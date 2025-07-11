@@ -99,7 +99,7 @@ export default function AlertsManagement() {
                                 setSortBy={setSortBy}
                                 sortBy={sortBy}
                                 field="createdDate" /></th>
-                            <th>Actions</th>
+                            <th className="text-center!">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -124,7 +124,7 @@ export default function AlertsManagement() {
                             </td>
                             <td>{formatDate(e.date)}</td>
                             <td>
-                                <div className='flex items-center gap-2'>
+                                <div className='flex items-center justify-center gap-2'>
                                     <div className='cursor-pointer' onClick={() => toast.success("Read Successfully")}><Status status="Read" /></div>
                                     <div className='cursor-pointer' onClick={() => toast.success("Dismissed Successfully")}><Status status="Dismiss" /></div>
                                 </div>

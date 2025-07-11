@@ -82,7 +82,7 @@ export default function GridView() {
                             <h2 className='text-sm font-medium'>{e.source}</h2>
                         </div>
                         <div className='flex items-center justify-between pt-[15px]'>
-                            <h2 className='text-sm font-medium text-text3'>Total customer</h2>
+                            <h2 className='text-sm font-medium text-text3 capitalize'>Total customer</h2>
                             <h2 className='text-sm font-medium'>{e.totalcustomer}</h2>
                         </div>
                     </div>
