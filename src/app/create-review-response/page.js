@@ -127,7 +127,7 @@ export default function CreateReviewResponse() {
                                 <Link href={"/review-responses"} className="text-primary"><span className="">Insert Dynamic Fields</span> <span>+</span></Link>
                             </div>
                         </div>
-                        <textarea placeholder="Type here" className="border border-border2 rounded-[10px] p-4 w-full mt-4" />
+                        {/* <textarea placeholder="Type here" className="border border-border2 rounded-[10px] p-4 w-full mt-4" /> */}
                         <div className="grid grid-cols-2 gap-5 mt-7">
                             <CancelButton title="Cancel" class_="text-lg!" />
                             <SecondaryButton title="Save" type="submit" disabled={sending} class_="text-lg!" />

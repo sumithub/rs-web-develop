@@ -42,18 +42,18 @@ export default function HtmlEditor({
         { value: "full_name", label: "Customer Name", type: "sms" },
         { value: "business_phone", label: "Business Phone", type: "sms" },
     ]
-    else if (type === "email") options = [
+    else if (type === "email" || type == "reviewResponseTemplate") options = [
         { value: "full_name", label: "Customer Full Name", type: "email" },
         { value: "first_name", label: "Customer First Name", type: "email" },
         { value: "business_name", label: "Business Name", type: "email" },
         { value: "direct_feedback", label: "Direct Feedback", type: "email" },
     ]
-    else if (type === "reviewResponseTemplate") options = [
-        { value: "Suggest Response", label: "Suggest Response", type: "reviewResponseTemplate" },
-        { value: "Hope To see you again", label: "Hope To see you again", type: "reviewResponseTemplate" },
-        { value: "thanks for sharing!", label: "thanks for sharing!", type: "reviewResponseTemplate" },
-        { value: "Appreciate the kind feedback", label: "Appreciate the kind feedback", type: "reviewResponseTemplate" }
-    ];
+    // else if (type === "reviewResponseTemplate") options = [
+    //     { value: "Suggest Response", label: "Suggest Response", type: "reviewResponseTemplate" },
+    //     { value: "Hope To see you again", label: "Hope To see you again", type: "reviewResponseTemplate" },
+    //     { value: "thanks for sharing!", label: "thanks for sharing!", type: "reviewResponseTemplate" },
+    //     { value: "Appreciate the kind feedback", label: "Appreciate the kind feedback", type: "reviewResponseTemplate" }
+    // ];
 
     return (
         <div className={`laptop:mb-2 mb-3 w-full relative  ${containerClass}`}>
@@ -109,18 +109,18 @@ export default function HtmlEditor({
                                             if (!selectedValue || !editor) return;
 
                                             // Insert `{{selectedValue}}` at current cursor position
-                                            if (type === "sms" || type === "email")
-                                                editor
-                                                    .chain()
-                                                    .focus()
-                                                    .insertContent(`{{${selectedValue}}}`)
-                                                    .run();
-                                            else if (type === "reviewResponseTemplate")
-                                                editor
-                                                    .chain()
-                                                    .focus()
-                                                    .insertContent(selectedValue)
-                                                    .run();
+                                            // if (type === "sms" || type === "email")
+                                            editor
+                                                .chain()
+                                                .focus()
+                                                .insertContent(`{{${selectedValue}}}`)
+                                                .run();
+                                            // else if (type === "reviewResponseTemplate")
+                                            //     editor
+                                            //         .chain()
+                                            //         .focus()
+                                            //         .insertContent(selectedValue)
+                                            //         .run();
 
                                         }}
                                     >
