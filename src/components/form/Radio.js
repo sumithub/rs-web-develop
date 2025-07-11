@@ -1,5 +1,3 @@
-import Image from "next/image"
-import Tooltip from "../../components/ToolTip"
 export default function Radio({
     disabled = false,
     label,
@@ -11,9 +9,7 @@ export default function Radio({
     onChange,
     value,
     mainClass = "",
-    showTooltip = false,
-    tooltipContent = "",
-    tooltipPosition = "top",
+
 }) {
     return (
         <div className={`text-sm mt-4 ${class_}`}>
@@ -35,12 +31,6 @@ export default function Radio({
                     <div className={`${labelClass} font-medium text-sm capitalize ml-[2px] whitespace-pre`}>
                         {label}
                     </div>
-
-                    {showTooltip && tooltipContent && (
-                        <Tooltip content={tooltipContent} position={tooltipPosition}>
-                            <Image src="/images/url.svg" alt="info" height={16} width={16} unoptimized={true} />
-                        </Tooltip>
-                    )}
                 </div>
             </label>
         </div>
