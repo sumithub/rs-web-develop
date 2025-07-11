@@ -18,6 +18,9 @@ const options = {
     plugins: {
         legend: { position: 'top', },
         title: { display: false, text: 'Numbers by Month', },
+        datalabels: {
+            display: false
+        }
     },
     scales: {
         x: { grid: { display: false, }, },

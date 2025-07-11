@@ -72,6 +72,7 @@ export default function Dashboard() {
                                 labels={["Opened", "Bounced", "Delivered", "Reviewed", "Clicked"]}
                                 colors={["#0396FF", "#16C098", "#FFAE4C", "#07DBFA", "#988AFC"]}
                                 maxWidth={240}
+                                showPercentage={true}
                             />
                         </div>
                         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-5 capitalize">

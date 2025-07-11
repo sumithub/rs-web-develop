@@ -48,6 +48,9 @@ const options = {
                 label: (ctx) => `${ctx.dataset.label}: ${ctx.raw}`,
             },
         },
+        datalabels: {
+            display: false
+        }
     },
     scales: {
         x: {

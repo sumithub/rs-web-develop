@@ -64,6 +64,9 @@ const options = {
             display: false,
             text: 'Top Review Sources',
         },
+        datalabels: {
+            display: false
+        }
     },
     scales: {
         x: {

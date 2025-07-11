@@ -70,6 +70,9 @@ const options = {
             display: true,
             text: 'Sentiment Trend',
         },
+        datalabels: {
+            display: false
+        }
     },
     scales: {
         x: {

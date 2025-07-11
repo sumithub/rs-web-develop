@@ -43,6 +43,9 @@ const options = {
     plugins: {
         legend: { display: false },
         title: { display: false },
+        datalabels: {
+            display: false
+        }
     },
     scales: {
         x: { grid: { display: false } },
