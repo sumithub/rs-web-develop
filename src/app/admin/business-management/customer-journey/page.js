@@ -124,20 +124,16 @@ export default function CustomersJourney() {
                                 setSortBy={setSortBy}
                                 field="email" /></th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Event Type"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="eventType" />
-                                </div>
+                                <TableOrder title="Event Type"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="eventType" />
                             </th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Details"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="details" />
-                                </div>
+                                <TableOrder title="Details"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="details" />
                             </th>
                             <th>
                                 <div className="flex justify-center">
@@ -148,12 +144,10 @@ export default function CustomersJourney() {
                                 </div>
                             </th>
                             <th>
-                                <div className="flex justify-center">
-                                    <TableOrder title="Timestamp"
-                                        sortBy={sortBy}
-                                        setSortBy={setSortBy}
-                                        field="timestamp" />
-                                </div>
+                                <TableOrder title="Timestamp"
+                                    sortBy={sortBy}
+                                    setSortBy={setSortBy}
+                                    field="timestamp" />
                             </th>
                         </tr>
                     </thead>
@@ -172,15 +166,11 @@ export default function CustomersJourney() {
                                 </td>
                                 <td>{e.email}</td>
                                 <td>
-                                    <div className="flex justify-center">
-                                        {e.type}
-                                    </div>
+                                    {e.type}
                                 </td>
                                 <td className="">
-                                    <div className="flex justify-center">
-                                        <div className="line-clamp-1">
-                                            {e.details}
-                                        </div>
+                                    <div className="line-clamp-1">
+                                        {e.details}
                                     </div>
                                 </td>
                                 <td>
@@ -189,7 +179,7 @@ export default function CustomersJourney() {
                                     </div>
                                 </td>
                                 <td>
-                                    {formatDateTime(e.timestamp)}
+                                    {e.timestamp}
                                 </td>
                             </tr>)}
                     </tbody>
