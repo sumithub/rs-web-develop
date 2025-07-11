@@ -24,6 +24,7 @@ import DeleteTemplate from "../../components/Models/review/DeleteTemplate";
 import DateRange from '../../components/form/DateRangePicker'
 import PaginationDemo from "../../components/Pagination";
 import SecondaryButton from "../../components/common/SecondaryButton";
+import { Tooltip } from "react-tooltip";
 
 export default function Review() {
     const [rating, setRating] = useState("")
@@ -294,11 +295,12 @@ export default function Review() {
                                 <option value="responded">Responded</option>
                                 <option value="flagged">Flagged</option>
                             </CustomSelectBox>
-
-                            <button className="cursor-pointer disabled:pointer-events-none shrink-0">
+                            <button data-tooltip-id="my-tooltip" className="cursor-pointer disabled:pointer-events-none shrink-0">
                                 <Image src="/images/network.svg" alt="network" height={36} width={36} unoptimized={true} />
                             </button>
+                            <Tooltip className="text-black! bg-white! shadow-md! rounded! border! border-gray-200!" place="bottom" content="Hello world!" id="my-tooltip">
 
+                            </Tooltip>
                             <div className="shrink-0!">
                                 <SecondaryButton title="Create Manual Review" class_="text-xs! py-2.5!" onClick={() => { setOpen(true) }} />
                             </div>
