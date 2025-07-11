@@ -313,7 +313,7 @@ export default function Detail({ }) {
                             </div>
                             <div className="flex items-center gap-3">
                                 <button
-                                    className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                                    className="bg-primary/10 p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                                     onClick={() => setOpenPreview(true)}
                                     type="button"
                                     disabled={!hasTemplate}
@@ -323,7 +323,7 @@ export default function Detail({ }) {
                                 </button>
 
                                 <button
-                                    className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="bg-primary/10 p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:opacity-50 disabled:cursor-not-allowed"
                                     // onClick={() => setOpenModal(true) }
                                     onClick={(el) => {
                                         setSelId("e.id")
@@ -573,7 +573,7 @@ export default function Detail({ }) {
                                 </SelectForm>} */}
                             </div>
 
-                            <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
+                            <div className="border border-primary bg-primary/10 rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
                                 <div>Total Selected Customers</div>
                                 <div className="flex items-center gap-2">
                                     <div>{customersSelected ? `${customersSelected} Customers` : '0 Customers'}</div>
