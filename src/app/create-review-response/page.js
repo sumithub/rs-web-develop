@@ -12,6 +12,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import Image from "next/image"
 import Checkbox from "../../components/form/Checkbox"
+import Link from "next/link"
 
 export default function CreateReviewResponse() {
     const id = ""
@@ -123,8 +124,7 @@ export default function CreateReviewResponse() {
                                 type={"reviewResponseTemplate"}
                             />
                             <div className="flex justify-end mt-4">
-                                <div className="text-primary flex gap-2 text-base font-medium">
-                                    <span className="">Insert Dynamic Fields</span> <span>+</span></div>
+                                <Link href={"/review-responses"} className="text-primary"><span className="">Insert Dynamic Fields</span> <span>+</span></Link>
                             </div>
                         </div>
                         <textarea placeholder="Type here" className="border border-border2 rounded-[10px] p-4 w-full mt-4" />
@@ -189,5 +189,5 @@ export default function CreateReviewResponse() {
                 </div>
             </div>
         </form>
-    </AdminLayout>
+    </AdminLayout >
 }
