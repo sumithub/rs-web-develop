@@ -81,7 +81,7 @@ export default function ViewNotification({ onClose, id }) {
                 <div className="grid grid-cols-3 gap-5 mt-7">
                     <CancelButton title="Delete" type="submit" disabled={sending} class_="text-lg!" />
                     <SecondaryButton title="Acknowledge" class_="text-lg! bg-white! border border-primary! text-primary! hover:text-white! hover:bg-primary!" />
-                    <SecondaryButton title="mark as read" class_="text-lg!" />
+                    <SecondaryButton title="mark as read" class_="text-lg!" onClick={onClose} />
                 </div>
             </form>
         </Model>

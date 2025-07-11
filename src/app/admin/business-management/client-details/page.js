@@ -385,18 +385,18 @@ export default function ClientDetails() {
                                 <td><div className="flex justify-center"><Status status={e.status} /></div></td>
                                 <td>
                                     <div className="flex justify-center">
-                                        {/* <button className='cursor-pointer bg-primary/10 py-1 px-2.5 rounded-full'>
+                                        {e.status === "Paid" && <button className='cursor-pointer bg-primary/10 py-1 px-2.5 rounded-full'>
                                             <div className="flex items-center gap-2.5">
                                                 <Image unoptimized={true} src="/images/arrow-down2.svg" alt='arrow-down2' height={16} width={16} />
                                                 <h2 className="text-sm text-primary">Download PDF</h2>
                                             </div>
-                                        </button> */}
-                                        <button className='cursor-pointer bg-success/10 py-1 px-2.5 rounded-full'>
+                                        </button>}
+                                        {e.status === "Overdue" && <button className='cursor-pointer bg-success/10 py-1 px-2.5 rounded-full'>
                                             <div className="flex items-center gap-2.5">
                                                 <Image unoptimized={true} src="/images/moneys.svg" alt='moneys' height={16} width={16} />
                                                 <h2 className="text-sm text-success">Pay Now</h2>
                                             </div>
-                                        </button>
+                                        </button>}
                                     </div>
                                 </td>
                             </tr>)}
