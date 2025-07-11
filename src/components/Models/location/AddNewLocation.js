@@ -9,6 +9,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import PhoneForm from "../../form/PhoneForm"
+import SelectForm from "../../form/SelectForm"
 
 function AddNewLocation({ onClose, id, onSave, type, showOnlyEdit }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors }, } = useForm();
@@ -42,16 +43,22 @@ function AddNewLocation({ onClose, id, onSave, type, showOnlyEdit }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <div>
-                    {type && <InputForm
+                    {type && <SelectForm
                         label="Client"
-                        class_="mt-0!"
-                        placeholder="Enter your name"
                         isRequired={true}
+                        class_="mt-0!"
+                        selectClass_="bg-white! py-[13.6px]! focus:border-primary/60! border-primary/10!"
                         formProps={{ ...register("client", { required: true }) }}
-                        errors={errors} />}
+                        errors={errors}
+                        setValue={setValue}
+                        watch={watch}>
+                        <option value="client">Client A</option>
+                        <option value="client">Client B</option>
+                        <option value="client">Client C</option>
+                        <option value="client">Client D</option>
+                    </SelectForm>}
 
                     <InputForm label="Name"
-                        class_="mt-0!"
                         placeholder="Enter your name"
                         isRequired={true}
                         formProps={{ ...register("name", { required: true }) }}

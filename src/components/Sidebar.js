@@ -4,17 +4,20 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import LocationsDropdown from "../components/Models/LocationsDropdown"
+import AddNewLocation from '../components/Models/location/AddNewLocation'
+import { useRole } from "../utils/hooks";
 
 export default function Sidebar({ collapse, toggleSidebar, role }) {
     const [list, setList] = useState([])
     const [openLocation, setOpenLocation] = useState(false)
-    const [selectedLocation, setSelectedLocation] = useState("4517 Washington Ave. Manchester, Kentucky 39495")
+    const [selectedLocation, setSelectedLocation] = useState("Select Location")
+    const [open, setOpen] = useState(false)
+    const { isAdmin } = useRole();
 
     const handleLocationSelect = (location) => {
         setSelectedLocation(location);
-        setOpenLocation(false);
+        localStorage.setItem("location", location)
     };
-
     useEffect(() => {
         const userList = [
             { title: "Dashboard", link: "/dashboard", icon: "dashboard" },
@@ -25,7 +28,12 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
             // { title: "Customers", link: "/campaigns", icon: "customer", submenu: [{ title: "User Management", link: "/users" }] },
             {
                 title: "Reviews", link: "/reviews", icon: "message",
-                submenu: [{ title: "Manage Reviews", link: "/review" }, { title: "Review Widgets", link: "/review-widgets" }, { title: "Review Sources", link: "/review-sources" }]
+                submenu: [{ title: "Manage Reviews", link: "/review" },
+                { title: "Review Sources", link: "/review-sources" },
+                { title: "Review Responses", link: "/review-responses" },
+                { title: "Review Widgets", link: "/review-widgets" },
+
+                ]
             },
             {
                 title: "Campaigns", link: "/campaigns", icon: "campaign",
@@ -82,7 +90,7 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                         { title: "Clients", link: "/admin/business-management/clients-management" },
                         { title: "Locations", link: "/admin/business-management/locations-management" },
                         { title: "Manage Customers", link: "/admin/business-management/manage-customers" },
-                        { title: "Customers Journey", link: "/admin/customer-journey" },
+                        { title: "Customers Journey", link: "/admin/business-management/customer-journey" },
                         { title: "Tagging", link: "/admin/business-management/customer-tagging" },
                     ]
             },
@@ -105,8 +113,9 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 submenu:
                     [
                         { title: "Manage Reviews", link: "/admin/reviews-oversight" },
-                        { title: "Widgets", link: "/admin/widgets-management" },
                         { title: "Sources", link: "/admin/review-sources" },
+                        { title: "Widgets", link: "/admin/widgets-management" },
+
                     ]
             },
 
@@ -161,17 +170,17 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
         } else {
             setList(userList)
         }
+        setSelectedLocation(localStorage.getItem("location") || "Select Location")
     }, [role])
 
     return <div className="relative z-50">
-
-        {openLocation && <LocationsDropdown
-            onClose={() => {
-                setOpenLocation(false)
-            }}
-            onLocationSelect={handleLocationSelect}
-            selectedLocation={selectedLocation}
-        />}
+        {open &&
+            <AddNewLocation
+                onClose={() => {
+                    setOpen(false)
+                }}
+            />
+        }
         <div className={`bg-white h-[100vh] ${collapse ? "w-20" : "w-72"} transition-all fixed top-0 left-0 z-20 rounded-tl-[20px] rounded-bl-[20px] shadow-[0px_16px_44px_0px_#00000012]`}>
             <div className="relative h-full pb-10">
                 <div className="pt-5 text-center relative h-12">
@@ -181,17 +190,42 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                     </button>
                 </div>
                 <div className="relative h-full flex flex-col justify-between overflow-y-auto custom-scrollbar pb-10 pt-10 scrollbar-none">
-                    <div>
-                        <div className="px-3 mb-4">
-                            <div className="flex gap-1 items-center px-4 py-3 text-sm rounded-lg bg-primary text-white">
-                                <Image className="shrink-0" src="/sidebar-icons/location.svg" alt="location" height={20} width={20} unoptimized={true} />
+                    <div className="relative">
 
-                                <div className="text-xs font-medium line-clamp-1">{selectedLocation}</div>
-                                <button className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={20} width={20} unoptimized={true} /></button>
+                        {!isAdmin && <>
+                            <div
+                                className="px-3 pb-4">
+                                <div className={`flex gap-2 items-center justify-between px-4 py-3 text-sm rounded-lg bg-primary text-white`}>
+                                    <Image className="shrink-0" src="/sidebar-icons/location.svg" alt="location" height={20} width={20} unoptimized={true} />
 
-                                <button onClick={() => { setOpenLocation(true) }} className="cursor-pointer"><Image src="/images/add1.svg" alt="add" height={25} width={25} unoptimized={true} /></button>
+                                    <div className={`${collapse ? "hidden" : "flex"}  items-center w-full gap-1`}>
+                                        <div className="text-sm font-medium line-clamp-1 capitalize">{selectedLocation}</div>
+                                        {/* <button type="button" className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={20} width={20} unoptimized={true} /></button> */}
+                                    </div>
+                                    <div className={`${collapse ? "hidden" : "flex"}  gap-2`}>
+
+                                        <button id="location-btn"
+                                            onClick={() => {
+                                                if (collapse) {
+                                                    toggleSidebar()
+                                                } else {
+                                                    setOpenLocation(!openLocation)
+                                                }
+                                            }} type="button" className="cursor-pointer"><Image src="/images/arrow-up.svg" alt="arrow" height={25} width={25} unoptimized={true} className="shrink-0" /></button>
+                                        <button onClick={() => { setOpen(true) }} type="button" className="cursor-pointer"><Image src="/images/add1.svg" alt="add" height={25} width={25} unoptimized={true} className="shrink-0" /></button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <div>
+                                {openLocation && <LocationsDropdown
+                                    onClose={() => {
+                                        setOpenLocation(false)
+                                    }}
+                                    onLocationSelect={handleLocationSelect}
+                                    selectedLocation={selectedLocation}
+                                />}
+                            </div>
+                        </>}
 
                         <ul className="flex flex-col gap-y-3 px-3">
                             {list.map((e, i) => {

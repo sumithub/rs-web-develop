@@ -38,7 +38,7 @@ export default function SmsPreview({ onClose, id, body }) {
                 res = await axios.post("/api", data)
             }
 
-            toast.success("Saved Successfully")
+            toast.success("Sent Successfully")
             setSending(false)
             onClose()
         } catch (error) {
@@ -170,7 +170,7 @@ export default function SmsPreview({ onClose, id, body }) {
                                 </button>
                             </div>
                             <div className={`mt-7 border border-dark rounded-[10px] `}>
-                                <div className='tiptap p-2.5'
+                                <div className='tiptap p-5'
                                     dangerouslySetInnerHTML={{ __html: body }}
                                 />
                                 {/* <div className="p-2.5">
@@ -181,7 +181,7 @@ export default function SmsPreview({ onClose, id, body }) {
                                     <h3 className="text-xs pt-5">&#123;Business_name&#125;</h3>
                                 </div> */}
                             </div>
-                            <Image src="/images/template.png" alt="template" width={407} height={196} className="mt-7 w-full h-auto" />
+                            {/* <Image src="/images/template.png" alt="template" width={407} height={196} className="mt-7 w-full h-auto" /> */}
                         </div>
                     </div>
                 </div>

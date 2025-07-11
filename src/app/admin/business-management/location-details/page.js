@@ -183,7 +183,7 @@ export default function LocationDetails() {
                                     <div className="flex items-center gap-2">
                                         {e.ratings?.map((rating, i) => (
                                             <div key={i} >
-                                                <Image src={rating} alt="star" height={20} width={20} unoptimized={true} />
+                                                <Image src={rating} alt="star" height={18} width={18} unoptimized={true} />
                                             </div>
                                         ))}
                                     </div>

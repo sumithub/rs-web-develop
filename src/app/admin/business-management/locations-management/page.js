@@ -133,7 +133,7 @@ function Location() {
                                 setSortBy={setSortBy}
                                 field="count"
                             /></th>
-                            <th className='text-center!'>Action</th>
+                            <th className='text-center!'>Actions</th>
                         </tr>
                     </thead>
 

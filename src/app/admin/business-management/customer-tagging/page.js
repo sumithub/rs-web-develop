@@ -120,7 +120,7 @@ function CustomerTagging() {
                 <div>
                     <div className="flex justify-between items-start w-full mb-5 mt-3.5">
                         <Search
-                            mainClass='max-w-[270px]!'
+                            mainClass='w-80!'
                             placeholder="Search by Tags"
                             onSearch={(s) => {
                                 setSearch(s)
@@ -195,7 +195,7 @@ function CustomerTagging() {
                                         /></div></th>
                                 <th>
                                     <div className='flex justify-center'>
-                                        Action
+                                        Actions
                                     </div>
                                 </th>
                             </tr>
@@ -274,7 +274,7 @@ function CustomerTagging() {
                                         colors={["#0396FF", "#16C098", "#FFAE4C", "#07DBFA", "#988AFC"]}
                                     />
                                 </div>
-                                <div className="mt-10 w-[55%]">
+                                <div className="mt-10 w-[55%] flex flex-col gap-3">
                                     <div className="flex items-center justify-between gap-3 mb-2">
                                         <div className='flex gap-2.5 items-center'>
                                             <div className="bg-primary h-3 w-3 rounded-full"></div>

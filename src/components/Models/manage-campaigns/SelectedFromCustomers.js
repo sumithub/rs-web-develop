@@ -56,18 +56,25 @@ function SelectedCustomers({ onClose, onSave }) {
                         <option value="filter 1">Filter 1</option>
                         <option value="filter 2">Filter 2</option>
                     </CustomSelectBox>
-                    <SecondaryButton type="button" title="Add Selected" class_="text-sm! font-normal! py-[7px]!"
+                    <SecondaryButton
+                        type="button"
+                        title="Add Selected"
+                        class_="text-sm! font-normal! py-[7px]!"
                         onClick={() => {
-                            if (onSave) {
-                                onSave(list.filter(e => e.selected))
+                            const selected = list.filter(e => e.selected)
+                            if (selected.length === 0) {
+                                return
                             }
+                            onSave?.(selected)
+                            onClose?.()
                         }}
                     />
+
                 </div>
             </div>
 
             <div className="table-class overflow-y-auto!">
-                {loading ? <Loading /> : (list?.length > 0 ? <table className='w-full'>
+                {loading ? <Loading class_="min-h-[400px]!" /> : (list?.length > 0 ? <table className='w-full'>
                     <thead>
                         <tr>
                             <th><TableOrder title="Customer Name"

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function DashboardCard({ title, count, img, bgClass, textColor, icon, percentage, bgImage }) {
+export default function DashboardCard({ title, type, count, img, bgClass, textColor, icon, percentage, bgImage }) {
     return <div className="relative bg-white rounded-[15px] border border-border-color overflow-hidden w-full">
         {/* Background grid vector */}
         {/* <Image
@@ -26,6 +26,7 @@ export default function DashboardCard({ title, count, img, bgClass, textColor, i
             </div>
 
             <div className="ml-12">
+                {type && <div className={`text-base font-medium capitalize mb-2`}>{type}</div>}
                 <div className={`text-[22px] font-bold ${textColor}`}>{count}</div>
                 {icon && (
                     <div className="flex items-center gap-2">

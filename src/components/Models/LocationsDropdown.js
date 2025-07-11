@@ -3,7 +3,7 @@ import { useState } from "react";
 import Search from "../form/Search";
 import Model from "./Model";
 
-export default function LocationsDropdown({ onClose, id, onLocationSelect, selectedLocation }) {
+export default function LocationsDropdown({ onClose, onLocationSelect, selectedLocation }) {
     const [search, setSearch] = useState("")
 
     // Sample locations data
@@ -26,13 +26,13 @@ export default function LocationsDropdown({ onClose, id, onLocationSelect, selec
         onClose();
     };
 
-    return <Model onClose={onClose} closeButton={false}
-        modalClass="w-[14%]! shadow-[0px_0px_40px_0px_#0000001A]!"
+    return <Model closeButton={false}
+        modalClass="shadow-[0px_0px_40px_0px_#0000001A]! md:w-full w-full! 2xl:max-w-[100%] xl:max-w-[100%]! max-w-[100%]"
         flexClass="items-start! justify-start!"
-        class_="top-36! left-3! inset-0 items-start! justify-end!"
+        class_="top-0! absolute! right-3! left-3! inset-0 items-start! justify-end!"
         modelHeaderClass="bg-white! p-0!"
-        modalBodyClass="px-2! pb-3!"
-        overlayClass="bg-white! opacity-0!"
+        modalBodyClass="px-3! pt-3! pb-3!"
+        overlayClass="bg-white! opacity-0! hidden!"
     >
         <div className="pt-1">
             <div>
@@ -51,7 +51,7 @@ export default function LocationsDropdown({ onClose, id, onLocationSelect, selec
                 return (
                     <div key={index}>
                         <div
-                            className={`${isSelected ? "bg-dark p-2.5 rounded-md" : ""} cursor-pointer hover:bg-gray-100 rounded-md ${isSelected ? "" : "p-2.5"}`}
+                            className={`${isSelected ? "bg-dark p-2 rounded-md" : ""} cursor-pointer rounded-md ${isSelected ? "" : ""}`}
                             onClick={() => handleLocationSelect(location)}
                         >
                             <h2 className={`text-sm capitalize ${isSelected ? "text-primary" : "text-text3"}`}>

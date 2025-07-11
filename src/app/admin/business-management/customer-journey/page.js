@@ -1,21 +1,21 @@
 "use client"
 import { useEffect, useState } from "react"
-import AdminLayout from "../../../components/AdminLayout"
-import Search from "../../../components/form/Search"
-import DateRange from "../../../components/form/DateRangePicker"
-import CustomSelectBox from "../../../components/form/CustomSelectBox"
-import SecondaryButton from "../../../components/common/SecondaryButton"
-import TableOrder from "../../../components/TableOrder"
-import Checkbox from "../../../components/form/Checkbox"
-import Status from "../../../components/Status"
-import PaginationDemo from "../../../components/Pagination"
+import AdminLayout from "../../../../components/AdminLayout"
+import Search from "../../../../components/form/Search"
+import DateRange from "../../../../components/form/DateRangePicker"
+import CustomSelectBox from "../../../../components/form/CustomSelectBox"
+import SecondaryButton from "../../../../components/common/SecondaryButton"
+import TableOrder from "../../../../components/TableOrder"
+import Checkbox from "../../../../components/form/Checkbox"
+import Status from "../../../../components/Status"
+import PaginationDemo from "../../../../components/Pagination"
 import axios from "axios"
 import { toast } from "react-toastify"
-import { formatDateTime, getError } from "../../../../helper"
-import Loading from "../../../components/Loading"
-import { customerJourney } from "../../../constent/constArray"
-import Switch from "../../../components/form/Switch"
-import CustomerJourney from "../../../components/Models/admin/customer-journey/CustomerJourney"
+import { formatDateTime, getError } from "../../../../../helper"
+import Loading from "../../../../components/Loading"
+import { customerJourney } from "../../../../constent/constArray"
+import Switch from "../../../../components/form/Switch"
+import CustomerJourney from "../../../../components/Models/admin/customer-journey/CustomerJourney"
 
 export default function CustomersJourney() {
     const [sortBy, setSortBy] = useState(false)
@@ -26,10 +26,11 @@ export default function CustomersJourney() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
+    const [enabled, setEnabled] = useState(true)
 
     useEffect(() => {
         getUsers()
-    }, [search, filterBy, date, filterBySort, sortBy])
+    }, [search, filterBy, date, filterBySort, sortBy, enabled])
 
     const getUsers = async () => {
         try {
@@ -66,14 +67,18 @@ export default function CustomersJourney() {
                 />
                 <div className='flex items-center gap-3.5'>
 
-                    < div className="flex items-center gap-2">
-                        <Switch class_="mt-2" />
+                    < div className="flex items-center gap-4">
+                        <Switch
+                            checked={enabled}
+                            onChange={setEnabled}
+                            class_={`${enabled ? 'bg-green-500' : 'bg-gray-300'
+                                } relative inline-flex h-4 w-8 items-center rounded-full transition mt-2`} />
                         <div>Table</div>
                     </div>
 
                     <CustomSelectBox
                         defaultOption="Sort By"
-                        class_='mt-0! w-36!'
+                        class_='mt-0! w-28!'
                         value={filterBySort}
                         onChange={(e) => {
                             setFilterBySort(e.target.value)
@@ -85,7 +90,7 @@ export default function CustomersJourney() {
 
                     <CustomSelectBox
                         defaultOption="Event Type"
-                        class_='mt-0! w-28!'
+                        class_='mt-0! w-36!'
                         value={filterBy}
                         onChange={(e) => {
                             setFilterBy(e.target.value)

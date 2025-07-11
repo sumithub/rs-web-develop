@@ -21,7 +21,6 @@ import { useRouter } from "next/navigation"
 import SelectedCustomers from "../../../components/Models/manage-campaigns/SelectedCustomers"
 import ImportCustomerDetail from "../../../components/Models/manage-campaigns/ImportCustomerDetail"
 import RadioForm from "../../../components/form/RadioForm"
-import Link from "next/link"
 
 export default function Detail({ }) {
     const id = ""
@@ -37,6 +36,8 @@ export default function Detail({ }) {
     const [expandAll, setExpandAll] = useState(undefined)
     const [openPreview, setOpenPreview] = useState(false)
     const router = useRouter()
+    const [selId, setSelId] = useState("")
+
     const [cardStatuses, setCardStatuses] = useState({
         campaignDetails: 'pending',
         targeting: 'pending',
@@ -106,7 +107,6 @@ export default function Detail({ }) {
     const handleEmailReminderToggle = (value) => {
         setEmailReminderEnabled(value === 'sameAsPrimary');
     };
-
 
 
     const watchedFields = watch()
@@ -225,6 +225,8 @@ export default function Detail({ }) {
             }
             toast.success("Campaign Created Successfully")
             setSending(false)
+            router.push("/manage-campaigns")
+
         } catch (error) {
             toast.error(getError(error))
             setSending(false)
@@ -320,15 +322,19 @@ export default function Detail({ }) {
                                     Preview
                                 </button>
 
-                                <Link href="/create-email-template"
+                                <button
                                     className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:opacity-50 disabled:cursor-not-allowed"
-                                    // onClick={() => setOpenModal(true)}
+                                    // onClick={() => setOpenModal(true) }
+                                    onClick={(el) => {
+                                        setSelId("e.id")
+                                        setOpenModal(el)
+                                    }}
                                     type="button"
                                     disabled={!hasTemplate}
                                 >
                                     <Image src="/images/edit2.svg" alt='edit' height={14} width={14} unoptimized={true} />
                                     Edit
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -343,9 +349,20 @@ export default function Detail({ }) {
         cardClass="w-[70%]! relative h-[85vh] overflow-y-auto pt-0! scrollbar-none">
         {openModal &&
             <AddTemplate
+                id={selId}
                 onClose={() => {
-                    setOpenModal(false)
+                    setOpenModal(false);
+                    setSelId("");
                 }}
+                onSave={() => {
+
+                    setOpenModal(false);
+                    setSelId("");
+                }}
+
+            // onClose={() => {
+            //     setOpenModal(false)
+            // }}
             />
         }
 
@@ -437,7 +454,7 @@ export default function Detail({ }) {
                         title="Campaign Details"
                         status={getCardStatus('campaignDetails')}>
                         <div>
-                            <div className="grid grid-cols-2 gap-3">
+                            <div className="grid grid-cols-1 gap-3">
                                 <InputForm
                                     label="Campaign Name"
                                     placeholder="Enter Name"
@@ -509,9 +526,9 @@ export default function Detail({ }) {
                             </div>
                         </div>
                         {customersSelected && <div>
-                            <div className="flex justify-between">
+                            <div className="flex justify-between items-start mb-4">
                                 <div>
-                                    <div className="flex items-center gap-5 mb-4">
+                                    <div className="flex items-center gap-5">
                                         <div className="flex items-center gap-2">
                                             <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                                             <div className="text-danger text-lg font-semibold capitalize">{customersSelected || 5} customers are already in an active campaign?</div>
@@ -520,10 +537,18 @@ export default function Detail({ }) {
                                             type="button"
                                             onClick={() => { setOpenCustomer("details") }} />
                                     </div>
-                                </div>
-                                <CancelButton type="button" title="proceed anyway" class_="bg-white! border-border-color! font-normal! text-sm!" />
+                                </div> {watch("customerSource") && <SelectForm
+                                    class_="mt-0!"
+                                    defaultOption="" selectClass_="bg-white! py-2! border-primary/10! focus:border-primary/60!"
+                                    formProps={{ ...register("excludeDuplicates", { required: false }) }}
+                                    errors={errors} setValue={setValue}
+                                    watch={watch}>
+                                    <option value="Exclude Duplicates">Exclude Duplicates</option>
+                                    <option value="Proceed Anyway">Proceed Anyway</option>
+                                </SelectForm>}
+                                {/* <CancelButton type="button" title="proceed anyway" class_="bg-white! border-border-color! font-normal! text-sm!" /> */}
                             </div>
-                            <div className="grid grid-cols-[3fr_1fr] items-start gap-3">
+                            <div className="grid grid-cols-1 items-start gap-3">
                                 <SelectForm
                                     label="Cooldown Period"
                                     isRequired={true}
@@ -537,7 +562,7 @@ export default function Detail({ }) {
                                     <option value="14">14 Days</option>
                                     <option value="21">21 Days</option>
                                 </SelectForm>
-                                {watch("customerSource") && <SelectForm
+                                {/* {watch("customerSource") && <SelectForm
                                     class_="mt-10"
                                     defaultOption="" selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                                     formProps={{ ...register("excludeDuplicates", { required: false }) }}
@@ -545,7 +570,7 @@ export default function Detail({ }) {
                                     watch={watch}>
                                     <option value="Exclude Duplicates">Exclude Duplicates</option>
                                     <option value="Proceed Anyway">Proceed Anyway</option>
-                                </SelectForm>}
+                                </SelectForm>} */}
                             </div>
 
                             <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
@@ -617,7 +642,7 @@ export default function Detail({ }) {
                                 {/* Reminder Email Template Options */}
                                 {selectedTemplates.primary && (
                                     <div className="mt-4">
-                                        <div className="flex items-start gap-4 mt-1 mb-4">
+                                        <div className="flex items-center gap-4 mt-1 mb-4">
                                             <div className="text-gray-600 text-sm font-medium">Reminder Email Template</div>
                                             <div className="flex items-start gap-5">
                                                 <Radio
@@ -661,8 +686,9 @@ export default function Detail({ }) {
                                                 <>
                                                     <div className="flex items-start gap-4 mt-1 mb-4">
                                                         <div className="text-gray-600 text-sm font-medium">Final Reminder Email Template<span className="text-red-500">*</span></div>
-                                                        <div className="flex items-start gap-2">
+                                                        <div className="flex items-start gap-5">
                                                             <Radio
+                                                                class_="mt-0!"
                                                                 name="final"
                                                                 label="Custom final reminder email"
                                                                 checked={campaignType === 'both' ? !sameAsEmailFinal : sameAsFinal === "customFinalReminderEmail"}
@@ -679,6 +705,7 @@ export default function Detail({ }) {
                                                                 showTooltip={true}
                                                             />
                                                             <Radio
+                                                                class_="mt-0!"
                                                                 name="final"
                                                                 label="Same as reminder"
                                                                 checked={campaignType === 'both' ? sameAsEmailFinal : sameAsFinal === "sameAsPrimary"}
@@ -733,7 +760,9 @@ export default function Detail({ }) {
                                         formProps={{
                                             ...register("emailReminderNo", {
                                                 required: emailReminderEnabled,
-                                                valueAsNumber: true
+                                                valueAsNumber: true,
+                                                min: { value: 0, message: "The number of reminders must be 1 or greater." }
+
                                             })
                                         }} inputType="number"
                                         errors={errors} />
@@ -853,7 +882,9 @@ export default function Detail({ }) {
                                                         formProps={{
                                                             ...register("smsReminderNo", {
                                                                 required: smsReminderEnabled,
-                                                                valueAsNumber: true
+                                                                valueAsNumber: true,
+                                                                min: { value: 0, message: "The number of reminders must be 1 or greater." }
+
                                                             })
                                                         }} inputType="number"
                                                         errors={errors} />
@@ -881,7 +912,7 @@ export default function Detail({ }) {
                             <SelectForm label="Send Time" isRequired={true} defaultOption="select" selectClass_="bg-white! py-[13.6px]! focus:border-primary/60! border-primary/10!"
                                 formProps={{ ...register("sendTime", { required: true }) }}
                                 errors={errors} setValue={setValue}
-                                watch={watch}>
+                                watch={watch} clearErrors={clearErrors}>
                                 <option value="morning">morning (8 AM - 12 PM)</option>
                                 <option value="afternoon">afternoon (12 PM - 4 PM)</option>
                                 <option value="evening">evening (4 PM - 8 PM)</option>
@@ -889,11 +920,14 @@ export default function Detail({ }) {
                             </SelectForm>
                         </div>
 
-                        <SelectForm label="Weekend Delivery" defaultOption="Restrict" selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
+                        <SelectForm label="Weekend Delivery" selectClass_="bg-white! py-3! focus:border-primary/60! border-primary/10!"
                             formProps={{ ...register("weekendDelivery", { required: false }) }}
                             errors={errors} setValue={setValue}
                             watch={watch}
-                        />
+                        >
+                            <option value="restrict">Restrict</option>
+                            <option value="allow">Allow</option>
+                        </SelectForm>
                     </CampaignCard>
                 </div>
 

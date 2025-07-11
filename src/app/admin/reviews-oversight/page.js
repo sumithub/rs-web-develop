@@ -25,10 +25,11 @@ export default function ReviewsOversight() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
+    const [enabled, setEnabled] = useState(true)
 
     useEffect(() => {
         getReviews()
-    }, [search, filterBy, filterBySort, filterByExport, sortBy])
+    }, [search, filterBy, filterBySort, filterByExport, sortBy, enabled])
 
     const getReviews = async () => {
         try {
@@ -59,8 +60,8 @@ export default function ReviewsOversight() {
                 <DashboardCard title="Positive Reviews" count="78%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
                 <DashboardCard title="Neutral Reviews" count="15%" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-yellow" bgImage="bg-[url('/images/active3.png')]" />
                 <DashboardCard title="Negative Reviews" count="7%" img="/images/chart-2.svg" bgClass="bg-danger" textColor="text-danger" bgImage="bg-[url('/images/negative.png')]" />
-                <DashboardCard title="Most Reviewed Business" count="1,245" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-yellow" bgImage="bg-[url('/images/active3.png')]" />
-                <DashboardCard title=" Most Active Review Source" count="65%" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
+                <DashboardCard title="Most Reviewed Business" count="1,245" type="abc dental" img="/images/activity.png" bgClass="bg-custom-yellow" textColor="text-custom-yellow" bgImage="bg-[url('/images/active3.png')]" />
+                <DashboardCard title=" Most Active Review Source" count="65%" type="google" img="/images/chart-2.svg" bgClass="bg-success" textColor="text-success" bgImage="bg-[url('/images/positive.png')]" />
             </div>
 
             {open &&
@@ -83,8 +84,13 @@ export default function ReviewsOversight() {
                 <div className='flex items-center gap-3.5'>
 
                     < div className="flex items-center gap-2">
-                        <div>Table View</div>
-                        <Switch class_="mt-2" />
+                        <div className="text-sm font-medium">Table View</div>
+                        <Switch
+                            switchClass_="w-9!"
+                            checked={enabled}
+                            onChange={setEnabled}
+                            class_={`${enabled ? 'bg-green-500' : 'bg-gray-300'
+                                } relative inline-flex h-4 w-4 items-center rounded-full transition mt-2 w-auto!`} />
                     </div>
 
                     <CustomSelectBox
