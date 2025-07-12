@@ -308,8 +308,8 @@ export default function LogoUpload({
                         >
                             Cancel
                         </button> */}
-                        <CancelButton title="Cancel" class_="text-xs! border border-border2! hover:bg-dark! bg-white!" mainClass="shrink-0" />
-                        <SecondaryButton title="Add To Logo" onClick={() => { setOpen(true) }} class_="text-xs! font-semibold!" />
+                        <CancelButton title="Cancel" class_="text-xs! border border-border2! hover:bg-dark! bg-white! py-[7px]! px-2.5!" mainClass="shrink-0" />
+                        <SecondaryButton title="Add To Logo" onClick={() => { setOpen(true) }} class_="text-xs! font-semibold! py-[7px]! px-2.5!" />
                     </div>
                 </div>
             )}
