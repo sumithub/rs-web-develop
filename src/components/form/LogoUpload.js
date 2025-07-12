@@ -207,7 +207,7 @@ export default function LogoUpload({
             {/* Only show drag & drop area if no file is selected */}
             {!selectedFile ? (
                 <div
-                    className={`border-2 border-dashed rounded-lg p-8 text-center transition-all duration-200 cursor-pointer hover:bg-gray-50 ${getBorderColor()}`}
+                    className={`border-2 border-dashed rounded-lg px-8 py-3.5 text-center transition-all duration-200 cursor-pointer hover:bg-gray-50 ${getBorderColor()}`}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
