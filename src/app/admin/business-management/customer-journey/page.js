@@ -73,8 +73,9 @@ export default function CustomersJourney() {
                         <Switch
                             checked={enabled}
                             onChange={setEnabled}
+                            switchClass="w-9!"
                             class_={`${enabled ? 'bg-green-500' : 'bg-gray-300'
-                                } relative inline-flex h-4 w-8 items-center rounded-full transition mt-2`} />
+                                } relative inline-flex h-4 w-9 items-center rounded-full transition mt-2`} />
                         <div>Table</div>
                     </div>
 
