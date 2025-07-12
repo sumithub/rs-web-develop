@@ -103,7 +103,7 @@ export default function WidgetsManagement() {
 
                     <CustomSelectBox
                         defaultOption="Type"
-                        class_='mt-0! w-36!'
+                        class_='mt-0! w-28!'
                         value={filterByType}
                         onChange={(e) => {
                             setFilterByType(e.target.value)
@@ -127,7 +127,7 @@ export default function WidgetsManagement() {
 
                     <CustomSelectBox
                         defaultOption="Assigned Clients"
-                        class_='mt-0! w-28!'
+                        class_='mt-0! w-40!'
                         value={filterByClients}
                         onChange={(e) => {
                             setFilterByClients(e.target.value)
