@@ -67,6 +67,7 @@ export default function ReviewSources() {
             {openConnect &&
                 <ConnectReviewSource
                     id={true}
+                    data={{ name: "Yelp" }}
                     onClose={() => {
                         setOpenConnect(false)
                     }}
@@ -78,6 +79,7 @@ export default function ReviewSources() {
 
             {openDisconnect &&
                 <DisconnectReviewSourceConfirmation
+                    data={{ name: "Yelp" }}
                     id={true}
                     onClose={() => {
                         setOpenDisconnect(false)
