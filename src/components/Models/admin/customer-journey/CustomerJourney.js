@@ -14,8 +14,6 @@ function CustomerJourney({ onClose, onSave, id }) {
     const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false)
 
-
-
     const onSubmit = async (data) => {
         try {
             setSending(true)
@@ -73,7 +71,7 @@ function CustomerJourney({ onClose, onSave, id }) {
             </div>
             <div className="grid grid-cols-3 gap-5 mt-7">
                 <CancelButton title="back to list" onClick={onClose} class_="text-lg! py-[8.2px]!" />
-                <SecondaryButton title="Delete Event" type="submit" disabled={sending} class_="bg-white text-danger! border border-danger! hover:text-white! hover:bg-danger! text-lg! py-[8.2px]!" />
+                <SecondaryButton title="Delete Event" type="submit" disabled={sending} class_="bg-white text-danger! border border-danger! hover:text-white! hover:bg-danger! text-lg! py-[8.2px]! disabled:bg-danger/20!" />
                 <SecondaryButton title="Edit Event" class_="text-lg! py-[8.2px]!" />
             </div>
         </form>

@@ -58,7 +58,7 @@ export default function NewSubscription({ onClose, id }) {
                     labelClass="mb-2.5!"
                     class_="mt-0!"
                     isRequired={true}
-                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60! py-3.5!"
                     formProps={{ ...register("client", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
@@ -68,7 +68,7 @@ export default function NewSubscription({ onClose, id }) {
 
 
                 {id && <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     label="Current Plan"
                     labelClass="mb-2.5!"
                     class_="mt-0!"
@@ -84,7 +84,7 @@ export default function NewSubscription({ onClose, id }) {
                     label={!id ? "Plan" : "New Plan"}
                     labelClass="mb-2.5!"
                     isRequired={true}
-                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60! py-3.5!"
                     formProps={{ ...register("plan", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
@@ -96,7 +96,7 @@ export default function NewSubscription({ onClose, id }) {
 
 
                 <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     labelClass="mb-2.5!"
                     label={`${!id ? "Start" : "Effective"} Date `}
                     isRequired={true}
@@ -110,7 +110,7 @@ export default function NewSubscription({ onClose, id }) {
                     label="Payment Method"
                     labelClass="mb-2.5!"
                     isRequired={true}
-                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60! py-3.5!"
                     formProps={{ ...register("paymentMethod", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
@@ -119,7 +119,7 @@ export default function NewSubscription({ onClose, id }) {
                 </SelectForm>}
 
                 {id && <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     label="Prorated Billing"
                     labelClass="mb-2.5!"
                     isRequired={true}

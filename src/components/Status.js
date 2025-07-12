@@ -15,7 +15,7 @@ export default function Status({ status = "", context = "" }) {
         s === "positive" ||
         s === "published" ||
         s === "edited campaign" ||
-        s === "paid") {
+        s === "paid" || s === "approved") {
         bgClass = "bg-[#28A7451A] text-success";
     } else if (
         s === "responded" ||
@@ -24,13 +24,14 @@ export default function Status({ status = "", context = "" }) {
         s === "activate" ||
         s === "yes" ||
         s === "replied" ||
-        s === "notify") {
+        s === "notify" || s === "delivered") {
         bgClass = "bg-[#0396FF1A] text-primary";
     } else if (
         s === "pending invite" ||
         s === "in_progress" ||
         s === "flagged" ||
-        s === "dp"
+        s === "dp" ||
+        s == "pending review"
     ) {
         bgClass = "bg-[#FFC1071A] text-[#FFC107]";
     } else if (s === "suspended" || s === "at risk") {
@@ -48,7 +49,7 @@ export default function Status({ status = "", context = "" }) {
     else if (s === "read") {
         bgClass = "bg-[#FFC1071A] text-custom-yellow-light"
     }
-    else if (s === "alert" || s === "canceled" || s === "disconnect") {
+    else if (s === "alert" || s === "canceled" || s === "disconnect" || s === "bounced") {
         bgClass = "bg-[#DC35451A] text-danger"
     }
     else if (s === "no") {

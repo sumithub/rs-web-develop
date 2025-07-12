@@ -198,9 +198,9 @@ export default function LogoUpload({
     return (
         <div className={class_}>
             <div className="mb-3">
-                <label className="text-sm text-gray-700 font-medium">
+                <label className="text-sm font-medium">
                     {label}
-                    {isRequired && <span className="text-red-500 ml-1">*</span>}
+                    {isRequired && <span className="text-danger ml-1">*</span>}
                 </label>
             </div>
 
@@ -240,7 +240,7 @@ export default function LogoUpload({
                         >
                             Choose File
                         </button> */}
-                        <SecondaryButton title="Choose File" onClick={() => { setOpen(true) }} class_="text-base! font-normal!" />
+                        <SecondaryButton title="Choose File" class_="text-base! font-normal!" />
                     </div>
                 </div>
             ) : (
@@ -254,7 +254,7 @@ export default function LogoUpload({
                                     <img
                                         src={previewUrl}
                                         alt="Logo preview"
-                                        className="w-full h-full object-contain rounded-full"
+                                        className="w-full h-full object-contain rounded-full border border-border-color"
                                     />
                                 ) : (
                                     <Image src="/images/logo.svg" alt='logo' width={32} height={32} />
@@ -313,7 +313,7 @@ export default function LogoUpload({
                             Cancel
                         </button> */}
                         <CancelButton title="Cancel" class_="text-xs! border border-border2! hover:bg-dark! bg-white! py-[7px]! px-2.5!" mainClass="shrink-0" />
-                        <SecondaryButton title="Add To Logo" onClick={() => { setOpen(true) }} class_="text-xs! font-semibold! py-[7px]! px-2.5!" />
+                        <SecondaryButton title="Add To Logo" class_="text-xs! font-semibold! py-[7px]! px-2.5!" />
                     </div>
                 </div>
             )}

@@ -183,7 +183,7 @@ export default function CustomersJourney() {
                                 </td>
                                 <td>
                                     <div className="flex items-center gap-2">
-                                        <div>{e.timestamp}</div>
+                                        <div>{formatDateTime(e.timestamp)}</div>
                                         <div data-tooltip-id="my-tooltip">
                                             <Image src="/images/info.svg" alt="info" height={20} width={20} unoptimized={true} className="cursor-pointer" />
                                         </div>

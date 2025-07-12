@@ -146,7 +146,7 @@ export default function HtmlEditor({
                 // content={value || ""}
                 />
             </div>
-            {error && <div className="capitalize text-xs font-medium text-danger mt-1">{error}</div>}
+            {error && <div className="text-xs pt-[3px] capitalize text-danger mt-1">{error}</div>}
         </div >
     )
 }

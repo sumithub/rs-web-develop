@@ -38,42 +38,42 @@ export default function ViewInvoice({ onClose, id }) {
                 <div>
                     <div>
                         <div className="flex justify-between items-center">
-                            <h2 className="text-text3 text-base">Invoice ID</h2>
+                            <h2 className="text-text3 text-base capitalize">Invoice ID</h2>
                             <h3 className="text-base font-medium">INV123</h3>
                         </div>
                         <hr className="border-t border-border2 my-3.5" />
                     </div>
                     <div>
                         <div className="flex justify-between items-center">
-                            <h2 className="text-text3 text-base">Client</h2>
+                            <h2 className="text-text3 text-base capitalize">Client</h2>
                             <h3 className="text-base font-medium">ABC Corp </h3>
                         </div>
                         <hr className="border-t border-border2 my-3.5" />
                     </div>
                     <div>
                         <div className="flex justify-between items-center">
-                            <h2 className="text-text3 text-base">Plan</h2>
+                            <h2 className="text-text3 text-base capitalize">Plan</h2>
                             <h3 className="text-base font-medium">Standard</h3>
                         </div>
                         <hr className="border-t border-border2 my-3.5" />
                     </div>
                     <div>
                         <div className="flex justify-between items-center">
-                            <h2 className="text-text3 text-base">Amount</h2>
+                            <h2 className="text-text3 text-base capitalize">Amount</h2>
                             <h3 className="text-base font-medium">50</h3>
                         </div>
                         <hr className="border-t border-border2 my-3.5" />
                     </div>
                     <div>
                         <div className="flex justify-between items-center">
-                            <h2 className="text-text3 text-base">status</h2>
+                            <h2 className="text-text3 text-base capitalize">status</h2>
                             <Status status="Paid" />
                         </div>
                         <hr className="border-t border-border2 my-3.5" />
                     </div>
                     <div>
                         <div className="flex justify-between items-center">
-                            <h2 className="text-text3 text-base">Due Date</h2>
+                            <h2 className="text-text3 text-base capitalize">Due Date</h2>
                             <h3 className="text-base font-medium">Mar 25, 2025</h3>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ export default function ViewInvoice({ onClose, id }) {
                 <div className="grid grid-cols-2 gap-5 mt-7">
                     <CancelButton title="Send Reminder" onClick={() => {
                         onClose()
-                        toast.success("Sended Successfully")
+                        toast.success("Sent Successfully")
                     }} class_="text-lg! bg-white! border border-primary! text-primary! hover:text-white! hover:bg-primary!" />
                     <SecondaryButton title="Download PDF" type="submit" disabled={sending} class_="text-lg!" />
                 </div>

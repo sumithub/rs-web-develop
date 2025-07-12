@@ -153,9 +153,7 @@ export default function PaymentManagement() {
                                         }}>
                                             <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
                                         </button>
-                                        <button className='cursor-pointer' onClick={() => {
-                                            setOpen(true)
-                                        }}>
+                                        <button className='cursor-pointer'>
                                             <Image unoptimized={true} src="/images/refresh1.svg" alt='refresh1' height={28} width={28} />
                                         </button>
                                     </div>

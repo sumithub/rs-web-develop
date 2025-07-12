@@ -252,7 +252,7 @@ export default function FileInput({
 
             {/* Error message - only show if there's an error AND no file is selected */}
             {error && !selectedFile && (
-                <div className="mt-2 text-sm text-danger capitalize">
+                <div className="mt-2 text-xs text-danger capitalize">
                     {error}
                 </div>
             )}

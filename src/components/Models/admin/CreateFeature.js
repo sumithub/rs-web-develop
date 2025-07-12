@@ -49,7 +49,7 @@ export default function CreateFeature({ onClose, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     class_="mt-0!"
                     label="Feature Name"
                     labelClass="mb-2.5"
@@ -64,7 +64,8 @@ export default function CreateFeature({ onClose, id }) {
                     inputClass='border-primary/10! focus:border-primary/60!'
                     label="Description"
                     labelClass="mb-2.5"
-                    rows={5}
+                    isTextArea={true}
+                    rows={1}
                     isRequired={true}
                     placeholder="Enter description"
                     formProps={{ ...register("description", { required: true }) }}

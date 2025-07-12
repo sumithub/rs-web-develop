@@ -6,7 +6,6 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { getError } from "../../../../helper";
 import axios from "axios";
-import { SubscriptionUsage } from "../../../constent/constArray";
 
 export default function SubscriptionUsageDetail({ onClose, id }) {
     const { handleSubmit } = useForm();
@@ -36,15 +35,33 @@ export default function SubscriptionUsageDetail({ onClose, id }) {
     return (
         <Model onClose={onClose} title="Subscription Usage Details" modalClass="w-1/2!">
             <form onSubmit={handleSubmit(onSubmit)}>
-                {SubscriptionUsage.map((e, i) => <div key={i}>
-                    <div className="flex justify-between items-center">
-                        <h2 className="text-text3 capitalize text-base">{e.name}</h2>
-                        <h3 className="text-base font-medium capitalize">{e.title}</h3>
+                <div>
+                    <div className="flex justify-between items-center mt-2">
+                        <h2 className="text-text3 capitalize text-base">Client</h2>
+                        <h3 className="text-base font-medium capitalize">ABC Corp</h3>
                     </div>
-                    {i !== SubscriptionUsage.length - 1 && (
-                        <hr className="border-t border-border2 w-full my-3.5" />
-                    )}
-                </div>)}
+
+                    <hr className="border-t border-border2 w-full my-3.5" />
+
+                    <div className="flex justify-between items-center">
+                        <h2 className="text-text3 capitalize text-base">plan</h2>
+                        <h3 className="text-base font-medium capitalize">basic</h3>
+                    </div>
+
+                    <hr className="border-t border-border2 w-full my-3.5" />
+                    <div className="flex justify-between items-center">
+                        <h2 className="text-text3 capitalize text-base">Email Quota Used</h2>
+                        <h3 className="text-base font-medium capitalize">500/1,000</h3>
+                    </div>
+
+                    <hr className="border-t border-border2 w-full my-3.5" />
+
+                    <div className="flex justify-between items-center">
+                        <h2 className="text-text3 capitalize text-base">SMS Quota Used</h2>
+                        <h3 className="text-base font-medium capitalize"> 50/100</h3>
+                    </div>
+
+                </div>
                 <div className="grid grid-cols-2 gap-5 mt-7">
                     <CancelButton title="View Details" onClick={onClose} class_="text-lg!" />
                     <SecondaryButton title="Upgrade Plan" type="submit" disabled={sending} class_="text-lg!" />

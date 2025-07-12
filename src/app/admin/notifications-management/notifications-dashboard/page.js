@@ -8,7 +8,7 @@ import Status from "../../../../components/Status"
 import Checkbox from "../../../../components/form/Checkbox";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { getError } from "../../../../../helper";
+import { formatDateTime, getError } from "../../../../../helper";
 import { useEffect, useState } from "react";
 import Loading from "../../../../components/Loading";
 import { notificationsDashboard } from "../../../../constent/constArray";
@@ -195,7 +195,7 @@ export default function NotificationsDashboard() {
                                             setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
                                         }}
                                     />
-                                    <div>{e.timestamp}</div>
+                                    <div>{formatDateTime(e.timestamp)}</div>
                                 </div>
                             </td>
                             <td>{e.clientName}</td>

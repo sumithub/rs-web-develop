@@ -38,7 +38,7 @@ export default function MakeAPayment({ onClose, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     class_="mt-0!"
                     label="Client"
                     labelClass="mb-2.5!"
@@ -50,7 +50,7 @@ export default function MakeAPayment({ onClose, id }) {
                 />
 
                 <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     label="Invoice"
                     labelClass="mb-2.5!"
                     rows={5}
@@ -61,7 +61,7 @@ export default function MakeAPayment({ onClose, id }) {
                 />
 
                 <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     label="Amount Due"
                     labelClass="mb-2.5!"
                     rows={5}
@@ -71,12 +71,21 @@ export default function MakeAPayment({ onClose, id }) {
                     errors={errors}
                     icon2="/images/calendar1.svg"
                 />
+                {/* <DatePickerForm
+                    label="Amount Due"
+                    labelClass="font-medium mb-2.5!"
+                    isRequired={true}
+                    icon={true}
+                    formProps={{ ...register("amountDue", { required: true }) }}
+                    mainClass="border-primary/10!"
+                    errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}
+                /> */}
 
                 <SelectForm
                     label="Payment Method"
                     labelClass="mb-2.5!"
                     isRequired={true}
-                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60! py-3.5!"
                     formProps={{ ...register("paymentMethod", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
