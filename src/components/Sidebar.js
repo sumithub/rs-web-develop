@@ -87,8 +87,8 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 title: "Business Management", link: "", icon: "business",
                 submenu:
                     [
-                        { title: "Clients", link: "/admin/business-management/clients-management" },
-                        { title: "Locations", link: "/admin/business-management/locations-management" },
+                        { title: "Clients", link: "/admin/business-management/clients" },
+                        { title: "Locations", link: "/admin/business-management/locations" },
                         { title: "Manage Customers", link: "/admin/business-management/manage-customers" },
                         { title: "Customers Journey", link: "/admin/business-management/customer-journey" },
                         { title: "Tagging", link: "/admin/business-management/customer-tagging" },
@@ -113,9 +113,8 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 submenu:
                     [
                         { title: "Manage Reviews", link: "/admin/reviews-oversight" },
-                        { title: "Sources", link: "/admin/review-sources" },
                         { title: "Widgets", link: "/admin/widgets-management" },
-
+                        { title: "Sources", link: "/admin/review-sources" },
                     ]
             },
 

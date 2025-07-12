@@ -251,7 +251,7 @@ export default function LocationDetails() {
                                                 field="responses" />
                                         </div>
                                     </th>
-                                    <th><div className="flex justify-center">Action </div></th>
+                                    <th><div className="flex justify-center">Actions</div></th>
                                 </tr>
                             </thead>
                             <tbody>

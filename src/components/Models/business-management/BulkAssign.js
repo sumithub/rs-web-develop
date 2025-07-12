@@ -40,7 +40,7 @@ export default function BulkAssign({ onClose, id }) {
                         label="Filter By Clients"
                         labelClass="mb-2.5!"
                         class_="mt-0!"
-                        selectClass_="py-2.5! px-2.5!"
+                        selectClass_="py-3.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("filterByClients", { required: true }) }}
                         errors={errors} clearErrors={clearErrors}

@@ -42,7 +42,7 @@ function EditRole({ onClose, onSave }) {
                     <SelectForm
                         label="Role Name"
                         class_="mt-0!"
-                        selectClass_="py-2.5! px-2.5!"
+                        selectClass_="py-3.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("role", { required: true }) }}
                         errors={errors} clearErrors={clearErrors}
@@ -57,7 +57,7 @@ function EditRole({ onClose, onSave }) {
 
                     <SelectForm
                         label="Permissions"
-                        selectClass_="py-2.5! px-2.5!"
+                        selectClass_="py-3.5! px-2.5!"
                         isRequired={true}
                         formProps={{ ...register("permissions", { required: true }) }}
                         errors={errors} clearErrors={clearErrors}

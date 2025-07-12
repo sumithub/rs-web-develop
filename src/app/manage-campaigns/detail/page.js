@@ -22,6 +22,7 @@ import SelectedCustomers from "../../../components/Models/manage-campaigns/Selec
 import ImportCustomerDetail from "../../../components/Models/manage-campaigns/ImportCustomerDetail"
 import RadioForm from "../../../components/form/RadioForm"
 import { Tooltip } from "react-tooltip"
+import { useRole } from "../../../utils/hooks"
 
 export default function Detail({ }) {
     const id = ""
@@ -38,6 +39,8 @@ export default function Detail({ }) {
     const [openPreview, setOpenPreview] = useState(false)
     const router = useRouter()
     const [selId, setSelId] = useState("")
+    const { isAdmin } = useRole();
+
 
     const [cardStatuses, setCardStatuses] = useState({
         campaignDetails: 'pending',
@@ -226,7 +229,11 @@ export default function Detail({ }) {
             }
             toast.success("Campaign Created Successfully")
             setSending(false)
-            router.push("/manage-campaigns")
+
+            if (isAdmin)
+                router.push("/admin/campaigns-management")
+            else
+                router.push("/manage-campaigns")
 
         } catch (error) {
             toast.error(getError(error))
@@ -455,7 +462,7 @@ export default function Detail({ }) {
                         title="Campaign Details"
                         status={getCardStatus('campaignDetails')}>
                         <div>
-                            <div className="grid grid-cols-1 gap-3">
+                            <div className={`${isAdmin ? "grid-cols-3" : "grid-cols-1"} grid gap-3`}>
                                 <InputForm
                                     label="Campaign Name"
                                     placeholder="Enter Name"
@@ -464,11 +471,20 @@ export default function Detail({ }) {
                                     formProps={{ ...register("campaignName", { required: true }) }}
                                     errors={errors}
                                 />
+                                <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white! border-primary/10! focus:border-primary/60!"
+                                    formProps={{ ...register("description", { required: false }) }}
+                                    errors={errors}
+                                />
+
+                                {isAdmin &&
+                                    <InputForm
+                                        label="additional Clients" placeholder="Additional Clients" isRequired={false} inputClass="bg-white! border-primary/10! focus:border-primary/60!"
+                                        formProps={{ ...register("additionalClients", { required: false }) }}
+                                        errors={errors}
+                                    />
+                                }
                             </div>
-                            <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white! border-primary/10! focus:border-primary/60!"
-                                formProps={{ ...register("description", { required: false }) }}
-                                errors={errors}
-                            />
+
                         </div>
                     </CampaignCard>
                 </div>
@@ -477,7 +493,16 @@ export default function Detail({ }) {
                     <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
                         title="Targeting"
                         status={getCardStatus('targeting')}>
-                        <div className="my-4">
+                        {isAdmin && <div className="flex items-center justify-between my-4">
+
+                            <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
+                            <SecondaryButton title="select from list" class_="text-sm! font-normal!"
+                                type="button"
+                                onClick={() => { setOpenCustomer(true) }} />
+                        </div>
+                        }
+
+                        {!isAdmin && <div className="my-4">
                             <div className="text-secondary text-sm font-medium capitalize">Select Customer Source</div>
                             <div>
                                 <div className="flex items-center justify-between">
@@ -495,7 +520,6 @@ export default function Detail({ }) {
                                 </div>
 
                                 <div className="flex items-center justify-between">
-
                                     <RadioForm
                                         checked={watch("customerSource") === "CSV"}
                                         name="customerSource"
@@ -525,7 +549,7 @@ export default function Detail({ }) {
                                     }}
                                 /> */}
                             </div>
-                        </div>
+                        </div>}
                         {customersSelected && <div>
                             <div className="flex justify-between items-start mb-4">
                                 <div>
@@ -534,9 +558,9 @@ export default function Detail({ }) {
                                             <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                                             <div className="text-danger text-lg font-semibold capitalize">{customersSelected || 5} customers are already in an active campaign?</div>
                                         </div>
-                                        <SecondaryButton title="View Details" class_="text-sm! font-normal!"
+                                        {!isAdmin && <SecondaryButton title="View Details" class_="text-sm! font-normal!"
                                             type="button"
-                                            onClick={() => { setOpenCustomer("details") }} />
+                                            onClick={() => { setOpenCustomer("details") }} />}
                                     </div>
                                 </div> {watch("customerSource") && <SelectForm
                                     class_="mt-0!"

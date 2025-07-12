@@ -37,6 +37,7 @@ export default function AddNewClient({ onClose, id }) {
                 <InputForm
                     label="Client Name"
                     class_="mt-0!"
+                    inputClass="py-3.5!"
                     placeholder="Enter client name"
                     isRequired={true}
                     formProps={{ ...register("name", { required: true }) }}
@@ -44,13 +45,14 @@ export default function AddNewClient({ onClose, id }) {
 
                 <InputForm
                     label="Industry"
+                    inputClass="py-3.5!"
                     placeholder="Enter industry"
                     isRequired={true}
                     formProps={{ ...register("industry", { required: true }) }}
                     errors={errors} />
 
                 <SelectForm
-                    selectClass_="py-3!"
+                    selectClass_="py-3.5!"
                     label="Subscription Plan"
                     isRequired={true}
                     defaultOption="select"
@@ -64,7 +66,7 @@ export default function AddNewClient({ onClose, id }) {
                 </SelectForm>
 
                 <SelectForm
-                    selectClass_="py-3!"
+                    selectClass_="py-3.5!"
                     label="Status"
                     isRequired={true}
                     defaultOption="select"
