@@ -88,39 +88,41 @@ export default function ReviewSources() {
                     }} />
             }
 
-            <div className="flex gap-3.5 items-center">
+            <div className="flex gap-3.5 items-center justify-between">
                 <div className="shrink-0">
                     <h2 className="text-lg capitalize font-medium">Manage Review Sources</h2>
                     <h2 className="text-sm text-text3 capitalize">Connect your business to review platforms</h2>
                 </div>
-                <div className="w-full">
-                    <Search
-                        mainClass='w-full!'
-                        placeholder="Search by Review Sources"
-                        onSearch={(s) => {
-                            setSearch(s)
+                <div className="flex items-center justify-end gap-3.5">
+                    <div className="w-96">
+                        <Search
+                            mainClass='w-full!'
+                            placeholder="Search by Review Sources"
+                            onSearch={(s) => {
+                                setSearch(s)
+                            }}
+                        />
+                    </div>
+                    <CancelButton title="Assigned Clients" class_="text-xs! bg-white! border border-border-color! py-2.5!" mainClass="shrink-0" />
+                    <CustomSelectBox
+                        defaultOption="Filters"
+                        class_='mt-0! w-26!'
+                        selectClass_="py-2.5! text-xs!"
+                        value={filterBy}
+                        onChange={(e) => {
+                            setFilterBy(e.target.value)
                         }}
+                    ><option value="filter 1">Filter 1</option>
+                        <option value="filter 2">Filter 2</option>
+                    </CustomSelectBox>
+
+                    <SecondaryButton
+                        title="Add New Source"
+                        onClick={() => setOpen(true)}
+                        class_="text-xs! py-2.5! font-normal!"
+                        mainClass="shrink-0"
                     />
                 </div>
-                <CancelButton title="Assigned Clients" class_="text-xs! bg-white! border border-border-color! py-2.5!" mainClass="shrink-0" />
-                <CustomSelectBox
-                    defaultOption="Filters"
-                    class_='mt-0! w-26!'
-                    selectClass_="py-2.5! text-xs!"
-                    value={filterBy}
-                    onChange={(e) => {
-                        setFilterBy(e.target.value)
-                    }}
-                ><option value="filter 1">Filter 1</option>
-                    <option value="filter 2">Filter 2</option>
-                </CustomSelectBox>
-
-                <SecondaryButton
-                    title="Add New Source"
-                    onClick={() => setOpen(true)}
-                    class_="text-xs! py-2.5! font-normal!"
-                    mainClass="shrink-0"
-                />
             </div>
             <div className="table-class mt-3.5">
                 {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
