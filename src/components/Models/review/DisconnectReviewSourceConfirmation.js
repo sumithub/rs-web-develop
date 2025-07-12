@@ -34,7 +34,7 @@ export default function DisconnectReviewSourceConfirmation({ onClose, onSave, id
                 {id && <hr className="border border-border-color mb-3.5" />
                 }
                 <div>
-                    <h2 className="text-lg font-semibold">Disconnect from {name}</h2>
+                    <h2 className="text-lg font-semibold capitalize">Disconnect from {name}</h2>
                     <Image unoptimized={true} src="/images/yelp-logo.svg" alt="yelp-logo" width={116} height={47} className="pt-2.5" />
                 </div>
                 {/* <Input

@@ -47,7 +47,7 @@ export default function AddReviewSource({ onClose, id }) {
                     formProps={{ ...register("name", { required: true }) }}
                     errors={errors} />
 
-                {/* <FileInput
+                <FileInput
                     accept=".csv, .xls , .xlsx"
                     class_="mt-3.5!"
                     formProps={{
@@ -61,7 +61,7 @@ export default function AddReviewSource({ onClose, id }) {
                     isRequired={true}
                     label="Upload Logo Here"
                     showToast={toast.error}
-                /> */}
+                />
 
                 <InputForm
                     label="URL Validation Rule"

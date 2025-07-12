@@ -61,7 +61,7 @@ export default function AssignWidget({ onClose, id }) {
                     <SecondaryButton title="Add Clients" onClick={() => setOpenClient(true)} class_="text-xs! py-2.5!" />
                 </div>}
                 {id === "editWidget" && <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     label="Widget Name"
                     class_="mt-0!"
                     isRequired={true}
@@ -73,7 +73,7 @@ export default function AssignWidget({ onClose, id }) {
                 {id !== "assignWidgets" && <SelectForm
                     label="Widget Type"
                     isRequired={true}
-                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60! py-3.5!"
                     formProps={{ ...register("widgetType", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
@@ -86,7 +86,7 @@ export default function AssignWidget({ onClose, id }) {
                 </SelectForm>}
 
                 {id !== "assignWidgets" && <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     label="Discription"
                     isTextArea={true}
                     rows={5}
@@ -99,7 +99,7 @@ export default function AssignWidget({ onClose, id }) {
                 {id !== "assignWidgets" && <SelectForm
                     label="Status"
                     isRequired={true}
-                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60! py-3.5!"
                     formProps={{ ...register("status", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
