@@ -5,7 +5,7 @@ export default function LogoUpload({
     errors,
     isRequired = false,
     label = "Upload Logo Here",
-    className = "",
+    class_ = "",
     accept = "image/*,.csv,.xls,.xlsx",
     setFile,
     selectedFile: propSelectedFile = null,
@@ -64,6 +64,8 @@ export default function LogoUpload({
 
     const handleFileSelect = (event) => {
         const file = event.target.files[0];
+        console.log("File selected:", file); // Debug log
+
         if (file && isValidFile(file)) {
             setSelectedFile(file);
             if (setFile) {
@@ -74,19 +76,28 @@ export default function LogoUpload({
             const url = URL.createObjectURL(file);
             setPreviewUrl(url);
 
-            // Trigger react-hook-form onChange and validation
+            // Call the formProps onChange directly with the event
             if (formProps?.onChange) {
                 formProps.onChange(event);
             }
-        } else {
-            // Show toast instead of alert
+        } else if (file) {
+            // Show toast for invalid file types
             if (showToast) {
-                showToast('Please select a valid file (JPG, PNG, GIF, WebP, CSV, XLS, XLSX)', 'error');
+                showToast('Please select a valid file (JPG, PNG, GIF, WebP, CSV, XLS, XLSX)');
             }
             // Clear the input
             event.target.value = '';
             setSelectedFile(null);
             setPreviewUrl(null);
+            if (setFile) {
+                setFile(null);
+            }
+
+            // Clear the form value
+            if (formProps?.onChange) {
+                const clearEvent = { ...event, target: { ...event.target, files: [], value: '' } };
+                formProps.onChange(clearEvent);
+            }
         }
     };
 
@@ -114,7 +125,7 @@ export default function LogoUpload({
             const url = URL.createObjectURL(file);
             setPreviewUrl(url);
 
-            // Get the actual file input element
+            // Get the actual file input element and update it
             const fileInput = document.getElementById('logo-file-input');
             if (fileInput) {
                 // Create a new FileList with the dropped file
@@ -122,13 +133,12 @@ export default function LogoUpload({
                 dataTransfer.items.add(file);
                 fileInput.files = dataTransfer.files;
 
-                // Create a proper synthetic event
+                // Create a synthetic event and trigger onChange
                 const syntheticEvent = {
                     target: fileInput,
                     currentTarget: fileInput
                 };
 
-                // Trigger the onChange handler
                 if (formProps?.onChange) {
                     formProps.onChange(syntheticEvent);
                 }
@@ -141,26 +151,35 @@ export default function LogoUpload({
     };
 
     const handleChooseFile = () => {
-        document.getElementById('logo-file-input').click();
+        const fileInput = document.getElementById('logo-file-input');
+        if (fileInput) {
+            fileInput.click();
+        }
     };
 
     const handleRemoveFile = () => {
         setSelectedFile(null);
         setPreviewUrl(null);
+        if (setFile) {
+            setFile(null);
+        }
 
-        // Clear the file input and trigger validation
+        // Clear the file input
         const fileInput = document.getElementById('logo-file-input');
         if (fileInput) {
             fileInput.value = '';
 
-            // Create synthetic event to clear the form value
-            const syntheticEvent = {
-                target: fileInput,
-                currentTarget: fileInput
+            // Create a clear event for react-hook-form
+            const clearEvent = {
+                target: {
+                    ...fileInput,
+                    files: [],
+                    value: ''
+                }
             };
 
             if (formProps?.onChange) {
-                formProps.onChange(syntheticEvent);
+                formProps.onChange(clearEvent);
             }
         }
     };
@@ -174,7 +193,7 @@ export default function LogoUpload({
     };
 
     return (
-        <div className={className}>
+        <div className={class_}>
             <div className="mb-3">
                 <label className="text-sm text-gray-700 font-medium">
                     {label}
@@ -209,21 +228,15 @@ export default function LogoUpload({
                         <button
                             type="button"
                             className="px-6 py-2 bg-primary text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
-                            onClick={handleChooseFile}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                handleChooseFile();
+                            }}
                         >
                             Choose File
                         </button>
                     </div>
-
-                    {/* Hidden file input */}
-                    <input
-                        {...formProps}
-                        id="logo-file-input"
-                        type="file"
-                        accept={accept}
-                        onChange={handleFileSelect}
-                        className="hidden"
-                    />
                 </div>
             ) : (
                 /* Show selected file display with company preview */
@@ -298,18 +311,18 @@ export default function LogoUpload({
                             Add To Logo
                         </button>
                     </div>
-
-                    {/* Hidden file input */}
-                    <input
-                        {...formProps}
-                        id="logo-file-input"
-                        type="file"
-                        accept={accept}
-                        onChange={handleFileSelect}
-                        className="hidden"
-                    />
                 </div>
             )}
+
+            {/* Hidden file input */}
+            <input
+                {...formProps}
+                id="logo-file-input"
+                type="file"
+                accept={accept}
+                onChange={handleFileSelect}
+                className="hidden"
+            />
 
             {/* Error message - only show if there's an error AND no file is selected */}
             {error && !selectedFile && (
