@@ -11,7 +11,7 @@ export default function Switch({ onChange, label, mb, checked, setValue, formPro
                         if (setValue && formProps)
                             setValue(formProps.name, e.target.checked)
                     }} />
-                <div className={`${switchClass_} w-10 h-5 bg-[#D7D7D9] peer-focus:outline-none rounded-full peer peer-checked:bg-green-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[3px] after:bg-white after:border-gray-300 after:rounded-full md:after:h-4 md:after:w-4 after:h-3 after:w-3 after:transition-all`}></div>            </label>
+                <div className={`${switchClass_} w-9 h-5 bg-[#D7D7D9] peer-focus:outline-none rounded-full peer peer-checked:bg-green-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[3px] after:bg-white after:border-gray-300 after:rounded-full md:after:h-4 md:after:w-4 after:h-3 after:w-3 after:transition-all`}></div>            </label>
         </div>
     </div >
 }

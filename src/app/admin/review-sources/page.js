@@ -89,10 +89,9 @@ export default function ReviewSources() {
             }
 
             <div className="flex gap-3.5 items-center">
-                <div className="flex gap-2.5 items-center shrink-0">
+                <div className="shrink-0">
                     <h2 className="text-lg capitalize font-medium">Manage Review Sources</h2>
-                    <div className="text-primary/10">|</div>
-                    <h2 className="text-lg capitalize font-medium">Connect your business to review platforms</h2>
+                    <h2 className="text-sm text-text3 capitalize">Connect your business to review platforms</h2>
                 </div>
                 <div className="w-full">
                     <Search

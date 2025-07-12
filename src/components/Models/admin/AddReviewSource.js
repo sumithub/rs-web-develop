@@ -106,7 +106,7 @@ export default function AddReviewSource({ onClose, id }) {
                                 checked={enabled}
                                 onChange={setEnabled}
                                 class_={`${enabled ? 'bg-green-500' : 'bg-gray-300'
-                                    } relative inline-flex h-4 w-8 items-center rounded-full transition mt-2`} />
+                                    } relative inline-flex h-4 w-9 items-center rounded-full transition mb-0!`} />
                         </div>
                     </div>
                 </div>
