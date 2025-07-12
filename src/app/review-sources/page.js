@@ -46,7 +46,7 @@ export default function ReviewSources() {
     return (<AdminLayout>
 
         <div className="flex justify-between">
-            <div className="">
+            <div>
                 <h2 className="text-lg capitalize font-medium shrink-0">Manage Review Sources</h2>
                 <h2 className="text-sm text-text3 pt-1 capitalize">Connect your business to review platforms</h2>
             </div>

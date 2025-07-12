@@ -9,10 +9,10 @@ import InputForm from "../../form/InputForm";
 import axios from "axios";
 import RadioForm from "../../form/RadioForm";
 import Switch from "../../form/Switch";
-import FileInput from "../../form/FileInput";
+import LogoUpload from "../../form/LogoUpload";
 
 export default function AddReviewSource({ onClose, id }) {
-    const { handleSubmit, register, setValue, watch, formState: { errors }, clearErrors } = useForm();
+    const { handleSubmit, register, setValue, watch, formState: { errors }, clearErrors, reset } = useForm();
     const [file, setFile] = useState(null)
     const [sending, setSending] = useState(false)
     const [enabled, setEnabled] = useState(false)
@@ -28,6 +28,12 @@ export default function AddReviewSource({ onClose, id }) {
                 res = await axios.post("/api", data)
             }
             toast.success("Saved Successfully")
+
+            // Reset form and file state after successful submission
+            reset()
+            setFile(null)
+            setEnabled(false)
+
             setSending(false)
             onClose()
         } catch (error) {
@@ -35,6 +41,7 @@ export default function AddReviewSource({ onClose, id }) {
             setSending(false)
         }
     }
+
     return (
         <Model onClose={onClose} title={`${!id ? "Add" : "Edit"} Review Source`} modalClass="w-1/2!">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -47,11 +54,11 @@ export default function AddReviewSource({ onClose, id }) {
                     formProps={{ ...register("name", { required: true }) }}
                     errors={errors} />
 
-                {/* <FileInput
-                    accept=".csv, .xls , .xlsx"
+                <LogoUpload
+                    accept="image/*,.csv,.xls,.xlsx"
                     class_="mt-3.5!"
                     formProps={{
-                        ...register('csvFile', {
+                        ...register('logoFile', {
                             required: true,
                         })
                     }}
@@ -60,8 +67,8 @@ export default function AddReviewSource({ onClose, id }) {
                     errors={errors}
                     isRequired={true}
                     label="Upload Logo Here"
-                    showToast={toast.error}
-                /> */}
+                    showToast={(message) => toast.error(message)}
+                />
 
                 <InputForm
                     label="URL Validation Rule"
@@ -88,11 +95,22 @@ export default function AddReviewSource({ onClose, id }) {
                     <div className="grid grid-cols-4 gap-2.5">
                         <div className="flex justify-between items-center bg-primary/5 rounded-lg p-2.5">
                             <div className="text-sm">Yes</div>
-                            <RadioForm name="popularPlatform" class_="mt-0!" />
+                            <RadioForm
+                                name="popularPlatform"
+                                class_="mt-0!"
+                                formProps={{ ...register("popularPlatform") }}
+                                value="yes"
+                            />
                         </div>
                         <div className="flex justify-between items-center bg-primary/5 rounded-lg p-2.5">
                             <div className="text-sm">No</div>
-                            <RadioForm name="popularPlatform" class_="mt-0!" labelClass="ml-0!" />
+                            <RadioForm
+                                name="popularPlatform"
+                                class_="mt-0!"
+                                labelClass="ml-0!"
+                                formProps={{ ...register("popularPlatform") }}
+                                value="no"
+                            />
                         </div>
                     </div>
                 </div>
@@ -110,9 +128,16 @@ export default function AddReviewSource({ onClose, id }) {
                         </div>
                     </div>
                 </div>
+
                 <div className="grid grid-cols-2 gap-5 mt-7">
                     <CancelButton title="Cancel" onClick={onClose} class_="text-lg!" />
-                    <SecondaryButton title="Save" type="submit" disabled={sending} class_="text-lg!" />
+                    <SecondaryButton
+                        title="Save"
+                        type="submit"
+                        disabled={sending}
+                        class_="text-lg!"
+
+                    />
                 </div>
             </form>
         </Model>
