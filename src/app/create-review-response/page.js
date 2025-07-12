@@ -123,9 +123,9 @@ export default function CreateReviewResponse() {
                                 dynamicFields={true}
                                 type={"reviewResponseTemplate"}
                             />
-                            <div className="flex justify-end mt-4">
+                            {/* <div className="flex justify-end mt-4">
                                 <Link href={"/review-responses"} className="text-primary"><span className="">Insert Dynamic Fields</span> <span>+</span></Link>
-                            </div>
+                            </div> */}
                         </div>
                         {/* <textarea placeholder="Type here" className="border border-border2 rounded-[10px] p-4 w-full mt-4" /> */}
                         <div className="grid grid-cols-2 gap-5 mt-7">
