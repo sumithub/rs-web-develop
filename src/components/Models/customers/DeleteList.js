@@ -27,7 +27,7 @@ export default function DeleteList({ onClose, id }) {
         <DeleteUser title={`Delete ${title}`} question={id ? "Are You Sure? You want To Delete This Alert." : "Confirmation prompt before deletion."} />
 
         <div className="grid grid-cols-2 gap-3 mt-5">
-            <CancelButton title="Cancel" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose} />
+            <CancelButton title="No" class_="border-danger2! hover:bg-danger! bg-white! text-danger2! hover:text-white!" onClick={onClose} />
             <SecondaryButton title="Yes, Delete" onClick={onSubmit} disabled={sending} />
         </div>
     </Model>

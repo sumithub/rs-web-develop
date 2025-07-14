@@ -12,13 +12,14 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import Image from "next/image"
 import Checkbox from "../../components/form/Checkbox"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function CreateReviewResponse() {
     const id = ""
     const { register, handleSubmit, clearErrors, watch, setValue, formState: { errors }, } = useForm({ defaultValues: { type: "email" } });
     const [sending, setSending] = useState(false)
     const [ratings, setRatings] = useState([]);
+    const router = useRouter()
 
     const onSubmit = async (data) => {
         try {
@@ -51,6 +52,8 @@ export default function CreateReviewResponse() {
             toast.success("Saved Successfully");
 
             setSending(false)
+            router.push("/review-responses")
+
         } catch (error) {
             toast.error(getError(error))
             setSending(false)
@@ -129,7 +132,7 @@ export default function CreateReviewResponse() {
                         </div>
                         {/* <textarea placeholder="Type here" className="border border-border2 rounded-[10px] p-4 w-full mt-4" /> */}
                         <div className="grid grid-cols-2 gap-5 mt-7">
-                            <CancelButton title="Cancel" class_="text-lg!" />
+                            <CancelButton title="Cancel" class_="text-lg!" onClick={() => router.push("/review-responses")} />
                             <SecondaryButton title="Save" type="submit" disabled={sending} class_="text-lg!" />
                         </div>
                     </div>

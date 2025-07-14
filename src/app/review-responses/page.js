@@ -35,7 +35,6 @@ export default function ReviewResponses() {
             const res = await axios.get("/api")
             setList(res.data || reviewResponse)
             setLoading(false)
-
         } catch (error) {
             toast.error(getError(error))
             setLoading(false)

@@ -50,7 +50,7 @@ export default function CreateNewAlert({ onClose, id }) {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     class_="mt-0!"
                     label="Alert Name"
                     labelClass="mb-2.5"
@@ -66,7 +66,7 @@ export default function CreateNewAlert({ onClose, id }) {
                     labelClass="mb-2.5!"
                     isRequired={true}
                     defaultOption=""
-                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60! py-3.5!"
                     formProps={{ ...register("clientScope", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
@@ -80,7 +80,7 @@ export default function CreateNewAlert({ onClose, id }) {
                     labelClass="mb-2.5!"
                     isRequired={true}
                     defaultOption=""
-                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60! py-3.5!"
                     formProps={{ ...register("triggerEvent", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
@@ -94,7 +94,7 @@ export default function CreateNewAlert({ onClose, id }) {
                     labelClass="mb-2.5!"
                     isRequired={true}
                     defaultOption=""
-                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60! py-3.5!"
                     formProps={{ ...register("deliveryMethod", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
