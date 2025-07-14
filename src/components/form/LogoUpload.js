@@ -9,7 +9,7 @@ export default function LogoUpload({
     isRequired = false,
     label = "Upload Logo Here",
     class_ = "",
-    accept = "image/*,.csv,.xls,.xlsx",
+    accept = ".csv,.xls,.xlsx",
     setFile,
     selectedFile: propSelectedFile = null,
     showToast
@@ -17,6 +17,7 @@ export default function LogoUpload({
     const [selectedFile, setSelectedFile] = useState(propSelectedFile);
     const [isDragOver, setIsDragOver] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
+    const [isLogoAdded, setIsLogoAdded] = useState(false);
 
     // Update selectedFile when prop changes
     useEffect(() => {
@@ -43,16 +44,15 @@ export default function LogoUpload({
     }
 
     const isValidFile = (file) => {
-        const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
         const validSpreadsheetTypes = [
             'text/csv',
             'application/vnd.ms-excel',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         ];
-        const validExtensions = ['.csv', '.xls', '.xlsx', '.jpg', '.jpeg', '.png', '.gif', '.webp'];
+        const validExtensions = ['.csv', '.xls', '.xlsx'];
         const fileName = file.name.toLowerCase();
 
-        return [...validImageTypes, ...validSpreadsheetTypes].includes(file.type) ||
+        return validSpreadsheetTypes.includes(file.type) ||
             validExtensions.some(ext => fileName.endsWith(ext));
     };
 
@@ -63,6 +63,25 @@ export default function LogoUpload({
 
         return validImageTypes.includes(file.type) ||
             imageExtensions.some(ext => fileName.endsWith(ext));
+    };
+
+    // Check if file is accepted spreadsheet type (CSV, XLS, XLSX)
+    const isSpreadsheetFile = (file) => {
+        const validSpreadsheetTypes = [
+            'text/csv',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ];
+        const spreadsheetExtensions = ['.csv', '.xls', '.xlsx'];
+        const fileName = file.name.toLowerCase();
+
+        return validSpreadsheetTypes.includes(file.type) ||
+            spreadsheetExtensions.some(ext => fileName.endsWith(ext));
+    };
+
+    // Get file name without extension for display
+    const getFileNameWithoutExtension = (fileName) => {
+        return fileName.replace(/\.[^/.]+$/, "");
     };
 
     const handleFileSelect = (event) => {
@@ -86,7 +105,7 @@ export default function LogoUpload({
         } else if (file) {
             // Show toast for invalid file types
             if (showToast) {
-                showToast('Please select a valid file (JPG, PNG, GIF, WebP, CSV, XLS, XLSX)');
+                showToast('Please select a valid file (CSV, XLS, XLSX)');
             }
             // Clear the input
             event.target.value = '';
@@ -148,7 +167,7 @@ export default function LogoUpload({
             }
         } else {
             if (showToast) {
-                showToast('Please select a valid file (JPG, PNG, GIF, WebP, CSV, XLS, XLSX)', 'error');
+                showToast('Please select a valid file (CSV, XLS, XLSX)', 'error');
             }
         }
     };
@@ -163,6 +182,7 @@ export default function LogoUpload({
     const handleRemoveFile = () => {
         setSelectedFile(null);
         setPreviewUrl(null);
+        setIsLogoAdded(false);
         if (setFile) {
             setFile(null);
         }
@@ -187,6 +207,10 @@ export default function LogoUpload({
         }
     };
 
+    const handleAddToLogo = () => {
+        setIsLogoAdded(true);
+    };
+
     // Determine border color based on state
     const getBorderColor = () => {
         if (isDragOver) return 'border-blue-500 bg-blue-50';
@@ -198,7 +222,7 @@ export default function LogoUpload({
     return (
         <div className={class_}>
             <div className="mb-3">
-                <label className="text-sm font-medium">
+                <label className="text-sm font-medium text-secondary inline-flex items-center gap-[5px] capitalize">
                     {label}
                     {isRequired && <span className="text-danger ml-1">*</span>}
                 </label>
@@ -207,80 +231,79 @@ export default function LogoUpload({
             {/* Only show drag & drop area if no file is selected */}
             {!selectedFile ? (
                 <div
-                    className={`border-2 border-dashed rounded-lg px-8 py-3.5 text-center transition-all duration-200 cursor-pointer hover:bg-gray-50 ${getBorderColor()}`}
+                    className={`border-2 border-dashed rounded-lg px-8 py-3.5 text-center transition-all duration-200 cursor-pointer ${getBorderColor()}`}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
                     onClick={handleChooseFile}
                 >
                     <div className="flex flex-col items-center">
-                        {/* <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3.5">
-                            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                            </svg>
-                        </div> */}
                         <Image src="/images/upload.svg" alt="upload" width={32} height={32} />
 
-                        <div className="text-lg font-semibold mb-2.5 mt-3.5">
+                        <div className="text-lg font-semibold capitalize mb-2.5 mt-3.5">
                             Drag & Drop Or Choose Logo To Upload
                         </div>
 
                         <div className="text-sm text-text3 mb-3.5">
-                            Supported Formats: JPG, PNG, GIF, WebP, CSV, XLS, XLSX
+                            Supported Formats: CSV, XLS, XLSX
                         </div>
 
-                        {/* <button
-                            type="button"
-                            className="px-6 py-2 bg-primary text-white rounded-lg font-medium transition-colors"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                handleChooseFile();
-                            }}
-                        >
-                            Choose File
-                        </button> */}
-                        <SecondaryButton title="Choose File" class_="text-base! font-normal!" />
+                        {/* <SecondaryButton title="Choose File" class_="text-base! font-normal!" /> */}
                     </div>
                 </div>
-            ) : (
-                /* Show selected file display with company preview */
+            ) : !isLogoAdded ? (
+                /* Show file selection with Add to Logo button */
                 <div className="rounded-lg p-7 shadow-[0px_0px_25px_0px_#0000000F]">
                     {/* Company preview section */}
                     <div className="text-center mb-3.5">
                         <div className="flex items-center justify-center gap-3 mb-4 h-40 bg-dark rounded-lg">
                             <div className="w-8 h-8 rounded-full flex items-center justify-center">
-                                {previewUrl && selectedFile && isImageFile(selectedFile) ? (
-                                    <img
-                                        src={previewUrl}
-                                        alt="Logo preview"
-                                        className="w-full h-full object-contain rounded-full border border-border-color"
-                                    />
-                                ) : (
-                                    <Image src="/images/logo.svg" alt='logo' width={32} height={32} />
-                                    // <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    //     <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
-                                    // </svg>
-                                )}
+                                <Image src="/images/logo.svg" alt='logo' width={32} height={32} />
                             </div>
-                            <span className="text-lg font-semibold ">ABC Solutions</span>
+                            <span className="text-lg font-semibold">
+                                {selectedFile ? getFileNameWithoutExtension(selectedFile.name) : "ABC Solutions"}
+                            </span>
                         </div>
                     </div>
 
-                    {/* File details section */}
+                    {/* Action buttons */}
+                    <div className="flex items-center justify-between mt-6">
+                        <CancelButton
+                            title="Cancel"
+                            class_="text-xs! border border-border2! hover:bg-dark! bg-white! py-[7px]! px-2.5!"
+                            mainClass="shrink-0"
+                            onClick={handleRemoveFile}
+                        />
+                        <SecondaryButton
+                            title="Add To Logo"
+                            class_="text-xs! font-semibold! py-[7px]! px-2.5!"
+                            onClick={handleAddToLogo}
+                        />
+                    </div>
+                </div>
+            ) : (
+                /* Show success view with file details after adding to logo */
+                <div className="rounded-lg p-7 shadow-[0px_0px_25px_0px_#0000000F]">
+                    {/* Company preview section */}
+                    <div className="text-center mb-3.5">
+                        <div className="flex items-center justify-center gap-3 mb-4 h-40 bg-dark rounded-lg">
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center">
+                                <Image src="/images/logo.svg" alt='logo' width={32} height={32} />
+                            </div>
+                            <span className="text-lg font-semibold">
+                                {selectedFile ? getFileNameWithoutExtension(selectedFile.name) : "ABC Solutions"}
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* File details section - show after adding to logo */}
                     <div className="flex items-center justify-between p-3.5 bg-white rounded-lg border border-primary/10">
                         <div className="flex items-center gap-3">
-                            {/* File icon */}
-                            {/* <div className="w-10 h-10 bg-green-100 rounded flex items-center justify-center">
-                                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
-                                </svg>
-                            </div> */}
                             <Image src="/images/csv.svg" alt='csv' width={30} height={35} />
 
                             {/* File info */}
                             <div>
-                                <p className="text-sm font-medium capitalize ">
+                                <p className="text-sm font-medium capitalize">
                                     {selectedFile.name}
                                 </p>
                                 <p className="text-xs font-medium text-text3">
@@ -290,30 +313,22 @@ export default function LogoUpload({
                         </div>
 
                         {/* Success checkmark */}
-                        {/* <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                            <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    fillRule="evenodd"
-                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
-                        </div> */}
                         <Image src="/images/checked.svg" alt='checked' width={30} height={30} />
-
                     </div>
 
                     {/* Action buttons */}
                     <div className="flex items-center justify-between mt-6">
-                        {/* <button
+                        <CancelButton
+                            title="Remove"
+                            class_="text-xs! border border-border2! hover:bg-dark! bg-white! py-[7px]! px-2.5!"
+                            mainClass="shrink-0"
                             onClick={handleRemoveFile}
-                            className=" text-sm hover:text-gray-700 transition-colors"
-                            type="button"
-                        >
-                            Cancel
-                        </button> */}
-                        <CancelButton title="Cancel" class_="text-xs! border border-border2! hover:bg-dark! bg-white! py-[7px]! px-2.5!" mainClass="shrink-0" />
-                        <SecondaryButton title="Add To Logo" class_="text-xs! font-semibold! py-[7px]! px-2.5!" />
+                        />
+                        <SecondaryButton
+                            title="Logo Added"
+                            class_="text-xs! font-semibold! py-[8px]! px-2.5! bg-success! text-white!"
+                            disabled
+                        />
                     </div>
                 </div>
             )}

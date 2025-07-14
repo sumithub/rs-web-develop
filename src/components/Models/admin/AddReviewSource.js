@@ -76,7 +76,7 @@ export default function AddReviewSource({ onClose, id }) {
                     placeholder="Add URL"
                     hideOptional={true}
                     isRequired={true}
-                    icon="/images/add-link.svg"
+                    icon2="/images/add-link.svg"
                     formProps={{ ...register("url", { required: true }) }}
                     errors={errors}
                     clearErrors={clearErrors}

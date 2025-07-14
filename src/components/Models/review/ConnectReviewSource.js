@@ -53,8 +53,7 @@ export default function ConnectReviewSource({ onClose, onSave, id, data }) {
                     selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
                     formProps={{ ...register("cooldownPeriod", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
-                    watch={watch}
-                >
+                    watch={watch}>
                     <option value="johnDeo">John Deo</option>
                 </SelectForm>}
 
@@ -67,7 +66,7 @@ export default function ConnectReviewSource({ onClose, onSave, id, data }) {
                     placeholder=""
                     hideOptional={true}
                     isRequired={true}
-                    icon="/images/add-link.svg"
+                    icon2="/images/add-link.svg"
                     defaultValue={watch("url") || ""}
                     infoIcon="/images/url.svg"
                     formProps={{ ...register("url", { required: true }) }}

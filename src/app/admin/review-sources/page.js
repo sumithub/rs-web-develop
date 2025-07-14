@@ -96,7 +96,7 @@ export default function ReviewSources() {
                     <h2 className="text-sm text-text3 capitalize">Connect your business to review platforms</h2>
                 </div>
                 <div className="flex items-center justify-end gap-3.5">
-                    <div className="w-96">
+                    <div className="w-72">
                         <Search
                             mainClass='w-full!'
                             placeholder="Search by Review Sources"
@@ -108,7 +108,7 @@ export default function ReviewSources() {
                     <CancelButton title="Assigned Clients" class_="text-xs! bg-white! border border-border-color! py-2.5!" mainClass="shrink-0" />
                     <CustomSelectBox
                         defaultOption="Filters"
-                        class_='mt-0! w-26!'
+                        class_='mt-0! w-20!'
                         selectClass_="py-2.5! text-xs!"
                         value={filterBy}
                         onChange={(e) => {

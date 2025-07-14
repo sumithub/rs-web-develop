@@ -62,7 +62,7 @@ export default function ReviewSources() {
                 </div>
                 <CustomSelectBox
                     defaultOption="Filters"
-                    class_='mt-0! w-26!'
+                    class_='mt-0! w-24!'
                     value={filterBy}
                     onChange={(e) => {
                         setFilterBy(e.target.value)
