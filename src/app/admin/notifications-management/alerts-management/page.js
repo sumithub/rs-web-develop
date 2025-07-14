@@ -15,6 +15,7 @@ import CreateNewAlert from "../../../../components/Models/admin/CreateNewAlert"
 import DeleteList from "../../../../components/Models/customers/DeleteList"
 import Status from "../../../../components/Status"
 import CustomSelectBox from "../../../../components/form/CustomSelectBox"
+import Checkbox from "../../../../components/form/Checkbox"
 
 export default function AlertsManagement() {
     const [sortBy, setSortBy] = useState(false)
@@ -77,6 +78,7 @@ export default function AlertsManagement() {
             <div className='flex items-center justify-between'>
 
                 <Search
+                    mainClass="w-80!"
                     placeholder="Search By Alerts"
                     onSearch={(s) => {
                         setSearch(s)
@@ -145,7 +147,14 @@ export default function AlertsManagement() {
                         {list.map((e, index) =>
                             <tr key={index} className={index === list.length - 1 ? '' : 'border-b border-border-color'}>
                                 <td>
-                                    <div>{e.alertName}</div>
+                                    <div className="flex items-start gap-2">
+                                        <Checkbox
+                                            checked={e.selected}
+                                            onChange={(checked) => {
+                                                setList(list => list.map((item, i) => i === index ? { ...item, selected: checked } : item))
+                                            }}
+                                        />
+                                        {e.alertName}</div>
                                 </td>
                                 <td>
                                     {e.clientScope}

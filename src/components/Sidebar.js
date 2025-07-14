@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import LocationsDropdown from "../components/Models/LocationsDropdown"
 import AddNewLocation from '../components/Models/location/AddNewLocation'
 import { useRole } from "../utils/hooks";
+import { title } from "process";
 
 export default function Sidebar({ collapse, toggleSidebar, role }) {
     const [list, setList] = useState([])
@@ -87,8 +88,8 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 title: "Business Management", link: "", icon: "business",
                 submenu:
                     [
-                        { title: "Clients", link: "/admin/business-management/clients-management" },
-                        { title: "Locations", link: "/admin/business-management/locations-management" },
+                        { title: "Clients", link: "/admin/business-management/clients" },
+                        { title: "Locations", link: "/admin/business-management/locations" },
                         { title: "Manage Customers", link: "/admin/business-management/manage-customers" },
                         { title: "Customers Journey", link: "/admin/business-management/customer-journey" },
                         { title: "Tagging", link: "/admin/business-management/customer-tagging" },
@@ -113,9 +114,8 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                 submenu:
                     [
                         { title: "Manage Reviews", link: "/admin/reviews-oversight" },
-                        { title: "Sources", link: "/admin/review-sources" },
                         { title: "Widgets", link: "/admin/widgets-management" },
-
+                        { title: "Sources", link: "/admin/review-sources" },
                     ]
             },
 
@@ -145,15 +145,23 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                     ]
             },
 
+            // {
+            //     title: "Rules", link: "/admin/global-rules-management", icon: "rule",
+            // },
             {
-                title: "Rules", link: "/admin/global-rules-management", icon: "rule",
+                title: "Rules", link: "", icon: "rule", icon: "rule",
+                submenu: [
+                    { title: "Global Rules", link: "/admin/global-rules-management" },
+                    { title: "Custom Rules", link: "/client-rules-management" }
+                ]
             },
-
             {
                 title: "Notifications and Alerts", link: "", icon: "notification",
                 submenu:
                     [
                         { title: "Notifications", link: "/admin/notifications-management/notifications-dashboard" },
+                        { title: "Notification Preferences", link: "/notification-preferences-management" },
+
                         { title: "Alerts", link: "/admin/notifications-management/alerts-management" },
                         // { title: "System Wide Notifications", link: "" },
                         { title: "Notification Log", link: "/audit-logs-dashboard" },
@@ -235,8 +243,19 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                         </ul>
                     </div>
                     <div>
-                        <div className="border-b-2 border-border2 mb-8" />
-                        <Image src="/images/avatar1.png" alt="avatar" height={56} width={56} className="h-14 w-14 rounded-full border border-border2 mx-auto" />
+                        <hr className="border-b-2 border-border2 mb-4" />
+                        <div className="p-6 flex justify-between items-center">
+                            <div className="flex items-center gap-3">
+                                <Image src="/images/avatar1.png" alt="avatar" height={40} width={40} className="h-10 w-10 rounded-full" />
+                                <div>
+                                    <h3 className="text-xs text-text3">Welcome back 👋</h3>
+                                    <h2 className="text-sm pt-0.5">Johnathan</h2>
+                                </div>
+                            </div>
+                            <div>
+                                <Image unoptimized={true} src="/images/arrow-right.svg" alt="arrow-left.svg" height={20} width={20} className="" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

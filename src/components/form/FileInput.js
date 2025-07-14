@@ -27,10 +27,10 @@ export default function FileInput({
         if (fieldError.type === "pattern" || fieldError.type === "validate" || fieldError.type === "minLength") {
             error = fieldError.message;
         } else {
-            error = "This field is required";
+            error = "Required";
         }
     } else if (errors?.[formProps?.name]?.type) {
-        error = errors[formProps?.name]?.message || "This field is required";
+        error = errors[formProps?.name]?.message || "Required";
     }
 
     const handleFileSelect = (event) => {
@@ -252,7 +252,7 @@ export default function FileInput({
 
             {/* Error message - only show if there's an error AND no file is selected */}
             {error && !selectedFile && (
-                <div className="mt-2 text-sm text-danger capitalize">
+                <div className="mt-2 text-xs text-danger capitalize">
                     {error}
                 </div>
             )}

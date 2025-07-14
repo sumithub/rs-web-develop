@@ -68,6 +68,9 @@ export default function DashboardTrend() {
         plugins: {
             legend: { display: false },
             tooltip: { enabled: true },
+            datalabels: {
+                display: false
+            }
         },
         scales: {
             x: {

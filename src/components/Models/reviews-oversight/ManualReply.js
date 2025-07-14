@@ -11,6 +11,8 @@ import HtmlEditor from '../../form/HtmlEditor'
 import CancelButton from '../../common/CancelButton'
 import SecondaryButton from '../../common/SecondaryButton'
 import Image from 'next/image'
+import CheckboxForm from '../../form/CheckboxForm'
+import RadioForm from '../../form/RadioForm'
 
 function AddTemplate({ onClose, id }) {
     const { handleSubmit, register, setValue, watch, formState: { errors }, clearErrors } = useForm();
@@ -37,13 +39,18 @@ function AddTemplate({ onClose, id }) {
         }
     }
 
+
     return <Model onClose={onClose} title="Manual Reply To Review" modalBodyClass='max-h-[85vh] pt-5!'>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className='grid grid-cols-[1fr_0.8fr] gap-5'>
                 <div>
-                    <Radio
+                    <RadioForm
+                        isRequired={true}
                         label="Select Template"
                         class_='mt-0!'
+                        name="template"
+                        formProps={{ ...register("template", { required: false }) }}
+                        errors={errors}
                     />
                     <SelectForm
                         // label="Select Template"
@@ -59,10 +66,13 @@ function AddTemplate({ onClose, id }) {
                     >
                         <option value="natureTemplate">Nature Template</option>
                     </SelectForm>
-
                     <div className="pt-3.5">
-                        <Radio label="Or Compose Reply"
+                        <RadioForm label="Or Compose Reply"
                             class_='mt-0!'
+                            name="composeReply"
+                            isRequired={true}
+                            formProps={{ ...register("composeReply", { required: true }) }}
+                            errors={errors}
                         />
                         <HtmlEditor
                             label=""
@@ -81,7 +91,7 @@ function AddTemplate({ onClose, id }) {
                 </div>
                 <div className='rounded-[15px] shadow-[0px_0px_40px_0px_#0000000F]'>
                     <div className='bg-primary/10 flex items-center gap-2.5 p-5 rounded-t-[15px]'>
-                        <Image src="/images/eye1.svg" alt='eye1' width={22} height={22} />
+                        <Image unoptimized={true} src="/images/eye1.svg" alt='eye1' width={22} height={22} />
                         <h2 className='text-lg font-semibold'>Preview Reply</h2>
                     </div>
                     <div className='p-2.5 border border-border2 m-5 rounded-[10px] min-h-[50vh]'>

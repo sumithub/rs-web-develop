@@ -119,64 +119,11 @@ function AddTemplate({ onClose, id }) {
                   clearErrors("body")
                   setValue("body", value)
                 }}
+                type={1}
+              />
 
-              // formProps={{ ...register("message", { required: true }) }}
-              // errors={errors}
-              // clearErrors={clearErrors}
-              >
-                <CustomSelectBox
-                  class_='mt-5!'
-                  defaultOption="Insert Dynamic Fields"
-                  value={dynamicFields}
-                  onChange={(e) => {
-                    setDynamicFields(e.target.value)
-                  }}
-                >
-                  <option value="full name">Customer Full Name</option>
-                  <option value="first name">Customer First Name</option>
-                  <option value="business name">Business Name</option>
-                  <option value="direct feedback">Direct Feedback</option>
-                </CustomSelectBox>
-
-              </HtmlEditor>
             </div>
-            {/* <HtmlEditor label="Email Body"
-               formProps={{ ...register("message", { required: false }) }}
-                                    errors={errors}
-                                    clearErrors={clearErrors}
-              
-            >
 
-              <div className='grid grid-cols-3 gap-4'>
-                <InputForm label="Customer Name" isRequired={true}
-                  formProps={{ ...register("customerName", { required: true }) }}
-                  errors={errors}
-                />
-
-                {isEmail && <DatePickerForm label="Appointment Date" isRequired={true}
-                  formProps={{ ...register("appointmentDate", { required: true }) }}
-                  errors={errors} clearErrors={clearErrors} setValue={setValue} watch={watch}
-                />}
-                {isEmail && <InputForm label="Review Link" isRequired={true}
-                  formProps={{ ...register("reviewLink", { required: true }) }}
-                  errors={errors}
-                />}
-
-                <InputForm label="Business Name" isRequired={true}
-                  formProps={{ ...register("businessName", { required: true }) }}
-                  errors={errors}
-                />
-                <InputForm label="Insert Field" isRequired={true}
-                  formProps={{ ...register("insertDynamicFields", { required: true }) }}
-                  errors={errors}
-                />
-              </div>
-            </HtmlEditor> */}
-
-            {/* <div className="text-sm text-secondary font-medium capitalize mt-3 mb-2">email body</div>
-          <textarea
-            required={true}
-            rows={15} className="rounded text-text3 text-sm border border-color w-full focus-visible:outline-none p-3" /> */}
 
             <div className="grid grid-cols-3 gap-3 mt-5">
               <CancelButton title="clone template" onClick={handleClick} />
@@ -189,7 +136,7 @@ function AddTemplate({ onClose, id }) {
         <div className='w-[40%] mt-4'>
           <div className='shadow-sm rounded-[10px]'>
 
-            <div className='bg-[#0396FF1a] px-5 py-4 rounded-tl-[10px] rounded-tr-[10px]'>
+            <div className='bg-primary/10 px-5 py-4 rounded-tl-[10px] rounded-tr-[10px]'>
               <div className='flex items-center gap-3'>
                 <Image src="/images/eye1.svg" alt='eye' height={22} width={22} unoptimized={true} />
                 <div className='text-secondary text-lg font-semibold'>Email Preview</div>

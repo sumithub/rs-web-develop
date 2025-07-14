@@ -198,7 +198,7 @@ export default function SelectForm({
             </div>
 
             {error && (
-                <div className="capitalize text-xs font-medium text-red-500 mt-1">
+                <div className="capitalize text-xs font-medium text-danger mt-1">
                     {error}
                 </div>
             )}

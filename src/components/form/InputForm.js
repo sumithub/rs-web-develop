@@ -11,10 +11,10 @@ export default function InputForm({ icon2 = "", infoIcon, class_ = "", watch, se
         if (fieldError.type === "pattern" || fieldError.type === "validate" || fieldError.type === "minLength" || fieldError.type === "min") {
             error = fieldError.message;
         } else {
-            error = "This field is required";
+            error = "Required";
         }
     } else if (formProps?.name && errors?.[formProps.name]?.type) {
-        error = errors[formProps.name]?.message || "This field is required";
+        error = errors[formProps.name]?.message || "Required";
     }
 
     const handleClick = () => {

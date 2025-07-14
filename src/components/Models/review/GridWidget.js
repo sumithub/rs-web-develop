@@ -191,7 +191,7 @@ export default function Carousel({ onClose, OnSave, id }) {
                                 <div className="my-[25px]">
                                     <button className="text-xs w-full font-medium flex items-center gap-2.5 py-[7px] px-2.5 rounded-lg border border-light2 bg-light2/10">
                                         <span>
-                                            <Image src="/images/google.svg" alt="google" width={18} height={18} className="" />
+                                            <Image unoptimized={true} src="/images/google.svg" alt="google" width={18} height={18} className="" />
                                         </span>
                                         Verified On Google
                                     </button>

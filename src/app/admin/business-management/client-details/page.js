@@ -110,19 +110,19 @@ export default function ClientDetails() {
                     <button className="flex gap-2.5 items-center border border-text3/30 rounded-lg p-2.5 text-xs text-text3 hover:bg-text3/10">
                         Export Client Report
                         <span>
-                            <Image src="/images/export-2.svg" alt="export-2" width={16} height={16} />
+                            <Image unoptimized={true} src="/images/export-2.svg" alt="export-2" width={16} height={16} />
                         </span>
                     </button>
                     <button className="flex gap-2.5 items-center border border-text3/30 rounded-lg p-2.5 text-xs text-text3 hover:bg-text3/10">
                         Suspend Client
                         <span>
-                            <Image src="/images/slash-2.svg" alt="slash-2" width={16} height={16} />
+                            <Image unoptimized={true} src="/images/slash-2.svg" alt="slash-2" width={16} height={16} />
                         </span>
                     </button>
                     <button className="flex gap-2.5 items-center border border-text3/30 rounded-lg p-2.5 text-xs text-text3 hover:bg-text3/10">
                         Edit Client
                         <span>
-                            <Image src="/images/edit-3.svg" alt="edit-3" width={16} height={16} />
+                            <Image unoptimized={true} src="/images/edit-3.svg" alt="edit-3" width={16} height={16} />
                         </span>
                     </button>
                     <SecondaryButton title="Add Location" onClick={() => { setOpen(true) }} class_="text-sm font-normal!" />
@@ -385,18 +385,18 @@ export default function ClientDetails() {
                                 <td><div className="flex justify-center"><Status status={e.status} /></div></td>
                                 <td>
                                     <div className="flex justify-center">
-                                        {/* <button className='cursor-pointer bg-primary/10 py-1 px-2.5 rounded-full'>
+                                        {e.status === "Paid" && <button className='cursor-pointer bg-primary/10 py-1 px-2.5 rounded-full'>
                                             <div className="flex items-center gap-2.5">
                                                 <Image unoptimized={true} src="/images/arrow-down2.svg" alt='arrow-down2' height={16} width={16} />
                                                 <h2 className="text-sm text-primary">Download PDF</h2>
                                             </div>
-                                        </button> */}
-                                        <button className='cursor-pointer bg-success/10 py-1 px-2.5 rounded-full'>
+                                        </button>}
+                                        {e.status === "Overdue" && <button className='cursor-pointer bg-success/10 py-1 px-2.5 rounded-full'>
                                             <div className="flex items-center gap-2.5">
                                                 <Image unoptimized={true} src="/images/moneys.svg" alt='moneys' height={16} width={16} />
                                                 <h2 className="text-sm text-success">Pay Now</h2>
                                             </div>
-                                        </button>
+                                        </button>}
                                     </div>
                                 </td>
                             </tr>)}

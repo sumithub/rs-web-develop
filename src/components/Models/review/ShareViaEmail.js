@@ -24,7 +24,7 @@ export default function ShareViaEmail({ onClose, onSave }) {
 
     const Copy = async () => {
         try {
-            toast.success("Coped Successfully")
+            toast.success("Copied Successfully")
             setSending(false)
             onClose()
         } catch (error) {
@@ -110,7 +110,7 @@ export default function ShareViaEmail({ onClose, onSave }) {
                         </button>
                     </div>
 
-                    <div className="">
+                    <div>
                         <SecondaryButton
                             title="Done"
                             class_="text-lg! px-[80px]!"

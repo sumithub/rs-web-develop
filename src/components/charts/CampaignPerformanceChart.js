@@ -84,6 +84,9 @@ const options = {
             display: false,
             text: 'Campaign Performance Over Time',
         },
+        datalabels: {
+            display: false
+        }
     },
     scales: {
         y: {

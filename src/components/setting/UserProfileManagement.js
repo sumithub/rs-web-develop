@@ -378,7 +378,7 @@ export default function UserProfileManagement({ id = "user1" }) {
                     </div>
 
                     <div className="flex items-center gap-[10px] pt-[25px]">
-                        <Image src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
+                        <Image unoptimized={true} src="/images/warning-2.svg" alt="warning-2" width={22} height={22} />
                         <h2 className="capitalize text-sm font-medium">This action is irreversible!</h2>
                     </div>
 

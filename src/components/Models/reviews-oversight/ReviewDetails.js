@@ -129,7 +129,7 @@ function ReviewDetails({ onClose, onSave }) {
                 <SecondaryButton title="Manual Reply" class_="text-lg! bg-white! text-primary! hover:text-white! hover:bg-primary! disabled:bg-dark! disabled:border disabled:border-dark! disabled:text-text3! cursor-not-allowed" onClick={() => setOpen(true)} />
                 <SecondaryButton title="view full log" onClick={onClose} class_="text-lg!" />
                 <div>
-                    <Image src="/images/component34.svg" alt="component34" width={47} height={47} />
+                    <Image src="/images/component34.svg" alt="component34" width={47} height={47} unoptimized={true} />
                 </div>
             </div>
         </form>

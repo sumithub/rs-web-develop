@@ -67,15 +67,15 @@ export default function Subscription({ setTab }) {
                     <h2 className="text-base">Features Included:</h2>
                     <div className="pt-[15px]">
                         <div className="flex items-center gap-[10px]">
-                            <Image src="/images/tick.svg" alt="tick" width={24} height={24} />
+                            <Image unoptimized={true} src="/images/tick.svg" alt="tick" width={24} height={24} />
                             <h2 className="text-base">Advanced Analytics</h2>
                         </div>
                         <div className="flex items-center gap-[10px] pt-2.5">
-                            <Image src="/images/tick.svg" alt="tick" width={24} height={24} />
+                            <Image unoptimized={true} src="/images/tick.svg" alt="tick" width={24} height={24} />
                             <h2 className="text-base">Multi-Channel Monitoring</h2>
                         </div>
                         <div className="flex items-center gap-[10px] pt-2.5">
-                            <Image src="/images/tick.svg" alt="tick" width={24} height={24} />
+                            <Image unoptimized={true} src="/images/tick.svg" alt="tick" width={24} height={24} />
                             <h2 className="text-base">Custom Branding</h2>
                         </div>
                     </div>

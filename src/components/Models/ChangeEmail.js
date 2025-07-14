@@ -13,7 +13,6 @@ function ChangeEmail({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
 
-
     const onSubmit = async (data) => {
         try {
             setSending(true)
@@ -56,8 +55,8 @@ function ChangeEmail({ onClose, id }) {
                             <Image unoptimized={true} src="images/warning.svg" alt='warning' height={22} width={22} />
                             <div className='text-sm text-secondary font-medium capitalize'>a new verification email will be sent to the updated email.</div>
                         </div>
-
                     </div>
+
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div>
                             <InputForm
@@ -102,7 +101,7 @@ function ChangeEmail({ onClose, id }) {
                     </div>
                 </div>
             </div>
-        </Model >
+        </Model>
     )
 }
 

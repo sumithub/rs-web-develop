@@ -21,7 +21,7 @@ export default function ColorInputForm({
         if (fieldError.type === "pattern" || fieldError.type === "validate") {
             error = fieldError.message;
         } else {
-            error = "This field is required";
+            error = "Required";
         }
     }
 

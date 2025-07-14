@@ -78,7 +78,7 @@ export default function AuditLogs() {
                             checked={enabled}
                             onChange={setEnabled}
                             class_={`${enabled ? 'bg-green-500' : 'bg-gray-300'
-                                } relative inline-flex h-4 w-8 items-center rounded-full transition mt-2`} />
+                                } relative inline-flex h-4 w-9 items-center rounded-full transition mb-0!`} />
                     </div>
 
                     <CustomSelectBox
@@ -200,7 +200,7 @@ export default function AuditLogs() {
                                 <td>
                                     <div className='flex justify-center gap-2'>
                                         <button className='cursor-pointer' onClick={() => setOpen(true)}>
-                                            <Image src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
                                         </button>
                                     </div>
                                 </td>

@@ -12,7 +12,7 @@ function JourneyTimeline() {
                     <h3>Review Submitted</h3>
                     <div className="flex items-center">
                         &#40;5
-                        <span><Image src="/images/star.svg" alt="star" width={16} height={16} /></span>
+                        <span><Image unoptimized={true} src="/images/star.svg" alt="star" width={16} height={16} /></span>
                         &#41;
                     </div>
                 </div>

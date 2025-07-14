@@ -21,6 +21,8 @@ import { useRouter } from "next/navigation"
 import SelectedCustomers from "../../../components/Models/manage-campaigns/SelectedCustomers"
 import ImportCustomerDetail from "../../../components/Models/manage-campaigns/ImportCustomerDetail"
 import RadioForm from "../../../components/form/RadioForm"
+import { Tooltip } from "react-tooltip"
+import { useRole } from "../../../utils/hooks"
 
 export default function Detail({ }) {
     const id = ""
@@ -37,6 +39,8 @@ export default function Detail({ }) {
     const [openPreview, setOpenPreview] = useState(false)
     const router = useRouter()
     const [selId, setSelId] = useState("")
+    const { isAdmin } = useRole();
+
 
     const [cardStatuses, setCardStatuses] = useState({
         campaignDetails: 'pending',
@@ -225,7 +229,11 @@ export default function Detail({ }) {
             }
             toast.success("Campaign Created Successfully")
             setSending(false)
-            router.push("/manage-campaigns")
+
+            if (isAdmin)
+                router.push("/admin/campaigns-management")
+            else
+                router.push("/manage-campaigns")
 
         } catch (error) {
             toast.error(getError(error))
@@ -313,7 +321,7 @@ export default function Detail({ }) {
                             </div>
                             <div className="flex items-center gap-3">
                                 <button
-                                    className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                                    className="bg-primary/10 p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                                     onClick={() => setOpenPreview(true)}
                                     type="button"
                                     disabled={!hasTemplate}
@@ -323,7 +331,7 @@ export default function Detail({ }) {
                                 </button>
 
                                 <button
-                                    className="bg-[#0396FF1a] p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="bg-primary/10 p-2 rounded-lg flex gap-2 items-center justify-center text-xs text-primary font-medium w-[85px] disabled:opacity-50 disabled:cursor-not-allowed"
                                     // onClick={() => setOpenModal(true) }
                                     onClick={(el) => {
                                         setSelId("e.id")
@@ -454,7 +462,7 @@ export default function Detail({ }) {
                         title="Campaign Details"
                         status={getCardStatus('campaignDetails')}>
                         <div>
-                            <div className="grid grid-cols-1 gap-3">
+                            <div className={`${isAdmin ? "grid-cols-3" : "grid-cols-1"} grid gap-3`}>
                                 <InputForm
                                     label="Campaign Name"
                                     placeholder="Enter Name"
@@ -463,11 +471,20 @@ export default function Detail({ }) {
                                     formProps={{ ...register("campaignName", { required: true }) }}
                                     errors={errors}
                                 />
+                                <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white! border-primary/10! focus:border-primary/60!"
+                                    formProps={{ ...register("description", { required: false }) }}
+                                    errors={errors}
+                                />
+
+                                {isAdmin &&
+                                    <InputForm
+                                        label="additional Clients" placeholder="Additional Clients" isRequired={false} inputClass="bg-white! border-primary/10! focus:border-primary/60!"
+                                        formProps={{ ...register("additionalClients", { required: false }) }}
+                                        errors={errors}
+                                    />
+                                }
                             </div>
-                            <InputForm label="Description" placeholder="Description" isRequired={false} inputClass="bg-white! border-primary/10! focus:border-primary/60!"
-                                formProps={{ ...register("description", { required: false }) }}
-                                errors={errors}
-                            />
+
                         </div>
                     </CampaignCard>
                 </div>
@@ -476,7 +493,16 @@ export default function Detail({ }) {
                     <CampaignCard expandAll={expandAll} setExpandAll={setExpandAll}
                         title="Targeting"
                         status={getCardStatus('targeting')}>
-                        <div className="my-4">
+                        {isAdmin && <div className="flex items-center justify-between my-4">
+
+                            <div className="text-secondary text-sm font-medium capitalize">Select Customers from List</div>
+                            <SecondaryButton title="select from list" class_="text-sm! font-normal!"
+                                type="button"
+                                onClick={() => { setOpenCustomer(true) }} />
+                        </div>
+                        }
+
+                        {!isAdmin && <div className="my-4">
                             <div className="text-secondary text-sm font-medium capitalize">Select Customer Source</div>
                             <div>
                                 <div className="flex items-center justify-between">
@@ -494,7 +520,6 @@ export default function Detail({ }) {
                                 </div>
 
                                 <div className="flex items-center justify-between">
-
                                     <RadioForm
                                         checked={watch("customerSource") === "CSV"}
                                         name="customerSource"
@@ -524,7 +549,7 @@ export default function Detail({ }) {
                                     }}
                                 /> */}
                             </div>
-                        </div>
+                        </div>}
                         {customersSelected && <div>
                             <div className="flex justify-between items-start mb-4">
                                 <div>
@@ -533,9 +558,9 @@ export default function Detail({ }) {
                                             <Image unoptimized={true} src="/images/warning.svg" alt="warning" height={22} width={22} />
                                             <div className="text-danger text-lg font-semibold capitalize">{customersSelected || 5} customers are already in an active campaign?</div>
                                         </div>
-                                        <SecondaryButton title="View Details" class_="text-sm! font-normal!"
+                                        {!isAdmin && <SecondaryButton title="View Details" class_="text-sm! font-normal!"
                                             type="button"
-                                            onClick={() => { setOpenCustomer("details") }} />
+                                            onClick={() => { setOpenCustomer("details") }} />}
                                     </div>
                                 </div> {watch("customerSource") && <SelectForm
                                     class_="mt-0!"
@@ -573,7 +598,7 @@ export default function Detail({ }) {
                                 </SelectForm>} */}
                             </div>
 
-                            <div className="border border-primary bg-[#0396FF1a] rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
+                            <div className="border border-primary bg-primary/10 rounded-[10px] py-1.5 px-3 capitalize w-full text-base text-primary font-medium flex items-center justify-between mt-4">
                                 <div>Total Selected Customers</div>
                                 <div className="flex items-center gap-2">
                                     <div>{customersSelected ? `${customersSelected} Customers` : '0 Customers'}</div>
@@ -645,26 +670,38 @@ export default function Detail({ }) {
                                         <div className="flex items-center gap-4 mt-1 mb-4">
                                             <div className="text-gray-600 text-sm font-medium">Reminder Email Template</div>
                                             <div className="flex items-start gap-5">
-                                                <Radio
-                                                    class_="mt-0!"
-                                                    name={campaignType === 'both' ? 'emailReminder' : 'reminderEmail'}
-                                                    label="Custom reminder email"
-                                                    checked={campaignType === 'both' ? !emailReminderEnabled : !reminderEnabled}
-                                                    onChange={() => campaignType === 'both' ? handleEmailReminderToggle('customReminderEmail') : handleReminderToggle('customReminderEmail')}
-                                                    tooltipContent="Select a unique template for your reminder email."
-                                                    tooltipPosition="bottom"
-                                                    showTooltip={true}
 
-                                                />
-                                                <Radio
-                                                    showTooltip={true}
-                                                    tooltipContent="This will reuse your primary email template." tooltipPosition="bottom"
-                                                    class_="mt-0!"
-                                                    name={campaignType === 'both' ? 'emailReminder' : 'reminderEmail'}
-                                                    label="Same as primary"
-                                                    checked={campaignType === 'both' ? emailReminderEnabled : reminderEnabled}
-                                                    onChange={() => campaignType === 'both' ? handleEmailReminderToggle('sameAsPrimary') : handleReminderToggle('sameAsPrimary')}
-                                                />
+                                                <div className="flex items-center gap-2">
+                                                    <Radio
+                                                        class_="mt-0!"
+                                                        name={campaignType === 'both' ? 'emailReminder' : 'reminderEmail'}
+                                                        label="Custom reminder email"
+                                                        checked={campaignType === 'both' ? !emailReminderEnabled : !reminderEnabled}
+                                                        onChange={() => campaignType === 'both' ? handleEmailReminderToggle('customReminderEmail') : handleReminderToggle('customReminderEmail')}
+
+
+                                                    />
+                                                    <div data-tooltip-id="my-tooltip" data-tooltip-html="Select a unique template for <br/> your reminder email.">
+
+                                                        <Image src="/images/url.svg" alt="info" height={16} width={16} unoptimized={true} className="cursor-pointer" />
+                                                    </div>
+                                                    <Tooltip className="z-20! text-secondary! text-sm! bg-white! shadow-md! rounded! border! border-gray-200!" place="bottom" id="my-tooltip" />
+                                                </div>
+
+                                                <div className="flex gap-2 items-center">
+                                                    <Radio
+                                                        class_="mt-0!"
+                                                        name={campaignType === 'both' ? 'emailReminder' : 'reminderEmail'}
+                                                        label="Same as primary"
+                                                        checked={campaignType === 'both' ? emailReminderEnabled : reminderEnabled}
+                                                        onChange={() => campaignType === 'both' ? handleEmailReminderToggle('sameAsPrimary') : handleReminderToggle('sameAsPrimary')}
+                                                    />
+                                                    <div data-tooltip-id="my-tooltip" data-tooltip-html="This will reuse your primary <br/> email template.">
+                                                        <Image src="/images/url.svg" alt="info" height={16} width={16} unoptimized={true} className="cursor-pointer" />
+                                                    </div>
+                                                    <Tooltip className="z-20! text-secondary! text-sm! bg-white! shadow-md! rounded! border! border-gray-200!" place="bottom" id="my-tooltip" />
+                                                </div>
+
                                             </div>
                                         </div>
 
@@ -687,41 +724,49 @@ export default function Detail({ }) {
                                                     <div className="flex items-start gap-4 mt-1 mb-4">
                                                         <div className="text-gray-600 text-sm font-medium">Final Reminder Email Template<span className="text-red-500">*</span></div>
                                                         <div className="flex items-start gap-5">
-                                                            <Radio
-                                                                class_="mt-0!"
-                                                                name="final"
-                                                                label="Custom final reminder email"
-                                                                checked={campaignType === 'both' ? !sameAsEmailFinal : sameAsFinal === "customFinalReminderEmail"}
-                                                                onChange={() => {
-                                                                    if (campaignType === 'both') {
-                                                                        setSameAsEmailFinal(false);
-                                                                    } else {
-                                                                        setSameAsFinal('customFinalReminderEmail');
-                                                                        setSelectedTemplates((prev) => ({ ...prev, final: null }));
-                                                                    }
-                                                                }}
-                                                                tooltipContent="Select a separate template for the final reminder email."
-                                                                tooltipPosition="bottom"
-                                                                showTooltip={true}
-                                                            />
-                                                            <Radio
-                                                                class_="mt-0!"
-                                                                name="final"
-                                                                label="Same as reminder"
-                                                                checked={campaignType === 'both' ? sameAsEmailFinal : sameAsFinal === "sameAsPrimary"}
-                                                                onChange={() => {
-                                                                    if (campaignType === 'both') {
-                                                                        setSameAsEmailFinal(true);
-                                                                    } else {
-                                                                        setSameAsFinal('sameAsPrimary');
-                                                                        setSelectedTemplates((prev) => ({ ...prev, final: prev.reminder }));
-                                                                    }
-                                                                }}
 
-                                                                tooltipContent="This will reuse your reminder email template."
-                                                                tooltipPosition="bottom"
-                                                                showTooltip={true}
-                                                            />
+                                                            <div className="flex gap-2 items-center">
+                                                                <Radio
+                                                                    class_="mt-0!"
+                                                                    name="final"
+                                                                    label="Custom final reminder email"
+                                                                    checked={campaignType === 'both' ? !sameAsEmailFinal : sameAsFinal === "customFinalReminderEmail"}
+                                                                    onChange={() => {
+                                                                        if (campaignType === 'both') {
+                                                                            setSameAsEmailFinal(false);
+                                                                        } else {
+                                                                            setSameAsFinal('customFinalReminderEmail');
+                                                                            setSelectedTemplates((prev) => ({ ...prev, final: null }));
+                                                                        }
+                                                                    }}
+                                                                />
+                                                                <div data-tooltip-id="my-tooltip" data-tooltip-html="Select a separate template for <br/> the final reminder email.">
+                                                                    <Image src="/images/url.svg" alt="info" height={16} width={16} unoptimized={true} className="cursor-pointer" />
+                                                                </div>
+                                                                <Tooltip className="z-20! text-secondary! text-sm! bg-white! shadow-md! rounded! border! border-gray-200!" place="bottom" id="my-tooltip" />
+
+                                                            </div>
+
+                                                            <div className="flex gap-2 items-center">
+                                                                <Radio
+                                                                    class_="mt-0!"
+                                                                    name="final"
+                                                                    label="Same as reminder"
+                                                                    checked={campaignType === 'both' ? sameAsEmailFinal : sameAsFinal === "sameAsPrimary"}
+                                                                    onChange={() => {
+                                                                        if (campaignType === 'both') {
+                                                                            setSameAsEmailFinal(true);
+                                                                        } else {
+                                                                            setSameAsFinal('sameAsPrimary');
+                                                                            setSelectedTemplates((prev) => ({ ...prev, final: prev.reminder }));
+                                                                        }
+                                                                    }}
+                                                                />
+                                                                <div data-tooltip-id="my-tooltip" data-tooltip-html="This will reuse your <br/> reminder email template.">
+                                                                    <Image src="/images/url.svg" alt="info" height={16} width={16} unoptimized={true} className="cursor-pointer" />
+                                                                </div>
+                                                                <Tooltip className="z-20! text-secondary! text-sm! bg-white! shadow-md! rounded! border! border-gray-200!" place="bottom" id="my-tooltip" />
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -787,26 +832,34 @@ export default function Detail({ }) {
                                         <div className="flex items-start gap-4 mt-1 mb-4">
                                             <div className="text-gray-600 text-sm font-medium">Reminder SMS Template</div>
                                             <div className="flex items-start gap-4">
-                                                <Radio
-                                                    class_="mt-0!"
-                                                    name="smsReminder"
-                                                    label="Custom reminder SMS"
-                                                    checked={!smsReminderEnabled}
-                                                    onChange={() => setSmsReminderEnabled(false)}
-                                                    tooltipContent="Select a unique template for your reminder SMS."
-                                                    tooltipPosition="bottom"
-                                                    showTooltip={true}
-                                                />
-                                                <Radio
-                                                    class_="mt-0!"
-                                                    name="smsReminder"
-                                                    label="Same as primary"
-                                                    checked={smsReminderEnabled}
-                                                    onChange={() => setSmsReminderEnabled(true)}
-                                                    tooltipContent="This will reuse your primary SMS template."
-                                                    tooltipPosition="bottom"
-                                                    showTooltip={true}
-                                                />
+                                                <div className="flex items-center gap-2">
+                                                    <Radio
+                                                        class_="mt-0!"
+                                                        name="smsReminder"
+                                                        label="Custom reminder SMS"
+                                                        checked={!smsReminderEnabled}
+                                                        onChange={() => setSmsReminderEnabled(false)}
+                                                    />
+                                                    <div data-tooltip-id="my-tooltip" data-tooltip-html="Select a unique template for <br/> your reminder SMS">
+
+                                                        <Image src="/images/url.svg" alt="info" height={16} width={16} unoptimized={true} className="cursor-pointer" />
+                                                    </div>
+                                                    <Tooltip className="z-20! text-secondary! text-sm! bg-white! shadow-md! rounded! border! border-gray-200!" place="bottom" id="my-tooltip" />
+                                                </div>
+                                                <div className="flex items-center gap-2">
+                                                    <Radio
+                                                        class_="mt-0!"
+                                                        name="smsReminder"
+                                                        label="Same as primary"
+                                                        checked={smsReminderEnabled}
+                                                        onChange={() => setSmsReminderEnabled(true)}
+                                                    />
+                                                    <div data-tooltip-id="my-tooltip" data-tooltip-html="This will reuse your primary <br/> SMS template.">
+                                                        <Image src="/images/url.svg" alt="info" height={16} width={16} unoptimized={true} className="cursor-pointer" />
+                                                    </div>
+                                                    <Tooltip className="z-20! text-secondary! text-sm! bg-white! shadow-md! rounded! border! border-gray-200!" place="bottom" id="my-tooltip" />
+                                                </div>
+
                                             </div>
                                         </div>
 
@@ -828,26 +881,36 @@ export default function Detail({ }) {
                                                 <div className="flex items-start gap-4 mt-1 mb-4">
                                                     <div className="text-gray-600 text-sm font-medium">Final Reminder SMS Template<span className="text-red-500">*</span></div>
                                                     <div className="flex items-start gap-4">
-                                                        <Radio
-                                                            class_="mt-0!"
-                                                            name="smsFinal"
-                                                            label="Custom final reminder SMS"
-                                                            checked={!sameAsSmsFinal}
-                                                            onChange={() => setSameAsSmsFinal(false)}
-                                                            tooltipContent="Select a separate template for the final reminder SMS."
-                                                            tooltipPosition="bottom"
-                                                            showTooltip={true}
-                                                        />
-                                                        <Radio
-                                                            class_="mt-0!"
-                                                            name="smsFinal"
-                                                            label="Same as reminder"
-                                                            checked={sameAsSmsFinal}
-                                                            onChange={() => setSameAsSmsFinal(true)}
-                                                            tooltipContent="This will reuse your reminder SMS template."
-                                                            tooltipPosition="bottom"
-                                                            showTooltip={true}
-                                                        />
+                                                        <div className="flex items-center gap-2">
+                                                            <Radio
+                                                                class_="mt-0!"
+                                                                name="smsFinal"
+                                                                label="Custom final reminder SMS"
+                                                                checked={!sameAsSmsFinal}
+                                                                onChange={() => setSameAsSmsFinal(false)}
+                                                            />
+                                                            <div data-tooltip-id="my-tooltip" data-tooltip-html="Select a separate template <br/> for the final reminder SMS.">
+
+                                                                <Image src="/images/url.svg" alt="info" height={16} width={16} unoptimized={true} className="cursor-pointer" />
+                                                            </div>
+                                                            <Tooltip className="z-20! text-secondary! text-sm! bg-white! shadow-md! rounded! border! border-gray-200!" place="bottom" id="my-tooltip" />
+                                                        </div>
+
+                                                        <div className="flex items-center gap-2">
+                                                            <Radio
+                                                                class_="mt-0!"
+                                                                name="smsFinal"
+                                                                label="Same as reminder"
+                                                                checked={sameAsSmsFinal}
+                                                                onChange={() => setSameAsSmsFinal(true)}
+
+                                                            />
+                                                            <div data-tooltip-id="my-tooltip" data-tooltip-html="This will reuse your <br/> reminder SMS template.">
+
+                                                                <Image src="/images/url.svg" alt="info" height={16} width={16} unoptimized={true} className="cursor-pointer" />
+                                                            </div>
+                                                            <Tooltip className="z-20! text-secondary! text-sm! bg-white! shadow-md! rounded! border! border-gray-200!" place="bottom" id="my-tooltip" />
+                                                        </div>
                                                     </div>
                                                 </div>
 

@@ -214,12 +214,12 @@ export default function PaymentInvoices() {
                                 <td>
                                     <div className='flex items-center gap-2'>
                                         <button className='cursor-pointer' onClick={() => { setOpenSchedule(true) }}>
-                                            <Image src="/images/open-eye2.svg" alt="open-eye2" height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/open-eye2.svg" alt="open-eye2" height={28} width={28} />
                                         </button>
 
                                         <button className='cursor-pointer'
                                             onClick={() => { toast.success("Downloaded") }}>
-                                            <Image src="/images/download.svg" alt='download' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/download.svg" alt='download' height={28} width={28} />
                                         </button>
                                     </div>
                                 </td>

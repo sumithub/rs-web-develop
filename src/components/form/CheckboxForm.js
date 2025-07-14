@@ -6,9 +6,9 @@ export default function CheckboxForm({ errors, id, label, name, checked, formPro
     if (formProps?.name && errors?.[formProps.name]) {
         const fieldError = errors[formProps.name];
         if (fieldError.type === "pattern" || fieldError.type === "validate" || fieldError.type === "required") {
-            error = fieldError.message || "This field is required";
+            error = fieldError.message || "Required";
         } else {
-            error = "This field is required";
+            error = "Required";
         }
     }
     return <div>

@@ -121,11 +121,11 @@ export default function ReviewWidgets() {
                                             </div>
                                         </div>
                                         <div className="flex gap-1">
-                                            <Image src="/images/star.svg" alt="star" width={21} height={21} />
-                                            <Image src="/images/star.svg" alt="star" width={21} height={21} />
-                                            <Image src="/images/star.svg" alt="star" width={21} height={21} />
-                                            <Image src="/images/star.svg" alt="star" width={21} height={21} />
-                                            <Image src="/images/star2.svg" alt="half star" width={21} height={21} />
+                                            <Image unoptimized={true} src="/images/star.svg" alt="star" width={21} height={21} />
+                                            <Image unoptimized={true} src="/images/star.svg" alt="star" width={21} height={21} />
+                                            <Image unoptimized={true} src="/images/star.svg" alt="star" width={21} height={21} />
+                                            <Image unoptimized={true} src="/images/star.svg" alt="star" width={21} height={21} />
+                                            <Image unoptimized={true} src="/images/star2.svg" alt="half star" width={21} height={21} />
                                         </div>
                                     </div>
                                     <SecondaryButton
@@ -336,7 +336,7 @@ export default function ReviewWidgets() {
 function CustomNextArrow({ onClick }) {
     return (
         <button type="button" onClick={onClick} className="absolute right-1 top-36 -translate-y-1/2 z-10 cursor-pointer">
-            <Image src="/images/arrow-right.svg" alt="Next" width={18} height={18} />
+            <Image unoptimized={true} src="/images/arrow-right.svg" alt="Next" width={18} height={18} />
         </button>
     );
 }
@@ -344,7 +344,7 @@ function CustomNextArrow({ onClick }) {
 function CustomPrevArrow({ onClick }) {
     return (
         <button type="button" onClick={onClick} className="absolute left-1 top-36 -translate-y-1/2 z-10 cursor-pointer">
-            <Image src="/images/arrow-right.svg" alt="Prev" width={18} height={18} className="rotate-180" />
+            <Image unoptimized={true} src="/images/arrow-right.svg" alt="Prev" width={18} height={18} className="rotate-180" />
         </button>
     );
 }

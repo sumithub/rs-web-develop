@@ -261,13 +261,13 @@ export const clientCampaign = [
 
 
 export const clientLocation = [
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
-    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
+    { name: "Melbourne CBD", address: "123 Bourke St, Melbourne", reviews: "1,200", rating: "4.5" },
 ]
 
 
@@ -309,16 +309,16 @@ export const notificationManagement = [
 ]
 
 export const auditLogsDashboard = [
-    { id: "AL-001", subscription: "SUB-101", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: "Jun 18,2024 | 10:00AM", },
-    { id: "AL-002", subscription: "SUB-102", action: "Customer Created", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: "Aug 18,2024 | 10:00AM", },
-    { id: "AL-003", subscription: "SUB-103", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
-    { id: "AL-004", subscription: "SUB-104", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Jun 18,2024 | 10:00AM", },
-    { id: "AL-005", subscription: "SUB-105", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
-    { id: "AL-006", subscription: "SUB-106", action: "Customer updated", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: "Aug 18,2024 | 10:00AM", },
-    { id: "AL-007", subscription: "SUB-107", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: "Aug 18,2024 | 10:00AM", },
-    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
-    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
-    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: "Aug 18,2024 | 10:00AM", },
+    { id: "AL-001", subscription: "SUB-101", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: new Date('2024-06-18T10:00:00'), },
+    { id: "AL-002", subscription: "SUB-102", action: "Customer Created", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: new Date('2024-06-18T10:00:00'), },
+    { id: "AL-003", subscription: "SUB-103", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: new Date('2024-06-18T10:00:00'), },
+    { id: "AL-004", subscription: "SUB-104", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: new Date('2024-06-18T10:00:00'), },
+    { id: "AL-005", subscription: "SUB-105", action: "File Uploaded", details: "John uploaded CSV file 'reviews.csv", performed: "john doe", timestamp: new Date('2024-06-18T10:00:00'), },
+    { id: "AL-006", subscription: "SUB-106", action: "Customer updated", details: "Jane created new customer 'Acme Inc.", performed: "jane admin", timestamp: new Date('2024-06-18T10:00:00') },
+    { id: "AL-007", subscription: "SUB-107", action: "SMS Updated", details: "John updated SMS notifications from Off to On", performed: "john doe", timestamp: new Date('2024-06-18T10:00:00') },
+    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: new Date('2024-06-18T10:00:00') },
+    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: new Date('2024-06-18T10:00:00') },
+    { id: "AL-008", subscription: "SUB-108", action: "E-mail Uploaded", details: "Sarah changed the email template for review alerts", performed: "sarah admin", timestamp: new Date('2024-06-18T10:00:00') },
 ]
 
 export const subscriptionSummary = [
@@ -355,8 +355,6 @@ export const clientsManagement = [
     { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
     { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
     { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Suspend" },
-    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
-    { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
     { name: "John Doe", industry: "Construction", plan: "Professional Plan", status: "Active" },
 ]
 
@@ -437,12 +435,12 @@ export const latestCampaigns = [
 ]
 
 export const customerJourney = [
-    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Success", timestamp: "Jun 18,2024 | 14:20:11" },
-    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Bounced", timestamp: "Jun 18,2024 | 14:20:11" },
-    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Approved", timestamp: "Jun 18,2024 | 14:20:11" },
-    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Pending Review", timestamp: "Jun 18,2024 | 14:20:11" },
-    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Replied", timestamp: "Jun 18,2024 | 14:20:11" },
-    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Delivered", timestamp: "Jun 18,2024 | 14:20:11" },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Success", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Bounced", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Approved", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Pending Review", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Replied", timestamp: new Date('2024-06-18T10:00:00'), },
+    { clientName: "John Doe", email: "john@example.com ", type: "Campaign Added", details: 'Added to "Promo 2024"', status: "Delivered", timestamp: new Date('2024-06-18T10:00:00'), },
 ];
 
 export const campaignsManagement = [
@@ -504,7 +502,7 @@ export const reviewSourcesList = [
 ]
 
 export const planManagement = [
-    { planName: "Basic", price: "$20/Mo", discount: "10%", email: "1000", sms: "100" },
+    { planName: "Basic", price: "$20/Mo", discount: "10%", email: "1,000", sms: "100" },
     { planName: "Standard", price: "$50/Mo", discount: "15%", email: "5,000", sms: "500" },
     { planName: "Premium", price: "$100/Mo", discount: "20%", email: "10,000", sms: "1,000" },
 ]
@@ -555,12 +553,6 @@ export const globalRulesManagement = [
     { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Notify", status: "Active", createdDate: "Mar 03, 2024" },
     { id: "CR-001", eventType: "New_review", condition: "Rating <3", action: "Alert", status: "Inactive", createdDate: "Mar 03, 2024" },
 ]
-export const SubscriptionUsage = [
-    { name: "Client", title: "ABC Corp" },
-    { name: "plan", title: "Basic" },
-    { name: "Email Quota Used", title: "500/1,000" },
-    { name: "SMS Quota Used", title: " 50/100" },
-]
 
 export const auditLog = [
     { date: "Jun 18,2024", time: "10:30 AM", client: "ABC Corp", location: "Sydney", user: "John D.", action: "Edited Campaign" },
@@ -573,13 +565,13 @@ export const auditLog = [
 ]
 
 export const notificationsDashboard = [
-    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
-    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
-    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Unread" },
-    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
-    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
-    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Unread" },
-    { timestamp: "Jun 18,2024 | 10:00AM", clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: new Date('2024-06-18T10:00:00'), clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: new Date('2024-06-18T10:00:00'), clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: new Date('2024-06-18T10:00:00'), clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Unread" },
+    { timestamp: new Date('2024-06-18T10:00:00'), clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: new Date('2024-06-18T10:00:00'), clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
+    { timestamp: new Date('2024-06-18T10:00:00'), clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Unread" },
+    { timestamp: new Date('2024-06-18T10:00:00'), clientName: "ABC Dental", location: "Melbourne", notificationType: "Review Alert", messageSummary: "New 1 Star Review", status: "Read" },
 ]
 
 export const alertManagement = [
@@ -590,3 +582,7 @@ export const alertManagement = [
     { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", deliveryMethod: "Email + In-App", status: "Active" },
     { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", deliveryMethod: "In-App Only", status: "Inactive" },
 ]
+
+export const viewNotification = [{ client: "abc crop", type: "review alert", level: "high", status: "unread", timestamp: "Jun 18,2024 | 10:00AM", message: "Service was slow and staff was rude." }]
+export const auditLogDetails = [{ logId: "AL-002", subscriptionID: "SUB-102", action: "Customer created", performedBy: "jane admin", timestamp: "Aug 18,2024 | 10:00AM", details: "Jane created new customer 'Acme Inc." }]
+export const adminAuditLogs = [{ date: "Jun 18,2024", time: "10:30AM", client: "ABC Corp", location: "Sydney", user: "john D.", action: "Edited Campaign", module: "Campaigns" }]

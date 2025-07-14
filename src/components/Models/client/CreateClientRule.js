@@ -14,11 +14,13 @@ import RadioForm from "../../form/RadioForm"
 import Image from "next/image"
 import StarRangeSlider from "../../StartRatingSlider"
 import CustomSelectBox from "../../form/CustomSelectBox"
+import { useRole } from "../../../utils/hooks"
 
 function CreateClientRule({ onClose, id }) {
     const { register, handleSubmit, clearErrors, setValue, watch, formState: { errors } } = useForm();
     const [sending, setSending] = useState(false)
     const [type, setType] = useState("")
+    const { isAdmin } = useRole();
 
     const onSubmit = async (data) => {
         try {
@@ -40,7 +42,11 @@ function CreateClientRule({ onClose, id }) {
         }
     }
 
-    let title = !id ? "Create Client Rule" : "Edit Client Rule"
+    // let title = !id ? "Create Client Rule" : "Edit Client Rule"
+
+    let title = isAdmin
+        ? (!id ? "Create Global Rule" : "Edit Global Rule")
+        : (!id ? "Create Client Rule" : "Edit Client Rule");
 
     if (type === "positiveReview") {
         title = "Positive Review"
@@ -54,9 +60,9 @@ function CreateClientRule({ onClose, id }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 {id && <InputForm
-                    label="Client Rule ID"
+                    label={isAdmin ? "Global Rule ID" : "Client Rule ID"}
                     disabled={true}
-                    placeholder="CR-001"
+                    placeholder={isAdmin ? "GR-001" : "CR-001"}
                     isRequired={false}
                     class_="mt-0!"
                     inputClass="border-primary/10 disabled:bg-dark! disabled:border-input-border! py-3.5!"
@@ -79,6 +85,7 @@ function CreateClientRule({ onClose, id }) {
                     }}>
                     <option value="negativeReview">Negative Review</option>
                     <option value="newReview">New Review</option>
+                    {isAdmin && <option value="updatedReview">Updated Review</option>}
                     <option value="flaggedReview">Flagged Review</option>
                     <option value="positiveReview">Positive Review</option>
                     <option value="reviewResponseReceived">Review Response Received</option>

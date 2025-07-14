@@ -41,7 +41,7 @@ function SelectedCustomers({ onClose, onSave }) {
     return (
         <Model onClose={onClose} title="select from Customer List" modalClass="w-[80%]!" >
             <div className="flex items-center justify-between mb-3">
-                <Search placeholder="Search by Filter by name, email, phone" mainClass="w-[45%]!"
+                <Search placeholder="Search by Filter by name, email, phone" mainClass="w-[35%]!"
                     onSearch={(s) => {
                         setSearch(s)
                     }} />

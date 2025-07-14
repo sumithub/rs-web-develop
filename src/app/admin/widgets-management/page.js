@@ -17,6 +17,7 @@ import Image from "next/image"
 import AssignWidget from "../../../components/Models/admin/AssignWidget"
 import PublishToUser from "../../../components/Models/admin/PublishToUser"
 import UnpublishUser from "../../../components/Models/admin/UnpublishUser"
+import Carousel from "../../../components/Models/review/Carousel";
 
 export default function WidgetsManagement() {
     const [sortBy, setSortBy] = useState(false)
@@ -27,6 +28,7 @@ export default function WidgetsManagement() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
+    const [openType, setOpenType] = useState(false)
     const [openPublish, setOpenPublish] = useState(false)
     const [openUnpublish, setOpenUnpublish] = useState(false)
 
@@ -58,6 +60,7 @@ export default function WidgetsManagement() {
                         setSearch(s)
                     }}
                 />}>
+
             {open &&
                 <AssignWidget
                     id={open}
@@ -68,6 +71,18 @@ export default function WidgetsManagement() {
                     onSave={() => {
                         setOpen(true)
                     }} />
+            }
+
+            {openType &&
+                <Carousel
+                    onClose={() => {
+                        setOpenType(false)
+                    }}
+
+                    onSave={() => {
+                        setOpenType(true)
+                    }}
+                />
             }
 
             {openPublish &&
@@ -103,7 +118,7 @@ export default function WidgetsManagement() {
 
                     <CustomSelectBox
                         defaultOption="Type"
-                        class_='mt-0! w-36!'
+                        class_='mt-0! w-28!'
                         value={filterByType}
                         onChange={(e) => {
                             setFilterByType(e.target.value)
@@ -127,7 +142,7 @@ export default function WidgetsManagement() {
 
                     <CustomSelectBox
                         defaultOption="Assigned Clients"
-                        class_='mt-0! w-28!'
+                        class_='mt-0! w-40!'
                         value={filterByClients}
                         onChange={(e) => {
                             setFilterByClients(e.target.value)
@@ -137,6 +152,7 @@ export default function WidgetsManagement() {
                         <option value="selected">Selected</option>
                     </CustomSelectBox>
 
+                    <SecondaryButton title="Add widget Type" class_="text-xs! font-normal!" onClick={setOpenType} />
 
                     <SecondaryButton
                         title="Add Widget"

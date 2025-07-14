@@ -48,6 +48,9 @@ const options = {
         legend: {
             display: false, // No legend in image
         },
+        datalabels: {
+            display: false
+        }
     },
     scales: {
         x: {

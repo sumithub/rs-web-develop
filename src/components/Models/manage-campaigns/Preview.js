@@ -7,7 +7,7 @@ export default function Preview({ onClose, previewType = '' }) {
             <div className='w-full mt-4'>
                 <div className='shadow-sm rounded-[10px]'>
 
-                    <div className='bg-[#0396FF1a] px-5 py-4 rounded-tl-[10px] rounded-tr-[10px]'>
+                    <div className='bg-primary/10 px-5 py-4 rounded-tl-[10px] rounded-tr-[10px]'>
                         <div className='flex items-center gap-3'>
                             <Image src="/images/eye1.svg" alt='eye' height={22} width={22} unoptimized={true} />
                             <div className='text-secondary text-lg font-semibold capitalize'>{previewType || "Email"} Preview</div>

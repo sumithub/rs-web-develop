@@ -67,6 +67,7 @@ export default function ReviewSources() {
             {openConnect &&
                 <ConnectReviewSource
                     id={true}
+                    data={{ name: "Yelp" }}
                     onClose={() => {
                         setOpenConnect(false)
                     }}
@@ -78,6 +79,7 @@ export default function ReviewSources() {
 
             {openDisconnect &&
                 <DisconnectReviewSourceConfirmation
+                    data={{ name: "Yelp" }}
                     id={true}
                     onClose={() => {
                         setOpenDisconnect(false)
@@ -88,40 +90,41 @@ export default function ReviewSources() {
                     }} />
             }
 
-            <div className="flex gap-3.5 items-center">
-                <div className="flex gap-2.5 items-center shrink-0">
+            <div className="flex gap-3.5 items-center justify-between">
+                <div className="shrink-0">
                     <h2 className="text-lg capitalize font-medium">Manage Review Sources</h2>
-                    <div className="text-primary/10">|</div>
-                    <h2 className="text-lg capitalize font-medium">Connect your business to review platforms</h2>
+                    <h2 className="text-sm text-text3 capitalize">Connect your business to review platforms</h2>
                 </div>
-                <div className="w-full">
-                    <Search
-                        mainClass='w-full!'
-                        placeholder="Search by Review Sources"
-                        onSearch={(s) => {
-                            setSearch(s)
+                <div className="flex items-center justify-end gap-3.5">
+                    <div className="w-72">
+                        <Search
+                            mainClass='w-full!'
+                            placeholder="Search by Review Sources"
+                            onSearch={(s) => {
+                                setSearch(s)
+                            }}
+                        />
+                    </div>
+                    <CancelButton title="Assigned Clients" class_="text-xs! bg-white! border border-border-color! py-2.5!" mainClass="shrink-0" />
+                    <CustomSelectBox
+                        defaultOption="Filters"
+                        class_='mt-0! w-20!'
+                        selectClass_="py-2.5! text-xs!"
+                        value={filterBy}
+                        onChange={(e) => {
+                            setFilterBy(e.target.value)
                         }}
+                    ><option value="filter 1">Filter 1</option>
+                        <option value="filter 2">Filter 2</option>
+                    </CustomSelectBox>
+
+                    <SecondaryButton
+                        title="Add New Source"
+                        onClick={() => setOpen(true)}
+                        class_="text-xs! py-2.5! font-normal!"
+                        mainClass="shrink-0"
                     />
                 </div>
-                <CancelButton title="Assigned Clients" class_="text-xs! bg-white! border border-border-color! py-2.5!" mainClass="shrink-0" />
-                <CustomSelectBox
-                    defaultOption="Filters"
-                    class_='mt-0! w-26!'
-                    selectClass_="py-2.5! text-xs!"
-                    value={filterBy}
-                    onChange={(e) => {
-                        setFilterBy(e.target.value)
-                    }}
-                ><option value="filter 1">Filter 1</option>
-                    <option value="filter 2">Filter 2</option>
-                </CustomSelectBox>
-
-                <SecondaryButton
-                    title="Add New Source"
-                    onClick={() => setOpen(true)}
-                    class_="text-xs! py-2.5! font-normal!"
-                    mainClass="shrink-0"
-                />
             </div>
             <div className="table-class mt-3.5">
                 {loading ? <Loading /> : (list?.length > 0 ? <table className="w-full">
@@ -190,20 +193,20 @@ export default function ReviewSources() {
                                 <td>
                                     <div className='flex justify-center gap-2'>
                                         {e.status === "Connected" && <button className='cursor-pointer' onClick={() => { setOpenDisconnect(true) }}>
-                                            <Image src="/images/disconnect.svg" alt='disconnect' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/disconnect.svg" alt='disconnect' height={28} width={28} />
                                         </button>}
                                         {e.status === "Disconnect" && <button className='cursor-pointer' onClick={() => { setOpenConnect(true) }}>
-                                            <Image src="/images/connected.svg" alt='connect' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/connected.svg" alt='connect' height={28} width={28} />
                                         </button>}
                                         <button className='cursor-pointer' onClick={() => {
                                             setSelId("e.id")
                                             setOpen(true)
                                         }}>
-                                            <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
 
                                         <button className='cursor-pointer'>
-                                            <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
                                         </button>
                                     </div>
                                 </td>
