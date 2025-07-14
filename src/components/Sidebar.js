@@ -236,8 +236,19 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                         </ul>
                     </div>
                     <div>
-                        <div className="border-b-2 border-border2 mb-8" />
-                        <Image src="/images/avatar1.png" alt="avatar" height={56} width={56} className="h-14 w-14 rounded-full border border-border2 mx-auto" />
+                        <hr className="border-b-2 border-border2 mb-4" />
+                        <div className="p-6 flex justify-between items-center">
+                            <div className="flex items-center gap-3">
+                                <Image src="/images/avatar1.png" alt="avatar" height={40} width={40} className="h-10 w-10 rounded-full" />
+                                <div>
+                                    <h3 className="text-xs text-text3">Welcome back 👋</h3>
+                                    <h2 className="text-sm pt-0.5">Johnathan</h2>
+                                </div>
+                            </div>
+                            <div>
+                                <Image unoptimized={true} src="/images/arrow-right.svg" alt="arrow-left.svg" height={20} width={20} className="" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
