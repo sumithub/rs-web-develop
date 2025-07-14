@@ -77,6 +77,7 @@ export default function GlobalRulesManagement() {
             <div className='flex items-center justify-between'>
 
                 <Search
+                    mainClass="w-80!"
                     placeholder="Search"
                     onSearch={(s) => {
                         setSearch(s)

@@ -6,11 +6,11 @@ const SingleStarRating = ({ value, onChange, name, errors, required = false, lab
   const stars = [1, 2, 3, 4, 5];
 
   const YellowStar = () => (
-    <Image src="/images/star.svg" alt='star' height={20} width={20} unoptimized={true}/>
+    <Image src="/images/star.svg" alt='star' height={20} width={20} unoptimized={true} />
   );
 
   const GrayStar = () => (
-    <Image src="/images/rating-star.svg" alt='star' height={20} width={20} unoptimized={true}/>
+    <Image src="/images/rating-star.svg" alt='star' height={20} width={20} unoptimized={true} />
   );
 
   const getStarComponent = (starIndex) => {
@@ -41,7 +41,7 @@ const SingleStarRating = ({ value, onChange, name, errors, required = false, lab
       <div className="flex justify-start items-center gap-4">
         {stars.map((star) => (
           <div key={star} className="flex flex-col items-center gap-1">
-            <div 
+            <div
               className="cursor-pointer select-none hover:scale-110 transition-transform duration-150"
               onClick={() => handleStarClick(star)}
               onMouseEnter={() => handleStarHover(star)}
@@ -61,7 +61,7 @@ const SingleStarRating = ({ value, onChange, name, errors, required = false, lab
 
       {/* Error Message */}
       {errors && errors[name] && (
-        <p className="text-red-500 text-sm mt-1">This field is required</p>
+        <p className="text-red-500 text-sm mt-1">Required</p>
       )}
     </div>
   );

@@ -21,10 +21,10 @@ export default function PhoneForm({ isRequired = false,
         if (fieldError.type === "pattern" || fieldError.type === "validate" || fieldError.type === "minLength") {
             error = fieldError.message;
         } else {
-            error = "This field is required";
+            error = "Required";
         }
     } else if (formProps?.name && errors?.[formProps.name]?.type) {
-        error = errors[formProps.name]?.message || "This field is required";
+        error = errors[formProps.name]?.message || "Required";
     }
     const value = watch ? watch(formProps.name) : null;
     return (<div className={`mt-4 text-lg relative w-full ${class_}`}>

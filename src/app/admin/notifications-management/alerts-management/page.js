@@ -78,6 +78,7 @@ export default function AlertsManagement() {
             <div className='flex items-center justify-between'>
 
                 <Search
+                    mainClass="w-80!"
                     placeholder="Search By Alerts"
                     onSearch={(s) => {
                         setSearch(s)

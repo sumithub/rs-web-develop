@@ -13,7 +13,6 @@ import { useEffect, useState } from "react";
 import Loading from "../../../../components/Loading";
 import { notificationsDashboard } from "../../../../constent/constArray";
 import Image from "next/image";
-import CancelButton from "../../../../components/common/CancelButton";
 import DateRange from "../../../../components/form/DateRangePicker";
 import ViewNotification from "../../../../components/Models/admin/ViewNotification"
 
@@ -28,7 +27,6 @@ export default function NotificationsDashboard() {
     const [open, setOpen] = useState(false)
     const [sortBy, setSortBy] = useState("")
     const [filterBySort, setFilterBySort] = useState("")
-
 
     useEffect(() => {
         getData()

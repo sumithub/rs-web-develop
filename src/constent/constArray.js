@@ -582,3 +582,5 @@ export const alertManagement = [
     { alertName: "Low Review", clientScope: "All Client", triggerEvent: "Rating <3", deliveryMethod: "Email + In-App", status: "Active" },
     { alertName: "Failed SMS", clientScope: "XYZ Auto", triggerEvent: "SMS Failure", deliveryMethod: "In-App Only", status: "Inactive" },
 ]
+
+export const viewNotification = [{ client: "abc crop", type: "review alert", level: "high", status: "unread", timestamp: "Jun 18,2024 | 10:00AM", message: "Service was slow and staff was rude." }]

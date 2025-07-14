@@ -255,7 +255,7 @@ export default function BoostRequest({ onClose, onSave, id, customer, isCustomer
                                 label="Phone Number"
                                 isRequired={true}
                                 placeholder="Enter phone number"
-                                formProps={{ ...register("phone", { required: true, minLength: { value: 10, message: "This field is required" } }) }}
+                                formProps={{ ...register("phone", { required: true, minLength: { value: 10, message: "Required" } }) }}
                                 errors={errors}
                                 setValue={setValue}
                                 watch={watch}

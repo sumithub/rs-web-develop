@@ -27,10 +27,10 @@ export default function FileInput({
         if (fieldError.type === "pattern" || fieldError.type === "validate" || fieldError.type === "minLength") {
             error = fieldError.message;
         } else {
-            error = "This field is required";
+            error = "Required";
         }
     } else if (errors?.[formProps?.name]?.type) {
-        error = errors[formProps?.name]?.message || "This field is required";
+        error = errors[formProps?.name]?.message || "Required";
     }
 
     const handleFileSelect = (event) => {
