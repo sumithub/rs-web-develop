@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import LocationsDropdown from "../components/Models/LocationsDropdown"
 import AddNewLocation from '../components/Models/location/AddNewLocation'
 import { useRole } from "../utils/hooks";
+import { title } from "process";
 
 export default function Sidebar({ collapse, toggleSidebar, role }) {
     const [list, setList] = useState([])
@@ -144,10 +145,16 @@ export default function Sidebar({ collapse, toggleSidebar, role }) {
                     ]
             },
 
+            // {
+            //     title: "Rules", link: "/admin/global-rules-management", icon: "rule",
+            // },
             {
-                title: "Rules", link: "/admin/global-rules-management", icon: "rule",
+                title: "Rules", link: "", icon: "rule", icon: "rule",
+                submenu: [
+                    { title: "Global Rules", link: "/admin/global-rules-management" },
+                    { title: "Custom Rules", link: "/client-rules-management" }
+                ]
             },
-
             {
                 title: "Notifications and Alerts", link: "", icon: "notification",
                 submenu:

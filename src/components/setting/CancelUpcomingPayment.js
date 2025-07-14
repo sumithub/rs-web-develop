@@ -12,7 +12,6 @@ export default function CancelUpcomingPayment({ onClose, id }) {
     const { handleSubmit } = useForm();
     const [sending, setSending] = useState(false)
 
-
     const onSubmit = async (data) => {
         try {
             setSending(true)
@@ -32,7 +31,6 @@ export default function CancelUpcomingPayment({ onClose, id }) {
             setSending(false)
         }
     }
-
 
     return (
         <Model onClose={onClose} title="Cancel Upcoming Payment" modalClass="w-[50%]!">
