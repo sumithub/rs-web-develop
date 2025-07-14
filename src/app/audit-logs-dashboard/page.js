@@ -79,14 +79,6 @@ export default function AuditLogsDashboard() {
                         value={date}
                         onChange={(e) => { setDate(e) }} />
 
-                    {/* <DatePicker
-                        icon={true}
-                        mainClass="mt-0!"
-                        value={date}
-                        dateFormat="dd/MM/yyyy"
-                        onChange={(e) => setDate(e)}
-                    /> */}
-
                     <CustomSelectBox
                         class_="mt-0! w-40!"
                         defaultOption="Filter"

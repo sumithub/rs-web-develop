@@ -42,7 +42,7 @@ export default function CreateAuditLogEntry({ onClose, id }) {
                     labelClass="mb-2.5!"
                     class_="mt-0!"
                     isRequired={true}
-                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60! py-3.5!"
                     formProps={{ ...register("subscriptionId", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
@@ -56,7 +56,7 @@ export default function CreateAuditLogEntry({ onClose, id }) {
                     label="Action"
                     labelClass="mb-2.5!"
                     isRequired={true}
-                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60!"
+                    selectClass_="bg-white! py-3! border-primary/10! focus:border-primary/60! py-3.5!"
                     formProps={{ ...register("action", { required: true }) }} errors={errors} clearErrors={clearErrors}
                     setValue={setValue}
                     watch={watch}
@@ -67,7 +67,7 @@ export default function CreateAuditLogEntry({ onClose, id }) {
                 </SelectForm>
 
                 <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     label="Detail"
                     labelClass="mb-2.5!"
                     rows={5}
@@ -79,7 +79,7 @@ export default function CreateAuditLogEntry({ onClose, id }) {
                 />
 
                 <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     label="Preformed By"
                     labelClass="mb-2.5!"
                     rows={5}
@@ -90,7 +90,7 @@ export default function CreateAuditLogEntry({ onClose, id }) {
                 />
 
                 <InputForm
-                    inputClass='border-primary/10! focus:border-primary/60!'
+                    inputClass='border-primary/10! focus:border-primary/60! py-3.5!'
                     label="Timestamp"
                     labelClass="mb-2.5!"
                     rows={5}

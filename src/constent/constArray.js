@@ -584,3 +584,5 @@ export const alertManagement = [
 ]
 
 export const viewNotification = [{ client: "abc crop", type: "review alert", level: "high", status: "unread", timestamp: "Jun 18,2024 | 10:00AM", message: "Service was slow and staff was rude." }]
+export const auditLogDetails = [{ logId: "AL-002", subscriptionID: "SUB-102", action: "Customer created", performedBy: "jane admin", timestamp: "Aug 18,2024 | 10:00AM", details: "Jane created new customer 'Acme Inc." }]
+export const adminAuditLogs = [{ date: "Jun 18,2024", time: "10:30AM", client: "ABC Corp", location: "Sydney", user: "john D.", action: "Edited Campaign", module: "Campaigns" }]
