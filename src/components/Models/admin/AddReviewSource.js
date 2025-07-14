@@ -73,7 +73,7 @@ export default function AddReviewSource({ onClose, id }) {
                 <InputForm
                     label="URL Validation Rule"
                     labelClass="mb-2.5!"
-                    placeholder="Add URL"
+                    placeholder="Enter URL Validation Rule"
                     hideOptional={true}
                     isRequired={true}
                     icon2="/images/add-link.svg"
