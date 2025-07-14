@@ -73,10 +73,10 @@ export default function AddReviewSource({ onClose, id }) {
                 <InputForm
                     label="URL Validation Rule"
                     labelClass="mb-2.5!"
-                    placeholder="Add URL"
+                    placeholder="Enter URL Validation Rule"
                     hideOptional={true}
                     isRequired={true}
-                    icon="/images/add-link.svg"
+                    icon2="/images/add-link.svg"
                     formProps={{ ...register("url", { required: true }) }}
                     errors={errors}
                     clearErrors={clearErrors}
