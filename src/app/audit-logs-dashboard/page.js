@@ -166,13 +166,13 @@ export default function AuditLogsDashboard() {
                                 <div className='flex items-center gap-2'>
                                     <button className='cursor-pointer'
                                         onClick={() => { setOpen(true) }}>
-                                        <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
+                                        <Image unoptimized={true} src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
                                     </button>
                                     {isAdmin && <button className='cursor-pointer' onClick={() => {
                                         setSelId("e.id")
                                         setOpenAudit(true)
                                     }}>
-                                        <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                        <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                     </button>}
                                 </div>
                             </td>

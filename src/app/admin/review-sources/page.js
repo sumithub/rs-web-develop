@@ -193,20 +193,20 @@ export default function ReviewSources() {
                                 <td>
                                     <div className='flex justify-center gap-2'>
                                         {e.status === "Connected" && <button className='cursor-pointer' onClick={() => { setOpenDisconnect(true) }}>
-                                            <Image src="/images/disconnect.svg" alt='disconnect' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/disconnect.svg" alt='disconnect' height={28} width={28} />
                                         </button>}
                                         {e.status === "Disconnect" && <button className='cursor-pointer' onClick={() => { setOpenConnect(true) }}>
-                                            <Image src="/images/connected.svg" alt='connect' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/connected.svg" alt='connect' height={28} width={28} />
                                         </button>}
                                         <button className='cursor-pointer' onClick={() => {
                                             setSelId("e.id")
                                             setOpen(true)
                                         }}>
-                                            <Image src="/images/edit.svg" alt='edit' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/edit.svg" alt='edit' height={28} width={28} />
                                         </button>
 
                                         <button className='cursor-pointer'>
-                                            <Image src="/images/delete1.svg" alt='delete' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/delete1.svg" alt='delete' height={28} width={28} />
                                         </button>
                                     </div>
                                 </td>

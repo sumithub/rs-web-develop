@@ -20,7 +20,7 @@ export default function DashboardCard({ title, type, count, img, bgClass, textCo
         <div className="relative z-10 p-5">
             <div className="flex items-start gap-2 shrink-0 grow-0">
                 <div className={`h-10 w-10 rounded-[12px] flex items-center justify-center shrink-0 grow-0 ${bgClass}`}>
-                    <Image src={img} alt="sent" height={18} width={18} unoptimized />
+                    <Image src={img} alt="sent" height={18} width={18} />
                 </div>
                 <div className="capitalize text-lg font-bold text-secondary">{title}</div>
             </div>
@@ -30,7 +30,7 @@ export default function DashboardCard({ title, type, count, img, bgClass, textCo
                 <div className={`text-[22px] font-bold ${textColor}`}>{count}</div>
                 {icon && (
                     <div className="flex items-center gap-2">
-                        <Image src={icon} alt="arrow" height={24} width={24} unoptimized />
+                        <Image src={icon} alt="arrow" height={24} width={24} unoptimized={true} />
                         <div className="text-secondary text-sm">
                             <span className="font-semibold">{percentage}</span> last 7 days
                         </div>

@@ -238,7 +238,7 @@ export default function LogoUpload({
                     onClick={handleChooseFile}
                 >
                     <div className="flex flex-col items-center">
-                        <Image src="/images/upload.svg" alt="upload" width={32} height={32} />
+                        <Image unoptimized={true} src="/images/upload.svg" alt="upload" width={32} height={32} />
 
                         <div className="text-lg font-semibold capitalize mb-2.5 mt-3.5">
                             Drag & Drop Or Choose Logo To Upload
@@ -258,7 +258,7 @@ export default function LogoUpload({
                     <div className="text-center mb-3.5">
                         <div className="flex items-center justify-center gap-3 mb-4 h-40 bg-dark rounded-lg">
                             <div className="w-8 h-8 rounded-full flex items-center justify-center">
-                                <Image src="/images/logo.svg" alt='logo' width={32} height={32} />
+                                <Image unoptimized={true} src="/images/logo.svg" alt='logo' width={32} height={32} />
                             </div>
                             <span className="text-lg font-semibold">
                                 {selectedFile ? getFileNameWithoutExtension(selectedFile.name) : "ABC Solutions"}
@@ -288,7 +288,7 @@ export default function LogoUpload({
                     <div className="text-center mb-3.5">
                         <div className="flex items-center justify-center gap-3 mb-4 h-40 bg-dark rounded-lg">
                             <div className="w-8 h-8 rounded-full flex items-center justify-center">
-                                <Image src="/images/logo.svg" alt='logo' width={32} height={32} />
+                                <Image unoptimized={true} src="/images/logo.svg" alt='logo' width={32} height={32} />
                             </div>
                             <span className="text-lg font-semibold">
                                 {selectedFile ? getFileNameWithoutExtension(selectedFile.name) : "ABC Solutions"}
@@ -299,7 +299,7 @@ export default function LogoUpload({
                     {/* File details section - show after adding to logo */}
                     <div className="flex items-center justify-between p-3.5 bg-white rounded-lg border border-primary/10">
                         <div className="flex items-center gap-3">
-                            <Image src="/images/csv.svg" alt='csv' width={30} height={35} />
+                            <Image unoptimized={true} src="/images/csv.svg" alt='csv' width={30} height={35} />
 
                             {/* File info */}
                             <div>
@@ -313,7 +313,7 @@ export default function LogoUpload({
                         </div>
 
                         {/* Success checkmark */}
-                        <Image src="/images/checked.svg" alt='checked' width={30} height={30} />
+                        <Image unoptimized={true} src="/images/checked.svg" alt='checked' width={30} height={30} />
                     </div>
 
                     {/* Action buttons */}

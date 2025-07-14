@@ -123,7 +123,7 @@ export default function NotificationsDashboard() {
                     </CustomSelectBox>
 
                     {/* <CancelButton title="Location" class_="text-xs! bg-white! border border-border-color! py-2.5!" mainClass="shrink-0" /> */}
-                    <button className="text-xs border border-border2 text-text3 p-2.5 rounded-lg flex items-center gap-2.5">Location<span><Image src="/images/location1.svg" alt="location1" width={16} height={16} /></span></button>
+                    <button className="text-xs border border-border2 text-text3 p-2.5 rounded-lg flex items-center gap-2.5">Location<span><Image unoptimized={true} src="/images/location1.svg" alt="location1" width={16} height={16} /></span></button>
 
                     <CustomSelectBox
                         class_="mt-0! w-28!"
@@ -139,8 +139,8 @@ export default function NotificationsDashboard() {
                         value={date}
                         onChange={(e) => { setDate(e) }}
                     />
-                    <button className="rounded-lg bg-primary/10 text-primary px-2.5 text-xs inline-flex items-center gap-2.5"><span><Image src="/images/export.svg" alt="export" width={16} height={16} /></span>Export</button>
-                    <button className="rounded-lg bg-danger/10 text-danger px-2.5  text-xs inline-flex items-center gap-2.5"><span><Image src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
+                    <button className="rounded-lg bg-primary/10 text-primary px-2.5 text-xs inline-flex items-center gap-2.5"><span><Image unoptimized={true} src="/images/export.svg" alt="export" width={16} height={16} /></span>Export</button>
+                    <button className="rounded-lg bg-danger/10 text-danger px-2.5  text-xs inline-flex items-center gap-2.5"><span><Image unoptimized={true} src="/images/delete.svg" alt="delete" width={16} height={16} /></span> Delete</button>
                     {/* <CancelButton title="Export" onClick={handleClick} class_="text-xs! py-[9.4px]! font-normal!" />
                     <CancelButton title="Delete" onClick={() => { toast.success("Deleted Successfully") }} class_="text-xs! py-[9.4px]! font-normal!" /> */}
                     {/* 
@@ -208,7 +208,7 @@ export default function NotificationsDashboard() {
                             <td>
                                 <div className='flex items-center justify-center gap-2'>
                                     <button className='cursor-pointer' onClick={() => setOpen(true)}>
-                                        <Image src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
+                                        <Image unoptimized={true} src="/images/open-eye2.svg" alt='open-eye2' height={28} width={28} />
                                     </button>
                                 </div>
                             </td>

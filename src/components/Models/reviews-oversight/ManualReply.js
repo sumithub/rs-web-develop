@@ -91,7 +91,7 @@ function AddTemplate({ onClose, id }) {
                 </div>
                 <div className='rounded-[15px] shadow-[0px_0px_40px_0px_#0000000F]'>
                     <div className='bg-primary/10 flex items-center gap-2.5 p-5 rounded-t-[15px]'>
-                        <Image src="/images/eye1.svg" alt='eye1' width={22} height={22} />
+                        <Image unoptimized={true} src="/images/eye1.svg" alt='eye1' width={22} height={22} />
                         <h2 className='text-lg font-semibold'>Preview Reply</h2>
                     </div>
                     <div className='p-2.5 border border-border2 m-5 rounded-[10px] min-h-[50vh]'>

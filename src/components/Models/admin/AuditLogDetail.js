@@ -161,11 +161,11 @@ export default function AuditLogDetail({ onClose, id }) {
                             <h3 className="capitalize text-xs">Lorem Ipsum..</h3>
                         </div>
                         <div className="grid grid-cols-2 gap-2.5">
-                            <button onClick={() => setOpenModal(true)} className="py-1 px-2 rounded-lg bg-primary/10 text-primary flex items-center justify-center gap-1" type="button"><span><Image src="/images/eye1.svg" alt="eye1" width={12} height={12} /></span>Preview</button>
+                            <button onClick={() => setOpenModal(true)} className="py-1 px-2 rounded-lg bg-primary/10 text-primary flex items-center justify-center gap-1" type="button"><span><Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={12} height={12} /></span>Preview</button>
                             <button onClick={(el) => {
                                 setSelId("e.id")
                                 setOpen(el)
-                            }} className="py-1 px-2 rounded-lg bg-primary/10 text-primary flex items-center justify-center gap-1" type="button"><span><Image src="/images/edit2.svg" alt="eye1" width={12} height={12} /></span>Edit</button>
+                            }} className="py-1 px-2 rounded-lg bg-primary/10 text-primary flex items-center justify-center gap-1" type="button"><span><Image unoptimized={true} src="/images/edit2.svg" alt="eye1" width={12} height={12} /></span>Edit</button>
                         </div>
                     </div>
                 </div>

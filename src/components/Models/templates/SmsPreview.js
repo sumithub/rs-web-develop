@@ -141,7 +141,7 @@ export default function SmsPreview({ onClose, id, body }) {
 
                     <div className={`bg-white rounded-[10px]  ${getPreviewWidth()}`}>
                         <div className="bg-primary/10 p-5 rounded-t-[10px] flex items-center gap-2.5">
-                            <Image src="/images/eye1.svg" alt="eye1" width={22} height={22} />
+                            <Image unoptimized={true} src="/images/eye1.svg" alt="eye1" width={22} height={22} />
                             <h2 className="text-lg font-semibold">Email Preview</h2>
                         </div>
                         <div className="p-5">
@@ -151,21 +151,21 @@ export default function SmsPreview({ onClose, id, body }) {
                                 }} type="button"
                                     className={`${perView === "web" ? "border-primary bg-primary/10" : "border-border-color"} border p-4 flex items-center justify-center gap-2 rounded-xl cursor-pointer ${type === "sms" ? "disabled:pointer-events-none text-secondary/50 disabled:border-border-color/40 disabled:bg-white" : "disabled:pointer-events-none"}`}
                                     disabled={type === "sms"}>
-                                    <Image src="/images/web.svg" alt="web" width={30} height={30} />
+                                    <Image unoptimized={true} src="/images/web.svg" alt="web" width={30} height={30} />
                                     <h2 className="text-base">Web</h2>
                                 </button>
 
                                 <button onClick={() => {
                                     setPerView("mobile")
                                 }} type="button" className={`${perView === "mobile" ? "border-primary bg-primary/10" : "border-border-color"} flex items-center justify-center gap-2 border p-4 rounded-xl cursor-pointer ${type === "email" ? "disabled:pointer-events-none text-secondary/50 disabled:border-color/40 disabled:bg-white" : ""} disabled:pointer-events-none disabled:text-secondary/50`} disabled={type === "email"}>
-                                    <Image src="/images/mobile.svg" alt="mobile" width={30} height={30} />
+                                    <Image unoptimized={true} src="/images/mobile.svg" alt="mobile" width={30} height={30} />
                                     <h2 className="text-base">Mobile</h2>
                                 </button>
 
                                 <button onClick={() => {
                                     setPerView("tablet")
                                 }} type="button" className={`${perView === "tablet" ? "border-primary bg-primary/10" : "border-border-color"} border flex items-center justify-center gap-2 p-4 rounded-xl cursor-pointer ${type === "sms" ? "disabled:pointer-events-none text-secondary/50 disabled:border-border-color/40 disabled:bg-white" : "disabled:pointer-events-none"}`} disabled={type === "sms"}>
-                                    <Image src="/images/tablet.svg" alt="tablet" width={30} height={30} />
+                                    <Image unoptimized={true} src="/images/tablet.svg" alt="tablet" width={30} height={30} />
                                     <h2 className="text-base">Tablet</h2>
                                 </button>
                             </div>

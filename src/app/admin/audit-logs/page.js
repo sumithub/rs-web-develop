@@ -200,7 +200,7 @@ export default function AuditLogs() {
                                 <td>
                                     <div className='flex justify-center gap-2'>
                                         <button className='cursor-pointer' onClick={() => setOpen(true)}>
-                                            <Image src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
+                                            <Image unoptimized={true} src="/images/eyes3.svg" alt='eyes3' height={28} width={28} />
                                         </button>
                                     </div>
                                 </td>
