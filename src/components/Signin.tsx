@@ -52,7 +52,6 @@ export default function Signin() {
           parsedData?.headers?.authorization
         );
       }
-      console.log(JSON.stringify(parsedData));
 
       router.push("/dashboard");
     } catch (error: any) {

@@ -34,6 +34,7 @@ function ForgotPassword() {
   const [isTimerActive, setIsTimerActive] = useState(true);
 
   const successMessage = "Check your email to reset the password.";
+  const buttonTitle = success ? "Resend Reset Password" : "Send Reset Link";
 
   const [mockLink, setMockLink] = useState<string | null>(null);
   useEffect(() => {
@@ -59,13 +60,15 @@ function ForgotPassword() {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
+      setError(null);
       setIsTimerActive(true);
       setSec(59);
       const response = await forgotPassword(data);
-      toast.success(`A password reset link has been sent successfully.`);
+      setSuccess(true);
+      toast.success("Reset link sent! Check your inbox.");
       // once the parsed message is received, we can set the mock link here
       setMockLink(
-        "https://reviewpulse.atlassian.net/jira/software/projects/MP1/boards/1"
+        "https://reviewpulse.atlassian.net/jira/software/proje/MP1/boards/1"
       );
     } catch (error) {
       const errorMessage = error?.response?.data?.message;
@@ -140,7 +143,7 @@ function ForgotPassword() {
             <div className="flex gap-2.5 justify-center mt-[15px]">
               <Image
                 unoptimized={true}
-                src="/images/error.svg"
+                src="/images/success.svg"
                 alt="error.svg"
                 width={15}
                 height={14}
@@ -149,10 +152,8 @@ function ForgotPassword() {
             </div>
           )}
           <SecondaryButton
-            title="Send Reset Link"
-            disabled={
-              Object.keys(errors).length > 0 || loading || isTimerActive
-            }
+            title={buttonTitle}
+            disabled={Object.keys(errors).length > 0 || loading}
             type="submit"
             class_="disabled:bg-dark! disabled:text-text3! disabled:border-dark! py-3! mt-5!"
             onClick={undefined}
