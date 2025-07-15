@@ -1,12 +1,12 @@
 import "@testing-library/jest-dom";
 
+import AuthContext, { AuthContextType } from "../contexts/AuthContext";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-import AuthContext, { AuthContextType } from "../contexts/AuthContext";
+import API_ENDPOINTS from "../api/endpoints";
 import VerificationEmailClient from "./VerificationEmailClient";
 import { axiosInstance } from "../api/axios";
 import { resendEmailVerification } from "../api/authApi";
-import API_ENDPOINTS from "../api/endpoints";
 
 const mockedAxios = axiosInstance as jest.Mocked<typeof axiosInstance>;
 
@@ -34,6 +34,15 @@ const invalidMockFormData = { email: "invalid-email" };
 jest.mock("axios", () => ({
   post: jest.fn().mockResolvedValue({ data: {} })
 }));
+
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+
+afterAll(() => {
+  (console.error as jest.Mock).mockRestore();
+});
+
 
 const renderComponent = () =>
   render(

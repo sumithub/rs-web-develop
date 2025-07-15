@@ -1,4 +1,5 @@
 const mockPush = jest.fn();
+
 import "@testing-library/jest-dom";
 
 import {
@@ -27,10 +28,19 @@ jest.mock("axios", () => ({
 
 jest.mock("react-toastify", () => ({
   toast: {
-    error: jest.fn(), // ✅ this allows toast.error(...) to run without crashing
+    error: jest.fn(),
     success: jest.fn()
   }
 }));
+
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+
+afterAll(() => {
+  (console.error as jest.Mock).mockRestore();
+});
+
 
 describe("Signin - Validation Errors", () => {
   beforeEach(() => {
@@ -97,9 +107,9 @@ describe("Signin - Validation Errors", () => {
     fireEvent.click(button);
     // Check if the mocked axios post was called with the correct endpoint and data
     await waitFor(() => {
-      expect(
-        screen.getByText("Invalid username or password")
-      ).toBeInTheDocument();
+      // Check that toast.error was called with the correct message
+      const { toast } = require("react-toastify");
+      expect(toast.error).toHaveBeenCalledWith("Invalid username or password");
     });
   });
 });

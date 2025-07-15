@@ -1,4 +1,13 @@
-import { ResendEmailVerificationSchema, ResendEmailVerificationResponseSchema } from "./ResendVerificationEmail";
+import { ResendEmailVerificationResponseSchema, ResendEmailVerificationSchema } from "./ResendVerificationEmail";
+
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+
+afterAll(() => {
+  (console.error as jest.Mock).mockRestore();
+});
+
 
 describe("ResendEmailVerificationSchema", () => {
     it("should pass with a valid email", () => {

@@ -1,15 +1,17 @@
 "use client";
-import { useForm } from "react-hook-form";
-import Checkbox2 from "./form/Checkbox2";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import InputForm from "./form/InputForm";
-import Verify from "./form/Verify";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
-import { login } from "../api/authApi";
+
 import { LoginFormData, LoginSchema } from "./schemas/LoginSchema";
+import { useEffect, useState } from "react";
+
+import Checkbox2 from "./form/Checkbox2";
+import Image from "next/image";
+import InputForm from "./form/InputForm";
+import Link from "next/link";
+import Verify from "./form/Verify";
+import { login } from "../api/authApi";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function Signin() {
@@ -25,7 +27,7 @@ export default function Signin() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [verificationSuccess, setVerificationSuccess] = useState(false);
+  const [verificationSuccess, setVerificationSuccess] = useState<boolean | null>(false);
   const router = useRouter();
   const [checked, setChecked] = useState(false);
 
@@ -40,18 +42,20 @@ export default function Signin() {
     try {
       setLoading(true);
       const { email, password } = formData;
-      const payload = { username: email, password, rememberMe: checked };
+      const payload = { email, password, rememberMe: checked };
       const parsedData = await login(payload);
+      console.log(JSON.stringify(parsedData));
+      
       router.push("/dashboard");
     } catch (error: any) {
       // Check if the error response has the expected shape
-      console.log("Login error:", error);
-      const apiMessage = error?.response?.data;
+      console.error("Login error:", error);
+      const apiMessage = error?.response?.data?.message;
       const timeoutError = error?.message;
-      const fallbackMessage =
-        "An error occurred while logging in. Please try again.";
+      const fallbackMessage = "An error occurred while logging in. Please try again.";
       setError(apiMessage || timeoutError || fallbackMessage);
       toast.error(apiMessage || timeoutError || fallbackMessage);
+
     } finally {
       setLoading(false);
     }

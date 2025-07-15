@@ -1,18 +1,19 @@
-import { ChangeEmailResponseSchema } from "../components/schemas/ChangeEmailSchema";
 import {
   ResendEmailVerificationData,
   ResendEmailVerificationResponseSchema
 } from "../components/schemas/ResendVerificationEmail";
-import { SignupResponseSchema } from "../components/schemas/SignupSchema";
-
+import { SignupFormData, SignupResponseSchema } from "../components/schemas/SignupSchema";
 import {
   authApi,
   changeEmail,
   resendEmailVerification,
   signup
 } from "./authApi";
-import { axiosInstance } from "./axios";
+
 import API_ENDPOINTS from "./endpoints";
+import { ChangeEmailFormData } from "../components/schemas/ChangeEmailSchema";
+import { ChangeEmailResponseSchema } from "../components/schemas/ChangeEmailSchema";
+import { axiosInstance } from "./axios";
 
 const apisToTest = [
   {
@@ -35,10 +36,18 @@ jest.mock("axios", () => ({
   post: jest.fn().mockResolvedValue({ data: {} })
 }));
 
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+
+afterAll(() => {
+  (console.error as jest.Mock).mockRestore();
+});
+
 const mockedAxios = axiosInstance as jest.Mocked<typeof axiosInstance>;
 
 describe("authApi.signup", () => {
-  const validvalidFormData: SignupvalidFormData = {
+  const validvalidFormData: SignupFormData = {
     fullName: "John Doe",
     email: "john@example.com",
     password: "StrongPassword123",
@@ -97,8 +106,9 @@ describe("authApi.signup", () => {
   });
 });
 
+
 describe("authApi.changeEmail", () => {
-  const validvalidFormData: ChangeEmailvalidFormData = {
+  const validvalidFormData: ChangeEmailFormData = {
     currentEmail: "newemail@example.com",
     newEmail: "updated@eample.com"
   };

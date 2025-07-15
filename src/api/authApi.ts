@@ -1,25 +1,25 @@
 import {
-  SignupFormData,
-  SignupResponseSchema
-} from "../components/schemas/SignupSchema";
-import {
   ChangeEmailFormData,
   ChangeEmailResponseSchema
 } from "../components/schemas/ChangeEmailSchema";
-
-import API_ENDPOINTS from "./endpoints";
-import { axiosInstance } from "./axios";
-import { z } from "zod";
+import {
+  LoginFormData,
+  LoginResponse,
+  LoginResponseSchema
+} from "../components/schemas/LoginSchema";
 import {
   ResendEmailVerificationData,
   ResendEmailVerificationResponseSchema,
   VerificationEmailResponse
 } from "../components/schemas/ResendVerificationEmail";
 import {
-  LoginFormData,
-  LoginResponse,
-  LoginResponseSchema
-} from "../components/schemas/LoginSchema";
+  SignupFormData,
+  SignupResponseSchema
+} from "../components/schemas/SignupSchema";
+
+import API_ENDPOINTS from "./endpoints";
+import { axiosInstance } from "./axios";
+import { z } from "zod";
 
 export type SignupResponse = z.infer<typeof SignupResponseSchema>;
 export type ChangeEmailResponse = z.infer<typeof ChangeEmailResponseSchema>;
@@ -68,7 +68,7 @@ export const login = async (
 ): Promise<LoginResponse> => {
   const response = await axiosInstance.post(API_ENDPOINTS.login, formData);
   if (!response.data || !response.status || !response.headers) {
-    console.log("API response is missing required fields", response);
+    console.error("API response is missing required fields", response);
     throw new Error("Invalid API response format");
   }
   const parsedResponse = {

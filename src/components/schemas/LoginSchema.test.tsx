@@ -1,4 +1,13 @@
-import { LoginSchema, LoginResponseSchema } from "./LoginSchema";
+import { LoginResponseSchema, LoginSchema } from "./LoginSchema";
+
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+
+afterAll(() => {
+  (console.error as jest.Mock).mockRestore();
+});
+
 
 describe("LoginSchema", () => {
   it("should validate correct login form data", () => {
