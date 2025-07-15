@@ -1,11 +1,11 @@
 import "@testing-library/jest-dom";
 
+import AuthContext, { AuthContextType } from "../contexts/AuthContext";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import Signup from "./Signup";
 import { axiosInstance } from "../api/axios";
 import { signup } from "../api/authApi";
-import AuthContext, { AuthContextType } from "../contexts/AuthContext";
 
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
@@ -42,6 +42,15 @@ const renderComponent = () =>
       <Signup />
     </AuthContext.Provider>
   );
+
+  beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+
+afterAll(() => {
+  (console.error as jest.Mock).mockRestore();
+});
+
 describe("Signup - Validation Errors", () => {
   beforeEach(() => {
     renderComponent();
