@@ -27,7 +27,9 @@ export default function Signin() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [verificationSuccess, setVerificationSuccess] = useState<boolean | null>(false);
+  const [verificationSuccess, setVerificationSuccess] = useState<
+    boolean | null
+  >(false);
   const router = useRouter();
   const [checked, setChecked] = useState(false);
 
@@ -44,18 +46,24 @@ export default function Signin() {
       const { email, password } = formData;
       const payload = { email, password, rememberMe: checked };
       const parsedData = await login(payload);
+      if (parsedData?.headers?.authorization) {
+        localStorage.setItem(
+          "mockVerificationLink",
+          parsedData?.headers?.authorization
+        );
+      }
       console.log(JSON.stringify(parsedData));
-      
+
       router.push("/dashboard");
     } catch (error: any) {
       // Check if the error response has the expected shape
       console.error("Login error:", error);
       const apiMessage = error?.response?.data?.message;
       const timeoutError = error?.message;
-      const fallbackMessage = "An error occurred while logging in. Please try again.";
+      const fallbackMessage =
+        "An error occurred while logging in. Please try again.";
       setError(apiMessage || timeoutError || fallbackMessage);
       toast.error(apiMessage || timeoutError || fallbackMessage);
-
     } finally {
       setLoading(false);
     }

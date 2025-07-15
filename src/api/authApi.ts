@@ -20,9 +20,16 @@ import {
 import API_ENDPOINTS from "./endpoints";
 import { axiosInstance } from "./axios";
 import { z } from "zod";
+import {
+  ForgotPasswordFormData,
+  ForgotPasswordResponseSchema
+} from "../components/schemas/ForgotPassword";
 
 export type SignupResponse = z.infer<typeof SignupResponseSchema>;
 export type ChangeEmailResponse = z.infer<typeof ChangeEmailResponseSchema>;
+export type ForgotPasswordResponse = z.infer<
+  typeof ForgotPasswordResponseSchema
+>;
 
 export const signup = async (
   formData: SignupFormData
@@ -82,7 +89,20 @@ export const login = async (
 
   const result = LoginResponseSchema.safeParse(parsedResponse);
   if (!result.success) {
-    console.log("API response data:", result);
+    console.error("Validation error:", result.error.flatten());
+    throw new Error("Invalid API response format");
+  }
+  return result.data;
+};
+export const forgotPassword = async (
+  formData: ForgotPasswordFormData
+): Promise<ForgotPasswordResponse> => {
+  const response = await axiosInstance.post(
+    API_ENDPOINTS.forgotPassword,
+    formData
+  );
+  const result = ForgotPasswordResponseSchema.safeParse(response.data);
+  if (!result.success) {
     console.error("Validation error:", result.error.flatten());
     throw new Error("Invalid API response format");
   }
@@ -93,5 +113,6 @@ export const authApi = {
   signup,
   changeEmail,
   resendEmailVerification,
-  login
+  login,
+  forgotPassword
 };

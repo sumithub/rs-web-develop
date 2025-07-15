@@ -2,18 +2,25 @@ import {
   ResendEmailVerificationData,
   ResendEmailVerificationResponseSchema
 } from "../components/schemas/ResendVerificationEmail";
-import { SignupFormData, SignupResponseSchema } from "../components/schemas/SignupSchema";
+import {
+  SignupFormData,
+  SignupResponseSchema
+} from "../components/schemas/SignupSchema";
 import {
   authApi,
   changeEmail,
-  resendEmailVerification,
-  signup
+  forgotPassword,
+  resendEmailVerification
 } from "./authApi";
 
 import API_ENDPOINTS from "./endpoints";
 import { ChangeEmailFormData } from "../components/schemas/ChangeEmailSchema";
 import { ChangeEmailResponseSchema } from "../components/schemas/ChangeEmailSchema";
 import { axiosInstance } from "./axios";
+import {
+  ForgotPasswordFormData,
+  ForgotPasswordResponseSchema
+} from "../components/schemas/ForgotPassword";
 
 const apisToTest = [
   {
@@ -30,6 +37,12 @@ const apisToTest = [
     api: resendEmailVerification,
     validFormData: { email: "john@example.com" },
     validApiResponse: "Verification email sent successfully"
+  },
+  {
+    name: "ForgotPassword",
+    api: forgotPassword,
+    validFormData: { email: "john@example.com" },
+    validApiResponse: "Password reset link sent successfully"
   }
 ];
 jest.mock("axios", () => ({
@@ -37,7 +50,7 @@ jest.mock("axios", () => ({
 }));
 
 beforeAll(() => {
-  jest.spyOn(console, 'error').mockImplementation(() => {});
+  jest.spyOn(console, "error").mockImplementation(() => {});
 });
 
 afterAll(() => {
@@ -105,7 +118,6 @@ describe("authApi.signup", () => {
     );
   });
 });
-
 
 describe("authApi.changeEmail", () => {
   const validvalidFormData: ChangeEmailFormData = {
@@ -259,6 +271,54 @@ describe("Login form test cases", () => {
     expect(axiosInstance.post).toHaveBeenCalledWith(
       "/auth/login",
       mockLoginFormData
+    );
+  });
+});
+describe("ForgotPassword test cases", () => {
+  const validFormData: ForgotPasswordFormData = {
+    email: "test@example.com"
+  };
+
+  const validApiResponse = "Password reset email sent successfully";
+
+  it("should return parsed data on valid response", async () => {
+    mockedAxios.post.mockResolvedValueOnce({ data: validApiResponse });
+
+    const result = await authApi.forgotPassword(validFormData);
+
+    expect(result).toEqual(
+      ForgotPasswordResponseSchema.parse(validApiResponse)
+    );
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      API_ENDPOINTS.forgotPassword,
+      validFormData
+    );
+  });
+  it("should propagate axios error", async () => {
+    mockedAxios.post.mockRejectedValueOnce(new Error("Network Error"));
+
+    await expect(authApi.forgotPassword(validFormData)).rejects.toThrow(
+      "Network Error"
+    );
+
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      API_ENDPOINTS.forgotPassword,
+      validFormData
+    );
+  });
+
+  it("should throw error on invalid API response", async () => {
+    const invalidResponse = { foo: "bar" };
+
+    mockedAxios.post.mockResolvedValueOnce({ data: invalidResponse });
+
+    await expect(authApi.forgotPassword(validFormData)).rejects.toThrow(
+      "Invalid API response format"
+    );
+
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      API_ENDPOINTS.forgotPassword,
+      validFormData
     );
   });
 });
