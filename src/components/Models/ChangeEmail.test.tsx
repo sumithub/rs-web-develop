@@ -1,11 +1,13 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import ChangeEmail from "./ChangeEmail";
+
 import AuthContext, { AuthContextType } from "../../contexts/AuthContext";
-import { toast } from "react-toastify";
-import { changeEmail } from "../../api/authApi";
-import { axiosInstance } from "../../api/axios";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+
 import API_ENDPOINTS from "../../api/endpoints";
+import ChangeEmail from "./ChangeEmail";
+import { axiosInstance } from "../../api/axios";
+import { changeEmail } from "../../api/authApi";
+import { toast } from "react-toastify";
 
 jest.mock("react-toastify", () => ({
   toast: {
@@ -35,6 +37,14 @@ const renderComponent = () =>
       <ChangeEmail onClose={mockOnClose} id="test-id" />
     </AuthContext.Provider>
   );
+
+  beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+
+afterAll(() => {
+  (console.error as jest.Mock).mockRestore();
+});
 
 describe("ChangeEmail Component", () => {
   beforeEach(() => {

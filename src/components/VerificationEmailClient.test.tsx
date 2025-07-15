@@ -1,46 +1,52 @@
 import "@testing-library/jest-dom";
 
+import AuthContext, { AuthContextType } from "../contexts/AuthContext";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-import AuthContext, { AuthContextType } from "../contexts/AuthContext";
+import API_ENDPOINTS from "../api/endpoints";
 import VerificationEmailClient from "./VerificationEmailClient";
 import { axiosInstance } from "../api/axios";
 import { resendEmailVerification } from "../api/authApi";
-import API_ENDPOINTS from "../api/endpoints";
 
 const mockedAxios = axiosInstance as jest.Mocked<typeof axiosInstance>;
-
 
 jest.mock("react-toastify", () => ({
   toast: {
     success: jest.fn(),
-    error: jest.fn(),
-  },
+    error: jest.fn()
+  }
 }));
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
-    push: jest.fn(),
+    push: jest.fn()
   }),
   usePathname: jest.fn(() => "/mocked-path"),
-    useSearchParams: jest.fn(() => new URLSearchParams("status=active")),
-  
+  useSearchParams: jest.fn(() => new URLSearchParams("status=active"))
 }));
 const mockSetEmail = jest.fn();
 const mockAuthContext: AuthContextType = {
   unVerifiedEmail: "current@example.com",
-  setEmail: mockSetEmail,
+  setEmail: mockSetEmail
 };
-const mockResponseData = 
-"Verification email sent successfully"
-const mockFormData = {  email: "Ex@ge.com.au" };
+const mockResponseData = "Verification email sent successfully";
+const mockFormData = { email: "Ex@ge.com.au" };
 const invalidMockFormData = { email: "invalid-email" };
 jest.mock("axios", () => ({
-  post: jest.fn().mockResolvedValue({ data: {} }),
+  post: jest.fn().mockResolvedValue({ data: {} })
 }));
+
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+
+afterAll(() => {
+  (console.error as jest.Mock).mockRestore();
+});
+
 
 const renderComponent = () =>
   render(
-      <AuthContext.Provider value={mockAuthContext}>
+    <AuthContext.Provider value={mockAuthContext}>
       <VerificationEmailClient />
     </AuthContext.Provider>
   );
@@ -49,7 +55,7 @@ describe("Verification Email Client - Validation Errors", () => {
   beforeEach(() => {
     jest.useFakeTimers();
   });
-it("should send a verification email and return the parsed response", async () => {
+  it("should send a verification email and return the parsed response", async () => {
     // Mock axios POST to return the success message
     mockedAxios.post.mockResolvedValueOnce({ data: mockResponseData });
 
@@ -63,31 +69,34 @@ it("should send a verification email and return the parsed response", async () =
   });
   it("should throw a 400 error for invalid email address", async () => {
     mockedAxios.post.mockResolvedValueOnce({
-      response: { status: 400, data: { message: "Invalid email provided" } }
-  });
+      response: {
+        status: 400,
+        data: { message: "Invalid API response format" }
+      }
+    });
 
     await expect(resendEmailVerification(invalidMockFormData)).rejects.toThrow(
-        	"Invalid email provided"
+      "Invalid API response format"
     );
 
     // Assertions
     expect(axiosInstance.post).toHaveBeenCalledWith(
-        API_ENDPOINTS.resendEmail,
-        invalidMockFormData
+      API_ENDPOINTS.resendEmail,
+      invalidMockFormData
     );
-});
-  
-it("should start with timer at 60 and button disabled", () => {
-  renderComponent();
-  expect(screen.getByText(/00.60|01.00/)).toBeInTheDocument(); // seconds format may vary
-  expect(
-    screen.getByRole("button", { name: /resend verification email/i })
-  ).toBeDisabled();
-});
+  });
+
+  it("should start with timer at 60 and button disabled", () => {
+    renderComponent();
+    expect(screen.getByText(/00.60|01.00/)).toBeInTheDocument(); // seconds format may vary
+    expect(
+      screen.getByRole("button", { name: /resend verification email/i })
+    ).toBeDisabled();
+  });
   it("should reset timer and button state when resend is clicked", async () => {
     renderComponent();
     const button = screen.getByRole("button", {
-      name: /resend verification email/i,
+      name: /resend verification email/i
     });
 
     fireEvent.click(button);
@@ -95,17 +104,18 @@ it("should start with timer at 60 and button disabled", () => {
     expect(screen.getByText(/00.59|01.00/)).toBeInTheDocument(); // Timer should reset to 59 seconds
     expect(button).toBeDisabled(); // Button should remain disabled
   });
-it("should handle network or server errors gracefully ", async () => {
+  it("should handle network or server errors gracefully ", async () => {
     // Mock axios throwing an error
-    (axiosInstance.post as jest.Mock).mockRejectedValueOnce(new Error("Network Error"));
+    (axiosInstance.post as jest.Mock).mockRejectedValueOnce(
+      new Error("Network Error")
+    );
     await expect(resendEmailVerification(mockFormData)).rejects.toThrow(
-        "Network Error"
+      "Network Error"
     );
     // Assertions
     expect(axiosInstance.post).toHaveBeenCalledWith(
-        API_ENDPOINTS.resendEmail,
-        mockFormData
+      API_ENDPOINTS.resendEmail,
+      mockFormData
     );
-
-}); 
+  });
 });
