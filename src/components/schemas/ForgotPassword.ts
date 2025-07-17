@@ -6,7 +6,10 @@ export const ForgotPasswordSchema = z.object({
 
 export type ForgotPasswordFormData = z.infer<typeof ForgotPasswordSchema>;
 
-export const ForgotPasswordResponseSchema = z.string();
+export const ForgotPasswordResponseSchema = z.object({
+  message: z.string(),
+  mockVerificationLink: z.string()
+});
 export type ForgotPasswordResponse = z.infer<
   typeof ForgotPasswordResponseSchema
 >;

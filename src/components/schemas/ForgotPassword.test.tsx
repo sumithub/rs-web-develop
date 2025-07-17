@@ -19,7 +19,10 @@ describe("ForgotPasswordSchema", () => {
 
 describe("ForgotPasswordResponseSchema", () => {
   it("validates a correct string response", () => {
-    const validResponse = "Password reset link sent successfully";
+    const validResponse = {
+      message: "Password reset link sent successfully",
+      mockVerificationLink: "HTTPS"
+    };
 
     expect(() =>
       ForgotPasswordResponseSchema.parse(validResponse)

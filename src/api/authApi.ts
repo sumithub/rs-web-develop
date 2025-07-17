@@ -24,6 +24,11 @@ import {
   ForgotPasswordFormData,
   ForgotPasswordResponseSchema
 } from "../components/schemas/ForgotPassword";
+import {
+  ResetPasswordFormData,
+  ResetPasswordResponse,
+  ResetPasswordResponseSchema
+} from "../components/schemas/ResetPassword";
 
 export type SignupResponse = z.infer<typeof SignupResponseSchema>;
 export type ChangeEmailResponse = z.infer<typeof ChangeEmailResponseSchema>;
@@ -108,11 +113,25 @@ export const forgotPassword = async (
   }
   return result.data;
 };
-
+export const resetPassword = async (
+  formData: ResetPasswordFormData
+): Promise<ResetPasswordResponse> => {
+  const response = await axiosInstance.post(
+    API_ENDPOINTS.resetPassword,
+    formData
+  );
+  const result = ResetPasswordResponseSchema.safeParse(response.data);
+  if (!result.success) {
+    console.error("Validation error:", result.error.flatten());
+    throw new Error("Invalid API response format");
+  }
+  return result.data;
+};
 export const authApi = {
   signup,
   changeEmail,
   resendEmailVerification,
   login,
-  forgotPassword
+  forgotPassword,
+  resetPassword
 };

@@ -5,8 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import InputForm from "../../components/form/InputForm";
 import { useForm } from "react-hook-form";
-
-import { useRouter } from "next/navigation";
 import { forgotPassword } from "../../api/authApi";
 import { toast } from "react-toastify";
 import SecondaryButton from "../../components/common/SecondaryButton";
@@ -32,8 +30,8 @@ function ForgotPassword() {
   const [success, setSuccess] = useState(false);
   const [sec, setSec] = useState(60);
   const [isTimerActive, setIsTimerActive] = useState(true);
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const successMessage = "Check your email to reset the password.";
   const buttonTitle = success ? "Resend Reset Password" : "Send Reset Link";
 
   const [mockLink, setMockLink] = useState<string | null>(null);
@@ -63,18 +61,28 @@ function ForgotPassword() {
       setError(null);
       setIsTimerActive(true);
       setSec(59);
+      setSuccess(false);
       const response = await forgotPassword(data);
       setSuccess(true);
+      setSuccessMessage("Check your email to reset the password");
       toast.success("Reset link sent! Check your inbox.");
-      // once the parsed message is received, we can set the mock link here
-      setMockLink(
-        "https://reviewpulse.atlassian.net/jira/software/proje/MP1/boards/1"
-      );
+      setMockLink(response.mockVerificationLink);
     } catch (error) {
-      const errorMessage = error?.response?.data?.message;
-      toast.error(errorMessage);
+      const apiMessage = error?.response?.data?.message;
+      const fallbackMessage = "Something went wrong. Please try again.";
+      setError(
+        apiMessage ||
+          (error?.message.includes("timeout") &&
+            "Timeout reached, please try again later") ||
+          fallbackMessage
+      );
+      toast.error(
+        apiMessage ||
+          (error?.message.includes("timeout") &&
+            "Timeout reached, please try again later") ||
+          fallbackMessage
+      );
       setLoading(false);
-      setError(errorMessage);
     }
   };
   const formatTime = (seconds) => {
@@ -153,7 +161,9 @@ function ForgotPassword() {
           )}
           <SecondaryButton
             title={buttonTitle}
-            disabled={Object.keys(errors).length > 0 || loading}
+            disabled={
+              Object.keys(errors).length > 0 || loading || isTimerActive
+            }
             type="submit"
             class_="disabled:bg-dark! disabled:text-text3! disabled:border-dark! py-3! mt-5!"
             onClick={undefined}

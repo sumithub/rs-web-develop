@@ -2,13 +2,7 @@ const mockPush = jest.fn();
 
 import "@testing-library/jest-dom";
 
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import ForgotPassword from "./page";
 import { forgotPassword } from "../../api/authApi";
@@ -64,11 +58,12 @@ describe("ForgotPassword - Validation Errors", () => {
     await waitFor(() => {
       const { toast } = require("react-toastify");
       expect(toast.success).toHaveBeenCalledWith(
-        "A password reset link has been sent successfully."
+        "Reset link sent! Check your inbox."
       );
       //   expect(
       //     screen.getByText(/A password reset link has been sent successfully./i)
       //   ).toBeInTheDocument();
+      // success message to be finalised and added
     });
   });
   it("should show error for invalid email", async () => {
@@ -85,7 +80,7 @@ describe("ForgotPassword - Validation Errors", () => {
   it("should throw 404 error if user enter wrong credentials", async () => {
     (forgotPassword as jest.Mock).mockRejectedValueOnce({
       response: {
-        status: 401,
+        status: 404,
         data: { message: "Email not registered" }
       }
     });

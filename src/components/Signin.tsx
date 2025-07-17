@@ -52,17 +52,24 @@ export default function Signin() {
           parsedData?.headers?.authorization
         );
       }
-
       router.push("/dashboard");
     } catch (error: any) {
       // Check if the error response has the expected shape
       console.error("Login error:", error);
       const apiMessage = error?.response?.data?.message;
-      const timeoutError = error?.message;
-      const fallbackMessage =
-        "An error occurred while logging in. Please try again.";
-      setError(apiMessage || timeoutError || fallbackMessage);
-      toast.error(apiMessage || timeoutError || fallbackMessage);
+      const fallbackMessage = "Something went wrong. Please try again.";
+      setError(
+        apiMessage ||
+          (error?.message.includes("timeout") &&
+            "Timeout reached, please try again later") ||
+          fallbackMessage
+      );
+      toast.error(
+        apiMessage ||
+          (error?.message.includes("timeout") &&
+            "Timeout reached, please try again later") ||
+          fallbackMessage
+      );
     } finally {
       setLoading(false);
     }

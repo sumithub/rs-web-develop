@@ -34,13 +34,12 @@ jest.mock("react-toastify", () => ({
 }));
 
 beforeAll(() => {
-  jest.spyOn(console, 'error').mockImplementation(() => {});
+  jest.spyOn(console, "error").mockImplementation(() => {});
 });
 
 afterAll(() => {
   (console.error as jest.Mock).mockRestore();
 });
-
 
 describe("Signin - Validation Errors", () => {
   beforeEach(() => {
@@ -61,10 +60,6 @@ describe("Signin - Validation Errors", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Login/i })).toBeInTheDocument();
   });
-
-  const validApiResponse = {
-    message: "Login successful"
-  };
 
   it("shows error when email is invalid", async () => {
     fireEvent.change(screen.getByPlaceholderText("Enter Your Email Address"), {
