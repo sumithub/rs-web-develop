@@ -47,10 +47,7 @@ export default function Signin() {
       const payload = { email, password, rememberMe: checked };
       const parsedData = await login(payload);
       if (parsedData?.headers?.authorization) {
-        localStorage.setItem(
-          "mockVerificationLink",
-          parsedData?.headers?.authorization
-        );
+        localStorage.setItem("accessToken", parsedData?.headers?.authorization);
       }
       router.push("/dashboard");
     } catch (error: any) {
