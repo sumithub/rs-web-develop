@@ -1,17 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import AuthLayout from "../../components/common/AuthLayout";
-import Link from "next/link";
-import Image from "next/image";
-import InputForm from "../../components/form/InputForm";
-import { useForm } from "react-hook-form";
-import { forgotPassword } from "../../api/authApi";
-import { toast } from "react-toastify";
-import SecondaryButton from "../../components/common/SecondaryButton";
+
 import {
   ForgotPasswordFormData,
   ForgotPasswordSchema
 } from "../../components/schemas/ForgotPassword";
+import React, { useEffect, useState } from "react";
+
+import AuthLayout from "../../components/common/AuthLayout";
+import Image from "next/image";
+import InputForm from "../../components/form/InputForm";
+import Link from "next/link";
+import SecondaryButton from "../../components/common/SecondaryButton";
+import { forgotPassword } from "../../api/authApi";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 function ForgotPassword() {
@@ -26,7 +28,7 @@ function ForgotPassword() {
     mode: "onBlur"
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [sec, setSec] = useState(60);
   const [isTimerActive, setIsTimerActive] = useState(true);
@@ -94,7 +96,7 @@ function ForgotPassword() {
   };
 
   return (
-    <AuthLayout>
+    <AuthLayout dangerClass={undefined}>
       <div>
         <h2 className="text-[34px] leading-none font-semibold text-secondary capitalize text-center">
           Forgot password

@@ -1,19 +1,21 @@
 "use client";
-import AuthLayout from "../../components/common/AuthLayout";
-import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import InputForm from "../../components/form/InputForm";
-import Success from "../../components/common/Success";
-import { resetPassword } from "../../api/authApi";
-import { toast } from "react-toastify";
+
 import {
   ResetPasswordFormData,
   ResetPasswordSchema
 } from "../../components/schemas/ResetPassword";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+import AuthLayout from "../../components/common/AuthLayout";
+import Image from "next/image";
+import InputForm from "../../components/form/InputForm";
+import Link from "next/link";
+import Success from "../../components/common/Success";
+import { resetPassword } from "../../api/authApi";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function ResetPasswordPage() {
   const {
@@ -44,8 +46,9 @@ export default function ResetPasswordPage() {
     try {
       setLoading(true);
       const payload = {
-        newPassword: data.password,
-        token: token
+        token: token,
+        password: data.password,
+        confirmPassword: data.confirmPassword
       };
       const response = await resetPassword(payload);
       setSuccess(true);
@@ -72,12 +75,11 @@ export default function ResetPasswordPage() {
     }
   };
   return (
-    <AuthLayout>
+    <AuthLayout dangerClass={undefined}>
       {success ? (
         <Success
           message="Your password has been successfully reset!"
-          buttonTitle="Return to Login"
-        />
+          buttonTitle="Return to Login" link={undefined} desc={undefined}/>
       ) : (
         <div>
           <h2 className="text-[34px] leading-none font-semibold text-secondary capitalize text-center">

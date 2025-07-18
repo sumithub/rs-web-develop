@@ -88,11 +88,8 @@ describe("ResetPassword - Validation Errors", () => {
       target: { value: "aRtest123#" }
     });
     fireEvent.click(button);
-    await waitFor(() => {
-      expect(
-        screen.findByText(/Passwords do not match/i)
-      ).resolves.toBeInTheDocument();
-    });
+    const errorMessage = await screen.findByText(/Passwords do not match/i);
+    expect(errorMessage).toBeInTheDocument();
   });
   it("should throw 400 error for invalid or expired token", async () => {
     (resetPassword as jest.Mock).mockRejectedValueOnce({
