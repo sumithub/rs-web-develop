@@ -1,9 +1,10 @@
+import {
+  ResetPasswordResponseSchema,
+  ResetPasswordSchema
+} from "./ResetPassword";
+
 import { ZodError } from "zod";
 import { resetPassword } from "../../api/authApi";
-import {
-  ResetPasswordSchema,
-  ResetPasswordResponseSchema
-} from "./ResetPassword";
 
 describe("ResetPasswordSchema", () => {
   it("validates correct scenario", () => {
@@ -68,14 +69,14 @@ it("fails when missing special character", () => {
 
 describe("ResetPasswordResponseSchema", () => {
   it("validates a correct response", () => {
-    const validResponse = "Password has been reset successfully";
+    const validResponse = { message: "Password has been reset successfully"};
     expect(() =>
       ResetPasswordResponseSchema.parse(validResponse)
     ).not.toThrow();
   });
 
   it("throws an error for a non-string response", () => {
-    const invalidResponse = 12345;
+    const invalidResponse = {message: 12345};
     expect(() => ResetPasswordResponseSchema.parse(invalidResponse)).toThrow();
   });
   it("throws an error for a response with missing fields", () => {

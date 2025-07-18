@@ -49,6 +49,9 @@ describe("ForgotPassword - Validation Errors", () => {
     ).toBeInTheDocument();
   });
   it("should work correctly with valid email", async () => {
+    (forgotPassword as jest.Mock).mockResolvedValueOnce({
+    message: "Password reset link has been sent to your email."
+  });
     const emailInput = screen.getByPlaceholderText(/Enter Your Email Address/i);
     const button = screen.getByRole("button", {
       name: /Send Reset Link/i
@@ -58,12 +61,8 @@ describe("ForgotPassword - Validation Errors", () => {
     await waitFor(() => {
       const { toast } = require("react-toastify");
       expect(toast.success).toHaveBeenCalledWith(
-        "Reset link sent! Check your inbox."
+        "Password reset link has been sent to your email."
       );
-      //   expect(
-      //     screen.getByText(/A password reset link has been sent successfully./i)
-      //   ).toBeInTheDocument();
-      // success message to be finalised and added
     });
   });
   it("should show error for invalid email", async () => {
@@ -93,4 +92,32 @@ describe("ForgotPassword - Validation Errors", () => {
       expect(toast.error).toHaveBeenCalledWith("Email not registered");
     });
   });
+  it("should show 429 error if user submits more than 3 times for the same email in 10 minutes", async () => {
+  // Mock the API: first 3 calls resolve, 4th call rejects with 429
+  (forgotPassword as jest.Mock)
+    .mockResolvedValueOnce({ message: "OK" })
+    .mockResolvedValueOnce({ message: "OK" })
+    .mockResolvedValueOnce({ message: "OK" })
+    .mockRejectedValueOnce({
+      response: {
+        status: 429,
+        data: { message: "Too many requests, please try again later." }
+      }
+    });
+
+  const emailInput = screen.getByPlaceholderText("Enter Your Email Address");
+  const button = screen.getByRole("button", { name: /Send Reset Link/i });
+
+  // Simulate 4 submissions with the same email
+  for (let i = 0; i < 4; i++) {
+    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.click(button);
+  }
+
+  await waitFor(() => {
+    expect(
+      screen.getByText(/too many requests, please try again later/i)
+    ).toBeInTheDocument();
+  });
+});
 });

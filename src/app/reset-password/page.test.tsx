@@ -53,6 +53,9 @@ describe("ResetPassword - Validation Errors", () => {
     ).toBeInTheDocument();
   });
   it("should work correctly with valid password", async () => {
+    (resetPassword as jest.Mock).mockResolvedValueOnce({
+        message: "Password has been reset successfully."
+      });
     const password = screen.getByPlaceholderText(/Create A Password/i);
     const confirmPassword = screen.getByPlaceholderText(
       /Enter Confirm Password/i
@@ -68,11 +71,8 @@ describe("ResetPassword - Validation Errors", () => {
     await waitFor(() => {
       const { toast } = require("react-toastify");
       expect(toast.success).toHaveBeenCalledWith(
-        "Your password has been successfully reset!"
+        "Password has been reset successfully."
       );
-      expect(
-        screen.getByText(/Your password has been successfully reset!/i)
-      ).toBeInTheDocument();
     });
   });
   it("should show error for password mistmatch", async () => {

@@ -18,5 +18,8 @@ export const ResetPasswordSchema = z
 
 export type ResetPasswordFormData = z.infer<typeof ResetPasswordSchema>;
 
-export const ResetPasswordResponseSchema = z.string();
+export const ResetPasswordResponseSchema = z.object({
+  message: z.string(),
+});
+
 export type ResetPasswordResponse = z.infer<typeof ResetPasswordResponseSchema>;

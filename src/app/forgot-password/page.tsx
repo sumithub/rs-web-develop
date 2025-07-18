@@ -67,7 +67,7 @@ function ForgotPassword() {
       const response = await forgotPassword(data);
       setSuccess(true);
       setSuccessMessage("Check your email to reset the password");
-      toast.success("Reset link sent! Check your inbox.");
+      toast.success(response.message || "Password reset link has been sent to your email.");
       setMockLink(response.mockVerificationLink);
     } catch (error) {
       const apiMessage = error?.response?.data?.message;

@@ -52,7 +52,7 @@ export default function ResetPasswordPage() {
       };
       const response = await resetPassword(payload);
       setSuccess(true);
-      toast.success("Your password has been successfully reset!");
+      toast.success(response.message || "Password has been reset successfully.");
     } catch (error) {
       const apiMessage = error?.response?.data?.message;
       const fallbackMessage = "Something went wrong. Please try again.";

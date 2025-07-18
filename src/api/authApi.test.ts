@@ -1,7 +1,15 @@
 import {
+  ForgotPasswordFormData,
+  ForgotPasswordResponseSchema
+} from "../components/schemas/ForgotPassword";
+import {
   ResendEmailVerificationData,
   ResendEmailVerificationResponseSchema
 } from "../components/schemas/ResendVerificationEmail";
+import {
+  ResetPasswordFormData,
+  ResetPasswordResponseSchema
+} from "../components/schemas/ResetPassword";
 import {
   SignupFormData,
   SignupResponseSchema
@@ -18,14 +26,6 @@ import API_ENDPOINTS from "./endpoints";
 import { ChangeEmailFormData } from "../components/schemas/ChangeEmailSchema";
 import { ChangeEmailResponseSchema } from "../components/schemas/ChangeEmailSchema";
 import { axiosInstance } from "./axios";
-import {
-  ForgotPasswordFormData,
-  ForgotPasswordResponseSchema
-} from "../components/schemas/ForgotPassword";
-import {
-  ResetPasswordFormData,
-  ResetPasswordResponseSchema
-} from "../components/schemas/ResetPassword";
 
 const apisToTest = [
   {
@@ -59,7 +59,7 @@ const apisToTest = [
       password: "12John@example.com",
       confirmPassword: "12John@example.com"
     },
-    validApiResponse: "Password has been reset successfully"
+    validApiResponse: {message: "Password has been reset successfully"}
   }
 ];
 jest.mock("axios", () => ({
@@ -344,11 +344,14 @@ describe("ForgotPassword test cases", () => {
 });
 describe("ResetPassword test cases", () => {
   const validFormData: ResetPasswordFormData = {
+    token: "valid-token",
     password: "tEst1@example.com",
     confirmPassword: "tEst1@example.com"
   };
 
-  const validApiResponse = "Password has been reset successfully";
+  const validApiResponse = {
+    message: "Password has been reset successfully"
+  };
 
   it("should return parsed data on valid response", async () => {
     mockedAxios.post.mockResolvedValueOnce({ data: validApiResponse });
