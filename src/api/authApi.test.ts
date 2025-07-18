@@ -1,13 +1,25 @@
 import {
+  ForgotPasswordFormData,
+  ForgotPasswordResponseSchema
+} from "../components/schemas/ForgotPassword";
+import {
   ResendEmailVerificationData,
   ResendEmailVerificationResponseSchema
 } from "../components/schemas/ResendVerificationEmail";
-import { SignupFormData, SignupResponseSchema } from "../components/schemas/SignupSchema";
+import {
+  ResetPasswordFormData,
+  ResetPasswordResponseSchema
+} from "../components/schemas/ResetPassword";
+import {
+  SignupFormData,
+  SignupResponseSchema
+} from "../components/schemas/SignupSchema";
 import {
   authApi,
   changeEmail,
+  forgotPassword,
   resendEmailVerification,
-  signup
+  resetPassword
 } from "./authApi";
 
 import API_ENDPOINTS from "./endpoints";
@@ -30,6 +42,24 @@ const apisToTest = [
     api: resendEmailVerification,
     validFormData: { email: "john@example.com" },
     validApiResponse: "Verification email sent successfully"
+  },
+  {
+    name: "ForgotPassword",
+    api: forgotPassword,
+    validFormData: { email: "john@example.com" },
+    validApiResponse: {
+      message: "Password reset link sent successfully",
+      mockVerificationLink: "HTTPS"
+    }
+  },
+  {
+    name: "ResetPassword",
+    api: resetPassword,
+    validFormData: {
+      password: "12John@example.com",
+      confirmPassword: "12John@example.com"
+    },
+    validApiResponse: {message: "Password has been reset successfully"}
   }
 ];
 jest.mock("axios", () => ({
@@ -37,7 +67,7 @@ jest.mock("axios", () => ({
 }));
 
 beforeAll(() => {
-  jest.spyOn(console, 'error').mockImplementation(() => {});
+  jest.spyOn(console, "error").mockImplementation(() => {});
 });
 
 afterAll(() => {
@@ -105,7 +135,6 @@ describe("authApi.signup", () => {
     );
   });
 });
-
 
 describe("authApi.changeEmail", () => {
   const validvalidFormData: ChangeEmailFormData = {
@@ -262,7 +291,110 @@ describe("Login form test cases", () => {
     );
   });
 });
+describe("ForgotPassword test cases", () => {
+  const validFormData: ForgotPasswordFormData = {
+    email: "test@example.com"
+  };
 
+  const validApiResponse = {
+    message: "Password reset link sent successfully",
+    mockVerificationLink: "HTTPS"
+  };
+
+  it("should return parsed data on valid response", async () => {
+    mockedAxios.post.mockResolvedValueOnce({ data: validApiResponse });
+
+    const result = await authApi.forgotPassword(validFormData);
+
+    expect(result).toEqual(
+      ForgotPasswordResponseSchema.parse(validApiResponse)
+    );
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      API_ENDPOINTS.forgotPassword,
+      validFormData
+    );
+  });
+  it("should propagate axios error", async () => {
+    mockedAxios.post.mockRejectedValueOnce(new Error("Network Error"));
+
+    await expect(authApi.forgotPassword(validFormData)).rejects.toThrow(
+      "Network Error"
+    );
+
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      API_ENDPOINTS.forgotPassword,
+      validFormData
+    );
+  });
+
+  it("should throw error on invalid API response", async () => {
+    const invalidResponse = { foo: "bar" };
+
+    mockedAxios.post.mockResolvedValueOnce({ data: invalidResponse });
+
+    await expect(authApi.forgotPassword(validFormData)).rejects.toThrow(
+      "Invalid API response format"
+    );
+
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      API_ENDPOINTS.forgotPassword,
+      validFormData
+    );
+  });
+});
+describe("ResetPassword test cases", () => {
+  const validFormData: ResetPasswordFormData = {
+    token: "valid-token",
+    password: "tEst1@example.com",
+    confirmPassword: "tEst1@example.com"
+  };
+
+  const validApiResponse = {
+    message: "Password has been reset successfully"
+  };
+
+  it("should return parsed data on valid response", async () => {
+    mockedAxios.post.mockResolvedValueOnce({ data: validApiResponse });
+
+    const result = await authApi.resetPassword(validFormData);
+
+    expect(result).toEqual(ResetPasswordResponseSchema.parse(validApiResponse));
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      API_ENDPOINTS.resetPassword,
+      validFormData
+    );
+  });
+  it("should propagate axios error", async () => {
+    mockedAxios.post.mockRejectedValueOnce(new Error("Network Error"));
+
+    await expect(authApi.resetPassword(validFormData)).rejects.toThrow(
+      "Network Error"
+    );
+
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      API_ENDPOINTS.resetPassword,
+      validFormData
+    );
+  });
+
+  it("should throw error on invalid API response", async () => {
+    const invalidResponse = {
+      password: "bqwWE133@#ar",
+      confirmPassword: "baqwWE133@#ar"
+    };
+
+    mockedAxios.post.mockResolvedValueOnce({ data: invalidResponse });
+
+    await expect(authApi.resetPassword(validFormData)).rejects.toThrow(
+      "Invalid API response format"
+    );
+
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      API_ENDPOINTS.resetPassword,
+      validFormData
+    );
+  });
+});
 describe.each(apisToTest)(
   "Rate-limiting tester for $name",
   ({ name, api, validFormData, validApiResponse }) => {

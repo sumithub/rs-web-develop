@@ -36,13 +36,12 @@ jest.mock("axios", () => ({
 }));
 
 beforeAll(() => {
-  jest.spyOn(console, 'error').mockImplementation(() => {});
+  jest.spyOn(console, "error").mockImplementation(() => {});
 });
 
 afterAll(() => {
   (console.error as jest.Mock).mockRestore();
 });
-
 
 const renderComponent = () =>
   render(

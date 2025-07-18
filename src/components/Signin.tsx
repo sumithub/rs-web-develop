@@ -27,7 +27,9 @@ export default function Signin() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [verificationSuccess, setVerificationSuccess] = useState<boolean | null>(false);
+  const [verificationSuccess, setVerificationSuccess] = useState<
+    boolean | null
+  >(false);
   const router = useRouter();
   const [checked, setChecked] = useState(false);
 
@@ -44,18 +46,27 @@ export default function Signin() {
       const { email, password } = formData;
       const payload = { email, password, rememberMe: checked };
       const parsedData = await login(payload);
-      console.log(JSON.stringify(parsedData));
-      
+      if (parsedData?.headers?.authorization) {
+        localStorage.setItem("accessToken", parsedData?.headers?.authorization);
+      }
       router.push("/dashboard");
     } catch (error: any) {
       // Check if the error response has the expected shape
       console.error("Login error:", error);
       const apiMessage = error?.response?.data?.message;
-      const timeoutError = error?.message;
-      const fallbackMessage = "An error occurred while logging in. Please try again.";
-      setError(apiMessage || timeoutError || fallbackMessage);
-      toast.error(apiMessage || timeoutError || fallbackMessage);
-
+      const fallbackMessage = "Something went wrong. Please try again.";
+      setError(
+        apiMessage ||
+          (error?.message.includes("timeout") &&
+            "Timeout reached, please try again later") ||
+          fallbackMessage
+      );
+      toast.error(
+        apiMessage ||
+          (error?.message.includes("timeout") &&
+            "Timeout reached, please try again later") ||
+          fallbackMessage
+      );
     } finally {
       setLoading(false);
     }
